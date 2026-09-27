@@ -1,0 +1,538 @@
+{
+  "title": "tech-radar",
+  "timezone": "Asia/Tokyo",
+  "domains": [
+    {
+      "id": "tech",
+      "label": "テック"
+    },
+    {
+      "id": "money",
+      "label": "マネー"
+    }
+  ],
+  "quadrants": [
+    {
+      "id": "q_ai",
+      "label": "AI / LLM",
+      "color": "#FF7B54"
+    },
+    {
+      "id": "q_eng",
+      "label": "ENGINEERING",
+      "color": "#58A6FF"
+    },
+    {
+      "id": "q_mkt",
+      "label": "MARKETS",
+      "color": "#F778BA"
+    },
+    {
+      "id": "q_asset",
+      "label": "ASSETS",
+      "color": "#E3B341"
+    }
+  ],
+  "categories": [
+    {
+      "id": "ai",
+      "domain": "tech",
+      "quadrant": "q_ai",
+      "tag": "ai/llm",
+      "label": "AI・LLM",
+      "color": "#FF7B54",
+      "hints": [
+        "llm",
+        "ai",
+        "agent",
+        "mcp",
+        "rag",
+        "embedding",
+        "claude",
+        "gpt",
+        "gemini",
+        "prompt",
+        "生成ai",
+        "エージェント"
+      ]
+    },
+    {
+      "id": "be",
+      "domain": "tech",
+      "quadrant": "q_eng",
+      "tag": "backend",
+      "label": "バックエンド・DB",
+      "color": "#58A6FF",
+      "hints": [
+        "go",
+        "golang",
+        "rust",
+        "java",
+        "kotlin",
+        "python",
+        "api",
+        "grpc",
+        "opentelemetry",
+        "postgres",
+        "postgresql",
+        "mysql",
+        "sqlite",
+        "duckdb",
+        "redis",
+        "sql",
+        "設計",
+        "バックエンド",
+        "データベース"
+      ]
+    },
+    {
+      "id": "cloud",
+      "domain": "tech",
+      "quadrant": "q_eng",
+      "tag": "infra",
+      "label": "クラウド・インフラ",
+      "color": "#2DD4BF",
+      "hints": [
+        "aws",
+        "gcp",
+        "azure",
+        "kubernetes",
+        "k8s",
+        "terraform",
+        "docker",
+        "ebpf",
+        "cloudflare",
+        "serverless",
+        "github actions",
+        "インフラ"
+      ]
+    },
+    {
+      "id": "sec",
+      "domain": "tech",
+      "quadrant": "q_eng",
+      "tag": "security",
+      "label": "セキュリティ",
+      "color": "#BC8CFF",
+      "hints": [
+        "security",
+        "vulnerability",
+        "cve",
+        "oauth",
+        "passkey",
+        "supply chain",
+        "脆弱性",
+        "認証",
+        "認可",
+        "セキュリティ",
+        "不正アクセス"
+      ]
+    },
+    {
+      "id": "macro",
+      "domain": "money",
+      "quadrant": "q_mkt",
+      "tag": "macro",
+      "label": "金融・マクロ",
+      "color": "#8FA3BF",
+      "hints": [
+        "日銀",
+        "frb",
+        "fomc",
+        "利上げ",
+        "利下げ",
+        "金利",
+        "為替",
+        "円安",
+        "円高",
+        "インフレ",
+        "cpi",
+        "gdp",
+        "景気",
+        "国債",
+        "財政"
+      ]
+    },
+    {
+      "id": "stocks",
+      "domain": "money",
+      "quadrant": "q_mkt",
+      "tag": "stocks",
+      "label": "株式",
+      "color": "#F778BA",
+      "hints": [
+        "株価",
+        "株式市場",
+        "日経平均",
+        "topix",
+        "s&p",
+        "nasdaq",
+        "決算",
+        "配当",
+        "株主優待",
+        "ipo",
+        "米国株",
+        "日本株",
+        "銘柄"
+      ]
+    },
+    {
+      "id": "funds",
+      "domain": "money",
+      "quadrant": "q_mkt",
+      "tag": "funds",
+      "label": "投資信託・NISA",
+      "color": "#9ED36A",
+      "hints": [
+        "投資信託",
+        "投信",
+        "nisa",
+        "新nisa",
+        "ideco",
+        "インデックス",
+        "オルカン",
+        "etf",
+        "信託報酬",
+        "積立",
+        "ファンド"
+      ]
+    },
+    {
+      "id": "crypto",
+      "domain": "money",
+      "quadrant": "q_asset",
+      "tag": "crypto",
+      "label": "仮想通貨",
+      "color": "#E3B341",
+      "hints": [
+        "ビットコイン",
+        "bitcoin",
+        "btc",
+        "イーサリアム",
+        "ethereum",
+        "eth",
+        "暗号資産",
+        "仮想通貨",
+        "ステーブルコイン",
+        "web3",
+        "取引所"
+      ]
+    },
+    {
+      "id": "realestate",
+      "domain": "money",
+      "quadrant": "q_asset",
+      "tag": "real-estate",
+      "label": "不動産",
+      "color": "#D4A373",
+      "hints": [
+        "不動産",
+        "マンション",
+        "戸建",
+        "住宅ローン",
+        "地価",
+        "reit",
+        "j-reit",
+        "家賃",
+        "賃貸",
+        "公示地価",
+        "路線価"
+      ]
+    }
+  ],
+  "interests": [
+    "go",
+    "postgres",
+    "opentelemetry",
+    "mcp",
+    "認可",
+    "kubernetes",
+    "aws",
+    "llm",
+    "設計",
+    "nisa",
+    "インデックス",
+    "米国株",
+    "高配当",
+    "金利",
+    "為替",
+    "ビットコイン",
+    "j-reit",
+    "住宅ローン"
+  ],
+  "muted": [],
+  "sources": [
+    {
+      "id": "zenn",
+      "name": "zenn.dev",
+      "domain": "tech",
+      "group": "tech_blog",
+      "kind": "rss",
+      "url": "https://zenn.dev/feed"
+    },
+    {
+      "id": "qiita",
+      "name": "qiita.com",
+      "domain": "tech",
+      "group": "tech_blog",
+      "kind": "rss",
+      "url": "https://qiita.com/popular-items/feed"
+    },
+    {
+      "id": "hatena_it",
+      "name": "hatena/it",
+      "domain": "tech",
+      "group": "tech_blog",
+      "kind": "rss",
+      "url": "https://b.hatena.ne.jp/hotentry/it.rss"
+    },
+    {
+      "id": "publickey",
+      "name": "publickey",
+      "domain": "tech",
+      "group": "news",
+      "kind": "rss",
+      "url": "https://www.publickey1.jp/atom.xml"
+    },
+    {
+      "id": "github_blog",
+      "name": "github.blog",
+      "domain": "tech",
+      "group": "news",
+      "kind": "rss",
+      "url": "https://github.blog/feed/"
+    },
+    {
+      "id": "cloudflare",
+      "name": "cloudflare blog",
+      "domain": "tech",
+      "group": "tech_blog",
+      "kind": "rss",
+      "url": "https://blog.cloudflare.com/rss/"
+    },
+    {
+      "id": "aws_whatsnew",
+      "name": "aws what's new",
+      "domain": "tech",
+      "group": "news",
+      "kind": "rss",
+      "url": "https://aws.amazon.com/about-aws/whats-new/recent/feed/"
+    },
+    {
+      "id": "go_blog",
+      "name": "go.dev/blog",
+      "domain": "tech",
+      "group": "tech_blog",
+      "kind": "rss",
+      "url": "https://go.dev/blog/feed.atom"
+    },
+    {
+      "id": "k8s_blog",
+      "name": "kubernetes.io",
+      "domain": "tech",
+      "group": "tech_blog",
+      "kind": "rss",
+      "url": "https://kubernetes.io/feed.xml"
+    },
+    {
+      "id": "postgres_news",
+      "name": "postgresql.org",
+      "domain": "tech",
+      "group": "news",
+      "kind": "rss",
+      "url": "https://www.postgresql.org/news.rss"
+    },
+    {
+      "id": "hn",
+      "name": "hackernews",
+      "domain": "tech",
+      "group": "hackernews",
+      "kind": "hn",
+      "min_points": 100
+    },
+    {
+      "id": "boj",
+      "name": "日本銀行",
+      "domain": "money",
+      "group": "official",
+      "kind": "rss",
+      "url": "https://www.boj.or.jp/rss/whatsnew.xml"
+    },
+    {
+      "id": "fsa",
+      "name": "金融庁",
+      "domain": "money",
+      "group": "official",
+      "kind": "rss",
+      "url": "https://www.fsa.go.jp/fsaNewsListAll_rss2.xml"
+    },
+    {
+      "id": "toyokeizai",
+      "name": "東洋経済",
+      "domain": "money",
+      "group": "news",
+      "kind": "rss",
+      "url": "https://toyokeizai.net/list/feed/rss"
+    },
+    {
+      "id": "diamond",
+      "name": "ダイヤモンド",
+      "domain": "money",
+      "group": "news",
+      "kind": "rss",
+      "url": "https://diamond.jp/list/feed/rss/dol"
+    },
+    {
+      "id": "investing",
+      "name": "investing.com",
+      "domain": "money",
+      "group": "news",
+      "kind": "rss",
+      "url": "https://jp.investing.com/rss/news.rss"
+    },
+    {
+      "id": "hatena_econ",
+      "name": "hatena/経済",
+      "domain": "money",
+      "group": "tech_blog",
+      "kind": "rss",
+      "url": "https://b.hatena.ne.jp/hotentry/economics.rss"
+    },
+    {
+      "id": "coinpost",
+      "name": "CoinPost",
+      "domain": "money",
+      "group": "news",
+      "kind": "rss",
+      "url": "https://coinpost.jp/?feed=rss2"
+    },
+    {
+      "id": "coindesk_jp",
+      "name": "CoinDesk JAPAN",
+      "domain": "money",
+      "group": "news",
+      "kind": "rss",
+      "url": "https://www.coindeskjapan.com/feed/"
+    },
+    {
+      "id": "suumo_journal",
+      "name": "SUUMOジャーナル",
+      "domain": "money",
+      "group": "news",
+      "kind": "rss",
+      "url": "https://suumo.jp/journal/feed/"
+    }
+  ],
+  "releases": [
+    {
+      "repo": "golang/go",
+      "category": "be",
+      "tag_pattern": "^go1\\.\\d+(\\.\\d+)?$"
+    },
+    {
+      "repo": "kubernetes/kubernetes",
+      "category": "cloud"
+    },
+    {
+      "repo": "open-telemetry/opentelemetry-go",
+      "category": "be"
+    },
+    {
+      "repo": "pgvector/pgvector",
+      "category": "be"
+    },
+    {
+      "repo": "modelcontextprotocol/go-sdk",
+      "category": "ai"
+    },
+    {
+      "repo": "astral-sh/uv",
+      "category": "be"
+    }
+  ],
+  "markets": [
+    {
+      "symbol": "^N225",
+      "label": "日経平均",
+      "category": "stocks",
+      "unit": "pt"
+    },
+    {
+      "symbol": "1306.T",
+      "label": "TOPIX ETF",
+      "category": "stocks",
+      "unit": "円"
+    },
+    {
+      "symbol": "^GSPC",
+      "label": "S&P 500",
+      "category": "stocks",
+      "unit": "pt"
+    },
+    {
+      "symbol": "^IXIC",
+      "label": "NASDAQ",
+      "category": "stocks",
+      "unit": "pt"
+    },
+    {
+      "symbol": "2559.T",
+      "label": "全世界株 ETF",
+      "category": "funds",
+      "unit": "円"
+    },
+    {
+      "symbol": "JPY=X",
+      "label": "USD/JPY",
+      "category": "macro",
+      "unit": "円"
+    },
+    {
+      "symbol": "^TNX",
+      "label": "米10年債利回り",
+      "category": "macro",
+      "unit": "%"
+    },
+    {
+      "symbol": "GC=F",
+      "label": "金先物",
+      "category": "macro",
+      "unit": "$"
+    },
+    {
+      "symbol": "BTC-JPY",
+      "label": "BTC/JPY",
+      "category": "crypto",
+      "unit": "円"
+    },
+    {
+      "symbol": "ETH-JPY",
+      "label": "ETH/JPY",
+      "category": "crypto",
+      "unit": "円"
+    },
+    {
+      "symbol": "1343.T",
+      "label": "J-REIT ETF",
+      "category": "realestate",
+      "unit": "円"
+    }
+  ],
+  "social_queries": {
+    "tech": [
+      "MCP サーバー 本番",
+      "OpenTelemetry Go",
+      "Go 言語 設計",
+      "Kubernetes 運用",
+      "LLM API コスト"
+    ],
+    "money": [
+      "新NISA 投資信託",
+      "日銀 利上げ",
+      "米国株 決算",
+      "ビットコイン 相場",
+      "J-REIT",
+      "住宅ローン 金利"
+    ]
+  }
+}
