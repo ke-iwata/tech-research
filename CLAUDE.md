@@ -14,6 +14,15 @@ GitHub Pages のダッシュボード（`index.html`）を更新するリポジ�
 Claude Code のルーチンから「CLAUDE.md の日次更新ルーチンを実行して」と呼ばれたら、以下を上から順に実行する。
 無人実行なので質問はせず、判断した前提は digest や note に書く。今日の日付を D（Asia/Tokyo、`YYYY-MM-DD`）とする。
 
+### 0. 最新の main から始める
+
+**更新は main に直接 push する。** 作業ブランチ（`claude/…`）に push しただけでは Pages の公開に失敗することがあるため、必ず main を更新する。
+
+```bash
+git fetch origin main
+git checkout -B main origin/main         # セッションが claude/… ブランチで始まっていても main で作業する
+```
+
 ### 1. 収集（スクリプト）
 
 ```bash
@@ -109,8 +118,11 @@ raw の候補から、技術・マネーそれぞれ 8〜15 件、合計 15〜30
 python3 scripts/update_stats.py        # 日次ファイルを検証して data/stats.json を再生成。エラーなら直してやり直す
 git add -A
 git commit -m "data: D 日次更新（記事N件・pickN件）"
-git push                                 # main に push できなければ claude/ ブランチに push（Actions が main にマージして公開する）
+git push origin HEAD:main                # main を更新する（これで Actions が Pages に公開する）
 ```
+
+- push が拒否されたら `git pull --rebase origin main` してから `python3 scripts/update_stats.py` をやり直し、もう一度 `git push origin HEAD:main` する
+- それでも main に push できないとき（権限エラーなど）だけ、`claude/` で始まるブランチに push する。Actions が main にマージして公開するが、main の更新に失敗した旨とエラー全文を最終メッセージに書く
 
 - `data/raw/` は `.gitignore` 済み（コミットしない）。`data/state/tags.json` はコミットする
 - 最後に digest と pick の一覧を最終メッセージとして出力する
