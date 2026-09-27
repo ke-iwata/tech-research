@@ -167,7 +167,9 @@ def collect_releases(rel, known, today):
     """前回見たタグとの差分を返す。初回は最新タグ 1 件だけを返す"""
     tags = remote_tags(rel["repo"], rel.get("tag_pattern", DEFAULT_TAG_PATTERN))
     before = set(known.get(rel["repo"], []))
-    new = [t for t in tags if t not in before] if before else tags[-1:]
+    # state は直近 30 件しか持たないので、それより古いタグを「新規」と誤認しないよう最新既知タグより後だけを見る
+    newest = max(before, key=version_key) if before else None
+    new = [t for t in tags if t not in before and version_key(t) > version_key(newest)] if before else tags[-1:]
     known[rel["repo"]] = tags[-30:]
     return [{
         "repo": rel["repo"], "tag": t, "title": f"{rel['repo'].split('/')[-1]} {t}",
