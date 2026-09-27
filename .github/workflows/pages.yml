@@ -1,7 +1,8 @@
 name: Publish site
 
 # main への push、または Claude Code ルーチンが push した claude/** ブランチで実行。
-# claude/** は main にマージしてから GitHub Pages にデプロイする。
+# claude/** は main にマージしたあと、main を対象にこのワークフローを起動し直して公開する
+# （github-pages 環境は main からのデプロイしか受け付けず、GITHUB_TOKEN の push では再実行されないため）。
 on:
   push:
     branches: [main, "claude/**"]
@@ -9,6 +10,7 @@ on:
 
 permissions:
   contents: write
+  actions: write
   pages: write
   id-token: write
 
@@ -34,10 +36,13 @@ jobs:
           python3 scripts/update_stats.py --check-only
           git push origin main
           git push origin --delete "${GITHUB_REF_NAME}" || true
+      - name: Publish main
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh workflow run pages.yml --repo "${GITHUB_REPOSITORY}" --ref main
 
   deploy:
-    needs: merge
-    if: always() && (needs.merge.result == 'success' || needs.merge.result == 'skipped')
+    if: github.ref_name == 'main'
     runs-on: ubuntu-latest
     environment:
       name: github-pages
