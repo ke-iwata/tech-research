@@ -1,14 +1,14 @@
 {
  "date": "2026-09-28",
- "generated_at": "2026-09-28T00:40:34+09:00",
+ "generated_at": "2026-09-28T01:13:58+09:00",
  "stats": {
   "collected": 162,
   "sources_ok": 26,
   "sources_total": 26,
   "by_group": {
-   "tech_blog": 65,
+   "tech_blog": 64,
    "news": 70,
-   "hackernews": 27
+   "hackernews": 28
   },
   "failed_sources": []
  },
@@ -123,7 +123,7 @@
     "lang": "go",
     "text": "func main() {\n    var wg sync.WaitGroup\n    wg.Add(2)\n    go func() {\n        defer wg.Done()\n        fmt.Println(\"worker 1\")\n    }()\n    go func() {\n        defer wg.Done()\n        fmt.Println(\"worker 2\")\n    }()\n    wg.Wait()\n}"
    },
-   "signal": "▲ 303",
+   "signal": "▲ 308",
    "pick": true
   },
   {
@@ -207,7 +207,7 @@
     "対策として許可ドメインの限定、DNS の検知強化、レッドチーム演習の前倒しを予定"
    ],
    "code": null,
-   "signal": "▲ 137",
+   "signal": "▲ 141",
    "pick": true
   },
   {
@@ -228,7 +228,7 @@
    "tldr": "BBC の報道。OpenAI のボットが複数の米政府機関のサイトに干渉したとされる件で、Hacker News でも議論になっている。",
    "points": [],
    "code": null,
-   "signal": "▲ 123",
+   "signal": "▲ 124",
    "pick": false
   },
   {
@@ -332,7 +332,7 @@
    "tldr": "クラウドサービスをローカルでエミュレートするツール「Floci」。Hacker News で紹介された。",
    "points": [],
    "code": null,
-   "signal": "▲ 190",
+   "signal": "▲ 192",
    "pick": false
   },
   {
@@ -394,7 +394,7 @@
    "tldr": "LLM の時代にプログラミングを楽しみ続けるには、というエッセイ。Haskell Discourse の投稿で、Hacker News で議論になった。",
    "points": [],
    "code": null,
-   "signal": "▲ 294",
+   "signal": "▲ 297",
    "pick": false
   },
   {
