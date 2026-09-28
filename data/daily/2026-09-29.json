@@ -1,0 +1,834 @@
+{
+  "date": "2026-09-29",
+  "generated_at": "2026-09-29T07:30:00+09:00",
+  "stats": {
+    "collected": 222,
+    "sources_ok": 26,
+    "sources_total": 26,
+    "by_group": {
+      "news": 86,
+      "tech_blog": 85,
+      "hackernews": 47,
+      "official": 4
+    },
+    "failed_sources": []
+  },
+  "digest": [
+    {
+      "category": "ai",
+      "text": "Anthropic が Claude Sonnet 5.5 を公開。料金は据え置きで出力が 30% 以上速く、1 タスクあたりのコストは最大 30% 減るとしている。AWS でも同日提供が始まった。",
+      "keywords": [
+        "claude",
+        "llm-cost"
+      ]
+    },
+    {
+      "category": "ai",
+      "text": "エージェント向けの開発ツールが続く。AWS が LLM を入れ替えられる OSS「Strands ハーネス」を、Cloudflare が 3,000 以上の API 操作を扱う CLI「cf」を公開。Wrangler の利用の 48% がすでにエージェントだという。",
+      "keywords": [
+        "ai-agent"
+      ]
+    },
+    {
+      "category": "macro",
+      "text": "日銀の 7 月会合の議事要旨で、利上げペースの加速を求める意見が相次いでいたことが分かった。今週は 10 月 1 日に日銀短観、2 日に米雇用統計が控える。",
+      "keywords": [
+        "boj-policy",
+        "boj-rate-hike"
+      ]
+    },
+    {
+      "category": "stocks",
+      "text": "28 日の日経平均は 6 営業日ぶりに反落し、486 円安の 6 万 5877 円。国内長期金利が一時 3.095% まで上昇したことが重荷になった。",
+      "keywords": [
+        "nikkei225",
+        "interest-rates"
+      ]
+    },
+    {
+      "category": "crypto",
+      "text": "米ビットコイン現物 ETF に 1 週間で 23.9 億ドルが流入し約 1 年ぶりの規模。欧州では ECB がトークン化資産を中央銀行マネーで決済する「Pontes」の運用を始めた。",
+      "keywords": [
+        "bitcoin-etf",
+        "tokenization"
+      ]
+    }
+  ],
+  "items": [
+    {
+      "id": "2026-09-29-anthropic-sonnet-5-5",
+      "url": "https://www.anthropic.com/claude-sonnet-5-5",
+      "title": "Sonnet 5.5",
+      "source": "anthropic.com",
+      "source_group": "hackernews",
+      "published_at": "2026-09-29T02:58:11+09:00",
+      "category": "ai",
+      "keywords": [
+        "claude",
+        "llm",
+        "llm-cost"
+      ],
+      "score": 90,
+      "why": "matched: llm, aws（Bedrock 提供）",
+      "read_min": 6,
+      "tldr": "Anthropic が Claude 5.5 ファミリーの 2 つ目のモデル「Claude Sonnet 5.5」を公開。Sonnet 5 より出力が 30% 以上速く、トークン単価は据え置きのままタスクあたりのコストは最大 30% 下がるとしている。AWS（Bedrock・GovCloud）でも同日提供が始まった。",
+      "points": [
+        "料金は Sonnet 5 と同じ入力 $2 / 出力 $10（100 万トークンあたり）、キャッシュ書き込み $2.50・読み込み $0.20。同じ作業に必要なトークンが少ないため 1 タスクあたり最大 30% 安くなる",
+        "Terminal-Bench 4.0 で 70.6%、CursorBench 55.5%（Opus 5.5 と約 2 ポイント差）、GDPval-AA 1844（Opus 5.5 は 1846）",
+        "位置づけは Opus 5.5 を補う高速・低コストモデル。複雑で長い判断が要る作業は Opus 5.5 が強い。Haiku 5.5 も数週間以内に追加予定"
+      ],
+      "code": {
+        "file": "model id",
+        "lang": "text",
+        "text": "claude-sonnet-5-5"
+      },
+      "signal": "▲ 328",
+      "pick": true
+    },
+    {
+      "id": "2026-09-29-publickey-strands-harness",
+      "url": "https://www.publickey1.jp/blog/26/awsaistrandsllm.html",
+      "title": "AWS、AIエージェントを自作できるツール「Strandsハーネス」をオープンソースで公開。特定のLLMに依存せず入れ替え可能、任意のコンテナ環境にデプロイ",
+      "source": "publickey",
+      "source_group": "news",
+      "published_at": "2026-09-29T00:01:25+09:00",
+      "category": "ai",
+      "keywords": [
+        "ai-agent",
+        "aws",
+        "oss"
+      ],
+      "score": 88,
+      "why": "matched: aws, llm",
+      "read_min": 5,
+      "tldr": "AWS が AI エージェントを数行で自作できるオープンソースのツール「Strands ハーネス」を公開。シェル実行・ファイル読み書き・Web 検索などを備え、LLM を後から入れ替えられる。",
+      "points": [
+        "Amazon Bedrock、Anthropic Claude、OpenAI GPT、Google Gemini、Ollama、LiteLLM に対応し、特定の LLM に依存しない",
+        "プロンプトキャッシングとコンテキスト管理でトークン消費を抑える",
+        "Linux コンテナが動く任意の環境にデプロイできる"
+      ],
+      "code": {
+        "file": "agent.ts",
+        "lang": "javascript",
+        "text": "import { createHarness } from \"@strands-agents/harness\";\n\nconst agent = await createHarness({ model: \"anthropic/claude-opus-5\" });\nawait agent(\"Research the top three vector databases, compare pricing \nand limits, and write it up in comparison.md\");"
+      },
+      "signal": null,
+      "pick": true
+    },
+    {
+      "id": "2026-09-29-hn-go-vanity-import",
+      "url": "https://iain.rocks/blog/dont-couple-your-go-code-to-github",
+      "title": "Don't couple your Go code to GitHub",
+      "source": "iain.rocks",
+      "source_group": "hackernews",
+      "published_at": "2026-09-28T01:50:58+09:00",
+      "category": "be",
+      "keywords": [
+        "go",
+        "go-modules"
+      ],
+      "score": 86,
+      "why": "matched: go",
+      "read_min": 6,
+      "tldr": "Go のインポートパスに github.com を直接書くと、ホスティング先を移すときに全コードの import を書き換える必要がある。独自ドメインの vanity import path を使えば、利用者側を変えずに移行できるという主張。",
+      "points": [
+        "GitHub への直接依存はベンダーロックインになり、移行コストが大きくなる",
+        "移行できずに 3 つのホスティングサービスのアカウントを併用し続けた会社の例を紹介",
+        "go-import / go-source の meta タグを置いた独自ドメイン（例 go.iain.rocks）で、裏側のリポジトリを自由に差し替えられる"
+      ],
+      "code": {
+        "file": "index.html",
+        "lang": "html",
+        "text": "<meta name=\"go-import\" content=\"go.iain.rocks/boneclone git https://github.com/that-guy-iain/boneclone\">\n<meta name=\"go-source\" content=\"go.iain.rocks/boneclone https://github.com/that-guy-iain/boneclone https://github.com/that-guy-iain/boneclone/tree/master{/dir} https://github.com/that-guy-iain/boneclone/blob/master{/dir}/{file}#L{line}\">"
+      },
+      "signal": "▲ 317",
+      "pick": true
+    },
+    {
+      "id": "2026-09-29-github-seclab-android",
+      "url": "https://github.blog/security/how-we-found-24-android-vulnerabilities-using-our-open-source-ai-security-agent/",
+      "title": "How we found 24 Android vulnerabilities using our open source AI security agent",
+      "source": "github.blog",
+      "source_group": "news",
+      "published_at": "2026-09-29T04:00:00+09:00",
+      "category": "sec",
+      "keywords": [
+        "ai-agent",
+        "ai-security",
+        "android"
+      ],
+      "score": 82,
+      "why": "AI エージェントによる脆弱性調査",
+      "read_min": 8,
+      "tldr": "GitHub Security Lab が、オープンソースの「Taskflow Agent」で Android アプリの脆弱性 24 件を見つけた手順を公開。監査を小さなステップの taskflow に分けて LLM を誘導する。",
+      "points": [
+        "攻撃面の洗い出し（gather_mobile_entry_point_info.yaml）と脆弱性クラスの判定（classify_application_local.yaml）などの taskflow を順に実行する",
+        "OsmAnd で外部アプリから位置情報を追跡できる問題、Wikipedia アプリでディープリンクの解析と Cookie 検証の不備によるアカウント乗っ取りなどを発見",
+        "seclab-taskflows リポジトリの Codespace から自分のアプリにも実行できる。中規模のリポジトリで 1〜2 時間、GitHub Copilot のライセンスが必要でトークン消費は多い"
+      ],
+      "code": {
+        "file": "shell",
+        "lang": "bash",
+        "text": "./scripts/audit/run_mobile.sh myorg/myrepo"
+      },
+      "signal": null,
+      "pick": true
+    },
+    {
+      "id": "2026-09-29-cloudflare-cf-cli",
+      "url": "https://blog.cloudflare.com/cloudflare-cf-cli-launch/",
+      "title": "Introducing cf: the agentic CLI for the entire Cloudflare API",
+      "source": "hatena/it",
+      "source_group": "tech_blog",
+      "published_at": "2026-09-29T01:16:09+09:00",
+      "category": "cloud",
+      "keywords": [
+        "ai-agent",
+        "cli",
+        "cloudflare"
+      ],
+      "score": 80,
+      "why": "エージェント向け CLI、matched: 設計",
+      "read_min": 6,
+      "tldr": "Cloudflare が AI エージェントでの利用を前提にした新 CLI「cf」を発表。Cloudflare API の 3,000 以上の操作を 1 つのインターフェースで扱える。",
+      "points": [
+        "Wrangler の利用に占めるエージェントの割合は 2026 年 3 月に約 4 分の 1、先週は 48% に達した",
+        "OpenAPI スキーマから CLI・SDK・ドキュメントを生成するオープンソースのパイプライン「Forge」で作られている",
+        "出力は既定で JSON。設定は TypeScript の cloudflare.config.ts。Wrangler は cf のベータ終了後 18 か月保守される"
+      ],
+      "code": {
+        "file": "cloudflare.config.ts",
+        "lang": "typescript",
+        "text": "import { bindings, defineConfig } from \"cf/config\";\n\nexport default defineConfig(({ mode }) => ({\n  worker: {\n    name: \"example-worker\",\n    env: {\n      API_URL: bindings.text(\n        mode === \"production\"\n          ? \"https://example.com\"\n          : \"https://staging.example.com\",\n      ),\n    },\n  },\n}));"
+      },
+      "signal": null,
+      "pick": true
+    },
+    {
+      "id": "2026-09-29-claude-prompting-opus-5-5",
+      "url": "https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/prompting-claude-opus-5-5",
+      "title": "Prompting Claude Opus 5.5",
+      "source": "platform.claude.com",
+      "source_group": "hackernews",
+      "published_at": "2026-09-28T16:33:29+09:00",
+      "category": "ai",
+      "keywords": [
+        "claude",
+        "prompt-engineering"
+      ],
+      "score": 70,
+      "why": "matched: llm",
+      "read_min": 8,
+      "tldr": "Claude Opus 5.5 向けのプロンプトの書き方をまとめた公式ドキュメント。HN で 215 件のコメントがついた。",
+      "points": [],
+      "code": null,
+      "signal": "▲ 191",
+      "pick": false
+    },
+    {
+      "id": "2026-09-29-hn-ai-code-architecture",
+      "url": "https://www.ssp.sh/brain/the-problem-is-not-the-ai-code-but-nobody-knows-anything-anymore/",
+      "title": "The problem is not AI code, but not knowing about system architecture or intent",
+      "source": "ssp.sh",
+      "source_group": "hackernews",
+      "published_at": "2026-09-29T01:11:42+09:00",
+      "category": "ai",
+      "keywords": [
+        "ai-coding",
+        "software-design"
+      ],
+      "score": 66,
+      "why": "matched: 設計",
+      "read_min": 5,
+      "tldr": "問題は AI が書いたコードそのものではなく、システムの設計や意図を誰も把握していないことだ、という論考。HN で 209 件のコメント。",
+      "points": [],
+      "code": null,
+      "signal": "▲ 318",
+      "pick": false
+    },
+    {
+      "id": "2026-09-29-hn-postgres-at-time-zone",
+      "url": "https://bookofrevenue.com/blog/6ab81e9a97a13f0001f7e4e1/postgres-at-time-zone-u-does-not-do-what-you-think-it-does",
+      "title": "Footguns with Postgres “at time zone 'UTC'”",
+      "source": "bookofrevenue.com",
+      "source_group": "hackernews",
+      "published_at": "2026-09-27T19:19:51+09:00",
+      "category": "be",
+      "keywords": [
+        "postgres",
+        "timezone"
+      ],
+      "score": 68,
+      "why": "matched: postgres",
+      "read_min": 5,
+      "tldr": "Postgres の `AT TIME ZONE 'UTC'` が想定どおりに動かないケースを扱った記事。HN で 151 ポイント・90 件のコメント。",
+      "points": [],
+      "code": null,
+      "signal": "▲ 151",
+      "pick": false
+    },
+    {
+      "id": "2026-09-29-cloudflare-vinext-1-0",
+      "url": "https://blog.cloudflare.com/vinext-nextjs-on-vite/",
+      "title": "Next.js applications, powered by Vite: introducing Vinext 1.0",
+      "source": "cloudflare blog",
+      "source_group": "tech_blog",
+      "published_at": "2026-09-28T23:51:57+09:00",
+      "category": "be",
+      "keywords": [
+        "nextjs",
+        "vite"
+      ],
+      "score": 55,
+      "why": "フロントエンド基盤",
+      "read_min": 5,
+      "tldr": "Next.js アプリを Vite 上で動かすフレームワーク「Vinext」が 1.0 に到達し、本番利用向けになった。",
+      "points": [],
+      "code": null,
+      "signal": null,
+      "pick": false
+    },
+    {
+      "id": "2026-09-29-github-git-2-56",
+      "url": "https://github.blog/open-source/git/highlights-from-git-2-56/",
+      "title": "Highlights from Git 2.56",
+      "source": "github.blog",
+      "source_group": "news",
+      "published_at": "2026-09-29T02:23:33+09:00",
+      "category": "be",
+      "keywords": [
+        "git"
+      ],
+      "score": 52,
+      "why": "開発ツールのリリース",
+      "read_min": 6,
+      "tldr": "Git 2.56 がリリースされ、GitHub が主な新機能と変更点を解説している。",
+      "points": [],
+      "code": null,
+      "signal": null,
+      "pick": false
+    },
+    {
+      "id": "2026-09-29-zenn-k8s-1-37-sig-apps",
+      "url": "https://zenn.dev/musaprg/articles/kubernetes-changelog-1-37-sig-apps",
+      "title": "Kubernetes 1.37: SIG Appsの変更内容",
+      "source": "zenn.dev",
+      "source_group": "tech_blog",
+      "published_at": "2026-09-28T02:25:56+09:00",
+      "category": "cloud",
+      "keywords": [
+        "kubernetes"
+      ],
+      "score": 62,
+      "why": "matched: kubernetes",
+      "read_min": 8,
+      "tldr": "2026 年 8 月にリリースされた Kubernetes v1.37 の CHANGELOG から、SIG Apps に関係する変更をまとめた記事。",
+      "points": [],
+      "code": null,
+      "signal": null,
+      "pick": false
+    },
+    {
+      "id": "2026-09-29-itmedia-timescar-leak",
+      "url": "https://www.itmedia.co.jp/news/article/2609/28/2000001808/",
+      "title": "「タイムズカー」会員情報約660万件漏えい 運転免許画像など 不正アクセスで",
+      "source": "hatena/it",
+      "source_group": "tech_blog",
+      "published_at": "2026-09-28T17:04:36+09:00",
+      "category": "sec",
+      "keywords": [
+        "security-incident",
+        "data-breach"
+      ],
+      "score": 60,
+      "why": "大規模な個人情報漏えい",
+      "read_min": 3,
+      "tldr": "カーシェア「タイムズカー」を運営するタイムズモビリティが、不正アクセスで会員情報約 660 万件が漏えいしたと発表。運転免許証の画像など本人確認書類の情報も含まれ、退会済みの人も対象。",
+      "points": [],
+      "code": null,
+      "signal": null,
+      "pick": false
+    },
+    {
+      "id": "2026-09-29-smartbank-trilogy",
+      "url": "https://blog.smartbank.co.jp/entry/mysql2-to-trilogy",
+      "title": "MySQLクライアントをTrilogyへ移行しました - inSmartBank",
+      "source": "hatena/it",
+      "source_group": "tech_blog",
+      "published_at": "2026-09-28T21:08:03+09:00",
+      "category": "be",
+      "keywords": [
+        "mysql",
+        "rails"
+      ],
+      "score": 50,
+      "why": "DB クライアント移行の事例",
+      "read_min": 8,
+      "tldr": "スマートバンクが Rails の MySQL クライアントを mysql2 から Trilogy に移行した事例。",
+      "points": [],
+      "code": null,
+      "signal": null,
+      "pick": false
+    },
+    {
+      "id": "2026-09-29-gigazine-ai-do-not-guess",
+      "url": "https://gigazine.net/news/20260928-ai-do-not-guess/",
+      "title": "AIに「推測するな」と指示するだけで架空データが70％から20％に減少したという実験結果",
+      "source": "hatena/it",
+      "source_group": "tech_blog",
+      "published_at": "2026-09-28T16:36:59+09:00",
+      "category": "ai",
+      "keywords": [
+        "llm",
+        "hallucination"
+      ],
+      "score": 58,
+      "why": "matched: llm",
+      "read_min": 3,
+      "tldr": "LLM に Web ページから情報を抜き出させる際、「値がなければ null、推測しない」と指示するだけで、存在しない値を作る割合が 70.7% から 20.2% に下がったという実験結果。",
+      "points": [],
+      "code": null,
+      "signal": null,
+      "pick": false
+    },
+    {
+      "id": "2026-09-29-pgedge-starfleet",
+      "url": "https://www.postgresql.org/about/news/pgedge-announces-pgedge-starfleet-a-new-postgres-cloud-platform-to-bridge-the-ai-prototype-to-production-chasm-3389/",
+      "title": "pgEdge Announces pgEdge Starfleet, a New Postgres Cloud Platform to Bridge the AI Prototype to Production Chasm",
+      "source": "postgresql.org",
+      "source_group": "news",
+      "published_at": "2026-09-28T09:00:00+09:00",
+      "category": "cloud",
+      "keywords": [
+        "postgres",
+        "managed-db"
+      ],
+      "score": 52,
+      "why": "matched: postgres",
+      "read_min": 4,
+      "tldr": "pgEdge が AI のプロトタイプから本番への移行を支援する Postgres のクラウドプラットフォーム「pgEdge Starfleet」を発表した。",
+      "points": [],
+      "code": null,
+      "signal": null,
+      "pick": false
+    },
+    {
+      "id": "2026-09-29-boj-minutes-july",
+      "url": "http://www.boj.or.jp/mopo/mpmsche_minu/minu_2026/g260731.pdf",
+      "title": "金融政策決定会合議事要旨（7月30、31日開催分）",
+      "source": "日本銀行",
+      "source_group": "official",
+      "published_at": "2026-09-28T08:50:00+09:00",
+      "category": "macro",
+      "keywords": [
+        "boj-policy",
+        "boj-rate-hike"
+      ],
+      "score": 90,
+      "why": "日銀の公式発表",
+      "read_min": 10,
+      "tldr": "日銀が 7 月 30・31 日の金融政策決定会合の議事要旨を公表。政策金利は据え置いた会合だが、委員から「金融緩和度合いの調整をペースアップする必要がある」など、物価の上振れリスクを警戒する意見が相次いだ。",
+      "points": [
+        "7 月会合は政策金利を据え置いた",
+        "複数の委員が利上げペースの加速を支持し、物価上振れへの警戒が議論の中心だった（報道による）",
+        "日銀は続く 9 月会合で政策金利を 1.25% に引き上げた。6 月の利上げから 3 か月での追加利上げ"
+      ],
+      "code": null,
+      "signal": null,
+      "pick": true
+    },
+    {
+      "id": "2026-09-29-boj-sppi-aug",
+      "url": "http://www.boj.or.jp/statistics/pi/cspi_release/sppi2608.pdf",
+      "title": "企業向けサービス価格指数（8月）",
+      "source": "日本銀行",
+      "source_group": "official",
+      "published_at": "2026-09-28T08:50:00+09:00",
+      "category": "macro",
+      "keywords": [
+        "boj-statistics",
+        "inflation"
+      ],
+      "score": 50,
+      "why": "日銀の公式統計",
+      "read_min": 3,
+      "tldr": "日銀が 8 月の企業向けサービス価格指数を公表した。",
+      "points": [],
+      "code": null,
+      "signal": null,
+      "pick": false
+    },
+    {
+      "id": "2026-09-29-fsa-privacy-qa",
+      "url": "https://www.fsa.go.jp/news/r8/sonota/20260928/20260928.html",
+      "title": "「金融機関における個人情報保護に関するQ&A」の改正について公表しました。",
+      "source": "金融庁",
+      "source_group": "official",
+      "published_at": "2026-09-29T01:00:00+09:00",
+      "category": "macro",
+      "keywords": [
+        "fsa",
+        "privacy"
+      ],
+      "score": 45,
+      "why": "金融庁の公式発表",
+      "read_min": 3,
+      "tldr": "金融庁が「金融機関における個人情報保護に関する Q&A」の改正を公表した。",
+      "points": [],
+      "code": null,
+      "signal": null,
+      "pick": false
+    },
+    {
+      "id": "2026-09-29-zaikei-nikkei-close",
+      "url": "https://www.zaikei.co.jp/article/20260928/871471.html",
+      "title": "日経平均は6日ぶり反落、大引けにかけて下げ幅拡大",
+      "source": "zaikei.co.jp",
+      "source_group": "news",
+      "published_at": null,
+      "category": "stocks",
+      "keywords": [
+        "nikkei225",
+        "interest-rates"
+      ],
+      "score": 78,
+      "why": "matched: 金利",
+      "read_min": 4,
+      "tldr": "9 月 28 日の日経平均は 6 営業日ぶりに反落し、前週末比 486.58 円安の 6 万 5877.62 円で取引を終えた。米国株高と原油安で買い先行したが、利益確定売りと国内長期金利の上昇（一時 3.095%）で下げ幅を広げた。",
+      "points": [
+        "寄り付きは 6 万 6505.94 円（+141.74 円）と上昇して始まった",
+        "長期金利の上昇や韓国 KOSPI の下落が重荷になり、大引けにかけて下げ幅が拡大",
+        "値下がり銘柄が 66.9%、値上がりは 30.1% で売りが優勢"
+      ],
+      "code": null,
+      "signal": null,
+      "pick": true
+    },
+    {
+      "id": "2026-09-29-toyokeizai-nidec",
+      "url": "https://toyokeizai.net/articles/-/959393?utm_source=rss&utm_medium=http&utm_campaign=link_back",
+      "title": "ニデック｢社長解任･1兆円減損｣報道でストップ安､東証審査直前の大混乱…くすぶり続けた岸田光哉社長の経営責任 | ビジネス | 東洋経済オンライン",
+      "source": "東洋経済",
+      "source_group": "news",
+      "published_at": "2026-09-28T17:30:00+09:00",
+      "category": "stocks",
+      "keywords": [
+        "corporate-governance",
+        "accounting-fraud"
+      ],
+      "score": 60,
+      "why": "大型株のガバナンス問題",
+      "read_min": 6,
+      "tldr": "ニデックで社長解任と 1 兆円規模の減損計上が報じられ、株価はストップ安となった。経営再建と内部統制が改めて問われている。",
+      "points": [],
+      "code": null,
+      "signal": null,
+      "pick": false
+    },
+    {
+      "id": "2026-09-29-diamond-new-topix",
+      "url": "https://diamond.jp/articles/-/399938",
+      "title": "新TOPIXが10月スタート、「新規採用＆脱落650社」の注目銘柄＆投資戦略は？セリア・フェローテック・マクドナルド…東証改革総仕上げの“詳細”を徹底解説！ - 先読み！企業業績 株式相場の歩き方",
+      "source": "ダイヤモンド",
+      "source_group": "news",
+      "published_at": "2026-09-29T04:35:00+09:00",
+      "category": "stocks",
+      "keywords": [
+        "topix",
+        "index-rebalance"
+      ],
+      "score": 62,
+      "why": "matched: インデックス",
+      "read_min": 8,
+      "tldr": "10 月から新しい TOPIX が始まる。TOPIX 改革の内容と、新規採用・除外の候補になる銘柄を解説する記事。",
+      "points": [],
+      "code": null,
+      "signal": null,
+      "pick": false
+    },
+    {
+      "id": "2026-09-29-coinpost-btc-etf-flow",
+      "url": "https://coinpost.jp/?p=739538",
+      "title": "ビットコイン現物ETF、週間23.9億ドル流入 約1年ぶりの高水準",
+      "source": "CoinPost",
+      "source_group": "news",
+      "published_at": "2026-09-28T11:47:38+09:00",
+      "category": "crypto",
+      "keywords": [
+        "bitcoin",
+        "bitcoin-etf"
+      ],
+      "score": 80,
+      "why": "matched: ビットコイン",
+      "read_min": 4,
+      "tldr": "米国のビットコイン現物 ETF は 9 月 21〜25 日の週に計 23 億 8,600 万ドルの純流入となり、約 1 年ぶりの高水準だった。",
+      "points": [
+        "ブラックロックの IBIT が 11 億 5,800 万ドルで首位、フィデリティの FBTC が 7 億 200 万ドルで続き、上位 2 本で流入の約 8 割",
+        "ETF 全体の純資産は 9 月 25 日時点で 1,084 億 2,000 万ドル、ビットコイン時価総額の 6.43%",
+        "純流出はウィズダムツリーの BTCW（401 万ドル）のみ"
+      ],
+      "code": null,
+      "signal": null,
+      "pick": true
+    },
+    {
+      "id": "2026-09-29-nada-ecb-pontes",
+      "url": "https://www.nadanews.com/369510/",
+      "title": "ECB、トークン化資産を中央銀行マネーで決済する「Pontes」を開始──2つの決済方式と、2028年の24時間化計画【MCB FinTechカタログ通信】",
+      "source": "CoinDesk JAPAN",
+      "source_group": "news",
+      "published_at": "2026-09-28T17:00:00+09:00",
+      "category": "crypto",
+      "keywords": [
+        "tokenization",
+        "cbdc"
+      ],
+      "score": 76,
+      "why": "中央銀行の決済基盤",
+      "read_min": 6,
+      "tldr": "ECB とユーロ圏の中央銀行が 9 月 21 日、ブロックチェーン上のトークン化資産の取引を中央銀行マネーで決済する「Pontes」の運用を始めた。",
+      "points": [
+        "初日から 13 の金融機関（Deutsche Bank、Santander など）と 4 つの分散台帳運営者が参加",
+        "代金をトークンで受け渡す方式と、台帳の指示で T2 システムの資金を動かす方式の 2 つがある",
+        "2027 年に決済時間を 22.5 時間へ延ばし、2028 年にトークン方式へ一本化して 24 時間 365 日の運用を予定"
+      ],
+      "code": null,
+      "signal": null,
+      "pick": true
+    },
+    {
+      "id": "2026-09-29-coinpost-strategy-btc",
+      "url": "https://coinpost.jp/?p=739651",
+      "title": "ストラテジー、224億円相当ビットコインを追加購入 二週連続で実施",
+      "source": "CoinPost",
+      "source_group": "news",
+      "published_at": "2026-09-28T21:15:45+09:00",
+      "category": "crypto",
+      "keywords": [
+        "bitcoin",
+        "strategy"
+      ],
+      "score": 60,
+      "why": "matched: ビットコイン",
+      "read_min": 3,
+      "tldr": "ストラテジーが 9 月 21〜27 日に 1,665 BTC を追加取得し、保有量は 84 万 7,666 BTC になった。",
+      "points": [],
+      "code": null,
+      "signal": null,
+      "pick": false
+    },
+    {
+      "id": "2026-09-29-coinpost-near-etf",
+      "url": "https://coinpost.jp/?p=739487",
+      "title": "仮想通貨ニア（NEAR）現物ETF、米国初の上場承認 29日にも取引開始へ",
+      "source": "CoinPost",
+      "source_group": "news",
+      "published_at": "2026-09-28T10:18:50+09:00",
+      "category": "crypto",
+      "keywords": [
+        "crypto-etf",
+        "near"
+      ],
+      "score": 55,
+      "why": "暗号資産 ETF",
+      "read_min": 3,
+      "tldr": "ビットワイズのニア（NEAR）現物 ETF「NRR」が NYSE Arca での上場承認を受け、米国初の NEAR 現物 ETF として取引開始が見込まれる。",
+      "points": [],
+      "code": null,
+      "signal": null,
+      "pick": false
+    },
+    {
+      "id": "2026-09-29-nada-bitget-outflow",
+      "url": "https://www.nadanews.com/369756/",
+      "title": "BitgetとTHORChain、約3.9億ドル流出めぐり対立──盗難資金の遮断可否が争点に",
+      "source": "CoinDesk JAPAN",
+      "source_group": "news",
+      "published_at": "2026-09-28T14:45:00+09:00",
+      "category": "crypto",
+      "keywords": [
+        "exchange-hack",
+        "bitget"
+      ],
+      "score": 55,
+      "why": "取引所の資金流出",
+      "read_min": 4,
+      "tldr": "Bitget で約 3.9 億ドルが流出した問題で、盗難資金の遮断の可否をめぐり THORChain と対立している。Bitget は 28 日にビットコインの出金を再開した。",
+      "points": [],
+      "code": null,
+      "signal": null,
+      "pick": false
+    },
+    {
+      "id": "2026-09-29-diamond-realestate-rate-shock",
+      "url": "https://diamond.jp/articles/-/399872",
+      "title": "【不動産67社】金利上昇で苦しくなる「衝撃度」ランキング！名古屋の住宅メーカーが1位に、三井不動産や住友不動産など財閥系デベロッパーへの影響は？《再配信》 - 今だからこそ読みたい！注目特集",
+      "source": "ダイヤモンド",
+      "source_group": "news",
+      "published_at": "2026-09-29T04:20:00+09:00",
+      "category": "realestate",
+      "keywords": [
+        "interest-rates",
+        "real-estate-companies"
+      ],
+      "score": 65,
+      "why": "matched: 金利",
+      "read_min": 8,
+      "tldr": "不動産 67 社について、借り換え金利が 1% 上がった場合に利益がどれだけ押し下げられるかを試算したランキング記事（有料記事）。",
+      "points": [],
+      "code": null,
+      "signal": null,
+      "pick": false
+    },
+    {
+      "id": "2026-09-29-diamond-cold-storage",
+      "url": "https://diamond.jp/articles/-/399934",
+      "title": "「賃貸型の冷凍冷蔵倉庫」がなぜ激増？大和ハウス、東京建物、森トラストまで参入するワケ - 物流専門紙カーゴニュース発",
+      "source": "ダイヤモンド",
+      "source_group": "news",
+      "published_at": "2026-09-28T11:00:00+09:00",
+      "category": "realestate",
+      "keywords": [
+        "logistics-reit",
+        "cold-storage"
+      ],
+      "score": 45,
+      "why": "不動産開発の動向",
+      "read_min": 6,
+      "tldr": "賃貸型の冷凍冷蔵倉庫の開発が増え、2026 年以降に竣工・計画中の主な物件は延床面積約 138 万平方メートル規模。開発側と利用者のニーズのずれも指摘されている。",
+      "points": [],
+      "code": null,
+      "signal": null,
+      "pick": false
+    }
+  ],
+  "social": [
+    {
+      "network": "x",
+      "author": "@claudeai",
+      "url": "https://x.com/claudeai/status/2104633115620823187",
+      "text": "Claude Sonnet 5.5 を発表。Sonnet 5 から明確に性能が上がり、30% 以上速く、多くの作業で最大 30% 安くなるとしている。",
+      "metrics": null,
+      "heat": null,
+      "category": "ai",
+      "keywords": [
+        "claude",
+        "llm"
+      ],
+      "posted_at": "2026-09-29T03:03:31+09:00"
+    },
+    {
+      "network": "x",
+      "author": "@ArtificialAnlys",
+      "url": "https://x.com/ArtificialAnlys/status/2104640155843989864",
+      "text": "Artificial Analysis Intelligence Index で Sonnet 5.5 は 56 点、Opus 5.5（max）と 2 点差。ただし 1 タスクあたりの出力トークンは同社の計測で最大。",
+      "metrics": null,
+      "heat": null,
+      "category": "ai",
+      "keywords": [
+        "claude",
+        "llm-cost"
+      ],
+      "posted_at": "2026-09-29T03:31:30+09:00"
+    },
+    {
+      "network": "x",
+      "author": "@wallstengine",
+      "url": "https://x.com/wallstengine/status/2104633377022525506",
+      "text": "Sonnet 5.5 と Opus 5.5 の料金比較（入力 $2 対 $4、出力 $10 対 $20、キャッシュ読み込みはどちらも $0.20）を紹介。",
+      "metrics": null,
+      "heat": null,
+      "category": "ai",
+      "keywords": [
+        "claude",
+        "llm-cost"
+      ],
+      "posted_at": "2026-09-29T03:04:33+09:00"
+    },
+    {
+      "network": "hn",
+      "author": null,
+      "url": "https://news.ycombinator.com/item?id=49881850",
+      "text": "「Sonnet 5.5」のスレッド。209 件のコメント。",
+      "metrics": "▲ 328  ✉ 209",
+      "heat": 82,
+      "category": "ai",
+      "keywords": [
+        "claude",
+        "llm"
+      ],
+      "posted_at": "2026-09-29T02:58:11+09:00"
+    },
+    {
+      "network": "hn",
+      "author": null,
+      "url": "https://news.ycombinator.com/item?id=49868404",
+      "text": "「Don't couple your Go code to GitHub」のスレッド。169 件のコメント。",
+      "metrics": "▲ 317  ✉ 169",
+      "heat": 79,
+      "category": "be",
+      "keywords": [
+        "go",
+        "go-modules"
+      ],
+      "posted_at": "2026-09-28T01:50:58+09:00"
+    },
+    {
+      "network": "hn",
+      "author": null,
+      "url": "https://news.ycombinator.com/item?id=49880312",
+      "text": "「The problem is not AI code, but not knowing about system architecture or intent」のスレッド。209 件のコメント。",
+      "metrics": "▲ 318  ✉ 209",
+      "heat": 79,
+      "category": "ai",
+      "keywords": [
+        "ai-coding",
+        "software-design"
+      ],
+      "posted_at": "2026-09-29T01:11:42+09:00"
+    },
+    {
+      "network": "hn",
+      "author": null,
+      "url": "https://news.ycombinator.com/item?id=49865312",
+      "text": "「Footguns with Postgres “at time zone 'UTC'”」のスレッド。90 件のコメント。",
+      "metrics": "▲ 151  ✉ 90",
+      "heat": 37,
+      "category": "be",
+      "keywords": [
+        "postgres",
+        "timezone"
+      ],
+      "posted_at": "2026-09-27T19:19:51+09:00"
+    }
+  ],
+  "releases": [
+    {
+      "date": "2026-10-01",
+      "title": "日銀短観（9 月調査）",
+      "repo": null,
+      "url": "https://news.livedoor.com/article/detail/32423967/",
+      "kind": "event",
+      "note": "10 月 1 日（木）8:50 発表",
+      "category": "macro"
+    },
+    {
+      "date": "2026-10-01",
+      "title": "米 ISM 製造業景気指数（9 月）",
+      "repo": null,
+      "url": "https://news.livedoor.com/article/detail/32423967/",
+      "kind": "event",
+      "note": "10 月 1 日（木）23:00 発表（日本時間）",
+      "category": "macro"
+    },
+    {
+      "date": "2026-10-02",
+      "title": "米雇用統計（9 月）",
+      "repo": null,
+      "url": "https://news.livedoor.com/article/detail/32423967/",
+      "kind": "event",
+      "note": "10 月 2 日（金）21:30 発表（日本時間）",
+      "category": "macro"
+    }
+  ]
+}
