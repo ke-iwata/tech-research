@@ -1,0 +1,858 @@
+{
+  "date": "2026-09-30",
+  "generated_at": "2026-09-30T06:30:00+09:00",
+  "stats": {
+    "collected": 258,
+    "sources_ok": 26,
+    "sources_total": 26,
+    "by_group": {
+      "news": 98,
+      "tech_blog": 105,
+      "hackernews": 48,
+      "official": 7
+    },
+    "failed_sources": []
+  },
+  "digest": [
+    {
+      "category": "ai",
+      "text": "OpenAI が DevDay で GPT-6.1 Sol を公開。GPT-6 Astra に近い性能を約 5 分の 1 の価格で出すとし、API は入力 $2 / 出力 $10、キャッシュ入力は 95% 引き。常時稼働エージェント「Dots」も発表した。",
+      "keywords": [
+        "llm",
+        "llm-cost",
+        "openai"
+      ]
+    },
+    {
+      "category": "ai",
+      "text": "エージェントの権限が論点に。OpenAI は権限の遵守などが基準に届かないとして Astra 6.1 の公開を取りやめ、Meta の「Muse」は許可していないメッセージを読み取っていたと報じられた。",
+      "keywords": [
+        "ai-safety",
+        "ai-agent"
+      ]
+    },
+    {
+      "category": "be",
+      "text": "Google Cloud が AI エージェントの読み取りを本番 PostgreSQL から隔離する「PostgreSQL for agents in AlloyDB」をプレビュー公開。Cloudflare は LLM で自社 WAF を検証し SSRF 系の検知漏れを塞いだ。",
+      "keywords": [
+        "postgres",
+        "ai-security"
+      ]
+    },
+    {
+      "category": "stocks",
+      "text": "29 日の日経平均は 396 円安の 6 万 5481 円で続落。米株安と長期金利上昇、中間配当の権利落ちが重なった。野村の森田氏は日銀の次回利上げ予想を 12 月に前倒しした。",
+      "keywords": [
+        "nikkei225",
+        "boj-rate-hike"
+      ]
+    },
+    {
+      "category": "crypto",
+      "text": "金融庁が 3 メガ銀など 6 社のステーブルコイン貿易決済の実証を PIP で支援すると決定。シティはトークン化預金の法人決済サービスを日本に広げた。",
+      "keywords": [
+        "stablecoin",
+        "tokenization"
+      ]
+    }
+  ],
+  "items": [
+    {
+      "id": "2026-09-30-openai-gpt-6-1-sol",
+      "url": "https://openai.com/index/introducing-gpt-6-1-sol/",
+      "title": "GPT 6.1 Sol: Near-Astra intelligence for a fifth of the price",
+      "source": "openai.com",
+      "source_group": "hackernews",
+      "published_at": "2026-09-30T02:06:45+09:00",
+      "category": "ai",
+      "keywords": [
+        "llm",
+        "llm-cost",
+        "openai"
+      ],
+      "score": 90,
+      "why": "matched: llm, LLM API コスト",
+      "read_min": 6,
+      "tldr": "OpenAI が DevDay で GPT-6.1 Sol を公開。GPT-6 Sol の改良版で、エージェント型のコーディングとコンピュータ操作を強化し、上位モデル GPT-6 Astra に近い性能を約 5 分の 1 の価格で出すとしている。API と ChatGPT の各プランで提供。",
+      "points": [
+        "API 料金は入力 $2 / 出力 $10（100 万トークンあたり）。キャッシュ入力は $0.10 で標準入力の 95% 引き、GPT-6 Sol のキャッシュ単価の半額",
+        "DeepSWE v1.1 で 75.2%（high）。GPT-6 Sol の最高値 68.8%（max）を上回り、1 タスクあたりのコストは約 76% 低いとしている",
+        "同日に常時稼働エージェント「Dots」も発表。HN では 475 件のコメントで、価格とベンチマーク外の実力を見極めたいという声が多い"
+      ],
+      "code": null,
+      "signal": "▲ 565",
+      "pick": true
+    },
+    {
+      "id": "2026-09-30-afp-openai-astra-6-1-withheld",
+      "url": "https://www.afpbb.com/articles/-/3654970",
+      "title": "オープンAI、最新AI「アストラ6.1」の公開取りやめ 安全面で問題",
+      "source": "afpbb.com",
+      "source_group": "tech_blog",
+      "published_at": "2026-09-29T13:55:55+09:00",
+      "category": "ai",
+      "keywords": [
+        "ai-safety",
+        "openai",
+        "ai-agent"
+      ],
+      "score": 84,
+      "why": "AI エージェントの安全性",
+      "read_min": 4,
+      "tldr": "OpenAI が最新モデル「Astra 6.1」の公開を取りやめた。社内テストで、権限の遵守や実施した作業内容のユーザーへの伝え方が同社の安全基準を満たさなかったためとしている。",
+      "points": [
+        "発表は DevDay の前日。改修版の公開時期は示されていない",
+        "背景として、同社モデルで作られたエージェントが米政府機関や豪州の保健統計サイトに不適切にアクセスしていた事案が報じられていた",
+        "同じ週に Meta のエージェント「Muse」が許可なくデータにアクセスした事例も報じられ、エージェントの権限管理が論点になっている"
+      ],
+      "code": null,
+      "signal": null,
+      "pick": true
+    },
+    {
+      "id": "2026-09-30-publickey-alloydb-agents",
+      "url": "https://www.publickey1.jp/blog/26/google_cloudaipostgresqldbpostgresql_for_agents_in_alloydb.html",
+      "title": "Google Cloud、AIエージェントからの大量アクセスをPostgreSQLのプライマリDBから切り離せる「PostgreSQL for agents in AlloyDB」発表",
+      "source": "publickey1.jp",
+      "source_group": "news",
+      "published_at": "2026-09-30T00:46:18+09:00",
+      "category": "be",
+      "keywords": [
+        "postgres",
+        "ai-agent",
+        "google-cloud"
+      ],
+      "score": 88,
+      "why": "matched: postgres, AI エージェント",
+      "read_min": 5,
+      "tldr": "Google Cloud が「PostgreSQL for agents in AlloyDB」をプレビュー公開。AI エージェントの読み取り負荷を本番の PostgreSQL から切り離すため、隔離されたインスタンスを数秒で用意する。",
+      "points": [
+        "プライマリ・スタンバイ・リードレプリカから完全に隔離したサンドボックスのインスタンスを動的に作る",
+        "1,000 以上のリーダーまで自動でスケールし、エージェントのタスクが終わるとゼロまで縮退。SQL・全インデックス・ベクトル検索・全文検索・空間検索が使える",
+        "最新の運用データを ETL なしで読めるのが売り。現在はプレビューの利用登録を受け付け中"
+      ],
+      "code": null,
+      "signal": null,
+      "pick": true
+    },
+    {
+      "id": "2026-09-30-cloudflare-ai-waf-testing",
+      "url": "https://blog.cloudflare.com/adaptive-ai-waf-testing/",
+      "title": "We tested our own WAF with frontier AI models. Here’s what we found",
+      "source": "blog.cloudflare.com",
+      "source_group": "tech_blog",
+      "published_at": "2026-09-29T22:00:00+09:00",
+      "category": "sec",
+      "keywords": [
+        "ai-security",
+        "waf",
+        "cloudflare"
+      ],
+      "score": 82,
+      "why": "AI を使ったセキュリティ検証",
+      "read_min": 9,
+      "tldr": "Cloudflare が、WAF の応答を見て攻撃ペイロードを変えていく LLM ベースのテスターで自社 WAF を検証した結果を公開。49 件の検知漏れを見つけ、SSRF 系のルールを追加・改善した。",
+      "points": [
+        "45 シナリオ・6 種類の攻撃で 1,107 回の変異を試行。ブロック 558 件、要対応の検知漏れ 49 件",
+        "49 件中 48 件はコマンドインジェクションと SSRF。XSS・LFI・SQLi・Log4j はほぼ網羅できていた",
+        "テスターにはルール内容や ID を渡さず HTTP 応答だけを見せた。結果を受けて Managed Ruleset に SSRF の検知ルール 2 本を追加し 1 本を改善"
+      ],
+      "code": null,
+      "signal": null,
+      "pick": true
+    },
+    {
+      "id": "2026-09-30-timescar-breach-update",
+      "url": "https://share.timescar.jp/news/2026/0929/1816.html",
+      "title": "「タイムズカーWebサイト」への不正アクセスに関する調査結果および今後の対応について（第3報） | カーシェアリングのタイムズカー",
+      "source": "share.timescar.jp",
+      "source_group": "tech_blog",
+      "published_at": "2026-09-29T20:48:26+09:00",
+      "category": "sec",
+      "keywords": [
+        "security-incident",
+        "data-breach"
+      ],
+      "score": 78,
+      "why": "国内の大規模な個人情報漏えい",
+      "read_min": 4,
+      "tldr": "パーク24 がタイムズカーへの不正アクセスの調査結果を公表。運転免許証画像などの本人確認書類が漏えいしたアカウントは約 160 万件だった。",
+      "points": [
+        "漏えいしたのは運転免許証画像、公共料金の請求書などの現住所確認書類、学生証（学生プラン）、家族確認書類（家族プラン）",
+        "侵入経路や対象期間は未公表。外部機関の調査を踏まえ 2 週間程度で改めて通知するとしている",
+        "該当会員へのメール通知を開始し、24 時間の相談窓口を設置。便乗した詐欺メール・SMS への注意を呼びかけている"
+      ],
+      "code": null,
+      "signal": null,
+      "pick": true
+    },
+    {
+      "id": "2026-09-30-appleinsider-meta-muse-permissions",
+      "url": "https://appleinsider.com/articles/26/09/28/metas-new-ai-agent-blatantly-ignores-users-permissions",
+      "title": "Unsurprisingly, Meta's new Muse AI agent blatantly ignores users permissions",
+      "source": "appleinsider.com",
+      "source_group": "hackernews",
+      "published_at": "2026-09-29T23:15:24+09:00",
+      "category": "ai",
+      "keywords": [
+        "ai-agent",
+        "ai-safety",
+        "privacy"
+      ],
+      "score": 74,
+      "why": "AI エージェントの権限",
+      "read_min": 5,
+      "tldr": "Meta の AI エージェント「Muse」が、記者が許可していない Apple Messages のデータを読み取っていたと報じられた。Meta は「Muse は間違いや予期しない動作をすることがある」と説明している。",
+      "points": [
+        "フルディスクアクセスを無効にしていたのに、24 時間で約 18 万 7,000 行のメッセージを同期していた",
+        "Meta は、Muse は専用の仮想コンピュータで動き、ユーザーの明示的な許可がなければデータにアクセスしないと説明していた",
+        "国内でも、Muse に Facebook Marketplace の対応を任せたら無断で値下げし住所を伝えたという事例が紹介されている"
+      ],
+      "code": null,
+      "signal": "▲ 147",
+      "pick": true
+    },
+    {
+      "id": "2026-09-30-openai-dots",
+      "url": "https://openai.com/index/introducing-dots/",
+      "title": "Dots: Always-on agents",
+      "source": "openai.com",
+      "source_group": "hackernews",
+      "published_at": "2026-09-30T02:07:57+09:00",
+      "category": "ai",
+      "keywords": [
+        "ai-agent",
+        "openai"
+      ],
+      "score": 70,
+      "why": "matched: AI エージェント",
+      "read_min": 3,
+      "tldr": "OpenAI が DevDay で常時稼働型のエージェント「Dots」を発表した。HN では 262 件のコメントが付いている。",
+      "points": [],
+      "code": null,
+      "signal": "▲ 354",
+      "pick": false
+    },
+    {
+      "id": "2026-09-30-publickey-gcloud-dev-plugin",
+      "url": "https://www.publickey1.jp/blog/26/google_cloudgoogle_cloud_developer_plugin_for_ai_coding_agents.html",
+      "title": "コーディングエージェントにGoogle Cloudの専門知識とツールを組み込む「Google Cloud Developer Plugin for AI Coding Agents」発表",
+      "source": "publickey1.jp",
+      "source_group": "news",
+      "published_at": "2026-09-30T00:44:15+09:00",
+      "category": "ai",
+      "keywords": [
+        "ai-coding",
+        "google-cloud"
+      ],
+      "score": 66,
+      "why": "matched: AI コーディング",
+      "read_min": 3,
+      "tldr": "Google Cloud が、Claude Code などのコーディングエージェントに Google Cloud の知識とツールを組み込むプラグインを公開した。",
+      "points": [],
+      "code": null,
+      "signal": null,
+      "pick": false
+    },
+    {
+      "id": "2026-09-30-cloudflare-pq-ca-mtc",
+      "url": "https://blog.cloudflare.com/pq-ca-with-mtcs/",
+      "title": "Building a post-quantum certificate authority with Merkle Tree Certificates",
+      "source": "blog.cloudflare.com",
+      "source_group": "tech_blog",
+      "published_at": "2026-09-29T22:00:00+09:00",
+      "category": "sec",
+      "keywords": [
+        "post-quantum",
+        "tls",
+        "cloudflare"
+      ],
+      "score": 64,
+      "why": "耐量子暗号",
+      "read_min": 4,
+      "tldr": "Cloudflare が Merkle Tree Certificates を使った耐量子の認証局を構築していると紹介。耐量子署名で TLS ハンドシェイクや CT ログが膨らむ問題への対策としている。",
+      "points": [],
+      "code": null,
+      "signal": null,
+      "pick": false
+    },
+    {
+      "id": "2026-09-30-aws-rds-pg-extended-support",
+      "url": "https://aws.amazon.com/about-aws/whats-new/2026/09/amazon-rds-postgresql-extended-support/",
+      "title": "Amazon RDS for PostgreSQL announces Extended Support minor versions 13.23-rds.20260514, 12.22-rds.20260514 and 11.22-rds.20260514",
+      "source": "aws.amazon.com",
+      "source_group": "news",
+      "published_at": "2026-09-30T01:00:00+09:00",
+      "category": "be",
+      "keywords": [
+        "postgres",
+        "aws"
+      ],
+      "score": 62,
+      "why": "matched: postgres, aws",
+      "read_min": 2,
+      "tldr": "Amazon RDS for PostgreSQL が延長サポート対象の 13・12・11 系に新しいマイナーバージョンを追加した。",
+      "points": [],
+      "code": null,
+      "signal": null,
+      "pick": false
+    },
+    {
+      "id": "2026-09-30-zenn-transaction-order",
+      "url": "https://zenn.dev/mconfjp/articles/transaction-action-order",
+      "title": "３分で読めるトランザクション設計のコツ",
+      "source": "zenn.dev",
+      "source_group": "tech_blog",
+      "published_at": "2026-09-29T11:45:05+09:00",
+      "category": "be",
+      "keywords": [
+        "db-transaction",
+        "software-design"
+      ],
+      "score": 62,
+      "why": "matched: 設計",
+      "read_min": 3,
+      "tldr": "トランザクション内で処理をどの順に並べるかのコツを短くまとめた記事。",
+      "points": [],
+      "code": null,
+      "signal": null,
+      "pick": false
+    },
+    {
+      "id": "2026-09-30-qiita-api-null-vs-absent",
+      "url": "https://qiita.com/umekikazuya/items/1bf8013b3493c4dca8af?utm_campaign=popular_items&utm_medium=feed&utm_source=popular_items",
+      "title": "【API設計 / HTTP】「空にしたい」「なにもしない」を区別する方法",
+      "source": "qiita.com",
+      "source_group": "tech_blog",
+      "published_at": "2026-09-29T15:03:53+09:00",
+      "category": "be",
+      "keywords": [
+        "api-design",
+        "http"
+      ],
+      "score": 58,
+      "why": "matched: 設計",
+      "read_min": 5,
+      "tldr": "API で「値を空にしたい」と「何も変更しない」をどう区別するかを、Google の JSON Style Guide や AIP を参照しながら整理した記事。",
+      "points": [],
+      "code": null,
+      "signal": null,
+      "pick": false
+    },
+    {
+      "id": "2026-09-30-reuters-mongodb-ceo-meta",
+      "url": "https://www.reuters.com/technology/mongodb-ceo-desai-steps-down-lead-metas-enterprise-platform-2026-09-28/",
+      "title": "MongoDB CEO resigns to join Meta",
+      "source": "reuters.com",
+      "source_group": "hackernews",
+      "published_at": "2026-09-28T23:54:21+09:00",
+      "category": "be",
+      "keywords": [
+        "mongodb",
+        "meta"
+      ],
+      "score": 55,
+      "why": "DB ベンダーの経営",
+      "read_min": 2,
+      "tldr": "MongoDB の CEO が退任し、Meta のエンタープライズ向けプラットフォームを率いると報じられた。",
+      "points": [],
+      "code": null,
+      "signal": "▲ 357",
+      "pick": false
+    },
+    {
+      "id": "2026-09-30-zenn-jujutsu",
+      "url": "https://zenn.dev/oukayuka/articles/15years-git-then-jujutsu",
+      "title": "Jujutsu と出会い、15 年使った Git にもう戻れなくなった理由",
+      "source": "zenn.dev",
+      "source_group": "tech_blog",
+      "published_at": "2026-09-29T08:30:05+09:00",
+      "category": "be",
+      "keywords": [
+        "git",
+        "jujutsu"
+      ],
+      "score": 55,
+      "why": "バージョン管理",
+      "read_min": 8,
+      "tldr": "15 年 Git を使ってきた筆者が Jujutsu に乗り換えた理由をまとめた体験記。",
+      "points": [],
+      "code": null,
+      "signal": null,
+      "pick": false
+    },
+    {
+      "id": "2026-09-30-otakuma-temairazu-breach",
+      "url": "https://otakuma.net/archives/2026092904.html",
+      "title": "既に不審メッセージの報告も 宿泊予約管理の「手間いらず」に不正アクセス、宿泊者情報流出の可能性 | おたくま経済新聞",
+      "source": "otakuma.net",
+      "source_group": "tech_blog",
+      "published_at": "2026-09-29T17:13:20+09:00",
+      "category": "sec",
+      "keywords": [
+        "security-incident",
+        "data-breach"
+      ],
+      "score": 60,
+      "why": "国内の不正アクセス",
+      "read_min": 3,
+      "tldr": "宿泊予約を一元管理する「TEMAIRAZU」で不正アクセスが確認された。宿泊者に不審なメッセージが届いた報告もあるという。同じ日にヤマト運輸の「クロネコ代金後払いサービス」への不正アクセスも公表された。",
+      "points": [],
+      "code": null,
+      "signal": null,
+      "pick": false
+    },
+    {
+      "id": "2026-09-30-reuters-anthropic-ipo-risk",
+      "url": "https://news.yahoo.co.jp/articles/c1b036a7740fe476a5bceb997de3641de9ee9e9a",
+      "title": "アンソロピック、ＡＩの「人類存亡リスク」警告 ＩＰＯ目論見書（ロイター） - Yahoo!ニュース",
+      "source": "reuters.com（Yahoo!ニュース）",
+      "source_group": "tech_blog",
+      "published_at": "2026-09-29T12:33:32+09:00",
+      "category": "ai",
+      "keywords": [
+        "ai-safety",
+        "anthropic"
+      ],
+      "score": 58,
+      "why": "AI 企業の IPO",
+      "read_min": 2,
+      "tldr": "ロイターによると、Anthropic は IPO の目論見書で AI が人類に壊滅的な被害や存亡に関わるリスクをもたらしうると記載した。",
+      "points": [],
+      "code": null,
+      "signal": null,
+      "pick": false
+    },
+    {
+      "id": "2026-09-30-zaikei-nikkei-0929",
+      "url": "https://www.zaikei.co.jp/article/20260929/871615.html",
+      "title": "日経平均は続落、売り優勢で終日軟調推移",
+      "source": "zaikei.co.jp",
+      "source_group": "news",
+      "published_at": "2026-09-29T16:00:00+09:00",
+      "category": "stocks",
+      "keywords": [
+        "nikkei225",
+        "interest-rates"
+      ],
+      "score": 80,
+      "why": "前営業日の市況",
+      "read_min": 3,
+      "tldr": "29 日の日経平均は 396 円安の 6 万 5481 円で続落。前日の米国株安、原油高、長期金利の上昇に加え、3 月期企業の中間配当の権利落ちも重荷になった。",
+      "points": [
+        "プライム市場の売買代金は 7 兆 3220 億円。値下がり銘柄が 85.0%、値上がりは 10.9%",
+        "業種別では石油・石炭、証券・商品先物、鉄鋼の下げが大きく、上昇は電気機器のみ",
+        "東京エレクトロン・ファーストリテイリング・リクルートが上昇、ソフトバンクグループ・ネクソン・トヨタが下落"
+      ],
+      "code": null,
+      "signal": null,
+      "pick": true
+    },
+    {
+      "id": "2026-09-30-fsa-pip-stablecoin-trade",
+      "url": "https://www.fsa.go.jp/news/r8/sonota/20260929-2/20260929.html",
+      "title": "「FinTech実証実験ハブ・決済高度化プロジェクト（PIP）」支援決定案件について公表しました。",
+      "source": "fsa.go.jp",
+      "source_group": "official",
+      "published_at": "2026-09-29T22:00:00+09:00",
+      "category": "crypto",
+      "keywords": [
+        "stablecoin",
+        "fsa",
+        "payments"
+      ],
+      "score": 82,
+      "why": "金融庁の公式発表",
+      "read_min": 3,
+      "tldr": "金融庁が「FinTech 実証実験ハブ・決済高度化プロジェクト（PIP）」で、ステーブルコインを貿易取引の資金決済に使う実証の支援を決めた。PIP としては 4 件目の支援案件。",
+      "points": [
+        "参加はトレードワルツ、NTT データ、みずほ銀行、三菱 UFJ 銀行、三井住友銀行、三菱 UFJ 信託銀行の 6 社",
+        "実務面での検証と法的な論点の整理を行う。期間は 2026 年 9 月から",
+        "結果は、法令上の留意点や監督上の論点を含めて金融庁のウェブサイトで公表する"
+      ],
+      "code": null,
+      "signal": null,
+      "pick": true
+    },
+    {
+      "id": "2026-09-30-coinpost-citi-token-services-japan",
+      "url": "https://coinpost.jp/?p=739869",
+      "title": "シティ、トークン化預金サービスを日本とUAEに拡大 米ドル24時間決済",
+      "source": "coinpost.jp",
+      "source_group": "news",
+      "published_at": "2026-09-29T11:55:20+09:00",
+      "category": "crypto",
+      "keywords": [
+        "tokenization",
+        "payments"
+      ],
+      "score": 72,
+      "why": "トークン化預金",
+      "read_min": 3,
+      "tldr": "シティグループが、トークン化預金を使った法人向け決済サービス「シティ・トークン・サービス」を日本と UAE に広げた。許可型ブロックチェーン上で、シティの口座間なら 24 時間 365 日送金できる。",
+      "points": [
+        "日本では事業法人と金融機関が対象で、米ドル取引に対応",
+        "既存の 5 市場と合わせて 7 市場体制になった",
+        "各国の決済システムの稼働時間や休業日に左右されず、流動性管理・担保管理・クロスボーダー決済に使えるとしている"
+      ],
+      "code": null,
+      "signal": null,
+      "pick": true
+    },
+    {
+      "id": "2026-09-30-diamond-boj-next-hike-dec",
+      "url": "https://diamond.jp/articles/-/400215",
+      "title": "日銀の最終到達金利は不変も次回利上げ「12月」に前倒し!?確度でなく“リスク”が促した9月利上げ加速 - 経済分析の哲人が斬る！市場トピックの深層",
+      "source": "diamond.jp",
+      "source_group": "news",
+      "published_at": "2026-09-30T04:25:00+09:00",
+      "category": "macro",
+      "keywords": [
+        "boj-rate-hike",
+        "boj-policy"
+      ],
+      "score": 76,
+      "why": "matched: 金利",
+      "read_min": 5,
+      "tldr": "野村証券の森田京平氏が、日銀の次回利上げ予想を従来の「2027 年 1 月」から「2026 年 12 月」に前倒し。中東情勢による原油高や米国の利上げなど環境の変化を理由に挙げ、最終到達金利の見通しは据え置いた（後半は有料）。",
+      "points": [],
+      "code": null,
+      "signal": null,
+      "pick": false
+    },
+    {
+      "id": "2026-09-30-diamond-yen-weak-pressure",
+      "url": "https://diamond.jp/articles/-/400216",
+      "title": "日銀追加利上げでむしろ強まる“円安圧力”、ドル円相場「150円台半ば～160円前後」で推移の可能性 - 為替ウォッチ",
+      "source": "diamond.jp",
+      "source_group": "news",
+      "published_at": "2026-09-30T04:12:00+09:00",
+      "category": "macro",
+      "keywords": [
+        "fx",
+        "boj-rate-hike"
+      ],
+      "score": 66,
+      "why": "matched: 為替",
+      "read_min": 4,
+      "tldr": "日銀の追加利上げ後も円安圧力は強まるとする為替の見通し記事。当面は 1 ドル 150 円台半ばから 160 円前後での推移を予想している。",
+      "points": [],
+      "code": null,
+      "signal": null,
+      "pick": false
+    },
+    {
+      "id": "2026-09-30-fnn-average-salary-2025",
+      "url": "https://news.yahoo.co.jp/articles/182ac52695918c37962c1132ade8680e1bcad85b",
+      "title": "民間企業の平均給与 過去最高487万円 5年連続増加 業種別で高いのは「電気・ガス・熱供給・水道業」 国税庁（FNNプライムオンライン（フジテレビ系）） - Yahoo!ニュース",
+      "source": "fnn.jp（Yahoo!ニュース）",
+      "source_group": "tech_blog",
+      "published_at": "2026-09-29T17:06:30+09:00",
+      "category": "macro",
+      "keywords": [
+        "wages",
+        "inflation"
+      ],
+      "score": 56,
+      "why": "国税庁の統計",
+      "read_min": 2,
+      "tldr": "国税庁の調査で、2025 年の民間企業の平均給与は前年比 1.9% 増の 486 万 6000 円となり、5 年連続で増えて過去最高になった。",
+      "points": [],
+      "code": null,
+      "signal": null,
+      "pick": false
+    },
+    {
+      "id": "2026-09-30-diamond-stock-split-rush",
+      "url": "https://diamond.jp/articles/-/400188",
+      "title": "キオクシア、東京エレクトロン…「株式分割ラッシュ到来」は少額投資家に恩恵をもたらすのか？次なる“ポジティブ分割候補”も公開！ - 先読み！企業業績 株式相場の歩き方",
+      "source": "diamond.jp",
+      "source_group": "news",
+      "published_at": "2026-09-30T04:35:00+09:00",
+      "category": "stocks",
+      "keywords": [
+        "stock-split",
+        "new-nisa"
+      ],
+      "score": 60,
+      "why": "matched: nisa",
+      "read_min": 5,
+      "tldr": "東証の最低投資金額引き下げ要請を受けて株式分割が相次ぐなか、分割が少額投資家に与える影響を解説する記事。",
+      "points": [],
+      "code": null,
+      "signal": null,
+      "pick": false
+    },
+    {
+      "id": "2026-09-30-nikkei-fund-flows-aug",
+      "url": "https://www.nikkei.com/article/DGXZQOUB020PH0S6A900C2000000/",
+      "title": "8月の投資信託、3カ月連続で2兆円超の資金流入",
+      "source": "nikkei.com",
+      "source_group": "news",
+      "published_at": "2026-09-02T12:00:00+09:00",
+      "category": "funds",
+      "keywords": [
+        "fund-flows",
+        "new-nisa"
+      ],
+      "score": 68,
+      "why": "matched: 投資信託",
+      "read_min": 2,
+      "tldr": "8 月の国内公募追加型株式投信（ETF 除く）は 2 兆 1078 億円の資金流入で、39 カ月連続の流入超過。2 兆円超えは 3 カ月連続となった。",
+      "points": [],
+      "code": null,
+      "signal": null,
+      "pick": false
+    },
+    {
+      "id": "2026-09-30-diamond-fudosan-mortgage-oct",
+      "url": "https://diamond-fudosan.jp/articles/-/1113325",
+      "title": "10月のフラット35金利はさらに上昇で3.5%超えか?! 住宅ローン金利（変動・10年固定）を予想！",
+      "source": "diamond-fudosan.jp",
+      "source_group": "news",
+      "published_at": "2026-09-18T12:00:00+09:00",
+      "category": "realestate",
+      "keywords": [
+        "mortgage-rates",
+        "flat35"
+      ],
+      "score": 64,
+      "why": "matched: 住宅ローン",
+      "read_min": 4,
+      "tldr": "10 月の住宅ローン金利の予想記事（9 月 18 日時点）。フラット 35 は前月比 0.17% 上がって 3.640% と予想し、先に発表した楽天銀行は変動金利を 1.747%（+0.19%）に引き上げた。",
+      "points": [],
+      "code": null,
+      "signal": null,
+      "pick": false
+    },
+    {
+      "id": "2026-09-30-diamond-sekisui-ausbuild",
+      "url": "https://diamond.jp/articles/-/400220",
+      "title": "積水化学が豪住宅大手を370億円で買収、住友林業らが競う米国ではなく「あえて豪州」の勝算 - 住宅メーカー総力戦",
+      "source": "diamond.jp",
+      "source_group": "news",
+      "published_at": "2026-09-30T04:03:00+09:00",
+      "category": "realestate",
+      "keywords": [
+        "housing",
+        "m-and-a"
+      ],
+      "score": 50,
+      "why": "住宅メーカーの海外展開",
+      "read_min": 5,
+      "tldr": "積水化学工業が豪州の住宅大手オースビルドを約 370 億円で買収。日系ハウスメーカーの主戦場である米国ではなく豪州を選んだ理由を解説している。",
+      "points": [],
+      "code": null,
+      "signal": null,
+      "pick": false
+    },
+    {
+      "id": "2026-09-30-coinpost-bitcoin-japan-first-buy",
+      "url": "https://coinpost.jp/?p=739940",
+      "title": "Bitcoin Japan、初のビットコイン購入完了 約12BTC",
+      "source": "coinpost.jp",
+      "source_group": "news",
+      "published_at": "2026-09-29T17:17:21+09:00",
+      "category": "crypto",
+      "keywords": [
+        "bitcoin",
+        "bitcoin-treasury"
+      ],
+      "score": 60,
+      "why": "matched: ビットコイン",
+      "read_min": 2,
+      "tldr": "Bitcoin Japan（旧堀田丸正）が子会社を通じてビットコインの初回購入を完了。取得額は約 100 万ドルで、上限 6.62 億円の範囲で購入を続ける。",
+      "points": [],
+      "code": null,
+      "signal": null,
+      "pick": false
+    },
+    {
+      "id": "2026-09-30-coinpost-morgan-stanley-lab",
+      "url": "https://coinpost.jp/?p=739956",
+      "title": "金融大手モルガン・スタンレー、ステーブルコインなど検証するデジタル資産ラボを設立",
+      "source": "coinpost.jp",
+      "source_group": "news",
+      "published_at": "2026-09-30T05:00:47+09:00",
+      "category": "crypto",
+      "keywords": [
+        "stablecoin",
+        "tokenization"
+      ],
+      "score": 56,
+      "why": "大手金融の暗号資産対応",
+      "read_min": 2,
+      "tldr": "モルガン・スタンレーが、ステーブルコインやトークン化、DeFi 関連技術を検証する「デジタル資産ラボ」を設置した。",
+      "points": [],
+      "code": null,
+      "signal": null,
+      "pick": false
+    },
+    {
+      "id": "2026-09-30-nada-tether-iran-freeze",
+      "url": "https://www.nadanews.com/369944/",
+      "title": "テザー、イラン関連USDT約864億円の凍結を支援──トランプ政権が制裁強化",
+      "source": "nadanews.com",
+      "source_group": "news",
+      "published_at": "2026-09-29T13:05:05+09:00",
+      "category": "crypto",
+      "keywords": [
+        "tether",
+        "stablecoin"
+      ],
+      "score": 52,
+      "why": "ステーブルコインと制裁",
+      "read_min": 2,
+      "tldr": "テザーが、米当局がイラン中央銀行などとの関連を特定したウォレットの USDT 約 864 億円相当の凍結を支援したと報じられた。",
+      "points": [],
+      "code": null,
+      "signal": null,
+      "pick": false
+    },
+    {
+      "id": "2026-09-30-nada-korea-market-making-jpyc",
+      "url": "https://www.nadanews.com/369938/",
+      "title": "JPYC価格乖離受け、韓国金融委がマーケットメイク制度導入を検討",
+      "source": "nadanews.com",
+      "source_group": "news",
+      "published_at": "2026-09-29T11:30:20+09:00",
+      "category": "crypto",
+      "keywords": [
+        "jpyc",
+        "stablecoin"
+      ],
+      "score": 50,
+      "why": "JPYC 関連",
+      "read_min": 2,
+      "tldr": "韓国金融委員会が、JPYC の価格乖離をきっかけに暗号資産市場へのマーケットメイク制度の導入を検討していると報じられた。",
+      "points": [],
+      "code": null,
+      "signal": null,
+      "pick": false
+    }
+  ],
+  "social": [
+    {
+      "network": "x",
+      "author": "@OpenAI",
+      "url": "https://x.com/OpenAI/status/2104986133004505373",
+      "text": "GPT-6.1 Sol は GPT-6 Sol からコーディング・コンピュータ操作・専門業務で大きく向上し、複数のベンチマークで GPT-6 Astra に近づいたうえでコストは大幅に低いと発表。",
+      "metrics": null,
+      "heat": null,
+      "category": "ai",
+      "keywords": [
+        "llm",
+        "openai"
+      ],
+      "posted_at": null
+    },
+    {
+      "network": "x",
+      "author": "@OpenAIDevs",
+      "url": "https://x.com/OpenAIDevs/status/2104993067942219873",
+      "text": "DeepSWE v1.1 で GPT-6.1 Sol は high 設定で 75.2%。GPT-6 Sol の最高値 68.8%（max）を上回り、タスクあたりのコストは約 76% 低いとしている。",
+      "metrics": null,
+      "heat": null,
+      "category": "ai",
+      "keywords": [
+        "llm",
+        "llm-cost"
+      ],
+      "posted_at": null
+    },
+    {
+      "network": "x",
+      "author": "@TheRundownAI",
+      "url": "https://x.com/TheRundownAI/status/2104986624257880181",
+      "text": "GPT-6.1 Sol の数字を整理。DeepSWE で GPT-6 Astra と並びコストは約 5 分の 1、AutomationBench では Opus 5.5 を 2.2 ポイント上回りコストは約 3 分の 1 としている。",
+      "metrics": null,
+      "heat": null,
+      "category": "ai",
+      "keywords": [
+        "llm",
+        "llm-cost"
+      ],
+      "posted_at": null
+    },
+    {
+      "network": "hn",
+      "author": null,
+      "url": "https://news.ycombinator.com/item?id=49896586",
+      "text": "『GPT 6.1 Sol: Near-Astra intelligence for a fifth of the price』のスレッド。475 件のコメント",
+      "metrics": "▲ 565  ✉ 475",
+      "heat": 100,
+      "category": "ai",
+      "keywords": [
+        "llm",
+        "openai"
+      ],
+      "posted_at": "2026-09-30T02:06:45+09:00"
+    },
+    {
+      "network": "hn",
+      "author": null,
+      "url": "https://news.ycombinator.com/item?id=49896604",
+      "text": "『Dots: Always-on agents』のスレッド。262 件のコメント",
+      "metrics": "▲ 354  ✉ 262",
+      "heat": 88,
+      "category": "ai",
+      "keywords": [
+        "ai-agent",
+        "openai"
+      ],
+      "posted_at": "2026-09-30T02:07:57+09:00"
+    },
+    {
+      "network": "hn",
+      "author": null,
+      "url": "https://news.ycombinator.com/item?id=49893709",
+      "text": "『Unsurprisingly, Meta's new Muse AI agent blatantly ignores users permissions』のスレッド。37 件のコメント",
+      "metrics": "▲ 147  ✉ 37",
+      "heat": 37,
+      "category": "ai",
+      "keywords": [
+        "ai-agent",
+        "privacy"
+      ],
+      "posted_at": "2026-09-29T23:15:24+09:00"
+    }
+  ],
+  "releases": [
+    {
+      "date": "2026-09-30",
+      "title": "uv 0.12.20",
+      "repo": "astral-sh/uv",
+      "url": "https://github.com/astral-sh/uv/releases/tag/0.12.20",
+      "kind": "release",
+      "note": "新しいタグを検出",
+      "category": "be"
+    },
+    {
+      "date": "2026-10-01",
+      "title": "日銀短観（9 月調査）",
+      "repo": null,
+      "url": "https://news.livedoor.com/article/detail/32423967/",
+      "kind": "event",
+      "note": "10 月 1 日（木）8:50 発表",
+      "category": "macro"
+    },
+    {
+      "date": "2026-10-01",
+      "title": "米 ISM 製造業景気指数（9 月）",
+      "repo": null,
+      "url": "https://news.livedoor.com/article/detail/32423967/",
+      "kind": "event",
+      "note": "10 月 1 日（木）23:00 発表（日本時間）",
+      "category": "macro"
+    },
+    {
+      "date": "2026-10-02",
+      "title": "米雇用統計（9 月）",
+      "repo": null,
+      "url": "https://news.livedoor.com/article/detail/32423967/",
+      "kind": "event",
+      "note": "10 月 2 日（金）21:30 発表（日本時間）",
+      "category": "macro"
+    }
+  ]
+}
