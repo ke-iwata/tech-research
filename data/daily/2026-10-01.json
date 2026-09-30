@@ -1,0 +1,861 @@
+{
+  "date": "2026-10-01",
+  "generated_at": "2026-10-01T05:40:00+09:00",
+  "stats": {
+    "collected": 280,
+    "sources_ok": 26,
+    "sources_total": 26,
+    "by_group": {
+      "news": 112,
+      "tech_blog": 101,
+      "hackernews": 49,
+      "official": 18
+    },
+    "failed_sources": []
+  },
+  "digest": [
+    {
+      "category": "ai",
+      "text": "エージェント基盤の整備が続く。MCP 非対応だった Pi が MCP をコアに取り込み、Cloudflare は HTTP 402 でエージェントに従量課金できる Monetization Gateway をベータ公開した。",
+      "keywords": [
+        "mcp-server",
+        "ai-agent",
+        "payments"
+      ]
+    },
+    {
+      "category": "sec",
+      "text": "Anthropic が公開重みモデル GLM-5.3 のサイバー能力とセーフガードの弱さを報告。Google は脆弱性修正を自動化する OSS ハーネス Mantis を公開した。",
+      "keywords": [
+        "ai-security",
+        "ai-safety"
+      ]
+    },
+    {
+      "category": "be",
+      "text": "JavaScript の統合ツールチェーン Vite+ 1.0 が正式リリース。`vp` 1 つで開発サーバーからテストまで扱える。",
+      "keywords": [
+        "vite"
+      ]
+    },
+    {
+      "category": "macro",
+      "text": "財務省が国債のオンチェーン化を検討する研究会を設置（10 月 8 日初会合）。英 FCA も暗号資産事業者の本格的な認可審査を始めた。",
+      "keywords": [
+        "tokenization",
+        "jgb",
+        "crypto-regulation"
+      ]
+    },
+    {
+      "category": "stocks",
+      "text": "9 月 30 日の日経平均は 1,272 円高の 66,753 円で 3 日ぶり反発。住宅ローンの変動金利は 10 月 1 日の基準金利改定で 0.25% 程度上がる見通し。",
+      "keywords": [
+        "nikkei225",
+        "mortgage-rates"
+      ]
+    }
+  ],
+  "items": [
+    {
+      "id": "2026-10-01-earendil-mcp",
+      "url": "https://earendil.com/posts/you-said-no-mcp/",
+      "title": "You said no MCP",
+      "source": "earendil.com",
+      "source_group": "hackernews",
+      "published_at": "2026-09-30T18:55:23+09:00",
+      "category": "ai",
+      "keywords": [
+        "mcp-server",
+        "ai-agent",
+        "sandbox"
+      ],
+      "score": 90,
+      "why": "matched: mcp",
+      "read_min": 8,
+      "tldr": "MCP 非対応を掲げていたコーディングエージェント Pi が、MCP をコア機能として取り込む方針に転換した。ハーネス側の JavaScript サンドボックス「Codemode」から MCP ツールや他のモデルを組み合わせて呼べるようにするためだという。",
+      "points": [
+        "MCP 自体の改善と、サポートすることの業界への波及効果を理由に「世界は静的ではない」として方針を変えた",
+        "Codemode はハーネス側で動くサンドボックスで、JavaScript でツール呼び出しを並べたり並列化したりできる",
+        "例として Linear MCP で取得したイシューのコメントを分類モデルで並列に感情分析する流れを示している"
+      ],
+      "code": {
+        "file": "codemode.js",
+        "lang": "javascript",
+        "text": "const { issues } = await tools.mcp__linear__list_issues({\n  team: \"Pi\", state: \"open\", limit: 250,\n});\nconst jev = await models.getModelOfType(\n  \"classifier\", \"cloudflare-workers-ai\", \"typesafe/jev\",\n);"
+      },
+      "signal": "▲ 530",
+      "pick": true
+    },
+    {
+      "id": "2026-10-01-cloudflare-402",
+      "url": "https://blog.cloudflare.com/monetization-gateway-beta/",
+      "title": "Monetization Gateway beta: charge AI agents for consumption with HTTP 402",
+      "source": "blog.cloudflare.com",
+      "source_group": "tech_blog",
+      "published_at": "2026-09-30T22:00:00+09:00",
+      "category": "ai",
+      "keywords": [
+        "ai-agent",
+        "payments",
+        "cloudflare",
+        "stablecoin"
+      ],
+      "score": 84,
+      "why": "matched: mcp, エージェント課金",
+      "read_min": 7,
+      "tldr": "Cloudflare が Monetization Gateway をベータ公開し、API・MCP ツール・トークンの利用に対して AI エージェントから HTTP 402 で従量課金できるようにした。決済は Base 上の USDC で、Coinbase の x402 facilitator が検証と決済を担う。",
+      "points": [
+        "課金単位はリクエスト・検索クエリ・トークンなどから選べ、上限価格を示して実使用分だけ請求する可変価格にも対応",
+        "HTTP 402 Payment Required で支払い指示をインラインで返すため、チェックアウトページや別 API 呼び出しが不要",
+        "現時点で対象は米国の売り手・買い手のみ。Ceramic.ai、Stocktwits、API2PDF などがすでに利用している"
+      ],
+      "code": {
+        "file": "request.sh",
+        "lang": "bash",
+        "text": "curl -iX POST \"https://api.cloudflare.com/client/v4/accounts/$CLOUDFLARE_ACCOUNT_ID/ai/run\" \\\n  --header \"Authorization: Bearer $CLOUDFLARE_API_TOKEN\" \\\n  --header \"Payment-Method: x402\" \\\n  --header \"Content-Type: application/json\""
+      },
+      "signal": null,
+      "pick": true
+    },
+    {
+      "id": "2026-10-01-publickey-viteplus",
+      "url": "https://www.publickey1.jp/blog/26/javascriptvite_10.html",
+      "title": "JavaScriptの統合ツールチェーン「Vite+ 1.0」正式リリース。ランタイム、パッケージマネージャー、ビルドツール、リンター、フォーマッターなどを統一",
+      "source": "publickey1.jp",
+      "source_group": "news",
+      "published_at": "2026-10-01T00:22:55+09:00",
+      "category": "be",
+      "keywords": [
+        "vite",
+        "cli",
+        "oss"
+      ],
+      "score": 80,
+      "why": "JS ツールチェーンの統合",
+      "read_min": 4,
+      "tldr": "VoidZero が JavaScript の統合ツールチェーン「Vite+」1.0 を正式リリースした。単一の `vp` CLI でランタイム管理・パッケージマネージャー・ビルド・リンター・フォーマッター・テストをまとめて扱える。",
+      "points": [
+        "開発サーバー、パッケージ管理、バンドラ、リンター、フォーマッター、テストランナーを 1 つのツールから使え、個別の設定ファイルが不要",
+        "Rust 製バンドラ Rolldown を中心に Vite・Vitest・Oxc・tsdown で構成",
+        "開発元の VoidZero は 2026 年 6 月に Cloudflare に買収されており、継続的な開発が見込まれるとしている"
+      ],
+      "code": {
+        "file": "shell",
+        "lang": "bash",
+        "text": "vp create"
+      },
+      "signal": null,
+      "pick": true
+    },
+    {
+      "id": "2026-10-01-atmarkit-mantis",
+      "url": "https://atmarkit.itmedia.co.jp/ait/articles/2609/30/news056.html",
+      "title": "トークン消費85％減 Googleが脆弱性を自動修正するオープンソースハーネス「Mantis」公開",
+      "source": "atmarkit.itmedia.co.jp",
+      "source_group": "tech_blog",
+      "published_at": "2026-09-30T16:26:00+09:00",
+      "category": "sec",
+      "keywords": [
+        "ai-security",
+        "vulnerability-management",
+        "oss"
+      ],
+      "score": 80,
+      "why": "matched: 脆弱性, AI エージェント",
+      "read_min": 5,
+      "tldr": "Google が脆弱性の発見・トリアージ・修正を自動化するオープンソースのハーネス「Mantis」を GitHub で公開した。サンドボックスでの検証などにより、トークン消費を 85% 減らせるとしている。",
+      "points": [
+        "Google 社内で脆弱性を高速に発見・修正する取り組みの一環で、リポジトリのコンテキストを考慮した分析を行う",
+        "サンドボックス内で脆弱性を実際に検証し、不要なコンテキストを削ることでトークン消費を抑える",
+        "コーディングエージェント向けのスキル（mantis-advise）も用意されている"
+      ],
+      "code": {
+        "file": "shell",
+        "lang": "bash",
+        "text": "git clone https://github.com/google/mantis.git"
+      },
+      "signal": null,
+      "pick": true
+    },
+    {
+      "id": "2026-10-01-anthropic-glm53",
+      "url": "https://www.anthropic.com/research/glm-5-3-and-the-spread-of-advanced-cyber-capabilities",
+      "title": "GLM-5.3 and the spread of advanced cyber capabilities",
+      "source": "anthropic.com",
+      "source_group": "hackernews",
+      "published_at": "2026-09-30T02:31:26+09:00",
+      "category": "sec",
+      "keywords": [
+        "ai-security",
+        "ai-safety",
+        "anthropic"
+      ],
+      "score": 82,
+      "why": "AI のサイバー能力と安全対策",
+      "read_min": 10,
+      "tldr": "Anthropic が、Zhipu AI の公開重みモデル GLM-5.3 が高度なサイバー攻撃能力を持つ一方で、セーフガードが簡単な手法で回避できると報告した。政府による安全性評価と、防御側への高度なモデル提供の拡大を提言している。",
+      "points": [
+        "ExploitBench で 410 試行中 50 件（12.2%）のエクスプロイトに成功し、NIST CAISI の評価でも最高水準の公開重みモデルとされた",
+        "偽のプロンプトで 64%、推論トークンの事前入力で 92%、重み改変（abliteration）で 100% の回避率",
+        "重み改変のコストは GPU 約 600 時間・約 1,200 ドルと見積もっている"
+      ],
+      "code": null,
+      "signal": "▲ 241",
+      "pick": true
+    },
+    {
+      "id": "2026-10-01-aws-bma",
+      "url": "https://aws.amazon.com/about-aws/whats-new/2026/09/bedrock-managed-agents-preview/",
+      "title": "Amazon Bedrock Managed Agents, powered by OpenAI, is now available in preview",
+      "source": "aws.amazon.com",
+      "source_group": "news",
+      "published_at": "2026-09-30T06:10:00+09:00",
+      "category": "ai",
+      "keywords": [
+        "aws",
+        "ai-agent",
+        "openai"
+      ],
+      "score": 72,
+      "why": "matched: aws, エージェント",
+      "read_min": null,
+      "tldr": "AWS と OpenAI が共同開発した Bedrock Managed Agents がプレビュー公開された。OpenAI の Agents API をカスタマイズし、AWS リソースと統合した形で提供する。",
+      "points": [],
+      "code": null,
+      "signal": null,
+      "pick": false
+    },
+    {
+      "id": "2026-10-01-cloudflare-containers",
+      "url": "https://blog.cloudflare.com/faster-agent-sandboxes/",
+      "title": "Cloudflare Containers, rebuilt to scale agent sandboxes",
+      "source": "blog.cloudflare.com",
+      "source_group": "tech_blog",
+      "published_at": "2026-09-30T21:58:00+09:00",
+      "category": "cloud",
+      "keywords": [
+        "sandbox",
+        "ai-agent",
+        "cloudflare"
+      ],
+      "score": 70,
+      "why": "エージェント用サンドボックス",
+      "read_min": null,
+      "tldr": "Cloudflare Containers の起動が 6 倍速くなり、エージェントがサンドボックスごとにイメージやインスタンスタイプを実行時に選べるようになった。ファイルシステムのスナップショットもパブリックベータに。",
+      "points": [],
+      "code": null,
+      "signal": null,
+      "pick": false
+    },
+    {
+      "id": "2026-10-01-cloudflare-autorouter",
+      "url": "https://blog.cloudflare.com/auto-router/",
+      "title": "Cut your AI spend with AI Gateway's Auto Router",
+      "source": "blog.cloudflare.com",
+      "source_group": "tech_blog",
+      "published_at": "2026-09-30T22:00:00+09:00",
+      "category": "ai",
+      "keywords": [
+        "llm-cost",
+        "cloudflare"
+      ],
+      "score": 70,
+      "why": "matched: LLM コスト",
+      "read_min": null,
+      "tldr": "Cloudflare AI Gateway に、エッジの分類器でリクエストの難しさを判定して使うモデルを選ぶ Auto Router が加わった。品質とトークンコストのバランスで振り分ける。",
+      "points": [],
+      "code": null,
+      "signal": null,
+      "pick": false
+    },
+    {
+      "id": "2026-10-01-aws-aurora-iceberg",
+      "url": "https://aws.amazon.com/about-aws/whats-new/2026/09/aurora-postgresql-query-apache-iceberg-and-parquet/",
+      "title": "Aurora PostgreSQL now supports querying of Apache Iceberg and Parquet data",
+      "source": "aws.amazon.com",
+      "source_group": "news",
+      "published_at": "2026-10-01T01:00:00+09:00",
+      "category": "be",
+      "keywords": [
+        "postgres",
+        "aws",
+        "iceberg"
+      ],
+      "score": 66,
+      "why": "matched: postgres, aws",
+      "read_min": null,
+      "tldr": "Aurora PostgreSQL から Apache Iceberg / Parquet 形式のデータレイクを、既存の PostgreSQL アプリやツールでそのままクエリできるようになった。",
+      "points": [],
+      "code": null,
+      "signal": null,
+      "pick": false
+    },
+    {
+      "id": "2026-10-01-forest-wsl3",
+      "url": "https://forest.watch.impress.co.jp/docs/news/2144295.html",
+      "title": "「WSL 3.0」がリリース、3カ月のテストを経て「WSL containers」が正式版に／「Docker」なしでLinuxコンテナーを構築・実行、「wslc compose」の開発にも着手",
+      "source": "forest.watch.impress.co.jp",
+      "source_group": "tech_blog",
+      "published_at": "2026-09-30T15:40:13+09:00",
+      "category": "cloud",
+      "keywords": [
+        "wsl",
+        "docker"
+      ],
+      "score": 64,
+      "why": "開発環境",
+      "read_min": null,
+      "tldr": "WSL 3.0 がリリースされ、Docker なしで Linux コンテナーを構築・実行できる「WSL containers」が正式版になった。`wslc compose` の開発にも着手している。",
+      "points": [],
+      "code": null,
+      "signal": null,
+      "pick": false
+    },
+    {
+      "id": "2026-10-01-qiita-actions-lock",
+      "url": "https://qiita.com/access3151fq/items/70a93f08bffd9c5f09a5",
+      "title": "GitHub Actionsにロックファイルが来るぞ - Qiita",
+      "source": "qiita.com",
+      "source_group": "tech_blog",
+      "published_at": "2026-09-30T14:56:28+09:00",
+      "category": "cloud",
+      "keywords": [
+        "github-actions",
+        "supply-chain"
+      ],
+      "score": 66,
+      "why": "CI のサプライチェーン対策",
+      "read_min": null,
+      "tldr": "GitHub Actions の依存はコミット SHA でピン留めするのが望ましいが扱いにくかった。公式の `gh actions-lock` コマンドで楽にロックできる、という紹介。",
+      "points": [],
+      "code": null,
+      "signal": null,
+      "pick": false
+    },
+    {
+      "id": "2026-10-01-hn-livenerf",
+      "url": "https://github.com/ninjahawk/livenerf",
+      "title": "Livenerf: Has Opus 5.5 been nerfed yet?",
+      "source": "github.com",
+      "source_group": "hackernews",
+      "published_at": "2026-09-30T07:36:14+09:00",
+      "category": "ai",
+      "keywords": [
+        "llm",
+        "anthropic"
+      ],
+      "score": 62,
+      "why": "HN で反応大",
+      "read_min": null,
+      "tldr": "Opus 5.5 の性能が落ちていないかを継続的に計測して公開するプロジェクト「Livenerf」。HN で 850 ポイント超の議論になった。",
+      "points": [],
+      "code": null,
+      "signal": "▲ 853",
+      "pick": false
+    },
+    {
+      "id": "2026-10-01-qiita-bedrock-cache",
+      "url": "https://qiita.com/moritalous/items/1b6a05842724fc1fff66?utm_campaign=popular_items&utm_medium=feed&utm_source=popular_items",
+      "title": "BedrockのClaudeに暗黙的なプロンプトキャッシュが登場！！とドキュメントにある（暗黙的とは？）",
+      "source": "qiita.com",
+      "source_group": "tech_blog",
+      "published_at": "2026-09-29T21:34:51+09:00",
+      "category": "ai",
+      "keywords": [
+        "prompt-caching",
+        "aws",
+        "claude"
+      ],
+      "score": 62,
+      "why": "matched: aws, LLM コスト",
+      "read_min": null,
+      "tldr": "Amazon Bedrock の Claude で「暗黙的なプロンプトキャッシュ」がドキュメントに記載された件を、実際の挙動を確かめながら整理した記事。",
+      "points": [],
+      "code": null,
+      "signal": null,
+      "pick": false
+    },
+    {
+      "id": "2026-10-01-ipa-whitepaper",
+      "url": "https://www.ipa.go.jp/publish/wp-security/2026.html",
+      "title": "情報セキュリティ白書2026 | 書籍・刊行物 | IPA 独立行政法人 情報処理推進機構",
+      "source": "ipa.go.jp",
+      "source_group": "tech_blog",
+      "published_at": "2026-09-30T19:11:27+09:00",
+      "category": "sec",
+      "keywords": [
+        "security-incident",
+        "ransomware"
+      ],
+      "score": 60,
+      "why": "IPA の公式刊行物",
+      "read_min": null,
+      "tldr": "IPA が「情報セキュリティ白書2026」の先行 PDF を公開した（書籍は 10 月 19 日発行、208 ページ）。",
+      "points": [],
+      "code": null,
+      "signal": null,
+      "pick": false
+    },
+    {
+      "id": "2026-10-01-speakerdeck-ai-review",
+      "url": "https://speakerdeck.com/texmeijin/ai-jidai-no-kodo-rebyu-ha-hito-ni-mukeru-na-shikumi-ni-mukero",
+      "title": "AI時代のコードレビューは人に向けるな、仕組みに向けろ",
+      "source": "speakerdeck.com",
+      "source_group": "tech_blog",
+      "published_at": "2026-09-30T19:03:59+09:00",
+      "category": "ai",
+      "keywords": [
+        "code-review",
+        "ai-coding"
+      ],
+      "score": 58,
+      "why": "AI レビュー運用",
+      "read_min": null,
+      "tldr": "AI 時代のコードレビューは人ではなく仕組みに向けるべき、という趣旨のスライド。はてブで話題になった。",
+      "points": [],
+      "code": null,
+      "signal": null,
+      "pick": false
+    },
+    {
+      "id": "2026-10-01-zaikei-nikkei",
+      "url": "https://www.zaikei.co.jp/article/20260930/871782.html",
+      "title": "日経平均大引け：前日比1272.45円高の66753.72円",
+      "source": "zaikei.co.jp",
+      "source_group": "news",
+      "published_at": "2026-09-30T15:30:00+09:00",
+      "category": "stocks",
+      "keywords": [
+        "nikkei225",
+        "topix",
+        "us-stocks"
+      ],
+      "score": 84,
+      "why": "前営業日の市況",
+      "read_min": 3,
+      "tldr": "9 月 30 日の日経平均は前日比 1,272.45 円高の 66,753.72 円（+1.94%）で 3 日ぶりに反発し、8 月 18 日以来の高値で引けた。米国株は PCE 物価指数が予想を下回るなか、ナスダックが上昇、ダウと S&P500 は下落した。",
+      "points": [
+        "日経平均は 66,753.72 円（+1,272.45 円）、TOPIX は 67.52 ポイント高の 4,108.65",
+        "市場は米 PCE データとマイクロン決算に注目していた",
+        "米国株は PCE の伸びが予想を下回り、ナスダック +0.2%、S&P500 −0.3%、ダウ −0.9%（検索結果の報道ベース）"
+      ],
+      "code": null,
+      "signal": null,
+      "pick": true
+    },
+    {
+      "id": "2026-10-01-nada-jgb-onchain",
+      "url": "https://www.nadanews.com/370187/",
+      "title": "財務省、国債オンチェーン研究会を設置──10月8日に初会合",
+      "source": "nadanews.com",
+      "source_group": "news",
+      "published_at": "2026-09-30T17:18:00+09:00",
+      "category": "macro",
+      "keywords": [
+        "tokenization",
+        "jgb",
+        "mof"
+      ],
+      "score": 84,
+      "why": "財務省の公式発表",
+      "read_min": 3,
+      "tldr": "財務省が「国債のオンチェーン対応に関する研究会」を設置し、10 月 8 日に初会合を開く。現在 T+1 の国債決済を、ブロックチェーンで 24 時間即時決済にする可能性を有識者と議論する。",
+      "points": [
+        "東大の加藤貴仁氏・加毛明氏・柳川範之氏、早大の篠潤之介氏、森田長太郎氏の 5 名で構成し、日本銀行と金融庁がオブザーバー",
+        "12 月から 2027 年 1 月をめどに議論を整理する予定",
+        "会議は非公開だが、議事要旨と配布資料は後日公開される"
+      ],
+      "code": null,
+      "signal": null,
+      "pick": true
+    },
+    {
+      "id": "2026-10-01-nada-uk-fca",
+      "url": "https://www.nadanews.com/370250/",
+      "title": "英国、初の暗号資産本格審査開始──既存登録業者も再審査へ",
+      "source": "nadanews.com",
+      "source_group": "news",
+      "published_at": "2026-09-30T23:20:00+09:00",
+      "category": "crypto",
+      "keywords": [
+        "crypto-regulation",
+        "stablecoin"
+      ],
+      "score": 76,
+      "why": "海外の暗号資産規制",
+      "read_min": 3,
+      "tldr": "英 FCA が 9 月 30 日、暗号資産事業者の認可申請を受け付ける「ゲートウェイ」を開設した。マネロン規制で登録済みの既存業者も含め、新制度での認可取得が必須になる。",
+      "points": [
+        "申請期限は 2027 年 2 月 28 日。期限内に申請した既存業者は審査中も営業を続けられる",
+        "基準を満たさない企業は 2027 年 10 月 25 日以降、規制対象サービスを提供できない",
+        "ステーブルコイン発行、取引プラットフォーム、仲介、カストディ、ステーキングの手配などが対象"
+      ],
+      "code": null,
+      "signal": null,
+      "pick": true
+    },
+    {
+      "id": "2026-10-01-diamond-fed",
+      "url": "https://diamond.jp/articles/-/400285",
+      "title": "FRBが突きつけた「28年まで利下げなし」の強い意志、米金利上昇でドル円160円再接近へ - マーケットフォーカス",
+      "source": "diamond.jp",
+      "source_group": "news",
+      "published_at": "2026-10-01T04:30:00+09:00",
+      "category": "macro",
+      "keywords": [
+        "fed",
+        "fx",
+        "interest-rates"
+      ],
+      "score": 70,
+      "why": "matched: 金利",
+      "read_min": null,
+      "tldr": "9 月の FOMC で FRB が 0.25% 利上げし、高金利を長く維持する姿勢を示したことで米実質金利が上昇し、ドル円が 158 円台まで円安が進んだ背景を解説する記事。",
+      "points": [],
+      "code": null,
+      "signal": null,
+      "pick": false
+    },
+    {
+      "id": "2026-10-01-boj-emeap-ai",
+      "url": "http://www.boj.or.jp/intl_finance/meeting/emeap/eme260930a.htm",
+      "title": "「AIに関するEMEAPノート：経済、金融安定、中央銀行業務への含意」の公表について",
+      "source": "boj.or.jp",
+      "source_group": "official",
+      "published_at": "2026-09-30T15:00:00+09:00",
+      "category": "macro",
+      "keywords": [
+        "boj-statistics",
+        "ai-economy"
+      ],
+      "score": 68,
+      "why": "日銀の公式発表",
+      "read_min": null,
+      "tldr": "日銀が、EMEAP（東アジア・オセアニア 11 中銀）の「AI に関するノート：経済、金融安定、中央銀行業務への含意」の抄訳を公表した。",
+      "points": [],
+      "code": null,
+      "signal": null,
+      "pick": false
+    },
+    {
+      "id": "2026-10-01-boj-jgb-purchase",
+      "url": "http://www.boj.or.jp/mopo/mpmdeci/mpr_2026/mpr260930a.pdf",
+      "title": "長期国債買入れ（利回り・価格入札方式）の四半期予定（2026年10～12月）",
+      "source": "boj.or.jp",
+      "source_group": "official",
+      "published_at": "2026-09-30T17:00:00+09:00",
+      "category": "macro",
+      "keywords": [
+        "boj-policy",
+        "jgb"
+      ],
+      "score": 66,
+      "why": "日銀の公式発表",
+      "read_min": null,
+      "tldr": "日銀が長期国債買入れ（利回り・価格入札方式）の 2026 年 10〜12 月の四半期予定を公表した。",
+      "points": [],
+      "code": null,
+      "signal": null,
+      "pick": false
+    },
+    {
+      "id": "2026-10-01-mortgage-oct",
+      "url": "https://yu-estate.co.jp/market-news/mortgage-rate-review-2026-october",
+      "title": "【2026年10月】住宅ローンの基準金利が改定されます｜すでに借りている方の返済はどう変わる？",
+      "source": "yu-estate.co.jp",
+      "source_group": "news",
+      "published_at": null,
+      "category": "realestate",
+      "keywords": [
+        "mortgage-rates",
+        "boj-rate-hike"
+      ],
+      "score": 66,
+      "why": "matched: 住宅ローン",
+      "read_min": null,
+      "tldr": "多くの銀行で変動金利の基準金利が 10 月 1 日に改定され、6 月の日銀利上げ（0.75%→1.00%）を反映して 0.25% 程度上がる見通し。5 年ルールの適用先は当面の返済額は変わらず、利息の割合が増える。",
+      "points": [],
+      "code": null,
+      "signal": null,
+      "pick": false
+    },
+    {
+      "id": "2026-10-01-diamond-mufgam",
+      "url": "https://diamond.jp/articles/-/400281",
+      "title": "オルカンの三菱UFJアセット川上社長が激白「提案が妥当ならアクティビストに賛成する」、自らも“ソフトアクティビスト”として企業に迫る経営改革と議決権行使の舞台裏 - アクティビストの実像",
+      "source": "diamond.jp",
+      "source_group": "news",
+      "published_at": "2026-10-01T04:38:00+09:00",
+      "category": "funds",
+      "keywords": [
+        "corporate-governance",
+        "index-fund"
+      ],
+      "score": 62,
+      "why": "matched: nisa, インデックス",
+      "read_min": null,
+      "tldr": "eMAXIS Slim を運用する三菱 UFJ アセットマネジメントの社長が、アクティビストの提案に「妥当なら賛成する」と語り、議決権行使や企業との対話の方針を説明するインタビュー。",
+      "points": [],
+      "code": null,
+      "signal": null,
+      "pick": false
+    },
+    {
+      "id": "2026-10-01-fsa-tsumitate",
+      "url": "https://www.fsa.go.jp/policy/nisa2/products/index.html",
+      "title": "その他,つみたて投資枠対象商品届出一覧及びつみたて投資枠対象商品の概要を更新しました。",
+      "source": "fsa.go.jp",
+      "source_group": "official",
+      "published_at": "2026-10-01T02:00:00+09:00",
+      "category": "funds",
+      "keywords": [
+        "new-nisa",
+        "fsa"
+      ],
+      "score": 60,
+      "why": "金融庁の公式発表",
+      "read_min": null,
+      "tldr": "金融庁がつみたて投資枠の対象商品届出一覧と商品概要を更新した。",
+      "points": [],
+      "code": null,
+      "signal": null,
+      "pick": false
+    },
+    {
+      "id": "2026-10-01-toyokeizai-nidec",
+      "url": "https://toyokeizai.net/articles/-/959691?utm_source=rss&utm_medium=http&utm_campaign=link_back",
+      "title": "ニデック前期決算､監査法人は｢意見不表明｣…不正会計受け資産を精査､6321億円規模の減損損失計上 | 政治・経済・投資 | 東洋経済オンライン",
+      "source": "toyokeizai.net",
+      "source_group": "news",
+      "published_at": "2026-09-30T22:30:00+09:00",
+      "category": "stocks",
+      "keywords": [
+        "accounting-fraud",
+        "corporate-governance"
+      ],
+      "score": 60,
+      "why": "企業決算",
+      "read_min": null,
+      "tldr": "ニデックが不正会計を受けた資産精査で約 6,321 億円の減損損失を計上し、前期決算について監査法人が「意見不表明」とした。",
+      "points": [],
+      "code": null,
+      "signal": null,
+      "pick": false
+    },
+    {
+      "id": "2026-10-01-nada-btc-monthly",
+      "url": "https://www.nadanews.com/370172/",
+      "title": "BTC月次分析｜ビットコインは年初水準まで回復、10月は1,400万円突破なるか【bitbankチャート分析】",
+      "source": "nadanews.com",
+      "source_group": "news",
+      "published_at": "2026-09-30T19:00:00+09:00",
+      "category": "crypto",
+      "keywords": [
+        "bitcoin"
+      ],
+      "score": 62,
+      "why": "matched: ビットコイン",
+      "read_min": null,
+      "tldr": "bitbank の月次分析。9 月のビットコインは月初の 1,255 万円近辺から 1,322 万円近辺まで上昇し、3 カ月連続の上昇で年初水準まで戻した。",
+      "points": [],
+      "code": null,
+      "signal": null,
+      "pick": false
+    },
+    {
+      "id": "2026-10-01-nada-robinhood-perp",
+      "url": "https://www.nadanews.com/370199/",
+      "title": "ロビンフッド、米国で暗号資産の無期限先物提供へ",
+      "source": "nadanews.com",
+      "source_group": "news",
+      "published_at": "2026-09-30T20:00:00+09:00",
+      "category": "crypto",
+      "keywords": [
+        "crypto-derivatives",
+        "us-stocks"
+      ],
+      "score": 58,
+      "why": "暗号資産の新商品",
+      "read_min": null,
+      "tldr": "Robinhood が米国の適格顧客向けに暗号資産の無期限先物を提供すると発表した。今後数カ月以内にアプリで取引できるようにする。",
+      "points": [],
+      "code": null,
+      "signal": null,
+      "pick": false
+    },
+    {
+      "id": "2026-10-01-coinpost-au-wallet",
+      "url": "https://coinpost.jp/?p=740129",
+      "title": "KDDIら、au PAYアプリで暗号資産ウォレット提供開始",
+      "source": "coinpost.jp",
+      "source_group": "news",
+      "published_at": "2026-09-30T15:01:27+09:00",
+      "category": "crypto",
+      "keywords": [
+        "jpyc",
+        "payments"
+      ],
+      "score": 60,
+      "why": "国内の暗号資産サービス",
+      "read_min": null,
+      "tldr": "KDDI など 3 社が au PAY アプリ上で使える暗号資産ウォレット「αU wallet」を開始した。Ponta ポイントを ETH や JPYC に交換でき、au PAY 残高へのチャージにも対応する。",
+      "points": [],
+      "code": null,
+      "signal": null,
+      "pick": false
+    },
+    {
+      "id": "2026-10-01-coinpost-hsbc-hkd",
+      "url": "https://coinpost.jp/?p=740227",
+      "title": "HSBC、香港ドル建てステーブルコイン「HSBC RedCoin」を年内提供へ",
+      "source": "coinpost.jp",
+      "source_group": "news",
+      "published_at": "2026-09-30T16:48:38+09:00",
+      "category": "crypto",
+      "keywords": [
+        "stablecoin"
+      ],
+      "score": 56,
+      "why": "ステーブルコイン",
+      "read_min": null,
+      "tldr": "HSBC 香港が香港ドル建てステーブルコインの名称を「HSBC RedCoin」と発表した。HKMA のライセンスに基づき、2026 年後半に個人間送金から提供を始める。",
+      "points": [],
+      "code": null,
+      "signal": null,
+      "pick": false
+    },
+    {
+      "id": "2026-10-01-coinpost-near-etf",
+      "url": "https://coinpost.jp/?p=739968",
+      "title": "ビットワイズ、NEAR現物ETFを米国初上場",
+      "source": "coinpost.jp",
+      "source_group": "news",
+      "published_at": "2026-09-30T06:10:47+09:00",
+      "category": "crypto",
+      "keywords": [
+        "crypto-etf",
+        "near"
+      ],
+      "score": 54,
+      "why": "暗号資産 ETF",
+      "read_min": null,
+      "tldr": "Bitwise が NEAR の現物 ETF「NRR」を米国で初めて上場した。信託手数料は年 0.75% で、ステーキング報酬の獲得も見込む。",
+      "points": [],
+      "code": null,
+      "signal": null,
+      "pick": false
+    }
+  ],
+  "social": [
+    {
+      "network": "x",
+      "author": "@OpenAIDevs",
+      "url": "https://x.com/OpenAIDevs/status/2104993053002043870",
+      "text": "GPT-6.1 Sol の API 価格は入力 100 万トークンあたり 2 ドル・出力 10 ドルで、キャッシュ入力は 0.10 ドル（通常入力の 95% 引き、GPT-6 Sol の半額）と告知。",
+      "metrics": null,
+      "heat": null,
+      "category": "ai",
+      "keywords": [
+        "llm-cost",
+        "openai"
+      ],
+      "posted_at": null
+    },
+    {
+      "network": "x",
+      "author": "@ArtificialAnlys",
+      "url": "https://x.com/ArtificialAnlys/status/2105025585332605357",
+      "text": "GPT-6.1 Sol は 7 日で GPT-6 Sol を置き換え、Intelligence Index で GPT-6 Astra に 1 ポイント差まで迫りつつタスク当たりコストは 4 分の 1 未満と評価。",
+      "metrics": null,
+      "heat": null,
+      "category": "ai",
+      "keywords": [
+        "llm",
+        "llm-cost",
+        "openai"
+      ],
+      "posted_at": null
+    },
+    {
+      "network": "hn",
+      "author": null,
+      "url": "https://news.ycombinator.com/item?id=49901736",
+      "text": "「Livenerf: Has Opus 5.5 been nerfed yet?」のスレッド。364 件のコメント",
+      "metrics": "▲ 853  ✉ 364",
+      "heat": 100,
+      "category": "ai",
+      "keywords": [
+        "llm",
+        "anthropic"
+      ],
+      "posted_at": "2026-09-30T07:36:14+09:00"
+    },
+    {
+      "network": "hn",
+      "author": null,
+      "url": "https://news.ycombinator.com/item?id=49906637",
+      "text": "「You said no MCP」のスレッド。312 件のコメント",
+      "metrics": "▲ 530  ✉ 312",
+      "heat": 100,
+      "category": "ai",
+      "keywords": [
+        "mcp-server",
+        "ai-agent"
+      ],
+      "posted_at": "2026-09-30T18:55:23+09:00"
+    },
+    {
+      "network": "hn",
+      "author": null,
+      "url": "https://news.ycombinator.com/item?id=49897075",
+      "text": "「GLM-5.3 and the spread of advanced cyber capabilities」のスレッド。227 件のコメント",
+      "metrics": "▲ 241  ✉ 227",
+      "heat": 60,
+      "category": "sec",
+      "keywords": [
+        "ai-security",
+        "ai-safety"
+      ],
+      "posted_at": "2026-09-30T02:31:26+09:00"
+    }
+  ],
+  "releases": [
+    {
+      "date": "2026-10-01",
+      "title": "uv 0.12.21",
+      "repo": "astral-sh/uv",
+      "url": "https://github.com/astral-sh/uv/releases/tag/0.12.21",
+      "kind": "release",
+      "note": "新しいタグを検出",
+      "category": "be"
+    },
+    {
+      "date": "2026-10-08",
+      "title": "財務省「国債のオンチェーン対応に関する研究会」第 1 回",
+      "repo": null,
+      "url": "https://www.nadanews.com/370187/",
+      "kind": "event",
+      "note": "10 月 8 日（木）初会合。議事要旨は後日公開",
+      "category": "macro"
+    },
+    {
+      "date": "2026-10-01",
+      "title": "米 ISM 製造業景気指数（9 月）",
+      "repo": null,
+      "url": "https://news.livedoor.com/article/detail/32423967/",
+      "kind": "event",
+      "note": "10 月 1 日（木）23:00 発表（日本時間）",
+      "category": "macro"
+    },
+    {
+      "date": "2026-10-02",
+      "title": "米雇用統計（9 月）",
+      "repo": null,
+      "url": "https://news.livedoor.com/article/detail/32423967/",
+      "kind": "event",
+      "note": "10 月 2 日（金）21:30 発表（日本時間）",
+      "category": "macro"
+    }
+  ]
+}
