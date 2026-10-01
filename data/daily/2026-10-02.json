@@ -1,0 +1,884 @@
+{
+  "date": "2026-10-02",
+  "generated_at": "2026-10-02T05:40:00+09:00",
+  "stats": {
+    "collected": 258,
+    "sources_ok": 26,
+    "sources_total": 26,
+    "by_group": {
+      "news": 107,
+      "tech_blog": 89,
+      "hackernews": 43,
+      "official": 19
+    },
+    "failed_sources": []
+  },
+  "digest": [
+    {
+      "category": "ai",
+      "text": "Google が新フロンティアモデル Gemini 4 Argon を発表。出力上限 100 万トークン、導入期の API 価格は入力 2 ドル・出力 10 ドルで、HN では 1,600 ポイント超の反響。",
+      "keywords": [
+        "llm",
+        "google",
+        "llm-cost"
+      ]
+    },
+    {
+      "category": "sec",
+      "text": "OpenAI が 1 万 5,000 超のユーザーによる組織的な敵対的蒸留を阻止したと報告。国内では佐川急便が不正アクセスによる個人情報流出の可能性を公表した。",
+      "keywords": [
+        "ai-security",
+        "model-distillation",
+        "data-breach"
+      ]
+    },
+    {
+      "category": "be",
+      "text": "Git 3.0 の SHA-256 既定化に GitButler が異議。turbopuffer はベクトル中心のインデックスをやめる v3 設計を、Cloudflare は p99 2ms 未満の KV Instant を公開した。",
+      "keywords": [
+        "git",
+        "vector-db",
+        "cloudflare"
+      ]
+    },
+    {
+      "category": "macro",
+      "text": "日銀短観（9 月）は大企業製造業 DI が +22 に改善、非製造業は +37 に悪化。9 月会合の「主な意見」では継続利上げを支持する意見と据え置き論の両方が出た。",
+      "keywords": [
+        "tankan",
+        "boj-policy",
+        "boj-rate-hike"
+      ]
+    },
+    {
+      "category": "stocks",
+      "text": "10 月 1 日の日経平均はマイクロンの好決算を受けた半導体株高で 2,203 円高の 68,956 円。フラット35 の 10 月金利は 3.83% と現行制度で最高。",
+      "keywords": [
+        "nikkei225",
+        "semiconductor",
+        "flat35"
+      ]
+    }
+  ],
+  "items": [
+    {
+      "id": "2026-10-02-google-gemini4argon",
+      "url": "https://blog.google/innovation-and-ai/models-and-research/gemini-models/gemini-4-argon/",
+      "title": "Gemini 4 Argon",
+      "source": "blog.google",
+      "source_group": "hackernews",
+      "published_at": "2026-10-01T05:04:37+09:00",
+      "category": "ai",
+      "keywords": [
+        "llm",
+        "google",
+        "llm-cost"
+      ],
+      "score": 90,
+      "why": "新フロンティアモデル・API 価格",
+      "read_min": 8,
+      "tldr": "Google が新フロンティアモデル Gemini 4 Argon を発表。ソフトウェア開発・法務や金融の業務・サイバー防御向けで、出力上限を 64K から 100 万トークンに広げた。まず Fairwind Program でサイバー防御担当者に提供し、開発者向けは順次。",
+      "points": [
+        "導入期の API 価格は入力 100 万トークンあたり 2 ドル・出力 10 ドル。通常価格は 4 ドル / 20 ドルで、キャッシュ入力は入力単価の 95% 引き",
+        "DeepSWE v1.1 で 77.9%、CWE-bench v1 で 68%（首位タイ）、AutomationBench で 51.3%（1 位）と公表",
+        "社内では 80 万行超の Fuchsia Zircon カーネル移行や、データセンター全体で 300 TiB のメモリ削減に使ったと説明"
+      ],
+      "code": null,
+      "signal": "▲ 1627",
+      "pick": true
+    },
+    {
+      "id": "2026-10-02-turbopuffer-v3",
+      "url": "https://turbopuffer.com/blog/rip-vector-database",
+      "title": "RIP, vector database",
+      "source": "turbopuffer.com",
+      "source_group": "hackernews",
+      "published_at": "2026-10-02T01:01:56+09:00",
+      "category": "be",
+      "keywords": [
+        "vector-db",
+        "search-index"
+      ],
+      "score": 84,
+      "why": "matched: 設計（検索基盤のアーキテクチャ）",
+      "read_min": 10,
+      "tldr": "turbopuffer が v3 でベクトル（ANN）中心のインデックスをやめ、ドキュメントを一次インデックスにして ANN を二次インデックスの 1 つにする設計変更を説明。",
+      "points": [
+        "v1 由来の制約として、マルチベクトル文書の重複によるストレージ増幅・再バランス時の書き込み増幅・ブロックサイズによるベクトル化の制約の 3 つを挙げる",
+        "現状の規模は 1 兆件超のドキュメント、毎秒 1,000 万件超の書き込み、毎秒 2.5 万件超のクエリ",
+        "v2 で全文検索のポスティングを 256 文書の固定ブロックにした際はインデックスが 10 分の 1、クエリが最大 20 倍高速になったとし、v3 は CI 通過済みでベンチマーク公開はこれから"
+      ],
+      "code": null,
+      "signal": "▲ 207",
+      "pick": true
+    },
+    {
+      "id": "2026-10-02-cloudflare-kv-instant",
+      "url": "https://blog.cloudflare.com/workers-kv-instant/",
+      "title": "Introducing Workers KV Instant — powered by Quicksilver",
+      "source": "blog.cloudflare.com",
+      "source_group": "tech_blog",
+      "published_at": "2026-10-01T22:00:00+09:00",
+      "category": "cloud",
+      "keywords": [
+        "cloudflare",
+        "kv-store",
+        "edge"
+      ],
+      "score": 82,
+      "why": "Workers の設定配信向け新モード",
+      "read_min": 7,
+      "tldr": "Cloudflare が Workers KV の新モード KV Instant をプライベートベータで公開。p99 で 2ms 未満の読み取りと約 250ms の全拠点レプリケーションをうたい、小さな設定値やフラグの配信を想定する。",
+      "points": [
+        "読み取りは p99 1.62ms（従来モードは 287ms）。名前空間作成時に \"mode\": \"instant\" を指定して有効化",
+        "読み取りは 100 万回 0.20 ドルと安い一方、ストレージは 1MB・月 100 ドル、put/delete/list は 1 回 0.10 ドルと高い",
+        "名前空間あたり最大 1MB・1 万キー、書き込みは名前空間ごとに毎秒 1 回までの制限がある"
+      ],
+      "code": {
+        "file": "worker.js",
+        "lang": "javascript",
+        "text": "async fetch(request, env, ctx) {\n  const launched = (await env.APP_CONFIG.get(\n    \"new-product-launched\"\n  )) === \"true\";\n  if (launched) {\n    return new Response({...});\n  }\n  return new Response({...});\n}"
+      },
+      "signal": null,
+      "pick": true
+    },
+    {
+      "id": "2026-10-02-gitbutler-sha256",
+      "url": "https://blog.gitbutler.com/git-3-sha-256",
+      "title": "Git 3.0's upcoming SHA-256 default will be a costly mistake",
+      "source": "blog.gitbutler.com",
+      "source_group": "hackernews",
+      "published_at": "2026-10-02T01:57:03+09:00",
+      "category": "be",
+      "keywords": [
+        "git",
+        "supply-chain"
+      ],
+      "score": 80,
+      "why": "Git 3.0 の既定変更と互換性",
+      "read_min": 8,
+      "tldr": "GitButler の Scott Chacon が、Git 3.0 で新規リポジトリの既定ハッシュを SHA-256 にする変更は互換性コストが大きすぎると主張。",
+      "points": [
+        "SHA-1 と SHA-256 のリポジトリは混在できず、サブモジュールも同じ方式が必要。既存の署名は変換で壊れ、40 文字前提のツールも動かなくなる",
+        "C 実装以外の Git ライブラリの多くは SHA-256 に未対応か部分対応にとどまる",
+        "代案として SHA-1 と SHA-256 の両方を署名するツリーハッシュのヘッダーを提案。`git init --object-format=sha256` で今も試せる"
+      ],
+      "code": null,
+      "signal": "▲ 142",
+      "pick": true
+    },
+    {
+      "id": "2026-10-02-gigazine-openai-distill",
+      "url": "https://gigazine.net/news/20261001-openai-model-distillation-campaign/",
+      "title": "OpenAIが「中国のAI企業が1万5000以上のユーザーを使ってモデルの思考を盗み取る蒸留攻撃を実行していた」と報告",
+      "source": "hatena/it",
+      "source_group": "tech_blog",
+      "published_at": "2026-10-01T11:22:39+09:00",
+      "category": "sec",
+      "keywords": [
+        "openai",
+        "ai-security",
+        "model-distillation"
+      ],
+      "score": 78,
+      "why": "AI モデルへの組織的攻撃",
+      "read_min": 5,
+      "tldr": "OpenAI が、1 万 5,000 超のユーザーによる組織的な「敵対的蒸留」を検出・阻止したと報告。暗号化された推論過程を脱獄で平文出力させる手口で、Kimi 開発元の Moonshot AI 関係者が中心と推測している。",
+      "points": [
+        "期間は 2026 年 7 月 1 日〜28 日で、ピークの 7 月 24〜25 日には 1 万 6,000 件のリクエスト",
+        "高性能モデルの思考内容を低性能モデルに読み込ませ、脱獄攻撃で平文出力させる手法",
+        "7 月 28 日に阻止し、対策を強化。Frontier Model Forum を通じて他社と情報共有した"
+      ],
+      "code": null,
+      "signal": null,
+      "pick": true
+    },
+    {
+      "id": "2026-10-02-hn-figma-mcp",
+      "url": "https://twitter.com/GayaniFigma/status/2105295629941350454",
+      "title": "Figma restricts MCP access to whitelisted clients, excluding Pi",
+      "source": "x.com",
+      "source_group": "hackernews",
+      "published_at": "2026-10-02T00:10:46+09:00",
+      "category": "ai",
+      "keywords": [
+        "mcp-server",
+        "figma"
+      ],
+      "score": 80,
+      "why": "matched: mcp",
+      "read_min": 3,
+      "tldr": "Figma のリモート MCP サーバーはサポート一覧に載ったクライアントだけを受け付け、Pi は含まれていないと Figma の担当者が X で説明。HN で MCP の開放性をめぐる議論になった。",
+      "points": [],
+      "code": null,
+      "signal": "▲ 147",
+      "pick": false
+    },
+    {
+      "id": "2026-10-02-publickey-spanner-omni",
+      "url": "https://www.publickey1.jp/blog/26/google_clouddbspanner_omni.html",
+      "title": "Google Cloud、ローカルマシンにインストールできる大規模分散型マルチモデルDB「Spanner Omni」正式版リリースを発表",
+      "source": "publickey",
+      "source_group": "news",
+      "published_at": "2026-10-02T03:28:43+09:00",
+      "category": "be",
+      "keywords": [
+        "google-cloud",
+        "managed-db"
+      ],
+      "score": 70,
+      "why": "分散 DB のオンプレ提供",
+      "read_min": 4,
+      "tldr": "Google Cloud が、リレーショナル・グラフ・KV・ベクトル検索・全文検索に対応する分散 DB をローカルや自社環境に導入できる「Spanner Omni」の正式版を発表した。",
+      "points": [],
+      "code": null,
+      "signal": null,
+      "pick": false
+    },
+    {
+      "id": "2026-10-02-cloudflare-basin",
+      "url": "https://blog.cloudflare.com/cloudflare-basin/",
+      "title": "Introducing Cloudflare Basin: an open, serverless data platform, now generally available",
+      "source": "cloudflare blog",
+      "source_group": "tech_blog",
+      "published_at": "2026-10-01T21:58:00+09:00",
+      "category": "cloud",
+      "keywords": [
+        "cloudflare",
+        "iceberg"
+      ],
+      "score": 68,
+      "why": "Iceberg ベースのデータ基盤",
+      "read_min": 4,
+      "tldr": "Cloudflare が Apache Iceberg と R2 上のデータ基盤 Basin を一般提供。同時に R2 上に構築したサーバーレスのイベントストリーム K2 も発表した。",
+      "points": [],
+      "code": null,
+      "signal": null,
+      "pick": false
+    },
+    {
+      "id": "2026-10-02-cloudflare-ai-search",
+      "url": "https://blog.cloudflare.com/ai-search-ga/",
+      "title": "AI Search is now generally available",
+      "source": "cloudflare blog",
+      "source_group": "tech_blog",
+      "published_at": "2026-10-01T22:00:00+09:00",
+      "category": "ai",
+      "keywords": [
+        "cloudflare",
+        "rag"
+      ],
+      "score": 66,
+      "why": "RAG のマネージドサービス",
+      "read_min": 4,
+      "tldr": "Cloudflare の AI Search が一般提供に。画像の埋め込みによる画像検索、スキャン PDF の OCR、10MiB までのファイルに対応し、任意のチャットモデルと組み合わせられる。",
+      "points": [],
+      "code": null,
+      "signal": null,
+      "pick": false
+    },
+    {
+      "id": "2026-10-02-netlify-firecracker",
+      "url": "https://www.netlify.com/blog/edge-functions-firecracker-microvms/",
+      "title": "5x faster Edge Functions: V8 isolates to Firecracker MicroVMs",
+      "source": "news.ycombinator.com",
+      "source_group": "hackernews",
+      "published_at": "2026-10-01T03:17:45+09:00",
+      "category": "cloud",
+      "keywords": [
+        "sandbox",
+        "serverless"
+      ],
+      "score": 64,
+      "why": "エッジ実行基盤の設計",
+      "read_min": 5,
+      "tldr": "Netlify が Edge Functions の実行基盤を V8 アイソレートから Firecracker microVM に移し、5 倍高速になったとする記事。HN で 220 ポイント。",
+      "points": [],
+      "code": null,
+      "signal": "▲ 220",
+      "pick": false
+    },
+    {
+      "id": "2026-10-02-aws-s3-vectors-prefilter",
+      "url": "https://aws.amazon.com/about-aws/whats-new/2026/09/s3-vectors-introduces-metadata-pre-filtering/",
+      "title": "Amazon S3 Vectors introduces metadata pre-filtering for up to 5x higher recall on filtered search",
+      "source": "aws what's new",
+      "source_group": "news",
+      "published_at": "2026-10-01T05:00:00+09:00",
+      "category": "cloud",
+      "keywords": [
+        "aws",
+        "vector-db"
+      ],
+      "score": 62,
+      "why": "matched: aws",
+      "read_min": 3,
+      "tldr": "Amazon S3 Vectors が類似検索の前にメタデータで絞り込むプレフィルタに対応。絞り込みが厳しい場合に一致するベクトルを最大 5 倍多く返せるとしている。",
+      "points": [],
+      "code": null,
+      "signal": null,
+      "pick": false
+    },
+    {
+      "id": "2026-10-02-forest-oracle-jdk21",
+      "url": "https://forest.watch.impress.co.jp/docs/news/2144856.html",
+      "title": "「Oracle JDK 21」は無償の「NFTC」ライセンスの対象外に、10月「CPU」以降で／「Oracle JDK」を無償で商用運用したいなら「Oracle JDK 25」への移行を",
+      "source": "hatena/it",
+      "source_group": "tech_blog",
+      "published_at": "2026-10-01T17:38:40+09:00",
+      "category": "be",
+      "keywords": [
+        "java",
+        "licensing"
+      ],
+      "score": 60,
+      "why": "商用ライセンス変更",
+      "read_min": 3,
+      "tldr": "Oracle JDK 21 は 10 月の CPU 以降、無償の NFTC ライセンスの対象外になる。無償で商用運用を続けるなら Oracle JDK 25 への移行が案内されている。",
+      "points": [],
+      "code": null,
+      "signal": null,
+      "pick": false
+    },
+    {
+      "id": "2026-10-02-itmedia-sagawa",
+      "url": "https://www.itmedia.co.jp/news/article/2610/01/2000001933/",
+      "title": "佐川急便、不正アクセスで個人情報流出か 送り主・届け先の氏名や住所など、約100日分の荷物データ対象",
+      "source": "hatena/it",
+      "source_group": "tech_blog",
+      "published_at": "2026-10-01T16:26:23+09:00",
+      "category": "sec",
+      "keywords": [
+        "data-breach",
+        "security-incident"
+      ],
+      "score": 62,
+      "why": "不正アクセス・個人情報流出",
+      "read_min": 3,
+      "tldr": "佐川急便が「お荷物問い合わせサービス」への不正アクセスで、顧客の個人情報が流出した可能性があると発表。荷物の問い合わせや集荷受付など Web サービスの一部を停止している。",
+      "points": [],
+      "code": null,
+      "signal": null,
+      "pick": false
+    },
+    {
+      "id": "2026-10-02-cnbc-ftc-ai",
+      "url": "https://www.cnbc.com/2026/09/30/ftc-ai-probe-openai-anthropic.html",
+      "title": "FTC is investigating OpenAI, Anthropic and other AI companies over product risks",
+      "source": "news.ycombinator.com",
+      "source_group": "hackernews",
+      "published_at": "2026-10-01T22:00:55+09:00",
+      "category": "ai",
+      "keywords": [
+        "ai-regulation",
+        "openai",
+        "anthropic"
+      ],
+      "score": 60,
+      "why": "AI 企業への規制動向",
+      "read_min": 3,
+      "tldr": "米 FTC が OpenAI・Anthropic などの AI 企業に対し、製品のリスクをめぐる調査を進めていると CNBC が報道。HN で 188 ポイント。",
+      "points": [],
+      "code": null,
+      "signal": "▲ 188",
+      "pick": false
+    },
+    {
+      "id": "2026-10-02-gigazine-robo-boss",
+      "url": "https://gigazine.net/news/20261001-california-no-robo-bosses-act/",
+      "title": "従業員の解雇・懲戒処分をAIだけで決定することを禁止する「ロボ上司禁止法」にカリフォルニア州のニューサム知事が署名",
+      "source": "hatena/経済",
+      "source_group": "tech_blog",
+      "published_at": "2026-10-01T16:42:13+09:00",
+      "category": "ai",
+      "keywords": [
+        "ai-regulation"
+      ],
+      "score": 56,
+      "why": "AI と雇用の規制",
+      "read_min": 3,
+      "tldr": "カリフォルニア州のニューサム知事が、AI の出力だけで従業員の解雇・懲戒を決めることを禁じる SB-947（No Robo Bosses Act）に署名した。この種の州法は米国で初めてとされる。",
+      "points": [],
+      "code": null,
+      "signal": null,
+      "pick": false
+    },
+    {
+      "id": "2026-10-02-zenn-claude-usage",
+      "url": "https://zenn.dev/tksfjt1024/articles/25c0ab111c277c",
+      "title": "Claude Code の使用量はどう数えられているのか ── Max 20x で実測した重みは API 料金表と違った",
+      "source": "zenn.dev",
+      "source_group": "tech_blog",
+      "published_at": "2026-10-01T11:34:27+09:00",
+      "category": "ai",
+      "keywords": [
+        "claude",
+        "llm-cost"
+      ],
+      "score": 66,
+      "why": "matched: LLM API コスト",
+      "read_min": 8,
+      "tldr": "Claude Code の Pro/Max の使用量制限（5 時間枠と週間枠）が何でどれだけ減るかを、条件を揃えて実測した記事。cache read も使用量に入るなど、API の料金表とは重みが違うと報告している。",
+      "points": [],
+      "code": null,
+      "signal": null,
+      "pick": false
+    },
+    {
+      "id": "2026-10-02-boj-tankan",
+      "url": "https://www.boj.or.jp/statistics/tk/yoshi/tk2609.htm",
+      "title": "短観（2026年9月調査）",
+      "source": "日本銀行",
+      "source_group": "official",
+      "published_at": "2026-10-01T08:50:00+09:00",
+      "category": "macro",
+      "keywords": [
+        "boj-statistics",
+        "tankan"
+      ],
+      "score": 90,
+      "why": "日銀の公式発表",
+      "read_min": 5,
+      "tldr": "日銀短観（9 月調査）で大企業製造業の業況判断 DI は +22 と前回から 2 ポイント改善、大企業非製造業は +37 と 2 ポイント悪化した。先行きはそれぞれ +21、+30。",
+      "points": [
+        "大企業製造業の 2026 年度の想定為替レートは 1 ドル 154.23 円、1 ユーロ 177.86 円",
+        "大企業全産業の 2026 年度設備投資計画（土地含む）は前年度比 11.3% 増",
+        "企業の物価全般の見通し（全規模）は 1 年後・3 年後とも 2.6%、5 年後 2.5%。販売価格の見通しは 1 年後 3.5%"
+      ],
+      "code": null,
+      "signal": null,
+      "pick": true
+    },
+    {
+      "id": "2026-10-02-boj-opinions-sep",
+      "url": "https://www.boj.or.jp/mopo/mpmsche_minu/opinion_2026/opi260918.pdf",
+      "title": "金融政策決定会合における主な意見（9月17、18日開催分）",
+      "source": "日本銀行",
+      "source_group": "official",
+      "published_at": "2026-10-01T08:50:00+09:00",
+      "category": "macro",
+      "keywords": [
+        "boj-policy",
+        "boj-rate-hike"
+      ],
+      "score": 86,
+      "why": "日銀の公式発表",
+      "read_min": 8,
+      "tldr": "9 月 17・18 日の金融政策決定会合の「主な意見」。利上げ支持の意見が並ぶ一方、消費者物価が 2% を下回っていることなどを理由に据え置きを求める意見も載った。",
+      "points": [
+        "基調的な物価上昇率は「2% にかなり近づいている」「概ね 2% に達している」との見方が出た",
+        "今後も経済・物価・金融情勢に応じて利上げを続けるのが適当とし、物価上振れの兆しがあればペースを速めざるを得ないとの意見もあった",
+        "6 月から 3 か月での利上げは想定より経済が底堅かったためと説明。為替市場を通じた影響への配慮を求める意見もあった"
+      ],
+      "code": null,
+      "signal": null,
+      "pick": true
+    },
+    {
+      "id": "2026-10-02-8and-nikkei",
+      "url": "https://8and.jp/2026/10/01/%E6%97%A5%E7%B5%8C%E5%B9%B3%E5%9D%87%E3%81%8C2203%E5%86%86%E9%AB%98%E3%81%AE6%E4%B8%878956%E5%86%86%E3%80%80%E5%8D%8A%E5%B0%8E%E4%BD%93%E6%A0%AA%E3%81%8C%E3%81%91%E3%82%93%E5%BC%95%E3%81%971%E6%97%A5/",
+      "title": "日経平均が2203円高の6万8956円 半導体株がけん引し1日で3.3％上昇",
+      "source": "8and.jp",
+      "source_group": "news",
+      "published_at": null,
+      "category": "stocks",
+      "keywords": [
+        "nikkei225",
+        "semiconductor",
+        "us-stocks"
+      ],
+      "score": 80,
+      "why": "前営業日の日経平均",
+      "read_min": 3,
+      "tldr": "10 月 1 日の日経平均は前日比 2,203 円高（+3.3%）の 68,956 円 72 銭。米マイクロン・テクノロジーの決算が市場予想を上回り、値がさの半導体株に買いが集まった。",
+      "points": [
+        "終値は 68,956 円 72 銭で、上昇幅は 2,203 円",
+        "米マイクロンの好決算を受けて半導体関連株が上昇を主導した",
+        "日経平均は値がさの半導体株の影響を受けやすいと記事は指摘している"
+      ],
+      "code": null,
+      "signal": null,
+      "pick": true
+    },
+    {
+      "id": "2026-10-02-livedoor-flat35",
+      "url": "https://news.livedoor.com/topics/detail/32459338/",
+      "title": "住宅ローン「フラット35」の10月適用金利が3.83％で過去最高を更新",
+      "source": "ライブドアニュース",
+      "source_group": "news",
+      "published_at": null,
+      "category": "realestate",
+      "keywords": [
+        "flat35",
+        "mortgage-rates"
+      ],
+      "score": 74,
+      "why": "住宅ローン金利",
+      "read_min": 2,
+      "tldr": "住宅金融支援機構が発表したフラット35 の 10 月適用金利は、返済期間 21〜35 年の最低金利が 3.83% で、現行制度になった 2017 年 10 月以降の最高となった。",
+      "points": [],
+      "code": null,
+      "signal": null,
+      "pick": false
+    },
+    {
+      "id": "2026-10-02-wsj-ust10y",
+      "url": "https://www.wsj.com/finance/investing/surging-yields-bring-the-bond-market-back-to-the-turn-of-the-century-2b74773f",
+      "title": "10-year Treasury yield climbs above 5.3% to a level not seen in 24 years",
+      "source": "wsj.com",
+      "source_group": "hackernews",
+      "published_at": "2026-10-01T10:40:50+09:00",
+      "category": "macro",
+      "keywords": [
+        "interest-rates",
+        "us-treasury"
+      ],
+      "score": 70,
+      "why": "米長期金利",
+      "read_min": 2,
+      "tldr": "米 10 年債利回りが 5.3% を超え、24 年ぶりの水準になったと WSJ が報道（本文は有料のため見出しのみ確認）。HN でも 116 ポイント・172 コメント。",
+      "points": [],
+      "code": null,
+      "signal": "▲ 116",
+      "pick": false
+    },
+    {
+      "id": "2026-10-02-techpowerup-micron",
+      "url": "https://www.techpowerup.com/353296/micron-ceo-says-memory-supply-will-be-much-tighter-in-2027-and-2028-than-in-2026",
+      "title": "Micron CEO Says Memory Supply Will Be Much Tighter in 2027 and 2028 Than in 2026",
+      "source": "techpowerup.com",
+      "source_group": "hackernews",
+      "published_at": "2026-10-01T21:48:59+09:00",
+      "category": "stocks",
+      "keywords": [
+        "semiconductor",
+        "memory"
+      ],
+      "score": 66,
+      "why": "半導体需給",
+      "read_min": 3,
+      "tldr": "米マイクロンの CEO が、メモリーの供給は 2026 年より 2027〜28 年の方がはるかに逼迫すると発言したと TechPowerUp が報じた。",
+      "points": [],
+      "code": null,
+      "signal": "▲ 281",
+      "pick": false
+    },
+    {
+      "id": "2026-10-02-toyokeizai-yen",
+      "url": "https://toyokeizai.net/articles/-/959895?utm_source=rss&utm_medium=http&utm_campaign=link_back",
+      "title": "【また160円台に接近】為替介入でも利上げでも「円安回帰」の傾向が変わらぬ理由／日銀が「“タカ派”になりきれなかった」影響度／日米「追加利上げ」の焦点／中間選挙後の「トランプ暴走リスク」 | ビジネス | 東洋経済オンライン",
+      "source": "東洋経済",
+      "source_group": "news",
+      "published_at": "2026-10-01T19:00:00+09:00",
+      "category": "macro",
+      "keywords": [
+        "fx",
+        "boj-rate-hike"
+      ],
+      "score": 64,
+      "why": "matched: 為替",
+      "read_min": 3,
+      "tldr": "9 月前半に一時 152 円台まで円高が進んだドル円は、その後 159 円台まで戻った。為替介入や利上げ観測でも円安回帰の傾向が変わらない理由を解説する記事。",
+      "points": [],
+      "code": null,
+      "signal": null,
+      "pick": false
+    },
+    {
+      "id": "2026-10-02-diamond-budget",
+      "url": "https://diamond.jp/articles/-/400352",
+      "title": "高市改造内閣の焦点は143兆円「青天井」の27年度予算編成、問われる財政再建とインフレ抑制 - 高市内閣2.0 どうなる？経済・市場・政策",
+      "source": "ダイヤモンド",
+      "source_group": "news",
+      "published_at": "2026-10-02T04:25:00+09:00",
+      "category": "macro",
+      "keywords": [
+        "jp-fiscal",
+        "inflation"
+      ],
+      "score": 58,
+      "why": "財政・インフレ",
+      "read_min": 3,
+      "tldr": "2027 年度予算の概算要求総額は新たな投資枠の創設もあって 143 兆円と過去最高に。成長重視路線のもとで財政規律とインフレ抑制が問われると論じる。",
+      "points": [],
+      "code": null,
+      "signal": null,
+      "pick": false
+    },
+    {
+      "id": "2026-10-02-fsa-basel3",
+      "url": "https://www.fsa.go.jp/inter/bis/20261001/20261001.html",
+      "title": "国際関係,バーゼル銀行監督委員会による「バーゼルⅢモニタリングレポート」について公表しました。",
+      "source": "金融庁",
+      "source_group": "official",
+      "published_at": "2026-10-02T02:00:00+09:00",
+      "category": "macro",
+      "keywords": [
+        "basel-iii",
+        "fsa"
+      ],
+      "score": 56,
+      "why": "金融庁・日銀の公式発表",
+      "read_min": 2,
+      "tldr": "金融庁と日銀が、バーゼル銀行監督委員会の「バーゼル III モニタリングレポート」の公表を案内した。",
+      "points": [],
+      "code": null,
+      "signal": null,
+      "pick": false
+    },
+    {
+      "id": "2026-10-02-coinpost-citi-btc",
+      "url": "https://coinpost.jp/?p=740504",
+      "title": "シティ、ビットコイン価格目標を11.3万ドルへ上方修正──今後12カ月の見通し",
+      "source": "CoinPost",
+      "source_group": "news",
+      "published_at": "2026-10-02T05:00:32+09:00",
+      "category": "crypto",
+      "keywords": [
+        "bitcoin",
+        "ethereum"
+      ],
+      "score": 70,
+      "why": "matched: ビットコイン",
+      "read_min": 2,
+      "tldr": "シティグループがビットコインとイーサリアムの 12 カ月目標をそれぞれ 11 万 3,000 ドル、3,028 ドルに引き上げた。暗号資産市場への資金流入が再加速するとの見方を示している。",
+      "points": [],
+      "code": null,
+      "signal": null,
+      "pick": false
+    },
+    {
+      "id": "2026-10-02-coinpost-coinshares",
+      "url": "https://coinpost.jp/?p=740375",
+      "title": "仮想通貨投資商品に年初来最大の週間流入、約5600億円＝コインシェアーズ",
+      "source": "CoinPost",
+      "source_group": "news",
+      "published_at": "2026-10-01T13:30:08+09:00",
+      "category": "crypto",
+      "keywords": [
+        "fund-flows",
+        "crypto-etf",
+        "bitcoin"
+      ],
+      "score": 66,
+      "why": "matched: ビットコイン",
+      "read_min": 2,
+      "tldr": "コインシェアーズによると、先週の暗号資産投資商品への資金流入は 35.5 億ドルで年初来最大。ビットコインが中心で、地域別では米国が大半を占めた。",
+      "points": [],
+      "code": null,
+      "signal": null,
+      "pick": false
+    },
+    {
+      "id": "2026-10-02-coinpost-ousd",
+      "url": "https://coinpost.jp/?p=740305",
+      "title": "企業コンソーシアム型ステーブルコイン「OUSD」がローンチ、イーサリアムなど4チェーンで発行可能に",
+      "source": "CoinPost",
+      "source_group": "news",
+      "published_at": "2026-10-01T09:15:50+09:00",
+      "category": "crypto",
+      "keywords": [
+        "stablecoin",
+        "payments"
+      ],
+      "score": 64,
+      "why": "企業連合のステーブルコイン",
+      "read_min": 2,
+      "tldr": "Visa・Mastercard・Stripe などが参加する企業コンソーシアム型の米ドル・ステーブルコイン「OUSD」が提供開始。イーサリアムなど 4 チェーンで発行できる。",
+      "points": [],
+      "code": null,
+      "signal": null,
+      "pick": false
+    },
+    {
+      "id": "2026-10-02-nada-sbi-bitbank",
+      "url": "https://www.nadanews.com/370392/",
+      "title": "SBI、ビットバンクの完全子会社化を完了──CEOは廣末氏が続投",
+      "source": "CoinDesk JAPAN",
+      "source_group": "news",
+      "published_at": "2026-10-01T18:32:45+09:00",
+      "category": "crypto",
+      "keywords": [
+        "m-and-a",
+        "crypto-exchange"
+      ],
+      "score": 60,
+      "why": "国内取引所の再編",
+      "read_min": 2,
+      "tldr": "SBI ホールディングスによるビットバンクの完全子会社化の手続きが 10 月 1 日に完了。CEO は廣末氏が続投する。",
+      "points": [],
+      "code": null,
+      "signal": null,
+      "pick": false
+    },
+    {
+      "id": "2026-10-02-nada-metamask",
+      "url": "https://www.nadanews.com/370310/",
+      "title": "MetaMask、セキュリティインシデント発生",
+      "source": "CoinDesk JAPAN",
+      "source_group": "news",
+      "published_at": "2026-10-01T13:00:57+09:00",
+      "category": "crypto",
+      "keywords": [
+        "security-incident",
+        "wallet"
+      ],
+      "score": 60,
+      "why": "セキュリティ事案",
+      "read_min": 2,
+      "tldr": "ウォレットの MetaMask が 9 月 30 日、一部インフラに影響するセキュリティ上の問題が発生し対応中と発表した。関連してバリデーターの予防的な退出も始めている。",
+      "points": [],
+      "code": null,
+      "signal": null,
+      "pick": false
+    }
+  ],
+  "social": [
+    {
+      "network": "x",
+      "author": "@sundarpichai",
+      "url": "https://x.com/sundarpichai/status/2105387952478277979",
+      "text": "Sundar Pichai が Gemini 4 Argon を先行公開と投稿。複雑なワークフロー・サイバー防御・ソフトウェア開発でフロンティア級の性能とし、Google 社内で広く使っていると説明。",
+      "metrics": null,
+      "heat": null,
+      "category": "ai",
+      "keywords": [
+        "llm",
+        "google"
+      ],
+      "posted_at": null
+    },
+    {
+      "network": "x",
+      "author": "@OfficialLoganK",
+      "url": "https://x.com/OfficialLoganK/status/2105388054274080946",
+      "text": "Gemini 4 Argon はサイバー防御担当者から順次提供し、導入期の価格は入力 2 ドル・出力 10 ドル（100 万トークンあたり）と告知。",
+      "metrics": null,
+      "heat": null,
+      "category": "ai",
+      "keywords": [
+        "llm",
+        "llm-cost",
+        "google"
+      ],
+      "posted_at": null
+    },
+    {
+      "network": "x",
+      "author": "@arena",
+      "url": "https://x.com/arena/status/2105411271525052418",
+      "text": "Gemini 4 Argon (High) は Agent Arena で 8 位、タスク当たりコスト 0.62 ドルでパレートフロンティアを塗り替えたと Arena が投稿。",
+      "metrics": null,
+      "heat": null,
+      "category": "ai",
+      "keywords": [
+        "llm",
+        "ai-agent"
+      ],
+      "posted_at": null
+    },
+    {
+      "network": "x",
+      "author": "@GayaniFigma",
+      "url": "https://x.com/GayaniFigma/status/2105295629941350454",
+      "text": "Figma のリモート MCP サーバーはサポート一覧のクライアントのみ受け付けており、Pi はまだ含まれていないと説明。追加は申請フォームから依頼できるとしている。",
+      "metrics": null,
+      "heat": null,
+      "category": "ai",
+      "keywords": [
+        "mcp-server",
+        "figma"
+      ],
+      "posted_at": null
+    },
+    {
+      "network": "hn",
+      "author": null,
+      "url": "https://news.ycombinator.com/item?id=49913571",
+      "text": "『Gemini 4 Argon』のスレッド。1,102 件のコメント",
+      "metrics": "▲ 1,627  ✉ 1,102",
+      "heat": 100,
+      "category": "ai",
+      "keywords": [
+        "llm",
+        "google"
+      ],
+      "posted_at": "2026-10-01T05:04:37+09:00"
+    },
+    {
+      "network": "hn",
+      "author": null,
+      "url": "https://news.ycombinator.com/item?id=49920932",
+      "text": "『Micron CEO Says Memory Supply Will Be Much Tighter in 2027 and 2028 Than in 2026』のスレッド。324 件のコメント",
+      "metrics": "▲ 281  ✉ 324",
+      "heat": 70,
+      "category": "stocks",
+      "keywords": [
+        "semiconductor",
+        "memory"
+      ],
+      "posted_at": "2026-10-01T21:48:59+09:00"
+    },
+    {
+      "network": "hn",
+      "author": null,
+      "url": "https://news.ycombinator.com/item?id=49916668",
+      "text": "『10-year Treasury yield climbs above 5.3% to a level not seen in 24 years』のスレッド。172 件のコメント",
+      "metrics": "▲ 116  ✉ 172",
+      "heat": 29,
+      "category": "macro",
+      "keywords": [
+        "interest-rates",
+        "us-treasury"
+      ],
+      "posted_at": "2026-10-01T10:40:50+09:00"
+    }
+  ],
+  "releases": [
+    {
+      "date": "2026-10-02",
+      "title": "pgvector v0.8.7",
+      "repo": "pgvector/pgvector",
+      "url": "https://github.com/pgvector/pgvector/releases/tag/v0.8.7",
+      "kind": "release",
+      "note": "新しいタグを検出",
+      "category": "be"
+    },
+    {
+      "date": "2026-10-01",
+      "title": "Pgpool-II 4.7.3 / 4.6.8 / 4.5.13 / 4.4.18 / 4.3.21",
+      "repo": null,
+      "url": "https://www.postgresql.org/about/news/pgpool-ii-473-468-4513-4418-and-4321-released-3390/",
+      "kind": "release",
+      "note": "PostgreSQL 向けコネクションプーラーのマイナーリリース",
+      "category": "be"
+    },
+    {
+      "date": "2026-10-01",
+      "title": "日銀「金融政策決定会合における主な意見」（9 月 17・18 日分）",
+      "repo": null,
+      "url": "https://www.boj.or.jp/mopo/mpmsche_minu/opinion_2026/opi260918.pdf",
+      "kind": "policy",
+      "note": "10 月 1 日公表",
+      "category": "macro"
+    },
+    {
+      "date": "2026-10-02",
+      "title": "米雇用統計（9 月）",
+      "repo": null,
+      "url": "https://news.livedoor.com/article/detail/32423967/",
+      "kind": "event",
+      "note": "10 月 2 日（金）21:30 発表（日本時間）",
+      "category": "macro"
+    },
+    {
+      "date": "2026-10-08",
+      "title": "財務省「国債のオンチェーン対応に関する研究会」第 1 回",
+      "repo": null,
+      "url": "https://www.nadanews.com/370187/",
+      "kind": "event",
+      "note": "10 月 8 日（木）初会合",
+      "category": "macro"
+    }
+  ]
+}
