@@ -1,0 +1,844 @@
+{
+  "date": "2026-10-03",
+  "generated_at": "2026-10-03T07:30:00+09:00",
+  "stats": {
+    "collected": 262,
+    "sources_ok": 26,
+    "sources_total": 26,
+    "by_group": {
+      "tech_blog": 96,
+      "news": 100,
+      "official": 18,
+      "hackernews": 48
+    },
+    "failed_sources": []
+  },
+  "digest": [
+    {
+      "category": "ai",
+      "text": "OSS コーディングエージェント Pi が 1.0 を公開し HN で 1,600 pt 超。同日に Claude Code も TypeScript で挙動や UI を書き換えられる mod を追加し、エージェントの拡張性が焦点に。",
+      "keywords": [
+        "ai-coding",
+        "claude"
+      ]
+    },
+    {
+      "category": "be",
+      "text": "Supabase が SQLite クラウドの Turso を買収。エージェントが作るアプリ向けの DB 需要増を理由に挙げ、Postgres と SQLite の両方を持つ形になる。",
+      "keywords": [
+        "m-and-a",
+        "sqlite",
+        "postgres"
+      ]
+    },
+    {
+      "category": "cloud",
+      "text": "EKS が Kubernetes 1.37 に対応（Metrics API GA・HPA のゼロスケール既定有効）。Cloudflare は OpenTelemetry 準拠の Traces をオープンベータで公開。",
+      "keywords": [
+        "kubernetes",
+        "opentelemetry"
+      ]
+    },
+    {
+      "category": "funds",
+      "text": "金融庁の調査で NISA 口座数は 2026 年 6 月末に 3,048 万口座、累計買付額は 85 兆円に達した。",
+      "keywords": [
+        "new-nisa",
+        "fsa"
+      ]
+    },
+    {
+      "category": "macro",
+      "text": "米 9 月雇用統計は雇用者数 +2.9 万人と予想を大きく下回り、ドル円は 156 円台に下落。日経平均は前日比 647 円安の 68,309 円で反落した。",
+      "keywords": [
+        "us-jobs",
+        "fx",
+        "nikkei225"
+      ]
+    }
+  ],
+  "items": [
+    {
+      "id": "2026-10-03-hn-pi-1-0",
+      "url": "https://earendil.com/posts/pi-1-0/",
+      "title": "Pi 1.0",
+      "source": "hackernews",
+      "source_group": "hackernews",
+      "published_at": "2026-10-02T04:33:05+09:00",
+      "category": "ai",
+      "keywords": [
+        "ai-coding",
+        "ai-agent",
+        "mcp-server"
+      ],
+      "score": 90,
+      "why": "matched: mcp, llm（HN 1,627 pt）",
+      "read_min": 6,
+      "tldr": "ミニマル設計の OSS コーディングエージェント Pi が 10 月 1 日に 1.0 を公開。codemode が MCP にネイティブ対応し、ツールの遅延読み込みや Anthropic モデル向けのキャッシュ予熱を追加した。長時間動くエージェント向けの実験的パッケージ Pi Durable も同時公開。",
+      "points": [
+        "codemode が MCP と LLM 以外のモデルの呼び出しに対応し、拡張から仮想モデルも定義できる",
+        "ツールの遅延読み込み・Anthropic モデル向けキャッシュ予熱・会話途中のシステムメッセージに対応。TUI は全画面がデフォルトに",
+        "Pi Durable は長時間・複数クライアントのエージェント実行を担う別パッケージ（実験的）。いずれも MIT ライセンス"
+      ],
+      "code": {
+        "file": "install.sh",
+        "lang": "bash",
+        "text": "# macOS / Linux\ncurl -fsSL https://pi.dev/install.sh | sh\n\n# Pi Durable (npm)\nnpm install @earendil-works/pi-durable @earendil-works/pi-ai @earendil-works/chord"
+      },
+      "signal": "▲ 1627",
+      "pick": true
+    },
+    {
+      "id": "2026-10-03-hn-supabase-turso",
+      "url": "https://supabase.com/blog/supabase-is-acquiring-turso",
+      "title": "Supabase is acquiring Turso",
+      "source": "hackernews",
+      "source_group": "hackernews",
+      "published_at": "2026-10-03T00:43:03+09:00",
+      "category": "be",
+      "keywords": [
+        "m-and-a",
+        "sqlite",
+        "postgres"
+      ],
+      "score": 84,
+      "why": "matched: postgres（DB 事業の買収）",
+      "read_min": 4,
+      "tldr": "Supabase が SQLite クラウドの Turso を買収すると発表。エージェントが大量にアプリを作る時代の DB 需要増を理由に挙げ、Supabase は Postgres、Turso は SQLite の開発をそれぞれ続ける。",
+      "points": [
+        "Supabase は現在週 100 万超のデータベースを立ち上げており、エージェント由来の需要がさらに伸びると見ている",
+        "既存の Turso / libSQL 利用者に影響はなく、Turso は独立して運営を続ける",
+        "Glauber Costa 氏がエージェント向けインフラの取り組みを率い、Pekka Enberg 氏ら Turso チームが合流"
+      ],
+      "code": null,
+      "signal": "▲ 175",
+      "pick": true
+    },
+    {
+      "id": "2026-10-03-technoedge-claude-code-mod",
+      "url": "https://www.techno-edge.net/article/2026/10/02/5550.html",
+      "title": "Claude Codeが拡張機能「mod」対応、UIや動作をカスタマイズ。Claude書かせて作成も | テクノエッジ TechnoEdge",
+      "source": "hatena/it",
+      "source_group": "tech_blog",
+      "published_at": "2026-10-02T20:02:36+09:00",
+      "category": "ai",
+      "keywords": [
+        "claude",
+        "ai-coding",
+        "cli"
+      ],
+      "score": 86,
+      "why": "matched: 設計（開発ツールの拡張）",
+      "read_min": 4,
+      "tldr": "Anthropic が Claude Code に、挙動や UI を TypeScript で書き換えられる「mod」を追加。mod はプラグインに同梱して /plugin でインストールし、Claude 自身に作らせることもできる。",
+      "points": [
+        "プロンプト・ツール呼び出し・画面描画などの内部イベントにフックして動作を変えられる",
+        "CLI 版とデスクトップ版で使え、mod はプラグインとして配布・インストールする",
+        "サンプルとして危険コマンド実行時の警告（Blast Radius）や編集履歴の再生（Replay Theater）が紹介されている。mod は Claude Code と同じ権限で動くため信頼できる配布元のものだけ入れる"
+      ],
+      "code": null,
+      "signal": null,
+      "pick": true
+    },
+    {
+      "id": "2026-10-03-aws-eks-k8s-137",
+      "url": "https://aws.amazon.com/about-aws/whats-new/2026/10/amazon-eks-distro-kubernetes-version-1-37",
+      "title": "Amazon EKS and Amazon EKS Distro now support Kubernetes version 1.37",
+      "source": "aws what's new",
+      "source_group": "news",
+      "published_at": "2026-10-03T02:30:00+09:00",
+      "category": "cloud",
+      "keywords": [
+        "kubernetes",
+        "aws"
+      ],
+      "score": 82,
+      "why": "matched: kubernetes, aws",
+      "read_min": 3,
+      "tldr": "Amazon EKS と EKS Distro が Kubernetes 1.37 に対応。Metrics API の GA、DRA のデバイス taint/toleration の GA、HPA のゼロスケールのベータ既定有効化が主な変更。",
+      "points": [
+        "Metrics API が metrics.k8s.io/v1 として GA になり、オートスケーラーが使うリソース使用量の取得が安定版に",
+        "DRA のデバイス taint / toleration が GA になり、GPU などのデバイス利用を管理者が制限できる",
+        "HPA のスケール・トゥ・ゼロがベータで既定有効に。GovCloud を含む全リージョンで新規作成・アップグレードが可能"
+      ],
+      "code": null,
+      "signal": null,
+      "pick": true
+    },
+    {
+      "id": "2026-10-03-speakerdeck-mcp-gateway",
+      "url": "https://speakerdeck.com/mtpooh/20261001-des37-mcpass",
+      "title": "MCPゲートウェイを作って運用してわかったこと — Agent時代の権限管理の現在地",
+      "source": "hatena/it",
+      "source_group": "tech_blog",
+      "published_at": "2026-10-02T05:29:50+09:00",
+      "category": "ai",
+      "keywords": [
+        "mcp-server",
+        "ai-security",
+        "authorization"
+      ],
+      "score": 88,
+      "why": "matched: mcp, 認可",
+      "read_min": 15,
+      "tldr": "社内の AI クライアントとデータソースの間に MCP ゲートウェイを置いて運用した登壇資料。ツール権限・DLP・レート制限・資格情報の 4 層で「誰が・どのツールで・何を送ったか」を一か所で統制する構成を紹介している。",
+      "points": [
+        "ツール権限は既定で全拒否とし、Read と Write を分けて「見てよい」と「書かせてよい」を区別する",
+        "送信前に機密情報を DLP で遮断し、受信結果はマスクする。呼び出し回数はレート制限で抑える",
+        "本人の OAuth / PAT を基にしつつ AI 専用の身分を持たせ、誰のために動いたかを監査ログで追えるようにする"
+      ],
+      "code": null,
+      "signal": null,
+      "pick": true
+    },
+    {
+      "id": "2026-10-03-cloudflare-traces",
+      "url": "https://blog.cloudflare.com/cloudflare-tracing/",
+      "title": "Introducing Cloudflare Traces: follow requests through our entire platform",
+      "source": "cloudflare blog",
+      "source_group": "tech_blog",
+      "published_at": "2026-10-02T22:00:00+09:00",
+      "category": "cloud",
+      "keywords": [
+        "cloudflare",
+        "opentelemetry",
+        "observability"
+      ],
+      "score": 80,
+      "why": "matched: opentelemetry",
+      "read_min": 6,
+      "tldr": "Cloudflare がリクエストのセキュリティルール・キャッシュ・Workers・オリジンまでの経路を 1 本のタイムラインで追える Cloudflare Traces をオープンベータで公開。OpenTelemetry 準拠で、OTLP 対応の外部基盤へ転送できる。",
+      "points": [
+        "追加の計装なしで、セキュリティルール・変換・キャッシュ判定・ルーティング・Workers・オリジン処理を 1 つのトレースで表示する",
+        "W3C traceparent ヘッダーを受け取り・伝搬し、アカウント単位の宛先設定で OTLP 形式のエクスポートができる",
+        "2026 年 12 月 1 日から統一料金。Free は 1 日 0.5 GB・7 日保持、有料は 50 GB 取り込みと 10 GB-月の保存を含む"
+      ],
+      "code": null,
+      "signal": null,
+      "pick": true
+    },
+    {
+      "id": "2026-10-03-hn-linux-kernel-dsa",
+      "url": "https://lwn.net/Articles/1097401/",
+      "title": "Several vulnerabilities have been discovered in the Linux kernel",
+      "source": "hackernews",
+      "source_group": "hackernews",
+      "published_at": "2026-10-02T08:10:44+09:00",
+      "category": "sec",
+      "keywords": [
+        "linux",
+        "vulnerability-management"
+      ],
+      "score": 72,
+      "why": "脆弱性（HN 535 pt）",
+      "read_min": 3,
+      "tldr": "Debian が DSA-6528-1 で stable（trixie）の Linux カーネルを 6.12.111-1 に更新。権限昇格・DoS・情報漏えいにつながり得る多数の CVE をまとめて修正しており、HN では CVE の量そのものが議論になっている。",
+      "points": [],
+      "code": null,
+      "signal": "▲ 535",
+      "pick": false
+    },
+    {
+      "id": "2026-10-03-aws-mcp-server-regions",
+      "url": "https://aws.amazon.com/about-aws/whats-new/2026/10/aws-mcp-server-six-additional-regions/",
+      "title": "The AWS MCP Server is now available in six additional AWS Regions",
+      "source": "aws what's new",
+      "source_group": "news",
+      "published_at": "2026-10-02T17:00:00+09:00",
+      "category": "ai",
+      "keywords": [
+        "mcp-server",
+        "aws"
+      ],
+      "score": 74,
+      "why": "matched: mcp, aws",
+      "read_min": 2,
+      "tldr": "AWS MCP Server が東京・シンガポール・シドニー・アイルランドなど 6 リージョンで追加提供された。",
+      "points": [],
+      "code": null,
+      "signal": null,
+      "pick": false
+    },
+    {
+      "id": "2026-10-03-aws-well-architected-agent",
+      "url": "https://aws.amazon.com/about-aws/whats-new/2026/10/aws-well-architected-agent/",
+      "title": "AWS Well-Architected Agent is now available in preview",
+      "source": "aws what's new",
+      "source_group": "news",
+      "published_at": "2026-10-02T05:00:00+09:00",
+      "category": "cloud",
+      "keywords": [
+        "aws",
+        "ai-agent"
+      ],
+      "score": 66,
+      "why": "matched: aws",
+      "read_min": 2,
+      "tldr": "AWS Trusted Advisor と Well-Architected Tool の後継となる AI サービス「AWS Well-Architected Agent」がプレビュー公開された。",
+      "points": [],
+      "code": null,
+      "signal": null,
+      "pick": false
+    },
+    {
+      "id": "2026-10-03-aws-elasticache-valkey-otel",
+      "url": "https://aws.amazon.com/about-aws/whats-new/2026/10/amazon-elasticache-valkey-opentelemetry-metrics-detailed-monitoring",
+      "title": "Amazon ElastiCache for Valkey now supports OpenTelemetry metrics and detailed monitoring",
+      "source": "aws what's new",
+      "source_group": "news",
+      "published_at": "2026-10-02T16:00:00+09:00",
+      "category": "be",
+      "keywords": [
+        "opentelemetry",
+        "aws",
+        "valkey"
+      ],
+      "score": 70,
+      "why": "matched: opentelemetry, aws",
+      "read_min": 2,
+      "tldr": "Amazon ElastiCache for Valkey のノードベースクラスターが OpenTelemetry 形式のメトリクスを CloudWatch に送れるようになった。",
+      "points": [],
+      "code": null,
+      "signal": null,
+      "pick": false
+    },
+    {
+      "id": "2026-10-03-rakus-k8s-boundary",
+      "url": "https://tech-blog.rakus.co.jp/entry/20261002/k8s",
+      "title": "Kubernetesの「境界」と「粒度」を引き直す 〜社内プラットフォームの設計判断〜 - RAKUS Developers Blog | ラクス エンジニアブログ",
+      "source": "hatena/it",
+      "source_group": "tech_blog",
+      "published_at": "2026-10-02T15:51:08+09:00",
+      "category": "be",
+      "keywords": [
+        "kubernetes",
+        "platform-engineering"
+      ],
+      "score": 72,
+      "why": "matched: kubernetes, 設計",
+      "read_min": 12,
+      "tldr": "社内プラットフォームの Kubernetes で、Namespace の割り当てやテナント境界、セルフサービスでの環境発行など「境界」と「粒度」を引き直した設計判断の記事。",
+      "points": [],
+      "code": null,
+      "signal": null,
+      "pick": false
+    },
+    {
+      "id": "2026-10-03-hn-deepseek-harness",
+      "url": "https://www.deepseek.com/en/harness/",
+      "title": "DeepSeek Harness Desktop for macOS and Windows",
+      "source": "hackernews",
+      "source_group": "hackernews",
+      "published_at": "2026-10-02T12:11:20+09:00",
+      "category": "ai",
+      "keywords": [
+        "ai-coding",
+        "llm"
+      ],
+      "score": 62,
+      "why": "matched: llm（HN 378 pt）",
+      "read_min": 3,
+      "tldr": "DeepSeek が macOS / Windows 向けのデスクトップアプリ「DeepSeek Harness」を公開し、HN で 200 件超のコメントが付いている。",
+      "points": [],
+      "code": null,
+      "signal": "▲ 378",
+      "pick": false
+    },
+    {
+      "id": "2026-10-03-itmedia-elyza-llm-jp-4",
+      "url": "https://www.itmedia.co.jp/aiplus/article/2610/02/2000001965/",
+      "title": "「完全国産」AI、KDDI傘下のELYZAが無料公開 「LLM-jp-4」ベースに性能強化",
+      "source": "hatena/it",
+      "source_group": "tech_blog",
+      "published_at": "2026-10-02T17:31:13+09:00",
+      "category": "ai",
+      "keywords": [
+        "llm",
+        "oss"
+      ],
+      "score": 60,
+      "why": "matched: llm",
+      "read_min": 3,
+      "tldr": "KDDI 傘下の ELYZA が NII の「LLM-jp-4」をベースに性能を強化した推論モデル 2 種を無料公開した。",
+      "points": [],
+      "code": null,
+      "signal": null,
+      "pick": false
+    },
+    {
+      "id": "2026-10-03-itmedia-daiichi-breach",
+      "url": "https://www.itmedia.co.jp/news/article/2610/02/2000001971/",
+      "title": "第一生命に不正アクセス 従業員情報12万人分漏えいか 退職者も対象",
+      "source": "hatena/it",
+      "source_group": "tech_blog",
+      "published_at": "2026-10-02T17:01:49+09:00",
+      "category": "sec",
+      "keywords": [
+        "data-breach",
+        "security-incident"
+      ],
+      "score": 58,
+      "why": "不正アクセス",
+      "read_min": 2,
+      "tldr": "第一ライフグループと第一生命の人事システムが不正アクセスを受け、退職者を含む従業員情報約 12 万人分が漏えいした可能性があると発表された。",
+      "points": [],
+      "code": null,
+      "signal": null,
+      "pick": false
+    },
+    {
+      "id": "2026-10-03-47news-yamato-breach",
+      "url": "https://www.47news.jp/15026982.html",
+      "title": "【速報】ヤマト運輸、不正アクセスで顧客情報流出か",
+      "source": "hatena/it",
+      "source_group": "tech_blog",
+      "published_at": "2026-10-02T18:50:04+09:00",
+      "category": "sec",
+      "keywords": [
+        "data-breach",
+        "security-incident"
+      ],
+      "score": 56,
+      "why": "不正アクセス",
+      "read_min": 2,
+      "tldr": "ヤマト運輸の EC 向け決済サービスに不正アクセスがあり、顧客の氏名・住所・電話番号などが流出した可能性がある。カード情報やパスワードは含まれないとしている。",
+      "points": [],
+      "code": null,
+      "signal": null,
+      "pick": false
+    },
+    {
+      "id": "2026-10-03-fsa-nisa-survey",
+      "url": "https://www.fsa.go.jp/policy/nisa/20261002.html",
+      "title": "NISA口座の利用状況に関する調査結果（令和８年６月末時点）について公表しました。",
+      "source": "金融庁",
+      "source_group": "official",
+      "published_at": "2026-10-03T02:00:00+09:00",
+      "category": "funds",
+      "keywords": [
+        "new-nisa",
+        "fsa"
+      ],
+      "score": 92,
+      "why": "日本の金融庁の公式発表（NISA）",
+      "read_min": 4,
+      "tldr": "金融庁が NISA の利用状況調査（2026 年 6 月末時点）を公表。口座数は 3,048 万口座、累計買付額は 85 兆円となった。",
+      "points": [
+        "NISA 口座数は 2026 年 6 月末で 3,048 万口座（2025 年 12 月末は 2,821 万口座）",
+        "累計買付額は 85 兆円（2025 年 12 月末は 71 兆円）で、政府目標の「2027 年末までに 56 兆円」はすでに上回っている",
+        "口座数の政府目標は 2027 年 12 月末までに 3,400 万口座"
+      ],
+      "code": null,
+      "signal": null,
+      "pick": true
+    },
+    {
+      "id": "2026-10-03-oanda-us-nfp-sep",
+      "url": "https://www.oanda.jp/lab-education/market_news/nfp-sep-2026-review/",
+      "title": "9月米雇用統計の結果とドル円・金の見通し",
+      "source": "OANDA証券",
+      "source_group": "news",
+      "published_at": "2026-10-02T22:30:00+09:00",
+      "category": "macro",
+      "keywords": [
+        "us-jobs",
+        "fx",
+        "fed"
+      ],
+      "score": 86,
+      "why": "matched: 為替, 金利",
+      "read_min": 4,
+      "tldr": "10 月 2 日発表の米 9 月雇用統計は、非農業部門雇用者数が +2.9 万人と予想（+8.8 万人）を大きく下回った。発表直後にドル円は約 65 銭下落し、一時 156 円台をつけた。",
+      "points": [
+        "非農業部門雇用者数は +2.9 万人（予想 +8.8 万人）。前月分は +16.2 万人から +13.3 万人に下方修正",
+        "平均時給は前月比 +0.1%（予想 +0.3%）と伸びが鈍った",
+        "ドル円は発表前の 157.60 円近辺から 156.96 円まで下げ、その後 157.1 円台に戻した"
+      ],
+      "code": null,
+      "signal": null,
+      "pick": true
+    },
+    {
+      "id": "2026-10-03-zaikei-nikkei-1002",
+      "url": "https://www.zaikei.co.jp/article/20261002/872176.html",
+      "title": "日経平均は反落、売り優勢も下げ幅は限定的",
+      "source": "財経新聞",
+      "source_group": "news",
+      "published_at": "2026-10-02T15:30:00+09:00",
+      "category": "stocks",
+      "keywords": [
+        "nikkei225",
+        "jgb"
+      ],
+      "score": 80,
+      "why": "株式：前営業日の終値",
+      "read_min": 3,
+      "tldr": "10 月 2 日の日経平均は前日比 647.26 円安の 68,309.46 円で反落。前日までに 3,500 円近く上げた反動の利益確定売りや、原油高・国内長期金利の高止まりが重しになった。",
+      "points": [
+        "東証プライムは値下がり銘柄が 84.1%、値上がりは 13.8% と売り優勢。売買代金は 8 兆 2,978 億円",
+        "ソフトバンク G・東エレク・ファーストリテイリングなどが下げ、非鉄金属・鉱業・石油石炭が上げた",
+        "米株は小幅高だったが、原油価格の上昇を受けて下げに転じた流れが波及した"
+      ],
+      "code": null,
+      "signal": null,
+      "pick": true
+    },
+    {
+      "id": "2026-10-03-mogecheck-mortgage-oct",
+      "url": "https://mogecheck.jp/articles/show/51rzNy7XEJ5o4mQ6ZkVv",
+      "title": "住宅ローン金利2026年10月の最新動向【日銀利上げによる変動金利引き上げと今後の見通し】",
+      "source": "モゲチェック",
+      "source_group": "news",
+      "published_at": null,
+      "category": "realestate",
+      "keywords": [
+        "mortgage-rates",
+        "flat35"
+      ],
+      "score": 72,
+      "why": "matched: 住宅ローン, 金利",
+      "read_min": 4,
+      "tldr": "10 月の住宅ローン金利は変動・10 年固定・35 年固定ともに引き上げ。フラット 35（買取型）は 3.830% で、変動金利は 6 月の利上げ分を反映する銀行が増えている。",
+      "points": [],
+      "code": null,
+      "signal": null,
+      "pick": false
+    },
+    {
+      "id": "2026-10-03-finasee-fund-flows-aug",
+      "url": "https://media.finasee.jp/articles/-/19537",
+      "title": "投資信託の純資産総額364兆円、2カ月ぶり増加―リスク回避から次の一手へ",
+      "source": "Finasee",
+      "source_group": "news",
+      "published_at": null,
+      "category": "funds",
+      "keywords": [
+        "fund-flows",
+        "index-fund"
+      ],
+      "score": 66,
+      "why": "matched: インデックス, nisa",
+      "read_min": 4,
+      "tldr": "公募投信の純資産総額は 8 月に 364 兆円となり、株式投信（ETF 除く）への資金流入超が続いている（検索結果の要約ベース）。",
+      "points": [],
+      "code": null,
+      "signal": null,
+      "pick": false
+    },
+    {
+      "id": "2026-10-03-toyokeizai-prudential-fsa",
+      "url": "https://toyokeizai.net/articles/-/959935?utm_source=rss&utm_medium=http&utm_campaign=link_back",
+      "title": "【独自】金融庁がプルデンシャル生命に業務停止命令で最終調整､営業社員による金銭詐取のほか情報提供義務違反も認定 | ビジネス | 東洋経済オンライン",
+      "source": "東洋経済",
+      "source_group": "news",
+      "published_at": "2026-10-02T14:00:00+09:00",
+      "category": "macro",
+      "keywords": [
+        "fsa",
+        "insurance"
+      ],
+      "score": 62,
+      "why": "金融庁の行政処分（報道）",
+      "read_min": 3,
+      "tldr": "金融庁がプルデンシャル生命保険に業務停止命令を出す方向で最終調整していると東洋経済が報道。営業社員による金銭詐取などが理由とされる。",
+      "points": [],
+      "code": null,
+      "signal": null,
+      "pick": false
+    },
+    {
+      "id": "2026-10-03-nhk-tohoku-bank-merger",
+      "url": "https://news.web.nhk/newsweb/na/nd-20261001de53731",
+      "title": "青森みちのく銀行 岩手銀行 秋田銀行が経営統合協議へ | NHKニュース",
+      "source": "hatena/経済",
+      "source_group": "tech_blog",
+      "published_at": "2026-10-01T22:27:56+09:00",
+      "category": "macro",
+      "keywords": [
+        "regional-banks",
+        "m-and-a"
+      ],
+      "score": 60,
+      "why": "matched: 金利（地銀再編）",
+      "read_min": 2,
+      "tldr": "青森みちのく銀行・岩手銀行・秋田銀行の 3 行が経営統合に向けた協議を進めていると NHK が報じた。利上げや人口減少による競争激化が背景。",
+      "points": [],
+      "code": null,
+      "signal": null,
+      "pick": false
+    },
+    {
+      "id": "2026-10-03-coinpost-fsa-digital-budget",
+      "url": "https://coinpost.jp/?p=740761",
+      "title": "金融庁、デジタル金融施策に約13.3億円を予算要求 前年度の15倍",
+      "source": "CoinPost",
+      "source_group": "news",
+      "published_at": "2026-10-02T17:36:50+09:00",
+      "category": "crypto",
+      "keywords": [
+        "fsa",
+        "tokenization"
+      ],
+      "score": 60,
+      "why": "金融庁の予算要求",
+      "read_min": 2,
+      "tldr": "金融庁が 2027 年度概算要求で、デジタル技術を用いた金融サービスの変革に約 13.3 億円（前年度の約 15 倍）を計上した。",
+      "points": [],
+      "code": null,
+      "signal": null,
+      "pick": false
+    },
+    {
+      "id": "2026-10-03-nada-smbc-nikko-defi",
+      "url": "https://www.nadanews.com/370589/",
+      "title": "SMBC日興、国内投資家向けDeFi基盤を開発へ──Uniswap・Baseらと協業",
+      "source": "CoinDesk JAPAN",
+      "source_group": "news",
+      "published_at": "2026-10-02T21:20:00+09:00",
+      "category": "crypto",
+      "keywords": [
+        "defi",
+        "ethereum"
+      ],
+      "score": 58,
+      "why": "証券会社のオンチェーン金融",
+      "read_min": 2,
+      "tldr": "SMBC 日興証券が Nethermind と国内投資家向け DeFi 基盤を共同開発すると発表。Uniswap や Base と協業する。",
+      "points": [],
+      "code": null,
+      "signal": null,
+      "pick": false
+    },
+    {
+      "id": "2026-10-03-nada-btc-etf-uptober",
+      "url": "https://www.nadanews.com/370607/",
+      "title": "ビットコインETF、1億270万ドル流入で「アップトーバー」幕開け──日銀とFRBの金利動向に注目【価格分析】",
+      "source": "CoinDesk JAPAN",
+      "source_group": "news",
+      "published_at": "2026-10-02T21:50:00+09:00",
+      "category": "crypto",
+      "keywords": [
+        "bitcoin",
+        "bitcoin-etf"
+      ],
+      "score": 64,
+      "why": "matched: ビットコイン, 金利",
+      "read_min": 2,
+      "tldr": "ビットコインは 8 万 6,800 ドルを上回り先週高値に迫った。米ビットコイン ETF には 1 億 270 万ドルの資金流入があった。",
+      "points": [],
+      "code": null,
+      "signal": null,
+      "pick": false
+    },
+    {
+      "id": "2026-10-03-coinpost-bitflyer-cooldown",
+      "url": "https://coinpost.jp/?p=740830",
+      "title": "bitFlyerが「クールダウン」導入、入金後48時間の暗号資産出金を制限",
+      "source": "CoinPost",
+      "source_group": "news",
+      "published_at": "2026-10-03T05:00:25+09:00",
+      "category": "crypto",
+      "keywords": [
+        "crypto-exchange",
+        "fraud-prevention"
+      ],
+      "score": 56,
+      "why": "matched: ビットコイン（取引所の規制強化）",
+      "read_min": 2,
+      "tldr": "bitFlyer が 10 月 15 日から、本人確認後 90 日未満の個人顧客を対象に日本円入金後 48 時間の暗号資産外部送付を制限する。",
+      "points": [],
+      "code": null,
+      "signal": null,
+      "pick": false
+    },
+    {
+      "id": "2026-10-03-coinpost-us-crypto-tax-bill",
+      "url": "https://coinpost.jp/?p=740658",
+      "title": "米上院議員が仮想通貨税制法案提出、ステーブルコイン決済を非課税に",
+      "source": "CoinPost",
+      "source_group": "news",
+      "published_at": "2026-10-02T15:14:04+09:00",
+      "category": "crypto",
+      "keywords": [
+        "crypto-tax",
+        "stablecoin"
+      ],
+      "score": 54,
+      "why": "暗号資産の税制",
+      "read_min": 2,
+      "tldr": "米上院のデインズ議員が暗号資産税制法案「ADAPT Act」を提出。ステーブルコイン決済などを非課税とする一方、ウォッシュセール・ルールを適用する内容。",
+      "points": [],
+      "code": null,
+      "signal": null,
+      "pick": false
+    },
+    {
+      "id": "2026-10-03-nada-near-intents-hack",
+      "url": "https://www.nadanews.com/370522/",
+      "title": "NEAR基盤の取引サービス、入出金のバグで約6億円流出",
+      "source": "CoinDesk JAPAN",
+      "source_group": "news",
+      "published_at": "2026-10-02T15:38:01+09:00",
+      "category": "crypto",
+      "keywords": [
+        "near",
+        "exchange-hack"
+      ],
+      "score": 50,
+      "why": "暗号資産のセキュリティ事故",
+      "read_min": 2,
+      "tldr": "NEAR 上のクロスチェーン取引基盤 NEAR Intents で入出金のバグにより約 6 億円が流出し、サービスが停止された。",
+      "points": [],
+      "code": null,
+      "signal": null,
+      "pick": false
+    }
+  ],
+  "social": [
+    {
+      "network": "x",
+      "author": "@ClaudeDevs",
+      "url": "https://x.com/ClaudeDevs/status/2105721434807083061",
+      "text": "Claude Code を mod で拡張できるようになったと告知。挙動や UI の変更、独自機能の差し替えを数行の TypeScript で書け、/plugin でインストールする。",
+      "metrics": null,
+      "heat": null,
+      "category": "ai",
+      "keywords": [
+        "claude",
+        "ai-coding"
+      ],
+      "posted_at": null
+    },
+    {
+      "network": "x",
+      "author": "@bcherny",
+      "url": "https://x.com/bcherny/status/2105756563302723721",
+      "text": "Boris Cherny 氏が mod について、プロンプトするだけで Claude を自分の働き方に合わせて変えられ、プラグインとして共有できると投稿。",
+      "metrics": null,
+      "heat": null,
+      "category": "ai",
+      "keywords": [
+        "claude",
+        "ai-coding"
+      ],
+      "posted_at": null
+    },
+    {
+      "network": "x",
+      "author": "@onusoz",
+      "url": "https://x.com/onusoz/status/2105849627006345258",
+      "text": "Pi 1.0 と Pi Durable について、複数クライアントでの同時セッション（マルチプレイヤー）や SQLite ストレージを挙げ、ミニマルなコーディングエージェントとしては大きな更新だと評価。",
+      "metrics": null,
+      "heat": null,
+      "category": "ai",
+      "keywords": [
+        "ai-coding",
+        "ai-agent"
+      ],
+      "posted_at": null
+    },
+    {
+      "network": "x",
+      "author": "@kiwicopple",
+      "url": "https://x.com/kiwicopple/status/2106047481851326869",
+      "text": "Supabase CEO の Paul Copplestone 氏が Turso 買収に触れ、以前から Turso チームのファンで今後の大きな計画があると投稿。",
+      "metrics": null,
+      "heat": null,
+      "category": "be",
+      "keywords": [
+        "m-and-a",
+        "sqlite"
+      ],
+      "posted_at": null
+    },
+    {
+      "network": "hn",
+      "author": null,
+      "url": "https://news.ycombinator.com/item?id=49926069",
+      "text": "『Pi 1.0』のスレッド。564 件のコメント。",
+      "metrics": "▲ 1,627  ✉ 564",
+      "heat": 100,
+      "category": "ai",
+      "keywords": [
+        "ai-coding",
+        "ai-agent"
+      ],
+      "posted_at": "2026-10-02T04:33:05+09:00"
+    },
+    {
+      "network": "hn",
+      "author": null,
+      "url": "https://news.ycombinator.com/item?id=49928121",
+      "text": "『Several vulnerabilities have been discovered in the Linux kernel』のスレッド。387 件のコメント。",
+      "metrics": "▲ 535  ✉ 387",
+      "heat": 100,
+      "category": "sec",
+      "keywords": [
+        "linux",
+        "vulnerability-management"
+      ],
+      "posted_at": "2026-10-02T08:10:44+09:00"
+    },
+    {
+      "network": "hn",
+      "author": null,
+      "url": "https://news.ycombinator.com/item?id=49934784",
+      "text": "『Supabase is acquiring Turso』のスレッド。90 件のコメント。",
+      "metrics": "▲ 175  ✉ 90",
+      "heat": 44,
+      "category": "be",
+      "keywords": [
+        "m-and-a",
+        "sqlite"
+      ],
+      "posted_at": "2026-10-03T00:43:03+09:00"
+    }
+  ],
+  "releases": [
+    {
+      "date": "2026-10-03",
+      "title": "opentelemetry-go v1.47.0",
+      "repo": "open-telemetry/opentelemetry-go",
+      "url": "https://github.com/open-telemetry/opentelemetry-go/releases/tag/v1.47.0",
+      "kind": "release",
+      "note": "新しいタグを検出",
+      "category": "be"
+    },
+    {
+      "date": "2026-10-03",
+      "title": "uv 0.12.22",
+      "repo": "astral-sh/uv",
+      "url": "https://github.com/astral-sh/uv/releases/tag/0.12.22",
+      "kind": "release",
+      "note": "新しいタグを検出",
+      "category": "be"
+    },
+    {
+      "date": "2026-10-02",
+      "title": "Kubernetes 1.37 が Amazon EKS で利用可能に",
+      "repo": null,
+      "url": "https://aws.amazon.com/about-aws/whats-new/2026/10/amazon-eks-distro-kubernetes-version-1-37",
+      "kind": "release",
+      "note": "EKS / EKS Distro が全リージョンで対応",
+      "category": "cloud"
+    },
+    {
+      "date": "2026-10-02",
+      "title": "金融庁「NISA 口座の利用状況調査（2026 年 6 月末時点）」",
+      "repo": null,
+      "url": "https://www.fsa.go.jp/policy/nisa/20261002.html",
+      "kind": "policy",
+      "note": "3,048 万口座・累計買付額 85 兆円",
+      "category": "funds"
+    },
+    {
+      "date": "2026-10-15",
+      "title": "bitFlyer 暗号資産送付の「クールダウン」導入",
+      "repo": null,
+      "url": "https://coinpost.jp/?p=740830",
+      "kind": "event",
+      "note": "本人確認後 90 日未満の個人顧客が対象。円入金後 48 時間の外部送付を制限",
+      "category": "crypto"
+    }
+  ]
+}
