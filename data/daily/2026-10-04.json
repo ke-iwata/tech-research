@@ -1,0 +1,814 @@
+{
+  "date": "2026-10-04",
+  "generated_at": "2026-10-04T06:40:00+09:00",
+  "stats": {
+    "collected": 200,
+    "sources_ok": 26,
+    "sources_total": 26,
+    "by_group": {
+      "news": 84,
+      "tech_blog": 74,
+      "hackernews": 35,
+      "official": 7
+    },
+    "failed_sources": []
+  },
+  "digest": [
+    {
+      "category": "ai",
+      "text": "独 Aleph Alpha がアクティブ 3.46B・総 78B の MoE モデル Kolibri を Apache 2.0 で公開。antirez の ds4 も含め、大型オープンモデルを手元で動かす流れが HN で話題に。",
+      "keywords": [
+        "llm",
+        "open-weight",
+        "local-llm"
+      ]
+    },
+    {
+      "category": "sec",
+      "text": "Apple が AI エージェントのリスクを理由に macOS のフルディスクアクセス付与を厳しくすると告知。韓国では AI を使ったとみられる銀行への同時攻撃も報じられた。",
+      "keywords": [
+        "ai-agent",
+        "ai-security"
+      ]
+    },
+    {
+      "category": "cloud",
+      "text": "Cloudflare が観測基盤を統合し OpenTelemetry エクスポートや SQL アラートを追加、12 月から新料金。AWS は ECS に VPC Lattice の blue/green・canary デプロイを追加。",
+      "keywords": [
+        "observability",
+        "opentelemetry",
+        "aws"
+      ]
+    },
+    {
+      "category": "stocks",
+      "text": "10 月 2 日の米国株は 9 月雇用統計の下振れで早期利上げ観測が後退し、ダウ・ナスダックとも続伸。エヌビディアは最高値を更新した。",
+      "keywords": [
+        "us-stocks",
+        "us-jobs"
+      ]
+    },
+    {
+      "category": "crypto",
+      "text": "米 SEC がビットコインなど 6 資産の 3 倍レバレッジ ETF の上場を承認（取引開始は別手続き）。CertiK は 7〜9 月の暗号資産の被害額を約 1999 億円と集計。",
+      "keywords": [
+        "crypto-etf",
+        "exchange-hack"
+      ]
+    }
+  ],
+  "items": [
+    {
+      "id": "2026-10-04-hn-kolibri",
+      "url": "https://aleph-alpha.com/en/blog/kolibri-has-landed-a-sovereign-open-weight-model/",
+      "title": "Kolibri: A Sovereign Open-Weight Model",
+      "source": "hackernews",
+      "source_group": "hackernews",
+      "published_at": "2026-10-03T18:36:04+09:00",
+      "category": "ai",
+      "keywords": [
+        "llm",
+        "open-weight",
+        "sovereign-ai"
+      ],
+      "score": 90,
+      "why": "matched: llm（HN 364 pt＋関連スレ 407 pt）",
+      "read_min": 6,
+      "tldr": "独 Aleph Alpha が 10 月 3 日、オープンウェイトの MoE モデル「Kolibri」を公開。総 78.1B・アクティブ 3.46B パラメータで最大 100 万トークンの文脈を扱え、重みは Hugging Face から Apache 2.0 で入手できる。",
+      "points": [
+        "384 エキスパート中 6 個を使う MoE 構成。英語・独語のバイリンガルで、事前学習データの 21.3% がドイツ語",
+        "同社は「アクティブパラメータが 4 倍のモデルに匹敵」と主張し、AIME 2025（英語 96.9）や HumanEval+ 92.7% などを示す",
+        "vLLM で配信でき、推論・ツール呼び出し用のパーサーも用意。262k トークン超では追加フラグが必要"
+      ],
+      "code": {
+        "file": "serve.sh",
+        "lang": "bash",
+        "text": "pip install \"aleph-alpha-inference>=1.0\"\n\nvllm serve Aleph-Alpha/Kolibri-1 --kv-cache-dtype fp8 \\\n  --reasoning-parser kolibri1 \\\n  --tool-call-parser kolibri1 \\\n  --enable-auto-tool-choice"
+      },
+      "signal": "▲ 364",
+      "pick": true
+    },
+    {
+      "id": "2026-10-04-hn-ds4-dwarfstar",
+      "url": "https://dwarfstar.sh/",
+      "title": "From the creator of Redis; run LLM locally with ds4",
+      "source": "hackernews",
+      "source_group": "hackernews",
+      "published_at": "2026-10-03T03:01:16+09:00",
+      "category": "ai",
+      "keywords": [
+        "local-llm",
+        "llm",
+        "llm-cost"
+      ],
+      "score": 86,
+      "why": "matched: llm（HN 333 pt）",
+      "read_min": 5,
+      "tldr": "Redis 作者 antirez による C 製のローカル推論エンジン「DwarfStar 4（ds4）」。DeepSeek V4/V4.1 Flash や GLM 5.x などの大規模 MoE モデルを、メモリの大きい Mac や DGX Spark・Strix Halo で動かす。",
+      "points": [
+        "ルーティングされるエキスパートだけを強く量子化し、重要な経路は精度を保つ非対称量子化で大型モデルを手元に載せる",
+        "長いプレフィックスの KV キャッシュを SSD に保存し、プロンプトのハッシュで再開できる",
+        "サーバーは OpenAI 互換と Anthropic 互換（/v1/messages）の API を持ち、Claude Code や Codex CLI からつなげる。MIT ライセンス"
+      ],
+      "code": {
+        "file": "README",
+        "lang": "bash",
+        "text": "git clone https://github.com/antirez/ds4\ncd ds4 && ./download_model.sh ds4f-q2\nmake                          # macOS · Metal\n./ds4                         # CLI\n./ds4-server --ctx 100000     # API server"
+      },
+      "signal": "▲ 333",
+      "pick": true
+    },
+    {
+      "id": "2026-10-04-apple-full-disk-access",
+      "url": "https://developer.apple.com/news/?id=p6zjojqw",
+      "title": "Updates to Full Disk Access in macOS",
+      "source": "hackernews",
+      "source_group": "hackernews",
+      "published_at": "2026-10-03T04:37:01+09:00",
+      "category": "sec",
+      "keywords": [
+        "ai-agent",
+        "ai-security",
+        "macos"
+      ],
+      "score": 85,
+      "why": "matched: AI エージェントの権限（HN 280 pt）",
+      "read_min": 3,
+      "tldr": "Apple が 10 月 2 日、macOS の「フルディスクアクセス」付与に追加の制御を入れると開発者向けに告知した。AI エージェントが高機能化するほど、ファイル・メール・メッセージ・閲覧履歴まで見える権限のリスクが大きくなるとしている。",
+      "points": [
+        "一部の開発者がフルディスクアクセスを、ユーザーが十分理解しないまま全データに触れる形で使っていると指摘",
+        "今後は「非常に明示的なユーザー操作」でしか付与できないようにする方針。具体的な導入時期や仕組みは未公表",
+        "バックアップアプリなどは正当な用途として挙げており、エージェント系アプリは権限設計の見直しが必要になりそう"
+      ],
+      "code": null,
+      "signal": "▲ 280",
+      "pick": true
+    },
+    {
+      "id": "2026-10-04-cloudflare-observability",
+      "url": "https://blog.cloudflare.com/one-observability-platform/",
+      "title": "8 major updates to Cloudflare Observability",
+      "source": "cloudflare blog",
+      "source_group": "tech_blog",
+      "published_at": "2026-10-02T22:00:00+09:00",
+      "category": "cloud",
+      "keywords": [
+        "cloudflare",
+        "observability",
+        "opentelemetry"
+      ],
+      "score": 84,
+      "why": "matched: opentelemetry",
+      "read_min": 6,
+      "tldr": "Cloudflare が誕生週の締めくくりに、ログ・トレース・分析・アラート・ダッシュボード・エクスポートを 1 つにまとめる 8 つの更新を発表。12 月 1 日から取り込み量ベースの新料金になる。",
+      "points": [
+        "Logs のホーム統合、Cloudflare Traces（オープンベータ）、全テレメトリーを横断する SQL API（新しい cf CLI と Workers バインディング）",
+        "SQL で条件を書くカスタムアラート（閾値・異常検知・SLO）とカスタムダッシュボード、30 日保持の Domain Analytics",
+        "OpenTelemetry エクスポートと W3C trace context の伝播に対応。Logpush がセルフサーブのプランにも開放される"
+      ],
+      "code": null,
+      "signal": null,
+      "pick": true
+    },
+    {
+      "id": "2026-10-04-aws-ecs-lattice-deploy",
+      "url": "https://aws.amazon.com/about-aws/whats-new/2026/10/amazon-ecs-vpc-lattice-blue-green-deployments",
+      "title": "Amazon ECS adds Amazon VPC Lattice support for blue/green, linear, and canary deployments",
+      "source": "aws what's new",
+      "source_group": "news",
+      "published_at": "2026-10-03T05:18:00+09:00",
+      "category": "cloud",
+      "keywords": [
+        "aws",
+        "ecs",
+        "deployment"
+      ],
+      "score": 80,
+      "why": "matched: aws",
+      "read_min": 3,
+      "tldr": "Amazon ECS が VPC Lattice を使うサービス向けに、組み込みの blue/green・linear・canary デプロイに対応した。テストトラフィックで新バージョンを検証してから本番トラフィックを移せる。",
+      "points": [
+        "VPC Lattice のターゲットグループとリスナールールを ECS サービスの設定で選ぶだけで使える。既存サービスにも適用可",
+        "Lambda フックや一時停止フックで独自の検証を挟め、CloudWatch アラームとデプロイサーキットブレーカーで自動ロールバック",
+        "VPC Lattice が使える全リージョンで提供。コンソール・CLI・SDK・IaC から設定できる"
+      ],
+      "code": null,
+      "signal": null,
+      "pick": true
+    },
+    {
+      "id": "2026-10-04-hn-zig-0-17",
+      "url": "https://ziglang.org/download/0.17.0/release-notes.html",
+      "title": "Zig v0.17.0",
+      "source": "hackernews",
+      "source_group": "hackernews",
+      "published_at": "2026-10-03T05:56:36+09:00",
+      "category": "be",
+      "keywords": [
+        "zig",
+        "programming-language"
+      ],
+      "score": 62,
+      "why": "言語の新リリース（HN 259 pt）",
+      "read_min": 2,
+      "tldr": "Zig 0.17.0 のリリースノートが公開された。HN で 259 ポイントを集めた。",
+      "points": [],
+      "code": null,
+      "signal": "▲ 259",
+      "pick": false
+    },
+    {
+      "id": "2026-10-04-hn-glm-53-flash",
+      "url": "https://wagtail.org/blog/one-month-on-glm-53-flash/",
+      "title": "One month coding with GLM 5.3 Flash",
+      "source": "hackernews",
+      "source_group": "hackernews",
+      "published_at": "2026-10-03T00:29:15+09:00",
+      "category": "ai",
+      "keywords": [
+        "ai-coding",
+        "llm-cost",
+        "open-weight"
+      ],
+      "score": 70,
+      "why": "matched: llm（HN 216 pt）",
+      "read_min": 6,
+      "tldr": "Wagtail のチームが、1 か月間 GLM 5.3 Flash でコーディングした体験をまとめた記事。",
+      "points": [],
+      "code": null,
+      "signal": "▲ 216",
+      "pick": false
+    },
+    {
+      "id": "2026-10-04-voluntas-llm-usage",
+      "url": "https://voluntas.ghost.io/2026-10-first-half-llm/",
+      "title": "2026 年 10 月前半の LLM 利用状況",
+      "source": "hatena/it",
+      "source_group": "tech_blog",
+      "published_at": "2026-10-03T17:13:44+09:00",
+      "category": "ai",
+      "keywords": [
+        "llm-cost",
+        "ai-coding"
+      ],
+      "score": 68,
+      "why": "matched: llm",
+      "read_min": 5,
+      "tldr": "2026 年 10 月前半時点のチームの LLM 利用状況の記録。Ollama Cloud・Cursor・Codex の 3 つのサブスクを使い、DeepSeek V4.1 Flash と GLM 5.3 Flash を中心に切り替えたという。",
+      "points": [],
+      "code": null,
+      "signal": null,
+      "pick": false
+    },
+    {
+      "id": "2026-10-04-hn-harness-is-company",
+      "url": "https://blog.sshh.io/p/the-harness-is-the-company",
+      "title": "Every SaaS business will become a harness around a model",
+      "source": "hackernews",
+      "source_group": "hackernews",
+      "published_at": "2026-10-03T06:06:56+09:00",
+      "category": "ai",
+      "keywords": [
+        "ai-agent",
+        "saas"
+      ],
+      "score": 60,
+      "why": "AI と SaaS の論考（HN 156 pt）",
+      "read_min": 8,
+      "tldr": "「あらゆる SaaS はモデルを包むハーネスになる」と論じるブログ記事。",
+      "points": [],
+      "code": null,
+      "signal": "▲ 156",
+      "pick": false
+    },
+    {
+      "id": "2026-10-04-gigazine-ministack",
+      "url": "https://gigazine.net/news/20261003-ministack/",
+      "title": "無料でAWSをローカルでシミュレーションできるエミュレーター「MiniStack」、60以上のAWSサービスを単一ポートで利用可能でマルチアカウント＆マルチリージョン対応、セルフホスト可能",
+      "source": "hatena/it",
+      "source_group": "tech_blog",
+      "published_at": "2026-10-03T12:06:02+09:00",
+      "category": "cloud",
+      "keywords": [
+        "aws",
+        "local-cloud-emulator"
+      ],
+      "score": 72,
+      "why": "matched: aws",
+      "read_min": 4,
+      "tldr": "AWS の 60 以上のサービスを単一ポートでローカルに再現する無料のエミュレーター「MiniStack」の紹介。AWS CLI や Terraform からそのまま使え、マルチアカウント・マルチリージョンに対応する。",
+      "points": [],
+      "code": null,
+      "signal": null,
+      "pick": false
+    },
+    {
+      "id": "2026-10-04-aws-dsql-partial-index",
+      "url": "https://aws.amazon.com/about-aws/whats-new/2026/10/aurora-dsql-partial-indexes/",
+      "title": "Amazon Aurora DSQL now supports partial indexes",
+      "source": "aws what's new",
+      "source_group": "news",
+      "published_at": "2026-10-03T02:30:00+09:00",
+      "category": "be",
+      "keywords": [
+        "aws",
+        "managed-db",
+        "postgres"
+      ],
+      "score": 70,
+      "why": "matched: postgres 互換 DB",
+      "read_min": 2,
+      "tldr": "Amazon Aurora DSQL が部分インデックスに対応。条件を満たす行だけを索引に入れられ、クエリ性能とストレージ効率を上げられる。",
+      "points": [],
+      "code": null,
+      "signal": null,
+      "pick": false
+    },
+    {
+      "id": "2026-10-04-cloudflare-web-search-api",
+      "url": "https://blog.cloudflare.com/introducing-web-search-api/",
+      "title": "Introducing Web Search API via AI Gateway",
+      "source": "cloudflare blog",
+      "source_group": "tech_blog",
+      "published_at": "2026-10-02T22:28:10+09:00",
+      "category": "ai",
+      "keywords": [
+        "cloudflare",
+        "rag",
+        "ai-gateway"
+      ],
+      "score": 66,
+      "why": "matched: llm",
+      "read_min": 4,
+      "tldr": "Cloudflare AI Gateway が Ceramic.ai・Exa・Linkup と組んだ Web 検索 API を提供開始。モデル呼び出しにリアルタイムの Web 情報を差し込める。",
+      "points": [],
+      "code": null,
+      "signal": null,
+      "pick": false
+    },
+    {
+      "id": "2026-10-04-cloudflare-protected-tunnels",
+      "url": "https://blog.cloudflare.com/protected-quick-tunnels/",
+      "title": "Protected Quick Tunnels: simple accountless authentication for your next dev project",
+      "source": "cloudflare blog",
+      "source_group": "tech_blog",
+      "published_at": "2026-10-02T22:00:00+09:00",
+      "category": "sec",
+      "keywords": [
+        "cloudflare",
+        "authentication"
+      ],
+      "score": 62,
+      "why": "matched: 認証",
+      "read_min": 3,
+      "tldr": "Quick Tunnels がメール認証に対応。cloudflared に --allowed-mail を付けると、指定したアドレスやドメインの人だけがローカルアプリに届く。双方に Cloudflare アカウントは不要。",
+      "points": [],
+      "code": null,
+      "signal": null,
+      "pick": false
+    },
+    {
+      "id": "2026-10-04-chosun-korea-bank-ai-hack",
+      "url": "https://www.chosunonline.com/site/data/html_dir/2026/10/03/2026100380012.html",
+      "title": "韓国6行に「AIハッキング」、4行で個人情報流出",
+      "source": "hatena/it",
+      "source_group": "tech_blog",
+      "published_at": "2026-10-03T12:45:48+09:00",
+      "category": "sec",
+      "keywords": [
+        "security-incident",
+        "data-breach",
+        "ai-security"
+      ],
+      "score": 70,
+      "why": "AI を使った攻撃の事例",
+      "read_min": 3,
+      "tldr": "10 月 1〜2 日、韓国の少なくとも 6 行で AI ツールを使ったとみられるハッキングが同時多発し、うち 4 行で個人情報が流出したと報じられた。",
+      "points": [],
+      "code": null,
+      "signal": null,
+      "pick": false
+    },
+    {
+      "id": "2026-10-04-itmedia-abahouse-breach",
+      "url": "https://www.itmedia.co.jp/news/article/2610/03/2000001981/",
+      "title": "「アバハウス」全顧客の情報漏えいか 会員・受注DBに不正アクセス 「不審な返金メール届いた」報告で判明",
+      "source": "hatena/it",
+      "source_group": "tech_blog",
+      "published_at": "2026-10-03T09:45:23+09:00",
+      "category": "sec",
+      "keywords": [
+        "security-incident",
+        "data-breach"
+      ],
+      "score": 55,
+      "why": "国内の情報漏えい",
+      "read_min": 2,
+      "tldr": "アバハウスインターナショナルが社内システムへの不正アクセスを公表。会員・受注のデータベース全体にアクセスされた可能性があり、全会員が対象になるおそれがある。",
+      "points": [],
+      "code": null,
+      "signal": null,
+      "pick": false
+    },
+    {
+      "id": "2026-10-04-nikkei-us-stocks-1002",
+      "url": "https://www.nikkei.com/article/DGXZQOFL0300F0T01C26A0000000/",
+      "title": "NYダウ続伸250ドル高、米雇用統計が予想下回る エヌビディア最高値",
+      "source": "nikkei.com",
+      "source_group": "news",
+      "published_at": "2026-10-03T06:00:00+09:00",
+      "category": "stocks",
+      "keywords": [
+        "us-stocks",
+        "us-jobs",
+        "nvidia"
+      ],
+      "score": 86,
+      "why": "matched: 米国株",
+      "read_min": 3,
+      "tldr": "10 月 2 日の NY 株式市場はダウが 250 ドル高の 5 万 1176 ドル、ナスダック総合が 1.18% 高の 2 万 7190 で続伸。9 月の米雇用統計が予想を下回り、早期利上げ観測が後退した。",
+      "points": [
+        "非農業部門雇用者数は前月比 2 万 9000 人増で予想（8 万 4000 人増）を下回り、失業率は 4.2%（予想 4.1%）に上昇",
+        "G7 が石油備蓄の協調放出を決め WTI 原油先物が 1.9% 安となったことも株式の支えに",
+        "エヌビディア・アルファベット・アマゾンなどハイテク大型株が買われ、エヌビディアは最高値を更新"
+      ],
+      "code": null,
+      "signal": null,
+      "pick": true
+    },
+    {
+      "id": "2026-10-04-coinpost-sec-3x-etf",
+      "url": "https://coinpost.jp/?p=740844",
+      "title": "米SEC、ビットコインなど6資産の3倍レバレッジETFの上場を承認",
+      "source": "CoinPost",
+      "source_group": "news",
+      "published_at": "2026-10-03T11:10:43+09:00",
+      "category": "crypto",
+      "keywords": [
+        "crypto-etf",
+        "bitcoin",
+        "sec"
+      ],
+      "score": 84,
+      "why": "matched: ビットコイン",
+      "read_min": 3,
+      "tldr": "米 SEC が 10 月 2 日、Cboe BZX によるビットコイン・イーサリアム・金・銀・原油・天然ガスの 3 倍レバレッジ ETF 6 銘柄の上場・取引に向けた規則変更を承認した。",
+      "points": [
+        "Volatility Shares がスポンサーの VS トラストのシリーズで、先物を使い参照資産の 1 日の値動きの 3 倍を目指す",
+        "ビットコインとイーサリアムは CME 先物と現金担保で運用する",
+        "承認は上場の許可で、実際の取引開始には登録の効力発生など別の手続きが必要"
+      ],
+      "code": null,
+      "signal": null,
+      "pick": true
+    },
+    {
+      "id": "2026-10-04-coindesk-certik-q3",
+      "url": "https://www.nadanews.com/370657/",
+      "title": "暗号資産のセキュリティ被害、3カ月で約2000億円に──前期比1.5倍＝CertiK",
+      "source": "CoinDesk JAPAN",
+      "source_group": "news",
+      "published_at": "2026-10-03T09:30:00+09:00",
+      "category": "crypto",
+      "keywords": [
+        "exchange-hack",
+        "security-incident",
+        "bitget"
+      ],
+      "score": 80,
+      "why": "matched: 暗号資産のセキュリティ",
+      "read_min": 3,
+      "tldr": "CertiK によると、2026 年 7〜9 月の暗号資産業界のセキュリティ被害は約 12 億 7000 万ドル（約 1999 億円）で前四半期比 54.4% 増。件数は 249 件だった。",
+      "points": [
+        "被害は四半期末に集中し、7〜9 月の約 6 割が 9 月に発生",
+        "最大の事例は取引所 Bitget のハッキングで約 3 億 8750 万ドル。第三者製セキュリティ製品の脆弱性から内部の認証情報を取られた可能性",
+        "攻撃手法では脆弱性の悪用（Exploit）による被害が最も大きかった"
+      ],
+      "code": null,
+      "signal": null,
+      "pick": true
+    },
+    {
+      "id": "2026-10-04-toyokeizai-nvidia-high",
+      "url": "https://toyokeizai.net/articles/-/960059?utm_source=rss&utm_medium=http&utm_campaign=link_back",
+      "title": "エヌビディア株が最高値更新…AIを巡る楽観的な見方から投資マネーが再び回帰､史上初の｢時価総額6兆ドル｣視野 | 政治・経済・投資 | 東洋経済オンライン",
+      "source": "東洋経済",
+      "source_group": "news",
+      "published_at": "2026-10-03T08:00:00+09:00",
+      "category": "stocks",
+      "keywords": [
+        "nvidia",
+        "us-stocks",
+        "ai-economy"
+      ],
+      "score": 70,
+      "why": "matched: 米国株",
+      "read_min": 4,
+      "tldr": "エヌビディア株が 2 か月ぶりに最高値を更新し、失った時価総額を急回復していると報じた記事（本文は未読）。",
+      "points": [],
+      "code": null,
+      "signal": null,
+      "pick": false
+    },
+    {
+      "id": "2026-10-04-toyokeizai-us-jobs-sep",
+      "url": "https://toyokeizai.net/articles/-/960051?utm_source=rss&utm_medium=http&utm_campaign=link_back",
+      "title": "米雇用統計､9月は予想下回る2万9000人増にとどまる…失業率は4.1％から4.2%に上昇 | 政治・経済・投資 | 東洋経済オンライン",
+      "source": "東洋経済",
+      "source_group": "news",
+      "published_at": "2026-10-03T08:00:00+09:00",
+      "category": "macro",
+      "keywords": [
+        "us-jobs",
+        "fed"
+      ],
+      "score": 66,
+      "why": "matched: 金利",
+      "read_min": 3,
+      "tldr": "9 月の米雇用統計は雇用者数・賃金の伸びとも市場予想を下回り、雇用主の慎重な姿勢が鮮明になったとする解説。",
+      "points": [],
+      "code": null,
+      "signal": null,
+      "pick": false
+    },
+    {
+      "id": "2026-10-04-investing-bessent-yields",
+      "url": "https://jp.investing.com/news/economy-news/article-1700603",
+      "title": "ベッセント財務長官、米国債利回り上昇は世界的傾向と説明",
+      "source": "investing.com",
+      "source_group": "news",
+      "published_at": "2026-10-04T01:49:38+09:00",
+      "category": "macro",
+      "keywords": [
+        "us-treasury",
+        "interest-rates"
+      ],
+      "score": 62,
+      "why": "matched: 金利",
+      "read_min": 2,
+      "tldr": "ベッセント米財務長官が、米国債利回りの上昇は世界的な傾向だと説明したと報じられた。",
+      "points": [],
+      "code": null,
+      "signal": null,
+      "pick": false
+    },
+    {
+      "id": "2026-10-04-tvasahi-condo-wani",
+      "url": "https://news.tv-asahi.co.jp/news_economy/articles/900201082.html",
+      "title": "マンション価格「ワニの口」現象 売買成立せず在庫が急増 売り手も買い手も苦境",
+      "source": "hatena/経済",
+      "source_group": "tech_blog",
+      "published_at": "2026-10-03T16:45:19+09:00",
+      "category": "realestate",
+      "keywords": [
+        "housing",
+        "real-estate-prices"
+      ],
+      "score": 74,
+      "why": "マンション市況",
+      "read_min": 3,
+      "tldr": "首都圏のマンション販売の現場で、売り出し価格と成約の乖離が広がる「ワニの口」現象が起き、売買が成立せず在庫が増えていると報じられた（本文は未読）。",
+      "points": [],
+      "code": null,
+      "signal": null,
+      "pick": false
+    },
+    {
+      "id": "2026-10-04-nhk-106man-wall",
+      "url": "https://news.web.nhk/newsweb/na/nd-20261003de54027",
+      "title": "「年収106万円の壁」正式撤廃 週20時間労働の要件は継続 | NHKニュース",
+      "source": "hatena/経済",
+      "source_group": "tech_blog",
+      "published_at": "2026-10-03T12:00:09+09:00",
+      "category": "macro",
+      "keywords": [
+        "wages",
+        "social-insurance"
+      ],
+      "score": 64,
+      "why": "制度変更",
+      "read_min": 2,
+      "tldr": "パートなどが厚生年金に加入する賃金要件「年収 106 万円の壁」が 10 月に正式撤廃された。ただし週 20 時間以上の労働時間要件は残る。",
+      "points": [],
+      "code": null,
+      "signal": null,
+      "pick": false
+    },
+    {
+      "id": "2026-10-04-coindesk-usdt-bitcoin",
+      "url": "https://www.nadanews.com/370676/",
+      "title": "USDT、10月中にビットコイン上で発行へ＝CoinDesk",
+      "source": "CoinDesk JAPAN",
+      "source_group": "news",
+      "published_at": "2026-10-03T18:30:00+09:00",
+      "category": "crypto",
+      "keywords": [
+        "stablecoin",
+        "tether",
+        "bitcoin"
+      ],
+      "score": 70,
+      "why": "matched: ビットコイン",
+      "read_min": 2,
+      "tldr": "Tether が支援する Utexo が、USDT を 10 月中にビットコインのネットワーク上で発行する計画だと CoinDesk が報じた。",
+      "points": [],
+      "code": null,
+      "signal": null,
+      "pick": false
+    },
+    {
+      "id": "2026-10-04-coindesk-bittrade-weekly",
+      "url": "https://www.nadanews.com/370626/",
+      "title": "「期待先行」から「買い手の確認」へ── ビットコインは8万5,000ドル台、資金はアルトコインへも広がる【BitTrade Market Weekly】",
+      "source": "CoinDesk JAPAN",
+      "source_group": "news",
+      "published_at": "2026-10-03T09:00:00+09:00",
+      "category": "crypto",
+      "keywords": [
+        "bitcoin"
+      ],
+      "score": 62,
+      "why": "matched: ビットコイン",
+      "read_min": 5,
+      "tldr": "ビットコインは週内に 8 万 5000 ドル台で推移し、資金がアルトコインにも広がったとする週次の市況レポート。",
+      "points": [],
+      "code": null,
+      "signal": null,
+      "pick": false
+    },
+    {
+      "id": "2026-10-04-coinpost-blast-shutdown",
+      "url": "https://coinpost.jp/?p=740848",
+      "title": "レイヤー2「ブラスト」が閉鎖へ、預かり資産規模は一時23億ドル超",
+      "source": "CoinPost",
+      "source_group": "news",
+      "published_at": "2026-10-03T05:55:51+09:00",
+      "category": "crypto",
+      "keywords": [
+        "ethereum",
+        "layer2"
+      ],
+      "score": 60,
+      "why": "暗号資産のサービス終了",
+      "read_min": 2,
+      "tldr": "イーサリアムのレイヤー2「Blast」が運営終了を発表。運営費が収益を上回ったとして、10 月 26 日までに資産をメインネットへ引き出すよう呼びかけている。",
+      "points": [],
+      "code": null,
+      "signal": null,
+      "pick": false
+    },
+    {
+      "id": "2026-10-04-coinpost-ecb-onchain",
+      "url": "https://coinpost.jp/?p=740866",
+      "title": "「中央銀行マネーのオンチェーン化に3つの方法」ECBが検討中",
+      "source": "CoinPost",
+      "source_group": "news",
+      "published_at": "2026-10-03T10:00:26+09:00",
+      "category": "crypto",
+      "keywords": [
+        "cbdc",
+        "tokenization"
+      ],
+      "score": 58,
+      "why": "中央銀行の制度論",
+      "read_min": 3,
+      "tldr": "ECB のシュナーベル理事が、中央銀行マネーをオンチェーンで扱う 3 つのモデル（直接発行・ブリッジ・民間仲介）を説明した。",
+      "points": [],
+      "code": null,
+      "signal": null,
+      "pick": false
+    }
+  ],
+  "social": [
+    {
+      "network": "x",
+      "author": "@Aleph__Alpha",
+      "url": "https://x.com/Aleph__Alpha/status/2106306840657297814",
+      "text": "Kolibri の公開を告知。78B パラメータ（アクティブ 3.46B）、最大 100 万トークン、欧州製で重みは Apache 2.0 で自前のハードウェアで動かせるとした。",
+      "metrics": null,
+      "heat": null,
+      "category": "ai",
+      "keywords": [
+        "llm",
+        "open-weight"
+      ],
+      "posted_at": null
+    },
+    {
+      "network": "x",
+      "author": "@MacRumors",
+      "url": "https://x.com/MacRumors/status/2106111922584383956",
+      "text": "Apple が AI エージェントを理由に macOS の『フルディスクアクセス』を変更すると発表した、と速報。",
+      "metrics": null,
+      "heat": null,
+      "category": "sec",
+      "keywords": [
+        "ai-agent",
+        "ai-security"
+      ],
+      "posted_at": null
+    },
+    {
+      "network": "x",
+      "author": "@SarahPerezTC",
+      "url": "https://x.com/SarahPerezTC/status/2106091468846723469",
+      "text": "TechCrunch の記者が、Apple が AI エージェントの新しいリスクを理由にフルディスクアクセスの制御を強めると投稿。",
+      "metrics": null,
+      "heat": null,
+      "category": "sec",
+      "keywords": [
+        "ai-agent",
+        "macos"
+      ],
+      "posted_at": null
+    },
+    {
+      "network": "x",
+      "author": "@antirez",
+      "url": "https://x.com/antirez/status/2096724533604397452",
+      "text": "antirez が DwarfStar（ds4）の直近 2 週間の改善を告知。Metal・DGX Spark・Strix Halo のほぼ全面で速度と正確さを改善したとした。",
+      "metrics": null,
+      "heat": null,
+      "category": "ai",
+      "keywords": [
+        "local-llm"
+      ],
+      "posted_at": null
+    },
+    {
+      "network": "x",
+      "author": "@WuBlockchain",
+      "url": "https://x.com/WuBlockchain/status/2106198202785656915",
+      "text": "Bloomberg のアナリストの話として、米 SEC がビットコイン・イーサ・金・銀・原油・天然ガスの 3 倍レバレッジ ETP の上場・取引を承認したと伝えた。",
+      "metrics": null,
+      "heat": null,
+      "category": "crypto",
+      "keywords": [
+        "crypto-etf",
+        "bitcoin"
+      ],
+      "posted_at": null
+    },
+    {
+      "network": "hn",
+      "author": null,
+      "url": "https://news.ycombinator.com/item?id=49943034",
+      "text": "『Aleph Alpha Kolibri: How the sovereign German LLM works』のスレッド。",
+      "metrics": "▲ 407",
+      "heat": 100,
+      "category": "ai",
+      "keywords": [
+        "llm",
+        "sovereign-ai"
+      ],
+      "posted_at": null
+    }
+  ],
+  "releases": [
+    {
+      "date": "2026-10-04",
+      "title": "uv 0.12.23",
+      "repo": "astral-sh/uv",
+      "url": "https://github.com/astral-sh/uv/releases/tag/0.12.23",
+      "kind": "release",
+      "note": "新しいタグを検出",
+      "category": "be"
+    },
+    {
+      "date": "2026-10-03",
+      "title": "Kolibri（Aleph Alpha）",
+      "repo": null,
+      "url": "https://aleph-alpha.com/en/blog/kolibri-has-landed-a-sovereign-open-weight-model/",
+      "kind": "release",
+      "note": "78B MoE のオープンウェイトモデル、Apache 2.0",
+      "category": "ai"
+    },
+    {
+      "date": "2026-10-03",
+      "title": "Zig 0.17.0",
+      "repo": null,
+      "url": "https://ziglang.org/download/0.17.0/release-notes.html",
+      "kind": "release",
+      "note": "リリースノート公開",
+      "category": "be"
+    },
+    {
+      "date": "2026-10-02",
+      "title": "Apple「macOS フルディスクアクセスの更新」",
+      "repo": null,
+      "url": "https://developer.apple.com/news/?id=p6zjojqw",
+      "kind": "policy",
+      "note": "AI エージェントのリスクを理由に付与時の制御を強化。時期は未定",
+      "category": "sec"
+    },
+    {
+      "date": "2026-12-01",
+      "title": "Cloudflare Observability の新料金開始",
+      "repo": null,
+      "url": "https://blog.cloudflare.com/one-observability-platform/",
+      "kind": "event",
+      "note": "取り込み量・保存量ベースの料金に移行",
+      "category": "cloud"
+    }
+  ]
+}
