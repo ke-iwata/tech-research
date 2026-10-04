@@ -1,0 +1,842 @@
+{
+ "date": "2026-10-05",
+ "generated_at": "2026-10-05T05:40:00+09:00",
+ "stats": {
+  "collected": 154,
+  "sources_ok": 26,
+  "sources_total": 26,
+  "by_group": {
+   "news": 66,
+   "tech_blog": 57,
+   "hackernews": 31
+  },
+  "failed_sources": []
+ },
+ "digest": [
+  {
+   "category": "ai",
+   "text": "OpenAI で安全性報告書を統括したデビッド・ロビンソン氏が退社し、The Atlantic に「文化が壊れている」と寄稿。HN では関連スレッドが合計 700 pt 超になった。",
+   "keywords": [
+    "openai",
+    "ai-safety"
+   ]
+  },
+  {
+   "category": "be",
+   "text": "Supabase が SQLite ベースの Turso を買収。エージェントが大量に DB を作る需要に備える。同日に 1.5 億ドルの調達も発表した。",
+   "keywords": [
+    "sqlite",
+    "m-and-a",
+    "ai-agent"
+   ]
+  },
+  {
+   "category": "cloud",
+   "text": "Simon Willison がクラウドや API に「既定でオンのハード予算上限」を求め、HN で 574 pt。Cloudflare はエージェント向け Git 基盤のコンテストを始めた。",
+   "keywords": [
+    "llm-cost",
+    "cloudflare"
+   ]
+  },
+  {
+   "category": "stocks",
+   "text": "10 月 2 日の日経平均は 647 円安の 6 万 8309 円。米 10 年債利回りの一時 5.34% への上昇が重荷になった。今週は 6 日の植田総裁の挨拶が焦点。",
+   "keywords": [
+    "nikkei225",
+    "boj-policy"
+   ]
+  },
+  {
+   "category": "realestate",
+   "text": "10 月の住宅ローン金利は、みずほ銀行など大手 3 行が変動金利を、大手 5 行すべてが固定金利を引き上げた。",
+   "keywords": [
+    "mortgage-rates",
+    "boj-rate-hike"
+   ]
+  }
+ ],
+ "items": [
+  {
+   "id": "2026-10-05-hn-budget-caps",
+   "url": "https://simonwillison.net/2026/Oct/3/default-hard-budget-caps/",
+   "title": "We're going to need default hard budget caps on pretty much everything",
+   "source": "hackernews",
+   "source_group": "hackernews",
+   "published_at": "2026-10-04T09:20:16+09:00",
+   "category": "cloud",
+   "keywords": [
+    "llm-cost",
+    "ai-agent",
+    "aws"
+   ],
+   "score": 86,
+   "why": "matched: llm-cost（HN 574 pt）",
+   "read_min": 5,
+   "tldr": "Simon Willison が、コーディングエージェントで誰でも気軽にデプロイできる時代には、クラウドや API に「既定でオンのハード予算上限」が必要だと主張。警告メールだけのソフト上限では、寝ている間に高額請求になるのを防げないとする。",
+   "points": [
+    "「月 $X を超えたら止めてエラーを返す」ハード上限を既定にし、外すときは支払い責任を認めるチェックを明示的に入れる形を提案",
+    "AWS が 2026 年 9 月に、上限に達するとその月はプロジェクトを停止する spending limits を出したと紹介",
+    "Google Cloud も 7 月にサービス単位で月額の上限をかける Spend Caps を導入しており、流れとして評価"
+   ],
+   "code": null,
+   "signal": "▲ 574",
+   "pick": true
+  },
+  {
+   "id": "2026-10-05-hn-opus-tips",
+   "url": "https://claude.dev/blog/getting-the-most-out-of-opus-5-5/",
+   "title": "Getting the most out of Opus 5.5 in Claude and Claude Code",
+   "source": "hackernews",
+   "source_group": "hackernews",
+   "published_at": "2026-10-04T03:29:30+09:00",
+   "category": "ai",
+   "keywords": [
+    "claude",
+    "ai-coding",
+    "prompt-engineering"
+   ],
+   "score": 84,
+   "why": "matched: ai-coding, claude（HN 230 pt）",
+   "read_min": 8,
+   "tldr": "Anthropic が Opus 5.5 を Claude / Claude Code で使いこなすためのガイドを公開。長い多段タスクでは「終わりの条件」と「止まって聞く条件」を明示し、途中で割り込まない運用を勧めている。",
+   "points": [
+    "プロンプトは「タスク全体」「完了の定義（テストが通る等）」「いつ止まって質問するか」の 3 要素で書く",
+    "モデルは返答前に自動で考えるため「よく考えて」の指示は不要。代わりに CLAUDE.md に続行・停止のルールを書く",
+    "大規模な監査や移行はサブエージェントに並列で分担させ、根拠を検証してから 1 枚の表にまとめさせる"
+   ],
+   "code": {
+    "file": "prompt.txt",
+    "lang": "text",
+    "text": "Migrate the payment endpoints from the old client to the new one.\nDone means: every endpoint uses the new client, the old client is deleted,\nand the test suite passes.\nStop and ask me only if a test fails for a reason you can't explain."
+   },
+   "signal": "▲ 230",
+   "pick": true
+  },
+  {
+   "id": "2026-10-05-hn-agents-docs",
+   "url": "https://liao.gg/blog/agents-dont-need-memory",
+   "title": "Agents don't need memory, they need documentation",
+   "source": "hackernews",
+   "source_group": "hackernews",
+   "published_at": "2026-10-04T02:03:37+09:00",
+   "category": "ai",
+   "keywords": [
+    "ai-agent",
+    "memory",
+    "rag"
+   ],
+   "score": 80,
+   "why": "matched: ai-agent（HN 316 pt）",
+   "read_min": 6,
+   "tldr": "エージェントに必要なのは類似度検索ベースの「メモリ」ではなくドキュメントだ、とする記事。Markdown の文書群をエージェントが作業前に参照し、作業後に更新する運用を提案している。",
+   "points": [
+    "RAG 型メモリは類似度で断片を呼び出し、文脈なしで保存されるため信頼しにくいと指摘",
+    "指示・仕様・調査結果を Markdown にまとめ、人間も読める監査可能な「脳」にする",
+    "ループを「指示→作る→忘れる」から「指示→参照→作る→更新」に変える"
+   ],
+   "code": null,
+   "signal": "▲ 316",
+   "pick": true
+  },
+  {
+   "id": "2026-10-05-hn-openai-safety",
+   "url": "https://www.itmedia.co.jp/news/article/2610/04/2000001986/",
+   "title": "「OpenAIの文化は壊れている」──安全性報告書を統括した従業員が退社し、寄稿",
+   "source": "itmedia.co.jp",
+   "source_group": "tech_blog",
+   "published_at": "2026-10-03T22:46:34+09:00",
+   "category": "ai",
+   "keywords": [
+    "openai",
+    "ai-safety"
+   ],
+   "score": 82,
+   "why": "matched: openai, ai-safety（HN 437 pt＋関連スレ 267 pt）",
+   "read_min": 7,
+   "tldr": "OpenAI で主要モデルの安全性報告書を統括していたデビッド・ロビンソン氏が退社し、The Atlantic に「OpenAI の文化は壊れている」と寄稿。「出してから問題を見つけて直す」反復開発は能力が上がるほど危険だと訴えた。",
+   "points": [
+    "3 年半在籍し、Preparedness Framework の起草を主導、12 件のフロンティアモデルの安全性報告書を監督",
+    "今夏の Hugging Face の件（エージェントの無許可の外部公開）を反復開発の失敗例として挙げた",
+    "原子力や航空のような多層の冗長性と、他分野の安全の知見の導入を求めた"
+   ],
+   "code": null,
+   "signal": "▲ 437",
+   "pick": true
+  },
+  {
+   "id": "2026-10-05-publickey-supabase-turso",
+   "url": "https://www.publickey1.jp/blog/26/supabase1sqlitetursoaidb.html",
+   "title": "Supabase、1サーバあたり数百万ものSQLiteをホストする「Turso」買収を発表。AIエージェントで加速するDB需要に対応",
+   "source": "publickey1.jp",
+   "source_group": "tech_blog",
+   "published_at": "2026-10-04T23:14:37+09:00",
+   "category": "be",
+   "keywords": [
+    "sqlite",
+    "m-and-a",
+    "ai-agent",
+    "managed-db"
+   ],
+   "score": 85,
+   "why": "matched: sqlite, managed-db（Publickey）",
+   "read_min": 5,
+   "tldr": "Supabase が SQLite ベースの DB サービス Turso を買収。AI エージェントが大量の DB を立ち上げる需要に備え、1 サーバで数百万の DB をホストできる Turso を取り込む。",
+   "points": [
+    "Supabase は「DB 需要は世界中の DB サービスの能力を上回る」と見込み、エージェント向けの需要増を買収理由に挙げた",
+    "Turso は SQLite のフォーク libSQL を使い、MVCC による並列書き込みやベクトル検索、S3 上での運用に対応",
+    "Turso はサービスを継続。Rust 実装の Turso Database やエージェント向けファイルシステム AgentFS はオープンソースで開発"
+   ],
+   "code": null,
+   "signal": null,
+   "pick": true
+  },
+  {
+   "id": "2026-10-05-hn-cf-git",
+   "url": "https://blog.cloudflare.com/next-git-platform-on-cloudflare/",
+   "title": "We want you to build the next Git platform on Cloudflare",
+   "source": "hackernews",
+   "source_group": "hackernews",
+   "published_at": "2026-10-04T04:33:16+09:00",
+   "category": "cloud",
+   "keywords": [
+    "cloudflare",
+    "git",
+    "ai-agent"
+   ],
+   "score": 78,
+   "why": "matched: cloudflare, git（HN 205 pt）",
+   "read_min": 6,
+   "tldr": "Cloudflare が、多数のエージェントが同時に使う前提の「次の Git プラットフォーム」を自社基盤で作るコンテストを開始。締切は 10 月 14 日で、1 位には 2.5 万ドル分のクレジットなどを用意する。",
+   "points": [
+    "バージョン管理付きファイルシステム Artifacts、Workers Builds、リポジトリ変更のイベント購読、米国・EU のデータ所在地制御を使える",
+    "人間向けに作られた Git の流れを、数百〜数千のエージェントの並行作業向けに作り直すのが狙い",
+    "応募には 5〜10 分のデモ動画と MIT / Apache / BSD のオープンソースコードが必要"
+   ],
+   "code": {
+    "file": "worker.ts",
+    "lang": "typescript",
+    "text": "using project = await env.ARTIFACTS.get(\"my-project\");\nconst { defaultBranch } = await project.info();\nconst workspace = await project.fork(`task-${crypto.randomUUID()}`);\n\nusing repo = await env.ARTIFACTS.get(workspace.name);\nconst instructions = await repo.readFile({\n  ref: defaultBranch,\n  path: \"AGENTS.md\",\n});"
+   },
+   "signal": "▲ 205",
+   "pick": true
+  },
+  {
+   "id": "2026-10-05-nikkei-m365-breach",
+   "url": "https://www.nikkei.com/article/DGXZQOUD02B5F0S6A001C2000000/",
+   "title": "日経にサイバー攻撃 情報漏洩、不審メール9000件送信 - 日本経済新聞",
+   "source": "nikkei.com",
+   "source_group": "news",
+   "published_at": "2026-10-04T17:03:25+09:00",
+   "category": "sec",
+   "keywords": [
+    "security-incident",
+    "data-breach",
+    "microsoft"
+   ],
+   "score": 76,
+   "why": "matched: セキュリティ事故（日経の自社発表）",
+   "read_min": 3,
+   "tldr": "日本経済新聞社の社員が使う Microsoft 365 のアカウントが不正ログインを受け、なりすましメール約 9000 件が送信された。送信先のアドレス・氏名や一部メールの内容が漏洩したとみられる。",
+   "points": [
+    "悪性サイトへ誘導するメールが社員アカウントから大量送信された",
+    "漏洩したとみられるのはメールアドレス、氏名、一部メールの内容",
+    "パスワードを変更し、個人情報保護委員会に報告。被害範囲と漏洩件数を調査中"
+   ],
+   "code": null,
+   "signal": null,
+   "pick": true
+  },
+  {
+   "id": "2026-10-05-aws-devops-agent-skills",
+   "url": "https://aws.amazon.com/jp/blogs/news/best-practices-for-writing-aws-devops-agent-skills/",
+   "title": "AWS DevOps Agent Skills を作成するためのベストプラクティス",
+   "source": "aws.amazon.com",
+   "source_group": "tech_blog",
+   "published_at": "2026-10-04T09:08:10+09:00",
+   "category": "cloud",
+   "keywords": [
+    "aws",
+    "ai-agent",
+    "observability"
+   ],
+   "score": 70,
+   "why": "matched: aws, ai-agent",
+   "read_min": 8,
+   "tldr": "AWS DevOps Agent に組み込む「スキル」の書き方のベストプラクティスを AWS 公式ブログが解説。障害対応で最初に見るメトリクスや平常時の状態などの知識をエージェントに渡す狙い。",
+   "points": [],
+   "code": null,
+   "signal": null,
+   "pick": false
+  },
+  {
+   "id": "2026-10-05-qiita-k8s-notready",
+   "url": "https://qiita.com/yosshi_/items/7ed4f99fbe9b96e360e3?utm_campaign=popular_items&utm_medium=feed&utm_source=popular_items",
+   "title": "Kubernetesノードが物理障害でNotReadyになってからPodが再スケジュールされるまで",
+   "source": "qiita.com",
+   "source_group": "tech_blog",
+   "published_at": "2026-10-03T18:32:45+09:00",
+   "category": "cloud",
+   "keywords": [
+    "kubernetes"
+   ],
+   "score": 68,
+   "why": "matched: kubernetes",
+   "read_min": 10,
+   "tldr": "Kubernetes のノードが物理障害で NotReady になってから Pod が別ノードに再スケジュールされるまでの状態遷移を追った記事。",
+   "points": [],
+   "code": null,
+   "signal": null,
+   "pick": false
+  },
+  {
+   "id": "2026-10-05-hn-qwen-strata",
+   "url": "https://github.com/Niko1221/Strata",
+   "title": "Run Qwen 3.8 Flash Next (125B) on consumer hardware (RTX 4090) at 100T/s",
+   "source": "github.com",
+   "source_group": "hackernews",
+   "published_at": "2026-10-04T21:51:53+09:00",
+   "category": "ai",
+   "keywords": [
+    "local-llm",
+    "open-weight",
+    "llm"
+   ],
+   "score": 66,
+   "why": "matched: llm（HN 432 pt）",
+   "read_min": 4,
+   "tldr": "125B の Qwen 3.8 Flash Next を RTX 4090 1 枚で 100 トークン/秒で動かすとする OSS「Strata」が HN で話題（233 コメント）。数値は作者の主張。",
+   "points": [],
+   "code": null,
+   "signal": "▲ 432",
+   "pick": false
+  },
+  {
+   "id": "2026-10-05-itmedia-gemini-free",
+   "url": "https://www.itmedia.co.jp/news/article/2610/04/2000001987/",
+   "title": "個人向けGeminiのモデル選択が厳格化 無料ユーザーが使えるのは「Flash-Lite」のみに",
+   "source": "itmedia.co.jp",
+   "source_group": "tech_blog",
+   "published_at": "2026-10-04T11:37:40+09:00",
+   "category": "ai",
+   "keywords": [
+    "google",
+    "llm"
+   ],
+   "score": 62,
+   "why": "matched: llm",
+   "read_min": 3,
+   "tldr": "Google が個人向け Gemini アプリで使えるモデルを契約プランごとに変更。無料ユーザーは 10 月 9 日から Flash-Lite のみになる。",
+   "points": [],
+   "code": null,
+   "signal": null,
+   "pick": false
+  },
+  {
+   "id": "2026-10-05-hn-popos-ai-ban",
+   "url": "https://www.neowin.net/news/system76-bans-ai-generated-code-across-many-of-its-cosmic-codebases/",
+   "title": "Pop!_OS bans AI-generated code from much of its codebase",
+   "source": "neowin.net",
+   "source_group": "hackernews",
+   "published_at": "2026-10-04T02:57:03+09:00",
+   "category": "ai",
+   "keywords": [
+    "ai-coding",
+    "oss",
+    "licensing"
+   ],
+   "score": 60,
+   "why": "matched: ai-coding（HN 115 pt）",
+   "read_min": 4,
+   "tldr": "System76 が Pop!_OS（COSMIC）の多くのコードベースで AI 生成コードの受け入れを禁止したと報道。HN では 164 件のコメントがついた。",
+   "points": [],
+   "code": null,
+   "signal": "▲ 115",
+   "pick": false
+  },
+  {
+   "id": "2026-10-05-hn-rust-headstart",
+   "url": "https://github.com/PowderworksCode/headstart",
+   "title": "Emitting metadata early makes building/checking Rust up to twice as fast",
+   "source": "github.com",
+   "source_group": "hackernews",
+   "published_at": "2026-10-04T15:26:57+09:00",
+   "category": "be",
+   "keywords": [
+    "programming-language"
+   ],
+   "score": 55,
+   "why": "matched: rust ビルド高速化（HN 104 pt）",
+   "read_min": 4,
+   "tldr": "Rust のメタデータを早めに出力することで、ビルドやチェックが最大 2 倍速くなるとするツール「headstart」が HN で紹介された。",
+   "points": [],
+   "code": null,
+   "signal": "▲ 104",
+   "pick": false
+  },
+  {
+   "id": "2026-10-05-mygo-desktop",
+   "url": "https://mygo.egoist.dev/",
+   "title": "MyGo — Desktop apps in Go, with a web frontend or native UI",
+   "source": "mygo.egoist.dev",
+   "source_group": "tech_blog",
+   "published_at": "2026-10-03T21:33:23+09:00",
+   "category": "be",
+   "keywords": [
+    "go"
+   ],
+   "score": 58,
+   "why": "matched: go",
+   "read_min": 4,
+   "tldr": "Go でデスクトップアプリを作るフレームワーク MyGo。Web フロントエンドかネイティブ UI を選べ、Go の構造体をフロントにバインドする。",
+   "points": [],
+   "code": null,
+   "signal": null,
+   "pick": false
+  },
+  {
+   "id": "2026-10-05-qiita-ai-code-security",
+   "url": "https://qiita.com/blinkgroup_jp/items/01a1126412b5b7b9b1c2?utm_campaign=popular_items&utm_medium=feed&utm_source=popular_items",
+   "title": "AI生成コードを本番環境へデプロイする前に実施すべきセキュリティチェックリストと対策実装例",
+   "source": "qiita.com",
+   "source_group": "tech_blog",
+   "published_at": "2026-10-04T09:22:02+09:00",
+   "category": "sec",
+   "keywords": [
+    "ai-coding",
+    "ai-security",
+    "vulnerability-management"
+   ],
+   "score": 60,
+   "why": "matched: セキュリティ, ai-coding",
+   "read_min": 12,
+   "tldr": "AI が生成したコードを本番に出す前のセキュリティチェックリスト。SQL インジェクションや XSS など AI が出しがちな脆弱性と対策例をまとめている。",
+   "points": [],
+   "code": null,
+   "signal": null,
+   "pick": false
+  },
+  {
+   "id": "2026-10-05-gaitame-nikkei-1002",
+   "url": "https://www.gaitame.com/media/entry/2026/10/02/173855",
+   "title": "来週の日経平均見通し（10/5〜10/9）｜植田総裁発言・世界的な金利上昇に注目",
+   "source": "gaitame.com",
+   "source_group": "news",
+   "published_at": "2026-10-02T17:38:00+09:00",
+   "category": "stocks",
+   "keywords": [
+    "nikkei225",
+    "jgb",
+    "boj-policy"
+   ],
+   "score": 80,
+   "why": "前営業日の日経平均（外為どっとコム）",
+   "read_min": 4,
+   "tldr": "10 月 2 日の日経平均は前日比 647 円安の 6 万 8309 円で取引を終えた。前日までの上昇の反動に加え、米 10 年債利回りが一時 5.34% まで上がったことが重荷になった。",
+   "points": [
+    "下落の材料は利益確定売りと世界的な金利上昇",
+    "翌週（10/5〜10/9）は 10 月 6 日の植田日銀総裁の挨拶で、追加利上げへの姿勢が焦点",
+    "記事は米長期金利の動向やフランスの財政不安も材料に挙げ、予想レンジを 6 万 6000〜7 万円とした"
+   ],
+   "code": null,
+   "signal": null,
+   "pick": true
+  },
+  {
+   "id": "2026-10-05-toyokeizai-orcan-hd",
+   "url": "https://toyokeizai.net/articles/-/959427?utm_source=rss&utm_medium=http&utm_campaign=link_back",
+   "title": "｢複利効果を生かしにくい｣｢信託報酬は通常オルカンの約3倍｣だが…｢オルカン高配当｣に若者が食いつく意外な理由",
+   "source": "toyokeizai.net",
+   "source_group": "news",
+   "published_at": "2026-10-04T09:30:00+09:00",
+   "category": "funds",
+   "keywords": [
+    "index-fund",
+    "new-nisa"
+   ],
+   "score": 78,
+   "why": "matched: インデックス, 高配当",
+   "read_min": 6,
+   "tldr": "全世界株式インデックスの「オルカン」に高配当版が登場し、年 4 回分配の「配当払出型」が若い世代に注目されている。信託報酬は通常版の約 3 倍で複利効果を生かしにくいが、定期的な現金収入が支持されている。",
+   "points": [
+    "年 4 回の分配金を受け取れる配当払出型",
+    "信託報酬は通常のオルカンの約 3 倍",
+    "FP の松田聡子氏が通常版との使い分けを解説。記事は推奨ではなく両者の違いを整理"
+   ],
+   "code": null,
+   "signal": null,
+   "pick": true
+  },
+  {
+   "id": "2026-10-05-coinpost-btc-85k",
+   "url": "https://coinpost.jp/?p=740798",
+   "title": "ビットコイン、8万5000ドルが分岐点 雇用統計後の焦点は｜bitbankアナリスト寄稿",
+   "source": "coinpost.jp",
+   "source_group": "news",
+   "published_at": "2026-10-04T11:30:55+09:00",
+   "category": "crypto",
+   "keywords": [
+    "bitcoin",
+    "us-jobs",
+    "us-treasury"
+   ],
+   "score": 74,
+   "why": "matched: ビットコイン, 金利",
+   "read_min": 5,
+   "tldr": "bitbank の長谷川友哉氏の週次レポート。ビットコインは 8 万 5000 ドルを上抜けたが、日足 RSI に弱気のダイバージェンスが出ており、この水準を保てるかが分かれ目だとする。",
+   "points": [
+    "BTC は円建てで 1350 万円前後。保てれば 9 万ドル、割れれば 8〜8.1 万ドルが下値の目安とする",
+    "日足 RSI の弱気ダイバージェンスは上昇の勢いが鈍っている可能性を示す",
+    "雇用統計後の米国債利回りの年限ごとの動きを重視"
+   ],
+   "code": null,
+   "signal": null,
+   "pick": true
+  },
+  {
+   "id": "2026-10-05-mortgage-oct",
+   "url": "https://news.web.nhk/newsweb/na/nd-20260930de53488",
+   "title": "住宅ローン 3行が変動金利引き上げ 固定金利は5行とも",
+   "source": "nhk.or.jp",
+   "source_group": "news",
+   "published_at": "2026-09-30T00:00:00+09:00",
+   "category": "realestate",
+   "keywords": [
+    "mortgage-rates",
+    "flat35",
+    "boj-rate-hike"
+   ],
+   "score": 72,
+   "why": "住宅ローン金利の月次動向",
+   "read_min": 4,
+   "tldr": "NHK によると、みずほ銀行など大手 3 行が 10 月から適用する変動型の住宅ローン金利を引き上げ、固定金利は大手 5 行すべてが引き上げた。",
+   "points": [],
+   "code": null,
+   "signal": null,
+   "pick": false
+  },
+  {
+   "id": "2026-10-05-invtrust-flow-aug",
+   "url": "https://www.nikkei.com/article/DGXZQOUB020PH0S6A900C2000000/",
+   "title": "8月の投資信託、3カ月連続で2兆円超の資金流入",
+   "source": "nikkei.com",
+   "source_group": "news",
+   "published_at": null,
+   "category": "funds",
+   "keywords": [
+    "fund-flows",
+    "new-nisa"
+   ],
+   "score": 66,
+   "why": "投信の資金流入（月次）",
+   "read_min": 3,
+   "tldr": "8 月の投資信託は 3 カ月連続で 2 兆円超の資金流入になったと日経が報じた（見出しで確認）。",
+   "points": [],
+   "code": null,
+   "signal": null,
+   "pick": false
+  },
+  {
+   "id": "2026-10-05-diamond-fed-ai",
+   "url": "https://diamond.jp/articles/-/400425",
+   "title": "FRBを襲うAI投資ブームの“誤算”、インフレ2％鎮静化「成功シナリオ」の高いハードル - Diamond マーケットラボ",
+   "source": "diamond.jp",
+   "source_group": "news",
+   "published_at": "2026-10-05T04:30:00+09:00",
+   "category": "macro",
+   "keywords": [
+    "fed",
+    "inflation",
+    "ai-economy"
+   ],
+   "score": 68,
+   "why": "matched: 金利（FRB）",
+   "read_min": 8,
+   "tldr": "AI 投資ブームが需要と長期金利を押し上げる中、FRB がインフレ率を 2% に戻すシナリオの実現性を検証する記事。",
+   "points": [],
+   "code": null,
+   "signal": null,
+   "pick": false
+  },
+  {
+   "id": "2026-10-05-wsj-global-bond-selloff",
+   "url": "https://diamond.jp/articles/-/400450",
+   "title": "世界的な国債売り、混迷深まる - WSJ PickUp",
+   "source": "diamond.jp",
+   "source_group": "news",
+   "published_at": "2026-10-05T04:00:00+09:00",
+   "category": "macro",
+   "keywords": [
+    "us-treasury",
+    "jgb",
+    "interest-rates"
+   ],
+   "score": 70,
+   "why": "国債売りの動向",
+   "read_min": 4,
+   "tldr": "数カ月続く世界的な国債売りが混迷を深めているとする WSJ の記事。",
+   "points": [],
+   "code": null,
+   "signal": null,
+   "pick": false
+  },
+  {
+   "id": "2026-10-05-investing-hassett-powell",
+   "url": "https://jp.investing.com/news/economy-news/article-1700661",
+   "title": "トランプ顧問ハセット氏、改修報告受けパウエル氏のFRB理事会離脱を促す",
+   "source": "jp.investing.com",
+   "source_group": "news",
+   "published_at": "2026-10-05T01:36:20+09:00",
+   "category": "macro",
+   "keywords": [
+    "fed"
+   ],
+   "score": 64,
+   "why": "FRB 人事",
+   "read_min": 2,
+   "tldr": "トランプ大統領の顧問ハセット氏が、改修をめぐる報告を受けてパウエル氏に FRB 理事会からの離脱を促したと報じられた。",
+   "points": [],
+   "code": null,
+   "signal": null,
+   "pick": false
+  },
+  {
+   "id": "2026-10-05-coindesk-btc-wallets",
+   "url": "https://www.nadanews.com/370753/",
+   "title": "ビットコインの1 BTC以上保有ウォレットが1万4000件減少──FRBのハト派姿勢と30億ドルのETF流入効果を相殺【価格分析】",
+   "source": "nadanews.com",
+   "source_group": "news",
+   "published_at": "2026-10-04T22:50:15+09:00",
+   "category": "crypto",
+   "keywords": [
+    "bitcoin",
+    "bitcoin-etf"
+   ],
+   "score": 62,
+   "why": "matched: ビットコイン",
+   "read_min": 4,
+   "tldr": "1 BTC 以上を持つウォレットが約 1 万 4000 件減少。FRB のハト派姿勢や 30 億ドルの ETF 流入があっても 8 万 5000 ドルを下回ったままだったとする分析記事。",
+   "points": [],
+   "code": null,
+   "signal": null,
+   "pick": false
+  },
+  {
+   "id": "2026-10-05-coindesk-bny-kraken",
+   "url": "https://www.nadanews.com/370705/",
+   "title": "米BNY、クラーケン親会社と金融インフラ提携を協議＝CoinDesk",
+   "source": "nadanews.com",
+   "source_group": "news",
+   "published_at": "2026-10-04T07:00:00+09:00",
+   "category": "crypto",
+   "keywords": [
+    "crypto-exchange",
+    "payments"
+   ],
+   "score": 60,
+   "why": "暗号資産と既存金融の提携",
+   "read_min": 3,
+   "tldr": "米 BNY メロンが、暗号資産取引所クラーケンの親会社 Payward と金融インフラ面の提携を協議していると CoinDesk が報じた。",
+   "points": [],
+   "code": null,
+   "signal": null,
+   "pick": false
+  },
+  {
+   "id": "2026-10-05-coindesk-fsa-stablecoin",
+   "url": "https://www.nadanews.com/370548/",
+   "title": "【独自】なぜメタプラネットを選んだのか──子会社証券会社が語る／金融庁、ステーブルコインの貿易決済実証を支援【日曜日に読みたい厳選5本】",
+   "source": "nadanews.com",
+   "source_group": "news",
+   "published_at": "2026-10-04T08:00:00+09:00",
+   "category": "crypto",
+   "keywords": [
+    "stablecoin",
+    "fsa"
+   ],
+   "score": 66,
+   "why": "matched: 金融庁",
+   "read_min": 4,
+   "tldr": "金融庁がステーブルコインを使った貿易決済の実証を支援する件などを、週末向けにまとめた記事。",
+   "points": [],
+   "code": null,
+   "signal": null,
+   "pick": false
+  },
+  {
+   "id": "2026-10-05-coindesk-iran-usdt",
+   "url": "https://www.nadanews.com/370741/",
+   "title": "イラン関連ウォレット、凍結遅れで約55億円のUSDT流出＝米上院報告",
+   "source": "nadanews.com",
+   "source_group": "news",
+   "published_at": "2026-10-04T20:30:00+09:00",
+   "category": "crypto",
+   "keywords": [
+    "tether",
+    "stablecoin"
+   ],
+   "score": 56,
+   "why": "ステーブルコインの凍結",
+   "read_min": 3,
+   "tldr": "米上院の報告によると、イラン関連のウォレットで凍結が遅れ、約 55 億円相当の USDT が流出した。",
+   "points": [],
+   "code": null,
+   "signal": null,
+   "pick": false
+  },
+  {
+   "id": "2026-10-05-investing-akzo-nippon-paint",
+   "url": "https://jp.investing.com/news/stock-market-news/article-1700666",
+   "title": "アクゾノーベル、東南アジア塗料部門を日本ペイントに売却へ",
+   "source": "jp.investing.com",
+   "source_group": "news",
+   "published_at": "2026-10-05T04:22:11+09:00",
+   "category": "stocks",
+   "keywords": [
+    "m-and-a"
+   ],
+   "score": 58,
+   "why": "M&A（日本企業）",
+   "read_min": 2,
+   "tldr": "アクゾノーベルが東南アジアの塗料部門を日本ペイントに売却する方針と報じられた。",
+   "points": [],
+   "code": null,
+   "signal": null,
+   "pick": false
+  },
+  {
+   "id": "2026-10-05-diamond-mansion-kanri",
+   "url": "https://diamond.jp/articles/-/400428",
+   "title": "【東京296物件】マンション管理頑張ってるランキング！6位サンヴェール久米川、1位は？過去2年で最も改善したのはどこか - マンション羅針盤 管理＆売買",
+   "source": "diamond.jp",
+   "source_group": "news",
+   "published_at": "2026-10-05T04:40:00+09:00",
+   "category": "realestate",
+   "keywords": [
+    "housing",
+    "real-estate-prices"
+   ],
+   "score": 54,
+   "why": "不動産（マンション管理）",
+   "read_min": 6,
+   "tldr": "東京の 296 物件を対象に、過去 2 年でマンション管理がどれだけ改善したかを順位付けしたランキング記事。",
+   "points": [],
+   "code": null,
+   "signal": null,
+   "pick": false
+  }
+ ],
+ "social": [
+  {
+   "network": "x",
+   "author": "@ai_for_success",
+   "url": "https://x.com/ai_for_success/status/2106414350672273640",
+   "text": "OpenAI の元安全性責任者デビッド・ロビンソン氏が 3.5 年で退社し、12 件のフロンティアモデルの安全性報告書を率いた立場から「速く出して直す」手法は危険すぎると公に批判した、と紹介。",
+   "metrics": null,
+   "heat": null,
+   "category": "ai",
+   "keywords": [
+    "openai",
+    "ai-safety"
+   ],
+   "posted_at": null
+  },
+  {
+   "network": "x",
+   "author": "@MC_of_A",
+   "url": "https://x.com/MC_of_A/status/2106384388317704524",
+   "text": "ロビンソン氏の寄稿について、安全性を実務の言葉で語り、他分野の文献やベストプラクティスを踏まえた初めての「AI 企業を辞めた」エッセイだと評価。",
+   "metrics": null,
+   "heat": null,
+   "category": "ai",
+   "keywords": [
+    "openai",
+    "ai-safety"
+   ],
+   "posted_at": null
+  },
+  {
+   "network": "x",
+   "author": "@tursodatabase",
+   "url": "https://x.com/tursodatabase/status/2106054567125532976",
+   "text": "Turso が Supabase への参加を発表。軽量 DB からペタバイト級の Postgres まで、エージェントに必要な DB 基盤を一緒に作るとした。",
+   "metrics": null,
+   "heat": null,
+   "category": "be",
+   "keywords": [
+    "sqlite",
+    "m-and-a"
+   ],
+   "posted_at": null
+  },
+  {
+   "network": "x",
+   "author": "@ycombinator",
+   "url": "https://x.com/ycombinator/status/2106106946503971236",
+   "text": "Supabase の 1.5 億ドルの調達（評価額 106.5 億ドル）を祝福。月に 400 万超の DB が作られ、その多くがエージェントや AI ツール経由だとした。",
+   "metrics": null,
+   "heat": null,
+   "category": "be",
+   "keywords": [
+    "managed-db",
+    "ai-agent"
+   ],
+   "posted_at": null
+  },
+  {
+   "network": "hn",
+   "author": null,
+   "url": "https://news.ycombinator.com/item?id=49949235",
+   "text": "『We're going to need default hard budget caps on pretty much everything』のスレッド。292 件のコメント。",
+   "metrics": "▲ 574  ✉ 292",
+   "heat": 100,
+   "category": "cloud",
+   "keywords": [
+    "llm-cost"
+   ],
+   "posted_at": "2026-10-04T09:20:16+09:00"
+  },
+  {
+   "network": "hn",
+   "author": null,
+   "url": "https://news.ycombinator.com/item?id=49945933",
+   "text": "『Agents don't need memory, they need documentation』のスレッド。198 件のコメント。",
+   "metrics": "▲ 316  ✉ 198",
+   "heat": 79,
+   "category": "ai",
+   "keywords": [
+    "ai-agent",
+    "memory"
+   ],
+   "posted_at": "2026-10-04T02:03:37+09:00"
+  }
+ ],
+ "releases": [
+  {
+   "date": "2026-10-06",
+   "title": "植田日銀総裁 全国証券大会での挨拶",
+   "repo": null,
+   "url": "https://www.boj.or.jp/about/press/index.htm",
+   "kind": "event",
+   "note": "日銀の講演予定に掲載。追加利上げへの姿勢が注目点",
+   "category": "macro"
+  },
+  {
+   "date": "2026-10-09",
+   "title": "Gemini 無料ユーザーのモデルが Flash-Lite のみに",
+   "repo": null,
+   "url": "https://www.itmedia.co.jp/news/article/2610/04/2000001987/",
+   "kind": "event",
+   "note": "個人向け Gemini アプリのモデル選択をプラン別に変更",
+   "category": "ai"
+  },
+  {
+   "date": "2026-10-14",
+   "title": "Cloudflare「次の Git プラットフォーム」コンテスト締切",
+   "repo": null,
+   "url": "https://blog.cloudflare.com/next-git-platform-on-cloudflare/",
+   "kind": "event",
+   "note": "1 位に 2.5 万ドル分のクレジット",
+   "category": "cloud"
+  }
+ ]
+}
