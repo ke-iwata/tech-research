@@ -365,7 +365,7 @@
         const c = CAT[it.category] || {};
         return h('button', {
           type: 'button', class: `r-item${i === S.reader.sel ? ' on' : ''}${store.get(it.id) ? '' : ' unread'}`,
-          onclick: () => { S.reader.sel = i; renderReader(); if (window.innerWidth <= 860) $('.r-detail').scrollIntoView({ behavior: 'smooth' }); },
+          onclick: () => { selectReader(i, false); if (window.innerWidth <= 860) $('.r-detail').scrollIntoView({ behavior: 'smooth' }); },
         },
           h('span', { class: 'u', style: { background: store.get(it.id) ? 'transparent' : 'var(--accent)' } }),
           h('span', { class: 'b' },
@@ -374,7 +374,18 @@
             h('span', { class: 'sc' }, h('span', { class: 'bar' }, h('span', { style: { width: `${it.score}%`, background: 'var(--accent)' } })), `${it.score}% · ${it.read_min || '?'} min`)));
       }) : empty('このキューは空です'));
 
+    const detail = readerDetail(list);
+    root.append(side, listEl, detail);
+    const on = listEl.querySelector('.r-item.on');
+    listEl.scrollTop = prevTop;
+    side.scrollTop = prevSideTop;
+    if (on && opts.reveal) on.scrollIntoView({ block: 'nearest' });
+  }
+
+  // 右側の本文。選択だけが変わったときはこれだけを差し替え、一覧は作り直さない
+  function readerDetail(list) {
     const cur = list[S.reader.sel];
+    const muted = store.muted();
     let detail;
     if (!cur) {
       detail = h('article', { class: 'r-detail' }, empty('記事を選んでください'));
@@ -399,20 +410,29 @@
           h('button', { type: 'button', class: 'btn' + (muted.includes(cur.category) ? ' on' : ''), onclick: () => act('m') }, h('kbd', null, 'm'), muted.includes(cur.category) ? 'unmute topic' : 'mute topic'),
           h('span', { class: 'pos' }, `${S.reader.sel + 1} / ${list.length}`)));
     }
-    root.append(side, listEl, detail);
+    return detail;
+  }
+
+  // 一覧の DOM はそのままに、選択中の印と本文だけを更新する（スクロール位置が動かない）
+  function selectReader(i, reveal) {
+    const root = $('#view-reader');
+    const listEl = root.querySelector('.r-list');
+    const oldDetail = root.querySelector('.r-detail');
+    if (!listEl || !oldDetail) { S.reader.sel = i; renderReader({ reveal }); return; }
+    const list = readerItems();
+    S.reader.sel = Math.max(0, Math.min(list.length - 1, i));
+    listEl.querySelectorAll('.r-item').forEach((el, j) => el.classList.toggle('on', j === S.reader.sel));
+    oldDetail.replaceWith(readerDetail(list));
     const on = listEl.querySelector('.r-item.on');
-    listEl.scrollTop = prevTop;
-    side.scrollTop = prevSideTop;
-    if (on && opts.reveal) on.scrollIntoView({ block: 'nearest' });
+    if (on && reveal) on.scrollIntoView({ block: 'nearest' });
   }
 
   function act(key) {
     const list = readerItems();
     const cur = list[S.reader.sel];
-    if (key === 'j') S.reader.sel = Math.min(list.length - 1, S.reader.sel + 1);
-    else if (key === 'k') S.reader.sel = Math.max(0, S.reader.sel - 1);
-    else if (!cur) return;
-    else if (key === 'o') { window.open(cur.url, '_blank', 'noopener'); if (!store.get(cur.id)) store.set(cur.id, 'done'); }
+    if (key === 'j' || key === 'k') { selectReader(S.reader.sel + (key === 'j' ? 1 : -1), true); return; }
+    if (!cur) return;
+    if (key === 'o') { window.open(cur.url, '_blank', 'noopener'); if (!store.get(cur.id)) store.set(cur.id, 'done'); }
     else if (key === 's') store.set(cur.id, store.get(cur.id) === 'later' ? null : 'later');
     else if (key === 'e') store.set(cur.id, store.get(cur.id) === 'done' ? null : 'done');
     else if (key === 'm') store.toggleMute(cur.category);
