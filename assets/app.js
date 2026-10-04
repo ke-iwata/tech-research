@@ -313,8 +313,14 @@
     }).sort((a, b) => b.score - a.score);
   }
 
-  function renderReader() {
+  // opts.reveal: 選択中の記事が一覧の表示範囲外なら最小限スクロールする（キー操作用）
+  // opts.resetScroll: 一覧を先頭から表示する（キュー・分野の切り替え用）
+  function renderReader(opts = {}) {
     const root = $('#view-reader');
+    const prevList = root.querySelector('.r-list');
+    const prevTop = prevList && !opts.resetScroll ? prevList.scrollTop : 0;
+    const prevSide = root.querySelector('.r-side');
+    const prevSideTop = prevSide ? prevSide.scrollTop : 0;
     root.replaceChildren();
     if (!S.day) { root.append(h('div', { class: 'empty' }, 'まだ日次データがありません。')); return; }
     const all = S.day.items.filter((it) => inDomain(it.category));
@@ -339,13 +345,13 @@
     for (let i = 0; ; i++) { const dt = new Date(end); dt.setDate(end.getDate() - i); const key = new Intl.DateTimeFormat('sv-SE', { timeZone: 'Asia/Tokyo' }).format(dt); if (log[key]) streak++; else if (i > 0) break; if (i > 400) break; }
     for (let i = 0; i < 7; i++) { const dt = new Date(end); dt.setDate(end.getDate() - i); week += log[new Intl.DateTimeFormat('sv-SE', { timeZone: 'Asia/Tokyo' }).format(dt)] || 0; }
 
-    const qbtn = (id) => h('button', { type: 'button', class: S.reader.queue === id && !S.reader.cat ? 'on' : '', onclick: () => { S.reader.queue = id; S.reader.cat = null; S.reader.sel = 0; renderReader(); } }, h('span', null, id), h('span', { class: 'n' }, count[id]));
+    const qbtn = (id) => h('button', { type: 'button', class: S.reader.queue === id && !S.reader.cat ? 'on' : '', onclick: () => { S.reader.queue = id; S.reader.cat = null; S.reader.sel = 0; renderReader({ resetScroll: true }); } }, h('span', null, id), h('span', { class: 'n' }, count[id]));
     const side = h('aside', { class: 'r-side' },
       h('h4', null, 'QUEUES'), ['inbox', 'picks', 'later', 'done', 'all'].map(qbtn),
       h('h4', null, 'TOPICS'), visibleCats().map((c) => {
         const n = all.filter((it) => it.category === c.id).length;
         const isMuted = muted.includes(c.id);
-        return h('button', { type: 'button', class: S.reader.cat === c.id ? 'on' : '', onclick: () => { S.reader.cat = S.reader.cat === c.id ? null : c.id; S.reader.queue = 'all'; S.reader.sel = 0; renderReader(); } },
+        return h('button', { type: 'button', class: S.reader.cat === c.id ? 'on' : '', onclick: () => { S.reader.cat = S.reader.cat === c.id ? null : c.id; S.reader.queue = 'all'; S.reader.sel = 0; renderReader({ resetScroll: true }); } },
           h('span', { class: 'dot', style: { background: c.color } }), h('span', { style: { textDecoration: isMuted ? 'line-through' : 'none' } }, c.tag), h('span', { class: 'n' }, n));
       }),
       h('div', { class: 'grass-box' },
@@ -395,7 +401,9 @@
     }
     root.append(side, listEl, detail);
     const on = listEl.querySelector('.r-item.on');
-    if (on && on.scrollIntoViewIfNeeded) on.scrollIntoViewIfNeeded(false);
+    listEl.scrollTop = prevTop;
+    side.scrollTop = prevSideTop;
+    if (on && opts.reveal) on.scrollIntoView({ block: 'nearest' });
   }
 
   function act(key) {
@@ -408,7 +416,7 @@
     else if (key === 's') store.set(cur.id, store.get(cur.id) === 'later' ? null : 'later');
     else if (key === 'e') store.set(cur.id, store.get(cur.id) === 'done' ? null : 'done');
     else if (key === 'm') store.toggleMute(cur.category);
-    renderReader();
+    renderReader({ reveal: true });
   }
 
   // ---------- radar ----------

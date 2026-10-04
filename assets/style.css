@@ -188,7 +188,7 @@ main { flex-grow: 1; }
 .grass span { aspect-ratio: 1; border-radius: 2px; background: var(--line-2); }
 .r-list { width: 440px; flex-shrink: 0; border-right: 1px solid var(--line); overflow-y: auto; }
 .r-list .panel-head { position: sticky; top: 0; background: var(--bg); z-index: 1; }
-.r-item { display: flex; gap: 12px; width: 100%; padding: 14px 16px; border: 0; border-bottom: 1px solid var(--line-2); border-left: 3px solid transparent; background: transparent; text-align: left; }
+.r-item { scroll-margin-top: 56px; scroll-margin-bottom: 16px; display: flex; gap: 12px; width: 100%; padding: 14px 16px; border: 0; border-bottom: 1px solid var(--line-2); border-left: 3px solid transparent; background: transparent; text-align: left; }
 .r-item.on { background: #161C26; border-left-color: var(--accent); }
 .r-item .u { width: 8px; height: 8px; margin-top: 7px; border-radius: 4px; flex-shrink: 0; }
 .r-item .b { display: flex; flex-direction: column; gap: 6px; flex-grow: 1; min-width: 0; }
