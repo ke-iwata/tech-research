@@ -1,0 +1,830 @@
+{
+ "date": "2026-10-06",
+ "generated_at": "2026-10-06T06:10:00+09:00",
+ "stats": {
+  "collected": 216,
+  "sources_ok": 26,
+  "sources_total": 26,
+  "by_group": {
+   "news": 93,
+   "tech_blog": 83,
+   "hackernews": 32,
+   "official": 8
+  },
+  "failed_sources": []
+ },
+ "digest": [
+  {
+   "category": "be",
+   "text": "Go の 40ms の GC 停止がスワップに追い出された GC メタデータのページフォルトだったという調査が HN で話題に。同日、Kubernetes 公式はノードのスワップでエージェント系 Pod の密度を上げる記事を出した。",
+   "keywords": [
+    "go",
+    "kubernetes",
+    "memory"
+   ]
+  },
+  {
+   "category": "be",
+   "text": "pgvector 0.8.7 が IVFFlat インデックス構築時のバッファオーバーフロー（CVE-2026-103484、任意コード実行の可能性）を修正。",
+   "keywords": [
+    "postgres",
+    "vector-db",
+    "vulnerability-management"
+   ]
+  },
+  {
+   "category": "sec",
+   "text": "焼肉きんぐのアプリで会員情報 1078 万件が流出、大和証券も約 22 万件の漏えいの可能性を発表。不正アクセスの公表が相次いだ。",
+   "keywords": [
+    "data-breach",
+    "security-incident"
+   ]
+  },
+  {
+   "category": "stocks",
+   "text": "10 月 5 日の日経平均は 1637 円高の 6 万 9946 円と、約 1 カ月半ぶりに 6 万 9000 円台に。OKX と ICE の合弁はトークン化米国株の 24 時間取引を SEC に通知した。",
+   "keywords": [
+    "nikkei225",
+    "tokenization",
+    "us-stocks"
+   ]
+  },
+  {
+   "category": "macro",
+   "text": "日銀の内田副総裁が AI とビッグデータについて挨拶し、船舶位置データなどの活用例と、AI が労働市場に与える正負両面の影響を論じた。6 日は植田総裁の全国証券大会での挨拶がある。",
+   "keywords": [
+    "boj-policy",
+    "ai-economy"
+   ]
+  }
+ ],
+ "items": [
+  {
+   "id": "2026-10-06-hn-go-gc-swap",
+   "url": "https://frn.sh/go-gc/",
+   "title": "A 40ms Go garbage collector pause caused by swap",
+   "source": "frn.sh",
+   "source_group": "hackernews",
+   "published_at": "2026-10-05T10:11:56+09:00",
+   "category": "be",
+   "keywords": [
+    "go",
+    "linux",
+    "memory"
+   ],
+   "score": 90,
+   "why": "matched: go（HN 105 pt）",
+   "read_min": 8,
+   "tldr": "Go サービスで発生した 40ms の GC 停止（STW）の原因が、スワップに追い出された GC のメタデータページだったことを BPF で突き止めた調査記事。40ms のうち 39ms が 228 回のページフォルトに費やされていた。",
+   "points": [
+    "STW 中に spanSet.reset() や finishsweep_m() など GC の管理処理が触るページがスワップ済みで、メジャーページフォルトによるディスク I/O が全 goroutine を止めた",
+    "カーネルは長くアクセスされていないページから追い出すため、古い GC メタデータが狙われやすい。停止時間は中央値の約 800 倍に達した",
+    "アロケーション側でも影響があり、メッセージ組み立てが 3〜5ms から NVMe で 105ms、ネットワークストレージで 903ms に悪化した"
+   ],
+   "code": null,
+   "signal": "▲ 105",
+   "pick": true
+  },
+  {
+   "id": "2026-10-06-k8s-node-swap",
+   "url": "https://kubernetes.io/blog/2026/10/05/scaling-kubernetes-workloads-with-node-swap/",
+   "title": "Scaling Kubernetes Workloads with Node Swap",
+   "source": "tech",
+   "source_group": "tech_blog",
+   "published_at": "2026-10-06T03:00:00+09:00",
+   "category": "cloud",
+   "keywords": [
+    "kubernetes",
+    "memory",
+    "ai-agent"
+   ],
+   "score": 84,
+   "why": "matched: kubernetes",
+   "read_min": 10,
+   "tldr": "Kubernetes 公式ブログがノードのスワップ活用を解説。スワップ対応は v1.34 で GA になっており、起動時に大きなメモリを使いその後は待機が長い AI エージェント系ワークロードで、ノードあたりの Pod 密度を上げられるとする。",
+   "points": [
+    "ノードは CPU より先にメモリが尽きることが多く、アイドルなメモリをスワップへ追い出して詰め込み率を上げる狙い",
+    "性能はストレージ速度に強く依存し、NVMe SSD を推奨。メモリ性能に依存するワークロードは劣化する",
+    "同日の HN では Go の GC 停止がスワップ由来だった事例も話題になっており、レイテンシ重視のサービスでは使い分けが要る"
+   ],
+   "code": null,
+   "signal": null,
+   "pick": true
+  },
+  {
+   "id": "2026-10-06-pg-pgvector-087",
+   "url": "https://www.postgresql.org/about/news/pgvector-087-released-3392/",
+   "title": "pgvector 0.8.7 Released",
+   "source": "tech",
+   "source_group": "news",
+   "published_at": "2026-10-05T09:00:00+09:00",
+   "category": "be",
+   "keywords": [
+    "postgres",
+    "vector-db",
+    "vulnerability-management"
+   ],
+   "score": 88,
+   "why": "matched: postgres（CVE 修正）",
+   "read_min": 2,
+   "tldr": "pgvector 0.8.7 が公開。IVFFlat インデックス構築時のバッファオーバーフロー（CVE-2026-103484）を修正するリリースで、任意コード実行につながりうるため早めの更新が推奨されている。",
+   "points": [
+    "修正対象は IVFFlat インデックスのビルド処理のバッファオーバーフロー（CVE-2026-103484）",
+    "影響は任意コード実行の可能性があり、公式は可能な限りのアップグレードを推奨",
+    "詳細は pgvector の GitHub issue #1036 にまとめられている"
+   ],
+   "code": null,
+   "signal": null,
+   "pick": true
+  },
+  {
+   "id": "2026-10-06-publickey-cf-containers",
+   "url": "https://www.publickey1.jp/blog/26/cloudflare_containersai6.html",
+   "title": "Cloudflare ContainersがAIエージェント向けに刷新。起動が6倍速、ファイルシステムのスナップショット機能など",
+   "source": "tech",
+   "source_group": "news",
+   "published_at": "2026-10-06T00:29:53+09:00",
+   "category": "cloud",
+   "keywords": [
+    "cloudflare",
+    "ai-agent",
+    "sandbox"
+   ],
+   "score": 82,
+   "why": "matched: AI エージェント実行基盤",
+   "read_min": 5,
+   "tldr": "Cloudflare がエッジでコンテナを動かす Cloudflare Containers を AI エージェント向けに刷新。スケジューリング方式の変更で起動時間の中央値が 4.049 秒から 648 ミリ秒になった。",
+   "points": [
+    "起動時間の中央値が 4.049 秒 → 648 ミリ秒と約 6 倍に高速化",
+    "イメージやインスタンスサイズを実行時にコードで指定でき、Debian Trixie Slim・Node.js 24 LTS のベースイメージで Dockerfile なしに起動できる",
+    "ファイルシステムのスナップショット（ベータ）で、特定時点の状態を保存・復元できる"
+   ],
+   "code": null,
+   "signal": null,
+   "pick": true
+  },
+  {
+   "id": "2026-10-06-ghblog-reviewbench",
+   "url": "https://github.blog/ai-and-ml/github-copilot/reviewbench-an-open-benchmark-for-ai-code-review/",
+   "title": "ReviewBench: An open benchmark for AI code review",
+   "source": "tech",
+   "source_group": "news",
+   "published_at": "2026-10-06T00:59:40+09:00",
+   "category": "ai",
+   "keywords": [
+    "code-review",
+    "ai-coding",
+    "llm"
+   ],
+   "score": 83,
+   "why": "AI コードレビューの評価手法",
+   "read_min": 8,
+   "tldr": "GitHub が AI コードレビュー用のオープンなベンチマーク ReviewBench を公開。187 リポジトリ・19 言語の 219 PR を使い、人手・静的解析・複数の LLM の指摘を統合した正解セットで精度と再現率を測る。",
+   "points": [
+    "PR は GitHub 上の 1 億 390 万件の分布に合わせて選び、複数ファイルにまたがる実質的な変更を厚めにしている",
+    "正解は候補の収集 → 意味的な重複排除 → LLM による判定の 3 段階で作り、シニアエンジニアの再ラベルとの一致率は 96.6%",
+    "評価用の判定プロンプトとランナーも公開。GitHub の本番では複数モデル構成で精度 +8.0%、再現率 +13.6%、レビュー単価 -8.0% だったとする"
+   ],
+   "code": null,
+   "signal": null,
+   "pick": true
+  },
+  {
+   "id": "2026-10-06-ascii-yakiniku-king-breach",
+   "url": "https://ascii.jp/elem/000/004/440/4440100/",
+   "title": "焼肉きんぐに不正アクセス、1078万人分の情報流出 アプリ登録者ほぼ全員が対象",
+   "source": "tech",
+   "source_group": "tech_blog",
+   "published_at": "2026-10-05T18:05:31+09:00",
+   "category": "sec",
+   "keywords": [
+    "data-breach",
+    "security-incident"
+   ],
+   "score": 78,
+   "why": "大規模な個人情報流出",
+   "read_min": 4,
+   "tldr": "焼肉きんぐを運営する物語コーポレーションが、公式アプリの会員管理システムへの不正アクセスで会員情報 1078 万 8963 件が流出したと発表。アプリ登録者のほぼ全員が対象。",
+   "points": [
+    "流出したのは会員番号・氏名（アプリ登録名）・メールアドレス・電話番号。パスワード・生年月日・決済情報は保有していないとしている",
+    "不正アクセスの発見は 10 月 2 日、流出の確認は 3 日。侵入経路は調査中",
+    "同日には大和証券（約 22 万件の可能性）、大阪公立大のランサムウェア被害も報じられた"
+   ],
+   "code": null,
+   "signal": null,
+   "pick": true
+  },
+  {
+   "id": "2026-10-06-hn-qwen-local",
+   "url": "https://github.com/Niko1221/Strata",
+   "title": "Run Qwen 3.8 Flash Next (125B) on consumer hardware (RTX 4090) at 100T/s",
+   "source": "github.com",
+   "source_group": "hackernews",
+   "published_at": "2026-10-04T21:51:53+09:00",
+   "category": "ai",
+   "keywords": [
+    "local-llm",
+    "open-weight"
+   ],
+   "score": 72,
+   "why": "matched: llm（HN 904 pt）",
+   "read_min": 3,
+   "tldr": "125B の Qwen 3.8 Flash Next を RTX 4090 1 枚で毎秒 100 トークンで動かすとうたう OSS「Strata」が HN で 904 pt。",
+   "points": [],
+   "code": null,
+   "signal": "▲ 904",
+   "pick": false
+  },
+  {
+   "id": "2026-10-06-hn-cf-web-search-api",
+   "url": "https://developers.cloudflare.com/changelog/post/2026-10-02-introducing-web-search-api/",
+   "title": "Web Search API",
+   "source": "developers.cloudflare.com",
+   "source_group": "hackernews",
+   "published_at": "2026-10-05T19:47:06+09:00",
+   "category": "ai",
+   "keywords": [
+    "cloudflare",
+    "ai-agent",
+    "search-index"
+   ],
+   "score": 70,
+   "why": "matched: AI エージェント（HN 391 pt）",
+   "read_min": 3,
+   "tldr": "Cloudflare が開発者向けに Web Search API を発表（changelog）。HN で 391 pt、188 件のコメント。",
+   "points": [],
+   "code": null,
+   "signal": "▲ 391",
+   "pick": false
+  },
+  {
+   "id": "2026-10-06-cf-birthday-week",
+   "url": "https://blog.cloudflare.com/birthday-week-2026-wrap-up/",
+   "title": "Everything we launched during Birthday Week 2026",
+   "source": "tech",
+   "source_group": "tech_blog",
+   "published_at": "2026-10-05T22:00:00+09:00",
+   "category": "cloud",
+   "keywords": [
+    "cloudflare",
+    "post-quantum",
+    "ai-agent"
+   ],
+   "score": 66,
+   "why": "Cloudflare の発表まとめ",
+   "read_min": 10,
+   "tldr": "Cloudflare が 16 周年の Birthday Week で出した 46 件の発表のまとめ。OSS、耐量子暗号、AI エージェント、開発者プラットフォームにわたる。",
+   "points": [],
+   "code": null,
+   "signal": null,
+   "pick": false
+  },
+  {
+   "id": "2026-10-06-hn-openai-wikimedia",
+   "url": "https://diff.wikimedia.org/2026/10/05/openai-rogue-agent-activities-found-on-wikimedia-projects/",
+   "title": "OpenAI \"rogue\" agent activities found on Wikimedia projects",
+   "source": "tech",
+   "source_group": "hackernews",
+   "published_at": "2026-10-06T02:53:35+09:00",
+   "category": "ai",
+   "keywords": [
+    "openai",
+    "ai-agent",
+    "ai-safety"
+   ],
+   "score": 68,
+   "why": "matched: llm（HN 188 pt）",
+   "read_min": 5,
+   "tldr": "Wikimedia が、OpenAI に関連するとみられる「暴走」エージェントの活動をウィキメディアのプロジェクト上で見つけたと報告。HN で 188 pt。",
+   "points": [],
+   "code": null,
+   "signal": "▲ 188",
+   "pick": false
+  },
+  {
+   "id": "2026-10-06-type-twada-review",
+   "url": "https://type.jp/et/feature/31834/",
+   "title": "AIでコード生成は加速、でも人間の確認が追いつかない問題。t-wadaが示す「レビュー解体」という答え - エンジニアtype | 転職type",
+   "source": "tech",
+   "source_group": "tech_blog",
+   "published_at": "2026-10-05T16:03:43+09:00",
+   "category": "ai",
+   "keywords": [
+    "code-review",
+    "ai-coding"
+   ],
+   "score": 70,
+   "why": "matched: 設計・コードレビュー",
+   "read_min": 6,
+   "tldr": "AI でコード生成が速くなる一方で人間のレビューが追いつかない問題について、t-wada（和田卓人氏）が「レビュー解体」という考え方を示したインタビュー記事。",
+   "points": [],
+   "code": null,
+   "signal": null,
+   "pick": false
+  },
+  {
+   "id": "2026-10-06-gigazine-linux-1313-cve",
+   "url": "https://gigazine.net/news/20261005-debian-security-advisory/",
+   "title": "Linuxカーネルの脆弱性が一挙1313件も報告される、AI普及で「個々の脆弱性を追う対策は限界」との指摘",
+   "source": "tech",
+   "source_group": "tech_blog",
+   "published_at": "2026-10-05T17:20:18+09:00",
+   "category": "sec",
+   "keywords": [
+    "linux",
+    "vulnerability-management"
+   ],
+   "score": 72,
+   "why": "Linux カーネルの脆弱性",
+   "read_min": 4,
+   "tldr": "Debian のカーネル更新（DSA-6528-1）で Linux カーネルの CVE が 1313 件まとめて列挙された。AI の普及で個々の脆弱性を追う対策は限界との指摘も紹介している。",
+   "points": [],
+   "code": null,
+   "signal": null,
+   "pick": false
+  },
+  {
+   "id": "2026-10-06-publickey-gvisor-cncf",
+   "url": "https://www.publickey1.jp/blog/26/googlegvisorcncf.html",
+   "title": "Google、サンドボックス型コンテナランタイムの「gVisor」をCNCFに寄贈したと発表",
+   "source": "tech",
+   "source_group": "news",
+   "published_at": "2026-10-06T00:27:19+09:00",
+   "category": "cloud",
+   "keywords": [
+    "sandbox",
+    "kubernetes",
+    "google"
+   ],
+   "score": 68,
+   "why": "matched: kubernetes 周辺",
+   "read_min": 3,
+   "tldr": "Google がサンドボックス型コンテナランタイム gVisor を CNCF に寄贈したと発表。",
+   "points": [],
+   "code": null,
+   "signal": null,
+   "pick": false
+  },
+  {
+   "id": "2026-10-06-ascii-ai-attack",
+   "url": "https://weekly.ascii.jp/elem/000/004/439/4439882/",
+   "title": "AIでサイバー攻撃のコスト激減 数行の指示だけで27社に侵入、カード情報60万件超が流出 - 週刊アスキー",
+   "source": "tech",
+   "source_group": "tech_blog",
+   "published_at": "2026-10-05T17:05:24+09:00",
+   "category": "sec",
+   "keywords": [
+    "ai-security",
+    "security-incident"
+   ],
+   "score": 66,
+   "why": "AI による攻撃の自動化",
+   "read_min": 5,
+   "tldr": "Gambit Security の 9 月 22 日の報告によると、攻撃者が複数のオープンソース AI エージェントを使って数百のオンラインショップを攻撃し、27 社に侵入、カード情報 60 万件超を盗んだとされる。",
+   "points": [],
+   "code": null,
+   "signal": null,
+   "pick": false
+  },
+  {
+   "id": "2026-10-06-aws-private-ca-logs",
+   "url": "https://aws.amazon.com/about-aws/whats-new/2026/10/aws-private-ca-certificate-issuance-logs/",
+   "title": "AWS Private CA now provides detailed certificate issuance logs",
+   "source": "tech",
+   "source_group": "news",
+   "published_at": "2026-10-05T18:00:00+09:00",
+   "category": "cloud",
+   "keywords": [
+    "aws",
+    "tls"
+   ],
+   "score": 64,
+   "why": "matched: aws",
+   "read_min": 2,
+   "tldr": "AWS Private CA が、発行した証明書の内容・発行 CA・要求者・署名状態を記録する CloudTrail のサービスイベントを追加した。",
+   "points": [],
+   "code": null,
+   "signal": null,
+   "pick": false
+  },
+  {
+   "id": "2026-10-06-rakus-claude-routines",
+   "url": "https://tech-blog.rakus.co.jp/entry/20261005/claude-code-routines",
+   "title": "Claude Codeのルーティンを利用した開発フローの自動化 - RAKUS Developers Blog | ラクス エンジニアブログ",
+   "source": "tech-blog.rakus.co.jp",
+   "source_group": "tech_blog",
+   "published_at": "2026-10-05T15:24:18+09:00",
+   "category": "ai",
+   "keywords": [
+    "claude",
+    "ai-coding",
+    "ai-agent"
+   ],
+   "score": 65,
+   "why": "matched: 設計（AI 開発フロー）",
+   "read_min": 8,
+   "tldr": "ラクスが Claude Code のルーティンで開発フローを自動化した事例。1 回の実行で 1 issue だけ扱う、複数リポジトリからコンテキストを集めるなどの設計上の工夫を紹介。",
+   "points": [],
+   "code": null,
+   "signal": null,
+   "pick": false
+  },
+  {
+   "id": "2026-10-06-boj-uchida-ai",
+   "url": "http://www.boj.or.jp/about/press/koen_2026/ko261005a.htm",
+   "title": "【挨拶】内田副総裁「AI、ビッグデータと金融政策」（ECONDAT 2026 Fall Meetingにおける開会挨拶の邦訳）",
+   "source": "boj.or.jp",
+   "source_group": "official",
+   "published_at": "2026-10-05T09:20:00+09:00",
+   "category": "macro",
+   "keywords": [
+    "boj-policy",
+    "ai-economy"
+   ],
+   "score": 86,
+   "why": "日銀の公式発表",
+   "read_min": 6,
+   "tldr": "日銀の内田副総裁が ECONDAT 2026 秋期会合の開会挨拶で、AI とビッグデータが中央銀行の分析と経済に与える影響を論じた。AI は「計算能力」と「データの利用可能性」という 2 つの制約を取り除きつつあると述べた。",
+   "points": [
+    "活用例として、テキスト分析、コロナ禍の人流データ、中東情勢の影響把握のための船舶位置データなどのオルタナティブ・データを挙げた",
+    "一方で非伝統的データの有効性は経済状態やデータの関連性に左右されうるとし、理解が不十分な部分も残るとした",
+    "AI の経済的影響は正負両面があり、定型的な認知タスクからの解放や研究開発の加速の一方、知的労働のスキル劣化や不平等の拡大もありうると指摘"
+   ],
+   "code": null,
+   "signal": null,
+   "pick": true
+  },
+  {
+   "id": "2026-10-06-coinpost-okx-ice-tokenized",
+   "url": "https://coinpost.jp/?p=741056",
+   "title": "OKXとICEの合弁、SECに通知 トークン化米国株を24時間取引へ＝報道",
+   "source": "money",
+   "source_group": "news",
+   "published_at": "2026-10-05T14:49:02+09:00",
+   "category": "stocks",
+   "keywords": [
+    "tokenization",
+    "us-stocks",
+    "sec"
+   ],
+   "score": 80,
+   "why": "matched: 米国株",
+   "read_min": 4,
+   "tldr": "OKX と NYSE 親会社 ICE の合弁 OKXICE が、トークン化した米国株を 24 時間取引する施設の開設を SEC に通知したと報じられた。9 月に導入された SEC の「イノベーション免除」を使う。",
+   "points": [
+    "米上場企業 60 銘柄超から始める計画で、ブロックチェーン上で 24 時間売買できるようにする",
+    "保有者には配当や議決権など従来の株式と同等の権利が付与されるとされる",
+    "開始には 30 日前の公開通知や発行体の異議申立期間、ブローカー・ディーラー登録の承認が必要で、開始時期は未定"
+   ],
+   "code": null,
+   "signal": null,
+   "pick": true
+  },
+  {
+   "id": "2026-10-06-coinpost-jvcea-aug",
+   "url": "https://coinpost.jp/?p=741119",
+   "title": "国内暗号資産の現物取引高、8月は7644億円 2カ月ぶり増加",
+   "source": "money",
+   "source_group": "news",
+   "published_at": "2026-10-05T16:41:58+09:00",
+   "category": "crypto",
+   "keywords": [
+    "bitcoin",
+    "crypto-exchange"
+   ],
+   "score": 78,
+   "why": "matched: ビットコイン",
+   "read_min": 3,
+   "tldr": "日本暗号資産等取引業協会（JVCEA）の 8 月統計で、国内の暗号資産現物取引高は 7643 億円と前月比 13.4% 増え、2 カ月ぶりに増加した。ただし前年同月比では 61.9% 減。",
+   "points": [
+    "証拠金取引も 19.0% 増え、現物と合わせて約 1 兆 5109 億円",
+    "銘柄別ではビットコインが 4629 億円で 60.6%、上位 3 銘柄（BTC・ETH・XRP）で 92.2% を占める",
+    "利用者預託金は 3 兆 5111 億円と前月末比 22.2% 増で 7 カ月ぶりの高水準。口座数は 1447 万"
+   ],
+   "code": null,
+   "signal": null,
+   "pick": true
+  },
+  {
+   "id": "2026-10-06-coinpost-strategy-848k",
+   "url": "https://coinpost.jp/?p=741160",
+   "title": "ストラテジー、3週連続でビットコイン追加取得 848000BTCに到達",
+   "source": "money",
+   "source_group": "news",
+   "published_at": "2026-10-05T21:25:55+09:00",
+   "category": "crypto",
+   "keywords": [
+    "bitcoin",
+    "bitcoin-treasury",
+    "strategy"
+   ],
+   "score": 76,
+   "why": "matched: ビットコイン",
+   "read_min": 2,
+   "tldr": "Strategy が 10 月 1〜4 日に 334 BTC を追加取得し、保有は 84 万 8000 BTC に。購入は 3 週連続。",
+   "points": [],
+   "code": null,
+   "signal": null,
+   "pick": false
+  },
+  {
+   "id": "2026-10-06-nada-metaplanet-2nd",
+   "url": "https://www.nadanews.com/370905/",
+   "title": "【速報】メタプラネット、ビットコイン保有量で世界2位に",
+   "source": "nadanews.com",
+   "source_group": "news",
+   "published_at": "2026-10-05T19:14:16+09:00",
+   "category": "crypto",
+   "keywords": [
+    "bitcoin",
+    "bitcoin-treasury"
+   ],
+   "score": 74,
+   "why": "matched: ビットコイン",
+   "read_min": 2,
+   "tldr": "メタプラネットが 7〜9 月に純額 1000 BTC を取得し、保有は 4 万 4000 BTC に。総資産の 85〜90% をビットコインに充てる目安へ資本配分方針を再改定した。",
+   "points": [],
+   "code": null,
+   "signal": null,
+   "pick": false
+  },
+  {
+   "id": "2026-10-06-nada-hitachi-aml",
+   "url": "https://www.nadanews.com/370839/",
+   "title": "日立、暗号資産・ステーブルコイン向けマネロン監視サービスを開始",
+   "source": "nadanews.com",
+   "source_group": "news",
+   "published_at": "2026-10-05T14:40:00+09:00",
+   "category": "crypto",
+   "keywords": [
+    "stablecoin",
+    "fraud-prevention"
+   ],
+   "score": 62,
+   "why": "ステーブルコインの AML",
+   "read_min": 2,
+   "tldr": "日立製作所が暗号資産・ステーブルコインの取引を対象にマネー・ローンダリングのリスクを監視するサービスを始めた。",
+   "points": [],
+   "code": null,
+   "signal": null,
+   "pick": false
+  },
+  {
+   "id": "2026-10-06-fsa-delta-wall-2026",
+   "url": "https://www.fsa.go.jp/news/r8/sonota/20261005/deltawall2026.html",
+   "title": "「金融業界横断的なサイバーセキュリティ演習 （Delta Wall 2026）」の実施について公表しました。",
+   "source": "money",
+   "source_group": "official",
+   "published_at": "2026-10-06T00:00:00+09:00",
+   "category": "sec",
+   "keywords": [
+    "fsa",
+    "security-incident"
+   ],
+   "score": 70,
+   "why": "金融庁の公式発表",
+   "read_min": 2,
+   "tldr": "金融庁が金融業界横断のサイバーセキュリティ演習「Delta Wall 2026」の実施を公表した。",
+   "points": [],
+   "code": null,
+   "signal": null,
+   "pick": false
+  },
+  {
+   "id": "2026-10-06-47news-daiwa-breach",
+   "url": "https://www.47news.jp/15038299.html",
+   "title": "【速報】大和証券に不正アクセス、22万件漏えいか",
+   "source": "47news.jp",
+   "source_group": "tech_blog",
+   "published_at": "2026-10-05T13:29:00+09:00",
+   "category": "stocks",
+   "keywords": [
+    "data-breach",
+    "security-incident"
+   ],
+   "score": 70,
+   "why": "証券会社への不正アクセス",
+   "read_min": 2,
+   "tldr": "大和証券グループ本社が、不正アクセスで個人を特定できない情報を含む約 22 万件が漏えいした可能性があると発表した。",
+   "points": [],
+   "code": null,
+   "signal": null,
+   "pick": false
+  },
+  {
+   "id": "2026-10-06-zaikei-nikkei-1005",
+   "url": "https://www.zaikei.co.jp/article/20261005/872387.html",
+   "title": "日経平均大引け：前週末比1637.40円高の69946.86円",
+   "source": "zaikei.co.jp",
+   "source_group": "news",
+   "published_at": "2026-10-05T15:30:00+09:00",
+   "category": "stocks",
+   "keywords": [
+    "nikkei225",
+    "semiconductor"
+   ],
+   "score": 80,
+   "why": "matched: 株式（前営業日の終値）",
+   "read_min": 2,
+   "tldr": "10 月 5 日の日経平均は前週末比 1637 円高の 6 万 9946 円で、約 1 カ月半ぶりに 6 万 9000 円台を回復した。半導体株が指数を押し上げた。",
+   "points": [],
+   "code": null,
+   "signal": null,
+   "pick": false
+  },
+  {
+   "id": "2026-10-06-diamond-housemakers-us",
+   "url": "https://diamond.jp/articles/-/400543",
+   "title": "住友林業と積水ハウス、高金利の逆風で大失速！誤算続きの米国事業で早期にV字回復できるのは… - 住宅メーカー総力戦",
+   "source": "money",
+   "source_group": "news",
+   "published_at": "2026-10-06T04:45:00+09:00",
+   "category": "realestate",
+   "keywords": [
+    "real-estate-companies",
+    "interest-rates"
+   ],
+   "score": 62,
+   "why": "matched: 金利",
+   "read_min": 6,
+   "tldr": "米国住宅事業に積極投資する積水ハウスと住友林業の中間決算を比較。積水ハウスは過去最高益、住友林業は下方修正と明暗が分かれた。",
+   "points": [],
+   "code": null,
+   "signal": null,
+   "pick": false
+  },
+  {
+   "id": "2026-10-06-tsr-labor-shortage",
+   "url": "https://www.tsr-net.co.jp/data/detail/1203295_1527.html",
+   "title": "年度上半期の「人手不足」倒産 過去最多の240件 深刻な“賃上げ疲れ”、『賃上げ倒産』が1.7倍に増加 | TSRデータインサイト | 東京商工リサーチ",
+   "source": "tsr-net.co.jp",
+   "source_group": "tech_blog",
+   "published_at": "2026-10-05T19:02:56+09:00",
+   "category": "macro",
+   "keywords": [
+    "wages"
+   ],
+   "score": 60,
+   "why": "国内景気の指標",
+   "read_min": 4,
+   "tldr": "東京商工リサーチによると、2026 年度上半期（4〜9 月）の「人手不足」倒産は 240 件で前年同期比 17.0% 増え、過去最多。うち賃上げが原因の倒産は 1.7 倍に増えた。",
+   "points": [],
+   "code": null,
+   "signal": null,
+   "pick": false
+  },
+  {
+   "id": "2026-10-06-nhk-shoshin",
+   "url": "https://news.web.nhk/newsweb/na/nd-20261005de54430",
+   "title": "首相 所信表明演説 “経済の力で国民の暮らしを守る”【全文】 | NHKニュース",
+   "source": "nhk.or.jp",
+   "source_group": "tech_blog",
+   "published_at": "2026-10-05T14:59:50+09:00",
+   "category": "macro",
+   "keywords": [
+    "jp-fiscal"
+   ],
+   "score": 62,
+   "why": "財政・経済政策",
+   "read_min": 4,
+   "tldr": "高市首相が所信表明演説で、最優先課題は経済の力で国民の暮らしを守ることだとし、強い経済と財政の持続可能性の両立を強調した。",
+   "points": [],
+   "code": null,
+   "signal": null,
+   "pick": false
+  },
+  {
+   "id": "2026-10-06-bi-mortgage-oct",
+   "url": "https://www.businessinsider.jp/article/2610-major-bank-mortgage-rates-what-happened-in-october-2026/",
+   "title": "主要銀行の「住宅ローン」、2026年10月の金利はどうなった？ フラット35は半年で+1.34％を記録",
+   "source": "businessinsider.jp",
+   "source_group": "news",
+   "published_at": null,
+   "category": "realestate",
+   "keywords": [
+    "mortgage-rates",
+    "flat35"
+   ],
+   "score": 72,
+   "why": "matched: 住宅ローン",
+   "read_min": 5,
+   "tldr": "主要銀行の 10 月の住宅ローン金利のまとめ。見出しによると、フラット 35 の金利は半年で 1.34% 上昇した。",
+   "points": [],
+   "code": null,
+   "signal": null,
+   "pick": false
+  },
+  {
+   "id": "2026-10-06-finasee-fund-aug",
+   "url": "https://media.finasee.jp/articles/-/19537",
+   "title": "投資信託の純資産総額364兆円、2カ月ぶり増加―リスク回避から次の一手へ 新規設定ファンドの注目テーマは？【2026年最新概況】",
+   "source": "media.finasee.jp",
+   "source_group": "news",
+   "published_at": null,
+   "category": "funds",
+   "keywords": [
+    "fund-flows",
+    "new-nisa"
+   ],
+   "score": 70,
+   "why": "matched: nisa, 投資信託",
+   "read_min": 5,
+   "tldr": "8 月末の国内公募投信の純資産総額は 364 兆円で 2 カ月ぶりに増え、過去最高を更新したとする月次概況。",
+   "points": [],
+   "code": null,
+   "signal": null,
+   "pick": false
+  }
+ ],
+ "social": [
+  {
+   "network": "hn",
+   "author": null,
+   "url": "https://news.ycombinator.com/item?id=49953495",
+   "text": "『Run Qwen 3.8 Flash Next (125B) on consumer hardware (RTX 4090) at 100T/s』のスレッド。407 件のコメント。",
+   "metrics": "▲ 904  ✉ 407",
+   "heat": 100,
+   "category": "ai",
+   "keywords": [
+    "local-llm",
+    "open-weight"
+   ],
+   "posted_at": "2026-10-04T21:51:53+09:00"
+  },
+  {
+   "network": "hn",
+   "author": null,
+   "url": "https://news.ycombinator.com/item?id=49957068",
+   "text": "『Improper redaction reveals Google Data Center water and electricity usage』のスレッド。666 件のコメント。",
+   "metrics": "▲ 504  ✉ 666",
+   "heat": 100,
+   "category": "cloud",
+   "keywords": [
+    "google"
+   ],
+   "posted_at": "2026-10-05T04:37:05+09:00"
+  },
+  {
+   "network": "hn",
+   "author": null,
+   "url": "https://news.ycombinator.com/item?id=49963171",
+   "text": "『Web Search API』のスレッド。188 件のコメント。",
+   "metrics": "▲ 391  ✉ 188",
+   "heat": 97,
+   "category": "ai",
+   "keywords": [
+    "cloudflare",
+    "search-index"
+   ],
+   "posted_at": "2026-10-05T19:47:06+09:00"
+  },
+  {
+   "network": "hn",
+   "author": null,
+   "url": "https://news.ycombinator.com/item?id=49968105",
+   "text": "『OpenAI \"rogue\" agent activities found on Wikimedia projects』のスレッド。124 件のコメント。",
+   "metrics": "▲ 188  ✉ 124",
+   "heat": 47,
+   "category": "ai",
+   "keywords": [
+    "openai",
+    "ai-agent"
+   ],
+   "posted_at": "2026-10-06T02:53:35+09:00"
+  },
+  {
+   "network": "hn",
+   "author": null,
+   "url": "https://news.ycombinator.com/item?id=49959654",
+   "text": "『A 40ms Go garbage collector pause caused by swap』のスレッド。120 件のコメント。",
+   "metrics": "▲ 105  ✉ 120",
+   "heat": 26,
+   "category": "be",
+   "keywords": [
+    "go",
+    "memory"
+   ],
+   "posted_at": "2026-10-05T10:11:56+09:00"
+  }
+ ],
+ "releases": [
+  {
+   "date": "2026-10-05",
+   "title": "pgvector 0.8.7",
+   "repo": "pgvector/pgvector",
+   "url": "https://www.postgresql.org/about/news/pgvector-087-released-3392/",
+   "kind": "release",
+   "note": "IVFFlat インデックス構築時のバッファオーバーフロー（CVE-2026-103484）を修正。git タグ監視では未検出のため PostgreSQL News から追加",
+   "category": "be"
+  },
+  {
+   "date": "2026-10-06",
+   "title": "植田総裁 挨拶（全国証券大会）",
+   "repo": null,
+   "url": "https://www.boj.or.jp/about/calendar/index.htm",
+   "kind": "event",
+   "note": "日銀の公表予定では、挨拶の公表は 10 月 7 日 8:50",
+   "category": "macro"
+  }
+ ]
+}
