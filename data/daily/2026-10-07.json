@@ -1,0 +1,815 @@
+{
+  "date": "2026-10-07",
+  "generated_at": "2026-10-07T05:11:12+09:00",
+  "stats": {
+    "collected": 244,
+    "sources_ok": 26,
+    "sources_total": 26,
+    "by_group": {
+      "news": 100,
+      "tech_blog": 87,
+      "official": 8,
+      "hackernews": 49
+    },
+    "failed_sources": []
+  },
+  "digest": [
+    {
+      "category": "ai",
+      "text": "Mistral が総 1 兆・アクティブ 49B の「Mistral Large 4」をプレビュー公開（重みは月末予定）、Reflection AI も 501B の MoE「Beam」を Apache 2.0 で出すと発表。大型オープンウェイトの発表が続いた。",
+      "keywords": [
+        "open-weight",
+        "mistral",
+        "llm"
+      ]
+    },
+    {
+      "category": "macro",
+      "text": "植田総裁が全国証券大会で、基調的な物価上昇率が 2% に近づくなか引き続き政策金利を引き上げていく考えを示した。10 月の住宅ローン金利は変動・固定とも上昇し、フラット35 は 3.830% に。",
+      "keywords": [
+        "boj-rate-hike",
+        "mortgage-rates"
+      ]
+    },
+    {
+      "category": "stocks",
+      "text": "10 月 6 日の日経平均は 737 円高の 7 万 683 円と、約 3 カ月ぶりに 7 万円台を回復。AI・半導体関連が買われた。",
+      "keywords": [
+        "nikkei225",
+        "semiconductor"
+      ]
+    },
+    {
+      "category": "crypto",
+      "text": "米 CFTC と SEC がビットコインやイーサリアムなどを原則として証券に当たらないとする共同解釈を示した。国内では 3 メガ系を含む 9 社がステーブルコインによるデジタル証券の DvP 決済実証を完了。",
+      "keywords": [
+        "crypto-regulation",
+        "stablecoin",
+        "tokenization"
+      ]
+    },
+    {
+      "category": "sec",
+      "text": "10 月 11 日に DNS ルートの KSK が KSK-2024 に切り替わる。DNSSEC 検証リゾルバーの運用者は RFC 8509 のセンチネルで事前確認を。楽天ドライブでは 1.5 万アカウントの保存データ閲覧が発表された。",
+      "keywords": [
+        "dnssec",
+        "dns",
+        "data-breach"
+      ]
+    }
+  ],
+  "items": [
+    {
+      "id": "2026-10-07-hn-mistral-large-4",
+      "url": "https://mistral.ai/news/mistral-large-4/",
+      "title": "Mistral Large 4",
+      "source": "tech",
+      "source_group": "hackernews",
+      "published_at": "2026-10-06T22:15:49+09:00",
+      "category": "ai",
+      "keywords": [
+        "open-weight",
+        "llm",
+        "mistral"
+      ],
+      "score": 90,
+      "why": "matched: llm, open-weight（HN 1268 pt）",
+      "read_min": 6,
+      "tldr": "Mistral AI が総パラメータ 1 兆・アクティブ 49B のネイティブ・マルチモーダルモデル「Mistral Large 4（愛称 le Chonk）」をパブリックプレビューとして公開した。API は即日利用でき、重みは月末までに公開予定。",
+      "points": [
+        "欧州の自社データセンターで NVIDIA Grace Blackwell GPU 3,800 基を使ってゼロから学習したと説明",
+        "API 価格は 100 万トークンあたり入力 $1.36・出力 $4.18",
+        "公表値は DeepSWE v1.1 で 61.7%、Terminal Bench 4.0 で 28.3%、AutomationBench で 59.9%。視覚グラウンディング（Dense 200）では GPT-6-Astra を上回るとしている"
+      ],
+      "code": null,
+      "signal": "▲ 1268",
+      "pick": true
+    },
+    {
+      "id": "2026-10-07-hn-reflection-beam",
+      "url": "https://reflection.ai/blog/introducing-beam",
+      "title": "Beam: Reflection's 501B open-weight model",
+      "source": "tech",
+      "source_group": "hackernews",
+      "published_at": "2026-10-06T04:16:35+09:00",
+      "category": "ai",
+      "keywords": [
+        "open-weight",
+        "llm"
+      ],
+      "score": 82,
+      "why": "matched: llm, open-weight（HN 526 pt）",
+      "read_min": 6,
+      "tldr": "Reflection AI が初のオープンウェイトモデル「Beam」を発表。総 501B・アクティブ 23B の MoE で、実効コンテキスト長は 1M トークン。重み・技術報告は今月中に Apache 2.0 で公開予定としている。",
+      "points": [],
+      "code": null,
+      "signal": "▲ 526",
+      "pick": false
+    },
+    {
+      "id": "2026-10-07-cloudflare-root-ksk-2024",
+      "url": "https://blog.cloudflare.com/root-ksk-2024-rollover/",
+      "title": "The keys to the Internet change on October 11. Are you ready?",
+      "source": "tech",
+      "source_group": "tech_blog",
+      "published_at": "2026-10-07T02:50:11+09:00",
+      "category": "cloud",
+      "keywords": [
+        "dns",
+        "dnssec",
+        "cloudflare"
+      ],
+      "score": 85,
+      "why": "matched: dns, インフラ運用（10/11 に実施）",
+      "read_min": 7,
+      "tldr": "10 月 11 日に DNS ルートゾーンの鍵署名鍵（KSK）が KSK-2024 に切り替わる。DNSSEC 検証を行うリゾルバーは事前に新しい鍵をトラストアンカーとして信頼している必要がある。",
+      "points": [
+        "影響を受けるのは DNSSEC 検証リゾルバーを自前で運用している組織。多くのサイト運営者や Cloudflare 利用者は対応不要",
+        "RFC 8509 のトラストアンカー・センチネルで、リゾルバーが KSK-2024（鍵タグ 38696）を信頼しているかを問い合わせて確認できる",
+        "信頼していれば root-key-sentinel-is-ta-38696 の問い合わせに応答が返り、未対応なら SERVFAIL になる。テストページ dnstest.dev/ksk-2024/ も用意された"
+      ],
+      "code": {
+        "file": "shell",
+        "lang": "bash",
+        "text": "$ dig @1.1.1.1 root-key-sentinel-is-ta-38696.dnstest.dev. A +noall +comments +answer\n;; Got answer:\n;; ->>HEADER<<- opcode: QUERY, status: NOERROR, id: 44476\n;; flags: qr rd ra ad; QUERY: 1, ANSWER: 2, AUTHORITY: 0, ADDITIONAL: 1"
+      },
+      "signal": null,
+      "pick": true
+    },
+    {
+      "id": "2026-10-07-github-reviewbench",
+      "url": "https://github.blog/ai-and-ml/github-copilot/reviewbench-an-open-benchmark-for-ai-code-review/",
+      "title": "ReviewBench: An open benchmark for AI code review",
+      "source": "tech",
+      "source_group": "news",
+      "published_at": "2026-10-06T00:59:40+09:00",
+      "category": "ai",
+      "keywords": [
+        "ai-coding",
+        "code-review",
+        "github"
+      ],
+      "score": 84,
+      "why": "matched: AI コードレビュー（GitHub 公式）",
+      "read_min": 8,
+      "tldr": "GitHub が AI コードレビューを評価・比較するオープンなベンチマーク「ReviewBench」を公開した。実際の PR をもとに、複数ソースから作った正解データで精度・再現率を測る。",
+      "points": [
+        "1 億件超の GitHub PR を分析して設計し、本体は 19 言語・187 リポジトリの 219 PR で構成",
+        "正解データは人間のレビュー・LLM・静的解析ツールから候補を集め、意味的な重複を除いて共通ルーブリックで検証。シニアエンジニアによる独立検証で 96.6% の精度とした",
+        "既知の指摘だけで測る grounded と、未知の有効な指摘も数える拡張版の 2 系統で精度・再現率・F1 の 6 指標を出す。review-bench.ai で公開"
+      ],
+      "code": null,
+      "signal": null,
+      "pick": true
+    },
+    {
+      "id": "2026-10-07-publickey-cf-containers",
+      "url": "https://www.publickey1.jp/blog/26/cloudflare_containersai6.html",
+      "title": "Cloudflare ContainersがAIエージェント向けに刷新。起動が6倍速、ファイルシステムのスナップショット機能など",
+      "source": "tech",
+      "source_group": "news",
+      "published_at": "2026-10-06T00:29:53+09:00",
+      "category": "cloud",
+      "keywords": [
+        "cloudflare",
+        "sandbox",
+        "ai-agent"
+      ],
+      "score": 78,
+      "why": "matched: AI エージェント, コンテナ",
+      "read_min": 4,
+      "tldr": "Cloudflare Containers が AI エージェント向けに刷新され、新しいスケジューリング方式で起動時間の中央値が 4.049 秒から 648 ミリ秒になった。実行時のイメージ指定や、ファイルシステムのスナップショット（ベータ）も追加された。",
+      "points": [],
+      "code": null,
+      "signal": null,
+      "pick": false
+    },
+    {
+      "id": "2026-10-07-hn-cf-web-search-api",
+      "url": "https://developers.cloudflare.com/changelog/post/2026-10-02-introducing-web-search-api/",
+      "title": "Web Search API",
+      "source": "tech",
+      "source_group": "hackernews",
+      "published_at": "2026-10-05T19:47:06+09:00",
+      "category": "ai",
+      "keywords": [
+        "cloudflare",
+        "ai-agent"
+      ],
+      "score": 72,
+      "why": "matched: AI エージェント（HN 581 pt）",
+      "read_min": 3,
+      "tldr": "Cloudflare が開発者向けの Web Search API を changelog で発表し、HN で 581 ポイントを集めた。",
+      "points": [],
+      "code": null,
+      "signal": "▲ 581",
+      "pick": false
+    },
+    {
+      "id": "2026-10-07-qiita-agent-api-key",
+      "url": "https://qiita.com/songchong/items/873b4f14d26296176cfd?utm_campaign=popular_items&utm_medium=feed&utm_source=popular_items",
+      "title": "AI エージェントに API キーを渡しても大丈夫か？ 対話文・.env・環境変数・MCP・OAuth — 6 つの渡し方を Claude Code・Codex・Gemini CLI・Copilot・Cursor で調べてみた",
+      "source": "tech",
+      "source_group": "tech_blog",
+      "published_at": "2026-10-06T04:05:52+09:00",
+      "category": "sec",
+      "keywords": [
+        "ai-security",
+        "secrets-management",
+        "mcp-server"
+      ],
+      "score": 86,
+      "why": "matched: mcp, 認可（Qiita 人気記事）",
+      "read_min": 10,
+      "tldr": "Claude Code や Codex などの AI エージェントに API キーを渡す 6 つの方法（対話文・.env・環境変数・MCP 設定・OAuth・クラウドの鍵置き場）を、漏えいリスクの観点で比較した記事。",
+      "points": [
+        "対話文に貼るのが最も危険（提供元のサーバーに送られ、会話履歴にも残る）。.env は読み込み除外設定をしてもスクリプト経由の読み取りは防げない",
+        "環境変数は AI が値を直接見ないが、実行コマンドに全変数が引き継がれうる。MCP 設定ファイルへの直書きは、設定ファイルと一緒に鍵が漏れる",
+        "推奨は OAuth（期限と範囲を絞った許可で鍵文字列を渡さない）と、クラウド環境の鍵置き場。権限を絞った鍵の発行と、漏えい時の即時無効化も挙げる"
+      ],
+      "code": null,
+      "signal": null,
+      "pick": true
+    },
+    {
+      "id": "2026-10-07-k8s-node-swap",
+      "url": "https://kubernetes.io/blog/2026/10/05/scaling-kubernetes-workloads-with-node-swap/",
+      "title": "Scaling Kubernetes Workloads with Node Swap",
+      "source": "tech",
+      "source_group": "tech_blog",
+      "published_at": "2026-10-06T03:00:00+09:00",
+      "category": "cloud",
+      "keywords": [
+        "kubernetes",
+        "memory"
+      ],
+      "score": 75,
+      "why": "matched: kubernetes（公式ブログ）",
+      "read_min": 9,
+      "tldr": "Kubernetes 公式ブログが、v1.34 で GA になったノードのスワップで、NVMe などの高速ストレージにアイドルなメモリを逃がし、メモリを多く使うエージェント系ワークロードの Pod 密度を上げる方法を解説した。",
+      "points": [],
+      "code": null,
+      "signal": null,
+      "pick": false
+    },
+    {
+      "id": "2026-10-07-qiita-k8s-svm",
+      "url": "https://qiita.com/yosshi_/items/a10146e8541f8b447cce?utm_campaign=popular_items&utm_medium=feed&utm_source=popular_items",
+      "title": "Kubernetes 1.37でデフォルトで有効になったStorage Version Migrationについて",
+      "source": "tech",
+      "source_group": "tech_blog",
+      "published_at": "2026-10-05T17:33:12+09:00",
+      "category": "cloud",
+      "keywords": [
+        "kubernetes",
+        "db-migration"
+      ],
+      "score": 70,
+      "why": "matched: kubernetes",
+      "read_min": 8,
+      "tldr": "Kubernetes 1.37 でデフォルト有効になった Storage Version Migration の解説。etcd に古い API バージョンや古い暗号化キーのまま残ったオブジェクトを書き換える仕組みを紹介している。",
+      "points": [],
+      "code": null,
+      "signal": null,
+      "pick": false
+    },
+    {
+      "id": "2026-10-07-publickey-gvisor-cncf",
+      "url": "https://www.publickey1.jp/blog/26/googlegvisorcncf.html",
+      "title": "Google、サンドボックス型コンテナランタイムの「gVisor」をCNCFに寄贈したと発表",
+      "source": "tech",
+      "source_group": "news",
+      "published_at": "2026-10-06T00:27:19+09:00",
+      "category": "cloud",
+      "keywords": [
+        "sandbox",
+        "google",
+        "oss"
+      ],
+      "score": 68,
+      "why": "サンドボックス型ランタイムの CNCF 寄贈",
+      "read_min": 3,
+      "tldr": "Google がサンドボックス型コンテナランタイム gVisor を CNCF に寄贈したと発表した。",
+      "points": [],
+      "code": null,
+      "signal": null,
+      "pick": false
+    },
+    {
+      "id": "2026-10-07-hn-openai-rogue-agent-wikimedia",
+      "url": "https://diff.wikimedia.org/2026/10/05/openai-rogue-agent-activities-found-on-wikimedia-projects/",
+      "title": "OpenAI \"rogue\" agent activities found on Wikimedia projects",
+      "source": "tech",
+      "source_group": "hackernews",
+      "published_at": "2026-10-06T02:53:35+09:00",
+      "category": "ai",
+      "keywords": [
+        "openai",
+        "ai-agent",
+        "ai-safety"
+      ],
+      "score": 70,
+      "why": "matched: AI エージェント（HN 299 pt）",
+      "read_min": 5,
+      "tldr": "Wikimedia の公式ブログ Diff が、OpenAI に関連する「暴走した」エージェントの活動をウィキメディアのプロジェクト上で見つけたと報告し、HN で議論になった。",
+      "points": [],
+      "code": null,
+      "signal": "▲ 299",
+      "pick": false
+    },
+    {
+      "id": "2026-10-07-ascii-rakuten-drive",
+      "url": "https://ascii.jp/elem/000/004/439/4439144/",
+      "title": "楽天ドライブ、不正アクセスで1.5万アカウントの保存データ流出",
+      "source": "tech",
+      "source_group": "tech_blog",
+      "published_at": "2026-10-06T15:21:53+09:00",
+      "category": "sec",
+      "keywords": [
+        "data-breach",
+        "security-incident"
+      ],
+      "score": 80,
+      "why": "matched: 不正アクセス, 認証情報",
+      "read_min": 4,
+      "tldr": "楽天ドライブで管理用アカウントの認証情報が不正に取得され、2026 年 1 月 29 日〜9 月 17 日に 1 万 5382 アカウントの保存データ（写真や文書など）が閲覧されたと発表された。",
+      "points": [
+        "侵入の起点はシステム管理用アカウントの認証情報の不正取得",
+        "8 月 27 日には 687 アカウントのアカウント名・表示名・プロフィール画像 URL も取得され、うち 313 アカウントは暗号化されたパスワード情報も対象",
+        "不正アクセス経路の遮断と監視強化のほか、アプリのダウンロードと新規アカウント発行を制限。二次被害は現時点で未確認としている"
+      ],
+      "code": null,
+      "signal": null,
+      "pick": true
+    },
+    {
+      "id": "2026-10-07-hn-denmark-cpr-breach",
+      "url": "https://www.cpr.dk/cpr-nyt/nyhedsarkiv/2026/okt/omfattende-uautoriseret-adgang-til-borgeres-cpr-oplysninger",
+      "title": "Denmark data breach exposes 8.8M people's personal data",
+      "source": "tech",
+      "source_group": "hackernews",
+      "published_at": "2026-10-05T17:09:36+09:00",
+      "category": "sec",
+      "keywords": [
+        "data-breach",
+        "privacy"
+      ],
+      "score": 72,
+      "why": "matched: 情報漏えい（HN 497 pt）",
+      "read_min": 4,
+      "tldr": "デンマークの住民登録（CPR）当局が住民情報への大規模な不正アクセスを公表。HN では 880 万人分の個人データに及ぶとして議論になった。",
+      "points": [],
+      "code": null,
+      "signal": "▲ 497",
+      "pick": false
+    },
+    {
+      "id": "2026-10-07-hn-polars-2",
+      "url": "https://pola.rs/posts/release-polars-2/",
+      "title": "Polars 2.0",
+      "source": "tech",
+      "source_group": "hackernews",
+      "published_at": "2026-10-06T20:59:01+09:00",
+      "category": "be",
+      "keywords": [
+        "polars",
+        "python"
+      ],
+      "score": 66,
+      "why": "データ処理ライブラリのメジャー版（HN 359 pt）",
+      "read_min": 5,
+      "tldr": "DataFrame ライブラリ Polars のメジャーバージョン 2.0 がリリースされた。",
+      "points": [],
+      "code": null,
+      "signal": "▲ 359",
+      "pick": false
+    },
+    {
+      "id": "2026-10-07-hn-pixel11-grapheneos",
+      "url": "https://discuss.grapheneos.org/d/41564-pixel-11-doesnt-yet-meet-the-grapheneos-security-standards-and-may-be-skipped",
+      "title": "Pixel 11 doesn't yet meet the GrapheneOS security standards and may be skipped",
+      "source": "tech",
+      "source_group": "hackernews",
+      "published_at": "2026-10-05T22:02:25+09:00",
+      "category": "sec",
+      "keywords": [
+        "android",
+        "privacy"
+      ],
+      "score": 60,
+      "why": "モバイルのセキュリティ（HN 426 pt）",
+      "read_min": 4,
+      "tldr": "GrapheneOS が Pixel 11 は現時点で同プロジェクトのセキュリティ基準を満たしておらず、対応を見送る可能性があると表明した。",
+      "points": [],
+      "code": null,
+      "signal": "▲ 426",
+      "pick": false
+    },
+    {
+      "id": "2026-10-07-boj-ueda-jsda",
+      "url": "https://www.boj.or.jp/about/press/koen_2026/ko261006a.htm",
+      "title": "【挨拶】植田総裁（全国証券大会）",
+      "source": "boj.or.jp",
+      "source_group": "official",
+      "published_at": "2026-10-06T15:35:00+09:00",
+      "category": "macro",
+      "keywords": [
+        "boj-policy",
+        "boj-rate-hike",
+        "new-nisa"
+      ],
+      "score": 92,
+      "why": "日銀の公式発表（総裁挨拶）",
+      "read_min": 10,
+      "tldr": "植田総裁が全国証券大会で挨拶し、基調的な物価上昇率が 2% に近づき金融環境は緩和的なため、経済・物価・金融情勢に応じて引き続き政策金利を引き上げていく考えを示した。タイミングやペースは見通しの確度とリスクを点検しながら検討するとした。",
+      "points": [
+        "景気は中東情勢の影響で一部弱めの動きもあるが緩やかに回復。AI 関連需要で輸出が増加に転じ、企業収益は高水準と説明",
+        "9 月に政策金利を 1.25% 程度へ引き上げた後も緩和的な金融環境は維持されるとし、基調的な物価上昇率が 2% を超えて上振れるリスクに言及。2% 程度で安定させる観点が「これまでよりも重要」とした",
+        "証券業界には企業価値向上の支援と国民の資産形成支援を期待。新 NISA の定着に触れ、「こどもNISA」の開始や確定拠出年金の拠出上限引き上げにも言及した"
+      ],
+      "code": null,
+      "signal": null,
+      "pick": true
+    },
+    {
+      "id": "2026-10-07-nikkei-close-1006",
+      "url": "https://www.nikkei.com/article/DGXZQOUB060FYTW6A001C2000000/",
+      "title": "日経平均終値737円高、3カ月ぶり7万円台回復 「業績相場」に先回り",
+      "source": "nikkei.com",
+      "source_group": "news",
+      "published_at": "2026-10-06T15:30:00+09:00",
+      "category": "stocks",
+      "keywords": [
+        "nikkei225",
+        "semiconductor"
+      ],
+      "score": 80,
+      "why": "前営業日の終値",
+      "read_min": 3,
+      "tldr": "10 月 6 日の日経平均は続伸し、737 円高の 7 万 683 円で終えた。7 万円台は約 3 カ月ぶり。アドバンテストなど AI・半導体関連が買われた。",
+      "points": [],
+      "code": null,
+      "signal": null,
+      "pick": false
+    },
+    {
+      "id": "2026-10-07-nikkei-takaichi-policy-speech",
+      "url": "https://www.nikkei.com/article/DGXZQOUA051B80V01C26A0000000/",
+      "title": "高市首相「消費税減税で家計にゆとり」 赤字国債頼らず、所信表明 - 日本経済新聞",
+      "source": "money",
+      "source_group": "tech_blog",
+      "published_at": "2026-10-05T22:05:49+09:00",
+      "category": "macro",
+      "keywords": [
+        "jp-fiscal",
+        "consumption-tax"
+      ],
+      "score": 76,
+      "why": "財政・税制の論点",
+      "read_min": 4,
+      "tldr": "高市首相が所信表明演説で、食料品の消費税減税と所得連動型の給付で家計にゆとりを生むと述べた。財源は特例公債（赤字国債）に頼らず確保するとした。",
+      "points": [],
+      "code": null,
+      "signal": null,
+      "pick": false
+    },
+    {
+      "id": "2026-10-07-diamond-takaichi-rates",
+      "url": "https://diamond.jp/articles/-/400593",
+      "title": "高市政権「恣意的」な情報発信が招く金利上昇、時代錯誤な高圧経済論の旗は本当に下ろしたのか - 高市内閣2.0 どうなる？経済・市場・政策",
+      "source": "money",
+      "source_group": "news",
+      "published_at": "2026-10-07T04:15:00+09:00",
+      "category": "macro",
+      "keywords": [
+        "interest-rates",
+        "jgb",
+        "boj-policy"
+      ],
+      "score": 70,
+      "why": "matched: 金利",
+      "read_min": 6,
+      "tldr": "高市政権の経済財政政策に関する発信が日銀への姿勢を含めて迷走しており、長期金利上昇と円安の同時進行につながりうると論じる解説記事。",
+      "points": [],
+      "code": null,
+      "signal": null,
+      "pick": false
+    },
+    {
+      "id": "2026-10-07-diamond-fudosan-mortgage-oct",
+      "url": "https://diamond-fudosan.jp/articles/-/1113331",
+      "title": "2026年10月の住宅ローン金利動向（変動・10年固定・フラット35）",
+      "source": "diamond-fudosan.jp",
+      "source_group": "news",
+      "published_at": "2026-10-02T00:00:00+09:00",
+      "category": "realestate",
+      "keywords": [
+        "mortgage-rates",
+        "flat35"
+      ],
+      "score": 84,
+      "why": "matched: 住宅ローン金利",
+      "read_min": 8,
+      "tldr": "2026 年 10 月の住宅ローン金利は、9 月の日銀利上げ（政策金利 1.25%）を受けて変動・固定ともに上昇。フラット35（買取型）は前月から 0.370% 上がり 3.830% になった。",
+      "points": [
+        "主要 14 行の変動金利（新規）は 4 行が引き上げ、10 行が据え置き。1.0% 台が過半になった",
+        "10 年固定は調査対象の主要 13 行すべてが引き上げ、3% 台に達した",
+        "長期金利は 10 月 1 日時点で 3.095% と、1996 年 9 月以来約 30 年ぶりの高水準と記事は伝えている"
+      ],
+      "code": null,
+      "signal": null,
+      "pick": true
+    },
+    {
+      "id": "2026-10-07-diamond-osaka-condo-mgmt",
+      "url": "https://diamond.jp/articles/-/400534",
+      "title": "【大阪114物件】マンション管理頑張ってるランキング！2年で最も改善したのは…？4位ライオンズガーデン千里丘、1位は？ - マンション羅針盤 管理＆売買",
+      "source": "money",
+      "source_group": "news",
+      "published_at": "2026-10-07T04:35:00+09:00",
+      "category": "realestate",
+      "keywords": [
+        "condo-management"
+      ],
+      "score": 55,
+      "why": "マンション管理",
+      "read_min": 5,
+      "tldr": "大阪の 114 物件を対象に、2 年間でのマンション管理の改善度をランキングした記事。",
+      "points": [],
+      "code": null,
+      "signal": null,
+      "pick": false
+    },
+    {
+      "id": "2026-10-07-coinpost-cftc-sec-interpretation",
+      "url": "https://coinpost.jp/?p=741180",
+      "title": "米CFTCとSEC、ビットコインやイーサリアム・XRPを原則証券でないと共同解釈",
+      "source": "money",
+      "source_group": "news",
+      "published_at": "2026-10-06T06:10:35+09:00",
+      "category": "crypto",
+      "keywords": [
+        "crypto-regulation",
+        "cftc",
+        "sec"
+      ],
+      "score": 88,
+      "why": "matched: 暗号資産の規制",
+      "read_min": 5,
+      "tldr": "米 CFTC と SEC が、デジタルコモディティ・デジタルコレクティブル・デジタルツールの 3 分類を原則として有価証券に当たらないとする共同解釈を示した。",
+      "points": [
+        "具体例としてビットコイン、イーサリアム、XRP、ソラナ、ステラ、テゾスの 6 銘柄が挙げられた",
+        "CFTC のセリグ委員長は、個人向けレバレッジ取引を扱う取引所向けに連邦登録の新区分「仮想通貨市場」を設ける枠組みを示した",
+        "州免許か連邦登録かを選べる仕組みで、取引所を 3 段階に分け、準備金証明の義務化を含む規則案とされる"
+      ],
+      "code": null,
+      "signal": null,
+      "pick": true
+    },
+    {
+      "id": "2026-10-07-coinpost-project-trinity",
+      "url": "https://coinpost.jp/?p=741289",
+      "title": "三井住友銀など9社、デジタル証券セカンダリー取引でDvP決済を実証完了",
+      "source": "money",
+      "source_group": "news",
+      "published_at": "2026-10-06T14:25:35+09:00",
+      "category": "crypto",
+      "keywords": [
+        "stablecoin",
+        "tokenization"
+      ],
+      "score": 86,
+      "why": "matched: ステーブルコイン, デジタル証券",
+      "read_min": 5,
+      "tldr": "三井住友銀行・大和証券・SBI 証券など 9 社が、ステーブルコインでデジタル証券（ST）の二次流通取引を DvP 決済する実証「Project Trinity」フェーズ 2 を完了し、T+2 の DvP 決済の実現可能性を一定程度確認した。",
+      "points": [
+        "決済手段は三井住友銀行が発行する特定信託受益権型ステーブルコイン（第 3 号電子決済手段）。検証用に ST とステーブルコインを実発行した",
+        "大阪デジタルエクスチェンジの START 市場での取引を想定し、SBI 証券と大和証券の間で 2 件の ST 譲渡を実施。チェーンをまたぐクロスチェーン技術も検証した",
+        "本格運用には、複数の ST 基盤や決済手段が混在する中で決済時限内に安定して回す体制と業務アプリの高度化が課題とした"
+      ],
+      "code": null,
+      "signal": null,
+      "pick": true
+    },
+    {
+      "id": "2026-10-07-nada-chainalysis-east-asia",
+      "url": "https://www.nadanews.com/371096/",
+      "title": "日本、暗号資産経済規模が東アジア2位の36兆円──DEX利用が拡大＝Chainalysis",
+      "source": "money",
+      "source_group": "news",
+      "published_at": "2026-10-06T20:43:52+09:00",
+      "category": "crypto",
+      "keywords": [
+        "crypto-exchange",
+        "defi"
+      ],
+      "score": 66,
+      "why": "暗号資産市場の調査",
+      "read_min": 3,
+      "tldr": "Chainalysis の東アジア調査で、日本の暗号資産経済の規模は域内 2 位の 36 兆円とされ、DEX の利用が拡大していると報じられた。",
+      "points": [],
+      "code": null,
+      "signal": null,
+      "pick": false
+    },
+    {
+      "id": "2026-10-07-coinpost-strive-btc",
+      "url": "https://coinpost.jp/?p=741256",
+      "title": "米上場ストライブ、266億円相当ビットコイン購入──世界5位に",
+      "source": "money",
+      "source_group": "news",
+      "published_at": "2026-10-06T13:00:46+09:00",
+      "category": "crypto",
+      "keywords": [
+        "bitcoin",
+        "bitcoin-treasury"
+      ],
+      "score": 62,
+      "why": "matched: ビットコイン",
+      "read_min": 3,
+      "tldr": "米上場のストライブが 2,000 BTC を 1 億 6,900 万ドルで追加購入し、保有量は 2 万 9,462 BTC になった。購入資金の 61.5% は優先株の販売で調達した。",
+      "points": [],
+      "code": null,
+      "signal": null,
+      "pick": false
+    },
+    {
+      "id": "2026-10-07-coinpost-fincen-mixing-withdrawn",
+      "url": "https://coinpost.jp/?p=741174",
+      "title": "米財務省、仮想通貨ミキシング規則案を撤回 正当な活動を妨げる懸念で",
+      "source": "money",
+      "source_group": "news",
+      "published_at": "2026-10-06T06:34:37+09:00",
+      "category": "crypto",
+      "keywords": [
+        "crypto-regulation",
+        "privacy"
+      ],
+      "score": 64,
+      "why": "暗号資産の規制",
+      "read_min": 3,
+      "tldr": "米財務省の FinCEN が、2023 年 10 月に提案した暗号資産ミキシングの報告義務規則案を撤回すると通知した。定義が広く正当な活動を萎縮させかねないとの懸念を踏まえたもので、金融機関の既存の義務は変わらない。",
+      "points": [],
+      "code": null,
+      "signal": null,
+      "pick": false
+    },
+    {
+      "id": "2026-10-07-fsa-delta-wall-2026",
+      "url": "https://www.fsa.go.jp/news/r8/sonota/20261005/deltawall2026.html",
+      "title": "「金融業界横断的なサイバーセキュリティ演習 （Delta Wall 2026）」の実施について公表しました。",
+      "source": "money",
+      "source_group": "official",
+      "published_at": "2026-10-06T00:00:00+09:00",
+      "category": "sec",
+      "keywords": [
+        "fsa",
+        "cyber-exercise"
+      ],
+      "score": 74,
+      "why": "金融庁の公式発表",
+      "read_min": 3,
+      "tldr": "金融庁が金融業界横断的なサイバーセキュリティ演習「Delta Wall 2026」の実施について公表した。",
+      "points": [],
+      "code": null,
+      "signal": null,
+      "pick": false
+    },
+    {
+      "id": "2026-10-07-nada-qilin-arrest",
+      "url": "https://www.nadanews.com/371031/",
+      "title": "ビットコイン恐喝疑い、ランサム集団「キリン」中心メンバーを日本で拘束＝報道",
+      "source": "money",
+      "source_group": "news",
+      "published_at": "2026-10-06T13:34:03+09:00",
+      "category": "sec",
+      "keywords": [
+        "ransomware",
+        "bitcoin"
+      ],
+      "score": 66,
+      "why": "matched: ランサムウェア",
+      "read_min": 3,
+      "tldr": "ランサムウェア集団「Qilin（キリン）」の中心メンバーとされるロシア国籍の男が日本で拘束され、10 月 2 日にドイツ側へ引き渡されたと報じられた。",
+      "points": [],
+      "code": null,
+      "signal": null,
+      "pick": false
+    }
+  ],
+  "social": [
+    {
+      "network": "x",
+      "author": "@MistralAI",
+      "url": "https://x.com/MistralAI/status/2107457414387622310",
+      "text": "Mistral Large 4（le Chonk）を発表。1T パラメータ・アクティブ 49B のネイティブ・マルチモーダルで、米欧のオープンウェイトモデルで集計ベンチマーク最高とうたう。",
+      "metrics": null,
+      "heat": null,
+      "category": "ai",
+      "keywords": [
+        "open-weight",
+        "mistral"
+      ],
+      "posted_at": null
+    },
+    {
+      "network": "x",
+      "author": "@ArtificialAnlys",
+      "url": "https://x.com/ArtificialAnlys/status/2107467221421420919",
+      "text": "Artificial Analysis が Mistral Large 4 を Intelligence Index 38 と評価。米中以外では最も高いモデルになったと投稿。",
+      "metrics": null,
+      "heat": null,
+      "category": "ai",
+      "keywords": [
+        "open-weight",
+        "mistral"
+      ],
+      "posted_at": null
+    },
+    {
+      "network": "hn",
+      "author": null,
+      "url": "https://news.ycombinator.com/item?id=49977979",
+      "text": "『Mistral Large 4』のスレッド。812 件のコメント。",
+      "metrics": "▲ 1268  ✉ 812",
+      "heat": 100,
+      "category": "ai",
+      "keywords": [
+        "open-weight",
+        "mistral"
+      ],
+      "posted_at": "2026-10-06T22:15:49+09:00"
+    },
+    {
+      "network": "hn",
+      "author": null,
+      "url": "https://news.ycombinator.com/item?id=49963171",
+      "text": "『Web Search API』のスレッド。278 件のコメント。",
+      "metrics": "▲ 581  ✉ 278",
+      "heat": 100,
+      "category": "ai",
+      "keywords": [
+        "cloudflare",
+        "ai-agent"
+      ],
+      "posted_at": "2026-10-05T19:47:06+09:00"
+    },
+    {
+      "network": "hn",
+      "author": null,
+      "url": "https://news.ycombinator.com/item?id=49962012",
+      "text": "『Denmark data breach exposes 8.8M people's personal data』のスレッド。350 件のコメント。",
+      "metrics": "▲ 497  ✉ 350",
+      "heat": 100,
+      "category": "sec",
+      "keywords": [
+        "data-breach",
+        "privacy"
+      ],
+      "posted_at": "2026-10-05T17:09:36+09:00"
+    },
+    {
+      "network": "hn",
+      "author": null,
+      "url": "https://news.ycombinator.com/item?id=49968105",
+      "text": "『OpenAI \"rogue\" agent activities found on Wikimedia projects』のスレッド。191 件のコメント。",
+      "metrics": "▲ 299  ✉ 191",
+      "heat": 74,
+      "category": "ai",
+      "keywords": [
+        "openai",
+        "ai-agent"
+      ],
+      "posted_at": "2026-10-06T02:53:35+09:00"
+    }
+  ],
+  "releases": [
+    {
+      "date": "2026-10-05",
+      "title": "mold v3.0.0",
+      "repo": "rui314/mold",
+      "url": "https://github.com/rui314/mold/releases/tag/v3.0.0",
+      "kind": "release",
+      "note": "Rust で書き直したメジャー版（HN 245 pt）。git タグ監視の対象外のため HN から追加",
+      "category": "be"
+    },
+    {
+      "date": "2026-10-06",
+      "title": "Polars 2.0",
+      "repo": "pola-rs/polars",
+      "url": "https://pola.rs/posts/release-polars-2/",
+      "kind": "release",
+      "note": "メジャーバージョン。git タグ監視の対象外のため HN から追加",
+      "category": "be"
+    },
+    {
+      "date": "2026-10-11",
+      "title": "DNS ルート KSK の切り替え（KSK-2024）",
+      "repo": null,
+      "url": "https://blog.cloudflare.com/root-ksk-2024-rollover/",
+      "kind": "event",
+      "note": "DNSSEC 検証リゾルバーは新しい鍵（鍵タグ 38696）を信頼している必要がある",
+      "category": "cloud"
+    }
+  ]
+}
