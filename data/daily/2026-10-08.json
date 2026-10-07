@@ -1,0 +1,791 @@
+{
+  "date": "2026-10-08",
+  "generated_at": "2026-10-08T06:40:00+09:00",
+  "stats": {
+    "collected": 238,
+    "sources_ok": 26,
+    "sources_total": 26,
+    "by_group": {
+      "news": 94,
+      "tech_blog": 82,
+      "hackernews": 50,
+      "official": 12
+    },
+    "failed_sources": []
+  },
+  "digest": [
+    {
+      "category": "ai",
+      "text": "Anthropic が Claude Haiku 5.5 を公開（入力 $0.10・出力 $0.50 / 100 万トークン、Haiku 4.5 比で平均約 75% 安）。OpenAI も GPT-6 と Intelligent UI の全ユーザー展開、分類専用の Decisions API（ベータ）を出し、小型・低価格モデルの競争が続いた。",
+      "keywords": [
+        "anthropic",
+        "claude",
+        "openai",
+        "llm-cost"
+      ]
+    },
+    {
+      "category": "sec",
+      "text": "IDCF クラウドの障害はランサムウェア攻撃によるもので、影響は 495 の企業・自治体に及ぶ。一部ではデータ復元が難しいと伝えられている。",
+      "keywords": [
+        "ransomware",
+        "security-incident"
+      ]
+    },
+    {
+      "category": "be",
+      "text": "AWS が Aurora PostgreSQL に DuckDB を統合し、S3 上の Iceberg / Parquet を ETL なしで SQL から直接読めるようにした（17.11 / 18.6 以降、追加料金なし）。",
+      "keywords": [
+        "aws",
+        "postgres",
+        "iceberg"
+      ]
+    },
+    {
+      "category": "stocks",
+      "text": "10 月 7 日の日経平均は 648 円安の 7 万 35 円と反落。半導体関連の利益確定売りと長期金利の上昇が重荷とされた。",
+      "keywords": [
+        "nikkei225",
+        "semiconductor"
+      ]
+    },
+    {
+      "category": "crypto",
+      "text": "金融庁が無登録の暗号資産交換業者への警告一覧を専用ページで公表。海外ではコインベースがデリビットを統合した Coinbase Global Exchange を発足させ、英国はデジタルネイティブ国債 DIGIT の 2027 年発行を決めた。",
+      "keywords": [
+        "fsa",
+        "crypto-exchange",
+        "tokenization"
+      ]
+    }
+  ],
+  "items": [
+    {
+      "id": "2026-10-08-hn-claude-haiku-5-5",
+      "url": "https://www.anthropic.com/claude-haiku-5-5",
+      "title": "Claude Haiku 5.5",
+      "source": "anthropic.com",
+      "source_group": "hackernews",
+      "published_at": "2026-10-08T03:01:32+09:00",
+      "category": "ai",
+      "keywords": [
+        "anthropic",
+        "claude",
+        "llm-cost"
+      ],
+      "score": 93,
+      "why": "matched: llm, コスト（HN 366 pt）",
+      "read_min": 6,
+      "tldr": "Anthropic が小型モデル Claude Haiku 5.5 を公開した。Haiku 4.5 比で平均約 75% 安く動かせるとし、Haiku として初めて effort（推論量）を調整できる。",
+      "points": [
+        "価格は 100 万トークンあたり入力 $0.10・出力 $0.50（10 万トークン超のプロンプトは $0.50 / $2.50）。Haiku 4.5 は入力 $1.00・出力 $5.00",
+        "公表値は OSWorld 2.1（offline subset）72.4%、Terminal-Bench 4.0 39.2%。比較表では GPT-6 Luna（48.9% / 16.4%）を上回るとしている",
+        "AWS・Google Cloud・Microsoft Azure を含む各プラットフォームで即日提供。モデル ID は claude-haiku-5-5"
+      ],
+      "code": null,
+      "signal": "▲ 366",
+      "pick": true
+    },
+    {
+      "id": "2026-10-08-hn-openai-decisions-api",
+      "url": "https://developers.openai.com/api/docs/guides/decisions",
+      "title": "Decisions API is in public beta",
+      "source": "developers.openai.com",
+      "source_group": "hackernews",
+      "published_at": "2026-10-07T05:57:25+09:00",
+      "category": "ai",
+      "keywords": [
+        "openai",
+        "api-design",
+        "llm-cost"
+      ],
+      "score": 86,
+      "why": "matched: llm, api（HN 378 pt）",
+      "read_min": 5,
+      "tldr": "OpenAI が分類・ルーティング向けの Decisions API をパブリックベータで公開した。テキストや画像に対する質問に型付きの答えと確率・信頼度を返し、Responses API より約 10 倍速いとしている。",
+      "points": [
+        "質問の型は predicate（条件判定・確率を返す）/ choice（選択肢から 1 つ）/ score（段階評価）の 3 種類",
+        "モデルは現在 gpt-6-luna のみ。入力はテキストかインラインの base64 画像で、ホストされた画像 URL や file_id は使えない",
+        "料金は入力 100 万トークンあたり $0.10 で、出力トークンとキャッシュの課金はない。GA は数週間以内の予定"
+      ],
+      "code": {
+        "file": "decisions.py",
+        "lang": "python",
+        "text": "answer = decision.answers[0]\nif answer.type == \"refusal\":\n    print(f\"Refused: {answer.name}\")\nelif answer.type == \"choice\":\n    print(f\"Department: {answer.choice} (confidence: {answer.confidence})\")"
+      },
+      "signal": "▲ 378",
+      "pick": true
+    },
+    {
+      "id": "2026-10-08-publickey-aurora-duckdb",
+      "url": "https://www.publickey1.jp/blog/26/awsduckdbaurora_postgresqletl.html",
+      "title": "AWS、DuckDBをAurora PostgreSQLに統合。ETL不要で直接データレイクを読み取り可能にしたと発表",
+      "source": "publickey1.jp",
+      "source_group": "news",
+      "published_at": "2026-10-08T00:59:06+09:00",
+      "category": "be",
+      "keywords": [
+        "aws",
+        "postgres",
+        "iceberg",
+        "duckdb"
+      ],
+      "score": 88,
+      "why": "matched: aws, postgres",
+      "read_min": 5,
+      "tldr": "AWS が Aurora PostgreSQL に DuckDB を統合し、S3 上の Apache Iceberg や Parquet のデータを ETL なしで直接クエリできるようにした。Aurora のテーブルとデータレイクを 1 つの SQL で結合できる。",
+      "points": [
+        "拡張 aurora_analytics を有効にし、Iceberg / Parquet を外部テーブルとして定義する。Glue のデータベースは IMPORT FOREIGN SCHEMA で一括作成できる",
+        "対応は Aurora PostgreSQL 17.11 以降と 18.6 以降。全商用リージョンと GovCloud（US）で利用でき、機能自体の追加料金はない（Aurora のコンピュートと S3 リクエストは課金）",
+        "DuckDB の開発元は 2026 年 9 月に AWS の子会社になり、DuckDB 自体は MIT ライセンスの OSS として続くと説明"
+      ],
+      "code": {
+        "file": "query.sql",
+        "lang": "sql",
+        "text": "SELECT merchant, category, amount, transaction_date, 'recent' AS source\nFROM recent_transactions\nWHERE customer_id = 'C-1001'\nUNION ALL\nSELECT merchant, category, amount, transaction_date, 'historical' AS source\nFROM transaction_history\nWHERE customer_id = 'C-1001'\n  AND transaction_date >= CURRENT_DATE - INTERVAL '5 years'\nORDER BY transaction_date DESC\nLIMIT 15;"
+      },
+      "signal": null,
+      "pick": true
+    },
+    {
+      "id": "2026-10-08-hn-embeddinggemma-2",
+      "url": "https://blog.google/innovation-and-ai/technology/developers-tools/embeddinggemma-2/",
+      "title": "EmbeddingGemma 2: An open, lightweight multimodal embedding model",
+      "source": "blog.google",
+      "source_group": "hackernews",
+      "published_at": "2026-10-07T01:03:49+09:00",
+      "category": "ai",
+      "keywords": [
+        "google",
+        "open-weight",
+        "embedding-model",
+        "rag"
+      ],
+      "score": 82,
+      "why": "matched: rag, open-weight（HN 411 pt）",
+      "read_min": 5,
+      "tldr": "Google が 740M パラメータのマルチモーダル埋め込みモデル EmbeddingGemma 2 を Apache 2.0 で公開した。テキスト・コード・画像・動画・音声を 1 つの埋め込み空間に写し、端末上での実行を想定している。",
+      "points": [
+        "テキストだけなら約 270M で動き、視覚（170M）と音声（300M）のエンコーダーを必要に応じて足す構成",
+        "Matryoshka 表現で出力を 768 から 512 / 256 / 128 次元に切り詰められ、保存容量を最大 6 分の 1 にできる。コンテキストは 8K トークン",
+        "MTEB Code は 68.76 → 78.68。重みは Hugging Face と Kaggle で公開され、transformers・vLLM・llama.cpp・Ollama などで使える"
+      ],
+      "code": null,
+      "signal": "▲ 411",
+      "pick": true
+    },
+    {
+      "id": "2026-10-08-itmedia-idcf-ransomware",
+      "url": "https://www.itmedia.co.jp/news/article/2610/07/2000002107/",
+      "title": "IDCFクラウドへのランサム攻撃、495の企業・自治体に影響 一部には「復元難しい」との通達も",
+      "source": "itmedia.co.jp",
+      "source_group": "tech_blog",
+      "published_at": "2026-10-07T23:11:42+09:00",
+      "category": "sec",
+      "keywords": [
+        "ransomware",
+        "security-incident",
+        "data-breach"
+      ],
+      "score": 90,
+      "why": "matched: クラウド障害, ランサムウェア",
+      "read_min": 4,
+      "tldr": "IDC フロンティアは、IDCF クラウドの障害がランサムウェア攻撃によるもので、影響が 495 の企業・自治体に及ぶと発表した。利用企業のサービス停止の公表が相次いでいる。",
+      "points": [
+        "10 月 7 日午前 3 時 40 分ごろ、福島県白河市の東日本リージョン 1 で障害が発生。安全確認のため他リージョンの管理コンソールも停止した",
+        "Movable Type クラウド版（サーバ 31 台）、UD トーク、らくらく在庫などが停止し、自治体や J リーグクラブのサイトにも障害が出た",
+        "一部の利用者には「データの復元は難しい」と伝えられ、別基盤で再構築する事業者もある"
+      ],
+      "code": null,
+      "signal": null,
+      "pick": true
+    },
+    {
+      "id": "2026-10-08-hn-gpt-6-intelligent-ui",
+      "url": "https://openai.com/index/gpt-6-for-everyone/",
+      "title": "GPT‑6 and Intelligent UI for everyone",
+      "source": "openai.com",
+      "source_group": "hackernews",
+      "published_at": "2026-10-08T03:00:58+09:00",
+      "category": "ai",
+      "keywords": [
+        "openai",
+        "llm"
+      ],
+      "score": 78,
+      "why": "matched: llm（HN 261 pt）",
+      "read_min": 3,
+      "tldr": "OpenAI が GPT-6 と、回答を図やボタン・フォームなどの対話的な UI で返す Intelligent UI を ChatGPT の全ユーザーに展開すると発表した（公式ページは取得できず、X の発表に基づく）。",
+      "points": [],
+      "code": null,
+      "signal": "▲ 261",
+      "pick": false
+    },
+    {
+      "id": "2026-10-08-hn-openai-ai-math",
+      "url": "https://openai.com/index/sharing-ai-progress-in-mathematics/",
+      "title": "Sharing AI progress in mathematics",
+      "source": "openai.com",
+      "source_group": "hackernews",
+      "published_at": "2026-10-07T07:17:21+09:00",
+      "category": "ai",
+      "keywords": [
+        "openai",
+        "llm"
+      ],
+      "score": 72,
+      "why": "HN 1186 pt",
+      "read_min": 4,
+      "tldr": "OpenAI が数学分野での AI の進展を共有する記事を公開し、HN で 1,186 ポイントを集めた。国内でも公開された問題の結果を紹介するブログが話題になっている。",
+      "points": [],
+      "code": null,
+      "signal": "▲ 1186",
+      "pick": false
+    },
+    {
+      "id": "2026-10-08-hn-counterfeit-tls-certs",
+      "url": "https://arstechnica.com/security/2026/10/hackers-obtain-counterfeit-tls-certificates-for-google-and-other-large-services/",
+      "title": "Hackers obtain counterfeit TLS certificates for Google and other large services",
+      "source": "arstechnica.com",
+      "source_group": "hackernews",
+      "published_at": "2026-10-07T13:37:05+09:00",
+      "category": "sec",
+      "keywords": [
+        "tls",
+        "security-incident"
+      ],
+      "score": 76,
+      "why": "matched: tls（HN 136 pt）",
+      "read_min": 4,
+      "tldr": "Google など大手サービスの偽の TLS 証明書を攻撃者が取得したと Ars Technica が報じた。",
+      "points": [],
+      "code": null,
+      "signal": "▲ 136",
+      "pick": false
+    },
+    {
+      "id": "2026-10-08-itmedia-vibecoding-vulns",
+      "url": "https://www.itmedia.co.jp/news/article/2610/07/2000002055/",
+      "title": "バイブコーディングで作った公開中のWebアプリ、9割に脆弱性 MSの研究者など調査",
+      "source": "itmedia.co.jp",
+      "source_group": "tech_blog",
+      "published_at": "2026-10-07T12:23:49+09:00",
+      "category": "sec",
+      "keywords": [
+        "ai-coding",
+        "vulnerability-management"
+      ],
+      "score": 74,
+      "why": "matched: ai コーディング, 脆弱性",
+      "read_min": 3,
+      "tldr": "Microsoft の研究者らの調査で、バイブコーディングで作られ公開されている Web アプリの 9 割に脆弱性があったと紹介する記事。",
+      "points": [],
+      "code": null,
+      "signal": null,
+      "pick": false
+    },
+    {
+      "id": "2026-10-08-47news-sompo-leak",
+      "url": "https://www.47news.jp/15049544.html",
+      "title": "【速報】損保ジャパン、6万件の顧客情報漏えいか",
+      "source": "47news.jp",
+      "source_group": "tech_blog",
+      "published_at": "2026-10-07T16:40:55+09:00",
+      "category": "sec",
+      "keywords": [
+        "data-breach",
+        "insurance"
+      ],
+      "score": 62,
+      "why": "情報漏えい",
+      "read_min": 2,
+      "tldr": "損害保険ジャパンが、外部委託先への不正アクセスで約 6 万件の顧客情報が漏えいした可能性があると発表した。",
+      "points": [],
+      "code": null,
+      "signal": null,
+      "pick": false
+    },
+    {
+      "id": "2026-10-08-k8s-cgroup-v2",
+      "url": "https://kubernetes.io/blog/2026/10/06/kubernetes-cgroups-v2-shift/",
+      "title": "The Shift to cgroup v2 in Kubernetes: What You Need to Know",
+      "source": "kubernetes.io",
+      "source_group": "tech_blog",
+      "published_at": "2026-10-07T03:00:00+09:00",
+      "category": "cloud",
+      "keywords": [
+        "kubernetes",
+        "linux"
+      ],
+      "score": 80,
+      "why": "matched: kubernetes",
+      "read_min": 8,
+      "tldr": "Kubernetes 公式ブログが cgroup v2 への移行で知っておくべき点をまとめた。cgroup v1 は v1.31 でメンテナンスモードに入り、v2 は v1.25 から stable。",
+      "points": [],
+      "code": null,
+      "signal": null,
+      "pick": false
+    },
+    {
+      "id": "2026-10-08-postgres-pgx-bm25",
+      "url": "https://www.postgresql.org/about/news/pgx-bm25-10-bm25-ranked-full-text-search-as-a-native-postgresql-index-3396/",
+      "title": "pgx-bm25 1.0: BM25 ranked full-text search as a native PostgreSQL index",
+      "source": "postgresql.org",
+      "source_group": "news",
+      "published_at": "2026-10-07T09:00:00+09:00",
+      "category": "be",
+      "keywords": [
+        "postgres",
+        "search-index"
+      ],
+      "score": 76,
+      "why": "matched: postgres",
+      "read_min": 3,
+      "tldr": "PostgreSQL のネイティブなインデックスとして Okapi BM25 の全文検索を追加する拡張 pgx-bm25 1.0 が公開された。PostgreSQL 17 と 18 に対応。",
+      "points": [],
+      "code": null,
+      "signal": null,
+      "pick": false
+    },
+    {
+      "id": "2026-10-08-github-git-infra-agents",
+      "url": "https://github.blog/engineering/architecture-optimization/building-git-infrastructure-for-agent-scale-development/",
+      "title": "Building Git infrastructure for agent-scale development",
+      "source": "github.blog",
+      "source_group": "news",
+      "published_at": "2026-10-07T05:57:56+09:00",
+      "category": "be",
+      "keywords": [
+        "github",
+        "git",
+        "ai-agent"
+      ],
+      "score": 70,
+      "why": "matched: github, ai エージェント",
+      "read_min": 8,
+      "tldr": "GitHub が、エージェントによる大量の開発に備えて Git 基盤を稼働したまま作り直している取り組みを紹介した。",
+      "points": [],
+      "code": null,
+      "signal": null,
+      "pick": false
+    },
+    {
+      "id": "2026-10-08-fsa-unregistered-crypto",
+      "url": "https://www.fsa.go.jp/ordinary/chuui/angoushisan_mutouroku.html",
+      "title": "無登録で暗号資産交換業を行う者の名称等について公表しました。",
+      "source": "fsa.go.jp",
+      "source_group": "official",
+      "published_at": "2026-10-08T02:00:00+09:00",
+      "category": "crypto",
+      "keywords": [
+        "fsa",
+        "crypto-regulation",
+        "crypto-exchange"
+      ],
+      "score": 88,
+      "why": "金融庁の公式発表",
+      "read_min": 3,
+      "tldr": "金融庁が無登録で暗号資産交換業を行う者への警告一覧を専用ページで公表した。海外拠点の業者でも日本居住者を相手にするには登録が必要で、取引前に登録状況を確認するよう呼びかけている。",
+      "points": [
+        "一覧は過去に警告した業者をまとめたもので、現在の営業状況を示すものではない",
+        "掲載例は IZAKA-YA（9 月 1 日に警告、9 月 17 日に日本向けサービス終了を発表）や Bybit（2021・2023・2024 年に計 3 回警告）",
+        "無登録業者との取引で出金拒否や高額な手数料を請求されたという相談が寄せられており、金融サービス利用者相談室を案内している"
+      ],
+      "code": null,
+      "signal": null,
+      "pick": true
+    },
+    {
+      "id": "2026-10-08-coinpost-btc-exchange-outflow",
+      "url": "https://coinpost.jp/?p=741617",
+      "title": "ビットコイン、取引所から1日で2.4万BTC純流出 7ヶ月ぶり規模＝サンティメント",
+      "source": "coinpost.jp",
+      "source_group": "news",
+      "published_at": "2026-10-07T16:14:51+09:00",
+      "category": "crypto",
+      "keywords": [
+        "bitcoin"
+      ],
+      "score": 80,
+      "why": "matched: ビットコイン",
+      "read_min": 3,
+      "tldr": "サンティメントによると、10 月 5 日にビットコインが取引所から 2 万 4,073 BTC 純流出し、1 日の規模として 3 月 1 日以来約 7 カ月ぶりとなった。取引所の残高は総供給量の約 6.50% まで下がった。",
+      "points": [
+        "純流出は出金が入金を上回った状態。売り物が減るため一般に強気材料とみられると同社は説明",
+        "同社は「流出だけでは何も保証しない」と留保を付けている",
+        "同日のレポートでは BTC が三角持ち合いを下抜け、原油と米金利の動きに振らされたと伝えられた"
+      ],
+      "code": null,
+      "signal": null,
+      "pick": true
+    },
+    {
+      "id": "2026-10-08-coinpost-coinbase-global-exchange",
+      "url": "https://coinpost.jp/?p=741573",
+      "title": "コインベース、Coinbase Pro年末復活へ デリビット統合を完了",
+      "source": "coinpost.jp",
+      "source_group": "news",
+      "published_at": "2026-10-07T14:49:41+09:00",
+      "category": "crypto",
+      "keywords": [
+        "crypto-derivatives",
+        "crypto-exchange"
+      ],
+      "score": 74,
+      "why": "matched: 暗号資産",
+      "read_min": 4,
+      "tldr": "コインベースがデリビットの統合を完了し、米国と海外の暗号資産デリバティブ市場を単一の流動性でつなぐ「Coinbase Global Exchange」を発足させた。2022 年に終了した Coinbase Pro も作り直して年末に再始動する。",
+      "points": [
+        "デリビットは約 29 億ドルで買収し 2025 年 8 月に完了。9 月 30 日時点の BTC オプション建玉は 300 億ドル超",
+        "現物の証拠金取引を数週間以内に導入し、レバレッジは主要銘柄で最大 10 倍。米国では適格契約参加者（ECP）に限る",
+        "9 月 28 日に CFTC から清算機関の登録承認を得て、FCM・指定契約市場と合わせ主要 3 登録をそろえた"
+      ],
+      "code": null,
+      "signal": null,
+      "pick": true
+    },
+    {
+      "id": "2026-10-08-coinpost-uk-digit-gilt",
+      "url": "https://coinpost.jp/?p=741522",
+      "title": "英国、初のデジタルネイティブ国債「DIGIT」を2027年Q1に発行へ",
+      "source": "coinpost.jp",
+      "source_group": "news",
+      "published_at": "2026-10-07T13:50:54+09:00",
+      "category": "macro",
+      "keywords": [
+        "tokenization",
+        "government-bond"
+      ],
+      "score": 70,
+      "why": "国債のトークン化",
+      "read_min": 3,
+      "tldr": "英国政府が初のデジタルネイティブ国債「DIGIT」を 2027 年第 1 四半期にパイロット発行すると発表し、バークレイズや HSBC など 6 社を共同主幹事に選んだ。",
+      "points": [
+        "発行と管理は HSBC の Orion 上で行い、英国のデジタル証券サンドボックス（DSS）内で運用する",
+        "既存の国債を後からトークン化するのではなく、発行時から DLT 上で扱い、発行から決済までを検証する",
+        "政府は DIGIT を LSEG のメイン市場に上場する最初のデジタル資産にしたい考え。発行額は記事に記載がない"
+      ],
+      "code": null,
+      "signal": null,
+      "pick": true
+    },
+    {
+      "id": "2026-10-08-kabutan-nikkei-close",
+      "url": "https://kabutan.jp/news/marketnews/?b=n202610070971",
+      "title": "日経平均 大引け｜3日ぶり反落、半導体関連中心に利益確定売り (10月7日)",
+      "source": "kabutan.jp",
+      "source_group": "news",
+      "published_at": "2026-10-07T15:30:00+09:00",
+      "category": "stocks",
+      "keywords": [
+        "nikkei225",
+        "semiconductor",
+        "interest-rates"
+      ],
+      "score": 72,
+      "why": "前営業日の日経平均",
+      "read_min": 2,
+      "tldr": "10 月 7 日の日経平均は 648 円安の 7 万 35 円と 3 日ぶりに反落した。半導体関連を中心に利益確定売りが出て、長期金利の上昇も重荷とされた（検索結果の要約に基づく）。",
+      "points": [],
+      "code": null,
+      "signal": null,
+      "pick": false
+    },
+    {
+      "id": "2026-10-08-toyokeizai-jpx-record-profit",
+      "url": "https://toyokeizai.net/articles/-/960131?utm_source=rss&utm_medium=http&utm_campaign=link_back",
+      "title": "日本取引所グループが過去最高益を見込む\"株高だけではない\"背景 純利益予想を1050億円に上方修正 | 政治・経済・投資 | 東洋経済オンライン",
+      "source": "toyokeizai.net",
+      "source_group": "news",
+      "published_at": "2026-10-07T11:30:00+09:00",
+      "category": "stocks",
+      "keywords": [
+        "topix",
+        "jpx"
+      ],
+      "score": 66,
+      "why": "matched: 株式市場",
+      "read_min": 4,
+      "tldr": "日本取引所グループが 2027 年 3 月期の純利益予想を 985 億円から 1,050 億円に引き上げ、過去最高を見込む。上期中に 2 度の上方修正は異例とされる（後半は有料部分）。",
+      "points": [],
+      "code": null,
+      "signal": null,
+      "pick": false
+    },
+    {
+      "id": "2026-10-08-toyokeizai-oasis-nidec",
+      "url": "https://toyokeizai.net/articles/-/960526?utm_source=rss&utm_medium=http&utm_campaign=link_back",
+      "title": "オアシスマネジメント､ニデックに非公開化に向けた初期的な検討を速やかに始めるよう要請 | 政治・経済・投資 | 東洋経済オンライン",
+      "source": "toyokeizai.net",
+      "source_group": "news",
+      "published_at": "2026-10-07T21:43:00+09:00",
+      "category": "stocks",
+      "keywords": [
+        "corporate-governance",
+        "m-and-a"
+      ],
+      "score": 60,
+      "why": "アクティビスト",
+      "read_min": 3,
+      "tldr": "香港のオアシス・マネジメントが、経営不安と巨額損失に揺れるニデックに非公開化に向けた検討を始めるよう要請した。",
+      "points": [],
+      "code": null,
+      "signal": null,
+      "pick": false
+    },
+    {
+      "id": "2026-10-08-diamond-yen-weakness",
+      "url": "https://diamond.jp/articles/-/400738",
+      "title": "日米介入・日銀利上げでもなぜ円安が止まらないのか？円高転換「3つのシナリオ」の現実味 - マーケットフォーカス",
+      "source": "diamond.jp",
+      "source_group": "news",
+      "published_at": "2026-10-08T04:30:00+09:00",
+      "category": "macro",
+      "keywords": [
+        "fx",
+        "boj-rate-hike"
+      ],
+      "score": 70,
+      "why": "matched: 為替, 日銀",
+      "read_min": 6,
+      "tldr": "日米の介入や日銀の利上げ加速があっても円安が止まらない理由を整理し、米金融政策・米信用リスク・円キャリーの巻き戻しという 3 つの円高シナリオを検証する記事。",
+      "points": [],
+      "code": null,
+      "signal": null,
+      "pick": false
+    },
+    {
+      "id": "2026-10-08-diamond-inflation-bankruptcy",
+      "url": "https://diamond.jp/articles/-/400706",
+      "title": "「物価高倒産」が過去最多ペース、初の「1000件超え」が現実味を帯びるワケ【帝国データバンクが解説】 - 倒産のニューノーマル",
+      "source": "diamond.jp",
+      "source_group": "news",
+      "published_at": "2026-10-08T05:00:00+09:00",
+      "category": "macro",
+      "keywords": [
+        "inflation"
+      ],
+      "score": 58,
+      "why": "物価・倒産",
+      "read_min": 4,
+      "tldr": "帝国データバンクによると、物価高倒産は 2026 年 1〜8 月に 762 件と過去最多ペースで、年間で初めて 1,000 件を超える可能性が高い。",
+      "points": [],
+      "code": null,
+      "signal": null,
+      "pick": false
+    },
+    {
+      "id": "2026-10-08-boj-consumption-activity",
+      "url": "https://www.boj.or.jp/research/research_data/cai/index.htm",
+      "title": "消費活動指数",
+      "source": "boj.or.jp",
+      "source_group": "official",
+      "published_at": "2026-10-07T14:00:00+09:00",
+      "category": "macro",
+      "keywords": [
+        "boj-statistics"
+      ],
+      "score": 52,
+      "why": "日銀の公式統計",
+      "read_min": 1,
+      "tldr": "日本銀行が消費活動指数を更新した。",
+      "points": [],
+      "code": null,
+      "signal": null,
+      "pick": false
+    },
+    {
+      "id": "2026-10-08-hn-visa-mastercard-litigation",
+      "url": "https://www.classaction.org/news/visa-mastercard-major-banks-facing-new-litigation-over-anticompetitive-merchant-credit-card-transaction-fees",
+      "title": "Visa, Mastercard, Major Banks Facing New Litigation over 'Anticompetitive' Fees",
+      "source": "classaction.org",
+      "source_group": "hackernews",
+      "published_at": "2026-10-08T00:09:59+09:00",
+      "category": "macro",
+      "keywords": [
+        "payments"
+      ],
+      "score": 55,
+      "why": "HN 355 pt",
+      "read_min": 3,
+      "tldr": "加盟店手数料が反競争的だとして、Visa・Mastercard と大手銀行が新たな訴訟に直面していると報じられた。",
+      "points": [],
+      "code": null,
+      "signal": "▲ 355",
+      "pick": false
+    },
+    {
+      "id": "2026-10-08-coinpost-robinhood-btc",
+      "url": "https://coinpost.jp/?p=741641",
+      "title": "ロビンフッド、ビットコイン約39.5億円分を自社保有 慎重姿勢から転換か＝報道",
+      "source": "coinpost.jp",
+      "source_group": "news",
+      "published_at": "2026-10-07T17:52:07+09:00",
+      "category": "crypto",
+      "keywords": [
+        "bitcoin",
+        "bitcoin-treasury"
+      ],
+      "score": 62,
+      "why": "matched: ビットコイン",
+      "read_min": 2,
+      "tldr": "米ロビンフッドが 2,500 万ドル相当のビットコインを自社のバランスシートに組み入れたと The Block が報じた。2025 年には BTC 保有に慎重な姿勢を示していた。",
+      "points": [],
+      "code": null,
+      "signal": null,
+      "pick": false
+    },
+    {
+      "id": "2026-10-08-nada-solana-dvp",
+      "url": "https://www.nadanews.com/371182/",
+      "title": "JPモルガンが助言、ソラナ財団が金融機関向け決済基盤を発表",
+      "source": "nadanews.com",
+      "source_group": "news",
+      "published_at": "2026-10-07T13:00:00+09:00",
+      "category": "crypto",
+      "keywords": [
+        "tokenization",
+        "payments"
+      ],
+      "score": 60,
+      "why": "トークン化証券",
+      "read_min": 3,
+      "tldr": "ソラナ財団が JP モルガンの助言を受け、デジタル証券と代金の同時決済を行う金融機関向けの決済基盤「Solana DvP」を発表した。",
+      "points": [],
+      "code": null,
+      "signal": null,
+      "pick": false
+    },
+    {
+      "id": "2026-10-08-suumo-genai-housing",
+      "url": "https://suumo.jp/journal/2026/10/07/221307/",
+      "title": "20代の過半数以上が住まい探しに生成AIを利用、金利上昇で購入検討はどう変わる？",
+      "source": "suumo.jp",
+      "source_group": "news",
+      "published_at": "2026-10-07T07:00:03+09:00",
+      "category": "realestate",
+      "keywords": [
+        "housing",
+        "mortgage-rates"
+      ],
+      "score": 56,
+      "why": "matched: 金利",
+      "read_min": 4,
+      "tldr": "SUUMO ジャーナルの調査で、20 代の過半数が住まい探しに生成 AI を使っていると紹介。金利上昇で購入検討がどう変わるかも取り上げている。",
+      "points": [],
+      "code": null,
+      "signal": null,
+      "pick": false
+    }
+  ],
+  "social": [
+    {
+      "network": "x",
+      "author": "@claudeai",
+      "url": "https://x.com/claudeai/status/2107894039626277339",
+      "text": "Claude Haiku 5.5 を発表。これまでで最も安く速く高性能な小型モデルで、平均して Haiku 4.5 より約 75% 安く動かせるとした。",
+      "metrics": null,
+      "heat": null,
+      "category": "ai",
+      "keywords": [
+        "anthropic",
+        "claude"
+      ],
+      "posted_at": null
+    },
+    {
+      "network": "x",
+      "author": "@OpenAI",
+      "url": "https://x.com/OpenAI/status/2107894997538525580",
+      "text": "GPT-6 と Intelligent UI を ChatGPT の全ユーザーに展開開始。日常の質問を図や対話的なツールで答えるとした。",
+      "metrics": null,
+      "heat": null,
+      "category": "ai",
+      "keywords": [
+        "openai",
+        "llm"
+      ],
+      "posted_at": null
+    },
+    {
+      "network": "hn",
+      "author": null,
+      "url": "https://news.ycombinator.com/item?id=49996437",
+      "text": "『Claude Haiku 5.5』のスレッド。",
+      "metrics": "▲ 366",
+      "heat": 91,
+      "category": "ai",
+      "keywords": [
+        "anthropic",
+        "claude"
+      ],
+      "posted_at": "2026-10-08T03:01:32+09:00"
+    },
+    {
+      "network": "hn",
+      "author": null,
+      "url": "https://news.ycombinator.com/item?id=49984025",
+      "text": "『Decisions API is in public beta』のスレッド。",
+      "metrics": "▲ 378",
+      "heat": 94,
+      "category": "ai",
+      "keywords": [
+        "openai",
+        "api-design"
+      ],
+      "posted_at": "2026-10-07T05:57:25+09:00"
+    },
+    {
+      "network": "hn",
+      "author": null,
+      "url": "https://news.ycombinator.com/item?id=49980487",
+      "text": "『EmbeddingGemma 2: An open, lightweight multimodal embedding model』のスレッド。",
+      "metrics": "▲ 411",
+      "heat": 100,
+      "category": "ai",
+      "keywords": [
+        "google",
+        "embedding-model"
+      ],
+      "posted_at": "2026-10-07T01:03:49+09:00"
+    }
+  ],
+  "releases": [
+    {
+      "date": "2026-10-07",
+      "title": "OpenSSH 10.6",
+      "repo": null,
+      "url": "https://www.openssh.org/releasenotes.html#10.6",
+      "kind": "release",
+      "note": "HN 118 pt。git タグ監視の対象外のため HN から追加",
+      "category": "sec"
+    },
+    {
+      "date": "2026-10-07",
+      "title": "7-Zip 26.04",
+      "repo": null,
+      "url": "https://forest.watch.impress.co.jp/docs/news/2146365.html",
+      "kind": "release",
+      "note": "いくつかの不具合と脆弱性を修正（窓の杜）",
+      "category": "sec"
+    },
+    {
+      "date": "2026-10-07",
+      "title": "pgx-bm25 1.0",
+      "repo": null,
+      "url": "https://www.postgresql.org/about/news/pgx-bm25-10-bm25-ranked-full-text-search-as-a-native-postgresql-index-3396/",
+      "kind": "release",
+      "note": "PostgreSQL 17 / 18 向けの BM25 全文検索インデックス",
+      "category": "be"
+    },
+    {
+      "date": "2026-10-11",
+      "title": "DNS ルート KSK の切り替え（KSK-2024）",
+      "repo": null,
+      "url": "https://blog.cloudflare.com/root-ksk-2024-rollover/",
+      "kind": "event",
+      "note": "DNSSEC 検証リゾルバーは新しい鍵（鍵タグ 38696）を信頼している必要がある",
+      "category": "cloud"
+    }
+  ]
+}
