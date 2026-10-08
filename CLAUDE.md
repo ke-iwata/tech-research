@@ -133,7 +133,7 @@ git push origin HEAD:main                # main を更新する（これで Acti
 
 | パス | 内容 |
 |---|---|
-| `index.html`, `assets/app.js`, `assets/style.css` | ダッシュボード。`#today`（今日のブリーフ）/ `#reader`（キーボード操作で読むリーダー）/ `#radar`（キーワード・レーダー）/ `#market`（市況とキーワードのマーケットマップ）の 4 画面。右上で tech / money を切り替え |
+| `index.html`, `assets/app.js`, `assets/style.css` | ダッシュボード（白地・黒罫・黄色の「DAILY」ポスター様式）。`#today`（今日のブリーフ。上段の輪からストーリー形式で要点・pick・レーダー・予定・SNS を全画面で読める）/ `#reader`（キーボード操作で読むリーダー）/ `#radar`（キーワード・レーダー＋リング別一覧）/ `#market`（市況とキーワードのマーケットマップ）の 4 画面。右上で tech / money を切り替え、`[` `]` で前日・翌日。スマホは下タブ |
 | `data/config.json` | 分野（categories・quadrants）、関心キーワード（interests）、収集元（sources・releases・markets）、SNS 検索語 |
 | `data/daily/YYYY-MM-DD.json` | 日次ファイル（ルーチンが書く） |
 | `data/stats.json` | 日次ファイルから集計したキーワードの推移・リングなど（`update_stats.py` が生成。手で書かない） |

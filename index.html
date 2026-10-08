@@ -3,38 +3,38 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>tech-radar</title>
+<title>DAILY — tech-radar</title>
 <meta name="description" content="技術と金融・投資の情報を毎日集めて可視化する、自分用のダッシュボード">
 <meta name="robots" content="noindex">
-<meta name="theme-color" content="#0B0E14">
+<meta name="theme-color" content="#FFFFFF">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+JP:wght@400;500;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/style.css?v=20261004">
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;700&family=Archivo+Black&family=JetBrains+Mono:wght@400;500&family=Noto+Sans+JP:wght@400;500;700;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/style.css?v=20261008">
 </head>
 <body>
-<header class="topbar">
-  <a class="brand" href="#today" aria-label="tech-radar トップ"><span class="brand-mark" aria-hidden="true">&gt;_</span><span class="brand-name">tech-radar</span></a>
+<header class="mast">
+  <a class="brand" href="#today" aria-label="DAILY トップ">DAILY</a>
+  <div class="datenav" aria-label="日付">
+    <button type="button" id="date-prev" aria-label="前の日">←</button>
+    <label><span class="sr-only">日付</span><select id="date"></select></label>
+    <button type="button" id="date-next" aria-label="次の日">→</button>
+  </div>
   <nav class="tabs" aria-label="画面">
-    <a href="#today" data-view="today">today.md</a>
-    <a href="#reader" data-view="reader">reader/</a>
-    <a href="#radar" data-view="radar">radar.svg</a>
-    <a href="#market" data-view="market">market.map</a>
+    <a href="#today" data-view="today">TODAY</a>
+    <a href="#reader" data-view="reader">READ</a>
+    <a href="#radar" data-view="radar">RADAR</a>
+    <a href="#market" data-view="market">MARKET</a>
   </nav>
   <div class="seg" id="domain" role="group" aria-label="領域で絞り込み">
-    <button type="button" data-domain="all">all</button>
-    <button type="button" data-domain="tech">tech</button>
-    <button type="button" data-domain="money">money</button>
+    <button type="button" data-domain="all">ALL</button>
+    <button type="button" data-domain="tech">TECH</button>
+    <button type="button" data-domain="money">MONEY</button>
   </div>
   <label class="search">
-    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg>
     <span class="sr-only">記事を検索</span>
-    <input type="search" id="q" placeholder="grep articles…" autocomplete="off">
+    <input type="search" id="q" placeholder="SEARCH" autocomplete="off">
     <kbd>/</kbd>
-  </label>
-  <label class="datepick">
-    <span class="sr-only">日付</span>
-    <select id="date"></select>
   </label>
 </header>
 
@@ -42,10 +42,19 @@
   <section class="view" id="view-today" aria-label="今日のブリーフ"></section>
   <section class="view" id="view-reader" aria-label="リーダー"></section>
   <section class="view" id="view-radar" aria-label="キーワード・レーダー"></section>
-  <section class="view" id="view-market" aria-label="マーケットマップ"></section>
+  <section class="view" id="view-market" aria-label="マーケット"></section>
 </main>
 
-<footer class="statusbar" id="statusbar"></footer>
-<script src="assets/app.js?v=20261004"></script>
+<footer class="status" id="statusbar"></footer>
+
+<nav class="bnav" aria-label="画面（モバイル）">
+  <a href="#today" data-view="today"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="18" height="18"/><path d="M3 10h18"/></svg>TODAY</a>
+  <a href="#reader" data-view="reader"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h10"/></svg>READ</a>
+  <a href="#radar" data-view="radar"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="3"/></svg>RADAR</a>
+  <a href="#market" data-view="market"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 18l5-7 4 4 5-8 4 5"/></svg>MARKET</a>
+</nav>
+
+<div class="stories" id="stories" hidden role="dialog" aria-modal="true" aria-label="ストーリー"></div>
+<script src="assets/app.js?v=20261008"></script>
 </body>
 </html>
