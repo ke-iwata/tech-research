@@ -1,0 +1,859 @@
+{
+  "date": "2026-10-09",
+  "generated_at": "2026-10-09T06:30:00+09:00",
+  "stats": {
+    "collected": 226,
+    "sources_ok": 26,
+    "sources_total": 26,
+    "by_group": {
+      "tech_blog": 76,
+      "news": 90,
+      "hackernews": 45,
+      "official": 15
+    },
+    "failed_sources": []
+  },
+  "digest": [
+    {
+      "category": "ai",
+      "text": "Docker が YAML でエージェントを定義して MCP サーバーを使える Docker Agent を公開し、Microsoft はエージェントを OS 上でポリシーに沿って隔離する実行基盤 MXC を一般提供した。エージェントの実行環境づくりが進んでいる。",
+      "keywords": [
+        "ai-agent",
+        "docker",
+        "sandbox"
+      ]
+    },
+    {
+      "category": "sec",
+      "text": "ローソンが「ローソンID」215 万件超の個人情報漏えいを公表。JPCERT/CC も、公開アプリの解析から内部 API を突く攻撃や Metabase の脆弱性の悪用など、相次ぐ国内の不正アクセスについて注意喚起を出した。",
+      "keywords": [
+        "data-breach",
+        "security-incident",
+        "authorization"
+      ]
+    },
+    {
+      "category": "macro",
+      "text": "日銀の 10 月支店長会議で全 9 地域が景気を回復・持ち直しと報告し、東北と四国の判断を引き上げた。財務省は国債トークン化の研究会を始め、3 つの類型を示した。",
+      "keywords": [
+        "boj-statistics",
+        "jgb",
+        "tokenization"
+      ]
+    },
+    {
+      "category": "stocks",
+      "text": "10 月 8 日の日経平均は 993 円安の 6 万 9042 円と続落し、7 万円を割った。原油高によるインフレ懸念と米長期金利の上昇が重荷とされた。",
+      "keywords": [
+        "nikkei225",
+        "interest-rates"
+      ]
+    },
+    {
+      "category": "crypto",
+      "text": "ヴィタリック・ブテリン氏らが、AI による数学の進歩で ECDSA や格子暗号が想定より早く破られる恐れを指摘。一方で急いで資金を移すことは勧めないとした。",
+      "keywords": [
+        "ethereum",
+        "post-quantum"
+      ]
+    }
+  ],
+  "items": [
+    {
+      "id": "2026-10-09-hn-docker-agent",
+      "url": "https://github.com/docker/docker-agent",
+      "title": "Docker Agent",
+      "source": "github.com",
+      "source_group": "hackernews",
+      "published_at": "2026-10-08T02:48:38+09:00",
+      "category": "ai",
+      "keywords": [
+        "docker",
+        "ai-agent",
+        "mcp-server"
+      ],
+      "score": 90,
+      "why": "matched: mcp, llm（HN 292 pt）",
+      "read_min": 6,
+      "tldr": "Docker が AI エージェントの構築・実行ツール Docker Agent を GitHub で公開している。docker CLI のプラグインとして動き、エージェントを YAML で定義して `docker agent run agent.yaml` で実行する。",
+      "points": [
+        "専門エージェントのチームを組んで互いにタスクを委譲でき、think / todo / memory の組み込みツールと複数方式の RAG を持つ",
+        "任意の MCP サーバー（ローカル・リモート・Docker 上）をツールセットとして使える。OCI レジストリ経由でエージェントを push / pull して配布できる",
+        "モデルは OpenAI・Anthropic・Gemini・AWS Bedrock・Mistral・xAI のほか、Docker Model Runner でローカルモデルも使える。ライセンスは Apache-2.0"
+      ],
+      "code": null,
+      "signal": "▲ 292",
+      "pick": true
+    },
+    {
+      "id": "2026-10-09-forest-ms-execution-containers",
+      "url": "https://forest.watch.impress.co.jp/docs/news/2146735.html",
+      "title": "「Microsoft Execution Containers」が一般提供、AIエージェントを安全に動かす基盤／Windows/macOS/Linuxで「Rust」「.NET」「Node.js」対応のSDKを提供",
+      "source": "hatena/it",
+      "source_group": "tech_blog",
+      "published_at": "2026-10-08T18:20:27+09:00",
+      "category": "ai",
+      "keywords": [
+        "microsoft",
+        "ai-agent",
+        "sandbox"
+      ],
+      "score": 86,
+      "why": "matched: 認可, 設計（エージェントの実行制御）",
+      "read_min": 5,
+      "tldr": "Microsoft が AI エージェントを OS 上で隔離して動かす実行基盤「Microsoft Execution Containers（MXC）」を一般提供した。アクセスできるファイル・書き込み先・接続先・ツールをエージェントの外のポリシーで定義し、その範囲でしか動かせないようにする。",
+      "points": [
+        "隔離方式はプロセスコンテナー（Windows は AppContainer、macOS は Seatbelt、Linux は Bubblewrap）、Windows 11 のセッションコンテナー・WSL コンテナー、MicroVM（Windows 11 / Linux、試験的）の 4 種類",
+        "ポリシーには遮断する Enforcement、遮断を記録する Learning、許可して記録する Permissive の 3 モードがある。SDK は Rust・.NET・Node.js 向けで、設定は共通の JSON スキーマ",
+        "GitHub Copilot・OpenAI Codex・OpenClaw などが対応済みで、Claude Code などが対応予定。Intune での管理や Entra との連携は今後の予定とされる"
+      ],
+      "code": null,
+      "signal": null,
+      "pick": true
+    },
+    {
+      "id": "2026-10-09-impress-lawson-breach",
+      "url": "https://internet.watch.impress.co.jp/docs/news/2146917.html",
+      "title": "ローソン、不正アクセスによる215万件超の個人情報漏えいが判明",
+      "source": "hatena/it",
+      "source_group": "tech_blog",
+      "published_at": "2026-10-08T21:04:31+09:00",
+      "category": "sec",
+      "keywords": [
+        "data-breach",
+        "security-incident"
+      ],
+      "score": 84,
+      "why": "matched: 認可（API 経由の不正アクセス）",
+      "read_min": 4,
+      "tldr": "ローソンは、ローソンアプリに関連するシステムが不正に使われ、「ローソンID」215 万 5345 件の個人情報が漏えいしたと発表した。アプリの予約機能でも 26 件の漏えいがあった。",
+      "points": [
+        "ローソンID ではメールアドレス・氏名・性別・電話番号などが、アプリ予約では氏名・電話番号・クレジットカード番号の一部が対象",
+        "不正アクセスは ID が 9 月 12〜14 日、予約が 9 月 17 日。10 月 7 日の調査で判明した",
+        "アクセス元をブロックし、予約機能を停止した。対象者には個別にメールで連絡するとしている"
+      ],
+      "code": null,
+      "signal": null,
+      "pick": true
+    },
+    {
+      "id": "2026-10-09-jpcert-alert-unauthorized-access",
+      "url": "https://www.jpcert.or.jp/at/2026/at260030.html",
+      "title": "直近で相次いでいる国内組織における不正アクセスに関する注意喚起",
+      "source": "hatena/it",
+      "source_group": "tech_blog",
+      "published_at": "2026-10-08T11:17:29+09:00",
+      "category": "sec",
+      "keywords": [
+        "security-incident",
+        "vulnerability-management",
+        "authorization"
+      ],
+      "score": 88,
+      "why": "matched: 認可（JPCERT/CC の注意喚起）",
+      "read_min": 8,
+      "tldr": "JPCERT/CC が、2026 年 9 月前後に国内組織で相次ぐ不正アクセス・情報漏えいについて注意喚起を出した。一般向けアプリだけでなく、BI ツールや従業員向け管理システムも被害を受けているとしている。",
+      "points": [
+        "確認された手口は、既知の脆弱性の走査、公開アプリを解析して API のエンドポイントやキーを特定し内部 API を操作する攻撃、Metabase の SQL インジェクション（CVE-2026-72898）の悪用",
+        "内部 API では権限変更・不正なアカウント作成・NoSQL インジェクションによるアカウント情報の探索などが試みられた",
+        "対策として、全エンドポイントでのアクセス制御、レート制限、トークンの最小権限と有効期限、不要な管理機能の公開停止などを挙げている"
+      ],
+      "code": null,
+      "signal": null,
+      "pick": true
+    },
+    {
+      "id": "2026-10-09-hn-ts-rust",
+      "url": "https://github.com/pingdotgg/ts-rust",
+      "title": "Port of the TypeScript compiler, checker and lsp to Rust, by LLM",
+      "source": "github.com",
+      "source_group": "hackernews",
+      "published_at": "2026-10-08T09:46:00+09:00",
+      "category": "be",
+      "keywords": [
+        "ai-coding",
+        "programming-language",
+        "typescript"
+      ],
+      "score": 80,
+      "why": "matched: llm, 設計（HN 106 pt）",
+      "read_min": 7,
+      "tldr": "Go で書かれた TypeScript 7 のコンパイラー（tsc）を、LLM に書かせて Rust に移植した実験的プロジェクト ts-rust（tsc-rs）が公開された。作者は「コードを 1 行も読んでいない」としている。",
+      "points": [
+        "OpenAI のモデルで 40 万ドル超のトークンを使った試みは互換性約 84% で止まり、Claude Opus 5.5 で作り直して約 2 週間・約 2.4 万ドルで動く版に至ったと作者は書いている",
+        "移植した Go のテスト 181,711 件がすべて通り、60 のプロジェクトで型チェックが Go 版の約半分の時間になったと作者が報告している（作者の環境での自己測定）",
+        "Linux x64 と macOS arm64 のみ。モノレポでの出力差異や長時間の編集でのメモリ増加など既知の問題がある"
+      ],
+      "code": null,
+      "signal": "▲ 106",
+      "pick": true
+    },
+    {
+      "id": "2026-10-09-hn-meta-ms-claude-usage",
+      "url": "https://www.rswebsols.com/news/meta-and-microsoft-take-steps-to-reduce-employee-usage-of-claude-ai/",
+      "title": "Meta and Microsoft take steps to reduce employee usage of Claude AI",
+      "source": "rswebsols.com",
+      "source_group": "hackernews",
+      "published_at": "2026-10-08T03:49:40+09:00",
+      "category": "ai",
+      "keywords": [
+        "anthropic",
+        "claude",
+        "llm-cost"
+      ],
+      "score": 72,
+      "why": "matched: llm（HN 363 pt）",
+      "read_min": 4,
+      "tldr": "Meta と Microsoft が社員による Claude の利用を減らす措置を取ったと報じられた（HN 363 pt）。本文は取得できず、詳細は未確認。",
+      "points": [],
+      "code": null,
+      "signal": "▲ 363",
+      "pick": false
+    },
+    {
+      "id": "2026-10-09-hn-openai-math-withdrawn",
+      "url": "https://github.com/openai/math/blob/main/history.md",
+      "title": "OpenAI Withdraws 3 Math Papers",
+      "source": "github.com",
+      "source_group": "hackernews",
+      "published_at": "2026-10-08T17:08:37+09:00",
+      "category": "ai",
+      "keywords": [
+        "openai",
+        "hallucination"
+      ],
+      "score": 70,
+      "why": "matched: llm（HN 337 pt）",
+      "read_min": 3,
+      "tldr": "OpenAI が数学の成果 3 件を取り下げたとして、公開リポジトリの履歴ファイルが HN で話題になった（HN 337 pt）。",
+      "points": [],
+      "code": null,
+      "signal": "▲ 337",
+      "pick": false
+    },
+    {
+      "id": "2026-10-09-hn-openai-revenue",
+      "url": "https://www.cnbc.com/2026/10/08/open-ai-revenue-nvidia-oracle-coreweave.html",
+      "title": "OpenAI annualised revenues $20B less than previously signalled",
+      "source": "cnbc.com",
+      "source_group": "hackernews",
+      "published_at": "2026-10-09T01:45:58+09:00",
+      "category": "ai",
+      "keywords": [
+        "openai",
+        "ai-economy"
+      ],
+      "score": 66,
+      "why": "matched: llm（HN 237 pt）",
+      "read_min": 4,
+      "tldr": "OpenAI の年換算売上が、これまで示されていた水準より 200 億ドル少ないと CNBC が報じた（HN 237 pt）。",
+      "points": [],
+      "code": null,
+      "signal": "▲ 237",
+      "pick": false
+    },
+    {
+      "id": "2026-10-09-hn-jpeg-xl-chrome",
+      "url": "https://developer.chrome.com/blog/jpeg-xl-in-chrome",
+      "title": "Shipping JPEG XL in Chrome",
+      "source": "developer.chrome.com",
+      "source_group": "hackernews",
+      "published_at": "2026-10-07T20:25:02+09:00",
+      "category": "be",
+      "keywords": [
+        "google",
+        "jpeg-xl"
+      ],
+      "score": 58,
+      "why": "反応大（HN 559 pt）",
+      "read_min": 5,
+      "tldr": "Chrome が一度削除した JPEG XL のサポートを改めて搭載すると Chrome 開発者ブログが説明した（HN 559 pt）。",
+      "points": [],
+      "code": null,
+      "signal": "▲ 559",
+      "pick": false
+    },
+    {
+      "id": "2026-10-09-hn-github-incident",
+      "url": "https://www.githubstatus.com/incidents/djlmxz2zd0j7",
+      "title": "Incident with Git Operations, Pull Requests and Actions – Resolved",
+      "source": "githubstatus.com",
+      "source_group": "hackernews",
+      "published_at": "2026-10-08T00:17:23+09:00",
+      "category": "cloud",
+      "keywords": [
+        "github",
+        "github-actions"
+      ],
+      "score": 60,
+      "why": "反応大（HN 226 pt）",
+      "read_min": 2,
+      "tldr": "GitHub で Git 操作・プルリクエスト・Actions に影響する障害があり、解消済みと報告された（HN 226 pt）。",
+      "points": [],
+      "code": null,
+      "signal": "▲ 226",
+      "pick": false
+    },
+    {
+      "id": "2026-10-09-cloudflare-agentic-secops",
+      "url": "https://blog.cloudflare.com/agentic-security-operations/",
+      "title": "Building an evidence-grounded agentic security operations harness on Cloudflare",
+      "source": "cloudflare blog",
+      "source_group": "tech_blog",
+      "published_at": "2026-10-08T01:30:36+09:00",
+      "category": "sec",
+      "keywords": [
+        "cloudflare",
+        "ai-agent",
+        "ai-security"
+      ],
+      "score": 74,
+      "why": "matched: 設計（エージェント設計）",
+      "read_min": 10,
+      "tldr": "Cloudflare Managed Defense が、Workers 上の専門 AI エージェント群でセキュリティアラートを分析する仕組みを紹介した。決定的な証拠収集とモデルの推論を分ける設計だとしている。",
+      "points": [],
+      "code": null,
+      "signal": null,
+      "pick": false
+    },
+    {
+      "id": "2026-10-09-aws-ai-vuln-harness",
+      "url": "https://aws.amazon.com/blogs/security/building-your-ai-vulnerability-harness-part-1/",
+      "title": "Building your AI vulnerability harness, Part 1 | Amazon Web Services",
+      "source": "aws.amazon.com",
+      "source_group": "tech_blog",
+      "published_at": "2026-10-08T22:18:36+09:00",
+      "category": "sec",
+      "keywords": [
+        "aws",
+        "ai-security",
+        "vulnerability-management"
+      ],
+      "score": 68,
+      "why": "matched: aws",
+      "read_min": 10,
+      "tldr": "AWS セキュリティブログが、AI を使った脆弱性探索のハーネスを自前で作る連載の第 1 回を公開した。",
+      "points": [],
+      "code": null,
+      "signal": null,
+      "pick": false
+    },
+    {
+      "id": "2026-10-09-publickey-sakura-ai-engine",
+      "url": "https://www.publickey1.jp/blog/26/gpuai_engine.html",
+      "title": "さくらインターネット、GPU専有によりトークン消費量を気にせず定額で利用できる「さくらのAI Engineプライベートエディション」提供開始を発表",
+      "source": "publickey",
+      "source_group": "news",
+      "published_at": "2026-10-09T00:49:01+09:00",
+      "category": "ai",
+      "keywords": [
+        "sovereign-ai",
+        "llm-cost"
+      ],
+      "score": 70,
+      "why": "matched: llm",
+      "read_min": 3,
+      "tldr": "さくらインターネットが、GPU を専有してトークン消費量を気にせず定額で使える「さくらのAI Engine プライベートエディション」の提供を始めた。",
+      "points": [],
+      "code": null,
+      "signal": null,
+      "pick": false
+    },
+    {
+      "id": "2026-10-09-zenn-breach-19",
+      "url": "https://zenn.dev/bita/articles/1616afdb93c4a6",
+      "title": "🔓2026年9〜10月の情報漏洩19件、公表文を全部読んで考えたこと",
+      "source": "zenn.dev",
+      "source_group": "tech_blog",
+      "published_at": "2026-10-08T09:43:37+09:00",
+      "category": "sec",
+      "keywords": [
+        "data-breach",
+        "security-incident"
+      ],
+      "score": 76,
+      "why": "matched: 設計",
+      "read_min": 9,
+      "tldr": "9/11〜10/5 に公表された不正アクセス・情報漏えい 19 件の公表文を読んだ記事。手口まで公表された 8 件はいずれも脆弱性か不正ログインで、AI への言及はなかったとしている。",
+      "points": [],
+      "code": null,
+      "signal": null,
+      "pick": false
+    },
+    {
+      "id": "2026-10-09-hn-push-ifs-up",
+      "url": "https://debasishg.github.io/blog/push-ifs-up-fors-down/",
+      "title": "Push ifs up and fors down: The idiom, its algebra, and its limits",
+      "source": "debasishg.github.io",
+      "source_group": "hackernews",
+      "published_at": "2026-10-08T03:43:18+09:00",
+      "category": "be",
+      "keywords": [
+        "software-design"
+      ],
+      "score": 64,
+      "why": "matched: 設計（HN 176 pt）",
+      "read_min": 12,
+      "tldr": "「if は上へ、for は下へ」という書き方の慣用句を、代数的な見方と限界から整理した記事（HN 176 pt）。",
+      "points": [],
+      "code": null,
+      "signal": "▲ 176",
+      "pick": false
+    },
+    {
+      "id": "2026-10-09-boj-branch-managers",
+      "url": "https://www.boj.or.jp/research/brp/rer/rera261008.htm",
+      "title": "各地域からみた景気の現状（2026年10月支店長会議における報告）",
+      "source": "日本銀行",
+      "source_group": "official",
+      "published_at": "2026-10-08T14:00:00+09:00",
+      "category": "macro",
+      "keywords": [
+        "boj-statistics",
+        "semiconductor"
+      ],
+      "score": 86,
+      "why": "日銀の公式発表（支店長会議・さくらレポート）",
+      "read_min": 8,
+      "tldr": "日銀の 10 月支店長会議で、全 9 地域が景気を「緩やかに回復」「持ち直し」「緩やかに持ち直し」と報告した。7 月と比べ東北と四国の 2 地域で判断を引き上げた。",
+      "points": [
+        "輸出・生産は AI 関連需要の拡大で、電子部品・半導体製造装置・工作機械・データセンター向け通信機器など資本財中心に増加との報告が多い",
+        "設備投資は建設コスト上昇や人手不足で先送りの動きが一部にあるが、データセンターや電力関連など意欲は旺盛とされた",
+        "個人消費は実質所得の改善で底堅い一方、スーパーやコンビニでは節約志向から来店客数の減少や低価格 PB への需要シフトが報告された"
+      ],
+      "code": null,
+      "signal": null,
+      "pick": true
+    },
+    {
+      "id": "2026-10-09-nada-mof-jgb-tokenization",
+      "url": "https://www.nadanews.com/371545/",
+      "title": "財務省、国債トークン化の「3類型」を提示",
+      "source": "nadanews.com",
+      "source_group": "news",
+      "published_at": "2026-10-08T22:20:23+09:00",
+      "category": "macro",
+      "keywords": [
+        "jgb",
+        "tokenization",
+        "mof"
+      ],
+      "score": 82,
+      "why": "財務省の研究会・国債",
+      "read_min": 5,
+      "tldr": "財務省が「国債のオンチェーン対応に関する研究会」の初会合を開き、国債のトークン化を 3 つの類型に整理した資料を示した。2027 年 1 月をめどに報告をまとめる。",
+      "points": [
+        "類型 1 は国債で運用する MMF の受益権のオンチェーン化、類型 2 は現行の振替口座簿のオンチェーン対応、類型 3 は振替制度の外で新しい形の国債を発行する方式",
+        "利点として担保・流動性管理の効率化（特に海外投資家）や、国債の安定消化・市場の国際競争力の維持を挙げている",
+        "課題は市場の分断、24 時間取引での価格急変の波及、制度・システム改修のコスト。いずれも「議論のための暫定整理」とした"
+      ],
+      "code": null,
+      "signal": null,
+      "pick": true
+    },
+    {
+      "id": "2026-10-09-coinpost-vitalik-ai-crypto-risk",
+      "url": "https://coinpost.jp/?p=741693",
+      "title": "ヴィタリック氏「慌てて資金を移すのは勧めない」 AIの暗号解読リスクで",
+      "source": "CoinPost",
+      "source_group": "news",
+      "published_at": "2026-10-08T10:18:44+09:00",
+      "category": "crypto",
+      "keywords": [
+        "ethereum",
+        "post-quantum",
+        "bitcoin"
+      ],
+      "score": 78,
+      "why": "matched: ビットコイン（暗号の安全性）",
+      "read_min": 5,
+      "tldr": "イーサリアム共同創設者のヴィタリック・ブテリン氏が、AI による数学研究の加速で格子暗号や ML-DSA の安全性が想定より早く損なわれる恐れがあると X で指摘した。一方で「慌てて資金を移すのは勧めない」とした。",
+      "points": [
+        "楕円曲線（ECDSA）だけでなく、量子耐性とされる格子暗号・ML-DSA・FHE も新たなリスク領域に挙げた。ハッシュ関数は現時点で強化の必要はないとする",
+        "対策として、公開鍵がチェーン上に出ていない未使用アドレスでの保管や、マルチシグの承認をオフチェーンで行うことを挙げた",
+        "過去にはハッキング被害より移行作業の失敗で失われた資金のほうが多かったとして、急な移行に注意を促した。イーサリアム財団のドレイク氏も同日、備えを呼びかけている"
+      ],
+      "code": null,
+      "signal": null,
+      "pick": true
+    },
+    {
+      "id": "2026-10-09-fisco-nikkei-close-1008",
+      "url": "https://finance.yahoo.co.jp/news/detail/823d4ce68faaf5d71652095a6ee0d25e4dcedf6d",
+      "title": "日経平均寄与度ランキング（大引け）～日経平均は続落、ソフトバンクGが約218円分押し下げ",
+      "source": "finance.yahoo.co.jp",
+      "source_group": "news",
+      "published_at": "2026-10-08T16:48:00+09:00",
+      "category": "stocks",
+      "keywords": [
+        "nikkei225",
+        "semiconductor",
+        "interest-rates"
+      ],
+      "score": 80,
+      "why": "matched: 金利（前営業日の終値）",
+      "read_min": 3,
+      "tldr": "10 月 8 日の日経平均は 993 円 60 銭安の 6 万 9042 円 11 銭と続落し、7 万円を割り込んで安値引けした。原油高によるインフレ懸念と米長期金利の上昇が重荷とされた。",
+      "points": [
+        "値上がり 56・値下がり 165 銘柄。ソフトバンクグループ 1 銘柄で約 218 円押し下げ、東京エレクトロン・TDK・アドバンテストも下げた",
+        "前日の米国株は原油高と金利上昇への警戒から反落していた",
+        "9 月 16 日以降に 6,500 円超上昇しており、短期的な過熱感から利益確定売りも出やすかったと解説している"
+      ],
+      "code": null,
+      "signal": null,
+      "pick": true
+    },
+    {
+      "id": "2026-10-09-diamond-boj-yen",
+      "url": "https://diamond.jp/articles/-/400783",
+      "title": "日銀「9月利上げ」後も進む円安は市場の“先走り”、日米当局の口先介入は今後も続く!? - 日銀 早耳深掘",
+      "source": "ダイヤモンド",
+      "source_group": "news",
+      "published_at": "2026-10-09T04:25:00+09:00",
+      "category": "macro",
+      "keywords": [
+        "boj-rate-hike",
+        "fx"
+      ],
+      "score": 78,
+      "why": "matched: 金利, 為替",
+      "read_min": 6,
+      "tldr": "日銀の 9 月利上げ後も円安が進んだのは、市場が日銀の今後の利上げ姿勢への疑念などから先走った面があると論じる記事。FRB の追加利上げも予想され内外金利差は縮まりにくいとしている。",
+      "points": [],
+      "code": null,
+      "signal": null,
+      "pick": false
+    },
+    {
+      "id": "2026-10-09-diamond-tech-stocks-rates",
+      "url": "https://diamond.jp/articles/-/400823",
+      "title": "絶好調ハイテク株もむしばむ金利上昇 - WSJ PickUp",
+      "source": "ダイヤモンド",
+      "source_group": "news",
+      "published_at": "2026-10-09T04:05:00+09:00",
+      "category": "stocks",
+      "keywords": [
+        "us-stocks",
+        "interest-rates"
+      ],
+      "score": 70,
+      "why": "matched: 金利, 米国株",
+      "read_min": 4,
+      "tldr": "金利上昇で多くの業種の株価が下がるなか、人気のハイテク銘柄も以前のような高いバリュエーションを保てなくなっているとする WSJ の記事。",
+      "points": [],
+      "code": null,
+      "signal": null,
+      "pick": false
+    },
+    {
+      "id": "2026-10-09-toyokeizai-cyber-stocks",
+      "url": "https://toyokeizai.net/articles/-/960621?utm_source=rss&utm_medium=http&utm_campaign=link_back",
+      "title": "個人情報流出が相次ぐ中でサイバーセキュリティー8社がストップ高…HISからパスポート情報流出も | 政治・経済・投資 | 東洋経済オンライン",
+      "source": "東洋経済",
+      "source_group": "news",
+      "published_at": "2026-10-08T22:07:00+09:00",
+      "category": "stocks",
+      "keywords": [
+        "security-incident",
+        "data-breach"
+      ],
+      "score": 62,
+      "why": "個人情報流出が相次ぐ中の株価の動き",
+      "read_min": 4,
+      "tldr": "個人情報の流出が相次ぐなか、東京市場でサイバーセキュリティー関連 8 社がストップ高になった。HIS からのパスポート情報流出も伝えられている。",
+      "points": [],
+      "code": null,
+      "signal": null,
+      "pick": false
+    },
+    {
+      "id": "2026-10-09-coinpost-btc-demand",
+      "url": "https://coinpost.jp/?p=741867",
+      "title": "ビットコイン総需要がプラス転換 現物需要のマイナス幅9割縮小＝アナリスト",
+      "source": "CoinPost",
+      "source_group": "news",
+      "published_at": "2026-10-08T17:20:21+09:00",
+      "category": "crypto",
+      "keywords": [
+        "bitcoin"
+      ],
+      "score": 72,
+      "why": "matched: ビットコイン",
+      "read_min": 3,
+      "tldr": "クリプトクアントのアナリストが、ビットコインの総需要が 1 万 4,000 BTC 超とプラス圏に戻ったと指摘した。現物需要は 9 月 20 日の -20 万 7,000 BTC から -1 万 7,000 BTC まで改善したという。",
+      "points": [],
+      "code": null,
+      "signal": null,
+      "pick": false
+    },
+    {
+      "id": "2026-10-09-coinpost-greece-crypto-tax",
+      "url": "https://coinpost.jp/?p=741903",
+      "title": "ギリシャ、個人の仮想通貨売買益に10％課税する法案──15％から低下",
+      "source": "CoinPost",
+      "source_group": "news",
+      "published_at": "2026-10-09T05:00:16+09:00",
+      "category": "crypto",
+      "keywords": [
+        "crypto-tax"
+      ],
+      "score": 60,
+      "why": "暗号資産の税制",
+      "read_min": 3,
+      "tldr": "ギリシャ財務省が、個人の暗号資産譲渡益に 10% で課税する規定を含む法案を意見公募にかけた。年 500 ユーロまでの譲渡益は非課税とする。",
+      "points": [],
+      "code": null,
+      "signal": null,
+      "pick": false
+    },
+    {
+      "id": "2026-10-09-nada-samsung-usdc",
+      "url": "https://www.nadanews.com/371345/",
+      "title": "サムスン、米国8200万台のGalaxyにUSDC導入へ──ソラナ・Suiで国際送金",
+      "source": "CoinDesk JAPAN",
+      "source_group": "news",
+      "published_at": "2026-10-08T14:15:43+09:00",
+      "category": "crypto",
+      "keywords": [
+        "stablecoin",
+        "payments"
+      ],
+      "score": 64,
+      "why": "ステーブルコインの普及",
+      "read_min": 3,
+      "tldr": "サムスン電子の米国法人が、Samsung Wallet にドル連動のステーブルコイン USDC を導入し、ソラナと Sui を使った国際送金に対応すると発表した。対象は米国の約 8,200 万台。",
+      "points": [],
+      "code": null,
+      "signal": null,
+      "pick": false
+    },
+    {
+      "id": "2026-10-09-nada-ripple-leveraged-etf",
+      "url": "https://www.nadanews.com/371505/",
+      "title": "リップル、米大手銀行と競合──ウォール街のお家芸「レバレッジ型ETFへの資金提供」で＝WSJ",
+      "source": "CoinDesk JAPAN",
+      "source_group": "news",
+      "published_at": "2026-10-08T21:30:24+09:00",
+      "category": "funds",
+      "keywords": [
+        "crypto-etf",
+        "fund-flows"
+      ],
+      "score": 56,
+      "why": "ETF の資金調達をめぐる競争",
+      "read_min": 3,
+      "tldr": "リップルが、米国のレバレッジ型 ETF への資金提供で大手銀行や証券会社と競合していると WSJ が報じた。",
+      "points": [],
+      "code": null,
+      "signal": null,
+      "pick": false
+    },
+    {
+      "id": "2026-10-09-fsa-tsumitate-list",
+      "url": "https://www.fsa.go.jp/policy/nisa2/products/index.html",
+      "title": "その他,つみたて投資枠対象商品届出一覧及びつみたて投資枠対象商品の概要を更新しました。",
+      "source": "金融庁",
+      "source_group": "official",
+      "published_at": "2026-10-09T02:00:00+09:00",
+      "category": "funds",
+      "keywords": [
+        "new-nisa",
+        "index-fund",
+        "fsa"
+      ],
+      "score": 74,
+      "why": "matched: nisa（金融庁の公式更新）",
+      "read_min": 2,
+      "tldr": "金融庁が NISA つみたて投資枠の対象商品届出一覧と対象商品の概要を更新した。",
+      "points": [],
+      "code": null,
+      "signal": null,
+      "pick": false
+    },
+    {
+      "id": "2026-10-09-morningstar-fund-flows-aug",
+      "url": "https://global.morningstar.com/ja/funds/japan-asset-flows-updateaugust-2026",
+      "title": "【投信資金フロー動向】: 2026年8月",
+      "source": "morningstar.com",
+      "source_group": "news",
+      "published_at": null,
+      "category": "funds",
+      "keywords": [
+        "fund-flows",
+        "index-fund"
+      ],
+      "score": 72,
+      "why": "matched: インデックス（投信の資金フロー）",
+      "read_min": 4,
+      "tldr": "モーニングスターの集計（推計）では、8 月の国内公募追加型株式投信への純資金流入は約 2 兆 1,346 億円で、3 カ月連続で 2 兆円を超えた。世界株式型への流入が 1 兆 5,328 億円で中心だった。",
+      "points": [],
+      "code": null,
+      "signal": null,
+      "pick": false
+    },
+    {
+      "id": "2026-10-09-0systems-mortgage-oct",
+      "url": "https://0systems.com/2026/10/03/53465/",
+      "title": "【住宅ローン】2026年10月 住宅ローン金利ランキング｜変動金利・固定金利を比較、固定は4%台へ",
+      "source": "0systems.com",
+      "source_group": "news",
+      "published_at": "2026-10-03T00:00:00+09:00",
+      "category": "realestate",
+      "keywords": [
+        "mortgage-rates",
+        "flat35"
+      ],
+      "score": 70,
+      "why": "matched: 住宅ローン, 金利",
+      "read_min": 4,
+      "tldr": "2026 年 10 月の住宅ローン金利のまとめ。変動金利で一部の金融機関が引き上げ、フラット 35 を含む 35 年固定も上昇が目立ったとしている。",
+      "points": [],
+      "code": null,
+      "signal": null,
+      "pick": false
+    },
+    {
+      "id": "2026-10-09-diamond-condo-management-chubu",
+      "url": "https://diamond.jp/articles/-/400707",
+      "title": "【中部200物件】マンション管理頑張ってるランキング！2年で最も改善したのは…？6位キングスコート豊田生駒、1位は？ - マンション羅針盤 管理＆売買",
+      "source": "ダイヤモンド",
+      "source_group": "news",
+      "published_at": "2026-10-09T04:35:00+09:00",
+      "category": "realestate",
+      "keywords": [
+        "condo-management"
+      ],
+      "score": 50,
+      "why": "不動産（マンション管理）",
+      "read_min": 5,
+      "tldr": "マンション管理の改善度に注目した「管理頑張るマンションランキング」の中部編 200 物件。",
+      "points": [],
+      "code": null,
+      "signal": null,
+      "pick": false
+    }
+  ],
+  "social": [
+    {
+      "network": "hn",
+      "author": null,
+      "url": "https://news.ycombinator.com/item?id=49991227",
+      "text": "『Shipping JPEG XL in Chrome』のスレッド。383 件のコメント",
+      "metrics": "▲ 559  ✉ 383",
+      "heat": 100,
+      "category": "be",
+      "keywords": [
+        "google",
+        "jpeg-xl"
+      ],
+      "posted_at": "2026-10-07T20:25:02+09:00"
+    },
+    {
+      "network": "hn",
+      "author": null,
+      "url": "https://news.ycombinator.com/item?id=49997161",
+      "text": "『Meta and Microsoft take steps to reduce employee usage of Claude AI』のスレッド。379 件のコメント",
+      "metrics": "▲ 363  ✉ 379",
+      "heat": 90,
+      "category": "ai",
+      "keywords": [
+        "anthropic",
+        "claude"
+      ],
+      "posted_at": "2026-10-08T03:49:40+09:00"
+    },
+    {
+      "network": "hn",
+      "author": null,
+      "url": "https://news.ycombinator.com/item?id=49996259",
+      "text": "『Docker Agent』のスレッド。134 件のコメント",
+      "metrics": "▲ 292  ✉ 134",
+      "heat": 73,
+      "category": "ai",
+      "keywords": [
+        "docker",
+        "ai-agent"
+      ],
+      "posted_at": "2026-10-08T02:48:38+09:00"
+    },
+    {
+      "network": "hn",
+      "author": null,
+      "url": "https://news.ycombinator.com/item?id=50003107",
+      "text": "『OpenAI Withdraws 3 Math Papers』のスレッド。3 件のコメント",
+      "metrics": "▲ 337  ✉ 3",
+      "heat": 84,
+      "category": "ai",
+      "keywords": [
+        "openai"
+      ],
+      "posted_at": "2026-10-08T17:08:37+09:00"
+    },
+    {
+      "network": "hn",
+      "author": null,
+      "url": "https://news.ycombinator.com/item?id=50008187",
+      "text": "『OpenAI annualised revenues $20B less than previously signalled』のスレッド。141 件のコメント",
+      "metrics": "▲ 237  ✉ 141",
+      "heat": 59,
+      "category": "ai",
+      "keywords": [
+        "openai",
+        "ai-economy"
+      ],
+      "posted_at": "2026-10-09T01:45:58+09:00"
+    },
+    {
+      "network": "hn",
+      "author": null,
+      "url": "https://news.ycombinator.com/item?id=50000676",
+      "text": "『Port of the TypeScript compiler, checker and lsp to Rust, by LLM』のスレッド。204 件のコメント",
+      "metrics": "▲ 106  ✉ 204",
+      "heat": 26,
+      "category": "be",
+      "keywords": [
+        "ai-coding",
+        "typescript"
+      ],
+      "posted_at": "2026-10-08T09:46:00+09:00"
+    }
+  ],
+  "releases": [
+    {
+      "date": "2026-10-09",
+      "title": "go go1.27.2",
+      "repo": "golang/go",
+      "url": "https://github.com/golang/go/releases/tag/go1.27.2",
+      "kind": "release",
+      "note": "git タグの差分から検出",
+      "category": "be"
+    },
+    {
+      "date": "2026-10-09",
+      "title": "uv 0.12.24",
+      "repo": "astral-sh/uv",
+      "url": "https://github.com/astral-sh/uv/releases/tag/0.12.24",
+      "kind": "release",
+      "note": "git タグの差分から検出",
+      "category": "be"
+    },
+    {
+      "date": "2026-10-08",
+      "title": "日銀 支店長会議・地域経済報告（さくらレポート）",
+      "repo": null,
+      "url": "https://www.boj.or.jp/research/brp/rer/rer261008.htm",
+      "kind": "policy",
+      "note": "全 9 地域中 2 地域（東北・四国）で景気の総括判断を引き上げ",
+      "category": "macro"
+    },
+    {
+      "date": "2026-10-08",
+      "title": "財務省「国債のオンチェーン対応に関する研究会」初会合",
+      "repo": null,
+      "url": "https://www.nadanews.com/371545/",
+      "kind": "policy",
+      "note": "国債トークン化を 3 類型で整理。2027 年 1 月めどに報告",
+      "category": "macro"
+    }
+  ]
+}
