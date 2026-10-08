@@ -268,7 +268,7 @@
     const rest = items.filter((it) => !it.pick).sort((a, b) => b.score - a.score);
     if (rest.length) {
       root.append(h('div', null, sechead(`INDEX ${rest.length}`, 'pick 以外 ・ score 順'),
-        cell({ style: { padding: '12px 16px' } }, h('table', { class: 'tbl' },
+        cell({ style: { padding: '12px 16px' } }, h('table', { class: 'tbl index' },
           h('thead', null, h('tr', null, h('th', null, 'SCORE'), h('th', null, 'TOPIC'), h('th', null, 'TITLE'), h('th', null, 'SOURCE'), h('th', null, 'SIGNAL'))),
           h('tbody', null, rest.map((it) => h('tr', { class: 'row-link', onclick: () => window.open(it.url, '_blank', 'noopener') },
             h('td', { class: 'n' }, it.score), h('td', null, h('span', { class: 'pill', style: { padding: '1px 6px', fontSize: '9.5px' } }, dot(catOf(it.category).color), catOf(it.category).tag.toUpperCase())),
@@ -638,7 +638,7 @@
           h('div', { class: 'stat3' },
             h('div', null, h('span', null, 'MENTIONS 7D'), h('b', null, sel.c7)),
             h('div', null, h('span', null, 'WOW'), h('b', { class: cls(sel.wow) }, sel.wow == null ? 'NEW' : pct(sel.wow))),
-            h('div', null, h('span', null, 'FIRST SEEN'), h('b', { style: { fontSize: '15px' } }, sel.first_seen))),
+            h('div', null, h('span', null, 'FIRST SEEN'), h('b', { class: 'small', style: { fontSize: '15px' } }, sel.first_seen))),
           h('div', null, h('span', { class: 'label' }, 'TREND 12W ・ weekly mentions'), spark(weekly, 460, 70, '#0A0A0A', true)),
           h('div', { class: 'related' }, h('span', { class: 'label' }, `ARTICLES ・ ${S.date}`), arts.length ? arts.slice(0, 6).map((x) => extLink(x.url, '↳ ' + (x.title || x.text.slice(0, 60)))) : h('span', { class: 'faint', style: { fontSize: '12px' } }, 'この日の記事はありません'))),
         cell({ 'aria-label': 'リングの移動' }, eye('moves ・ last week → now'),
