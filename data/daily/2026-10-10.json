@@ -1,0 +1,813 @@
+{
+  "date": "2026-10-10",
+  "generated_at": "2026-10-10T06:30:00+09:00",
+  "stats": {
+    "collected": 243,
+    "sources_ok": 26,
+    "sources_total": 26,
+    "by_group": {
+      "news": 99,
+      "tech_blog": 84,
+      "official": 18,
+      "hackernews": 42
+    },
+    "failed_sources": []
+  },
+  "digest": [
+    {
+      "category": "cloud",
+      "text": "Deno のチームが Cloudflare に合流し、workerd のセルフホストを正式サポートにする。Deno ランタイムは 1 年の保守後に開発終了、Deno Deploy は 6 か月後に終了する。",
+      "keywords": [
+        "deno",
+        "cloudflare"
+      ]
+    },
+    {
+      "category": "sec",
+      "text": "IDCF への不正アクセスで JR 東日本（最大 609 万件）や JR 九州などの漏えいが続き、IPA・国家サイバー統括室が外部公開アプリとアカウントの点検を呼びかけた。Let's Encrypt は 2027 年 2 月から証明書を 64 日に短縮する。",
+      "keywords": [
+        "security-incident",
+        "data-breach",
+        "tls"
+      ]
+    },
+    {
+      "category": "ai",
+      "text": "Anthropic が影響の大きい OSS 向けに無料の AI 脆弱性スキャン「OSS Scanner」を開始。初期検証では 97 件中 88% が開示基準を満たした。",
+      "keywords": [
+        "anthropic",
+        "ai-security",
+        "oss"
+      ]
+    },
+    {
+      "category": "macro",
+      "text": "金融庁がプルデンシャル生命とジブラルタ生命に約 3 か月半の一部業務停止命令を出した。漏えい続発を受け、金融機関に本人確認の IC チップ読み取り移行の前倒しも要請した。",
+      "keywords": [
+        "fsa",
+        "insurance",
+        "kyc"
+      ]
+    },
+    {
+      "category": "realestate",
+      "text": "10 月の住宅ローン金利は主要 7 行すべてが変動・10 年固定を引き上げ、フラット 35 の最頻金利は 3.830% と半年で 1.34 ポイント上がった。",
+      "keywords": [
+        "mortgage-rates",
+        "flat35"
+      ]
+    }
+  ],
+  "items": [
+    {
+      "id": "2026-10-10-cloudflare-deno",
+      "url": "https://blog.cloudflare.com/deno-joins-cloudflare/",
+      "title": "Deno is joining Cloudflare",
+      "source": "blog.cloudflare.com",
+      "source_group": "tech_blog",
+      "published_at": "2026-10-09T22:25:43+09:00",
+      "category": "cloud",
+      "keywords": [
+        "cloudflare",
+        "deno",
+        "serverless"
+      ],
+      "score": 86,
+      "why": "Workers のセルフホスト・ランタイム統合（HN 860 pt）",
+      "read_min": 6,
+      "tldr": "Deno のチームが Cloudflare に加わり、Deno 側の celld と Cloudflare の workerd を統合して、Workers と Durable Objects を自前のインフラでも動かせるようにする。Deno 側の発表では、Deno ランタイムは 1 年間の保守のあと開発を終える。",
+      "points": [
+        "celld（Rust 製の単一バイナリで、外部依存はオブジェクトストレージのみ）と workerd を統合し、workerd のセルフホストを正式サポートにする。Ryan Dahl 氏と Bert Belder 氏が主導する",
+        "Deno ランタイムは今後 1 年間、バグ修正とセキュリティ更新の月次リリースを続け、その後は開発終了（オープンソースとしては残る）",
+        "Deno Deploy は 6 か月後に終了し、有料顧客には Workers への移行支援を提供。JSR は運用を続け、インフラを Cloudflare に移す"
+      ],
+      "code": null,
+      "signal": "▲ 860",
+      "pick": true
+    },
+    {
+      "id": "2026-10-10-gigazine-oss-scanner",
+      "url": "https://gigazine.net/news/20261009-anthropic-oss-scanner/",
+      "title": "Anthropicがオープンソースプロジェクト向けに無料AIセキュリティスキャンサービスの「OSS Scanner」を開始",
+      "source": "gigazine.net",
+      "source_group": "tech_blog",
+      "published_at": "2026-10-09T12:34:15+09:00",
+      "category": "sec",
+      "keywords": [
+        "anthropic",
+        "ai-security",
+        "oss",
+        "vulnerability-management"
+      ],
+      "score": 84,
+      "why": "matched: llm（AI による脆弱性検出）",
+      "read_min": 5,
+      "tldr": "Anthropic が、影響の大きい OSS プロジェクト向けに、最上位モデルで脆弱性を探すオプトイン型サービス「OSS Scanner」を始めた。メンテナーが申し込むと無料でスキャンを受けられる。",
+      "points": [
+        "主要メンテナーが GitHub の anthropics/oss-scanner リポジトリにテンプレートどおりの PR を送って申し込む。対象かどうかは個別に判断される",
+        "スキャンは AI のみで行い、報告には再現手順や説明、場合によっては修正パッチ案が付く。協調的脆弱性開示（CVD）に回す結果は専門家がレビューする",
+        "初期検証では 48 プロジェクトで 97 件を検出し、85 件（88%）が CVD の基準を満たした。誤検出は 1 件だった"
+      ],
+      "code": null,
+      "signal": null,
+      "pick": true
+    },
+    {
+      "id": "2026-10-10-gigazine-letsencrypt-64days",
+      "url": "https://gigazine.net/news/20261009-lets-encrypt-cuts-certificate-lifetimes-64-days/",
+      "title": "Let’s Encryptが2027年2月から証明書の有効期間を64日間に短縮",
+      "source": "gigazine.net",
+      "source_group": "tech_blog",
+      "published_at": "2026-10-09T11:57:29+09:00",
+      "category": "sec",
+      "keywords": [
+        "tls",
+        "acme",
+        "certificate-lifetime"
+      ],
+      "score": 80,
+      "why": "運用影響（更新スクリプト）",
+      "read_min": 4,
+      "tldr": "Let's Encrypt は 2027 年 2 月 10 日から証明書の有効期間を 90 日から 64 日に短縮し、2028 年 2 月 16 日には 45 日にする。更新タイミングを固定日数で決めている環境は見直しが必要になる。",
+      "points": [
+        "CA/Browser Forum が進める証明書の短命化に合わせた措置で、鍵漏えいや誤発行時の影響を小さくする狙い",
+        "「80 日ごと」「60 日ごと」のように固定値で更新している場合は要修正。ACME Renewal Information（ARI）対応のクライアントならほぼ影響はない",
+        "ドメイン検証結果の再利用期間も 30 日から 10 日に縮む（2028 年に 7 時間）。2026 年 10 月 14 日からテスト期間が始まる"
+      ],
+      "code": null,
+      "signal": null,
+      "pick": true
+    },
+    {
+      "id": "2026-10-10-ipa-alert-unauthorized-access",
+      "url": "https://www.ipa.go.jp/security/security-alert/2026/alert20261009.html",
+      "title": "不正アクセスによる漏えい等の事案を踏まえ、速やかに実施すべき対策等について",
+      "source": "ipa.go.jp",
+      "source_group": "official",
+      "published_at": "2026-10-09T15:26:14+09:00",
+      "category": "sec",
+      "keywords": [
+        "security-incident",
+        "data-breach",
+        "authentication"
+      ],
+      "score": 85,
+      "why": "matched: 認可（国内の不正アクセス多発への公的注意喚起）",
+      "read_min": 8,
+      "tldr": "国内の金融機関や通信事業者などで不正アクセスによる情報漏えいの公表が相次ぐなか、IPA が速やかに実施すべき対策をまとめた。特定製品の脆弱性とは断定されておらず、外部公開アプリやアカウントの侵害が起点とみられるとしている。",
+      "points": [
+        "外部公開アプリと、利用中のクラウド・VPN などの外部サービスを洗い出し、直近 1 か月→3 か月とログの異常（エラー急増、ログイン失敗、覚えのないアカウント）を確認する",
+        "異常がなくても、多要素認証、アカウント・API 連携の権限、ログの保持期間を見直す。「不要な情報は持たない」を原則に保有データを再点検する",
+        "国家サイバー統括室・総務省・経産省・金融庁も同日に注意喚起を出し、委託先を含むサプライチェーン全体での対策を求めている"
+      ],
+      "code": null,
+      "signal": null,
+      "pick": true
+    },
+    {
+      "id": "2026-10-10-itmedia-jre-idcf-breach",
+      "url": "https://www.itmedia.co.jp/news/article/2610/09/2000002171/",
+      "title": "JR東日本、「えきねっと」「ビューカード」などで漏えいか メルアドなど最大609万件 IDCFへの不正アクセスで【追記あり】",
+      "source": "itmedia.co.jp",
+      "source_group": "tech_blog",
+      "published_at": "2026-10-09T15:26:00+09:00",
+      "category": "sec",
+      "keywords": [
+        "data-breach",
+        "security-incident"
+      ],
+      "score": 74,
+      "why": "国内の大規模漏えい（クラウド事業者経由）",
+      "read_min": 4,
+      "tldr": "IDC フロンティアのクラウドへの不正アクセスを受け、JR 東日本とビューカードが「えきねっと」などの利用者情報最大約 609 万件の漏えいの可能性を公表した。JR 九州（最大 130 万件）や、コミューン経由の Sansan なども同日に被害を公表している。",
+      "points": [],
+      "code": null,
+      "signal": null,
+      "pick": false
+    },
+    {
+      "id": "2026-10-10-cscloud-ai-agent-attack",
+      "url": "https://www.cscloud.co.jp/news/report/202610099351/",
+      "title": "国内で相次ぐ不正アクセス、AIエージェントによる攻撃の可能性 約40分間で326のIPアドレスを使い分け、1,200件超のアクセスを繰り返す",
+      "source": "cscloud.co.jp",
+      "source_group": "tech_blog",
+      "published_at": "2026-10-09T13:50:18+09:00",
+      "category": "sec",
+      "keywords": [
+        "ai-security",
+        "security-incident",
+        "ai-agent"
+      ],
+      "score": 72,
+      "why": "matched: llm（AI エージェントによる攻撃）",
+      "read_min": 6,
+      "tldr": "サイバーセキュリティクラウドが、9 月前後から国内で相次ぐ不正アクセスについて、約 40 分間に 326 の IP アドレスを使い分けて 1,200 件超のアクセスを繰り返す挙動を観測し、AI エージェントによる攻撃の可能性を指摘した。",
+      "points": [],
+      "code": null,
+      "signal": null,
+      "pick": false
+    },
+    {
+      "id": "2026-10-10-python-315",
+      "url": "https://www.python.org/downloads/release/python-3150/",
+      "title": "Python 3.15",
+      "source": "python.org",
+      "source_group": "hackernews",
+      "published_at": "2026-10-09T23:35:42+09:00",
+      "category": "be",
+      "keywords": [
+        "python",
+        "programming-language"
+      ],
+      "score": 76,
+      "why": "新バージョン（HN 260 pt）",
+      "read_min": 5,
+      "tldr": "Python 3.15.0 が 10 月 9 日にリリースされた。明示的な遅延 import（PEP 810）、組み込みの frozendict（PEP 814）、内包表記でのアンパック（PEP 798）などが入り、UTF-8 が既定のエンコーディングになった。",
+      "points": [
+        "`lazy import` で使う時点まで import を遅らせ、起動を速くできる。旧バージョン向けに `__lazy_modules__` という書き方も用意された",
+        "UTF-8 の既定化（PEP 686）、sentinel 型（PEP 661）、プロファイラ用パッケージと高頻度サンプリングプロファイラ Tachyon（PEP 799）、JIT の改良",
+        "型ではTypedDict の追加項目の型付け（PEP 728）や TypeForm（PEP 747）。free-threaded ビルド向けの Stable ABI、フレームポインタの既定有効化も入った"
+      ],
+      "code": {
+        "file": "whatsnew-3.15",
+        "lang": "python",
+        "text": "lazy import json\nlazy from pathlib import Path\n\nprint(\"Starting up...\")  # json and pathlib are not fully imported yet\n\ndata = json.loads('{\"key\": \"value\"}')  # json gets fully imported here\n\nlists = [[1, 2], [3, 4], [5]]\n[*L for L in lists]  # [1, 2, 3, 4, 5]\n\na = frozendict(x=1, y=2)  # immutable, hashable"
+      },
+      "signal": "▲ 260",
+      "pick": true
+    },
+    {
+      "id": "2026-10-10-postgres-jdbc-42714",
+      "url": "https://www.postgresql.org/about/news/2026-10-07-postgresql-jdbc-42714-security-update-for-multiple-cves-3399/",
+      "title": "PostgreSQL JDBC 42.7.14 Security update for multiple CVE's",
+      "source": "postgresql.org",
+      "source_group": "news",
+      "published_at": "2026-10-09T09:00:00+09:00",
+      "category": "be",
+      "keywords": [
+        "postgres",
+        "java",
+        "vulnerability-management"
+      ],
+      "score": 70,
+      "why": "matched: postgres",
+      "read_min": 2,
+      "tldr": "PostgreSQL JDBC ドライバ 42.7.14 が 2 件の CVE（CVE-2026-107314、CVE-2026-107315）を修正するセキュリティリリースとして公開された。詳細はリリースノートを参照。",
+      "points": [],
+      "code": null,
+      "signal": null,
+      "pick": false
+    },
+    {
+      "id": "2026-10-10-aws-lambda-kafka-oauth",
+      "url": "https://aws.amazon.com/about-aws/whats-new/2026/10/aws-Lambda-supports-oauth-kafka-esm/",
+      "title": "AWS Lambda supports OAuth authentication for self-managed Apache Kafka event sources",
+      "source": "aws.amazon.com",
+      "source_group": "news",
+      "published_at": "2026-10-10T01:30:00+09:00",
+      "category": "cloud",
+      "keywords": [
+        "aws",
+        "authentication",
+        "kafka"
+      ],
+      "score": 68,
+      "why": "matched: aws, 認可",
+      "read_min": 2,
+      "tldr": "Lambda のセルフマネージド Kafka イベントソース（Confluent Cloud・Aiven・Redpanda なども含む）で OAuth 認証が使えるようになり、企業の IdP 経由でコンシューマーを認証できる。",
+      "points": [],
+      "code": null,
+      "signal": null,
+      "pick": false
+    },
+    {
+      "id": "2026-10-10-cloudflare-workers-profiling",
+      "url": "https://blog.cloudflare.com/workers-on-demand-profiling/",
+      "title": "Introducing on-demand CPU and memory profiling with flamegraphs for Workers and Durable Objects",
+      "source": "blog.cloudflare.com",
+      "source_group": "tech_blog",
+      "published_at": "2026-10-09T22:00:00+09:00",
+      "category": "cloud",
+      "keywords": [
+        "cloudflare",
+        "observability"
+      ],
+      "score": 60,
+      "why": "本番プロファイリング",
+      "read_min": 5,
+      "tldr": "Cloudflare Workers と Durable Objects で、本番環境のまま CPU・メモリのプロファイルを取り、フレームグラフで見られるようになった。メモリリークや性能のボトルネック調査向け。",
+      "points": [],
+      "code": null,
+      "signal": null,
+      "pick": false
+    },
+    {
+      "id": "2026-10-10-mynavi-claude-dashboards",
+      "url": "https://news.mynavi.jp/techplus/article/20261009-5099252/",
+      "title": "Claude、SQL不要でデータ分析可能に - ダッシュボードを自動生成する新機能",
+      "source": "news.mynavi.jp",
+      "source_group": "tech_blog",
+      "published_at": "2026-10-09T17:31:27+09:00",
+      "category": "ai",
+      "keywords": [
+        "claude",
+        "anthropic"
+      ],
+      "score": 66,
+      "why": "matched: llm",
+      "read_min": 4,
+      "tldr": "Anthropic が Claude にデータウェアハウスや業務アプリをつないでダッシュボードを作る「Claude Dashboards」と、説明用アニメーションを作る「Claude Motion」をベータ公開した。",
+      "points": [],
+      "code": null,
+      "signal": null,
+      "pick": false
+    },
+    {
+      "id": "2026-10-10-qiita-explore-haiku55",
+      "url": "https://qiita.com/suwa_nobu/items/837c03e66ba03ee636ea",
+      "title": "Claude Code の Explore を Haiku にする設定は、2.1.293 に上げるだけで Haiku 5.5 になった。費用は34〜43%減",
+      "source": "qiita.com",
+      "source_group": "tech_blog",
+      "published_at": "2026-10-09T09:33:47+09:00",
+      "category": "ai",
+      "keywords": [
+        "claude",
+        "llm-cost",
+        "ai-coding"
+      ],
+      "score": 64,
+      "why": "matched: llm（API コスト）",
+      "read_min": 6,
+      "tldr": "Explore サブエージェントを model: haiku に固定する設定は、Claude Code 2.1.293 に上げると Haiku 5.5 で動くようになり、筆者の計測では費用が 34〜43% 減ったという記事。",
+      "points": [],
+      "code": null,
+      "signal": null,
+      "pick": false
+    },
+    {
+      "id": "2026-10-10-hn-whistle-stt",
+      "url": "https://cactuscompute.com/blog/whistle",
+      "title": "Whistle: Speech to Text in 16.9 MB",
+      "source": "cactuscompute.com",
+      "source_group": "hackernews",
+      "published_at": "2026-10-09T01:59:39+09:00",
+      "category": "ai",
+      "keywords": [
+        "speech-to-text",
+        "edge"
+      ],
+      "score": 58,
+      "why": "反応大（HN 900 pt）",
+      "read_min": 5,
+      "tldr": "Cactus が 16.9 MB の音声認識モデル「Whistle」を公開した。端末上で動く小型の speech-to-text として HN で大きな反応を集めた。",
+      "points": [],
+      "code": null,
+      "signal": null,
+      "pick": false
+    },
+    {
+      "id": "2026-10-10-cnbc-openai-revenue",
+      "url": "https://www.cnbc.com/2026/10/08/open-ai-revenue-nvidia-oracle-coreweave.html",
+      "title": "OpenAI annualised revenues $20B less than previously signalled",
+      "source": "cnbc.com",
+      "source_group": "hackernews",
+      "published_at": "2026-10-09T01:45:58+09:00",
+      "category": "ai",
+      "keywords": [
+        "openai",
+        "ai-economy"
+      ],
+      "score": 60,
+      "why": "AI 投資の収益性（HN 420 pt）",
+      "read_min": 5,
+      "tldr": "OpenAI の年換算売上高が、これまで示唆されていた水準より 200 億ドル少ないと CNBC が報じた。Nvidia・Oracle・CoreWeave など AI インフラ関連企業との関係にも触れている。",
+      "points": [],
+      "code": null,
+      "signal": null,
+      "pick": false
+    },
+    {
+      "id": "2026-10-10-publickey-sakura-ai-engine",
+      "url": "https://www.publickey1.jp/blog/26/gpuai_engine.html",
+      "title": "さくらインターネット、GPU専有によりトークン消費量を気にせず定額で利用できる「さくらのAI Engineプライベートエディション」提供開始を発表",
+      "source": "publickey1.jp",
+      "source_group": "news",
+      "published_at": "2026-10-09T00:49:01+09:00",
+      "category": "ai",
+      "keywords": [
+        "sovereign-ai",
+        "llm-cost"
+      ],
+      "score": 62,
+      "why": "matched: llm（API コスト）",
+      "read_min": 3,
+      "tldr": "さくらインターネットが、GPU を専有して基盤モデルを定額で使える「さくらの AI Engine プライベートエディション」を発表した。トークン従量課金を気にせず使える点を打ち出している。",
+      "points": [],
+      "code": null,
+      "signal": null,
+      "pick": false
+    },
+    {
+      "id": "2026-10-10-fsa-prudential-order",
+      "url": "https://www.fsa.go.jp/news/r8/hoken/20261009/20261009.html",
+      "title": "プルデンシャル生命保険株式会社、ジブラルタ生命保険株式会社及びプルデンシャル・ホールディング・オブ・ジャパン株式会社に対する行政処分について公表しました。",
+      "source": "fsa.go.jp",
+      "source_group": "official",
+      "published_at": "2026-10-10T00:00:00+09:00",
+      "category": "macro",
+      "keywords": [
+        "fsa",
+        "insurance",
+        "corporate-governance"
+      ],
+      "score": 82,
+      "why": "金融庁の公式発表（行政処分）",
+      "read_min": 8,
+      "tldr": "金融庁はプルデンシャル生命とジブラルタ生命に、10 月 13 日から 2027 年 1 月 31 日まで保険募集と新規契約締結を停止する一部業務停止命令と業務改善命令を出した。持株会社にも業務改善命令を出した。",
+      "points": [
+        "プルデンシャル生命では完全歩合制と支社への権限集中のもと、営業管理職を含むライフプランナーの金銭不祥事が繰り返された（報道では詐取額は総額 60 億円超）",
+        "ジブラルタ生命も類似のビジネスモデルで、金銭詐取や保険と関係のない投資勧誘・金銭貸借が続いていた。持株会社は子会社の監督やグループ監査が機能していなかったとされた",
+        "経営責任の明確化、被害回復、報酬制度・営業管理の見直しなどを求め、改善計画は 11 月 30 日までに提出、以後 3 か月ごとに報告する"
+      ],
+      "code": null,
+      "signal": null,
+      "pick": true
+    },
+    {
+      "id": "2026-10-10-impress-fsa-ic-chip",
+      "url": "https://www.watch.impress.co.jp/docs/news/2147233.html",
+      "title": "金融庁、本人確認のICチップ1本化前倒しを要請 免許証情報漏えいで",
+      "source": "watch.impress.co.jp",
+      "source_group": "tech_blog",
+      "published_at": "2026-10-09T18:59:26+09:00",
+      "category": "macro",
+      "keywords": [
+        "fsa",
+        "kyc",
+        "data-breach"
+      ],
+      "score": 80,
+      "why": "金融庁の要請（口座開設の本人確認）",
+      "read_min": 3,
+      "tldr": "金融庁は 9 日、本人確認書類の画像を含む顧客情報の漏えいが相次いでいることを受け、金融機関に画像送信方式をやめて IC チップ読み取りへ一本化する移行の前倒しを要請した。",
+      "points": [
+        "画像送信による本人確認は 2027 年 4 月に廃止予定だったが、施行を待たず「可及的速やかな対応」を求めた",
+        "10 月に入って不正アクセスによる漏えいが続き、運転免許証などの書類画像が流出した事例もあることが背景",
+        "暗号資産交換業者も対象で（CoinPost 報道）、オンライン口座開設の手順に影響する。金融分野のサイバーセキュリティガイドラインに沿った点検も改めて求めた"
+      ],
+      "code": null,
+      "signal": null,
+      "pick": true
+    },
+    {
+      "id": "2026-10-10-coinpost-btc-quantum-exposure",
+      "url": "https://coinpost.jp/?p=742115",
+      "title": "量子攻撃受け得るビットコイン、現在供給量の31.2％に増加＝グラスノード",
+      "source": "coinpost.jp",
+      "source_group": "news",
+      "published_at": "2026-10-09T14:40:02+09:00",
+      "category": "crypto",
+      "keywords": [
+        "bitcoin",
+        "post-quantum"
+      ],
+      "score": 76,
+      "why": "matched: ビットコイン",
+      "read_min": 4,
+      "tldr": "グラスノード共同創業者の集計で、公開鍵がオンチェーンで露出したビットコインは 626 万 BTC（供給量の 31.2%）となり、5 月の 30.2% から増えた。同氏はこれはアドレスの使い方を示す指標で、リスク評価ではないと説明している。",
+      "points": [
+        "内訳はアドレス再利用が 433 万 BTC、P2PK や Taproot などスクリプト形式が 194 万 BTC（P2PK の 171 万 BTC のうち約 110 万 BTC はサトシ・ナカモトのものとされる）",
+        "取引所分は 179 万 BTC が露出。割合は Coinbase 10%、Binance 83%、Bitfinex 100% と差が大きい",
+        "ジャスティン・ドレイク氏は大口保有者の計画的な新アドレス移行を勧め、ヴィタリック・ブテリン氏は慌てて資金を移すことに慎重な姿勢を示した"
+      ],
+      "code": null,
+      "signal": null,
+      "pick": true
+    },
+    {
+      "id": "2026-10-10-bi-mortgage-rates-oct",
+      "url": "https://www.businessinsider.jp/article/2610-major-bank-mortgage-rates-what-happened-in-october-2026/",
+      "title": "主要銀行の住宅ローン金利、2026年10月はどうなった？",
+      "source": "businessinsider.jp",
+      "source_group": "news",
+      "published_at": null,
+      "category": "realestate",
+      "keywords": [
+        "mortgage-rates",
+        "flat35"
+      ],
+      "score": 74,
+      "why": "matched: 住宅ローン, 金利",
+      "read_min": 5,
+      "tldr": "Business Insider Japan の定点観測で、10 月は調査した 7 行すべてが変動金利と 10 年固定を引き上げた。フラット 35（融資率 9 割以下）の最頻金利は 3.830% で、半年前から 1.34 ポイント上昇した。",
+      "points": [
+        "変動の適用金利は三菱 UFJ 1.195%、PayPay 銀行 1.580%、ソニー銀行 2.207% など。上げ幅は +0.25〜+1.21 ポイント",
+        "10 年固定の適用金利は 3.379〜4.015% 程度で、PayPay 銀行は +1.16 ポイント",
+        "表と本文で数値が食い違う箇所があり、実際の金利は各行の公式サイトで確認が必要"
+      ],
+      "code": null,
+      "signal": null,
+      "pick": true
+    },
+    {
+      "id": "2026-10-10-zaikei-nikkei-1009",
+      "url": "https://www.zaikei.co.jp/article/20261009/873007.html",
+      "title": "日経平均大引け：前日比11.19円安の69030.92円",
+      "source": "zaikei.co.jp",
+      "source_group": "news",
+      "published_at": null,
+      "category": "stocks",
+      "keywords": [
+        "nikkei225",
+        "topix"
+      ],
+      "score": 66,
+      "why": "matched: 前営業日の終値",
+      "read_min": 2,
+      "tldr": "10 月 9 日の日経平均は 11.19 円安の 6 万 9030 円 92 銭で 3 日続落。米ハイテク株安で一時 800 円超下げたが後場に戻した。TOPIX は 0.33% 高の 4104.81。",
+      "points": [],
+      "code": null,
+      "signal": null,
+      "pick": false
+    },
+    {
+      "id": "2026-10-10-investing-musalem-hike",
+      "url": "https://jp.investing.com/news/economy-news/article-93CH-1707558",
+      "title": "セントルイス連銀ムサレム総裁、インフレ2%目標達成に向けさらなる利上げが必要と表明",
+      "source": "jp.investing.com",
+      "source_group": "news",
+      "published_at": "2026-10-10T04:33:45+09:00",
+      "category": "macro",
+      "keywords": [
+        "fed",
+        "us-inflation",
+        "interest-rates"
+      ],
+      "score": 64,
+      "why": "matched: 金利",
+      "read_min": 2,
+      "tldr": "セントルイス連銀のムサレム総裁が、インフレ率を 2% 目標に戻すにはさらなる利上げが必要との考えを示したと報じられた。",
+      "points": [],
+      "code": null,
+      "signal": null,
+      "pick": false
+    },
+    {
+      "id": "2026-10-10-nikkei-household-spending-aug",
+      "url": "https://www.nikkei.com/article/DGXZQOUA087AW0Y6A001C2000000/",
+      "title": "8月の実質消費支出3.1%減、9カ月連続マイナス 家計調査 - 日本経済新聞",
+      "source": "nikkei.com",
+      "source_group": "news",
+      "published_at": "2026-10-09T10:43:37+09:00",
+      "category": "macro",
+      "keywords": [
+        "household-spending",
+        "inflation"
+      ],
+      "score": 58,
+      "why": "国内の消費統計",
+      "read_min": 2,
+      "tldr": "総務省の 8 月家計調査で、2 人以上世帯の消費支出は実質で前年同月比 3.1% 減と 9 か月連続のマイナスだった（市場予想は 3.6% 減）。",
+      "points": [],
+      "code": null,
+      "signal": null,
+      "pick": false
+    },
+    {
+      "id": "2026-10-10-nikkei-trump-iran-oil",
+      "url": "https://www.nikkei.com/article/DGXZQOGN08BZB0Y6A001C2000000/",
+      "title": "トランプ氏、中間選挙まで「イラン攻撃しない」 投稿直後に原油急落 - 日本経済新聞",
+      "source": "nikkei.com",
+      "source_group": "news",
+      "published_at": "2026-10-09T05:53:15+09:00",
+      "category": "macro",
+      "keywords": [
+        "crude-oil",
+        "geopolitics"
+      ],
+      "score": 56,
+      "why": "市場材料（原油）",
+      "read_min": 2,
+      "tldr": "トランプ米大統領が 11 月 3 日の中間選挙までイランを攻撃しないと SNS に投稿し、直後に原油相場が急落した。原油高はこのところ株価や金利の重荷とされていた。",
+      "points": [],
+      "code": null,
+      "signal": null,
+      "pick": false
+    },
+    {
+      "id": "2026-10-10-fsa-boj-liaison-25",
+      "url": "https://www.fsa.go.jp/news/r8/sonota/20261009nichiginrenrakukai.html",
+      "title": "第25回「金融庁・日本銀行連絡会」の開催について公表しました。",
+      "source": "fsa.go.jp",
+      "source_group": "official",
+      "published_at": "2026-10-10T03:00:00+09:00",
+      "category": "macro",
+      "keywords": [
+        "fsa",
+        "boj-policy"
+      ],
+      "score": 55,
+      "why": "金融庁・日銀の公式発表",
+      "read_min": 1,
+      "tldr": "金融庁と日本銀行が第 25 回「金融庁・日本銀行連絡会」の開催を公表した。",
+      "points": [],
+      "code": null,
+      "signal": null,
+      "pick": false
+    },
+    {
+      "id": "2026-10-10-fsa-tsumitate-list",
+      "url": "https://www.fsa.go.jp/policy/nisa2/products/index.html",
+      "title": "つみたて投資枠対象商品届出一覧及びつみたて投資枠対象商品の概要を更新",
+      "source": "fsa.go.jp",
+      "source_group": "official",
+      "published_at": "2026-10-09T02:00:00+09:00",
+      "category": "funds",
+      "keywords": [
+        "new-nisa",
+        "index-fund"
+      ],
+      "score": 60,
+      "why": "matched: nisa（金融庁の公式更新）",
+      "read_min": 1,
+      "tldr": "金融庁が NISA つみたて投資枠の対象商品届出一覧と商品概要を更新した。",
+      "points": [],
+      "code": null,
+      "signal": null,
+      "pick": false
+    },
+    {
+      "id": "2026-10-10-nada-sbi-mf-mesh",
+      "url": "https://www.nadanews.com/371671/",
+      "title": "SBI・マネーフォワード・米Mesh、暗号資産決済の新会社を年内設立へ",
+      "source": "nadanews.com",
+      "source_group": "news",
+      "published_at": "2026-10-09T14:30:00+09:00",
+      "category": "crypto",
+      "keywords": [
+        "payments",
+        "stablecoin"
+      ],
+      "score": 60,
+      "why": "国内の暗号資産決済",
+      "read_min": 2,
+      "tldr": "SBI ホールディングス、マネーフォワード、米 Mesh Connect が、日本での暗号資産決済の合弁会社を年内に設立することで基本合意した。",
+      "points": [],
+      "code": null,
+      "signal": null,
+      "pick": false
+    },
+    {
+      "id": "2026-10-10-coinpost-jpyc-jftc",
+      "url": "https://coinpost.jp/?p=742088",
+      "title": "JPYC、公取委に情報提供──「決済導入店の割引は消費者利益」",
+      "source": "coinpost.jp",
+      "source_group": "news",
+      "published_at": "2026-10-09T13:45:10+09:00",
+      "category": "crypto",
+      "keywords": [
+        "jpyc",
+        "stablecoin",
+        "payments"
+      ],
+      "score": 58,
+      "why": "ステーブルコイン決済の競争環境",
+      "read_min": 2,
+      "tldr": "JPYC が、キャッシュレス決済市場の競争環境について 9 月 14 日に公正取引委員会へ情報提供したと明らかにした。ステーブルコイン決済導入店の割引とカード加盟店規約の関係についての考え方も公表した。",
+      "points": [],
+      "code": null,
+      "signal": null,
+      "pick": false
+    },
+    {
+      "id": "2026-10-10-nada-btc-weekly-monex",
+      "url": "https://www.nadanews.com/371757/",
+      "title": "BTC（ビットコイン）は米CPIと大手金融機関の決算が焦点、続落リスクも【マネックス証券】",
+      "source": "nadanews.com",
+      "source_group": "news",
+      "published_at": "2026-10-09T19:00:13+09:00",
+      "category": "crypto",
+      "keywords": [
+        "bitcoin",
+        "us-inflation"
+      ],
+      "score": 56,
+      "why": "matched: ビットコイン, 米国株",
+      "read_min": 3,
+      "tldr": "マネックス証券の週次レポート。ビットコインは一時 8 万 7000 ドル付近まで上げたが、中東情勢による原油高などで伸び悩み、来週は米 CPI と大手金融機関の決算が焦点になるとしている。",
+      "points": [],
+      "code": null,
+      "signal": null,
+      "pick": false
+    }
+  ],
+  "social": [
+    {
+      "network": "x",
+      "author": "@deno_land",
+      "url": "https://x.com/deno_land/status/2108543358197207048",
+      "text": "Deno 公式アカウントが「Deno is joining Cloudflare」と、Cloudflare への合流を告知した。",
+      "metrics": null,
+      "heat": null,
+      "category": "cloud",
+      "keywords": [
+        "deno",
+        "cloudflare"
+      ],
+      "posted_at": null
+    },
+    {
+      "network": "hn",
+      "author": null,
+      "url": "https://news.ycombinator.com/item?id=50019911",
+      "text": "『Cloudflare acquires Deno』のスレッド。472 件のコメント",
+      "metrics": "▲ 860  ✉ 472",
+      "heat": 100,
+      "category": "cloud",
+      "keywords": [
+        "deno",
+        "cloudflare"
+      ],
+      "posted_at": "2026-10-09T22:03:48+09:00"
+    },
+    {
+      "network": "hn",
+      "author": null,
+      "url": "https://news.ycombinator.com/item?id=50008427",
+      "text": "『Whistle: Speech to Text in 16.9 MB』のスレッド。174 件のコメント",
+      "metrics": "▲ 900  ✉ 174",
+      "heat": 100,
+      "category": "ai",
+      "keywords": [
+        "speech-to-text",
+        "edge"
+      ],
+      "posted_at": "2026-10-09T01:59:39+09:00"
+    },
+    {
+      "network": "hn",
+      "author": null,
+      "url": "https://news.ycombinator.com/item?id=50008187",
+      "text": "『OpenAI annualised revenues $20B less than previously signalled』のスレッド。296 件のコメント",
+      "metrics": "▲ 420  ✉ 296",
+      "heat": 100,
+      "category": "ai",
+      "keywords": [
+        "openai",
+        "ai-economy"
+      ],
+      "posted_at": "2026-10-09T01:45:58+09:00"
+    },
+    {
+      "network": "hn",
+      "author": null,
+      "url": "https://news.ycombinator.com/item?id=50021127",
+      "text": "『Python 3.15』のスレッド。70 件のコメント",
+      "metrics": "▲ 260  ✉ 70",
+      "heat": 65,
+      "category": "be",
+      "keywords": [
+        "python"
+      ],
+      "posted_at": "2026-10-09T23:35:42+09:00"
+    }
+  ],
+  "releases": [
+    {
+      "date": "2026-10-10",
+      "title": "uv 0.13.0",
+      "repo": "astral-sh/uv",
+      "url": "https://github.com/astral-sh/uv/releases/tag/0.13.0",
+      "kind": "release",
+      "note": "git タグの差分から検出",
+      "category": "be"
+    },
+    {
+      "date": "2026-10-09",
+      "title": "Python 3.15.0",
+      "repo": "python/cpython",
+      "url": "https://www.python.org/downloads/release/python-3150/",
+      "kind": "release",
+      "note": "lazy import（PEP 810）、frozendict（PEP 814）、UTF-8 既定化など",
+      "category": "be"
+    },
+    {
+      "date": "2026-10-09",
+      "title": "金融庁 プルデンシャル生命・ジブラルタ生命に一部業務停止命令",
+      "repo": null,
+      "url": "https://www.fsa.go.jp/news/r8/hoken/20261009/20261009.html",
+      "kind": "policy",
+      "note": "10/13〜2027/1/31 の保険募集・契約締結を停止。持株会社を含む 3 社に業務改善命令",
+      "category": "macro"
+    },
+    {
+      "date": "2026-10-09",
+      "title": "金融庁 本人確認の IC チップ読み取り移行の前倒しを要請",
+      "repo": null,
+      "url": "https://www.watch.impress.co.jp/docs/news/2147233.html",
+      "kind": "policy",
+      "note": "画像送信方式の 2027 年 4 月廃止を待たずに移行を求める",
+      "category": "macro"
+    }
+  ]
+}
