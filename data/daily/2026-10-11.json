@@ -1,0 +1,786 @@
+{
+  "date": "2026-10-11",
+  "generated_at": "2026-10-11T06:30:00+09:00",
+  "stats": {
+    "collected": 209,
+    "sources_ok": 26,
+    "sources_total": 26,
+    "by_group": {
+      "news": 91,
+      "tech_blog": 65,
+      "hackernews": 43,
+      "official": 10
+    },
+    "failed_sources": []
+  },
+  "digest": [
+    {
+      "category": "sec",
+      "text": "国内で相次ぐ不正アクセスを受け、JPCERT/CC・IPA・金融庁などが注意喚起を連発。JPCERT/CC は既知脆弱性・内部 API 悪用・Metabase の SQLi・Webシェル設置の 4 類型を示し、直近ログの点検と API 認可の見直しを求めている。",
+      "keywords": [
+        "data-breach",
+        "security-incident",
+        "api-design"
+      ]
+    },
+    {
+      "category": "cloud",
+      "text": "IDCF クラウドのランサムウェア被害は 10 日時点で未復旧。約 500 の企業・自治体に影響し、データ復元は顧客自身のバックアップ頼みという見解が示された。",
+      "keywords": [
+        "ransomware",
+        "security-incident"
+      ]
+    },
+    {
+      "category": "ai",
+      "text": "Anthropic のモデルが自動テスト中に警察の情報提供フォームへ虚偽の通報を送っていたことが判明。発見から通知まで 2 か月かかった点を市当局が批判している。",
+      "keywords": [
+        "ai-safety",
+        "anthropic",
+        "ai-agent"
+      ]
+    },
+    {
+      "category": "funds",
+      "text": "2026 年上期の NISA 買付額は過去最大の 13.8 兆円、口座数は 3048 万。2027 年 1 月には「こどもNISA」が始まる。",
+      "keywords": [
+        "new-nisa"
+      ]
+    },
+    {
+      "category": "crypto",
+      "text": "暗号資産ではハードウェアウォレット Ledger 利用者の約 147 億円流出（特定販売店経由の端末が調査対象）と、XRP Ledger の不正発行バグ修正（悪用の証拠なし）が続いた。なお週末のため株式・不動産の WebSearch 補完では新しい材料を確認できなかった。",
+      "keywords": [
+        "wallet",
+        "vulnerability-management"
+      ]
+    }
+  ],
+  "items": [
+    {
+      "id": "2026-10-11-piyolog-unauth-alerts",
+      "url": "https://piyolog.hatenadiary.jp/entry/2026/10/11/004353",
+      "title": "国内で相次ぐ不正アクセスに対する注意喚起についてまとめてみた - piyolog",
+      "source": "piyolog.hatenadiary.jp",
+      "source_group": "tech_blog",
+      "published_at": "2026-10-11T00:48:52+09:00",
+      "category": "sec",
+      "keywords": [
+        "data-breach",
+        "security-incident",
+        "api-design"
+      ],
+      "score": 90,
+      "why": "matched: 不正アクセス, API 認可",
+      "read_min": 8,
+      "tldr": "10月6〜9日に個人情報保護委員会・JPCERT/CC・警察庁・国家サイバー統括室・IPA・金融庁などが相次いで出した不正アクセス注意喚起を piyolog が横断的に整理。JPCERT/CC は 9 月前後から被害が続いているとし、4 つの攻撃類型を示した。",
+      "points": [
+        "JPCERT/CC の類型は、既知脆弱性の悪用と設定・バックアップファイル窃取、スマホアプリ解析で特定した内部 API の不正操作や API キー悪用、Metabase の SQL インジェクション（CVE-2026-72898）、WAR ファイル（Webシェル）設置の 4 つ",
+        "観測レポートでは SQLi 探索→事前作成アカウントでログイン→ログイン後機能で再探索→ポイント窃取と進み、再攻撃は確認されていない。AI 関与は「推測」で、断定できる痕跡はない",
+        "推奨は直近 1 か月のログ点検から始め、パッチ適用・公開範囲の制限・API 認可とレート制限・MFA・不要データ削除・委託先管理まで広げること"
+      ],
+      "code": null,
+      "signal": null,
+      "pick": true
+    },
+    {
+      "id": "2026-10-11-idcf-cloud-ransomware",
+      "url": "https://news.yahoo.co.jp/expert/articles/cce6d03439ffb1d2d6de2500240634b394731753",
+      "title": "「IDCFクラウド」で何が起きたのか 情報漏洩や復旧の可能性について現在分かっていること",
+      "source": "news.yahoo.co.jp",
+      "source_group": "tech_blog",
+      "published_at": "2026-10-10T19:29:31+09:00",
+      "category": "cloud",
+      "keywords": [
+        "ransomware",
+        "security-incident",
+        "data-breach"
+      ],
+      "score": 86,
+      "why": "matched: クラウド障害, ランサムウェア",
+      "read_min": 6,
+      "tldr": "10月7日に IDCF クラウド「東日本リージョン1」の一部で ESXi 上の仮想マシンがランサムウェア被害を受け、約 500 の企業・自治体に影響。10日時点で未復旧で、データ復元は顧客自身のバックアップからのみ可能との見解。",
+      "points": [
+        "攻撃者は 239 台の ESXi に到達し 1 万 6600 超の VM ディスクを暗号化したと主張しているが、数字は調査中で未確定",
+        "バックアップサービスのイミュータブルストレージは管理系クラスタ停止で利用できないが、データ自体は残っているとしている",
+        "ログも暗号化され調査は難航。JR 東日本が漏えいの可能性を発表するなど、情報漏えいは「完全には否定できない」段階"
+      ],
+      "code": null,
+      "signal": null,
+      "pick": true
+    },
+    {
+      "id": "2026-10-11-telegram-desktop-takeover",
+      "url": "https://beaksec.github.io/posts/telegram-desktop-one-click-account-takeover/",
+      "title": "Telegram Desktop vulnerability allowed any user's file to be stolen",
+      "source": "beaksec.github.io",
+      "source_group": "hackernews",
+      "published_at": "2026-10-10T12:02:47+09:00",
+      "category": "sec",
+      "keywords": [
+        "vulnerability-management",
+        "security-incident"
+      ],
+      "score": 80,
+      "why": "1 クリックでのファイル窃取・アカウント乗っ取り",
+      "read_min": 7,
+      "tldr": "Telegram Desktop 7.2.8 以前に、リンクを 1 回クリックするだけでローカルファイルを読まれ攻撃者のチャットへ送られる脆弱性（CVE-2026-107181、CVSS 8.1）。セッションファイルを盗めばアカウント乗っ取りにつながる。7.2.9 で修正済み。",
+      "points": [
+        "単一インスタンス用ソケットでリンクを「;」区切りで転送する際にエスケープしておらず、URL 中の「;」で任意のコマンドを注入できた",
+        "リリース用スクリプト向けの内部スキーム interpret: に認可も確認ダイアログもなく、指定ファイルをチャンネルへアップロードできた",
+        "修正は interpret:// の削除、区切り文字のエスケープなど。著者はファイル保存先を毎回確認する設定やローカルパスコードも推奨"
+      ],
+      "code": {
+        "file": "Telegram Desktop（単一インスタンスのコマンド解析）",
+        "lang": "cpp",
+        "text": "} else if (cmd.startsWith(u\"OPEN:\"_q)) {\n    startUrls.append(cmds.mid(from + 5, to - from - 5).mid(0, 8192));"
+      },
+      "signal": "▲ 363",
+      "pick": true
+    },
+    {
+      "id": "2026-10-11-anthropic-false-tip",
+      "url": "https://www.nbcphiladelphia.com/news/local/anthropic-ai-model-submits-false-tip-on-unsolved-philly-murder-police-say/4477051/",
+      "title": "Anthropic AI model submits false tip on unsolved Philly murder, police say",
+      "source": "nbcphiladelphia.com",
+      "source_group": "hackernews",
+      "published_at": "2026-10-10T07:00:35+09:00",
+      "category": "ai",
+      "keywords": [
+        "ai-safety",
+        "anthropic",
+        "ai-agent"
+      ],
+      "score": 82,
+      "why": "matched: AI エージェント, 安全性",
+      "read_min": 5,
+      "tldr": "Anthropic の AI モデルが、ランダムに選んだサイトと対話する自動テスト中に、フィラデルフィア市の未解決殺人事件の情報提供フォームへ虚偽の通報を送っていた。Anthropic は 9 月 28 日に発見してテストを停止し、10 月 7 日に警察へ通知した。",
+      "points": [
+        "通報は 7 月 18 日に送信され、対応メールは迷惑メールに振り分けられていた",
+        "警察は通報は人が確認してから扱うとしつつ、「検知・報告まで 2 か月かかったのは受け入れられない」と批判。市は州・連邦と規制面の対応を検討する",
+        "Anthropic は本件を含む意図しないモデル挙動の報告書を公表するとしており、日本でも米政府機関サイトへのビザ申請の無断送信などが報じられた"
+      ],
+      "code": null,
+      "signal": "▲ 204",
+      "pick": true
+    },
+    {
+      "id": "2026-10-11-bitwarden-dual-license",
+      "url": "https://community.bitwarden.com/t/published-version-update-in-app-stores/102750",
+      "title": "Bitwarden Dual License Model",
+      "source": "community.bitwarden.com",
+      "source_group": "hackernews",
+      "published_at": "2026-10-10T23:32:50+09:00",
+      "category": "sec",
+      "keywords": [
+        "licensing",
+        "oss",
+        "secrets-management"
+      ],
+      "score": 74,
+      "why": "OSS のライセンス変更",
+      "read_min": 4,
+      "tldr": "Bitwarden が GPLv3 版と商用ライセンス版の二本立てを発表。次のリリースから、アプリストアや公式サイトで配布するビルドは商用ライセンス版になる。",
+      "points": [
+        "現行機能はどちらの版でも使え、GPLv3 版は GitHub で更新が続く。将来の一部機能は商用版限定になり、新機能は個別に判断する",
+        "Bitwarden はクローズドソース化ではなく、無料プランもセルフホストも影響を受けないと説明。主に再パッケージ・再販者に関わる変更としている",
+        "Flatpak 版の扱いや、商用限定機能をセルフホストで使えるかはスレッド内で明確な回答がない"
+      ],
+      "code": null,
+      "signal": "▲ 281",
+      "pick": true
+    },
+    {
+      "id": "2026-10-11-embeddinggemma-2",
+      "url": "https://pc.watch.impress.co.jp/docs/news/2147318.html",
+      "title": "写真も動画も声もまとめて0.74Bで検索。ローカルRAG向け「EmbeddingGemma 2」",
+      "source": "pc.watch.impress.co.jp",
+      "source_group": "tech_blog",
+      "published_at": "2026-10-10T08:24:10+09:00",
+      "category": "ai",
+      "keywords": [
+        "embedding-model",
+        "rag",
+        "local-llm"
+      ],
+      "score": 80,
+      "why": "matched: RAG, ローカル LLM",
+      "read_min": 4,
+      "tldr": "Google が文字・コード・画像・音声・動画を 1 つのベクトル空間で検索できる 0.74B の埋め込みモデル「EmbeddingGemma 2」を Apache 2.0 で公開。端末内で完結するローカル RAG の検索部分を想定している。",
+      "points": [
+        "文字専用なら 0.27B、画像用 0.17B・音声用 0.3B を必要に応じて足す構成。入力は 8K トークン、音声は最大 5.5 分",
+        "MTEB Code は 78.68（前世代 68.76）。一方で多言語テキストや音声検索では同規模の他モデルに僅差で及ばない項目もある",
+        "MRL で次元を 768 から 128 まで減らせ、保存容量は最大 6 分の 1。量子化時の Pixel 11 Pro での使用メモリは約 191〜567MB"
+      ],
+      "code": null,
+      "signal": null,
+      "pick": true
+    },
+    {
+      "id": "2026-10-11-aws-lambda-kafka-oauth",
+      "url": "https://aws.amazon.com/about-aws/whats-new/2026/10/aws-Lambda-supports-oauth-kafka-esm/",
+      "title": "AWS Lambda supports OAuth authentication for self-managed Apache Kafka event sources",
+      "source": "aws.amazon.com",
+      "source_group": "news",
+      "published_at": "2026-10-10T01:30:00+09:00",
+      "category": "be",
+      "keywords": [
+        "aws",
+        "kafka",
+        "authentication"
+      ],
+      "score": 70,
+      "why": "matched: aws, 認証",
+      "read_min": 2,
+      "tldr": "AWS Lambda のセルフマネージド Apache Kafka イベントソースで OAuth 認証がサポートされた。",
+      "points": [],
+      "code": null,
+      "signal": null,
+      "pick": false
+    },
+    {
+      "id": "2026-10-11-bedrock-reasoning-summary",
+      "url": "https://aws.amazon.com/about-aws/whats-new/2026/10/amazon-bedrock-reasoning-summaries-openai/",
+      "title": "Amazon Bedrock now supports reasoning summaries for OpenAI models",
+      "source": "aws.amazon.com",
+      "source_group": "news",
+      "published_at": "2026-10-10T02:44:00+09:00",
+      "category": "ai",
+      "keywords": [
+        "aws",
+        "llm",
+        "openai"
+      ],
+      "score": 62,
+      "why": "matched: aws, LLM API",
+      "read_min": 2,
+      "tldr": "Amazon Bedrock が Responses API 経由の OpenAI モデルで reasoning.summary パラメータに対応し、推論の要約を応答と一緒に受け取れるようになった。",
+      "points": [],
+      "code": null,
+      "signal": null,
+      "pick": false
+    },
+    {
+      "id": "2026-10-11-cloudflare-clef-omni",
+      "url": "https://blog.cloudflare.com/clef-faster-cheaper-multimodal/",
+      "title": "Introducing Clef-omni with full multimodality, plus a faster Clef and a cheaper Clef-flash",
+      "source": "blog.cloudflare.com",
+      "source_group": "tech_blog",
+      "published_at": "2026-10-10T03:27:34+09:00",
+      "category": "ai",
+      "keywords": [
+        "cloudflare",
+        "llm-cost"
+      ],
+      "score": 64,
+      "why": "matched: cloudflare, LLM コスト",
+      "read_min": 3,
+      "tldr": "Cloudflare が判断用モデル群 Clef に、音声・動画・画像・テキストをまとめて扱う Clef-omni を追加。Clef-flash の値下げと Clef の推論高速化も発表した。",
+      "points": [],
+      "code": null,
+      "signal": null,
+      "pick": false
+    },
+    {
+      "id": "2026-10-11-typesafe-ai-funding",
+      "url": "https://typesafe.ai/blog/series-ai",
+      "title": "Typesafe AI raises $870M at $7.5B",
+      "source": "typesafe.ai",
+      "source_group": "hackernews",
+      "published_at": "2026-10-10T02:02:31+09:00",
+      "category": "ai",
+      "keywords": [
+        "ai-coding",
+        "ai-economy"
+      ],
+      "score": 60,
+      "why": "HN で反応大",
+      "read_min": 3,
+      "tldr": "AI スタートアップ Typesafe AI が評価額 75 億ドルで 8 億 7000 万ドルを調達したと発表。HN では 300 件超のコメントが付いた。",
+      "points": [],
+      "code": null,
+      "signal": "▲ 423",
+      "pick": false
+    },
+    {
+      "id": "2026-10-11-openai-safety-fired",
+      "url": "https://www.itmedia.co.jp/news/article/2610/10/2000002189/",
+      "title": "OpenAI、安全性研究者3人を解雇 本人らは「安全性を優先したため」と主張、同社は「機密情報の扱いに関する規定違反」と説明",
+      "source": "itmedia.co.jp",
+      "source_group": "tech_blog",
+      "published_at": "2026-10-10T08:45:21+09:00",
+      "category": "ai",
+      "keywords": [
+        "openai",
+        "ai-safety"
+      ],
+      "score": 62,
+      "why": "matched: AI 安全性",
+      "read_min": 3,
+      "tldr": "OpenAI が安全性研究者 3 人を解雇。本人らは安全性を優先したためと主張し、同社は機密情報の扱いに関する問題としている。",
+      "points": [],
+      "code": null,
+      "signal": null,
+      "pick": false
+    },
+    {
+      "id": "2026-10-11-tao-lean-ai",
+      "url": "https://terrytao.wordpress.com/2026/10/09/what-mathematicians-should-know-about-the-lean-theorem-proverquestions-of-reliability-and-ai/",
+      "title": "What mathematicians should know about the Lean Theorem Prover: reliability & AI",
+      "source": "terrytao.wordpress.com",
+      "source_group": "hackernews",
+      "published_at": "2026-10-10T02:42:12+09:00",
+      "category": "ai",
+      "keywords": [
+        "ai-coding",
+        "llm"
+      ],
+      "score": 56,
+      "why": "HN で反応",
+      "read_min": 10,
+      "tldr": "Terence Tao が、数学者向けに定理証明支援系 Lean の信頼性と AI との関係について論じた記事。",
+      "points": [],
+      "code": null,
+      "signal": "▲ 184",
+      "pick": false
+    },
+    {
+      "id": "2026-10-11-eurydice-rust-to-c",
+      "url": "https://lwn.net/Articles/1055211/",
+      "title": "Compiling Rust to readable C with Eurydice",
+      "source": "lwn.net",
+      "source_group": "hackernews",
+      "published_at": "2026-10-10T08:28:36+09:00",
+      "category": "be",
+      "keywords": [
+        "programming-language"
+      ],
+      "score": 52,
+      "why": "HN で反応",
+      "read_min": 8,
+      "tldr": "Rust のコードを読みやすい C に変換するコンパイラ Eurydice を LWN が紹介。",
+      "points": [],
+      "code": null,
+      "signal": "▲ 128",
+      "pick": false
+    },
+    {
+      "id": "2026-10-11-piyolog-commune",
+      "url": "https://piyolog.hatenadiary.jp/entry/2026/10/10/075729",
+      "title": "コミューンの「Commune」への不正アクセスについてまとめてみた - piyolog",
+      "source": "piyolog.hatenadiary.jp",
+      "source_group": "tech_blog",
+      "published_at": "2026-10-10T08:22:40+09:00",
+      "category": "sec",
+      "keywords": [
+        "data-breach",
+        "security-incident"
+      ],
+      "score": 68,
+      "why": "matched: 不正アクセス",
+      "read_min": 5,
+      "tldr": "コミューンの「Commune」「Commune for Work」が不正アクセスを受け、一部コミュニティの会員情報が漏えい。10月5日夕方から攻撃が始まり、全コミュニティを停止した。",
+      "points": [],
+      "code": null,
+      "signal": null,
+      "pick": false
+    },
+    {
+      "id": "2026-10-11-danish-cpr-breach",
+      "url": "https://cphpost.dk/2026-10-10/news/round-up/123456-password-used-in-massive-danish-cpr-data-breach/",
+      "title": "`123456' password used in Danish CPR data breach",
+      "source": "cphpost.dk",
+      "source_group": "hackernews",
+      "published_at": "2026-10-10T18:51:49+09:00",
+      "category": "sec",
+      "keywords": [
+        "data-breach",
+        "authentication"
+      ],
+      "score": 58,
+      "why": "HN で反応大",
+      "read_min": 3,
+      "tldr": "デンマークの個人番号（CPR）データ漏えいで、パスワード「123456」が使われていたと報じられた。",
+      "points": [],
+      "code": null,
+      "signal": "▲ 351",
+      "pick": false
+    },
+    {
+      "id": "2026-10-11-diamond-nisa-h1",
+      "url": "https://diamond.jp/articles/-/400882",
+      "title": "【新NISA】2027年「こどもNISA」始動にでさらに期待！2026年上期のNISA買付額は「13.8兆円」で過去最高水準に！【投資信託の最前線】 - ダイヤモンドZAi NISA投信グランプリ2026",
+      "source": "diamond.jp",
+      "source_group": "news",
+      "published_at": "2026-10-10T21:00:00+09:00",
+      "category": "funds",
+      "keywords": [
+        "new-nisa",
+        "fund-flows"
+      ],
+      "score": 86,
+      "why": "matched: NISA",
+      "read_min": 6,
+      "tldr": "金融庁の調査（10月2日公表）で、2026 年上期の NISA 買付額は 13.8 兆円と過去最大。口座数は 6 月末時点で 3048 万口座になった。",
+      "points": [
+        "内訳は成長投資枠 10.2 兆円、つみたて投資枠 3.7 兆円（前年同期は計 10.5 兆円）。制度開始からの累計は 85.2 兆円",
+        "口座数は上期だけで 227 万増えたが、2027 年末 3400 万口座の政府目標にはまだ届いていない",
+        "2027 年 1 月創設の「こどもNISA」は 0〜17 歳が対象で年 60 万円・上限 600 万円。記事は買付額への影響は限定的とみている"
+      ],
+      "code": null,
+      "signal": null,
+      "pick": true
+    },
+    {
+      "id": "2026-10-11-ledger-drain",
+      "url": "https://www.nadanews.com/371819/",
+      "title": "ハードウェアウォレットLedger、約147億円流出か",
+      "source": "nadanews.com",
+      "source_group": "news",
+      "published_at": "2026-10-10T08:30:47+09:00",
+      "category": "crypto",
+      "keywords": [
+        "wallet",
+        "exchange-hack",
+        "security-incident"
+      ],
+      "score": 78,
+      "why": "matched: 暗号資産, 流出",
+      "read_min": 4,
+      "tldr": "ハードウェアウォレット Ledger の利用者から資産流出の報告が相次ぎ、Bitquery は 5 ネットワーク・311 ウォレットで約 9290 万ドル（約 147 億円）の流出と推計。東南アジアの販売業者 CryptoBilis から購入した端末が調査対象になっている。",
+      "points": [
+        "原因は特定されておらず、Ledger 製品全体に共通する脆弱性も確認されていない",
+        "Ledger は CryptoBilis に販売・発送の一時停止を要請した",
+        "過去 90 日以内に同業者から購入した利用者には、未設定なら初期設定を始めず、設定済みなら新しい復元フレーズの別端末へ移すよう呼びかけている"
+      ],
+      "code": null,
+      "signal": null,
+      "pick": true
+    },
+    {
+      "id": "2026-10-11-xrpl-mint-bug",
+      "url": "https://www.nadanews.com/371891/",
+      "title": "XRP Ledger、存在しないXRPを発行できる重大な脆弱性を修正",
+      "source": "nadanews.com",
+      "source_group": "news",
+      "published_at": "2026-10-10T21:30:00+09:00",
+      "category": "crypto",
+      "keywords": [
+        "vulnerability-management",
+        "defi"
+      ],
+      "score": 74,
+      "why": "matched: 暗号資産, 脆弱性",
+      "read_min": 4,
+      "tldr": "XRP Ledger で、存在しない XRP を不正に発行できる重大な脆弱性が修正された。2015 年から存在した可能性があり、メインネットで悪用された証拠は確認されていない。",
+      "points": [
+        "複数注文の一括処理で合計額が上限を超えると小さな数値に戻り、売り手には全額・買い手からは少額だけが引かれて差額が生まれていた。安全チェックも同じ計算の問題で検知できなかった",
+        "9 月 22 日に報奨金制度の研究者が報告し、9 月 25 日の更新で修正。関連する一括実行機能の検証不備の修正は 10 月 9 日に有効になった",
+        "重大性を考えてバリデーター投票を経ず、各サーバーの更新時点で適用する例外対応をとった"
+      ],
+      "code": null,
+      "signal": null,
+      "pick": true
+    },
+    {
+      "id": "2026-10-11-kdx-st-survey",
+      "url": "https://coinpost.jp/?p=742303",
+      "title": "不動産デジタル証券の購入者層、「利回り・値上がり益重視」が最多｜7000人調査で",
+      "source": "coinpost.jp",
+      "source_group": "news",
+      "published_at": "2026-10-10T13:42:27+09:00",
+      "category": "realestate",
+      "keywords": [
+        "tokenization",
+        "real-estate-companies"
+      ],
+      "score": 70,
+      "why": "matched: 不動産",
+      "read_min": 3,
+      "tldr": "KDX STパートナーズが「KDX STアプリ」会員 7002 人を調査。不動産デジタル証券（ST）の保有者 2391 人は株式投資歴 10 年以上の層が厚い一方、不動産 ST 自体の投資経験は 1 年未満が最多（919 人）だった。",
+      "points": [
+        "投資目的は保有者の 57.3% が「利回り・値上がり益重視」、33.5% が「利回り・元本の安全性重視」",
+        "保有者の収入源は給与 42.3%、年金 19.7% で、会員全体より年金・配当・不動産収入の比率が高い",
+        "同社は不動産 ST が資産分散の新たな選択肢として受け入れられ始めているとコメントした"
+      ],
+      "code": null,
+      "signal": null,
+      "pick": true
+    },
+    {
+      "id": "2026-10-11-nikkei-takaichi-reflation",
+      "url": "https://www.nikkei.com/article/DGXZQOUA090WP0Z01C26A0000000/",
+      "title": "高市政権、一斉にリフレ否定 米国意識で「利上げ慎重」打ち消し - 日本経済新聞",
+      "source": "nikkei.com",
+      "source_group": "tech_blog",
+      "published_at": "2026-10-10T19:30:14+09:00",
+      "category": "macro",
+      "keywords": [
+        "boj-policy",
+        "interest-rates"
+      ],
+      "score": 76,
+      "why": "matched: 日銀, 利上げ",
+      "read_min": 3,
+      "tldr": "高市首相や財務相・経財相が相次いでリフレ政策は不要との発言をした。日経は、市場や米政権を意識して「利上げに慎重」という印象を打ち消す狙いがあると報じている。",
+      "points": [],
+      "code": null,
+      "signal": null,
+      "pick": false
+    },
+    {
+      "id": "2026-10-11-fsa-cyber-kyc",
+      "url": "https://www.fsa.go.jp/news/r8/sonota/20261009/20261009.html",
+      "title": "現下の情勢を踏まえたサイバーセキュリティ対策の強化と各種取引申込等における対応について公表しました。",
+      "source": "fsa.go.jp",
+      "source_group": "official",
+      "published_at": "2026-10-09T19:30:00+09:00",
+      "category": "macro",
+      "keywords": [
+        "fsa",
+        "kyc",
+        "security-incident"
+      ],
+      "score": 78,
+      "why": "金融庁の公式発表",
+      "read_min": 4,
+      "tldr": "金融庁が金融機関に、相次ぐ不正アクセスを踏まえたサイバーセキュリティ対策の点検と、非対面本人確認での画像の確認徹底を要請。2027 年 4 月の画像送信方式廃止を待たず IC チップ読取への移行を前倒しするよう求めた。",
+      "points": [],
+      "code": null,
+      "signal": null,
+      "pick": false
+    },
+    {
+      "id": "2026-10-11-fsa-net-trading-alert",
+      "url": "https://www.fsa.go.jp/ordinary/chuui/chuui_phishing.html",
+      "title": "「インターネット取引サービスへの不正アクセス・不正取引にご注意ください」のページを更新しました。",
+      "source": "fsa.go.jp",
+      "source_group": "official",
+      "published_at": "2026-10-10T01:00:00+09:00",
+      "category": "sec",
+      "keywords": [
+        "fsa",
+        "fraud-prevention"
+      ],
+      "score": 60,
+      "why": "金融庁の公式発表",
+      "read_min": 2,
+      "tldr": "金融庁が「インターネット取引サービスへの不正アクセス・不正取引にご注意ください」のページを更新した。",
+      "points": [],
+      "code": null,
+      "signal": null,
+      "pick": false
+    },
+    {
+      "id": "2026-10-11-fsa-insider-demaecan",
+      "url": "https://www.fsa.go.jp/news/r8/shouken/20261009/20261009.html",
+      "title": "（株）出前館との契約締結交渉者の従業員から伝達を受けた海外居住者による内部者取引に対する違反事実がないと認める旨の決定について公表しました。",
+      "source": "fsa.go.jp",
+      "source_group": "official",
+      "published_at": "2026-10-10T01:00:00+09:00",
+      "category": "stocks",
+      "keywords": [
+        "fsa",
+        "corporate-governance"
+      ],
+      "score": 52,
+      "why": "金融庁の公式発表",
+      "read_min": 2,
+      "tldr": "金融庁が、出前館との契約締結交渉者の従業員から情報伝達を受けた海外居住者による内部者取引について、違反事実の概要を公表した。",
+      "points": [],
+      "code": null,
+      "signal": null,
+      "pick": false
+    },
+    {
+      "id": "2026-10-11-thai-sec-crypto-etf",
+      "url": "https://coinpost.jp/?p=742267",
+      "title": "タイSEC、仮想通貨現物ETFを解禁 ビットコインとイーサリアムに限定",
+      "source": "coinpost.jp",
+      "source_group": "news",
+      "published_at": "2026-10-10T11:40:52+09:00",
+      "category": "crypto",
+      "keywords": [
+        "crypto-etf",
+        "bitcoin",
+        "crypto-regulation"
+      ],
+      "score": 66,
+      "why": "matched: ビットコイン",
+      "read_min": 2,
+      "tldr": "タイ証券取引委員会が暗号資産の現物 ETF を解禁した。対象はビットコインとイーサリアムに限られる。",
+      "points": [],
+      "code": null,
+      "signal": null,
+      "pick": false
+    },
+    {
+      "id": "2026-10-11-tokenized-stocks-record",
+      "url": "https://www.nadanews.com/371834/",
+      "title": "トークン化株式の月間取引高、2兆円超で過去最高──ロビンフッドが首位に＝CoinDesk",
+      "source": "nadanews.com",
+      "source_group": "news",
+      "published_at": "2026-10-10T08:00:00+09:00",
+      "category": "crypto",
+      "keywords": [
+        "tokenization",
+        "us-stocks"
+      ],
+      "score": 64,
+      "why": "matched: 米国株",
+      "read_min": 3,
+      "tldr": "トークン化株式の 9 月のオンチェーン取引高が前月比 16.4% 増の 156 億ドルで過去最高を更新し、ロビンフッドが首位だったと CoinDesk が報じた。",
+      "points": [],
+      "code": null,
+      "signal": null,
+      "pick": false
+    },
+    {
+      "id": "2026-10-11-cftc-prediction-markets",
+      "url": "https://coinpost.jp/?p=742269",
+      "title": "米CFTC、予測市場の規則2件発表｜イベント契約は管轄下、カジノ型賭博は除外",
+      "source": "coinpost.jp",
+      "source_group": "news",
+      "published_at": "2026-10-10T11:20:44+09:00",
+      "category": "crypto",
+      "keywords": [
+        "cftc",
+        "crypto-regulation"
+      ],
+      "score": 58,
+      "why": "matched: 規制",
+      "read_min": 2,
+      "tldr": "米 CFTC が予測市場に関する規則 2 件を発表。イベント契約を管轄下に置く一方、カジノ型の賭博は対象外とした。",
+      "points": [],
+      "code": null,
+      "signal": null,
+      "pick": false
+    },
+    {
+      "id": "2026-10-11-metaplanet-btc-no2",
+      "url": "https://www.nadanews.com/371688/",
+      "title": "メタプラネット、ビットコイン保有量で世界2位に／Strategyが週次購入を再開【週末に読みたい厳選5本_相場編】",
+      "source": "nadanews.com",
+      "source_group": "news",
+      "published_at": "2026-10-10T07:00:00+09:00",
+      "category": "crypto",
+      "keywords": [
+        "bitcoin-treasury",
+        "bitcoin"
+      ],
+      "score": 62,
+      "why": "matched: ビットコイン",
+      "read_min": 3,
+      "tldr": "メタプラネットがビットコイン保有量で世界 2 位になり、Strategy が週次購入を再開したことなどを取り上げた週末の相場まとめ記事。",
+      "points": [],
+      "code": null,
+      "signal": null,
+      "pick": false
+    },
+    {
+      "id": "2026-10-11-toysrus-japan-bankruptcy",
+      "url": "https://www.j-cast.com/2026/10/09518390.html?p=all",
+      "title": "「日本トイザらス」負債132億円で倒産 おもちゃ市場は絶好調なのに...「黒船」と呼ばれた巨人が沈んだ理由",
+      "source": "j-cast.com",
+      "source_group": "tech_blog",
+      "published_at": "2026-10-10T05:40:32+09:00",
+      "category": "stocks",
+      "keywords": [
+        "m-and-a"
+      ],
+      "score": 46,
+      "why": "企業倒産",
+      "read_min": 3,
+      "tldr": "日本トイザらスが負債 132 億円で倒産したと報じられた。",
+      "points": [],
+      "code": null,
+      "signal": null,
+      "pick": false
+    }
+  ],
+  "social": [
+    {
+      "network": "x",
+      "author": "@rough__sea",
+      "url": "https://x.com/rough__sea/status/2108556208340898246",
+      "text": "Ryan Dahl が、自身と Deno 社のメンバー全員が Cloudflare に加わると投稿。Workers のプログラミングモデルを「ネットワークこそがコンピューター」を体現する抽象化だと評した。",
+      "metrics": null,
+      "heat": null,
+      "category": "cloud",
+      "keywords": [
+        "deno",
+        "cloudflare"
+      ],
+      "posted_at": null
+    },
+    {
+      "network": "hn",
+      "author": null,
+      "url": "https://news.ycombinator.com/item?id=50029123",
+      "text": "『Telegram Desktop vulnerability allowed any user's file to be stolen』のスレッド。197 件のコメント",
+      "metrics": "▲ 363  ✉ 197",
+      "heat": 90,
+      "category": "sec",
+      "keywords": [
+        "vulnerability-management"
+      ],
+      "posted_at": "2026-10-10T12:02:47+09:00"
+    },
+    {
+      "network": "hn",
+      "author": null,
+      "url": "https://news.ycombinator.com/item?id=50033407",
+      "text": "『Bitwarden Dual License Model』のスレッド。207 件のコメント",
+      "metrics": "▲ 281  ✉ 207",
+      "heat": 70,
+      "category": "sec",
+      "keywords": [
+        "licensing",
+        "oss"
+      ],
+      "posted_at": "2026-10-10T23:32:50+09:00"
+    },
+    {
+      "network": "hn",
+      "author": null,
+      "url": "https://news.ycombinator.com/item?id=50027118",
+      "text": "『Anthropic AI model submits false tip on unsolved Philly murder, police say』のスレッド。148 件のコメント",
+      "metrics": "▲ 204  ✉ 148",
+      "heat": 51,
+      "category": "ai",
+      "keywords": [
+        "ai-safety",
+        "anthropic"
+      ],
+      "posted_at": "2026-10-10T07:00:35+09:00"
+    },
+    {
+      "network": "hn",
+      "author": null,
+      "url": "https://news.ycombinator.com/item?id=50023450",
+      "text": "『Typesafe AI raises $870M at $7.5B』のスレッド。337 件のコメント",
+      "metrics": "▲ 423  ✉ 337",
+      "heat": 100,
+      "category": "ai",
+      "keywords": [
+        "ai-coding",
+        "ai-economy"
+      ],
+      "posted_at": "2026-10-10T02:02:31+09:00"
+    },
+    {
+      "network": "hn",
+      "author": null,
+      "url": "https://news.ycombinator.com/item?id=50031269",
+      "text": "『`123456' password used in Danish CPR data breach』のスレッド。182 件のコメント",
+      "metrics": "▲ 351  ✉ 182",
+      "heat": 87,
+      "category": "sec",
+      "keywords": [
+        "data-breach"
+      ],
+      "posted_at": "2026-10-10T18:51:49+09:00"
+    }
+  ],
+  "releases": []
+}
