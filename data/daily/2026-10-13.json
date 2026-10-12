@@ -1,0 +1,755 @@
+{
+  "date": "2026-10-13",
+  "generated_at": "2026-10-13T05:40:00+09:00",
+  "stats": {
+    "collected": 189,
+    "sources_ok": 26,
+    "sources_total": 26,
+    "by_group": {
+      "news": 71,
+      "tech_blog": 69,
+      "hackernews": 49
+    },
+    "failed_sources": []
+  },
+  "digest": [
+    {
+      "category": "cloud",
+      "text": "Deno 開発元が Cloudflare に合流。Deno 本体は 1 年間の保守後に Deno Land による開発を終え、Deno Deploy は 6 カ月後に終了。今後は workerd のセルフホスティングと Durable Objects 互換実装に注力する。",
+      "keywords": [
+        "deno",
+        "cloudflare"
+      ]
+    },
+    {
+      "category": "be",
+      "text": "Postgres の遅さはストレージ由来という ClickHouse の検証。同条件でローカル NVMe は gp3 EBS の約 9.2 倍の TPS で、EBS では取引遅延の大半がページ読み込みと WAL fsync 待ちだった。",
+      "keywords": [
+        "postgres"
+      ]
+    },
+    {
+      "category": "ai",
+      "text": "Codex CLI が常駐・自己更新デーモンを既定で起動すると issue で報告され HN で話題に。zod 4.6.6 への不審なコミット（preinstall でペイロード取得）も指摘されたが、公開状況は未確認。",
+      "keywords": [
+        "ai-coding",
+        "supply-chain"
+      ]
+    },
+    {
+      "category": "stocks",
+      "text": "日米の長期金利が 3%・5% を超えても米ハイテク株は最高値圏、日経平均も一時 7 万円台。米国債売りには MBS 起点の悪循環が弱まり一服の兆しとの WSJ 記事も。12 日の米国株終値は収集時点で未確認。",
+      "keywords": [
+        "interest-rates",
+        "us-treasury"
+      ]
+    },
+    {
+      "category": "crypto",
+      "text": "BTC は「エネルギー停戦」発表で 8 万 3935 ドルまで反発。Ledger 販売代理店経由の端末から約 9290 万ドル流出との推計があり、14 日の米 CPI が次の材料。",
+      "keywords": [
+        "bitcoin",
+        "wallet"
+      ]
+    }
+  ],
+  "items": [
+    {
+      "id": "2026-10-13-publickey-deno-cloudflare",
+      "url": "https://www.publickey1.jp/blog/26/denocloudflaredenocloudflare_workersdurable_objects.html",
+      "title": "Deno開発元がCloudflareに合流。Denoの開発は終了へ、今後はCloudflare WorkersとDurable Objectsのオープンソース実装に注力",
+      "source": "publickey1.jp",
+      "source_group": "tech_blog",
+      "published_at": "2026-10-12T23:19:28+09:00",
+      "category": "cloud",
+      "keywords": [
+        "deno",
+        "cloudflare",
+        "serverless"
+      ],
+      "score": 86,
+      "why": "matched: 設計, cloudflare / Deno 開発終了",
+      "read_min": 4,
+      "tldr": "Deno 開発元の Deno Land が Cloudflare に合流すると 10 月 9 日に発表。Deno 本体は今後 1 年間の月次バグ修正・セキュリティ更新の後に Deno Land による開発を終え、Ryan Dahl 氏らは workerd のセルフホスティング支援に注力する。",
+      "points": [
+        "Deno 本体は 1 年間毎月の修正・セキュリティ更新を提供した後、Deno Land による開発を終了（コードは OSS のまま残る）",
+        "Deno Deploy は 6 カ月後に終了し、Cloudflare Workers への移行サービスが提供される。JSR はインフラを Cloudflare へ移して継続",
+        "8 月公開の Durable Objects 互換 OSS「celld」のコードを workerd にマージし、Workers のプログラミングモデルを「サーバー構築の主流」にする狙い"
+      ],
+      "code": null,
+      "signal": null,
+      "pick": true
+    },
+    {
+      "id": "2026-10-13-clickhouse-postgres-storage",
+      "url": "https://clickhouse.com/blog/posette-talk-recap-postgres-isnt-slow-your-storage-is",
+      "title": "Postgres isn't slow, your storage is",
+      "source": "clickhouse.com",
+      "source_group": "hackernews",
+      "published_at": "2026-10-12T15:36:53+09:00",
+      "category": "be",
+      "keywords": [
+        "postgres",
+        "object-storage",
+        "disaster-recovery"
+      ],
+      "score": 90,
+      "why": "matched: postgres, aws",
+      "read_min": 9,
+      "tldr": "ClickHouse の POSETTE 講演まとめ。同一の m6id.4xlarge で 482 GiB の pgbench 更新負荷を比べると、ローカル NVMe は gp3 EBS（3,000 IOPS）の約 9.2 倍の TPS を出し、遅延の大半がページ読み込みと WAL fsync の I/O 待ちだったと示す。",
+      "points": [
+        "中央値 TPS は NVMe 16,030 / EBS 1,734、取引遅延は 4.0 ms / 36.9 ms。10 GB の VACUUM は 366 秒 / 964 秒",
+        "EBS の 1 取引あたり遅延はページ読み込み約 19 ms・WAL fsync 約 11 ms で、CPU 処理（約 2 ms）は両者同等。EBS 側のバックエンドはほぼストレージ待ち",
+        "インスタンスストアは消えるので、クォーラム同期レプリケーション（ANY 1）と WAL-G などでのオブジェクトストレージへの継続バックアップを前提にする"
+      ],
+      "code": {
+        "file": "update.sql",
+        "lang": "sql",
+        "text": "\\set aid random(1, 3300000000)\nUPDATE pgbench_accounts SET abalance = abalance + 1 WHERE aid = :aid;"
+      },
+      "signal": "▲ 166",
+      "pick": true
+    },
+    {
+      "id": "2026-10-13-hn-codex-daemon",
+      "url": "https://github.com/openai/codex/issues/48195",
+      "title": "Codex CLI installs a persistent, self-updating background daemon by default",
+      "source": "github.com",
+      "source_group": "hackernews",
+      "published_at": "2026-10-13T03:29:04+09:00",
+      "category": "ai",
+      "keywords": [
+        "ai-coding",
+        "cli",
+        "openai"
+      ],
+      "score": 80,
+      "why": "AI コーディング CLI の挙動 / HN 上位",
+      "read_min": 4,
+      "tldr": "Codex CLI 0.157.0 が対話セッション開始時に常駐デーモン（app-server --managed-daemon）を既定で起動し、約 374 MB のバイナリを ~/.codex 配下に複製、1 時間ごとに自己更新すると GitHub issue で報告された。メンテナーの回答はまだない。",
+      "points": [
+        "デーモンは Codex のウィンドウを閉じても残り、最初に起動したセッションの環境変数（プロキシ・cwd）を保持し続ける",
+        "別プロセスの pid-update-loop が起動 5 分後と以後 1 時間ごとに更新を確認してバックエンドを再起動する",
+        "回避策は daemon_auto_start 機能の無効化。daemon stop だけでは更新ループが止まらないと報告者は指摘"
+      ],
+      "code": {
+        "file": "shell",
+        "lang": "bash",
+        "text": "codex features disable daemon_auto_start\ncodex app-server daemon stop\npkill -f 'app-server daemon pid-update-loop'   # not stopped by `daemon stop`\nrm -rf ~/.codex/packages/app-server-daemon"
+      },
+      "signal": "▲ 225",
+      "pick": true
+    },
+    {
+      "id": "2026-10-13-cloudflare-logpush-transformers",
+      "url": "https://blog.cloudflare.com/transformers-on-logpush/",
+      "title": "Filter, reshape, and redact logs before export with Transformers",
+      "source": "blog.cloudflare.com",
+      "source_group": "tech_blog",
+      "published_at": "2026-10-12T23:44:59+09:00",
+      "category": "be",
+      "keywords": [
+        "cloudflare",
+        "observability",
+        "pii-masking"
+      ],
+      "score": 78,
+      "why": "matched: 設計 / ログの前処理",
+      "read_min": 8,
+      "tldr": "Cloudflare Logpush に、エクスポート前のログを SQL で絞り込み・秘匿・整形できる Transformers が追加された。Go 製の配信サービスから cgo 経由で Apache DataFusion（Rust）を同一プロセスで呼び、全プランで使える。",
+      "points": [
+        "SQL でレコードの除外、機微フィールドの秘匿、フィールドの追加・改名・ネストができ、出力は NDJSON。Transformer Studio か API で作成し、更新ごとにバージョンが付く",
+        "バッチを Arrow RecordBatch にして Arrow IPC で DataFusion に渡す。合成ベンチで 5,000 行を約 3 ms（約 160 万行/秒）",
+        "変換に失敗すると未変換データを送らず fail closed で再試行し、失敗が続くジョブは自動で無効化される"
+      ],
+      "code": {
+        "file": "transformer.sql",
+        "lang": "sql",
+        "text": "SELECT ClientIP, EdgeResponseStatus, RayID\nFROM http_requests\nWHERE EdgeResponseStatus >= 500"
+      },
+      "signal": null,
+      "pick": true
+    },
+    {
+      "id": "2026-10-13-substack-passkeys-trap",
+      "url": "https://nonfunctional.substack.com/p/passkeys-are-a-trap-do-not-use-them",
+      "title": "Passkeys are a trap",
+      "source": "nonfunctional.substack.com",
+      "source_group": "hackernews",
+      "published_at": "2026-10-12T06:59:48+09:00",
+      "category": "sec",
+      "keywords": [
+        "authentication",
+        "privacy"
+      ],
+      "score": 76,
+      "why": "matched: 認可（認証） / HN ▲974",
+      "read_min": 7,
+      "tldr": "「パスキーは罠」と題した論考。リモートアテステーションでサイト側が認証器や OS を限定できる点や、コピー可否などの違いを「パスキー」の名で一括りにしている点を問題視し、HN で 500 件超の議論になった。",
+      "points": [
+        "パスキーは利用者が最終的に管理できず、サイト側が後から使い方を制限できると主張",
+        "アテステーション付きパスキーは承認済みのパスキー管理ソフト・OS・ハードを要求でき、Linux や独自ブラウザの排除につながりうると指摘",
+        "代替として TOTP（RFC 6238）や YubiKey などの物理キーを挙げ、設定前に種類を確認するよう勧めている"
+      ],
+      "code": null,
+      "signal": "▲ 974",
+      "pick": true
+    },
+    {
+      "id": "2026-10-13-hn-zod-466",
+      "url": "https://github.com/colinhacks/zod/commit/d821685ea6732436fcdf786a81d076958471e467",
+      "title": "Zod 4.6.6 compromised by malware?",
+      "source": "github.com",
+      "source_group": "hackernews",
+      "published_at": "2026-10-12T16:47:29+09:00",
+      "category": "sec",
+      "keywords": [
+        "supply-chain",
+        "typescript"
+      ],
+      "score": 74,
+      "why": "サプライチェーン / HN で指摘",
+      "read_min": 3,
+      "tldr": "zod リポジトリ上で見える 4.6.6 へのバージョン更新コミットに、preinstall で外部からペイロードを取得・実行するスクリプトが含まれていると HN で指摘された。npm に公開されたかどうかや公式の説明は、この時点では確認できていない。",
+      "points": [],
+      "code": null,
+      "signal": "▲ 175",
+      "pick": false
+    },
+    {
+      "id": "2026-10-13-hn-qgis-no-ai",
+      "url": "https://github.com/qgis/QGIS-Enhancement-Proposals/pull/387",
+      "title": "QGIS: No AI contributions permitted",
+      "source": "github.com",
+      "source_group": "hackernews",
+      "published_at": "2026-10-12T20:22:24+09:00",
+      "category": "ai",
+      "keywords": [
+        "oss",
+        "ai-coding"
+      ],
+      "score": 70,
+      "why": "OSS と AI 生成コード / HN ▲343",
+      "read_min": 3,
+      "tldr": "QGIS の改善提案（QEP）で、AI が生成したコントリビューションを受け付けない方針が提案され、HN で 380 件の議論になった。",
+      "points": [],
+      "code": null,
+      "signal": "▲ 343",
+      "pick": false
+    },
+    {
+      "id": "2026-10-13-arstechnica-ai-agents-software",
+      "url": "https://arstechnica.com/ai/2026/10/ai-coding-agents-generate-more-code-but-not-more-software/",
+      "title": "AI coding agents generate more code, but not more software",
+      "source": "arstechnica.com",
+      "source_group": "hackernews",
+      "published_at": "2026-10-13T02:14:01+09:00",
+      "category": "ai",
+      "keywords": [
+        "ai-coding",
+        "ai-agent"
+      ],
+      "score": 72,
+      "why": "matched: llm / AI コーディングの効果",
+      "read_min": 6,
+      "tldr": "AI コーディングエージェントでコード量は増えたが、出荷されるソフトウェアは増えていないとする Ars Technica の記事。",
+      "points": [],
+      "code": null,
+      "signal": "▲ 179",
+      "pick": false
+    },
+    {
+      "id": "2026-10-13-karpathy-llm-gap",
+      "url": "https://twitter.com/karpathy/status/2109361546505966046",
+      "title": "The gap in shared understanding of LLM capability is widening",
+      "source": "twitter.com",
+      "source_group": "hackernews",
+      "published_at": "2026-10-12T05:20:52+09:00",
+      "category": "ai",
+      "keywords": [
+        "llm"
+      ],
+      "score": 68,
+      "why": "matched: llm / HN ▲658",
+      "read_min": 2,
+      "tldr": "Andrej Karpathy 氏の、LLM の能力についての共通理解の差が広がっているという投稿。HN で 950 件超のコメントが付いた。",
+      "points": [],
+      "code": null,
+      "signal": "▲ 658",
+      "pick": false
+    },
+    {
+      "id": "2026-10-13-gigazine-geiger",
+      "url": "https://gigazine.net/news/20261012-geiger/",
+      "title": "無料で自分のPCにインストールされているAIエージェント・ハーネス・MCPサーバー・プラグイン・AI拡張機能をすべてスキャンして列挙してレポートしてくれる「Geiger」",
+      "source": "gigazine.net",
+      "source_group": "tech_blog",
+      "published_at": "2026-10-12T18:06:49+09:00",
+      "category": "ai",
+      "keywords": [
+        "mcp-server",
+        "ai-security"
+      ],
+      "score": 75,
+      "why": "matched: mcp",
+      "read_min": 3,
+      "tldr": "PC 内の AI エージェント・ハーネス・MCP サーバー・プラグイン・AI 拡張を走査して一覧化し、それぞれのアクセス範囲までレポートする無料ツール「Geiger」の紹介。",
+      "points": [],
+      "code": null,
+      "signal": null,
+      "pick": false
+    },
+    {
+      "id": "2026-10-13-github-copilot-app-codebase",
+      "url": "https://github.blog/ai-and-ml/github-copilot/github-copilot-app-for-beginners-how-to-teach-copilot-about-your-codebase/",
+      "title": "GitHub Copilot app for Beginners: How to teach Copilot about your codebase",
+      "source": "github.blog",
+      "source_group": "news",
+      "published_at": "2026-10-13T02:43:59+09:00",
+      "category": "ai",
+      "keywords": [
+        "github",
+        "mcp-server",
+        "ai-coding"
+      ],
+      "score": 66,
+      "why": "matched: mcp",
+      "read_min": 6,
+      "tldr": "GitHub Copilot アプリの入門記事。リポジトリへのカスタム指示とスキルの追加、カスタムエージェント、Playwright などの MCP サーバー接続を解説する。",
+      "points": [],
+      "code": null,
+      "signal": null,
+      "pick": false
+    },
+    {
+      "id": "2026-10-13-aws-elasticache-insights",
+      "url": "https://aws.amazon.com/about-aws/whats-new/2026/10/amazon-elasticache-valkey-elasticache-insights/",
+      "title": "Amazon ElastiCache for Valkey introduces ElastiCache Insights",
+      "source": "aws.amazon.com",
+      "source_group": "news",
+      "published_at": "2026-10-12T16:00:00+09:00",
+      "category": "cloud",
+      "keywords": [
+        "valkey",
+        "opentelemetry",
+        "aws"
+      ],
+      "score": 70,
+      "why": "matched: opentelemetry, aws",
+      "read_min": 2,
+      "tldr": "ElastiCache for Valkey のノードベースクラスター向けに、CloudWatch の既製ダッシュボード「ElastiCache Insights」が追加された。自動発行される OpenTelemetry メトリクスでヘルス・メモリ・レイテンシなどを一画面にまとめる。",
+      "points": [],
+      "code": null,
+      "signal": null,
+      "pick": false
+    },
+    {
+      "id": "2026-10-13-impress-maia300",
+      "url": "https://pc.watch.impress.co.jp/docs/news/2147412.html",
+      "title": "脱NVIDIAを急ぐMicrosoft、わずか9カ月で次世代AIチップ「Maia 300」",
+      "source": "pc.watch.impress.co.jp",
+      "source_group": "tech_blog",
+      "published_at": "2026-10-12T22:23:38+09:00",
+      "category": "ai",
+      "keywords": [
+        "microsoft",
+        "semiconductor",
+        "nvidia"
+      ],
+      "score": 58,
+      "why": "AI 半導体",
+      "read_min": 3,
+      "tldr": "Microsoft が前世代から約 9 カ月で次世代 AI チップ「Maia 300」を発表したと PC Watch が報じた。",
+      "points": [],
+      "code": null,
+      "signal": null,
+      "pick": false
+    },
+    {
+      "id": "2026-10-13-royfish-fingerprints",
+      "url": "https://royfish.dev/fingerprints-are-the-new-cookies",
+      "title": "Fingerprints are the new cookies",
+      "source": "royfish.dev",
+      "source_group": "hackernews",
+      "published_at": "2026-10-12T07:33:39+09:00",
+      "category": "sec",
+      "keywords": [
+        "privacy",
+        "bot-traffic"
+      ],
+      "score": 60,
+      "why": "プライバシー / HN ▲675",
+      "read_min": 5,
+      "tldr": "ブラウザフィンガープリントが Cookie に代わる追跡手段になっているという論考。HN で 320 件超の議論。",
+      "points": [],
+      "code": null,
+      "signal": "▲ 675",
+      "pick": false
+    },
+    {
+      "id": "2026-10-13-qiita-hono",
+      "url": "https://qiita.com/tanahiro2010/items/c76f51efc93fc357d4c5?utm_campaign=popular_items&utm_medium=feed&utm_source=popular_items",
+      "title": "個人開発者よ、Honoを使え",
+      "source": "qiita.com",
+      "source_group": "tech_blog",
+      "published_at": "2026-10-12T11:11:33+09:00",
+      "category": "be",
+      "keywords": [
+        "hono",
+        "typescript"
+      ],
+      "score": 56,
+      "why": "matched: 設計",
+      "read_min": 5,
+      "tldr": "個人開発で Web フレームワーク Hono を勧める Qiita 記事。",
+      "points": [],
+      "code": null,
+      "signal": null,
+      "pick": false
+    },
+    {
+      "id": "2026-10-13-diamond-rates-stocks",
+      "url": "https://diamond.jp/articles/-/400854",
+      "title": "金利上昇“節目”を超えても堅調な株式市場、金利高と株高の両立「今回は違う」論の危うさ - Diamond マーケットラボ",
+      "source": "diamond.jp",
+      "source_group": "news",
+      "published_at": "2026-10-13T04:30:00+09:00",
+      "category": "stocks",
+      "keywords": [
+        "interest-rates",
+        "us-stocks",
+        "nikkei225"
+      ],
+      "score": 84,
+      "why": "matched: 金利 / 長期金利と株価",
+      "read_min": 6,
+      "tldr": "日本の 10 年債利回りが 3%、米国が 5% を超えても、ナスダックや S&P500 は最高値圏にあり、日経平均も一時 7 万円台を回復した。記事は、金利上昇がインフレ期待によるものなら企業利益も膨らむため株高と両立しうる、という見方を整理している。",
+      "points": [
+        "日米の長期金利が節目を超える一方、NY ダウとラッセル 2000 は上値が重く、指数ごとに差が出ている",
+        "日本は物価連動国債から見た予想インフレ率が日銀の 2% 目標を上回り、株価の支えになっているとみる",
+        "日経平均の予想 PER は約 18 倍。益利回り約 5.6% は長期金利 3.1% を約 2.5 ポイント上回る（「今回は違う」論の危うさを論じる後半は有料で未確認）"
+      ],
+      "code": null,
+      "signal": null,
+      "pick": true
+    },
+    {
+      "id": "2026-10-13-diamond-wsj-ust",
+      "url": "https://diamond.jp/articles/-/400918",
+      "title": "米国債売りがようやく一服、その理由とは？ - WSJ PickUp",
+      "source": "diamond.jp",
+      "source_group": "news",
+      "published_at": "2026-10-13T04:05:00+09:00",
+      "category": "macro",
+      "keywords": [
+        "us-treasury",
+        "interest-rates"
+      ],
+      "score": 74,
+      "why": "matched: 金利 / 米国債",
+      "read_min": 4,
+      "tldr": "続いていた米国債売りに一服の兆し。利回りの急上昇で MBS と国債先物のデュレーションが延び、長期債売りが利回りをさらに押し上げる悪循環が起きていたが、そのゆがみが弱まりつつあるという WSJ の記事。",
+      "points": [
+        "利回り上昇で借り換えが冷え込み MBS の想定残存期間が延び、ヘッジの長期債売りが利回り上昇を加速させていた",
+        "アナリストは MBS の残存期間の長期化がほぼ限界に達したとみる",
+        "運用会社は売り局面は終盤に近いとし、今後は原油価格などファンダメンタルズで方向が決まるとの見方（具体的な利回り水準は有料部分で未確認）"
+      ],
+      "code": null,
+      "signal": null,
+      "pick": true
+    },
+    {
+      "id": "2026-10-13-toyokeizai-autumn-market",
+      "url": "https://toyokeizai.net/articles/-/960881?utm_source=rss&utm_medium=http&utm_campaign=link_back",
+      "title": "ここから日本株は本当に上昇するのか？｢波乱含みの秋相場｣を読み解く｢2つのカギ｣とは何か | 政治・経済・投資 | 東洋経済オンライン",
+      "source": "toyokeizai.net",
+      "source_group": "news",
+      "published_at": "2026-10-12T07:30:00+09:00",
+      "category": "stocks",
+      "keywords": [
+        "nikkei225",
+        "interest-rates"
+      ],
+      "score": 66,
+      "why": "matched: 金利",
+      "read_min": 5,
+      "tldr": "秋相場の焦点を「AI 相場の主役交代」と「金利上昇メリット株」の 2 テーマで読み解く東洋経済の記事。",
+      "points": [],
+      "code": null,
+      "signal": null,
+      "pick": false
+    },
+    {
+      "id": "2026-10-13-cnbc-anthropic-ipo",
+      "url": "https://www.cnbc.com/2026/10/07/anthropic-will-be-most-ridiculous-ipo-of-year-analyst-says.html",
+      "title": "Research Firm Calls Anthropic's IPO 'Unprecedented Test of Investor Gullibity'",
+      "source": "cnbc.com",
+      "source_group": "hackernews",
+      "published_at": "2026-10-12T14:03:47+09:00",
+      "category": "stocks",
+      "keywords": [
+        "anthropic",
+        "ipo"
+      ],
+      "score": 64,
+      "why": "IPO / HN ▲234",
+      "read_min": 3,
+      "tldr": "調査会社が Anthropic の IPO を「投資家の軽信さを試す前例のない試験」と評したと CNBC が報じ、HN で 200 件超の議論になった。",
+      "points": [],
+      "code": null,
+      "signal": "▲ 234",
+      "pick": false
+    },
+    {
+      "id": "2026-10-13-nada-btc-analysis",
+      "url": "https://www.nadanews.com/372094/",
+      "title": "ビットコインが8万4000ドル手前で反発一服──トランプ氏の「エネルギー停戦」、LedgerとColdcardのハッキング懸念を上回るか【価格分析】",
+      "source": "nadanews.com",
+      "source_group": "news",
+      "published_at": "2026-10-12T12:53:41+09:00",
+      "category": "crypto",
+      "keywords": [
+        "bitcoin",
+        "wallet",
+        "crude-oil"
+      ],
+      "score": 82,
+      "why": "matched: ビットコイン",
+      "read_min": 6,
+      "tldr": "BTC は 10 月 11 日、トランプ氏の「エネルギー停戦」発表を受けて 8 万 3935 ドルまで反発し、金曜安値（約 8 万 300 ドル）から約 4.3% 戻した。一方で Ledger の販売代理店経由の端末から約 9290 万ドルが流出したと推計され、Coldcard の公式 X アカウントも乗っ取られた。",
+      "points": [
+        "停戦はゼレンスキー氏が「詳細を受け取っていない」としており未実施。ブレント原油は一時 102 ドルまで下落",
+        "Bitquery 推計で 311 ウォレットから約 9290 万ドル流出（TRON 上の USDT 約 7050 万ドル、BTC 1680 万ドルなど）。Ledger は自社システムと直販は侵害されていないとする",
+        "週末はショートの強制決済がロングを上回った。今後の材料は米 CPI、ベージュブック、10 月 29 日の FOMC、停戦の実施状況"
+      ],
+      "code": null,
+      "signal": null,
+      "pick": true
+    },
+    {
+      "id": "2026-10-13-nada-jeonbuk-btc-loan",
+      "url": "https://www.nadanews.com/372131/",
+      "title": "韓国の全北銀行、国内銀行初のビットコイン担保ウォン融資を実施＝報道",
+      "source": "nadanews.com",
+      "source_group": "news",
+      "published_at": "2026-10-12T20:00:00+09:00",
+      "category": "crypto",
+      "keywords": [
+        "bitcoin",
+        "regional-banks"
+      ],
+      "score": 66,
+      "why": "matched: ビットコイン",
+      "read_min": 2,
+      "tldr": "韓国の全北銀行が法人向けにビットコインを担保とするウォン建て融資を実行したと現地メディアが報じた。国内銀行では初とされる。",
+      "points": [],
+      "code": null,
+      "signal": null,
+      "pick": false
+    },
+    {
+      "id": "2026-10-13-nada-meanwhile-raise",
+      "url": "https://www.nadanews.com/372078/",
+      "title": "サム・アルトマン氏出資のビットコイン生保会社、60億円を追加調達",
+      "source": "nadanews.com",
+      "source_group": "news",
+      "published_at": "2026-10-12T07:00:00+09:00",
+      "category": "crypto",
+      "keywords": [
+        "bitcoin",
+        "insurance"
+      ],
+      "score": 60,
+      "why": "matched: ビットコイン",
+      "read_min": 2,
+      "tldr": "ビットコインのみで事業を行う認可を受けた生命保険会社 Meanwhile が、既存投資家から 3750 万ドル（約 60 億円）を追加調達した。",
+      "points": [],
+      "code": null,
+      "signal": null,
+      "pick": false
+    },
+    {
+      "id": "2026-10-13-nada-cftc-prediction",
+      "url": "https://www.nadanews.com/372084/",
+      "title": "CFTC、新たな規則で予測市場とギャンブルの境界線を明確化──カジノは管轄外",
+      "source": "nadanews.com",
+      "source_group": "news",
+      "published_at": "2026-10-12T08:00:00+09:00",
+      "category": "crypto",
+      "keywords": [
+        "cftc",
+        "crypto-regulation"
+      ],
+      "score": 58,
+      "why": "規制",
+      "read_min": 3,
+      "tldr": "CFTC が 10 月 9 日、予測市場に関する 2 つの措置を発表。スポーツや政治などのイベント契約の扱いを整理し、カジノは管轄外とした。",
+      "points": [],
+      "code": null,
+      "signal": null,
+      "pick": false
+    },
+    {
+      "id": "2026-10-13-nada-stablecoin-column",
+      "url": "https://www.nadanews.com/372051/",
+      "title": "企業ではSAP、個人ではGalaxy──ステーブルコインが“いつもの場所”に入り始めた【編集長コラム】",
+      "source": "nadanews.com",
+      "source_group": "news",
+      "published_at": "2026-10-12T10:00:00+09:00",
+      "category": "crypto",
+      "keywords": [
+        "stablecoin",
+        "payments"
+      ],
+      "score": 56,
+      "why": "ステーブルコイン",
+      "read_min": 4,
+      "tldr": "企業向けでは SAP、個人向けでは Galaxy と、USDC が日常的に使う場所に入り始めたことを論じる編集長コラム。",
+      "points": [],
+      "code": null,
+      "signal": null,
+      "pick": false
+    },
+    {
+      "id": "2026-10-13-diamond-rental-property-valuation",
+      "url": "https://diamond.jp/articles/-/400906",
+      "title": "富裕層の相続対策を直撃！「貸付不動産5年ルール」と「不動産小口化商品」の評価が来年から激変へ、年内にできる5つの対策法を伝授【前編】 - 富裕層必見！ 資産防衛＆節税術",
+      "source": "diamond.jp",
+      "source_group": "news",
+      "published_at": "2026-10-13T04:40:00+09:00",
+      "category": "realestate",
+      "keywords": [
+        "housing",
+        "real-estate-prices",
+        "jp-fiscal"
+      ],
+      "score": 80,
+      "why": "不動産の相続税評価の見直し",
+      "read_min": 6,
+      "tldr": "国税庁が 9 月 18 日に公表した通達案で、取得・新築から 5 年以内の貸付用不動産と不動産小口化商品の相続税評価が、路線価などではなく取引価額を原則とする方式に変わる。2027 年 1 月 1 日以後の相続・遺贈・贈与から適用の見込み。",
+      "points": [
+        "対象は「課税時期前 5 年以内に取得・新築した貸付用不動産」と、取得時期を問わない任意組合型などの不動産小口化商品",
+        "取引価額を原則とし、要件を満たせば取得価額ベースの簡便法（80% など）も認める。5 年超保有の貸付不動産・自宅・事業用は従来どおり",
+        "パブリックコメントは 10 月 18 日締め切り、通達は 11 月〜12 月初旬に発出見込み（計算方法の詳細は有料部分で未確認）"
+      ],
+      "code": null,
+      "signal": null,
+      "pick": true
+    },
+    {
+      "id": "2026-10-13-diamond-mitsubishi-realestate",
+      "url": "https://diamond.jp/articles/-/400877",
+      "title": "三菱商事の不動産事業トップが明かす“半歩先”戦略、JR東と異例タッグの伊藤忠や大手デベの包囲網に挑む「独自路線」の勝算 - クローズアップ商社",
+      "source": "diamond.jp",
+      "source_group": "news",
+      "published_at": "2026-10-13T04:55:00+09:00",
+      "category": "realestate",
+      "keywords": [
+        "real-estate-companies"
+      ],
+      "score": 52,
+      "why": "不動産",
+      "read_min": 5,
+      "tldr": "三菱商事の都市開発本部長が「産業型都市開発」という不動産事業の独自路線を語るインタビュー。JR 東日本と組む伊藤忠や大手デベロッパーとの競合も扱う。",
+      "points": [],
+      "code": null,
+      "signal": null,
+      "pick": false
+    }
+  ],
+  "social": [
+    {
+      "network": "hn",
+      "author": null,
+      "url": "https://news.ycombinator.com/item?id=50048312",
+      "text": "『Passkeys are a trap』のスレッド。514 件のコメント",
+      "metrics": "▲ 974  ✉ 514",
+      "heat": 100,
+      "category": "sec",
+      "keywords": [
+        "authentication",
+        "privacy"
+      ],
+      "posted_at": "2026-10-12T06:59:48+09:00"
+    },
+    {
+      "network": "hn",
+      "author": null,
+      "url": "https://news.ycombinator.com/item?id=50047422",
+      "text": "『The gap in shared understanding of LLM capability is widening』のスレッド。958 件のコメント",
+      "metrics": "▲ 658  ✉ 958",
+      "heat": 100,
+      "category": "ai",
+      "keywords": [
+        "llm"
+      ],
+      "posted_at": "2026-10-12T05:20:52+09:00"
+    },
+    {
+      "network": "hn",
+      "author": null,
+      "url": "https://news.ycombinator.com/item?id=50054751",
+      "text": "『QGIS: No AI contributions permitted』のスレッド。380 件のコメント",
+      "metrics": "▲ 343  ✉ 380",
+      "heat": 85,
+      "category": "ai",
+      "keywords": [
+        "oss",
+        "ai-coding"
+      ],
+      "posted_at": "2026-10-12T20:22:24+09:00"
+    },
+    {
+      "network": "hn",
+      "author": null,
+      "url": "https://news.ycombinator.com/item?id=50060694",
+      "text": "『Codex CLI installs a persistent, self-updating background daemon by default』のスレッド。133 件のコメント",
+      "metrics": "▲ 225  ✉ 133",
+      "heat": 56,
+      "category": "ai",
+      "keywords": [
+        "ai-coding",
+        "cli"
+      ],
+      "posted_at": "2026-10-13T03:29:04+09:00"
+    },
+    {
+      "network": "hn",
+      "author": null,
+      "url": "https://news.ycombinator.com/item?id=50052163",
+      "text": "『Postgres isn't slow, your storage is』のスレッド。177 件のコメント",
+      "metrics": "▲ 166  ✉ 177",
+      "heat": 41,
+      "category": "be",
+      "keywords": [
+        "postgres"
+      ],
+      "posted_at": "2026-10-12T15:36:53+09:00"
+    },
+    {
+      "network": "hn",
+      "author": null,
+      "url": "https://news.ycombinator.com/item?id=50051583",
+      "text": "『Research Firm Calls Anthropic's IPO 'Unprecedented Test of Investor Gullibity'』のスレッド。203 件のコメント",
+      "metrics": "▲ 234  ✉ 203",
+      "heat": 58,
+      "category": "stocks",
+      "keywords": [
+        "anthropic",
+        "ipo"
+      ],
+      "posted_at": "2026-10-12T14:03:47+09:00"
+    }
+  ],
+  "releases": [
+    {
+      "date": "2026-10-14",
+      "title": "米 9 月消費者物価指数（CPI）発表",
+      "repo": null,
+      "url": "https://www.bls.gov/schedule/news_release/cpi.htm",
+      "kind": "event",
+      "note": "米東部時間 8:30（日本時間 14 日 21:30）予定。前日の日次ファイルで確認済みの予定を継続掲載",
+      "category": "macro"
+    }
+  ]
+}
