@@ -1,0 +1,861 @@
+{
+  "date": "2026-10-14",
+  "generated_at": "2026-10-14T05:45:00+09:00",
+  "stats": {
+    "collected": 236,
+    "sources_ok": 26,
+    "sources_total": 26,
+    "by_group": {
+      "news": 87,
+      "tech_blog": 88,
+      "official": 11,
+      "hackernews": 50
+    },
+    "failed_sources": []
+  },
+  "digest": [
+    {
+      "category": "ai",
+      "text": "Google が Gemini 4 Argon を一般提供。出力上限 100 万トークンで、一部ベンチマークで他社を上回る一方、Terminal-bench などでは下回る。API は 11 月末まで入力 $2・出力 $10 の導入価格。",
+      "keywords": [
+        "google",
+        "llm"
+      ]
+    },
+    {
+      "category": "cloud",
+      "text": "AWS Lambda に HTTP を直接受ける Lambda Web Functions。1 環境で同時リクエストを処理し、アイドル CPU は課金しない。既存関数は Lambda Event Functions に改称。",
+      "keywords": [
+        "aws",
+        "serverless"
+      ]
+    },
+    {
+      "category": "sec",
+      "text": "NICT が公開アプリを解析して API サーバーを突く「A2B 攻撃」に注意喚起。IDARE（約 13 万人）や銀のさら（最大約 650 万件）など国内の漏えい公表も相次いだ。",
+      "keywords": [
+        "authorization",
+        "data-breach"
+      ]
+    },
+    {
+      "category": "stocks",
+      "text": "13 日の日経平均は半導体安で 1,253 円安の 6 万 7777 円と 4 日続落（TOPIX は小幅続伸）。PayPay 証券は接続先障害で日本株・ETF の取引を停止した。13 日の米国株終値は収集時点で未確認。",
+      "keywords": [
+        "nikkei225",
+        "semiconductor"
+      ]
+    },
+    {
+      "category": "crypto",
+      "text": "Ledger が不正部品でリカバリーフレーズを LTE 送信する手口を公表。BTC は 8 万 3 千ドル台で、今夜（日本時間 21:30）の米 CPI 待ち。",
+      "keywords": [
+        "wallet",
+        "bitcoin"
+      ]
+    }
+  ],
+  "items": [
+    {
+      "id": "2026-10-14-hn-gemini-4-argon",
+      "url": "https://deepmind.google/models/gemini/",
+      "title": "Gemini 4 Argon",
+      "source": "deepmind.google",
+      "source_group": "hackernews",
+      "published_at": "2026-10-14T01:03:16+09:00",
+      "category": "ai",
+      "keywords": [
+        "google",
+        "llm",
+        "ai-coding"
+      ],
+      "score": 90,
+      "why": "matched: llm / HN ▲663・新フロンティアモデル",
+      "read_min": 6,
+      "tldr": "Google DeepMind の新フロンティアモデル Gemini 4 Argon が一般提供開始。ソフトウェア開発・知識労働・サイバー防御向けで、出力上限 100 万トークンを打ち出す。",
+      "points": [
+        "公式ページのベンチマークでは Vals Index 68.9%、DeepSWE v1.1 77.9% などで他社モデルを上回る一方、Terminal-bench 4.0（57.4%）や FrontierSWE v2、OSWorld-2.0 では他社モデルを下回る",
+        "Gemini アプリ（AI Pro / Ultra）、Google AI Studio、Antigravity、Gemini API で提供。Google Cloud の告知では 11 月 30 日まで入力 $2・出力 $10／100 万トークンの導入価格、その後は $4・$20",
+        "間接プロンプトインジェクションへの耐性を最も高めたモデルとし、防御側向けの Fairwind Program を拡大"
+      ],
+      "code": null,
+      "signal": "▲ 663",
+      "pick": true
+    },
+    {
+      "id": "2026-10-14-aws-lambda-web-functions",
+      "url": "https://aws.amazon.com/about-aws/whats-new/2026/10/aws-lambda-web-functions/",
+      "title": "AWS Lambda announces Lambda Web Functions",
+      "source": "aws.amazon.com",
+      "source_group": "news",
+      "published_at": "2026-10-13T04:30:00+09:00",
+      "category": "cloud",
+      "keywords": [
+        "aws",
+        "serverless",
+        "http"
+      ],
+      "score": 88,
+      "why": "matched: aws / Lambda の新しい実行モデル",
+      "read_min": 3,
+      "tldr": "AWS Lambda に、コードがポートで HTTP リクエストを直接受ける新プリミティブ「Lambda Web Functions」が登場。Express や Hono をアダプターなしで動かせ、既存の関数は「Lambda Event Functions」に改称される。",
+      "points": [
+        "1 つのウォーム実行環境が複数リクエストを同時処理し、コールドスタートを減らす。ネイティブ HTTP ストリーミングとマルチリージョンルーティングに対応",
+        "課金はアクティブ CPU 時間と保持メモリ。DB 待ちなどのアイドル CPU 時間は課金しない。ランタイムは現時点で Node.js のみ",
+        "東京を含む 5 リージョンで提供開始。同日 CloudFront のオリジンとしても指定可能になり、TLS 終端やエッジ配信を前段に置ける"
+      ],
+      "code": null,
+      "signal": null,
+      "pick": true
+    },
+    {
+      "id": "2026-10-14-cloudflare-d1-control-plane",
+      "url": "https://blog.cloudflare.com/d1-control-plane/",
+      "title": "Under the hood, off the hot path: How D1 scales to millions of databases",
+      "source": "blog.cloudflare.com",
+      "source_group": "tech_blog",
+      "published_at": "2026-10-14T01:20:18+09:00",
+      "category": "be",
+      "keywords": [
+        "cloudflare",
+        "sqlite",
+        "managed-db"
+      ],
+      "score": 84,
+      "why": "matched: 設計 / 数百万 DB を捌く制御プレーン",
+      "read_min": 15,
+      "tldr": "Cloudflare D1 が数百万のデータベースを管理する制御プレーンの設計を解説。クエリ経路から中央集権・単一リージョンの部品を外し、DB ごとに 1 つの SQLite Durable Object で処理する。",
+      "points": [
+        "稼働 DB 数は 1 年で 15 倍・2 年で 65 倍、日次アクティブ DB は 1 年で 18 倍に増加",
+        "ルーティング情報は Workers KV にキャッシュし、メタデータは Hyperdrive 経由の Postgres（読みはレプリカ）、使用量は Queues でバッチ化し ClickHouse で集計",
+        "作成処理は冪等・再試行前提で、DB 側の定期ハートビートが孤立した状態を自己修復する。行数上限は Quicksilver でエッジ側で強制"
+      ],
+      "code": {
+        "file": "edge-api-worker.js",
+        "lang": "javascript",
+        "text": "const parsed = parseQueries(request);\n\nconst cachedDB = await withRetries(getCachedDatabase(parsed.dbUuid));\n\nconst response = await env.EYEBALL_WORKER.query({\n  db: cachedDB,\n  queries: parsed.queries,\n});\n\nreturn response;"
+      },
+      "signal": null,
+      "pick": true
+    },
+    {
+      "id": "2026-10-14-hn-anthropic-scion",
+      "url": "https://www.anthropic.com/engineering/redesigning-source-control",
+      "title": "Redesigning source control at Anthropic",
+      "source": "anthropic.com",
+      "source_group": "hackernews",
+      "published_at": "2026-10-14T00:49:56+09:00",
+      "category": "be",
+      "keywords": [
+        "git",
+        "anthropic",
+        "ai-coding"
+      ],
+      "score": 82,
+      "why": "HN ▲271 / エージェント時代のソース管理",
+      "read_min": 12,
+      "tldr": "Anthropic がモノレポで git を置き換えた独自 VCS「Scion」を解説。日次マージが 5 月の約 2,500 件から 9 月には 3 万件超に増え、git ミラー運用がボトルネックになったため 7 人で 5 カ月かけて移行した。",
+      "points": [
+        "常時オンライン前提でサーバー側が履歴・コミット・マージを担い、クライアントは有限のキャッシュと疎なワーキングコピーだけを持つ",
+        "変更は親との差分だけを記録する changeset と内容アドレスの blob で表し、ノード・リージョン・権威サーバーの段階キャッシュはいずれもヒット率 99% 超",
+        "インフラの CPU・メモリは旧 git ミラー比で約 200 分の 1、チェックアウトは分から秒に。グローバルなマージロックは置かず、マージ後・デプロイ前のテストで補う"
+      ],
+      "code": null,
+      "signal": "▲ 271",
+      "pick": true
+    },
+    {
+      "id": "2026-10-14-nict-a2b-attack",
+      "url": "https://cynex.nict.go.jp/library/261013-01.html",
+      "title": "【注意喚起】相次ぐ情報漏洩、その原因の一つは「アプリ解析からのサーバ攻撃」（NICT CYNEX）",
+      "source": "cynex.nict.go.jp",
+      "source_group": "tech_blog",
+      "published_at": "2026-10-13T14:02:30+09:00",
+      "category": "sec",
+      "keywords": [
+        "ai-security",
+        "api-design",
+        "authorization"
+      ],
+      "score": 86,
+      "why": "matched: 認可 / NICT の注意喚起",
+      "read_min": 5,
+      "tldr": "NICT の LETTICE が、公開 Android アプリを解析して裏側の API サーバーを攻撃する「A2B（App-to-Backend）攻撃」に注意喚起。相次ぐ情報漏えいの原因の一つとし、AI で解析・脆弱性探索が効率化している点も指摘した。",
+      "points": [
+        "アプリ自体に脆弱性がなくても、アプリから通信先 API と仕様を割り出し、サーバー側の認証・認可や入力検証の不備を突く",
+        "重点点検対象として API の認可不備（IDOR / BOLA）、SSRF、RCE、SQL インジェクションを挙げる",
+        "「公開アプリは解析される前提」でバックエンドを守るよう求め、不要 API の停止・アクセス制限・認証情報の再発行などの暫定策も示す"
+      ],
+      "code": null,
+      "signal": null,
+      "pick": true
+    },
+    {
+      "id": "2026-10-14-forest-python-315",
+      "url": "https://forest.watch.impress.co.jp/docs/news/2147319.html",
+      "title": "「Python 3.15」が正式公開 ～UTF-8が標準に、“番兵値”などの新しい言語機能も／実験的な「JIT」コンパイラーも大きく強化",
+      "source": "forest.watch.impress.co.jp",
+      "source_group": "tech_blog",
+      "published_at": "2026-10-13T17:58:09+09:00",
+      "category": "be",
+      "keywords": [
+        "python",
+        "programming-language"
+      ],
+      "score": 80,
+      "why": "matched: python / 正式リリース",
+      "read_min": 5,
+      "tldr": "Python 3.15 が正式公開。UTF-8 が既定のエンコーディングになり、明示的な遅延インポート、frozendict、sentinel などの言語機能が加わった。",
+      "points": [
+        "PEP 686 で open() などの既定が UTF-8 に（従来動作は -X utf8=0）。PEP 810 の lazy import で起動時間を短縮",
+        "組み込みの frozendict（PEP 814）と sentinel（PEP 661）、内包表記での * / ** アンパック（PEP 798）、サンプリング型プロファイラー Tachyon（PEP 799）",
+        "実験的 JIT は x86-64 Linux で幾何平均 7〜8% 高速化の見込み。Windows のフルインストーラーは 3.15 が最後で、サポートは 2031 年 10 月まで"
+      ],
+      "code": null,
+      "signal": null,
+      "pick": true
+    },
+    {
+      "id": "2026-10-14-hn-rust-borrowck-unsound",
+      "url": "https://github.com/rust-lang/rust/issues/164250",
+      "title": "11 year old unsoundness bugs found in Rust borrow checker",
+      "source": "github.com",
+      "source_group": "hackernews",
+      "published_at": "2026-10-13T19:27:00+09:00",
+      "category": "be",
+      "keywords": [
+        "rust",
+        "programming-language",
+        "memory-safety"
+      ],
+      "score": 70,
+      "why": "HN ▲606 / I-unsound P-high",
+      "read_min": 8,
+      "tldr": "Rust の借用検査で、構造体の 'static 境界をフィールド代入で回避できる健全性バグが報告された。悪意ある Drop 実装と組み合わせると安全なコードで use-after-scope を起こせ、少なくとも 1.18 から存在。修正 PR が出ている。",
+      "points": [
+        "型の単一化で寿命境界が検査されないことが原因とみられ、I-unsound・P-high のラベル",
+        "コア開発者は意図的に悪意ある Drop 実装が必要なため偶発的な影響は小さいと説明",
+        "スレッドは議論が過熱しコラボレーター限定にロック、修正 PR #164277 がオープン"
+      ],
+      "code": {
+        "file": "repro.rs",
+        "lang": "rust",
+        "text": "struct Q<T: 'static>(Option<T>);\n\nimpl<T: 'static> Drop for Q<T> {\n    fn drop(&mut self) {\n        // Code in here has access to a non-'static &String\n        // but assumes that it's a &'static String\n    }\n}\n\nfn main() {\n    let l = String::new();\n    let mut q = Q(None);\n    q.0 = Some(&l);\n}"
+      },
+      "signal": "▲ 606",
+      "pick": false
+    },
+    {
+      "id": "2026-10-14-publickey-sveltekit-3",
+      "url": "https://www.publickey1.jp/blog/26/websveltekit_3vite.html",
+      "title": "Webアプリフレームワークの「SvelteKit 3」正式リリース。設定をViteに集約、型安全やエラー処理の改善など",
+      "source": "publickey1.jp",
+      "source_group": "news",
+      "published_at": "2026-10-14T00:26:33+09:00",
+      "category": "be",
+      "keywords": [
+        "typescript",
+        "vite"
+      ],
+      "score": 62,
+      "why": "フレームワークのメジャー更新",
+      "read_min": null,
+      "tldr": "SvelteKit 3 正式版。svelte.config.js を廃止して設定を Vite 設定に集約し、$lib エイリアスを Node.js サブパスインポートの #lib に移行、型安全性やエラー処理を改善した。",
+      "points": [],
+      "code": null,
+      "signal": null,
+      "pick": false
+    },
+    {
+      "id": "2026-10-14-github-secret-detection-model",
+      "url": "https://github.blog/ai-and-ml/githubs-model-for-secret-detection-finding-more-secrets-with-less-noise/",
+      "title": "GitHub’s model for secret detection: Finding more secrets with less noise",
+      "source": "github.blog",
+      "source_group": "news",
+      "published_at": "2026-10-14T02:56:33+09:00",
+      "category": "sec",
+      "keywords": [
+        "secrets-management",
+        "github"
+      ],
+      "score": 64,
+      "why": "シークレット検出の精度改善",
+      "read_min": null,
+      "tldr": "GitHub が文脈を考慮するシークレット分類モデルを解説。RSS 要約によると加重受入率が 11.5% 向上し、スキャン時間の中央値を 86% 短縮した。",
+      "points": [],
+      "code": null,
+      "signal": null,
+      "pick": false
+    },
+    {
+      "id": "2026-10-14-torvalds-llm-assoc-array",
+      "url": "https://joho-todai.com/torvalds-llm-linux-13-year-old-bugs-fixed/",
+      "title": "トーバルズ、「説いた通りにやった」。LLMでLinuxの13年来のバグ4件を発見",
+      "source": "joho-todai.com",
+      "source_group": "tech_blog",
+      "published_at": "2026-10-13T13:53:09+09:00",
+      "category": "ai",
+      "keywords": [
+        "llm",
+        "linux",
+        "code-review"
+      ],
+      "score": 66,
+      "why": "matched: llm",
+      "read_min": null,
+      "tldr": "Linus Torvalds 氏が LLM で Linux カーネルの assoc_array ライブラリを読みやすく書き直し、2013 年の初回コミットから埋もれていたバグ 4 件を見つけたと紹介する記事。",
+      "points": [],
+      "code": null,
+      "signal": null,
+      "pick": false
+    },
+    {
+      "id": "2026-10-14-hn-agents-more-code",
+      "url": "https://arstechnica.com/ai/2026/10/ai-coding-agents-generate-more-code-but-not-more-software/",
+      "title": "AI coding agents generate more code, but not more software",
+      "source": "arstechnica.com",
+      "source_group": "hackernews",
+      "published_at": "2026-10-13T02:14:01+09:00",
+      "category": "ai",
+      "keywords": [
+        "ai-coding"
+      ],
+      "score": 64,
+      "why": "HN ▲356",
+      "read_min": null,
+      "tldr": "AI コーディングエージェントでコード量は増えたが、出荷されるソフトウェアは増えていないと論じる Ars Technica の記事。HN でも生産性の測り方をめぐって議論になった。",
+      "points": [],
+      "code": null,
+      "signal": "▲ 356",
+      "pick": false
+    },
+    {
+      "id": "2026-10-14-hn-glm-legal",
+      "url": "https://z.ai/blog/glm-legal",
+      "title": "GLM-Legal",
+      "source": "z.ai",
+      "source_group": "hackernews",
+      "published_at": "2026-10-13T01:11:45+09:00",
+      "category": "ai",
+      "keywords": [
+        "llm",
+        "open-weight"
+      ],
+      "score": 58,
+      "why": "HN ▲660",
+      "read_min": null,
+      "tldr": "Z.ai が法務タスク特化モデル「GLM-Legal」を発表。GLM-5.3-Flash ベースで、報道では GPT-6 Astra に匹敵する性能とされる。",
+      "points": [],
+      "code": null,
+      "signal": "▲ 660",
+      "pick": false
+    },
+    {
+      "id": "2026-10-14-hn-supermarket-fridge-attack",
+      "url": "https://www.tomshardware.com/tech-industry/cyber-security/unprecedented-cyberattack-cripples-supermarket-fridges-across-europe-as-hackers-activate-automatic-defrosting-delivery-and-store-prices-also-impacted-by-incident",
+      "title": "Hackers activate automatic defrosting in supermarket fridges across Europe",
+      "source": "tomshardware.com",
+      "source_group": "hackernews",
+      "published_at": "2026-10-12T21:16:42+09:00",
+      "category": "sec",
+      "keywords": [
+        "security-incident",
+        "iot-security"
+      ],
+      "score": 60,
+      "why": "HN ▲872",
+      "read_min": null,
+      "tldr": "欧州のスーパーで冷蔵設備がサイバー攻撃を受け、自動霜取りが作動させられて庫内温度が上昇。フランスでは数百店舗で食品の大量廃棄が報じられた。",
+      "points": [],
+      "code": null,
+      "signal": "▲ 872",
+      "pick": false
+    },
+    {
+      "id": "2026-10-14-itmedia-data-breaches",
+      "url": "https://www.itmedia.co.jp/news/article/2610/13/2000002233/",
+      "title": "キャッシュレスサービス「IDARE」、約13万人の個人情報漏えい 残高や取引履歴なども",
+      "source": "itmedia.co.jp",
+      "source_group": "tech_blog",
+      "published_at": "2026-10-13T22:34:54+09:00",
+      "category": "sec",
+      "keywords": [
+        "data-breach"
+      ],
+      "score": 62,
+      "why": "国内の漏えい相次ぐ",
+      "read_min": null,
+      "tldr": "キャッシュレスサービス「IDARE」で約 13 万人分の電話番号・残高・取引履歴などが不正アクセスで漏えい。同日、「銀のさら」運営会社の最大約 650 万件、楽天モバイルの支払い証明書の第三者閲覧のおそれも公表された。",
+      "points": [],
+      "code": null,
+      "signal": null,
+      "pick": false
+    },
+    {
+      "id": "2026-10-14-aws-agentcore-memory-pricing",
+      "url": "https://aws.amazon.com/about-aws/whats-new/2026/10/agentcore-memory-consumption-based-pricing",
+      "title": "Announcing consumption-based pricing for short-term memory in Amazon Bedrock AgentCore",
+      "source": "aws.amazon.com",
+      "source_group": "news",
+      "published_at": "2026-10-13T01:00:00+09:00",
+      "category": "ai",
+      "keywords": [
+        "aws",
+        "ai-agent",
+        "llm-cost"
+      ],
+      "score": 60,
+      "why": "matched: aws / エージェント基盤の価格",
+      "read_min": null,
+      "tldr": "Amazon Bedrock AgentCore の短期メモリが、エージェントが取り込み・取得するデータ量に応じた従量課金に変わった。",
+      "points": [],
+      "code": null,
+      "signal": null,
+      "pick": false
+    },
+    {
+      "id": "2026-10-14-coinpost-ledger-implant",
+      "url": "https://coinpost.jp/?p=742638",
+      "title": "レジャーウォレット、不正部品がリカバリーフレーズを画面から読み取る手口を公表",
+      "source": "coinpost.jp",
+      "source_group": "news",
+      "published_at": "2026-10-14T05:00:08+09:00",
+      "category": "crypto",
+      "keywords": [
+        "wallet",
+        "supply-chain",
+        "exchange-hack"
+      ],
+      "score": 82,
+      "why": "暗号資産の自己管理リスク",
+      "read_min": 4,
+      "tldr": "Ledger が、東南アジアの販売店クリプトビリス経由の端末に仕込まれた不正部品の手口を公表。設定時に画面に出る 24 単語のリカバリーフレーズを読み取り、内蔵 eSIM の LTE で外部送信していた。",
+      "points": [
+        "部品は独立したもので、セキュアエレメントや OS、署名処理は改変されていないと Ledger は説明",
+        "ビットクエリの推計では 315 ウォレットから約 9,320 万ドルが流出。Ledger 自身は損失総額・被害者数を確認できていないとしている",
+        "確認済みの損失はすべて同店経由。独メディアマルクト・サターンも 1 件の報告を受け Ledger 製品の販売を停止した"
+      ],
+      "code": null,
+      "signal": null,
+      "pick": true
+    },
+    {
+      "id": "2026-10-14-boj-life-survey-107",
+      "url": "http://www.boj.or.jp/research/o_survey/ishiki2610.htm",
+      "title": "「生活意識に関するアンケート調査」（第107回）の結果",
+      "source": "boj.or.jp",
+      "source_group": "official",
+      "published_at": "2026-10-13T13:30:00+09:00",
+      "category": "macro",
+      "keywords": [
+        "boj-statistics",
+        "inflation",
+        "household-spending"
+      ],
+      "score": 80,
+      "why": "日銀の公式発表",
+      "read_min": 5,
+      "tldr": "日銀の「生活意識に関するアンケート調査」第 107 回（9 月調査）。景況感・暮らし向きの DI は前回からやや改善したがマイナス圏のままで、1 年後に物価が上がるとみる人は 88.6%。",
+      "points": [
+        "景況感 DI（現在）は −53.0（前回 −56.7）、1 年後は −36.2（同 −42.5）。暮らし向き DI は −49.9（同 −50.2）",
+        "物価が 1 年前より上がったとの回答は 95.5%、1 年後に上がるとの見通しは 88.6%（前回 90.4%）",
+        "日銀を「信頼している」系の回答は 43.5% で前回 44.8% から低下。「物価安定の目標（2%）」の認知度は 21.9%"
+      ],
+      "code": null,
+      "signal": null,
+      "pick": true
+    },
+    {
+      "id": "2026-10-14-nada-btc-cpi",
+      "url": "https://www.nadanews.com/372264/",
+      "title": "ビットコインの9万ドル再挑戦、米CPIとタイでのIMF総会が鍵【価格分析】",
+      "source": "nadanews.com",
+      "source_group": "news",
+      "published_at": "2026-10-13T23:09:46+09:00",
+      "category": "crypto",
+      "keywords": [
+        "bitcoin",
+        "us-inflation",
+        "bitcoin-etf"
+      ],
+      "score": 74,
+      "why": "matched: ビットコイン",
+      "read_min": 5,
+      "tldr": "BTC は 13 日に 8 万 1130 ドルまで下げた後 8 万 3200 ドルへ反発。Ledger 問題と 14 日の米 9 月 CPI 待ちで、10 月 2 日の高値 8 万 7170 ドル以降 8 万 5000 ドルを回復できていない。",
+      "points": [
+        "現物 BTC ETF は 12 日に 6,540 万ドルの純流出",
+        "日程は 14 日に米 CPI とベージュブック、15 日に PPI、IMF・世銀年次総会（バンコク）は 12〜18 日、次回 FOMC は 27〜28 日",
+        "Polymarket では 10 月末までの 8 万 5000 ドル到達確率が 78%、9 万ドルは 32%（記事時点）"
+      ],
+      "code": null,
+      "signal": null,
+      "pick": true
+    },
+    {
+      "id": "2026-10-14-paypay-sec-outage",
+      "url": "https://news.tv-asahi.co.jp/news_economy/articles/000539845.html",
+      "title": "【速報】PayPay証券 障害で日本株の取引停止 14日の予約注文も停止 復旧めど立たず",
+      "source": "news.tv-asahi.co.jp",
+      "source_group": "tech_blog",
+      "published_at": "2026-10-13T18:20:42+09:00",
+      "category": "stocks",
+      "keywords": [
+        "security-incident",
+        "jpx"
+      ],
+      "score": 74,
+      "why": "証券取引の障害",
+      "read_min": null,
+      "tldr": "PayPay 証券で 13 日午前 10 時 15 分以降、外部接続先の障害により日本株と ETF の全銘柄の取引が停止し、14 日分の予約注文も止まった。報道によれば米国株・投資信託は影響なし。NHK は接続先をみずほ証券と報じている。",
+      "points": [],
+      "code": null,
+      "signal": null,
+      "pick": false
+    },
+    {
+      "id": "2026-10-14-kabutan-nikkei-1013",
+      "url": "https://kabutan.jp/news/marketnews/?b=n202610131001",
+      "title": "日経平均 大引け｜4日続落、半導体関連株を中心に売り優勢（10月13日）",
+      "source": "kabutan.jp",
+      "source_group": "news",
+      "published_at": "2026-10-13T15:30:00+09:00",
+      "category": "stocks",
+      "keywords": [
+        "nikkei225",
+        "semiconductor"
+      ],
+      "score": 72,
+      "why": "前営業日の市況",
+      "read_min": null,
+      "tldr": "13 日の日経平均は 1,253 円安の 6 万 7777 円で 4 日続落。米半導体株安を受けて AI・半導体関連に売りが集中した一方、プライム市場の値上がり銘柄は 7 割超で TOPIX は小幅続伸（検索結果の要約に基づく）。",
+      "points": [],
+      "code": null,
+      "signal": null,
+      "pick": false
+    },
+    {
+      "id": "2026-10-14-boj-fsb-global-stablecoin",
+      "url": "https://www.boj.or.jp/intl_finance/meeting/group/gro261013c.htm",
+      "title": "金融安定理事会による「グローバル・ステーブルコイン（GSC）：クロスボーダーの脆弱性と金融安定のモニタリング」の公表について",
+      "source": "boj.or.jp",
+      "source_group": "official",
+      "published_at": "2026-10-13T17:00:00+09:00",
+      "category": "crypto",
+      "keywords": [
+        "stablecoin",
+        "crypto-regulation"
+      ],
+      "score": 72,
+      "why": "日銀・金融庁の公表（FSB）",
+      "read_min": null,
+      "tldr": "金融安定理事会（FSB）がグローバル・ステーブルコインのクロスボーダーの脆弱性と金融安定モニタリングに関する報告書を公表。日銀・金融庁が紹介した。G20 への書簡では監督の連携強化を求めている。",
+      "points": [],
+      "code": null,
+      "signal": null,
+      "pick": false
+    },
+    {
+      "id": "2026-10-14-boj-cgpi-202609",
+      "url": "https://www.boj.or.jp/statistics/pi/cgpi_release/cgpi2609.pdf",
+      "title": "企業物価指数（9月）",
+      "source": "boj.or.jp",
+      "source_group": "official",
+      "published_at": "2026-10-13T08:50:00+09:00",
+      "category": "macro",
+      "keywords": [
+        "inflation",
+        "boj-statistics"
+      ],
+      "score": 66,
+      "why": "日銀の公式発表",
+      "read_min": null,
+      "tldr": "日銀が 9 月の企業物価指数を公表（本文未確認のため数値は記載しない）。",
+      "points": [],
+      "code": null,
+      "signal": null,
+      "pick": false
+    },
+    {
+      "id": "2026-10-14-fsa-nonlife-trust",
+      "url": "https://www.fsa.go.jp/news/r8/hoken/20261013/20261013.html",
+      "title": "損害保険業界の信頼回復に向けた取組の適切な運用について公表しました。",
+      "source": "fsa.go.jp",
+      "source_group": "official",
+      "published_at": "2026-10-14T02:00:00+09:00",
+      "category": "macro",
+      "keywords": [
+        "fsa",
+        "insurance"
+      ],
+      "score": 58,
+      "why": "金融庁の公表",
+      "read_min": null,
+      "tldr": "金融庁と国交省が日本損害保険協会に、代理店業務品質評価制度の運用について代理店の規模・特性を踏まえた丁寧な対話を要請。一部の損保で改善が必要な事例が見られたとしている。",
+      "points": [],
+      "code": null,
+      "signal": null,
+      "pick": false
+    },
+    {
+      "id": "2026-10-14-coinpost-metaplanet-cb",
+      "url": "https://coinpost.jp/?p=742629",
+      "title": "メタプラネット、初のユーロ円建転換社債を520億円相当分発行へ",
+      "source": "coinpost.jp",
+      "source_group": "news",
+      "published_at": "2026-10-13T21:30:11+09:00",
+      "category": "crypto",
+      "keywords": [
+        "bitcoin-treasury"
+      ],
+      "score": 60,
+      "why": "matched: ビットコイン",
+      "read_min": null,
+      "tldr": "メタプラネットが初のユーロ円建転換社債（約 520 億円、利率 0%）を発行へ。BTC 担保の有利子借入の一部を置き換え、返済と自己株式取得に充てる。",
+      "points": [],
+      "code": null,
+      "signal": null,
+      "pick": false
+    },
+    {
+      "id": "2026-10-14-nada-strategy-250btc",
+      "url": "https://www.nadanews.com/372174/",
+      "title": "Strategy、250BTCを追加購入──優先株の買い戻しは約308億円に拡大",
+      "source": "nadanews.com",
+      "source_group": "news",
+      "published_at": "2026-10-13T09:00:00+09:00",
+      "category": "crypto",
+      "keywords": [
+        "strategy",
+        "bitcoin-treasury"
+      ],
+      "score": 54,
+      "why": "matched: ビットコイン",
+      "read_min": null,
+      "tldr": "Strategy が 10 月 5〜11 日に 250 BTC（約 2,150 万ドル）を追加購入。優先株の買い戻しも拡大している。",
+      "points": [],
+      "code": null,
+      "signal": null,
+      "pick": false
+    },
+    {
+      "id": "2026-10-14-diamond-global-yields",
+      "url": "https://diamond.jp/articles/-/401011",
+      "title": "「長期金利上昇」日本だけじゃない、政府と中銀を悩ませるインフレ圧力と財政・金融政策の“ジレンマ” - 経済分析の哲人が斬る！市場トピックの深層",
+      "source": "diamond.jp",
+      "source_group": "news",
+      "published_at": "2026-10-14T04:35:00+09:00",
+      "category": "macro",
+      "keywords": [
+        "interest-rates",
+        "jgb",
+        "jp-fiscal"
+      ],
+      "score": 62,
+      "why": "matched: 金利",
+      "read_min": null,
+      "tldr": "日本の長期金利は 3% を超え約 30 年ぶりの水準だが、金利上昇は主要国で同時進行。インフレ圧力・財政悪化・利上げが絡み、財政と金融政策のジレンマが懸念されるとの論考。",
+      "points": [],
+      "code": null,
+      "signal": null,
+      "pick": false
+    },
+    {
+      "id": "2026-10-14-toyokeizai-kiuchi-reflation",
+      "url": "https://toyokeizai.net/articles/-/960585?utm_source=rss&utm_medium=http&utm_campaign=link_back",
+      "title": "【直撃】｢リフレ政策の時代は終わった｣ 高市政権のキーマン･城内経済財政担当相が語るサナエノミクスの核心（前編） | 政治・経済・投資 | 東洋経済オンライン",
+      "source": "toyokeizai.net",
+      "source_group": "news",
+      "published_at": "2026-10-13T06:00:00+09:00",
+      "category": "macro",
+      "keywords": [
+        "jp-fiscal",
+        "boj-policy"
+      ],
+      "score": 58,
+      "why": "政策の方向性",
+      "read_min": null,
+      "tldr": "城内経済財政担当相がインタビューで「リフレ政策の時代は終わった」と発言。高市政権の経済運営の考え方を語った。",
+      "points": [],
+      "code": null,
+      "signal": null,
+      "pick": false
+    },
+    {
+      "id": "2026-10-14-cnn-nobel-econ-2026",
+      "url": "https://www.cnn.co.jp/business/35253480.html",
+      "title": "ノーベル経済学賞、米国の研究者2人に 景気安定化政策の経済モデル築く",
+      "source": "cnn.co.jp",
+      "source_group": "tech_blog",
+      "published_at": "2026-10-13T11:38:32+09:00",
+      "category": "macro",
+      "keywords": [
+        "fed",
+        "boj-policy"
+      ],
+      "score": 52,
+      "why": "ノーベル経済学賞",
+      "read_min": null,
+      "tldr": "2026 年のノーベル経済学賞はロバート・ホール氏とマイケル・ウッドフォード氏。政府や中央銀行が外的ショックの影響を抑えるためのマクロ経済安定化の理論が評価された。",
+      "points": [],
+      "code": null,
+      "signal": null,
+      "pick": false
+    },
+    {
+      "id": "2026-10-14-nada-korea-blocks-exchanges",
+      "url": "https://www.nadanews.com/372197/",
+      "title": "韓国、未登録の暗号資産取引所27サイトを遮断へ──KuCoin、MEXCなど",
+      "source": "nadanews.com",
+      "source_group": "news",
+      "published_at": "2026-10-13T12:30:00+09:00",
+      "category": "crypto",
+      "keywords": [
+        "crypto-regulation",
+        "crypto-exchange"
+      ],
+      "score": 50,
+      "why": "規制動向",
+      "read_min": null,
+      "tldr": "韓国の金融情報分析院が、未登録の暗号資産事業者 27 サイト（KuCoin、MEXC など）を国内から遮断する措置を取る。",
+      "points": [],
+      "code": null,
+      "signal": null,
+      "pick": false
+    }
+  ],
+  "social": [
+    {
+      "network": "x",
+      "author": "@OfficialLoganK",
+      "url": "https://x.com/OfficialLoganK/status/2110038940841545827",
+      "text": "Gemini 4 Argon を Gemini API で全世界に、Gemini アプリでは Pro・Ultra、Antigravity では Ultra 向けに展開開始。社内 10 万人以上で試してきたモデルだと紹介。",
+      "metrics": null,
+      "heat": null,
+      "category": "ai",
+      "keywords": [
+        "google",
+        "llm"
+      ],
+      "posted_at": null
+    },
+    {
+      "network": "x",
+      "author": "@Google",
+      "url": "https://x.com/Google/status/2105388143902175529",
+      "text": "Gemini 4 Argon はソフトウェア開発・知識労働・サイバー防御の複雑なワークフローで最先端の性能を示し、業界最長の 100 万トークン出力に対応すると発表。",
+      "metrics": null,
+      "heat": null,
+      "category": "ai",
+      "keywords": [
+        "google",
+        "llm"
+      ],
+      "posted_at": null
+    },
+    {
+      "network": "hn",
+      "author": null,
+      "url": "https://news.ycombinator.com/item?id=50073879",
+      "text": "『Gemini 4 Argon』のスレッド。547 件のコメント",
+      "metrics": "▲ 663  ✉ 547",
+      "heat": 100,
+      "category": "ai",
+      "keywords": [
+        "google",
+        "llm"
+      ],
+      "posted_at": "2026-10-14T01:03:16+09:00"
+    },
+    {
+      "network": "hn",
+      "author": null,
+      "url": "https://news.ycombinator.com/item?id=50069499",
+      "text": "『11 year old unsoundness bugs found in Rust borrow checker』のスレッド。340 件のコメント",
+      "metrics": "▲ 606  ✉ 340",
+      "heat": 100,
+      "category": "be",
+      "keywords": [
+        "rust"
+      ],
+      "posted_at": "2026-10-13T19:27:00+09:00"
+    },
+    {
+      "network": "hn",
+      "author": null,
+      "url": "https://news.ycombinator.com/item?id=50073633",
+      "text": "『Redesigning source control at Anthropic』のスレッド。236 件のコメント",
+      "metrics": "▲ 271  ✉ 236",
+      "heat": 67,
+      "category": "be",
+      "keywords": [
+        "git",
+        "anthropic"
+      ],
+      "posted_at": "2026-10-14T00:49:56+09:00"
+    },
+    {
+      "network": "hn",
+      "author": null,
+      "url": "https://news.ycombinator.com/item?id=50055304",
+      "text": "『Hackers activate automatic defrosting in supermarket fridges across Europe』のスレッド。972 件のコメント",
+      "metrics": "▲ 872  ✉ 972",
+      "heat": 100,
+      "category": "sec",
+      "keywords": [
+        "security-incident"
+      ],
+      "posted_at": "2026-10-12T21:16:42+09:00"
+    },
+    {
+      "network": "hn",
+      "author": null,
+      "url": "https://news.ycombinator.com/item?id=50059523",
+      "text": "『AI coding agents generate more code, but not more software』のスレッド。296 件のコメント",
+      "metrics": "▲ 356  ✉ 296",
+      "heat": 89,
+      "category": "ai",
+      "keywords": [
+        "ai-coding"
+      ],
+      "posted_at": "2026-10-13T02:14:01+09:00"
+    }
+  ],
+  "releases": [
+    {
+      "date": "2026-10-14",
+      "title": "米 9 月消費者物価指数（CPI）発表",
+      "repo": null,
+      "url": "https://www.bls.gov/schedule/news_release/cpi.htm",
+      "kind": "event",
+      "note": "日本時間 14 日 21:30 予定。同日に FRB ベージュブック",
+      "category": "macro"
+    },
+    {
+      "date": "2026-10-15",
+      "title": "米 9 月生産者物価指数（PPI）発表",
+      "repo": null,
+      "url": "https://www.nadanews.com/372264/",
+      "kind": "event",
+      "note": "記事内の日程表に基づく",
+      "category": "macro"
+    },
+    {
+      "date": "2026-10-13",
+      "title": "Python 3.15 正式リリース",
+      "repo": null,
+      "url": "https://forest.watch.impress.co.jp/docs/news/2147319.html",
+      "kind": "release",
+      "note": "UTF-8 既定化、lazy import、frozendict など。サポートは 2031 年 10 月まで",
+      "category": "be"
+    },
+    {
+      "date": "2026-10-13",
+      "title": "FSB「グローバル・ステーブルコイン：クロスボーダーの脆弱性と金融安定のモニタリング」",
+      "repo": null,
+      "url": "https://www.boj.or.jp/intl_finance/meeting/group/gro261013c.htm",
+      "kind": "policy",
+      "note": "日銀・金融庁が公表を紹介",
+      "category": "crypto"
+    }
+  ]
+}
