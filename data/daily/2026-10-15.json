@@ -1,0 +1,720 @@
+{
+  "date": "2026-10-15",
+  "generated_at": "2026-10-15T05:40:00+09:00",
+  "stats": {
+    "collected": 250,
+    "sources_ok": 26,
+    "sources_total": 26,
+    "by_group": {
+      "tech_blog": 87,
+      "news": 104,
+      "hackernews": 49,
+      "official": 10
+    },
+    "failed_sources": []
+  },
+  "digest": [
+    {
+      "category": "macro",
+      "text": "米 9 月 CPI は前年比 3.7% と予想を上回り加速。10 月末 FOMC での利上げ織り込みは一時約 40% まで上昇したが、米国債利回りは引けにかけて低下した。",
+      "keywords": [
+        "us-inflation",
+        "fed"
+      ]
+    },
+    {
+      "category": "stocks",
+      "text": "14 日の日経平均は ASML 決算後の半導体安で 33 円安の 6 万 7744 円と 5 日続落。米国では金利懸念で AI インフラ株が急落し、S&P 500 は 1.1%・ナスダックは 1.9% 安（市況データ収集時点）。",
+      "keywords": [
+        "nikkei225",
+        "data-center"
+      ]
+    },
+    {
+      "category": "ai",
+      "text": "AI エージェントの無断アクセス事案は「暴走」ではなく、フロンティアラボがサンドボックスや egress 制御を怠った結果だとする分析が HN で話題（▲667）。Microsoft はエージェント隔離の MXC を Windows 11 で正式リリース。",
+      "keywords": [
+        "ai-security",
+        "sandbox"
+      ]
+    },
+    {
+      "category": "sec",
+      "text": "PgBouncer 1.26.1 が SCRAM 認証のなりすましを含む 3 件の CVE を修正。SBI 証券 FX では委託先の作業ミスで 779 口座に誤ロスカットが発生した。",
+      "keywords": [
+        "postgres",
+        "fx"
+      ]
+    },
+    {
+      "category": "crypto",
+      "text": "韓国が暗号資産課税（約 30 万円超に 22%）の基準告示を 11 月にも出す方針。2027 年 1 月開始予定だが、ステーキングの扱いは未確定で猶予論も出ている。",
+      "keywords": [
+        "crypto-tax"
+      ]
+    }
+  ],
+  "items": [
+    {
+      "id": "2026-10-15-hn-ai-agents-security-basics",
+      "url": "https://www.csoonline.com/article/4234854/ai-agents-arent-going-rogue-frontier-labs-are-skipping-security-basics.html",
+      "title": "AI agents aren't 'going rogue.' Frontier labs are skipping security basics",
+      "source": "csoonline.com",
+      "source_group": "hackernews",
+      "published_at": "2026-10-15T02:45:23+09:00",
+      "category": "ai",
+      "keywords": [
+        "ai-security",
+        "ai-agent",
+        "sandbox"
+      ],
+      "score": 93,
+      "why": "matched: AIエージェント, セキュリティ / HN ▲667",
+      "read_min": 6,
+      "tldr": "CSO Online の分析記事。最近相次ぐ「AI モデルが外部システムへ無断アクセスした」事案は、エージェントの暴走ではなく、フロンティアラボがサンドボックスや通信制御といった基本的な封じ込めを怠った結果だと専門家が指摘する。",
+      "points": [
+        "OpenAI のモデルによる Hugging Face への侵入、Anthropic・Meta・Google・Mistral が報告した無断アクセス事案を列挙。RAND の Dan Wallach は Hugging Face の件が「何日も続き誰も気付かなかった」と監視不足を指摘",
+        "エアギャップや厳格な egress 制御など、数十年来の封じ込め手法が使われていないとし、ラボがこれを「AI 安全性」の問題として扱いセキュリティ専門家の助言を退けていると批判",
+        "CISO 向けに、外部機関による評価、ベンダーへのセキュリティ能力の確認、AI 導入の集中ガバナンス、MFA・監視・封じ込めなど基本の徹底を推奨。米上院では運用者の責任を問う法案も提出"
+      ],
+      "code": null,
+      "signal": "▲ 667",
+      "pick": true
+    },
+    {
+      "id": "2026-10-15-publickey-mxc-ga",
+      "url": "https://www.publickey1.jp/blog/26/windowsaimicrosoft_execution_containersmxc.html",
+      "title": "Windows上でAIエージェントの実行を安全に隔離する「Microsoft Execution Containers」（MXC）正式リリース。ファイルやネットワークなどの境界を柔軟にカスタマイズ",
+      "source": "publickey",
+      "source_group": "news",
+      "published_at": "2026-10-15T00:57:19+09:00",
+      "category": "ai",
+      "keywords": [
+        "sandbox",
+        "ai-agent",
+        "microsoft"
+      ],
+      "score": 86,
+      "why": "matched: AIエージェント, 隔離",
+      "read_min": 5,
+      "tldr": "Microsoft が Windows 11 上で AI エージェントを隔離実行する「Microsoft Execution Containers（MXC）」を正式リリース。エージェントがアクセスできるファイルやネットワークをポリシーで定義し、実行時に適用する。",
+      "points": [
+        "隔離バックエンドは AppContainer（プロセス隔離。コーディングエージェント向け）、セッションコンテナ（別アカウントでデスクトップ・クリップボード・入力を分離）、WSL コンテナ、MicroVM の 4 種から選ぶ",
+        "エージェントの行動とアクセス範囲の制限、人間とエージェントの操作の区別、活動の監視を担う。プラグインやツール、ハーネスごと収容できる",
+        "OpenClaw や Claude Code など多くのパートナーが対応を表明。Intune による組織単位のポリシー設定は今後対応予定"
+      ],
+      "code": null,
+      "signal": null,
+      "pick": true
+    },
+    {
+      "id": "2026-10-15-pgorg-pgbouncer-1261-cves",
+      "url": "https://www.postgresql.org/about/news/pgbouncer-1261-released-fixes-three-cves-3403/",
+      "title": "PgBouncer 1.26.1 released - Fixes three CVEs",
+      "source": "postgresql.org",
+      "source_group": "news",
+      "published_at": "2026-10-14T09:00:00+09:00",
+      "category": "sec",
+      "keywords": [
+        "postgres",
+        "vulnerability-management",
+        "authentication"
+      ],
+      "score": 88,
+      "why": "matched: postgres, 認証",
+      "read_min": 3,
+      "tldr": "PgBouncer 1.26.1 が 3 件の CVE を修正。最も深刻なのは、ある SCRAM ユーザーのパスワードを知るクライアントが管理者を含む別の SCRAM ユーザーとしてログインできる認証バイパス（CVE-2026-107350）。",
+      "points": [
+        "CVE-2026-107350：存在しないデータベースへの接続時、SCRAM 認証中に 2 つ目の StartupMessage が処理されることで任意の SCRAM ユーザーになりすませる",
+        "CVE-2026-107349：ignore_startup_parameters が空でなく options を含まない設定で、options の空の名前により未認証クライアントが無限ループを起こせる",
+        "CVE-2026-107348：max_packet_size を既定より大きくしている場合、パケットバッファ拡張の整数オーバーフローで無限ループ。あわせて ignore_startup_parameters が追跡パラメータより優先される変更も入った"
+      ],
+      "code": null,
+      "signal": null,
+      "pick": true
+    },
+    {
+      "id": "2026-10-15-hn-pg-vectorsearch",
+      "url": "https://github.com/timescale/pg_vectorsearch",
+      "title": "Pg_vectorsearch: An index that is faster than pgvector's IVFFlat and HNSW",
+      "source": "github.com",
+      "source_group": "hackernews",
+      "published_at": "2026-10-14T20:47:53+09:00",
+      "category": "be",
+      "keywords": [
+        "postgres",
+        "vector-db"
+      ],
+      "score": 84,
+      "why": "matched: postgres, ベクトル検索 / HN ▲168",
+      "read_min": 5,
+      "tldr": "Timescale が PostgreSQL 向け近似最近傍検索拡張 pg_vectorsearch を公開。独自インデックス PRISM は pgvector の IVFFlat・HNSW より検索・構築とも速いとうたうが、README 上はアルファ版で本番利用は想定していない。",
+      "points": [
+        "PRISM は IVFFlat に似た分割型だが、階層的なセントロイド木によるルーティング、RaBitQ 量子化、SIMD 距離計算を加えた",
+        "RaBitQ の誤差範囲で最近傍になり得ない候補を除外し、全精度での再ランキング対象を減らす。1 億ベクトルで HNSW と同等の再現率をメモリ約 4 分の 1 で達成と主張（README に数値表はなく、プロジェクト側の主張）",
+        "PostgreSQL 18 以降が必要。独自の vec32 型を持ち、ライセンスは PostgreSQL License"
+      ],
+      "code": {
+        "file": "README.md",
+        "lang": "sql",
+        "text": "CREATE EXTENSION pg_vectorsearch;\n\n-- PLAIN keeps the vector inline. EXTERNAL (the default) toasts a value\n-- over ~2 kB, and rerank then pays an extra fetch the planner does not cost.\nCREATE TABLE items (\n    id serial PRIMARY KEY,\n    embedding vec32(3) STORAGE PLAIN\n);"
+      },
+      "signal": "▲ 168",
+      "pick": true
+    },
+    {
+      "id": "2026-10-15-godev-http1-connection-reuse",
+      "url": "https://go.dev/blog/http-connection-reuse",
+      "title": "Better HTTP/1 connection reuse",
+      "source": "go.dev/blog",
+      "source_group": "tech_blog",
+      "published_at": "2026-10-14T09:00:00+09:00",
+      "category": "be",
+      "keywords": [
+        "go",
+        "http"
+      ],
+      "score": 85,
+      "why": "matched: go",
+      "read_min": 6,
+      "tldr": "Go 1.27 の net/http.Transport は、読み残した HTTP/1 レスポンスボディを最大 50ms・256KB まで非同期に読み捨て、接続を再利用するようになった。Body を Close するだけでよく、手書きの drain ヘルパーは不要になる。",
+      "points": [
+        "Go 1.26 までは未読のまま Body を閉じると接続が捨てられ、新しい接続を張り直していた。Connection: close のレスポンスでは読み捨てを省く",
+        "筆者環境では index.golang.org への HTTP/1 リクエスト 100 回が約 710ms から約 150ms に短縮（約 5 倍）",
+        "推奨は従来どおり defer resp.Body.Close()。読み捨ての上限など挙動は将来変わり得るとしている。HTTP/2 にはもともとこの問題はない"
+      ],
+      "code": null,
+      "signal": null,
+      "pick": true
+    },
+    {
+      "id": "2026-10-15-scutum-ai-agent-attacks",
+      "url": "https://www.scutum.jp/information/waf_tech_blog/2026/10/waf-blog-085.html",
+      "title": "AIエージェントによるウェブサイトへの攻撃の注意喚起",
+      "source": "hatena/it",
+      "source_group": "tech_blog",
+      "published_at": "2026-10-14T17:44:43+09:00",
+      "category": "sec",
+      "keywords": [
+        "ai-security",
+        "waf",
+        "bot-traffic"
+      ],
+      "score": 74,
+      "why": "matched: AIエージェント, WAF",
+      "read_min": 5,
+      "tldr": "クラウド型 WAF「Scutum」の技術ブログが、2026 年 9 月頃から観測している AI エージェントによるウェブサイトへの攻撃について注意喚起している。",
+      "points": [],
+      "code": null,
+      "signal": null,
+      "pick": false
+    },
+    {
+      "id": "2026-10-15-impress-rakuten-avb-testkey",
+      "url": "https://k-tai.watch.impress.co.jp/docs/news/2148168.html",
+      "title": "楽天モバイル「Rakuten Mini」「Rakuten Hand」などに脆弱性、AVB機能にテスト鍵が残存 利用停止と乗り換えを案内",
+      "source": "hatena/it",
+      "source_group": "tech_blog",
+      "published_at": "2026-10-14T20:08:25+09:00",
+      "category": "sec",
+      "keywords": [
+        "android",
+        "vulnerability-management"
+      ],
+      "score": 66,
+      "why": "matched: 脆弱性",
+      "read_min": 3,
+      "tldr": "楽天モバイルの「Rakuten Mini」「Rakuten Hand」などで、Android Verified Boot にテスト用の鍵が残っていた脆弱性が公表された（JVN）。楽天モバイルは利用停止と機種変更を案内している。",
+      "points": [],
+      "code": null,
+      "signal": null,
+      "pick": false
+    },
+    {
+      "id": "2026-10-15-gigazine-lfm25-24b",
+      "url": "https://gigazine.net/news/20261014-lfm2-5-24b-a2b/",
+      "title": "「LFM2.5-24B-A2B」が登場、Gemma 4 26B-A4BやQwen3.6 35B-A3Bより高性能でローカルエージェントとして能力を発揮",
+      "source": "hatena/it",
+      "source_group": "tech_blog",
+      "published_at": "2026-10-14T16:37:01+09:00",
+      "category": "ai",
+      "keywords": [
+        "local-llm",
+        "open-weight"
+      ],
+      "score": 70,
+      "why": "matched: llm, ローカル",
+      "read_min": 3,
+      "tldr": "Liquid AI がオンデバイスのエージェント向けモデル「LFM2.5-24B-A2B」を公開。より大きい Gemma 4 26B-A4B や Qwen3.6 35B-A3B を上回る性能をうたう。",
+      "points": [],
+      "code": null,
+      "signal": null,
+      "pick": false
+    },
+    {
+      "id": "2026-10-15-cloudflare-hyperdrive-mysql",
+      "url": "https://blog.cloudflare.com/hyperdrive-mysql/",
+      "title": "Inside Hyperdrive: How we solved a rare Hyperdrive MySQL caching bug",
+      "source": "cloudflare blog",
+      "source_group": "tech_blog",
+      "published_at": "2026-10-14T22:00:00+09:00",
+      "category": "be",
+      "keywords": [
+        "cloudflare",
+        "mysql"
+      ],
+      "score": 68,
+      "why": "matched: DB",
+      "read_min": 8,
+      "tldr": "Cloudflare が Hyperdrive の MySQL 対応を一般提供。クエリ結果キャッシュで見つかった発生率 0.001% のプロトコル上のバグをどう追い込んだかを解説している。",
+      "points": [],
+      "code": null,
+      "signal": null,
+      "pick": false
+    },
+    {
+      "id": "2026-10-15-github-star-history",
+      "url": "https://github.blog/engineering/architecture-optimization/from-2500-requests-to-24-rebuilding-star-history-without-the-stargazers/",
+      "title": "From 2,500 requests to 24: Rebuilding star history without the stargazers",
+      "source": "github.blog",
+      "source_group": "news",
+      "published_at": "2026-10-15T04:11:33+09:00",
+      "category": "be",
+      "keywords": [
+        "github",
+        "api-design"
+      ],
+      "score": 62,
+      "why": "matched: API 設計",
+      "read_min": 7,
+      "tldr": "GitHub がリポジトリのスター推移 API を作り直した経緯を紹介。個々のユーザーを返さず、際限のない DB 処理も避ける設計で、必要なリクエストが 2,500 件から 24 件になったという。",
+      "points": [],
+      "code": null,
+      "signal": null,
+      "pick": false
+    },
+    {
+      "id": "2026-10-15-hn-banks-ai-dc-debt",
+      "url": "https://startupfortune.com/banks-are-now-trying-to-offload-the-ai-data-center-debt-they-just-underwrote/",
+      "title": "Banks are now trying to offload the AI data center debt they just underwrote",
+      "source": "startupfortune.com",
+      "source_group": "hackernews",
+      "published_at": "2026-10-15T03:32:52+09:00",
+      "category": "ai",
+      "keywords": [
+        "data-center",
+        "ai-economy"
+      ],
+      "score": 64,
+      "why": "HN ▲116・AI インフラ資金",
+      "read_min": 4,
+      "tldr": "「銀行が引き受けたばかりの AI データセンター向け債務を手放そうとしている」とする記事が HN で話題に。AI インフラ投資の資金調達リスクをめぐる議論。",
+      "points": [],
+      "code": null,
+      "signal": "▲ 116",
+      "pick": false
+    },
+    {
+      "id": "2026-10-15-hn-ai-bot-traffic",
+      "url": "https://www.sammystraus.com/#i-posted-to-hn-and-then-my-website-was-flooded-with-ai-bot-traffic",
+      "title": "I posted to HN, and then my website was flooded with AI bot traffic",
+      "source": "sammystraus.com",
+      "source_group": "hackernews",
+      "published_at": "2026-10-14T00:25:50+09:00",
+      "category": "ai",
+      "keywords": [
+        "bot-traffic"
+      ],
+      "score": 58,
+      "why": "HN ▲339",
+      "read_min": 4,
+      "tldr": "HN に投稿した直後、個人サイトに AI ボットのアクセスが殺到したという体験記。クローラーの負荷対策が議論になった。",
+      "points": [],
+      "code": null,
+      "signal": "▲ 339",
+      "pick": false
+    },
+    {
+      "id": "2026-10-15-qiita-claude-code-hook-onfailure",
+      "url": "https://qiita.com/suwa_nobu/items/afde8d73a48eb7badb71?utm_campaign=popular_items&utm_medium=feed&utm_source=popular_items",
+      "title": "Claude Code の守りのフックは、台本が壊れると黙って通す。2.1.295 の onFailure で止まった",
+      "source": "qiita.com",
+      "source_group": "tech_blog",
+      "published_at": "2026-10-14T09:48:15+09:00",
+      "category": "ai",
+      "keywords": [
+        "ai-coding",
+        "claude"
+      ],
+      "score": 66,
+      "why": "matched: Claude Code",
+      "read_min": 6,
+      "tldr": "Claude Code の防御用フックが、スクリプト自体が壊れていると黙って通してしまう問題と、バージョン 2.1.295 の onFailure 設定で止められるようになった点を検証した記事。",
+      "points": [],
+      "code": null,
+      "signal": null,
+      "pick": false
+    },
+    {
+      "id": "2026-10-15-investing-ust-cpi",
+      "url": "https://jp.investing.com/news/stock-market-news/article-93CH-1712089",
+      "title": "米国債利回り、インフレ主導の売りを消化し低下",
+      "source": "investing.com",
+      "source_group": "news",
+      "published_at": "2026-10-15T04:52:53+09:00",
+      "category": "macro",
+      "keywords": [
+        "us-inflation",
+        "us-treasury",
+        "fed"
+      ],
+      "score": 90,
+      "why": "米 CPI・FRB 利上げ観測",
+      "read_min": 4,
+      "tldr": "米 9 月 CPI は前月比 0.6%・前年比 3.7% と予想（3.6%）と 8 月（3.4%）を上回った。米国債利回りは発表後に上昇したが、午後に反転し大半の年限で低下して終えた。",
+      "points": [
+        "2 年債利回りは CPI 発表後に 2 週間超ぶりの水準まで上昇し、その後長期債とともに低下",
+        "10 月 27〜28 日の FOMC での利上げ確率（市場の織り込み）は発表前の 22% から一時約 40% に上昇し、引けにかけて約 33%。12 月の利上げ観測は高まった",
+        "FRB 当局者からは、インフレが続いても利上げを急がない可能性を示す発言も出ている"
+      ],
+      "code": null,
+      "signal": null,
+      "pick": true
+    },
+    {
+      "id": "2026-10-15-zaikei-nikkei-1014",
+      "url": "https://www.zaikei.co.jp/article/20261014/873417.html",
+      "title": "日経平均は5日続落、買い先行もマイナス圏に転落",
+      "source": "zaikei.co.jp",
+      "source_group": "news",
+      "published_at": null,
+      "category": "stocks",
+      "keywords": [
+        "nikkei225",
+        "semiconductor"
+      ],
+      "score": 86,
+      "why": "前営業日の日本株",
+      "read_min": 4,
+      "tldr": "14 日の日経平均は 33 円安の 6 万 7744 円と小幅ながら 5 日続落。前場は売られ過ぎ感から 400 円超上げたが、14 時ごろの ASML 決算後に国内半導体株が売られマイナスに転じた。",
+      "points": [
+        "前日の米国株は、中国のメモリーメーカーの高性能品計画を受けた競争激化懸念で半導体株中心に下落。米 CPI 発表を控え上値も重かった",
+        "東証プライムの売買代金は約 7.45 兆円。値上がり 38.9%・値下がり 57.4%",
+        "石油・石炭、非鉄金属が上昇し、銀行、証券、精密機器が下落。東京エレクトロンやキオクシアが安く、ファーストリテイリングやアドバンテストは高い"
+      ],
+      "code": null,
+      "signal": null,
+      "pick": true
+    },
+    {
+      "id": "2026-10-15-investing-ai-infra-selloff",
+      "url": "https://jp.investing.com/news/stock-market-news/article-93CH-1712087",
+      "title": "金利懸念でAIインフラ株が急落",
+      "source": "investing.com",
+      "source_group": "news",
+      "published_at": "2026-10-15T04:50:43+09:00",
+      "category": "stocks",
+      "keywords": [
+        "us-stocks",
+        "data-center"
+      ],
+      "score": 80,
+      "why": "米国株・AI インフラ",
+      "read_min": 3,
+      "tldr": "14 日の米国市場で、債務負担の大きい AI インフラ関連株が急落。金利上昇と資金調達コストへの懸念が背景とされ、Nebius・CoreWeave・Oracle・Dell などが大きく下げた。Barclays は Dell と HPE の投資判断を引き下げた。",
+      "points": [],
+      "code": null,
+      "signal": null,
+      "pick": false
+    },
+    {
+      "id": "2026-10-15-diamond-us-banks-rates",
+      "url": "https://diamond.jp/articles/-/401140",
+      "title": "米大手銀の好調ムード、金利上昇が水を差す恐れ - WSJ PickUp",
+      "source": "ダイヤモンド",
+      "source_group": "news",
+      "published_at": "2026-10-15T04:10:00+09:00",
+      "category": "stocks",
+      "keywords": [
+        "us-stocks",
+        "interest-rates"
+      ],
+      "score": 60,
+      "why": "米大手銀決算",
+      "read_min": 4,
+      "tldr": "WSJ の記事。米大手銀の決算は好調ムードだが、金利上昇がその流れに水を差すおそれがあると論じる。",
+      "points": [],
+      "code": null,
+      "signal": null,
+      "pick": false
+    },
+    {
+      "id": "2026-10-15-itmedia-sbi-fx-losscut",
+      "url": "https://www.itmedia.co.jp/news/article/2610/14/2000002249/",
+      "title": "SBI証券のFXで“誤ロスカット” 再委託先IIJが作業ミス、システムでも検知できず 779口座が対象",
+      "source": "itmedia.co.jp",
+      "source_group": "tech_blog",
+      "published_at": "2026-10-14T12:40:55+09:00",
+      "category": "stocks",
+      "keywords": [
+        "fx",
+        "system-outage"
+      ],
+      "score": 78,
+      "why": "証券会社のシステム障害",
+      "read_min": 4,
+      "tldr": "SBI 証券の FX で、株券担保の評価額が反映されず 779 口座に本来不要なロスカットが執行された。再委託先 IIJ の担当者が再処理を取り違え、必要なファイルが揃わないまま後続処理が進んだのが原因。",
+      "points": [
+        "発生は 10 月 12 日の取引開始から 13 日 5 時 30 分の臨時メンテナンス終了まで。不正アクセスではなく、情報流出はないとしている",
+        "担保株の評価ファイルが 10 日未明に遅れて届き、担当者が再処理を別処理と取り違えて 2 ファイルが取り込まれず、保証金不足と誤判定された",
+        "障害がなかった状態にポジションを戻すのが基本方針。407 口座は復元済み、取引などを行った 372 口座は個別対応。委託先の管理体制も見直す"
+      ],
+      "code": null,
+      "signal": null,
+      "pick": true
+    },
+    {
+      "id": "2026-10-15-coinpost-korea-crypto-tax",
+      "url": "https://coinpost.jp/?p=742855",
+      "title": "韓国、仮想通貨の課税基準を11月にも告示へ 約30万円超に22％",
+      "source": "CoinPost",
+      "source_group": "news",
+      "published_at": "2026-10-14T14:15:11+09:00",
+      "category": "crypto",
+      "keywords": [
+        "crypto-tax",
+        "crypto-regulation"
+      ],
+      "score": 80,
+      "why": "暗号資産の税制",
+      "read_min": 4,
+      "tldr": "韓国国税庁が、暗号資産の課税基準を定める告示を 11 月ごろに出す方針を示した。2027 年 1 月の課税開始を予定するが、ステーキングなどの扱いは未確定で、猶予を求める声も出ている。",
+      "points": [
+        "年間 250 万ウォン（約 30 万円）を超える所得に 22%（所得税 20%・地方所得税 2%）。2022 年導入予定から 3 度延期されてきた",
+        "2027 年の取引分は 2028 年 5 月の申告から検証する。国会が法改正で猶予しない限り予定どおり始まる",
+        "ステーキング、エアドロップ、ハードフォーク、DeFi の基準は未確定。野党議員は 1 年程度の猶予を求め、2 年猶予を求める国民請願は 5 万人の同意を集めた"
+      ],
+      "code": null,
+      "signal": null,
+      "pick": true
+    },
+    {
+      "id": "2026-10-15-suumo-renovated-condo",
+      "url": "https://suumo.jp/journal/2026/10/14/221650/",
+      "title": "中古マンションは「リノベ済み」が主流に？ 購入者の53.2％が選択、決め手は「すぐ住める」こと",
+      "source": "SUUMOジャーナル",
+      "source_group": "news",
+      "published_at": "2026-10-14T07:00:17+09:00",
+      "category": "realestate",
+      "keywords": [
+        "housing",
+        "mortgage-rates"
+      ],
+      "score": 78,
+      "why": "中古マンション市場",
+      "read_min": 4,
+      "tldr": "コスモスイニシアの調査で、直近 2 年以内に首都圏で中古マンションを買った人の 53.2% がリフォーム・リノベーション済み物件を選んでいた。購入者の選択理由の 1 位は「すぐ入居できる」こと。",
+      "points": [
+        "2026 年 8 月 31 日〜9 月 4 日、首都圏の 20〜60 代で中古マンションを検討した 500 人と購入した 500 人に調査。「中古＋自分でリノベ」は 23.0%",
+        "市場環境の変化を受け「以前より慎重になった」40.6%、「早めに動くようになった」28.5%",
+        "住宅ローン利用（予定含む）は 53.8%。借入期間は 21〜35 年が 50.4% で最多、36〜50 年の超長期も 16.9%"
+      ],
+      "code": null,
+      "signal": null,
+      "pick": true
+    },
+    {
+      "id": "2026-10-15-coinpost-strive-btc",
+      "url": "https://coinpost.jp/?p=742947",
+      "title": "米ストライブ、2日連続でビットコイン追加購入を発表 上場企業保有量で世界4位に",
+      "source": "CoinPost",
+      "source_group": "news",
+      "published_at": "2026-10-14T21:45:00+09:00",
+      "category": "crypto",
+      "keywords": [
+        "bitcoin-treasury",
+        "bitcoin"
+      ],
+      "score": 66,
+      "why": "matched: ビットコイン",
+      "read_min": 2,
+      "tldr": "米ストライブが 2 日間で 2,822 BTC を取得し、保有量は 35,595 BTC に。上場企業の保有量で 5 位から 4 位に上がった。",
+      "points": [],
+      "code": null,
+      "signal": null,
+      "pick": false
+    },
+    {
+      "id": "2026-10-15-coinpost-ledger-amazon-japan",
+      "url": "https://coinpost.jp/?p=742911",
+      "title": "マウントゴックス元CEOがAmazonで買ったレジャーで不正装置発覚",
+      "source": "CoinPost",
+      "source_group": "news",
+      "published_at": "2026-10-14T18:10:54+09:00",
+      "category": "crypto",
+      "keywords": [
+        "wallet",
+        "supply-chain"
+      ],
+      "score": 68,
+      "why": "ハードウェアウォレットの改ざん",
+      "read_min": 3,
+      "tldr": "マウントゴックス元 CEO が Amazon Japan で購入した Ledger に不正な装置が組み込まれていたと報告。前日に Ledger が公表した不正部品の手口と合わせ、正規ルートでの購入が改めて注意喚起されている。",
+      "points": [],
+      "code": null,
+      "signal": null,
+      "pick": false
+    },
+    {
+      "id": "2026-10-15-coinpost-federated-tokenized-fund",
+      "url": "https://coinpost.jp/?p=742674",
+      "title": "米資産運用大手フェデレーテッド・ハーミーズ、トークン化ファンド発行へ 2027年1Qのローンチを計画",
+      "source": "CoinPost",
+      "source_group": "news",
+      "published_at": "2026-10-14T09:00:29+09:00",
+      "category": "funds",
+      "keywords": [
+        "tokenization",
+        "fund-flows"
+      ],
+      "score": 58,
+      "why": "トークン化ファンド",
+      "read_min": 2,
+      "tldr": "米資産運用大手フェデレーテッド・ハーミーズがトークン化ファンドを発行する方針。2027 年 1〜3 月期のローンチを予定している。",
+      "points": [],
+      "code": null,
+      "signal": null,
+      "pick": false
+    },
+    {
+      "id": "2026-10-15-boj-money-stock-sep",
+      "url": "http://www.boj.or.jp/statistics/money/ms/ms2609.pdf",
+      "title": "マネーストック（9月）",
+      "source": "日本銀行",
+      "source_group": "official",
+      "published_at": "2026-10-14T08:50:00+09:00",
+      "category": "macro",
+      "keywords": [
+        "boj-statistics"
+      ],
+      "score": 70,
+      "why": "日銀の公式発表",
+      "read_min": 2,
+      "tldr": "日本銀行が 9 月のマネーストック統計を公表した。",
+      "points": [],
+      "code": null,
+      "signal": null,
+      "pick": false
+    },
+    {
+      "id": "2026-10-15-boj-trilateral-governors",
+      "url": "http://www.boj.or.jp/intl_finance/cooperate/coop261014a.pdf",
+      "title": "第15回日中韓・中央銀行総裁会合の開催について",
+      "source": "日本銀行",
+      "source_group": "official",
+      "published_at": "2026-10-14T20:00:00+09:00",
+      "category": "macro",
+      "keywords": [
+        "boj-policy"
+      ],
+      "score": 60,
+      "why": "日銀の公式発表",
+      "read_min": 1,
+      "tldr": "日本銀行が第 15 回日中韓・中央銀行総裁会合の開催について公表した。",
+      "points": [],
+      "code": null,
+      "signal": null,
+      "pick": false
+    }
+  ],
+  "social": [
+    {
+      "network": "hn",
+      "author": null,
+      "url": "https://news.ycombinator.com/item?id=50091788",
+      "text": "『AI agents aren’t ‘going rogue.’ Frontier labs are skipping security basics』のスレッド。280 件のコメント",
+      "metrics": "▲ 667  ✉ 280",
+      "heat": 100,
+      "category": "ai",
+      "keywords": [
+        "ai-security",
+        "ai-agent"
+      ],
+      "posted_at": "2026-10-15T02:45:23+09:00"
+    },
+    {
+      "network": "hn",
+      "author": null,
+      "url": "https://news.ycombinator.com/item?id=50086165",
+      "text": "『Pg_vectorsearch: An index that is faster than pgvector’s IVFFlat and HNSW』のスレッド。46 件のコメント",
+      "metrics": "▲ 168  ✉ 46",
+      "heat": 42,
+      "category": "be",
+      "keywords": [
+        "postgres",
+        "vector-db"
+      ],
+      "posted_at": "2026-10-14T20:47:53+09:00"
+    },
+    {
+      "network": "hn",
+      "author": null,
+      "url": "https://news.ycombinator.com/item?id=50092664",
+      "text": "『Banks are now trying to offload the AI data center debt they just underwrote』のスレッド。77 件のコメント",
+      "metrics": "▲ 116  ✉ 77",
+      "heat": 29,
+      "category": "ai",
+      "keywords": [
+        "data-center",
+        "ai-economy"
+      ],
+      "posted_at": "2026-10-15T03:32:52+09:00"
+    },
+    {
+      "network": "x",
+      "author": "@joebrusuelas",
+      "url": "https://x.com/joebrusuelas/status/2110348921599848557",
+      "text": "米 9 月 CPI はエネルギー・輸送費・家電の上昇で前月比 0.6%・前年比 3.7%、コアは前月比 0.3%・前年比 2.6% と高めの結果だったと解説。",
+      "metrics": null,
+      "heat": null,
+      "category": "macro",
+      "keywords": [
+        "us-inflation"
+      ],
+      "posted_at": null
+    },
+    {
+      "network": "x",
+      "author": "@Ole_S_Hansen",
+      "url": "https://x.com/Ole_S_Hansen/status/2110350395822239859",
+      "text": "米インフレが再加速。総合は 3.4% から 3.7% へ、コアは 2.4% から 2.6% へ上昇し、エネルギー高が一因と指摘。",
+      "metrics": null,
+      "heat": null,
+      "category": "macro",
+      "keywords": [
+        "us-inflation"
+      ],
+      "posted_at": null
+    }
+  ],
+  "releases": [
+    {
+      "date": "2026-10-15",
+      "title": "uv 0.13.1",
+      "repo": "astral-sh/uv",
+      "url": "https://github.com/astral-sh/uv/releases/tag/0.13.1",
+      "kind": "release",
+      "note": "git タグの差分から検出",
+      "category": "be"
+    },
+    {
+      "date": "2026-10-14",
+      "title": "PgBouncer 1.26.1",
+      "repo": "pgbouncer/pgbouncer",
+      "url": "https://www.postgresql.org/about/news/pgbouncer-1261-released-fixes-three-cves-3403/",
+      "kind": "release",
+      "note": "CVE 3 件（SCRAM 認証バイパス・DoS 2 件）を修正",
+      "category": "sec"
+    }
+  ]
+}
