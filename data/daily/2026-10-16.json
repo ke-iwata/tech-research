@@ -1,0 +1,838 @@
+{
+  "date": "2026-10-16",
+  "generated_at": "2026-10-16T05:40:00+09:00",
+  "stats": {
+    "collected": 253,
+    "sources_ok": 26,
+    "sources_total": 26,
+    "by_group": {
+      "news": 109,
+      "tech_blog": 87,
+      "hackernews": 49,
+      "official": 8
+    },
+    "failed_sources": []
+  },
+  "digest": [
+    {
+      "category": "stocks",
+      "text": "15 日の日経平均は 3318 円安（-4.90%）の 6 万 4425 円と下げ幅は歴代 3 位。米コアウィーブの社債急落をきっかけに AI インフラ投資の減速が意識され、半導体株が集中的に売られた。",
+      "keywords": [
+        "nikkei225",
+        "data-center"
+      ]
+    },
+    {
+      "category": "macro",
+      "text": "日銀の小枝審議委員は、中立金利の推計レンジを念頭に政策金利を適時に調整すべきだとし、物価上昇リスクを踏まえ「利上げに過度に慎重になることはない」と述べた。",
+      "keywords": [
+        "boj-rate-hike",
+        "boj-policy"
+      ]
+    },
+    {
+      "category": "sec",
+      "text": "curl 8.23.0 が HTTP/2 アップロード時の UAF（High）を含む 24 件の脆弱性を修正。JPCERT/CC は、相次ぐ漏えいの攻撃者が APK を解析して見つけた API を AI で攻撃していたと報告した。",
+      "keywords": [
+        "vulnerability-management",
+        "data-breach"
+      ]
+    },
+    {
+      "category": "cloud",
+      "text": "AWS が Lambda durable functions の Go SDK を GA に。ローカルテスト用の durabletest と、再開時に壊れるコードを見つける durablelint が付く。PostgreSQL 19 は RC 1 が出て、正式版は 11 月 19 日予定。",
+      "keywords": [
+        "go",
+        "serverless",
+        "postgres"
+      ]
+    },
+    {
+      "category": "crypto",
+      "text": "ブラックロックの仮想通貨 ETF 残高は 9 月末で 796 億ドルと 3 か月で約 1.6 倍。EU は USDC を MiCA 上初の「重要な電子マネートークン」に指定した。",
+      "keywords": [
+        "bitcoin-etf",
+        "stablecoin"
+      ]
+    }
+  ],
+  "items": [
+    {
+      "id": "2026-10-16-aws-lambda-durable-go",
+      "url": "https://aws.amazon.com/about-aws/whats-new/2026/10/aws-lambda-durable-go-sdk-support/",
+      "title": "AWS Lambda Durable Execution SDK for Go is now generally available",
+      "source": "aws.amazon.com",
+      "source_group": "news",
+      "published_at": "2026-10-16T03:23:00+09:00",
+      "category": "cloud",
+      "keywords": [
+        "aws",
+        "go",
+        "serverless"
+      ],
+      "score": 90,
+      "why": "matched: go, aws",
+      "read_min": 4,
+      "tldr": "AWS が Lambda durable functions 向けの Go SDK を GA にした。チェックポイントによる進捗の自動保存や外部イベント待ちでの一時停止を使い、承認ゲート付きのデプロイや人のレビューを挟む AI パイプラインを Go のコードだけで書ける。",
+      "points": [
+        "ステップ単位の自動チェックポイント、人・エージェントを挟むコールバック、関数の確実な連鎖呼び出し、最長 1 年の待機（実行は停止）を提供",
+        "go get で導入し、provided.al2023 ランタイム上に単一の静的バイナリとして通常の Go Lambda と同じ手順でデプロイできる",
+        "durabletest パッケージでネットワークや AWS 認証情報なしにワークフロー全体をローカルテストでき、durablelint が再開時に壊れうるコードを検出する"
+      ],
+      "code": null,
+      "signal": null,
+      "pick": true
+    },
+    {
+      "id": "2026-10-16-forest-curl-8-23",
+      "url": "https://forest.watch.impress.co.jp/docs/news/2148495.html",
+      "title": "「curl」にリモートコード実行の恐れがある脆弱性／深刻度Highを含む24件を修正したv8.23.0が公開",
+      "source": "forest.watch.impress.co.jp",
+      "source_group": "tech_blog",
+      "published_at": "2026-10-15T22:22:05+09:00",
+      "category": "sec",
+      "keywords": [
+        "vulnerability-management",
+        "http"
+      ],
+      "score": 86,
+      "why": "matched: 脆弱性 / 広く使われる基盤ライブラリ",
+      "read_min": 3,
+      "tldr": "curl v8.23.0（10 月 14 日公開）が 24 件の脆弱性を修正した。うち 1 件（CVE-2026-92392）は深刻度 High で、HTTP/2 アップロード中の解放後使用により、悪意のあるサーバーが条件を満たすとリモートでコードを実行される恐れがある。",
+      "points": [
+        "High は 1 件のみで残る 23 件は Low。High の脆弱性は HTTP/2 でのアップロード処理における Use-After-Free",
+        "影響はコマンドラインツールを含む v8.12.0〜v8.22.0。v8.12.0 より前は影響を受けない",
+        "対策は v8.23.0 への更新、手元のバージョンへのパッチ適用、または HTTP/2 の利用停止"
+      ],
+      "code": null,
+      "signal": null,
+      "pick": true
+    },
+    {
+      "id": "2026-10-16-jpcert-web-api-attacks",
+      "url": "https://blogs.jpcert.or.jp/ja/2026/10/web_api_attacks.html",
+      "title": "連続不正アクセス事案の攻撃手法に関する調査",
+      "source": "JPCERT/CC Eyes",
+      "source_group": "official",
+      "published_at": "2026-10-15T17:02:36+09:00",
+      "category": "sec",
+      "keywords": [
+        "data-breach",
+        "api-design",
+        "ai-security"
+      ],
+      "score": 92,
+      "why": "matched: 認可, API / JPCERT/CC の公式調査",
+      "read_min": 8,
+      "tldr": "国内で相次ぐ個人情報漏えいについて、JPCERT/CC が攻撃元サーバーの調査結果を公表した。攻撃者は AI で既知脆弱性のスキャンや API 経由の攻撃を行い、Android アプリ（APK）を解析して見つけた API を悪用していた。",
+      "points": [
+        "攻撃元サーバーから APK 解析の痕跡、SSRF 検証用とみられる Python スクリプト、Flutter 解析ツール Blutter や jadx 関連ファイルが見つかった",
+        "Flutter アプリからも埋め込み秘密鍵や署名ロジックが特定されうるとし、正規アプリを経ずに本番 API を叩かれる前提での設計を求めている",
+        "対策として、秘密情報をアプリに埋め込まない、サーバー側で認証・認可を検証する、レート制限と監視、外部 URL 取得 API の宛先とリダイレクト先の制限を挙げる"
+      ],
+      "code": null,
+      "signal": null,
+      "pick": true
+    },
+    {
+      "id": "2026-10-16-publickey-bun-1-4-3",
+      "url": "https://www.publickey1.jp/blog/26/anthropicbuntypescript_73typescriptbun143.html",
+      "title": "AnthropicのBun、TypeScript 7よりも3倍以上高速なTypeScript型チェッカーを搭載。Bunの新バージョン1.4.3で",
+      "source": "publickey1.jp",
+      "source_group": "tech_blog",
+      "published_at": "2026-10-16T00:21:12+09:00",
+      "category": "be",
+      "keywords": [
+        "typescript",
+        "anthropic"
+      ],
+      "score": 80,
+      "why": "matched: TypeScript / ランタイムの大型機能",
+      "read_min": 4,
+      "tldr": "Bun v1.4.3 が型検査機能（bun check）を内蔵した。TypeScript 7.0.2 の適合性テストを 100% パスし、TypeScript 7 より 3 倍以上速く、メモリ消費は 1/2〜1/4 以下だとしている。",
+      "points": [
+        "主要 OSS の TypeScript ファイル 72 個で TypeScript と結果を比べ、差異は 1 箇所だけだった",
+        "ほかに Node.js 互換性の向上、JSON.parse の高速化、サーバーのアイドル時 CPU 消費の削減、Bun.FetchSession の追加",
+        "記事は性能の計測条件の詳細には触れておらず、数値は Bun 側の発表に基づく"
+      ],
+      "code": null,
+      "signal": null,
+      "pick": true
+    },
+    {
+      "id": "2026-10-16-pg-19-rc1",
+      "url": "https://www.postgresql.org/about/news/postgresql-19-rc-1-released-3409/",
+      "title": "PostgreSQL 19 RC 1 Released!",
+      "source": "postgresql.org",
+      "source_group": "official",
+      "published_at": "2026-10-15T09:00:00+09:00",
+      "category": "be",
+      "keywords": [
+        "postgres"
+      ],
+      "score": 84,
+      "why": "matched: PostgreSQL",
+      "read_min": 3,
+      "tldr": "PostgreSQL 19 の最初のリリース候補が公開された。正式版は 11 月 19 日予定で、11 月 12 日に RC 2 を出す計画。",
+      "points": [
+        "Beta 4 以降の修正：REPACK (CONCURRENTLY)、pg_plan_advice、NULL 可否に依存する新しいプランナ最適化、並列 autovacuum など",
+        "COPY (query) TO ... (FORMAT json) は JSON のキーにテーブルではなくクエリの列名（別名を含む）を使うよう変更",
+        "postgres_fdw の統計インポートは ANALYZE 実行者ではなく外部テーブルの所有者権限で動くようになった。旧版からはメジャーバージョンアップ手順（pg_upgrade 等）が必要"
+      ],
+      "code": null,
+      "signal": null,
+      "pick": true
+    },
+    {
+      "id": "2026-10-16-citizenlab-adfection",
+      "url": "https://citizenlab.ca/research/how-discover-tech-turned-targeted-ads-into-a-pipeline-for-spyware/",
+      "title": "Zero-Click Spyware Delivered via Targeted Ads: AdFection",
+      "source": "citizenlab.ca",
+      "source_group": "hackernews",
+      "published_at": "2026-10-15T19:43:36+09:00",
+      "category": "sec",
+      "keywords": [
+        "privacy",
+        "ai-security"
+      ],
+      "score": 78,
+      "why": "matched: セキュリティ / HN ▲267",
+      "read_min": 15,
+      "tldr": "Citizen Lab が、イスラエルの広告ベンダー Discover-Tech の広告配信基盤が傭兵型スパイウェア（Candiru など）のゼロクリック感染経路として使われていたと報告した。広告表示時に端末の広告 ID と IP を送らせ、標的にだけ攻撃用 JavaScript を返す仕組み。",
+      "points": [
+        "広告のスクリプトタグが Discover-Tech のサーバーを呼び、標的と判定された端末にだけ自動実行される JS を返す。非標的には空応答を返して広告事業者の検知を避ける",
+        "Al Jazeera の端末少なくとも 45 台が 2024〜2025 年に標的になった。2026 年 3〜6 月の入札データでは約 7.5 万アプリ・12 万サイトに表示され、161 か国に及ぶ",
+        "公表後、Google と IAB Europe がベンダー登録から除外し、Beeswax・Vungle・Eskimi なども接続を遮断した"
+      ],
+      "code": null,
+      "signal": "▲ 267",
+      "pick": true
+    },
+    {
+      "id": "2026-10-16-hn-opencode-2",
+      "url": "https://anoma.ly/notes/opencode-2-0/",
+      "title": "OpenCode 2.0",
+      "source": "anoma.ly",
+      "source_group": "hackernews",
+      "published_at": "2026-10-15T05:48:24+09:00",
+      "category": "ai",
+      "keywords": [
+        "ai-coding",
+        "oss",
+        "cli"
+      ],
+      "score": 72,
+      "why": "matched: AIエージェント / HN ▲837",
+      "read_min": 6,
+      "tldr": "OSS のコーディングエージェント OpenCode の 2.0 を紹介する記事。HN で ▲837・358 コメントと大きな反響を集めた。",
+      "points": [],
+      "code": null,
+      "signal": "▲ 837",
+      "pick": false
+    },
+    {
+      "id": "2026-10-16-meta-muse-spark-open",
+      "url": "https://research.meta.ai/blog/muse-spark-open",
+      "title": "Muse Spark Open",
+      "source": "research.meta.ai",
+      "source_group": "hackernews",
+      "published_at": "2026-10-16T02:47:39+09:00",
+      "category": "ai",
+      "keywords": [
+        "open-weight",
+        "ai-coding",
+        "aws"
+      ],
+      "score": 74,
+      "why": "matched: LLM / HN ▲361",
+      "read_min": 6,
+      "tldr": "Meta がコーディング向けのオープンウェイトモデル Muse Spark Open を公開した。エージェント型のコーディングを想定し、同日 Amazon SageMaker JumpStart でも利用可能になった。",
+      "points": [],
+      "code": null,
+      "signal": "▲ 361",
+      "pick": false
+    },
+    {
+      "id": "2026-10-16-sourcenext-breach",
+      "url": "https://www.sourcenext.com/support/i/2026/1015_info/",
+      "title": "当社サイトへの不正アクセスによるお客様情報流出のお詫びとお知らせ",
+      "source": "sourcenext.com",
+      "source_group": "news",
+      "published_at": "2026-10-15T17:49:13+09:00",
+      "category": "sec",
+      "keywords": [
+        "data-breach",
+        "security-incident"
+      ],
+      "score": 70,
+      "why": "matched: 不正アクセス / 大規模な漏えい",
+      "read_min": 3,
+      "tldr": "ソースネクストが不正アクセスにより会員情報が流出したと発表した。報道では最大約 2251 万件で、パスワード再設定を呼びかけている。同日にはバーガーキングのアプリ会員約 1118 万件の漏えいも公表された。",
+      "points": [],
+      "code": null,
+      "signal": null,
+      "pick": false
+    },
+    {
+      "id": "2026-10-16-hn-google-phone-linking",
+      "url": "https://www.androidauthority.com/google-auto-phone-number-verification-android-3723117/",
+      "title": "Google is silently linking your phone number across all signed-in accounts",
+      "source": "androidauthority.com",
+      "source_group": "hackernews",
+      "published_at": "2026-10-15T01:28:51+09:00",
+      "category": "sec",
+      "keywords": [
+        "privacy",
+        "google",
+        "android"
+      ],
+      "score": 60,
+      "why": "HN ▲501",
+      "read_min": 4,
+      "tldr": "Android 端末でログインしているすべての Google アカウントに電話番号が自動で紐づけられているという報道。HN でもプライバシー面から議論になった。",
+      "points": [],
+      "code": null,
+      "signal": "▲ 501",
+      "pick": false
+    },
+    {
+      "id": "2026-10-16-hn-scion-mononoke",
+      "url": "https://sunshowers.io/posts/anthropic-mononoke/",
+      "title": "Anthropic's Scion is heavily inspired by Mononoke",
+      "source": "sunshowers.io",
+      "source_group": "hackernews",
+      "published_at": "2026-10-15T05:30:54+09:00",
+      "category": "be",
+      "keywords": [
+        "git",
+        "anthropic",
+        "licensing"
+      ],
+      "score": 58,
+      "why": "HN ▲412",
+      "read_min": 8,
+      "tldr": "Anthropic のソース管理システム Scion が Meta の Mononoke に強く影響を受けているとするブログ記事。続編も公開され、HN で議論が続いている。",
+      "points": [],
+      "code": null,
+      "signal": "▲ 412",
+      "pick": false
+    },
+    {
+      "id": "2026-10-16-zenn-otel-stepfunctions",
+      "url": "https://zenn.dev/boy_techblog/articles/connecting-trace-serverless",
+      "title": "OpenTelemetryでStep Functions越しにtraceparentを引き回し、複数Lambdaを一つのトレースにつなぐ",
+      "source": "zenn.dev",
+      "source_group": "tech_blog",
+      "published_at": "2026-10-15T12:59:10+09:00",
+      "category": "cloud",
+      "keywords": [
+        "opentelemetry",
+        "serverless",
+        "observability"
+      ],
+      "score": 76,
+      "why": "matched: opentelemetry, aws",
+      "read_min": 10,
+      "tldr": "X-Ray SDK から OpenTelemetry への移行 PoC として、Step Functions をまたいで traceparent を受け渡し、複数の Lambda を 1 本のトレースにつなぐ方法を解説。送信先は New Relic で、OTLP 直接送信の実装に焦点を当てている。",
+      "points": [],
+      "code": null,
+      "signal": null,
+      "pick": false
+    },
+    {
+      "id": "2026-10-16-k8s-kueue-headlamp",
+      "url": "https://kubernetes.io/blog/2026/10/14/tracing-kueue-admission-with-headlamp/",
+      "title": "Why Is My Kubernetes Job Still Pending? Tracing Kueue Admission with Headlamp",
+      "source": "kubernetes.io",
+      "source_group": "official",
+      "published_at": "2026-10-15T03:35:00+09:00",
+      "category": "cloud",
+      "keywords": [
+        "kubernetes"
+      ],
+      "score": 66,
+      "why": "matched: kubernetes",
+      "read_min": 8,
+      "tldr": "Kueue 管理下では Job が suspend のまま Pod も作られないことがあり、それが正常動作の場合もある。Headlamp を使って Kueue のアドミッション判断を追う方法を紹介する公式ブログ。",
+      "points": [],
+      "code": null,
+      "signal": null,
+      "pick": false
+    },
+    {
+      "id": "2026-10-16-cf-programmable-gateway",
+      "url": "https://blog.cloudflare.com/programmable-gateway-dlp/",
+      "title": "A fully programmable secure web gateway",
+      "source": "blog.cloudflare.com",
+      "source_group": "tech_blog",
+      "published_at": "2026-10-16T02:11:12+09:00",
+      "category": "sec",
+      "keywords": [
+        "cloudflare",
+        "edge"
+      ],
+      "score": 58,
+      "why": "matched: cloudflare",
+      "read_min": 7,
+      "tldr": "Cloudflare Gateway と DLP が Workers を含む開発者プラットフォームと統合され、ゲートウェイの判定処理をプログラムで拡張できるようになった。",
+      "points": [],
+      "code": null,
+      "signal": null,
+      "pick": false
+    },
+    {
+      "id": "2026-10-16-ricoh-lmm-35b",
+      "url": "https://jp.ricoh.com/release/2026/1015_1",
+      "title": "リコー、MoE型マルチモーダル大規模言語モデル「リコーLMM_35B-A3B」を開発",
+      "source": "jp.ricoh.com",
+      "source_group": "news",
+      "published_at": "2026-10-15T18:06:24+09:00",
+      "category": "ai",
+      "keywords": [
+        "llm",
+        "local-llm",
+        "sovereign-ai"
+      ],
+      "score": 60,
+      "why": "matched: LLM",
+      "read_min": 3,
+      "tldr": "リコーが日本語の文書や図表の理解に強い MoE 型マルチモーダル LLM を開発した。高速・省リソースな動作を特徴とし、オンプレミス向けラインアップを拡充する。",
+      "points": [],
+      "code": null,
+      "signal": null,
+      "pick": false
+    },
+    {
+      "id": "2026-10-16-nikkei-coreweave-shock",
+      "url": "https://www.nikkei.com/article/DGXZQOUB150HLTV11C26A0000000/",
+      "title": "日経平均3318円安 「コアウィーブ・ショック」で下げ幅歴代3位",
+      "source": "nikkei.com",
+      "source_group": "news",
+      "published_at": "2026-10-15T14:52:06+09:00",
+      "category": "stocks",
+      "keywords": [
+        "nikkei225",
+        "data-center",
+        "semiconductor"
+      ],
+      "score": 92,
+      "why": "前営業日の日経平均・主な材料",
+      "read_min": 4,
+      "tldr": "15 日の日経平均は前日比 3318 円 34 銭（4.90%）安の 6 万 4425 円 95 銭で、下げ幅は過去 3 番目。米 AI クラウドのコアウィーブの社債価格急落を引き金に、AI インフラ投資の減速が意識された。",
+      "points": [
+        "863 円安で始まり、その後も水準を切り下げた。AI・半導体関連が集中的に売られた",
+        "値下がり率上位はアイドム（-20.07%）、メイコー（-18.49%）、アドバンテスト（-14.96%）など",
+        "前日の米国市場ではコアウィーブ株が 15% 超下落し、ナスダックも 1.9% 安となっていた（本文の大半は会員限定で未確認）"
+      ],
+      "code": null,
+      "signal": null,
+      "pick": true
+    },
+    {
+      "id": "2026-10-16-boj-koeda-kumamoto",
+      "url": "https://www.boj.or.jp/about/press/koen_2026/ko261015a.htm",
+      "title": "【挨拶】小枝審議委員「わが国の経済・物価情勢と金融政策」（熊本）",
+      "source": "日本銀行",
+      "source_group": "official",
+      "published_at": "2026-10-15T10:30:00+09:00",
+      "category": "macro",
+      "keywords": [
+        "boj-policy",
+        "boj-rate-hike",
+        "interest-rates"
+      ],
+      "score": 90,
+      "why": "日銀の公式発表",
+      "read_min": 12,
+      "tldr": "小枝審議委員は熊本での挨拶で、9 月に 1.25% へ引き上げた政策金利について、中立金利の推計レンジを念頭に適時に調整していくべきだと述べた。緩和的な金融環境と物価上昇リスクを踏まえ「利上げに過度に慎重になることはない」との考えを示した。",
+      "points": [
+        "7 月時点の見通しで物価は 2026・2027 年度とも上振れリスクが大きく、中東情勢・円安・グローバルな AI 関連需要からの物価上昇圧力に注意が必要とした",
+        "米通商政策や中東情勢で内需が弱含むリスクを意識していたが、日本経済は外部ショックに底堅さを見せているとの認識",
+        "長期金利は政策金利の予想が定まればリスクプレミアム主導で動くとし、財政要因やインフレリスクの影響を注視するとした"
+      ],
+      "code": null,
+      "signal": null,
+      "pick": true
+    },
+    {
+      "id": "2026-10-16-coinpost-blackrock-q3",
+      "url": "https://coinpost.jp/?p=743012",
+      "title": "ブラックロックQ3決算、仮想通貨ETF残高約12.6兆円 3か月で1.6倍",
+      "source": "coinpost.jp",
+      "source_group": "news",
+      "published_at": "2026-10-15T09:37:40+09:00",
+      "category": "crypto",
+      "keywords": [
+        "bitcoin-etf",
+        "crypto-etf",
+        "fund-flows"
+      ],
+      "score": 78,
+      "why": "matched: ビットコイン, ETF",
+      "read_min": 5,
+      "tldr": "ブラックロックの 2026 年 7〜9 月期決算で、仮想通貨 ETF からなるデジタル資産部門の残高が 796 億ドル（約 12.6 兆円）と 6 月末の約 1.6 倍になった。四半期の純流入は 79 億ドル。",
+      "points": [
+        "年初来の純流入は 57 億ドルで、上半期の流出超から 7 月以降に流入へ転じた計算。ただし前年同期末比では約 23% 減",
+        "サークル株で約 2,200 万ドル、セキュリタイズ株で約 8,000 万ドルの評価益を計上（現金の受け取りは伴わない）",
+        "全社の運用資産は 15.49 兆ドル（前年同期比 15% 増）、四半期の純流入は 2,055 億ドル、調整後 EPS は 15.93 ドル"
+      ],
+      "code": null,
+      "signal": null,
+      "pick": true
+    },
+    {
+      "id": "2026-10-16-coinpost-usdc-emt",
+      "url": "https://coinpost.jp/?p=743060",
+      "title": "ステーブルコインUSDC、EU初の「重要な電子マネートークン（EMT）」に指定",
+      "source": "coinpost.jp",
+      "source_group": "news",
+      "published_at": "2026-10-15T14:00:57+09:00",
+      "category": "crypto",
+      "keywords": [
+        "stablecoin",
+        "crypto-regulation"
+      ],
+      "score": 70,
+      "why": "matched: ステーブルコイン / EU の規制",
+      "read_min": 3,
+      "tldr": "EU 当局が 14 日、サークルの USDC を MiCA に基づく初の「重要な電子マネートークン」に分類した。準備資産や流動性などの直接監督権限が EU 側に移る。",
+      "points": [],
+      "code": null,
+      "signal": null,
+      "pick": false
+    },
+    {
+      "id": "2026-10-16-nada-btc-cpi",
+      "url": "https://www.nadanews.com/372485/",
+      "title": "ビットコイン、CPI上振れも下げ渋る 今晩PPIと明日の議長発言に注目【楽天ウォレットDaily Report】",
+      "source": "nadanews.com",
+      "source_group": "news",
+      "published_at": "2026-10-15T14:15:00+09:00",
+      "category": "crypto",
+      "keywords": [
+        "bitcoin",
+        "us-inflation",
+        "fed"
+      ],
+      "score": 66,
+      "why": "matched: ビットコイン, 金利",
+      "read_min": 4,
+      "tldr": "米 CPI の上振れでもビットコインは下げ渋り、株安で一時 8 万ドル台まで下げた。15 日の PPI と 16 日のウォーシュ議長の発言が次の注目点としている。",
+      "points": [],
+      "code": null,
+      "signal": null,
+      "pick": false
+    },
+    {
+      "id": "2026-10-16-fsa-tsumitate-list",
+      "url": "https://www.fsa.go.jp/policy/nisa2/products/index.html",
+      "title": "つみたて投資枠対象商品届出一覧及びつみたて投資枠対象商品の概要を更新",
+      "source": "金融庁",
+      "source_group": "official",
+      "published_at": "2026-10-16T02:00:00+09:00",
+      "category": "funds",
+      "keywords": [
+        "new-nisa",
+        "index-fund",
+        "fsa"
+      ],
+      "score": 72,
+      "why": "金融庁の公式発表 / matched: NISA",
+      "read_min": 2,
+      "tldr": "金融庁が NISA つみたて投資枠の対象商品の届出一覧と概要を更新した。",
+      "points": [],
+      "code": null,
+      "signal": null,
+      "pick": false
+    },
+    {
+      "id": "2026-10-16-fsa-fsb-g20-review",
+      "url": "https://www.fsa.go.jp/inter/fsf/20261015_1/20261015_1.html",
+      "title": "金融安定理事会による「G20金融規制改革の実施モニタリングレビュー：2026年報告書」について公表",
+      "source": "金融庁",
+      "source_group": "official",
+      "published_at": "2026-10-16T02:00:00+09:00",
+      "category": "macro",
+      "keywords": [
+        "fsa",
+        "basel-iii"
+      ],
+      "score": 55,
+      "why": "金融庁の公式発表",
+      "read_min": 2,
+      "tldr": "金融庁が、FSB の G20 金融規制改革の実施状況レビュー 2026 年版の公表を案内した。同日、FSB の市中協議文書「規制・監督の現代化に係る原則」も公表されている。",
+      "points": [],
+      "code": null,
+      "signal": null,
+      "pick": false
+    },
+    {
+      "id": "2026-10-16-diamond-global-rates-2027",
+      "url": "https://diamond.jp/articles/-/401179",
+      "title": "2027年に金利はどこまで上がるのか？インフレだけでは説明できない世界の「金利上昇」の構造",
+      "source": "diamond.jp",
+      "source_group": "news",
+      "published_at": "2026-10-16T04:00:00+09:00",
+      "category": "macro",
+      "keywords": [
+        "interest-rates",
+        "jgb",
+        "us-treasury"
+      ],
+      "score": 68,
+      "why": "matched: 金利",
+      "read_min": 8,
+      "tldr": "米 10 年債利回りが 5% を超え、日本も 3% 台に入るなど世界で長期金利が上昇している。記事は原油高だけでなく、AI 投資に伴う資金需要と財政悪化懸念がタームプレミアムを押し上げていると論じる。",
+      "points": [],
+      "code": null,
+      "signal": null,
+      "pick": false
+    },
+    {
+      "id": "2026-10-16-nikkei-imf-gdp-6th",
+      "url": "https://www.nikkei.com/article/DGXZQOUA142QN0U6A011C2000000/",
+      "title": "日本のGDPが世界6位に、インドとイギリスに抜かれる 27年IMF見通し",
+      "source": "nikkei.com",
+      "source_group": "news",
+      "published_at": "2026-10-15T06:49:19+09:00",
+      "category": "macro",
+      "keywords": [
+        "jp-fiscal",
+        "fx"
+      ],
+      "score": 50,
+      "why": "IMF 見通し",
+      "read_min": 3,
+      "tldr": "IMF の 10 月推計で、日本の名目 GDP は 2027 年にインドと英国に抜かれ世界 6 位になる見通し。円安によるドル換算額の目減りや成長の鈍さが理由とされる。",
+      "points": [],
+      "code": null,
+      "signal": null,
+      "pick": false
+    },
+    {
+      "id": "2026-10-16-diamond-prudential-order",
+      "url": "https://diamond.jp/articles/-/401211",
+      "title": "業務停止命令を受けたプルデンシャル生命の「異様な企業文化」とは？",
+      "source": "diamond.jp",
+      "source_group": "news",
+      "published_at": "2026-10-16T04:05:00+09:00",
+      "category": "macro",
+      "keywords": [
+        "insurance",
+        "fsa"
+      ],
+      "score": 52,
+      "why": "金融庁の行政処分",
+      "read_min": 8,
+      "tldr": "約 61 億円の金銭詐取などを受け、金融庁がプルデンシャル生命に一部業務停止命令を出した。立ち入り検査のなかったグループのジブラルタ生命も処分対象になった点を解説する。",
+      "points": [],
+      "code": null,
+      "signal": null,
+      "pick": false
+    },
+    {
+      "id": "2026-10-16-diamond-baas-banks",
+      "url": "https://diamond.jp/articles/-/401219",
+      "title": "JR九州・北海道電力・イズミが相次ぎ「銀行参入」、BaaS新時代",
+      "source": "diamond.jp",
+      "source_group": "news",
+      "published_at": "2026-10-16T04:50:00+09:00",
+      "category": "stocks",
+      "keywords": [
+        "baas",
+        "regional-banks"
+      ],
+      "score": 48,
+      "why": "金融業界の構造変化",
+      "read_min": 8,
+      "tldr": "9 月下旬に JR 九州、北海道電力、イズミが相次いで銀行業への参入を発表した。BaaS を提供する銀行側もドコモ SMTB ネット銀行に加え SBI 新生銀行・りそな・三菱 UFJ などが参入し、顧客企業の獲得競争が激しくなっている。",
+      "points": [],
+      "code": null,
+      "signal": null,
+      "pick": false
+    },
+    {
+      "id": "2026-10-16-diamond-apple-5t",
+      "url": "https://diamond.jp/articles/-/401229",
+      "title": "アップル時価総額、終値で5兆ドル突破",
+      "source": "diamond.jp",
+      "source_group": "news",
+      "published_at": "2026-10-16T04:05:00+09:00",
+      "category": "stocks",
+      "keywords": [
+        "us-stocks"
+      ],
+      "score": 50,
+      "why": "米国株の主要トピック",
+      "read_min": 3,
+      "tldr": "米アップルの時価総額が 14 日の終値で 5 兆ドル（約 790 兆円）を上回った。エヌビディアに続き 2 社目。",
+      "points": [],
+      "code": null,
+      "signal": null,
+      "pick": false
+    },
+    {
+      "id": "2026-10-16-coinpost-rakuten-wallet",
+      "url": "https://coinpost.jp/?p=743139",
+      "title": "楽天ウォレット、現物と証拠金のアプリを統合 パスキー必須に",
+      "source": "coinpost.jp",
+      "source_group": "news",
+      "published_at": "2026-10-15T13:59:03+09:00",
+      "category": "crypto",
+      "keywords": [
+        "crypto-exchange",
+        "authentication"
+      ],
+      "score": 56,
+      "why": "matched: パスキー",
+      "read_min": 3,
+      "tldr": "楽天ウォレットが暗号資産の現物取引と証拠金取引のアプリを統合した新アプリを提供開始した。ログインはパスキー必須で、旧 2 アプリは 2027 年初頭をめどに終了する。",
+      "points": [],
+      "code": null,
+      "signal": null,
+      "pick": false
+    },
+    {
+      "id": "2026-10-16-suumo-reform-tax",
+      "url": "https://suumo.jp/journal/2026/10/15/221455/",
+      "title": "リフォーム減税と補助金を国交省に徹底取材！「減税額は実費ではなく国の基準額で決まる」など知らないと損する条件とは？",
+      "source": "suumo.jp",
+      "source_group": "news",
+      "published_at": "2026-10-15T07:00:12+09:00",
+      "category": "realestate",
+      "keywords": [
+        "housing"
+      ],
+      "score": 50,
+      "why": "matched: 住宅",
+      "read_min": 8,
+      "tldr": "耐震・省エネなどのリフォームで受けられる減税と補助金の条件を国交省に取材した記事。減税額は実費ではなく国の基準額で決まる点や、住宅ローン減税との使い分けを解説している。",
+      "points": [],
+      "code": null,
+      "signal": null,
+      "pick": false
+    }
+  ],
+  "social": [
+    {
+      "network": "x",
+      "author": "@nikkei",
+      "url": "https://x.com/nikkei/status/2110565616415306227",
+      "text": "日経電子版の速報投稿。日経平均は午前で 3255 円安、「コアウィーブ・ショック」で投げ売りと伝えた。",
+      "metrics": null,
+      "heat": null,
+      "category": "stocks",
+      "keywords": [
+        "nikkei225",
+        "data-center"
+      ],
+      "posted_at": null
+    },
+    {
+      "network": "x",
+      "author": "@txbiz_ondemand",
+      "url": "https://x.com/txbiz_ondemand/status/2110639355060715679",
+      "text": "テレ東BIZ の緊急解説。日経平均が一時 6 万 5000 円を割り、アドバンテスト・東京エレクトロン・ソフトバンクグループなど AI・半導体株が集中的に売られたと紹介。",
+      "metrics": null,
+      "heat": null,
+      "category": "stocks",
+      "keywords": [
+        "nikkei225",
+        "semiconductor"
+      ],
+      "posted_at": null
+    },
+    {
+      "network": "x",
+      "author": "@hirokoFR",
+      "url": "https://x.com/hirokoFR/status/2110541124427460690",
+      "text": "コアウィーブの社債利回り急騰が AI 半導体セクター売りを加速させ、クレジット市場への警戒が株式市場に波及しているとの指摘。",
+      "metrics": null,
+      "heat": null,
+      "category": "stocks",
+      "keywords": [
+        "data-center",
+        "us-stocks"
+      ],
+      "posted_at": null
+    },
+    {
+      "network": "hn",
+      "author": null,
+      "url": "https://news.ycombinator.com/item?id=50094994",
+      "text": "『OpenCode 2.0』のスレッド。358 件のコメント",
+      "metrics": "▲ 837  ✉ 358",
+      "heat": 100,
+      "category": "ai",
+      "keywords": [
+        "ai-coding",
+        "oss"
+      ],
+      "posted_at": "2026-10-15T05:48:24+09:00"
+    },
+    {
+      "network": "hn",
+      "author": null,
+      "url": "https://news.ycombinator.com/item?id=50107379",
+      "text": "『Muse Spark Open』のスレッド。234 件のコメント",
+      "metrics": "▲ 361  ✉ 234",
+      "heat": 90,
+      "category": "ai",
+      "keywords": [
+        "open-weight"
+      ],
+      "posted_at": "2026-10-16T02:47:39+09:00"
+    },
+    {
+      "network": "hn",
+      "author": null,
+      "url": "https://news.ycombinator.com/item?id=50101813",
+      "text": "『Zero-Click Spyware Delivered via Targeted Ads: AdFection』のスレッド。67 件のコメント",
+      "metrics": "▲ 267  ✉ 67",
+      "heat": 67,
+      "category": "sec",
+      "keywords": [
+        "privacy"
+      ],
+      "posted_at": "2026-10-15T19:43:36+09:00"
+    }
+  ],
+  "releases": [
+    {
+      "date": "2026-10-15",
+      "title": "PostgreSQL 19 RC 1",
+      "repo": "postgres/postgres",
+      "url": "https://www.postgresql.org/about/news/postgresql-19-rc-1-released-3409/",
+      "kind": "release",
+      "note": "正式版は 11 月 19 日予定（RC 2 は 11 月 12 日）",
+      "category": "be"
+    },
+    {
+      "date": "2026-10-14",
+      "title": "curl 8.23.0",
+      "repo": "curl/curl",
+      "url": "https://forest.watch.impress.co.jp/docs/news/2148495.html",
+      "kind": "release",
+      "note": "脆弱性 24 件を修正（High 1 件：HTTP/2 アップロード時の UAF）",
+      "category": "sec"
+    },
+    {
+      "date": "2026-10-15",
+      "title": "Bun v1.4.3",
+      "repo": "oven-sh/bun",
+      "url": "https://www.publickey1.jp/blog/26/anthropicbuntypescript_73typescriptbun143.html",
+      "kind": "release",
+      "note": "型チェッカー bun check を内蔵",
+      "category": "be"
+    },
+    {
+      "date": "2026-10-15",
+      "title": "日銀 小枝審議委員 熊本での挨拶",
+      "repo": null,
+      "url": "https://www.boj.or.jp/about/press/koen_2026/ko261015a.htm",
+      "kind": "policy",
+      "note": "「利上げに過度に慎重になることはない」",
+      "category": "macro"
+    }
+  ]
+}
