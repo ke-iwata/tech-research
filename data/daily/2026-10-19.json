@@ -1,0 +1,790 @@
+{
+ "date": "2026-10-19",
+ "generated_at": "2026-10-19T05:50:00+09:00",
+ "stats": {
+  "collected": 179,
+  "sources_ok": 26,
+  "sources_total": 26,
+  "by_group": {
+   "news": 73,
+   "tech_blog": 65,
+   "hackernews": 41
+  },
+  "failed_sources": []
+ },
+ "digest": [
+  {
+   "category": "ai",
+   "text": "DeepSeek がエージェント向けの Search / Fetch API を全ユーザーに公開。成功リクエスト 1,000 件あたり 0.75 ドルで、Claude Code など経由の呼び出しは 11 月 1 日（北京時間）まで無料。HN で 480 ポイント超。",
+   "keywords": [
+    "llm-cost",
+    "ai-agent"
+   ]
+  },
+  {
+   "category": "sec",
+   "text": "Linux カーネルの脆弱性「PwnEscape」（深刻度スコア 9.3）はゲスト VM からホストでのコード実行につながる可能性。さくらインターネットは一部サービスの新規受付を停止し、AWS はマネージドサービスへの影響なしとした。",
+   "keywords": [
+    "linux",
+    "virtualization"
+   ]
+  },
+  {
+   "category": "be",
+   "text": "collector を立てずに Go の net/http の span を SQLite に溜めて SQL で遅い処理を探す gospan の検証記事。Postgres 周辺では pg_hint_plan 1.9.0（PG19 対応）と pgBackRest 2.60.0 が出た。",
+   "keywords": [
+    "go",
+    "observability",
+    "postgres"
+   ]
+  },
+  {
+   "category": "stocks",
+   "text": "16 日の日経平均は 898 円高の 65,324 円で 7 営業日ぶりに反発。同日の米国株は S&P 500 が 1.09% 安、NASDAQ が 2.15% 安（市況データ）。米ブロードコムなど 9 社は第三者による自社株のトークン化取引に異議を出した。",
+   "keywords": [
+    "nikkei225",
+    "tokenization"
+   ]
+  },
+  {
+   "category": "crypto",
+   "text": "米 9 月 CPI が前年比 3.7% と予想を上回り BTC は一時 8 万ドルを割ったが、すぐに切り返した。投信の資金流入（10 月分は未公表）と住宅ローン金利は、当日の新しいニュースが検索で見つからなかった。",
+   "keywords": [
+    "bitcoin",
+    "us-inflation"
+   ]
+  }
+ ],
+ "items": [
+  {
+   "id": "2026-10-19-zenn-gospan-sqlite",
+   "url": "https://zenn.dev/nonejp/articles/c7dd2859872f9d",
+   "title": "トレーシング基盤なしで「どこが遅いか」を SQL で探す：gospan で net/http の span を SQLite に溜める",
+   "source": "zenn.dev",
+   "source_group": "tech_blog",
+   "published_at": "2026-10-18T22:58:52+09:00",
+   "category": "be",
+   "keywords": [
+    "go",
+    "observability",
+    "sqlite",
+    "opentelemetry"
+   ],
+   "score": 90,
+   "why": "matched: go, opentelemetry（比較対象）",
+   "read_min": 12,
+   "tldr": "Go の net/http サービスに gospan で span を仕込み、collector を立てずに実行ごとの SQLite ファイルへ記録して SQL で遅い処理を探す手順の紹介。300 リクエストを流し、遅い DB クエリが特定 ID に集中していることなどを SQL で突き止めている。",
+   "points": [
+    "span の開始・終了イベントを有界チャネル経由でバックグラウンドの writer goroutine が書き出し、親子関係は context.Context で決まる。ドライバは pure-Go の modernc.org/sqlite で CGO_ENABLED=0 でもビルドできる",
+    "spans_named ビューを duration_ns で並べると遅い span が分かり、attrs と JOIN して属性で絞り込める。記事の VM では SQLite sink の持続上限が 1 span あたり約 8.0µs（毎秒約 12.5 万 span）",
+    "プロセス間の伝播はなく、サービスをまたぐ追跡は OpenTelemetry 向き。既定ではバッファ溢れ時に捨てて Dropped で数え、API は pre-1.0"
+   ],
+   "code": {
+    "file": "main.go",
+    "lang": "go",
+    "text": "sink, err := sqlite.New(\"traces\", sqlite.WithName(\"run.sqlite\", true))\ntracer, err := gospan.New(sink)\ngospan.SetDefault(tracer)\n\nctx, span := gospan.Start(r.Context(), \"http.request\",\n\tslog.String(\"http.method\", r.Method),\n\tslog.String(\"http.route\", route),\n\tslog.String(\"http.path\", r.URL.Path))\ndefer span.End()"
+   },
+   "signal": null,
+   "pick": true
+  },
+  {
+   "id": "2026-10-19-zenn-claude-code-browser-ops",
+   "url": "https://zenn.dev/edash_tech_blog/articles/6250fc61ccf009",
+   "title": "コネクタも API も無いサービスを、Claude Code に操作させる",
+   "source": "zenn.dev",
+   "source_group": "tech_blog",
+   "published_at": "2026-10-18T13:21:04+09:00",
+   "category": "ai",
+   "keywords": [
+    "claude",
+    "ai-agent",
+    "authentication"
+   ],
+   "score": 82,
+   "why": "matched: mcp（コネクタが無い場合の代替）、認可",
+   "read_min": 10,
+   "tldr": "MCP コネクタも API も無い社内ローコード管理コンソールなどを、Claude Code の Chrome 拡張連携（claude --chrome）でログイン済みのブラウザから操作させた事例。認証情報は渡さず「認証済みの状態」だけを使い、作業の型をスキルに固定している。",
+   "points": [
+    "ID・パスワードは Claude のコンテキストに入れず、ログイン画面や CAPTCHA では人に操作を求めて止まる。開発環境のテストは任せ、ステージングと本番は人が行う",
+    "plan mode や、GIF 記録・新規タブなどの前の承認、拡張側のサイト単位の許可で操作範囲を絞る。リポジトリの設定からブラウザ連携を有効にできない仕様もある",
+    "確認ダイアログ表示中は操作が止まる、クロスオリジン iframe の中身は読めない、API キーやサードパーティ経由では使えないといった制約がある"
+   ],
+   "code": null,
+   "signal": null,
+   "pick": true
+  },
+  {
+   "id": "2026-10-19-deepseek-search-fetch-api",
+   "url": "https://api-docs.deepseek.com/guides/search/",
+   "title": "DeepSeek search and fetch – $0.75 per 1000 successful requests",
+   "source": "api-docs.deepseek.com",
+   "source_group": "hackernews",
+   "published_at": "2026-10-18T15:50:36+09:00",
+   "category": "ai",
+   "keywords": [
+    "llm-cost",
+    "ai-agent",
+    "rag"
+   ],
+   "score": 85,
+   "why": "matched: llm（エージェント向け検索 API の価格）",
+   "read_min": 6,
+   "tldr": "DeepSeek がエージェントや RAG 向けに、自社検索エンジンを使う Search API と、URL を Markdown にして返す Fetch API を全ユーザーに公開した。料金はそれぞれ成功したリクエスト 1,000 件あたり 0.75 ドル。",
+   "points": [
+    "Search は POST /v1/tools/search で count（1〜50）や site: / lang: / after: などの演算子に対応。Fetch は POST /v1/tools/fetch で 1 ページを Markdown で返す",
+    "課金は HTTP 200 で結果がある場合のみで、空の検索結果・失敗・タイムアウトは無料。レート制限は各 5 QPS／アカウント（Fetch はドメイン単位の制限もあり）",
+    "DeepSeek Harness・Claude Code・Codex 経由のサーバー側ツール呼び出しは当面無料で、北京時間 2026-11-01 0 時から課金開始。HN で 480 ポイント超"
+   ],
+   "code": null,
+   "signal": "▲ 481",
+   "pick": true
+  },
+  {
+   "id": "2026-10-19-publickey-pwnescape",
+   "url": "https://www.publickey1.jp/blog/26/linuxpwnescapecve-2026-99999linux_os.html",
+   "title": "Linuxカーネルの深刻な脆弱性「PwnEscape」（CVE-2026-99999）、ゲストの仮想マシンからホスト側Linux OSに不正なコードを実行できる可能性",
+   "source": "publickey1.jp",
+   "source_group": "news",
+   "published_at": "2026-10-18T00:27:18+09:00",
+   "category": "sec",
+   "keywords": [
+    "linux",
+    "virtualization",
+    "vulnerability-management"
+   ],
+   "score": 80,
+   "why": "matched: セキュリティ（クラウド基盤に影響）",
+   "read_min": 6,
+   "tldr": "Linux カーネルのネットワーク処理の欠陥により、ゲスト VM を操作できる攻撃者がホスト側でコードを実行できる可能性がある脆弱性「PwnEscape」が公開された。スコアは 9.3（Critical）で、現時点では研究環境での実証のみ。",
+   "points": [
+    "検証済み IPv4 ヘッダーのチェックサム関連データを書き換えられ、想定外のメモリ読み書きにつながる。記事は KVM 以外のコンテナ環境でも成立しうるとしている",
+    "さくらインターネットは一部サービスの新規申し込みを停止して対策を開始。AWS は EC2・Lambda・Fargate などは影響なしとし、Amazon Linux 2 には修正版が出ている",
+    "記事に影響・修正済みのカーネルバージョンの記載はない。元投稿は攻撃コードが数週間〜1 カ月以内に現れると予測しており、VPS やクラウド利用者は提供者の対応確認を勧めている"
+   ],
+   "code": null,
+   "signal": null,
+   "pick": true
+  },
+  {
+   "id": "2026-10-19-anthropic-employment",
+   "url": "https://www.anthropic.com/research/employment-at-anthropic",
+   "title": "How employment is changing at Anthropic",
+   "source": "anthropic.com",
+   "source_group": "hackernews",
+   "published_at": "2026-10-18T19:49:26+09:00",
+   "category": "ai",
+   "keywords": [
+    "ai-coding",
+    "ai-agent",
+    "anthropic"
+   ],
+   "score": 70,
+   "why": "matched: llm（AI 導入後の組織と採用の変化）",
+   "read_min": 10,
+   "tldr": "Anthropic が社内の雇用・役割の変化を分析した。若手技術職の採用比率が大きく下がる一方、AI エージェントの稼働やエンジニア 1 人あたりのコミット速度が伸び、エージェント管理などの「メタワーク」が増えたという。",
+   "points": [
+    "技術部門に占める若手の割合は 2025 年初めの 21% から 14% に、若手技術職が採用に占める割合は 27% から 9% に低下",
+    "8 月時点で社員が管理する AI エージェントの稼働時間は人の作業時間の 6 倍、エンジニア 1 人あたりのコミット速度は半年前の 5 倍。Claude とのセッション時間の約 8 割はユーザーの入力待ち",
+    "メタワークの割合は 2025 年秋の 10% から 2026 年春に 22% へ。面接での AI ツール活用実績の評価は技術職で約 3 倍、非技術職で約 4 倍に増えた"
+   ],
+   "code": null,
+   "signal": "▲ 101",
+   "pick": true
+  },
+  {
+   "id": "2026-10-19-verge-ai-agents-blocked",
+   "url": "https://www.theverge.com/ai-artificial-intelligence/1013195/ai-agents-blocked-web",
+   "title": "Websites are closing their doors to AI agents",
+   "source": "theverge.com",
+   "source_group": "hackernews",
+   "published_at": "2026-10-18T23:58:10+09:00",
+   "category": "ai",
+   "keywords": [
+    "ai-agent",
+    "bot-traffic"
+   ],
+   "score": 66,
+   "why": "matched: llm（エージェントのウェブ利用）",
+   "read_min": 6,
+   "tldr": "ウェブサイトが AI エージェントのアクセスを閉ざし始めているとする The Verge の記事。本文は取得できず、HN で 118 件のコメントがついた。",
+   "points": [],
+   "code": null,
+   "signal": "▲ 125",
+   "pick": false
+  },
+  {
+   "id": "2026-10-19-toms-anthropic-safety-bill",
+   "url": "https://www.tomshardware.com/tech-industry/artificial-intelligence/anthropics-proposed-ai-safety-bill-only-kicks-in-if-50-deaths-or-usd1-billion-in-damages-are-on-the-line-proposal-would-effectively-make-the-commerce-department-the-only-agency-capable-of-stopping-an-ai-model",
+   "title": "Anthropic's proposed AI safety bill only kicks in if 50 deaths or $1B in damages",
+   "source": "tomshardware.com",
+   "source_group": "hackernews",
+   "published_at": "2026-10-18T23:30:27+09:00",
+   "category": "ai",
+   "keywords": [
+    "ai-safety",
+    "anthropic"
+   ],
+   "score": 58,
+   "why": "AI 規制の論点",
+   "read_min": 5,
+   "tldr": "Anthropic が提案した AI 安全法案は、死者 50 人または損害 10 億ドル規模の事態で発動する内容だと伝える記事（見出しより）。HN で 156 件のコメント。",
+   "points": [],
+   "code": null,
+   "signal": "▲ 141",
+   "pick": false
+  },
+  {
+   "id": "2026-10-19-cnet-claude-ecdsa-seed",
+   "url": "https://japan.cnet.com/article/35253671/",
+   "title": "Claude、暗号技術の「25年来の謎」を30分足らずで解明",
+   "source": "japan.cnet.com",
+   "source_group": "tech_blog",
+   "published_at": "2026-10-18T10:39:48+09:00",
+   "category": "sec",
+   "keywords": [
+    "cryptography",
+    "claude"
+   ],
+   "score": 62,
+   "why": "matched: llm（暗号分野での活用）",
+   "read_min": 5,
+   "tldr": "NIST が 2000 年に公表した ECDSA の楕円曲線規格に記載された「シード」の由来という長年の謎を、Claude が 30 分足らずで解明したと伝える記事（RSS 要約より）。",
+   "points": [],
+   "code": null,
+   "signal": null,
+   "pick": false
+  },
+  {
+   "id": "2026-10-19-zenn-ios-sim-context",
+   "url": "https://zenn.dev/eai/articles/dont-let-agents-see-the-ios-sim-screen",
+   "title": "ClaudeにiOSシミュレーターのスクリーンショットを読ませるのをやめて、操作で増えるコンテキストを43%削減した",
+   "source": "zenn.dev",
+   "source_group": "tech_blog",
+   "published_at": "2026-10-18T11:56:18+09:00",
+   "category": "ai",
+   "keywords": [
+    "ai-coding",
+    "llm-cost",
+    "claude"
+   ],
+   "score": 64,
+   "why": "matched: llm（コンテキスト削減）",
+   "read_min": 10,
+   "tldr": "Claude Code で iOS シミュレーターを操作させる際、画面をスクリーンショットではなく文字で読む道具を足し、操作で増えるコンテキストを 43% 減らした事例。過去のセッションログ 99 件を集計して非効率な操作を洗い出した。",
+   "points": [],
+   "code": null,
+   "signal": null,
+   "pick": false
+  },
+  {
+   "id": "2026-10-19-zenn-pii-masking-ja",
+   "url": "https://zenn.dev/fusic/articles/a77ba348115364",
+   "title": "日本語の個人情報を Bedrock Guardrails, SDP, Presidio でマスキングして比較する",
+   "source": "zenn.dev",
+   "source_group": "tech_blog",
+   "published_at": "2026-10-18T08:00:05+09:00",
+   "category": "sec",
+   "keywords": [
+    "pii-masking",
+    "aws",
+    "privacy"
+   ],
+   "score": 68,
+   "why": "matched: aws, llm（生成 AI 前処理）",
+   "read_min": 12,
+   "tldr": "生成 AI で分析する前に日本語の個人情報をマスキングする目的で、Google Cloud の Sensitive Data Protection、Amazon Bedrock Guardrails、OSS の Presidio を比較した記事。全角数字や和暦など日本語特有の表記がどこまで扱えるかを試している。",
+   "points": [],
+   "code": null,
+   "signal": null,
+   "pick": false
+  },
+  {
+   "id": "2026-10-19-qiita-entra-agent-id",
+   "url": "https://qiita.com/shou-wordwright555501/items/b4e0ad709b882ed4ad44",
+   "title": "Entra ID で AI エージェントに ID を持たせよう！ ～ Foundry × Claude で検証（その1）",
+   "source": "qiita.com",
+   "source_group": "tech_blog",
+   "published_at": "2026-10-17T18:15:10+09:00",
+   "category": "sec",
+   "keywords": [
+    "authorization",
+    "ai-agent",
+    "microsoft"
+   ],
+   "score": 72,
+   "why": "matched: 認可（エージェントの ID と権限）",
+   "read_min": 10,
+   "tldr": "AI セキュリティの一環として、Entra ID で AI エージェントに ID を割り当て、権限を付与する手順を検証した記事の第 1 回。",
+   "points": [],
+   "code": null,
+   "signal": null,
+   "pick": false
+  },
+  {
+   "id": "2026-10-19-tbs-ai-intrusion",
+   "url": "https://newsdig.tbs.co.jp/articles/-/3020110",
+   "title": "不正アクセス急増背景に“中国製LLM”台頭、AIが自動で偵察→侵入→情報奪取「情報漏れていない人の方が珍しい」専門家が警鐘、対策は?",
+   "source": "newsdig.tbs.co.jp",
+   "source_group": "tech_blog",
+   "published_at": "2026-10-18T17:55:01+09:00",
+   "category": "sec",
+   "keywords": [
+    "ai-security",
+    "data-breach"
+   ],
+   "score": 55,
+   "why": "matched: llm, 不正アクセス",
+   "read_min": 5,
+   "tldr": "不正アクセスによる個人情報漏えいが全国で急増しているとして、AI が偵察から侵入・情報窃取までを自動で行う手口の広がりと個人の対策を専門家に聞いた報道（RSS 要約より）。",
+   "points": [],
+   "code": null,
+   "signal": null,
+   "pick": false
+  },
+  {
+   "id": "2026-10-19-pg-hint-plan-190",
+   "url": "https://www.postgresql.org/about/news/pg_hint_plan-v190-released-3408/",
+   "title": "pg_hint_plan v1.9.0 Released",
+   "source": "postgresql.org",
+   "source_group": "news",
+   "published_at": "2026-10-18T09:00:00+09:00",
+   "category": "be",
+   "keywords": [
+    "postgres"
+   ],
+   "score": 70,
+   "why": "matched: postgres",
+   "read_min": 3,
+   "tldr": "実行計画をヒント句で制御する拡張 pg_hint_plan 1.9.0 が公開された。PostgreSQL 19 への対応と各種改善・バグ修正を含む。",
+   "points": [],
+   "code": null,
+   "signal": null,
+   "pick": false
+  },
+  {
+   "id": "2026-10-19-pgbackrest-2600",
+   "url": "https://www.postgresql.org/about/news/pgbackrest-2600-released-3416/",
+   "title": "pgBackRest 2.60.0 Released",
+   "source": "postgresql.org",
+   "source_group": "news",
+   "published_at": "2026-10-18T09:00:00+09:00",
+   "category": "be",
+   "keywords": [
+    "postgres",
+    "disaster-recovery"
+   ],
+   "score": 66,
+   "why": "matched: postgres",
+   "read_min": 3,
+   "tldr": "PostgreSQL 向けバックアップ・リストアツール pgBackRest 2.60.0 が公開された（お知らせより。変更点の詳細は未確認）。",
+   "points": [],
+   "code": null,
+   "signal": null,
+   "pick": false
+  },
+  {
+   "id": "2026-10-19-qiita-dynamodb-export-filter",
+   "url": "https://qiita.com/s_moriyama/items/a3336c72f1f4e81744c5",
+   "title": "DynamoDB の S3 エクスポートにフィルターが来た！特定データだけ切り出して新テーブルを作る",
+   "source": "qiita.com",
+   "source_group": "tech_blog",
+   "published_at": "2026-10-18T05:43:37+09:00",
+   "category": "cloud",
+   "keywords": [
+    "aws",
+    "managed-db"
+   ],
+   "score": 62,
+   "why": "matched: aws",
+   "read_min": 8,
+   "tldr": "2026 年 10 月 1 日から DynamoDB の S3 エクスポートでフィルターが使えるようになり、特定データだけを切り出して新テーブルを作る手順を試した記事。",
+   "points": [],
+   "code": null,
+   "signal": null,
+   "pick": false
+  },
+  {
+   "id": "2026-10-19-coinpost-btc-cpi-fomc",
+   "url": "https://coinpost.jp/?p=743353",
+   "title": "ビットコインCPI・PPI上振れも8万ドル維持、FOMC金利観測が焦点｜bitbankアナリスト寄稿",
+   "source": "coinpost.jp",
+   "source_group": "news",
+   "published_at": "2026-10-18T11:30:53+09:00",
+   "category": "crypto",
+   "keywords": [
+    "bitcoin",
+    "fed",
+    "us-inflation"
+   ],
+   "score": 86,
+   "why": "matched: ビットコイン, 金利",
+   "read_min": 6,
+   "tldr": "国内取引所のアナリスト寄稿。9 月の米 CPI・PPI がともに予想を上回り BTC は PPI 直後に一時 8 万ドルを割ったが、すぐに切り返した。10 月 FOMC は据え置きが約 7 割織り込まれる一方、その見方は週内に後退しているとした。",
+   "points": [
+    "9 月の米 CPI は前年比 3.7%（予想 3.6%）。BTC は対円で 15 日に一時 1,250 万円台まで下げ、16 日正午時点で 1,300 万円前後",
+    "筆者は 8 万ドル（約 1,263 万円）を下値の節目、8.4 万ドル（約 1,330 万円）を今週の上値の節目とみている。8 万ドルのストライクにオプション建玉が集中しているという",
+    "来週は注目度の高い米指標が少ないとして、8 万〜8.5 万ドルのレンジ推移を基本線に挙げる（筆者の見立て）"
+   ],
+   "code": null,
+   "signal": null,
+   "pick": true
+  },
+  {
+   "id": "2026-10-19-nada-tokenized-stock-objection",
+   "url": "https://www.nadanews.com/372969/",
+   "title": "ブロードコムなど米9社、ブロックチェーン上での自社株取引に異議──OKX・NYSE親会社の計画に＝The Block",
+   "source": "nadanews.com",
+   "source_group": "news",
+   "published_at": "2026-10-18T19:00:00+09:00",
+   "category": "stocks",
+   "keywords": [
+    "tokenization",
+    "us-stocks"
+   ],
+   "score": 74,
+   "why": "matched: 米国株（トークン化株式）",
+   "read_min": 5,
+   "tldr": "OKX と NYSE 親会社の合弁「OKXICE」が、第三者がトークン化した米国株をステーブルコインで 24 時間売買できるようにする計画に対し、ブロードコムやコアウィーブなど 9 社が異議を申し立てた。異議を出した企業の株式トークンは扱えなくなる。",
+   "points": [
+    "OKXICE は 10 月 4 日に公表され、60 銘柄超の米国株が対象。株式トークンの保有者に配当や議決権を認めるとしている",
+    "SEC が 9 月 17 日に出した 5 年間の「イノベーション免除」により取引所登録なしで運営できるが、第三者によるトークン化には発行企業が期限内に異議を出せる",
+    "企業側は自社株の価格・売買への影響が見通せないことや、承認していない商品が公式と誤解される懸念を挙げる。ナスダックも同制度での自社株の取り扱いを拒む方針"
+   ],
+   "code": null,
+   "signal": null,
+   "pick": true
+  },
+  {
+   "id": "2026-10-19-nada-china-stablecoin-p2p",
+   "url": "https://www.nadanews.com/372983/",
+   "title": "中国のステーブルコイン個人間送金、利用ウォレット数が43倍に＝Chainalysis",
+   "source": "nadanews.com",
+   "source_group": "news",
+   "published_at": "2026-10-18T20:00:00+09:00",
+   "category": "crypto",
+   "keywords": [
+    "stablecoin",
+    "crypto-regulation"
+   ],
+   "score": 66,
+   "why": "matched: 暗号資産（ステーブルコイン）",
+   "read_min": 5,
+   "tldr": "Chainalysis によると、中国でステーブルコインの個人間送金に使われた送金元ウォレット数は 2024 年 1〜3 月期から 2026 年 4〜6 月期に 43 倍に増えた。中国当局は暗号資産への厳しい規制を維持している。",
+   "points": [
+    "2025 年 7 月〜2026 年 6 月の中国の暗号資産活動のうち、国内の個人間取引が 59.1% を占め、前回調査期間から 3.5 倍に拡大",
+    "自己管理のステーブルコインの年間送金額は平均保有額の 33.2 倍で、世界平均（年 9.3 回）を大きく上回り、支払いに繰り返し使われていることと整合するという",
+    "社会信用制度の対象が金融・ネット分野に広がった 2025 年 3 月ごろから増加。同社は従来の金融サービスの代替や監視回避の可能性を挙げている"
+   ],
+   "code": null,
+   "signal": null,
+   "pick": true
+  },
+  {
+   "id": "2026-10-19-kyodo-nikkei-close-1016",
+   "url": "https://www.oanda.jp/lab-education/market_news/kn_2026101601001176/",
+   "title": "東証反発、終値６万５３２４円",
+   "source": "oanda.jp（共同通信）",
+   "source_group": "news",
+   "published_at": "2026-10-16T15:37:00+09:00",
+   "category": "stocks",
+   "keywords": [
+    "nikkei225",
+    "topix"
+   ],
+   "score": 72,
+   "why": "matched: 株価（前営業日の終値）",
+   "read_min": 2,
+   "tldr": "16 日の日経平均は前日比 898 円 34 銭高の 6 万 5324 円 29 銭で 7 営業日ぶりに反発、TOPIX は 66.66 ポイント高の 4066.00。前日の大幅安の反動に加え、好決算の発表が相次いだことが買い材料とされた。",
+   "points": [],
+   "code": null,
+   "signal": null,
+   "pick": false
+  },
+  {
+   "id": "2026-10-19-diamond-nikkei-outlook",
+   "url": "https://diamond.jp/articles/-/401269",
+   "title": "中間決算の業績上方修正次第で日経平均27年前半「7万6000円」視野に、懸念は“悪い金利上昇”",
+   "source": "diamond.jp",
+   "source_group": "news",
+   "published_at": "2026-10-19T04:25:00+09:00",
+   "category": "stocks",
+   "keywords": [
+    "nikkei225",
+    "interest-rates"
+   ],
+   "score": 60,
+   "why": "matched: 金利",
+   "read_min": 8,
+   "tldr": "中間決算で通期見通しの上方修正が進めば日経平均の最高値更新や来年の 7 万 6000 円もありうるとする一方、インフレ長期化や財政不安による金利上昇で大きめに下落する可能性も指摘する見通し記事（RSS 要約より）。",
+   "points": [],
+   "code": null,
+   "signal": null,
+   "pick": false
+  },
+  {
+   "id": "2026-10-19-diamond-wsj-ai-trade-rates",
+   "url": "https://diamond.jp/articles/-/401323",
+   "title": "AIトレードの高リスク銘柄、金利上昇で打撃",
+   "source": "diamond.jp",
+   "source_group": "news",
+   "published_at": "2026-10-19T04:05:00+09:00",
+   "category": "stocks",
+   "keywords": [
+    "us-stocks",
+    "interest-rates",
+    "ai-economy"
+   ],
+   "score": 58,
+   "why": "matched: 金利, 米国株",
+   "read_min": 5,
+   "tldr": "市場心理が冷え込み AI ブーム関連企業に動揺が広がるなか、金利上昇が高リスクの AI 関連銘柄を直撃しているとする WSJ 記事の翻訳（見出しと RSS 要約より）。",
+   "points": [],
+   "code": null,
+   "signal": null,
+   "pick": false
+  },
+  {
+   "id": "2026-10-19-nada-morgan-stanley-tokenized",
+   "url": "https://www.nadanews.com/372936/",
+   "title": "モルガン・スタンレー、トークン化株対応の見通しを後ろ倒し──2027年初頭に対応か＝The Block",
+   "source": "nadanews.com",
+   "source_group": "news",
+   "published_at": "2026-10-18T16:30:00+09:00",
+   "category": "stocks",
+   "keywords": [
+    "tokenization",
+    "us-stocks"
+   ],
+   "score": 52,
+   "why": "トークン化株式の動向",
+   "read_min": 3,
+   "tldr": "モルガン・スタンレーが運営する ATS でのトークン化株式の取り扱い開始を 2026 年後半から 2027 年 1〜3 月に見直した。取り扱う商品がまだ少なく、顧客需要も顕在化していないためとしている。",
+   "points": [],
+   "code": null,
+   "signal": null,
+   "pick": false
+  },
+  {
+   "id": "2026-10-19-nada-memecoin-peak",
+   "url": "https://www.nadanews.com/373001/",
+   "title": "ミームコイン、半数が取引開始から17日以内に価格のピーク＝Coin Metrics",
+   "source": "nadanews.com",
+   "source_group": "news",
+   "published_at": "2026-10-18T21:00:00+09:00",
+   "category": "crypto",
+   "keywords": [
+    "crypto-exchange"
+   ],
+   "score": 45,
+   "why": "暗号資産市場の調査",
+   "read_min": 3,
+   "tldr": "Coin Metrics は 10 月 6 日、ミームコインの半数が取引開始から約 17 日以内に観測期間中の最高値を付けたとする分析を公表した（RSS 要約より）。",
+   "points": [],
+   "code": null,
+   "signal": null,
+   "pick": false
+  },
+  {
+   "id": "2026-10-19-diamond-sanaenomics-debate",
+   "url": "https://diamond.jp/articles/-/401322",
+   "title": "消費税減税の財源は？金利上昇は大丈夫？高市政権の経済ブレーン・永濱氏と元日銀審議委員・木内氏がサナエノミクスの功罪を徹底討論！【高市政権1年・総括対談前編】",
+   "source": "diamond.jp",
+   "source_group": "news",
+   "published_at": "2026-10-19T04:55:00+09:00",
+   "category": "macro",
+   "keywords": [
+    "consumption-tax",
+    "interest-rates",
+    "jp-fiscal"
+   ],
+   "score": 62,
+   "why": "matched: 金利",
+   "read_min": 12,
+   "tldr": "政権発足 1 年で長期金利が 3% を超え円安も続くなか、積極財政の評価、消費税減税の財源、金利上昇の背景をエコノミスト 2 人が議論する対談の前編（RSS 要約より）。",
+   "points": [],
+   "code": null,
+   "signal": null,
+   "pick": false
+  },
+  {
+   "id": "2026-10-19-diamond-rental-property-valuation",
+   "url": "https://diamond.jp/articles/-/401008",
+   "title": "富裕層の相続対策を直撃！「貸付不動産5年ルール」と「不動産小口化商品」の評価が来年から激変へ、年内にできる5つの対策法を伝授【後編】",
+   "source": "diamond.jp",
+   "source_group": "news",
+   "published_at": "2026-10-19T04:35:00+09:00",
+   "category": "realestate",
+   "keywords": [
+    "real-estate-prices",
+    "inheritance-tax"
+   ],
+   "score": 50,
+   "why": "不動産の税制変更",
+   "read_min": 10,
+   "tldr": "国税庁は 9 月 18 日に通達案「貸付用不動産の評価について」を公表しパブリックコメントを実施（10 月 18 日締め切り）。2027 年 1 月 1 日以後の相続・贈与から、賃貸物件や不動産小口化商品の相続税評価のルールが変わる見込みと解説する記事（RSS 要約より）。",
+   "points": [],
+   "code": null,
+   "signal": null,
+   "pick": false
+  },
+  {
+   "id": "2026-10-19-diamond-msad-cfo",
+   "url": "https://diamond.jp/articles/-/401206",
+   "title": "MS＆ADのCFOが明かす「政策株売却益なき後」の稼ぐ力とは？三井住友海上とあいおい合併まで半年、“15年がかりの統合”と資本政策の要諦",
+   "source": "diamond.jp",
+   "source_group": "news",
+   "published_at": "2026-10-19T04:45:00+09:00",
+   "category": "stocks",
+   "keywords": [
+    "insurance",
+    "corporate-governance"
+   ],
+   "score": 45,
+   "why": "日本株（損保の資本政策）",
+   "read_min": 10,
+   "tldr": "2027 年 4 月に傘下 2 社の合併を控える MS&AD の CFO に、政策保有株の売却が終わった後の収益力や資本政策、合併準備を聞いたインタビュー（RSS 要約より）。",
+   "points": [],
+   "code": null,
+   "signal": null,
+   "pick": false
+  },
+  {
+   "id": "2026-10-19-numismatic-gold-top-export",
+   "url": "https://www.numismaticnews.net/gold-now-top-u-s-export",
+   "title": "Gold is now the top U.S. export",
+   "source": "numismaticnews.net",
+   "source_group": "hackernews",
+   "published_at": "2026-10-18T02:06:07+09:00",
+   "category": "macro",
+   "keywords": [
+    "gold"
+   ],
+   "score": 48,
+   "why": "金価格・貿易の話題",
+   "read_min": 4,
+   "tldr": "米国の輸出品目で金が首位になったとする記事（見出しより。本文は未確認）。HN で約 400 ポイントを集めた。",
+   "points": [],
+   "code": null,
+   "signal": "▲ 398",
+   "pick": false
+  }
+ ],
+ "social": [
+  {
+   "network": "x",
+   "author": "@deepseek_ai",
+   "url": "https://x.com/deepseek_ai/status/2111375650414309859",
+   "text": "DeepSeek が Search と Fetch の API を全ユーザーに開放したと告知。自社検索エンジンを使い、各エンドポイント 1,000 回あたり 0.75 ドル。",
+   "metrics": null,
+   "heat": null,
+   "category": "ai",
+   "keywords": [
+    "llm-cost",
+    "ai-agent"
+   ],
+   "posted_at": null
+  },
+  {
+   "network": "x",
+   "author": "@buildwithhassan",
+   "url": "https://x.com/buildwithhassan/status/2111373256397599012",
+   "text": "DeepSeek の検索 API は 1,000 回 0.75 ドルで、結果が返ったときだけ課金される点を紹介し、他社 API の検索料金と比べて安いと指摘。",
+   "metrics": null,
+   "heat": null,
+   "category": "ai",
+   "keywords": [
+    "llm-cost"
+   ],
+   "posted_at": null
+  },
+  {
+   "network": "hn",
+   "author": null,
+   "url": "https://news.ycombinator.com/item?id=50138531",
+   "text": "『DeepSeek search and fetch – $0.75 per 1000 successful requests』のスレッド。234 件のコメント",
+   "metrics": "▲ 481  ✉ 234",
+   "heat": 100,
+   "category": "ai",
+   "keywords": [
+    "llm-cost",
+    "ai-agent"
+   ],
+   "posted_at": "2026-10-18T15:50:36+09:00"
+  },
+  {
+   "network": "hn",
+   "author": null,
+   "url": "https://news.ycombinator.com/item?id=50141657",
+   "text": "『Websites are closing their doors to AI agents』のスレッド。118 件のコメント",
+   "metrics": "▲ 125  ✉ 118",
+   "heat": 31,
+   "category": "ai",
+   "keywords": [
+    "ai-agent",
+    "bot-traffic"
+   ],
+   "posted_at": "2026-10-18T23:58:10+09:00"
+  },
+  {
+   "network": "hn",
+   "author": null,
+   "url": "https://news.ycombinator.com/item?id=50141429",
+   "text": "『Anthropic's proposed AI safety bill only kicks in if 50 deaths or $1B in damages』のスレッド。156 件のコメント",
+   "metrics": "▲ 141  ✉ 156",
+   "heat": 35,
+   "category": "ai",
+   "keywords": [
+    "ai-safety",
+    "anthropic"
+   ],
+   "posted_at": "2026-10-18T23:30:27+09:00"
+  },
+  {
+   "network": "hn",
+   "author": null,
+   "url": "https://news.ycombinator.com/item?id=50139873",
+   "text": "『How employment is changing at Anthropic』のスレッド。184 件のコメント",
+   "metrics": "▲ 101  ✉ 184",
+   "heat": 25,
+   "category": "ai",
+   "keywords": [
+    "ai-coding",
+    "anthropic"
+   ],
+   "posted_at": "2026-10-18T19:49:26+09:00"
+  },
+  {
+   "network": "hn",
+   "author": null,
+   "url": "https://news.ycombinator.com/item?id=50132870",
+   "text": "『Gold is now the top U.S. export』のスレッド。217 件のコメント",
+   "metrics": "▲ 398  ✉ 217",
+   "heat": 99,
+   "category": "macro",
+   "keywords": [
+    "gold"
+   ],
+   "posted_at": "2026-10-18T02:06:07+09:00"
+  }
+ ],
+ "releases": [
+  {
+   "date": "2026-10-18",
+   "title": "pg_hint_plan v1.9.0",
+   "repo": null,
+   "url": "https://www.postgresql.org/about/news/pg_hint_plan-v190-released-3408/",
+   "kind": "release",
+   "note": "PostgreSQL 19 に対応",
+   "category": "be"
+  },
+  {
+   "date": "2026-10-18",
+   "title": "pgBackRest 2.60.0",
+   "repo": null,
+   "url": "https://www.postgresql.org/about/news/pgbackrest-2600-released-3416/",
+   "kind": "release",
+   "note": "PostgreSQL のバックアップ・リストアツールの新版",
+   "category": "be"
+  }
+ ]
+}
