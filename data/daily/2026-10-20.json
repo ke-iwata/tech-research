@@ -1,0 +1,793 @@
+{
+  "date": "2026-10-20",
+  "generated_at": "2026-10-20T05:40:00+09:00",
+  "stats": {
+    "collected": 228,
+    "sources_ok": 26,
+    "sources_total": 26,
+    "by_group": {
+      "news": 83,
+      "tech_blog": 93,
+      "hackernews": 50,
+      "official": 2
+    },
+    "failed_sources": []
+  },
+  "digest": [
+    {
+      "category": "ai",
+      "text": "Cloudflare が社内 AI コードレビューの推論コストを 1 回約 2.43 ドルから 0.77 ドルへ 68% 削減。初回リクエストでプロンプトキャッシュが効いていなかった問題の修正や、サブレビュアー間でのキャッシュ共有、モデルと effort の比較試験を重ねた。",
+      "keywords": [
+        "llm-cost",
+        "prompt-caching",
+        "code-review"
+      ]
+    },
+    {
+      "category": "sec",
+      "text": "国内で不正アクセスの公表が相次いだ。ニフティは回線申込の管理システムから最大約 54 万件、H2O リテイリングは共通 ID の約 126 万件の漏えい（可能性を含む）を公表。ソフトバンクは会員サイトを一時停止し、スクウェア・エニックスはパスワードリスト型攻撃による不正ログインを確認した。",
+      "keywords": [
+        "data-breach",
+        "security-incident",
+        "credential-stuffing"
+      ]
+    },
+    {
+      "category": "cloud",
+      "text": "AWS が Lambda 上で Next.js や Hono などの Node.js アプリをアダプターなしで動かせる「Lambda Web Functions」を発表（Node.js 24、1 環境で最大 128 同時リクエスト、東京リージョンでも利用可）。",
+      "keywords": [
+        "aws",
+        "serverless"
+      ]
+    },
+    {
+      "category": "stocks",
+      "text": "19 日の日経平均は米半導体株安を受けて 407 円安の 64,916 円で反落し、TOPIX は小幅高。同日の米国株は S&P 500 が 0.41% 高、NASDAQ が 1.11% 高（市況データ）。市況データの日経平均は 16 日終値のままで、19 日分は株探の記事で確認した。",
+      "keywords": [
+        "nikkei225",
+        "semiconductor"
+      ]
+    },
+    {
+      "category": "crypto",
+      "text": "JP モルガンがトークン化預金 JPM Coin をイーサリアムのメインネットで提供開始。BIS の論文は預金金利の上昇がステーブルコインの伸びを鈍らせると分析した。投信の資金流入（10 月分は未公表）と住宅ローン金利は、当日の新しいニュースが検索で見つからなかった。",
+      "keywords": [
+        "tokenization",
+        "stablecoin",
+        "ethereum"
+      ]
+    }
+  ],
+  "items": [
+    {
+      "id": "2026-10-20-cloudflare-inference-68",
+      "url": "https://blog.cloudflare.com/obsessive-inference-optimization/",
+      "title": "Cutting our inference bill by 68% by being obsessive about optimization",
+      "source": "blog.cloudflare.com",
+      "source_group": "tech_blog",
+      "published_at": "2026-10-20T04:12:53+09:00",
+      "category": "ai",
+      "keywords": [
+        "llm-cost",
+        "prompt-caching",
+        "code-review",
+        "ai-agent"
+      ],
+      "score": 90,
+      "why": "matched: llm（API コスト削減の実例）",
+      "read_min": 15,
+      "tldr": "Cloudflare が社内の AI コードレビュー（コーディネーターと専門サブレビュアーの構成）の推論コストを、1 レビューあたり約 2.43 ドルから 0.77 ドルへ 68% 削減した経緯を公開。中央値の所要時間も 4 分 9 秒から 1 分 32 秒に縮んだ。",
+      "points": [
+        "4 月の約 1.19 ドルから 8 月末に約 2.46 ドルへ上がった主因は、モデル変更とトークン量の増加（1 レビュー 0.91M→2.99M）。費用の 77% はキャッシュの書き込み・読み出しで、既に見たコンテキストに払っていた",
+        "リポジトリ固有の情報（作業ディレクトリ・日付）がキャッシュ境界より前にあり、共通部分が初回リクエストでキャッシュされていなかった。共通部分に独立したブレークポイントを置き、初回のキャッシュ読み出しを 14〜26% から 91〜99.5% に改善",
+        "使えないツール定義の削除、ファイル読み込みの並列化、3 つのサブレビュアーで同一プレフィックスを共有、モデルと effort の A/B 試験などを積み重ねた。性能レビュアーは重要な指摘が約 64% 減っており、high effort の検証を予定"
+      ],
+      "code": null,
+      "signal": null,
+      "pick": true
+    },
+    {
+      "id": "2026-10-20-publickey-lambda-web-functions",
+      "url": "https://www.publickey1.jp/blog/26/aws_lambdanextjshononodejsaws_lambda_web_functions.html",
+      "title": "AWS LambdaでNext.jsやHonoなどNode.jsフレームワークとアプリをそのままデプロイ、実行できる「AWS Lambda Web Functions」発表",
+      "source": "publickey1.jp",
+      "source_group": "news",
+      "published_at": "2026-10-20T00:49:22+09:00",
+      "category": "cloud",
+      "keywords": [
+        "aws",
+        "serverless",
+        "nextjs",
+        "hono"
+      ],
+      "score": 86,
+      "why": "matched: aws（Lambda の新しい実行形態）",
+      "read_min": 5,
+      "tldr": "AWS が Lambda 上で Next.js・Express・Hono・Fastify などの Node.js アプリをアダプターなしでそのままデプロイできる「Lambda Web Functions」を発表。従来型の関数は「Lambda Event Functions」と呼ぶようになる。",
+      "points": [
+        "Web 関数は Node.js と同様の Web サーバー機能を持ち、従来必要だった Lambda Functions Adapter が不要になる",
+        "ランタイムは Node.js 24、実行環境ごとにメモリ 2GB（既定ヒープ 1024MB）、1 環境で最大 128 の同時リクエスト、タイムアウトは既定 30 秒（3 秒〜15 分）",
+        "東京、米国東部（バージニア北部・オハイオ）、米国西部（オレゴン）、欧州（アイルランド）で利用可能。記事は Vercel など既存の Node.js ホスティングと競合し得ると指摘"
+      ],
+      "code": null,
+      "signal": null,
+      "pick": true
+    },
+    {
+      "id": "2026-10-20-nifty-breach",
+      "url": "https://www.nifty.co.jp/newsrelease/nifty202610195434.htm",
+      "title": "【第一報】当社回線申込・受付管理システムへの不正アクセスの発生について - ニフティ株式会社",
+      "source": "nifty.co.jp",
+      "source_group": "tech_blog",
+      "published_at": "2026-10-19T18:00:21+09:00",
+      "category": "sec",
+      "keywords": [
+        "data-breach",
+        "security-incident"
+      ],
+      "score": 80,
+      "why": "公式発表（不正アクセス・最大 54 万件）",
+      "read_min": 4,
+      "tldr": "ニフティが社内向けの回線申込・受付管理システムへの不正アクセスを 10 月 19 日に確認し、最大 54 万 2,513 件の顧客情報が漏えいした可能性があると第一報で公表した。原因の詳細は調査中。",
+      "points": [
+        "対象は 2019 年以降に同社 Web サイト以外から ＠nifty光・＠nifty MAX光・＠nifty auひかりプラスを申し込んだ顧客。会員 ID・氏名・性別・生年月日・住所・電話番号・メールアドレスが含まれる",
+        "口座・クレジットカード情報はこのシステムで保有しておらず対象外。顧客が使う申込フォームとは別の管理用ツール",
+        "通信元を遮断し、外部専門機関と調査中。個人情報保護委員会への報告手続きを進め、不審なメール・電話・SMS への注意を呼びかけている"
+      ],
+      "code": null,
+      "signal": null,
+      "pick": true
+    },
+    {
+      "id": "2026-10-20-nono-credential-injection",
+      "url": "https://nono.sh/credential-injection",
+      "title": "Credential Injection - Proxy-Based Secret Management for AI Agents",
+      "source": "nono.sh",
+      "source_group": "tech_blog",
+      "published_at": "2026-10-19T17:39:46+09:00",
+      "category": "sec",
+      "keywords": [
+        "secrets-management",
+        "ai-security",
+        "ai-agent",
+        "sandbox"
+      ],
+      "score": 84,
+      "why": "matched: 認可（エージェントに API キーを渡さない設計）",
+      "read_min": 8,
+      "tldr": "AI エージェント用のランタイム保護ツール nono の機能で、ローカルのリバースプロキシが API キーをヘッダーに差し込んで上流へ転送するため、エージェント自身はキーを見ない。環境変数で渡す簡易方式も用意している。",
+      "points": [
+        "エージェントは localhost に平文 HTTP で送り、プロキシがサービス接頭辞を外して資格情報を付け、TLS で上流 API に転送する。openai は Authorization、anthropic は x-api-key、gemini は x-goog-api-key",
+        "資格情報は macOS Keychain や Linux Secret Service（1Password・Apple Passwords の URI も可）から読み、ゼロ化されるメモリで保持。既存の認証ヘッダーは除去し、不正なセッショントークンには 407 を返す",
+        "監査ログはサービス名とステータスだけを記録。プロキシは設定済みのルートにしか効かず、環境変数方式は子プロセス内に秘密が存在するので安全性が下がる"
+      ],
+      "code": {
+        "file": "shell",
+        "lang": "bash",
+        "text": "# Proxy injection — agent never sees the API key\nnono run --allow-cwd --network-profile claude-code \\\n  --credential openai -- my-agent"
+      },
+      "signal": null,
+      "pick": true
+    },
+    {
+      "id": "2026-10-20-qiita-pg-auto-explain",
+      "url": "https://qiita.com/kobadain/items/e57c61375be6006dfe27?utm_campaign=popular_items&utm_medium=feed&utm_source=popular_items",
+      "title": "PostgreSQLで遅いSQLの実行計画を自動で取得しNew Relicで確認する - auto_explainの活用方法",
+      "source": "qiita.com",
+      "source_group": "tech_blog",
+      "published_at": "2026-10-19T11:50:44+09:00",
+      "category": "be",
+      "keywords": [
+        "postgres",
+        "observability"
+      ],
+      "score": 85,
+      "why": "matched: postgres",
+      "read_min": 10,
+      "tldr": "PostgreSQL 16 の auto_explain で一定時間を超えた SQL の実測付き実行計画を自動でログに出し、New Relic Infrastructure Agent（Fluent Bit）で送って NRQL で一覧・集計する手順の紹介。",
+      "points": [
+        "log_min_duration で閾値を決め、log_analyze は on、ノードごとの計測負荷を避けるため log_timing は off。バインド値は log_parameter_max_length = 0 でログに出さない",
+        "ログは jsonlog で出力して logging.d の YAML で転送し、Logs の Parsing で実行時間・SQL 本文・実行計画を別属性に分ける",
+        "sample_rate や閾値次第で DB 負荷が増える、SQL 内の値が平文で残り得る、属性上限 4,094 文字を超えると検索対象外になる、といった注意点がある"
+      ],
+      "code": {
+        "file": "postgresql.conf",
+        "lang": "ini",
+        "text": "shared_preload_libraries = 'auto_explain'\nauto_explain.log_min_duration = '1s'\nauto_explain.log_analyze = on\nauto_explain.log_timing = off\nauto_explain.log_buffers = on\nauto_explain.log_format = 'text'\nauto_explain.sample_rate = 1.0\nauto_explain.log_parameter_max_length = 0\nlogging_collector = on\nlog_destination = 'jsonlog'"
+      },
+      "signal": null,
+      "pick": true
+    },
+    {
+      "id": "2026-10-20-hn-hybrid-reasoning-agents",
+      "url": "https://arxiv.org/abs/2610.18861",
+      "title": "Hybrid Reasoning Agents: LLM agents that think in latent space, act through text",
+      "source": "arxiv.org",
+      "source_group": "hackernews",
+      "published_at": "2026-10-19T05:48:14+09:00",
+      "category": "ai",
+      "keywords": [
+        "llm",
+        "ai-agent",
+        "llm-cost"
+      ],
+      "score": 78,
+      "why": "matched: llm（推論トークンの削減）",
+      "read_min": 15,
+      "tldr": "スタンフォード大学・Together AI・イリノイ大学・Meta の研究チームによる論文。事後学習でモデルの思考を潜在空間で行わせ、行動はテキストで出すことで、処理トークンを減らし高速化・低コスト化を狙う（GIGAZINE の紹介記事より）。",
+      "points": [],
+      "code": null,
+      "signal": "▲ 501",
+      "pick": false
+    },
+    {
+      "id": "2026-10-20-hn-own-llm-proxy",
+      "url": "https://jrdsgl.com/if-you-dont-run-your-own-llm-proxy-how-the-fuck-do-you-even-know-whats-going-on/",
+      "title": "If you don't run your own LLM proxy, how do you know whats going on?",
+      "source": "jrdsgl.com",
+      "source_group": "hackernews",
+      "published_at": "2026-10-19T06:09:12+09:00",
+      "category": "ai",
+      "keywords": [
+        "ai-gateway",
+        "observability",
+        "llm-cost"
+      ],
+      "score": 72,
+      "why": "matched: llm（API 呼び出しの可視化）",
+      "read_min": 6,
+      "tldr": "LLM API の呼び出しを自前のプロキシで中継しないと、実際に何が送られ何に費用がかかっているか分からない、という問題提起の記事。HN で 200 件超のコメントがついた。",
+      "points": [],
+      "code": null,
+      "signal": "▲ 288",
+      "pick": false
+    },
+    {
+      "id": "2026-10-20-hn-mistral-timestral",
+      "url": "https://mistral.ai/news/timestral/",
+      "title": "Timestral: Mistral's time-series foundation models",
+      "source": "mistral.ai",
+      "source_group": "hackernews",
+      "published_at": "2026-10-19T18:59:32+09:00",
+      "category": "ai",
+      "keywords": [
+        "mistral",
+        "time-series"
+      ],
+      "score": 62,
+      "why": "LLM 各社の新モデル（HN で反響）",
+      "read_min": 5,
+      "tldr": "Mistral が時系列データ向けの基盤モデル群「Timestral」を発表した。HN で 450 ポイント超。",
+      "points": [],
+      "code": null,
+      "signal": "▲ 458",
+      "pick": false
+    },
+    {
+      "id": "2026-10-20-hn-linux-7-3",
+      "url": "https://lwn.net/Articles/1101143/",
+      "title": "Linux 7.3",
+      "source": "lwn.net",
+      "source_group": "hackernews",
+      "published_at": "2026-10-19T16:23:57+09:00",
+      "category": "cloud",
+      "keywords": [
+        "linux"
+      ],
+      "score": 60,
+      "why": "インフラの基盤（カーネルの新版）",
+      "read_min": 3,
+      "tldr": "Linux カーネル 7.3 のリリースを伝える LWN の記事。HN で 570 ポイント・260 件超のコメント。",
+      "points": [],
+      "code": null,
+      "signal": "▲ 570",
+      "pick": false
+    },
+    {
+      "id": "2026-10-20-hn-letsencrypt-perspectives",
+      "url": "https://community.letsencrypt.org/t/lets-encrypt-is-adding-two-additional-remote-perspectives-for-domain-validation/252166",
+      "title": "Let's Encrypt is adding two additional remote perspectives for domain validation",
+      "source": "community.letsencrypt.org",
+      "source_group": "hackernews",
+      "published_at": "2026-10-19T19:53:39+09:00",
+      "category": "sec",
+      "keywords": [
+        "tls",
+        "acme"
+      ],
+      "score": 58,
+      "why": "証明書発行の検証方法の変更",
+      "read_min": 3,
+      "tldr": "Let's Encrypt がドメイン検証（複数拠点からの検証）に使うリモート拠点を 2 つ追加すると告知した。",
+      "points": [],
+      "code": null,
+      "signal": "▲ 217",
+      "pick": false
+    },
+    {
+      "id": "2026-10-20-softbank-mysoftbank-stop",
+      "url": "https://www.softbank.jp/corp/news/press/sbkk/2026/20261019_01/",
+      "title": "お客さま向け会員サイト「My SoftBank」の一時的な停止について",
+      "source": "softbank.jp",
+      "source_group": "tech_blog",
+      "published_at": "2026-10-19T20:38:08+09:00",
+      "category": "sec",
+      "keywords": [
+        "security-incident",
+        "authentication"
+      ],
+      "score": 66,
+      "why": "公式発表（不正アクセスの試行）",
+      "read_min": 3,
+      "tldr": "ソフトバンクは会員サイト「My SoftBank」の一部システムに第三者による不正アクセスの試みがあったとして、10 月 17 日午前 8 時から「My SoftBank」「My Y!mobile」「My Menu」のウェブサイトを一時停止している。アプリ版は利用できる（報道）。",
+      "points": [],
+      "code": null,
+      "signal": null,
+      "pick": false
+    },
+    {
+      "id": "2026-10-20-itmedia-h2o-id-breach",
+      "url": "https://www.itmedia.co.jp/news/article/2610/19/2000002398/",
+      "title": "阪急阪神百貨店などの共通ID、ほぼ全会員分漏えい 約126万件 予約サイトに不正アクセス",
+      "source": "itmedia.co.jp",
+      "source_group": "tech_blog",
+      "published_at": "2026-10-19T18:59:26+09:00",
+      "category": "sec",
+      "keywords": [
+        "data-breach",
+        "security-incident"
+      ],
+      "score": 64,
+      "why": "不正アクセスによる大規模漏えい",
+      "read_min": 3,
+      "tldr": "エイチ・ツー・オー リテイリングは、子会社の阪急阪神百貨店が運営する予約サイトなどが不正アクセスを受け、グループ共通会員 ID「H2O ID」の個人情報約 126 万件の一部が漏えいしたと発表した。",
+      "points": [],
+      "code": null,
+      "signal": null,
+      "pick": false
+    },
+    {
+      "id": "2026-10-20-itmedia-square-enix-login",
+      "url": "https://www.itmedia.co.jp/news/article/2610/19/2000002397/",
+      "title": "スクエニアカウントに不正ログイン、他社で流出の情報使用か 全アカウントのパスワード強制リセットも視野に",
+      "source": "itmedia.co.jp",
+      "source_group": "tech_blog",
+      "published_at": "2026-10-19T19:03:09+09:00",
+      "category": "sec",
+      "keywords": [
+        "credential-stuffing",
+        "authentication"
+      ],
+      "score": 62,
+      "why": "matched: 認証（パスワードリスト型攻撃）",
+      "read_min": 3,
+      "tldr": "スクウェア・エニックスが「スクウェア・エニックス アカウント」への不正ログインを確認したと発表。他社から流出した ID・パスワードを使うパスワードリスト型攻撃によるもので、使い回している利用者に変更を呼びかけた。",
+      "points": [],
+      "code": null,
+      "signal": null,
+      "pick": false
+    },
+    {
+      "id": "2026-10-20-itmedia-sourcenext-password",
+      "url": "https://www.itmedia.co.jp/news/article/2610/19/2000002372/",
+      "title": "ソースネクスト、パスワードなぜ平文で流出 「暗号化していたが、鍵にアクセスできるシステムに侵入された」",
+      "source": "itmedia.co.jp",
+      "source_group": "tech_blog",
+      "published_at": "2026-10-19T13:15:53+09:00",
+      "category": "sec",
+      "keywords": [
+        "data-breach",
+        "secrets-management"
+      ],
+      "score": 64,
+      "why": "続報（パスワード保存方式）",
+      "read_min": 4,
+      "tldr": "最大約 2,252 万件の会員情報が漏えいした問題の続報。同社はパスワードを暗号化して保存していたとする一方、復号の鍵にアクセスできるシステムに侵入されたと説明している。",
+      "points": [],
+      "code": null,
+      "signal": null,
+      "pick": false
+    },
+    {
+      "id": "2026-10-20-qiita-claude-code-env-deny",
+      "url": "https://qiita.com/yakumo_09/items/5a86ca330b449db0e6bc?utm_campaign=popular_items&utm_medium=feed&utm_source=popular_items",
+      "title": "Claude Codeの.envを読ませない設定がどこまで効くのか試してみた",
+      "source": "qiita.com",
+      "source_group": "tech_blog",
+      "published_at": "2026-10-18T21:49:25+09:00",
+      "category": "ai",
+      "keywords": [
+        "claude",
+        "secrets-management",
+        "ai-coding"
+      ],
+      "score": 70,
+      "why": "matched: 認可（エージェントの権限設定）",
+      "read_min": 8,
+      "tldr": "Claude Code の permissions.deny で .env を読ませない設定が、公式ドキュメントで「止まらないケースもある」とされている点を、偽物のキーを置いて 48 回試して確かめた記事。",
+      "points": [],
+      "code": null,
+      "signal": null,
+      "pick": false
+    },
+    {
+      "id": "2026-10-20-kabutan-nikkei-1019",
+      "url": "https://s.kabutan.jp/news/n202610190900/",
+      "title": "【↓】日経平均 大引け｜ 反落、米ハイテク株安を受け半導体関連が軟調 (10月19日)",
+      "source": "kabutan.jp",
+      "source_group": "news",
+      "published_at": null,
+      "category": "stocks",
+      "keywords": [
+        "nikkei225",
+        "semiconductor"
+      ],
+      "score": 82,
+      "why": "日本株の前営業日の終値",
+      "read_min": 3,
+      "tldr": "10 月 19 日の日経平均は前週末比 407 円 59 銭安（−0.62%）の 64,916 円 70 銭で反落。前週末の米半導体株安で朝方は一時 1,500 円近く下げたが、後場は先物買いで下げ渋った。TOPIX は 1.48 ポイント高の 4,067.48 と小幅に上昇した。",
+      "points": [
+        "前週末の米国でフィラデルフィア半導体株指数（SOX）が急落。AI 関連の設備投資への不安や原油高が重しとされた",
+        "東京エレクトロン・ファーストリテイリング・ソフトバンクグループなど 5 銘柄で約 418 円の押し下げ。上昇は 21 業種で、鉱業・海運・石油石炭が上位、非鉄金属・電気機器が下位",
+        "プライムの売買代金は 6 兆 7,835 億円と 7 兆円を割り込み低調。なお同日の米国株は S&P 500 が 0.41% 高、NASDAQ が 1.11% 高（市況データ）"
+      ],
+      "code": null,
+      "signal": null,
+      "pick": true
+    },
+    {
+      "id": "2026-10-20-nadanews-jpm-coin-ethereum",
+      "url": "https://www.nadanews.com/373214/",
+      "title": "JPモルガン、トークン化預金「JPMコイン」をイーサリアム上で提供開始",
+      "source": "nadanews.com",
+      "source_group": "news",
+      "published_at": "2026-10-19T20:14:07+09:00",
+      "category": "crypto",
+      "keywords": [
+        "tokenization",
+        "ethereum",
+        "payments"
+      ],
+      "score": 76,
+      "why": "matched: ステーブルコイン周辺（トークン化預金）",
+      "read_min": 4,
+      "tldr": "JP モルガン・チェースが、米ドル建てのトークン化預金「JPM Coin（JPMD）」をイーサリアムのメインネットで機関顧客向けに提供開始した。2025 年 11 月に始めたレイヤー 2「Base」に続く展開。",
+      "points": [
+        "同行に預けられた米ドル預金をブロックチェーン上で表したもので、一般向けステーブルコインとは異なり機関顧客に限る",
+        "24 時間 365 日ほぼリアルタイムで送金・決済でき、メインネットと Base を含む EVM 環境で送金できるようになった",
+        "ブロックチェーン部門 Kinexys は流動性とトークン化資産の厚さを理由に挙げる。想定用途は暗号資産企業の送金や、トークン化資産売買の決済・担保。取引量や残高の数字は示されていない"
+      ],
+      "code": null,
+      "signal": null,
+      "pick": true
+    },
+    {
+      "id": "2026-10-20-coinpost-bis-stablecoin-deposit",
+      "url": "https://coinpost.jp/?p=743482",
+      "title": "BIS論文、預金金利上昇でステーブルコインの成長鈍化 USDCで顕著",
+      "source": "coinpost.jp",
+      "source_group": "news",
+      "published_at": "2026-10-19T08:24:30+09:00",
+      "category": "crypto",
+      "keywords": [
+        "stablecoin",
+        "interest-rates"
+      ],
+      "score": 74,
+      "why": "matched: 金利（預金金利とステーブルコイン）",
+      "read_min": 6,
+      "tldr": "BIS が 10 月 13 日に公表したワーキングペーパーは、ステーブルコインと銀行預金が部分的に代替関係にあり、預金金利が上がるとステーブルコインの伸びが鈍ると分析した。見解は執筆者個人のもの。",
+      "points": [
+        "2019 年 1 月〜2025 年 6 月の米国の週次データ 339 週分を分析。預金金利 0.01% 上昇で 10 週間の成長率が約 2.8 ポイント低下（平均 15%→約 12%）、逆の因果を補正すると約 9.1 ポイント低下（約 6%）",
+        "USDC の反応（約 4.8 ポイント）は USDT（約 1.9 ポイント）より強く、機関投資家や DeFi 利用者が多いことが理由とされる",
+        "準備資産の一部を銀行預金で持たせる規制や、保有者への利息支払いの可否が論点とされた。補正に使った変数の強さを示す F 値は 9.78 と目安の 10 をわずかに下回る"
+      ],
+      "code": null,
+      "signal": null,
+      "pick": true
+    },
+    {
+      "id": "2026-10-20-boj-fmi-guidance",
+      "url": "http://www.boj.or.jp/paym/intlact_pm/cpss/cpss261019a.htm",
+      "title": "「金融市場インフラ（FMI）によるビジネスリスク・ビジネスロス管理：金融市場インフラのための原則（FMI原則）に関する追加ガイダンス」の公表について",
+      "source": "boj.or.jp",
+      "source_group": "official",
+      "published_at": "2026-10-19T12:00:00+09:00",
+      "category": "macro",
+      "keywords": [
+        "payments"
+      ],
+      "score": 55,
+      "why": "日銀の公式発表",
+      "read_min": 2,
+      "tldr": "日銀が、金融市場インフラ（FMI）のビジネスリスク・ビジネスロス管理について、FMI 原則に関する追加ガイダンスの公表を案内した。",
+      "points": [],
+      "code": null,
+      "signal": null,
+      "pick": false
+    },
+    {
+      "id": "2026-10-20-nadanews-digital-agency-stablecoin",
+      "url": "https://www.nadanews.com/373170/",
+      "title": "デジタル庁、公的給付金にステーブルコイン活用を検討",
+      "source": "nadanews.com",
+      "source_group": "news",
+      "published_at": "2026-10-19T18:39:59+09:00",
+      "category": "crypto",
+      "keywords": [
+        "stablecoin",
+        "fsa"
+      ],
+      "score": 66,
+      "why": "matched: ステーブルコイン（政府の検討）",
+      "read_min": 3,
+      "tldr": "金融庁が 10 月 19 日に公開した「AI 時代を見据えたオンチェーン金融フォーラム」初会合（9 月 30 日）の議事録に、デジタル庁が公的給付金でのステーブルコイン活用を検討しているとの説明が含まれていた。",
+      "points": [],
+      "code": null,
+      "signal": null,
+      "pick": false
+    },
+    {
+      "id": "2026-10-20-coinpost-strategy-btc",
+      "url": "https://coinpost.jp/?p=743825",
+      "title": "ストラテジー、先週34億円相当ビットコインを追加購入 5週連続買い増し",
+      "source": "coinpost.jp",
+      "source_group": "news",
+      "published_at": "2026-10-19T21:16:13+09:00",
+      "category": "crypto",
+      "keywords": [
+        "bitcoin",
+        "bitcoin-treasury",
+        "strategy"
+      ],
+      "score": 64,
+      "why": "matched: ビットコイン",
+      "read_min": 3,
+      "tldr": "ストラテジーは 10 月 12〜18 日に 267 BTC を取得したと発表。5 週連続の購入で保有量は 848,517 BTC に。証券の買い戻し枠も 30 億ドルに拡大した。",
+      "points": [],
+      "code": null,
+      "signal": null,
+      "pick": false
+    },
+    {
+      "id": "2026-10-20-coinpost-quantum-alliance",
+      "url": "https://coinpost.jp/?p=743693",
+      "title": "9組織が「量子アライアンス」設立、ブロックチェーンの耐量子暗号基準を策定へ",
+      "source": "coinpost.jp",
+      "source_group": "news",
+      "published_at": "2026-10-19T15:05:10+09:00",
+      "category": "crypto",
+      "keywords": [
+        "post-quantum",
+        "bitcoin"
+      ],
+      "score": 60,
+      "why": "matched: ビットコイン（耐量子暗号）",
+      "read_min": 3,
+      "tldr": "ブロックチェーン関連の 9 組織が「Quantum Alliance」を設立し、量子耐性の定義や耐量子暗号への移行基準を 4 つの作業部会で策定する。記事はビットコイン供給量の約 30% が量子攻撃のリスクにさらされているとしている。",
+      "points": [],
+      "code": null,
+      "signal": null,
+      "pick": false
+    },
+    {
+      "id": "2026-10-20-coinpost-q3-crypto-losses",
+      "url": "https://coinpost.jp/?p=743596",
+      "title": "7～9月の仮想通貨被害額は約1870億円、8割弱は直近の監査範囲外の経路＝レポート",
+      "source": "coinpost.jp",
+      "source_group": "news",
+      "published_at": "2026-10-19T11:38:15+09:00",
+      "category": "crypto",
+      "keywords": [
+        "exchange-hack",
+        "security-incident"
+      ],
+      "score": 58,
+      "why": "暗号資産のハッキング被害の集計",
+      "read_min": 3,
+      "tldr": "Hacken の報告によると、2026 年 7〜9 月のハッキングや不正操作による暗号資産の被害は約 1,870 億円。損失の多くは直近の監査が及ばない経路で発生した。",
+      "points": [],
+      "code": null,
+      "signal": null,
+      "pick": false
+    },
+    {
+      "id": "2026-10-20-nadanews-eth-50dma",
+      "url": "https://www.nadanews.com/373090/",
+      "title": "イーサリアムが50日移動平均線割れ──ETF流出額は10月に9億5500万ドル規模、2277ドル割れなら200日線視野に",
+      "source": "nadanews.com",
+      "source_group": "news",
+      "published_at": "2026-10-19T13:00:00+09:00",
+      "category": "crypto",
+      "keywords": [
+        "ethereum",
+        "crypto-etf"
+      ],
+      "score": 56,
+      "why": "暗号資産の相場動向",
+      "read_min": 3,
+      "tldr": "イーサリアムは 10 月 18 日に 2,384 ドル近辺まで下げ、50 日移動平均線を割り込んだ。10 月の ETF 累計流出額は 9 億 5,500 万ドルで、米インフレ指標の上振れも重荷とされる。",
+      "points": [],
+      "code": null,
+      "signal": null,
+      "pick": false
+    },
+    {
+      "id": "2026-10-20-nikkei-takaichi-jgb",
+      "url": "https://www.nikkei.com/article/DGXZQOUA191NX0Z11C26A0000000/",
+      "title": "高市首相、減税の財源「国債発行否定せず」 予算全体で適切に管理",
+      "source": "nikkei.com",
+      "source_group": "news",
+      "published_at": "2026-10-19T12:58:25+09:00",
+      "category": "macro",
+      "keywords": [
+        "jp-fiscal",
+        "jgb",
+        "consumption-tax"
+      ],
+      "score": 66,
+      "why": "matched: 金利（国債・財政）",
+      "read_min": 3,
+      "tldr": "高市首相は 19 日、食料品の消費税減税の財源について「国債の発行を否定するものではない」と述べた。当初予算と補正予算を通じた通年の国債発行額は昨年度同様に適切にコントロールするとした。",
+      "points": [],
+      "code": null,
+      "signal": null,
+      "pick": false
+    },
+    {
+      "id": "2026-10-20-diamond-takaichi-reflation",
+      "url": "https://diamond.jp/articles/-/401395",
+      "title": "高市政策は「リフレ」か？日銀利上げへの本音は？政権の経済ブレーン・永濱氏と元日銀審議委員・木内氏がサナエノミクスの内実を大激論【高市政権1年・総括対談後編】",
+      "source": "diamond.jp",
+      "source_group": "news",
+      "published_at": "2026-10-20T04:40:00+09:00",
+      "category": "macro",
+      "keywords": [
+        "boj-rate-hike",
+        "jp-fiscal"
+      ],
+      "score": 62,
+      "why": "matched: 金利（日銀の利上げ・財政）",
+      "read_min": 10,
+      "tldr": "高市政権 1 年の総括対談の後編。政権の経済ブレーンと元日銀審議委員が、「脱リフレ」の実態、円安と長期金利上昇の受け止め、市場の信認回復の条件、2027 年度予算編成などを議論している。",
+      "points": [],
+      "code": null,
+      "signal": null,
+      "pick": false
+    },
+    {
+      "id": "2026-10-20-investing-nscale-anthropic",
+      "url": "https://jp.investing.com/news/stock-market-news/article-1716577",
+      "title": "NscaleがAnthropicと450億ドルのAI契約交渉中、IPOも視野に",
+      "source": "jp.investing.com",
+      "source_group": "news",
+      "published_at": "2026-10-20T04:32:25+09:00",
+      "category": "stocks",
+      "keywords": [
+        "anthropic",
+        "data-center",
+        "ipo"
+      ],
+      "score": 58,
+      "why": "AI インフラ投資の動向",
+      "read_min": 2,
+      "tldr": "AI インフラ企業の Nscale が Anthropic と 450 億ドル規模の契約を交渉中で、IPO も視野に入れていると伝えられた（見出しによる）。",
+      "points": [],
+      "code": null,
+      "signal": null,
+      "pick": false
+    },
+    {
+      "id": "2026-10-20-diamond-wsj-ai-stocks",
+      "url": "https://diamond.jp/articles/-/401408",
+      "title": "「今回は違う」は通用せず、AI株高の変調が警鐘 - WSJ PickUp",
+      "source": "diamond.jp",
+      "source_group": "news",
+      "published_at": "2026-10-20T04:00:00+09:00",
+      "category": "stocks",
+      "keywords": [
+        "ai-economy",
+        "us-stocks"
+      ],
+      "score": 56,
+      "why": "米国株（AI 関連）の論点",
+      "read_min": 4,
+      "tldr": "AI 関連の大規模投資が、鉄道やインターネットなど過去の巨大資本プロジェクトが抱えた問題を回避できるかはまだ分からない、とする WSJ の論考。",
+      "points": [],
+      "code": null,
+      "signal": null,
+      "pick": false
+    }
+  ],
+  "social": [
+    {
+      "network": "hn",
+      "author": null,
+      "url": "https://news.ycombinator.com/item?id=50149392",
+      "text": "『Linux 7.3』のスレッド。262 件のコメント",
+      "metrics": "▲ 570  ✉ 262",
+      "heat": 100,
+      "category": "cloud",
+      "keywords": [
+        "linux"
+      ],
+      "posted_at": "2026-10-19T16:23:57+09:00"
+    },
+    {
+      "network": "hn",
+      "author": null,
+      "url": "https://news.ycombinator.com/item?id=50145337",
+      "text": "『Hybrid Reasoning Agents: LLM agents that think in latent space, act through text』のスレッド。233 件のコメント",
+      "metrics": "▲ 501  ✉ 233",
+      "heat": 100,
+      "category": "ai",
+      "keywords": [
+        "llm",
+        "ai-agent"
+      ],
+      "posted_at": "2026-10-19T05:48:14+09:00"
+    },
+    {
+      "network": "hn",
+      "author": null,
+      "url": "https://news.ycombinator.com/item?id=50150434",
+      "text": "『Timestral: Mistral's time-series foundation models』のスレッド。85 件のコメント",
+      "metrics": "▲ 458  ✉ 85",
+      "heat": 100,
+      "category": "ai",
+      "keywords": [
+        "mistral",
+        "time-series"
+      ],
+      "posted_at": "2026-10-19T18:59:32+09:00"
+    },
+    {
+      "network": "hn",
+      "author": null,
+      "url": "https://news.ycombinator.com/item?id=50145507",
+      "text": "『If you don't run your own LLM proxy, how do you know whats going on?』のスレッド。202 件のコメント",
+      "metrics": "▲ 288  ✉ 202",
+      "heat": 72,
+      "category": "ai",
+      "keywords": [
+        "ai-gateway",
+        "llm-cost"
+      ],
+      "posted_at": "2026-10-19T06:09:12+09:00"
+    },
+    {
+      "network": "hn",
+      "author": null,
+      "url": "https://news.ycombinator.com/item?id=50150809",
+      "text": "『Let's Encrypt is adding two additional remote perspectives for domain validation』のスレッド。68 件のコメント",
+      "metrics": "▲ 217  ✉ 68",
+      "heat": 54,
+      "category": "sec",
+      "keywords": [
+        "tls",
+        "acme"
+      ],
+      "posted_at": "2026-10-19T19:53:39+09:00"
+    }
+  ],
+  "releases": [
+    {
+      "date": "2026-10-19",
+      "title": "Linux 7.3",
+      "repo": null,
+      "url": "https://lwn.net/Articles/1101143/",
+      "kind": "release",
+      "note": "LWN の告知（HN 経由で確認）。collect.py の監視対象外",
+      "category": "cloud"
+    },
+    {
+      "date": "2026-10-19",
+      "title": "日銀 FMI 原則に関する追加ガイダンス（ビジネスリスク・ビジネスロス管理）の公表",
+      "repo": null,
+      "url": "http://www.boj.or.jp/paym/intlact_pm/cpss/cpss261019a.htm",
+      "kind": "policy",
+      "note": "金融市場インフラ向けの国際基準の追加ガイダンスを日銀が案内",
+      "category": "macro"
+    }
+  ]
+}
