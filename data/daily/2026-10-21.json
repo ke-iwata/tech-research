@@ -1,0 +1,914 @@
+{
+  "date": "2026-10-21",
+  "generated_at": "2026-10-21T05:50:00+09:00",
+  "stats": {
+    "collected": 240,
+    "sources_ok": 25,
+    "sources_total": 26,
+    "by_group": {
+      "news": 89,
+      "tech_blog": 91,
+      "hackernews": 48,
+      "official": 12
+    },
+    "failed_sources": [
+      "coindesk_jp"
+    ]
+  },
+  "digest": [
+    {
+      "category": "sec",
+      "text": "TLS の中間 CA 証明書の鍵漏えいへの対応が相次いだ。eMudhra の中間 CA 8 枚の秘密鍵漏えいを受け Firefox・Chrome・Apple がブロックし、Go も crypto/x509 で該当チェーンを拒否する修正を 1.27.3 / 1.26.10 に入れた。",
+      "keywords": [
+        "tls",
+        "go",
+        "security-incident"
+      ]
+    },
+    {
+      "category": "ai",
+      "text": "Amazon Bedrock で全 Claude モデルの structured outputs（JSON Schema 出力と strict tool use）が利用可能に。Cloudflare は推論トークンを出さない抽出モデル Clairic を Workers AI でプレビュー公開した。",
+      "keywords": [
+        "structured-outputs",
+        "aws",
+        "cloudflare"
+      ]
+    },
+    {
+      "category": "sec",
+      "text": "国内ではふるさとチョイス（約 445 万件と報道）やアルカディア経由の流出など不正アクセスの公表が続き、中国製 AI ツール「ARTEX」が攻撃に使われた痕跡も報告された。",
+      "keywords": [
+        "data-breach",
+        "ai-security"
+      ]
+    },
+    {
+      "category": "macro",
+      "text": "日銀が植田総裁の G20 後会見の要旨を公表し、緩和度合いの調整（利上げ）を続ける考えと、今後は基調物価を 2% 近辺で定着させる姿勢への変化を説明。20 日の日経平均は 841 円安の 64,075 円で続落し、米国株は S&P 500 が 0.28% 高、NASDAQ が 0.02% 安（市況データ）。FOMC は 27〜28 日。",
+      "keywords": [
+        "boj-policy",
+        "nikkei225",
+        "fed"
+      ]
+    },
+    {
+      "category": "crypto",
+      "text": "スイス FINMA が一般投資家向けビットコイン現物 ETF を初承認し、ブラックロックは下落緩和型の PBIT を申請。金融庁は DeFi・ステーブルコインの制度点検を始めた。投信の 10 月分資金フローと住宅ローン金利の新しい発表は確認できなかった。",
+      "keywords": [
+        "bitcoin-etf",
+        "defi",
+        "fsa"
+      ]
+    }
+  ],
+  "items": [
+    {
+      "id": "2026-10-21-golang-distrust-spki",
+      "url": "https://github.com/golang/go/issues/82345",
+      "title": "Go will reject certificate chains containing eight distrusted SPKIs",
+      "source": "github.com",
+      "source_group": "hackernews",
+      "published_at": "2026-10-20T12:05:07+09:00",
+      "category": "be",
+      "keywords": [
+        "go",
+        "tls"
+      ],
+      "score": 90,
+      "why": "matched: go（crypto/x509 のセキュリティ修正）",
+      "read_min": 4,
+      "tldr": "Go の crypto/x509 が、鍵の漏えいで失効した 8 つの中間 CA 証明書を含む証明書チェーンを検証結果から除外するようになった（CVE-2026-111943）。修正は Go 1.27.3 と 1.26.10 にバックポートされ、Issue は即時の更新を推奨している。",
+      "points": [
+        "Issue は 10 月 19 日に Security・release-blocker として起票され、20 日に master と各リリースブランチへ修正がマージされた",
+        "Linux のルートストアは失効情報をアプリに伝えられないため、Go 側でハードコードして不信任にするしかない、とメンテナーが説明。より体系的な解決にはエコシステム全体の調整が必要とした",
+        "Issue 本文では対象 CA 名や SPKI ハッシュは示されず、攻撃者に先行させないためリリースノートも意図的に曖昧にしたとのこと。GODEBUG による回避策の記載はない"
+      ],
+      "code": null,
+      "signal": "▲ 132",
+      "pick": true
+    },
+    {
+      "id": "2026-10-21-emudhra-ca-compromise",
+      "url": "https://emudhra.we-have-a-problem.com/",
+      "title": "EMudhra Intermediate CA Compromise",
+      "source": "emudhra.we-have-a-problem.com",
+      "source_group": "hackernews",
+      "published_at": "2026-10-20T22:58:33+09:00",
+      "category": "sec",
+      "keywords": [
+        "tls",
+        "security-incident"
+      ],
+      "score": 84,
+      "why": "TLS 中間 CA の秘密鍵漏えい（HN ▲395）",
+      "read_min": 6,
+      "tldr": "eMudhra の中間 CA 証明書 8 枚の秘密鍵が漏えいしたとするコミュニティ運営の告知ページ。報告者は各秘密鍵で署名したメッセージを証拠としてルートプログラムに提出し、Firefox・Chrome（17 日〜）、Apple（19 日〜）が当該証明書をブロックした。",
+      "points": [
+        "報告は 10 月 17 日に各ルートプログラムへ。証明書・公開鍵・署名を含む証拠パッケージと、OpenSSL での検証手順が公開されている",
+        "秘密鍵を持つ攻撃者は任意のサイトになりすませる。失効情報を参照しないクライアントはソフトウェア更新が必要で、19 日に下流のトラストストアへ通知された",
+        "Mozilla・Apple・Chrome は OneCRL / CRLite / CRLSets で失効を反映し、CA 側も中間証明書を失効済み。ページは eMudhra 自身の声明を含まない点に注意"
+      ],
+      "code": null,
+      "signal": "▲ 395",
+      "pick": true
+    },
+    {
+      "id": "2026-10-21-cloudflare-clairic",
+      "url": "https://blog.cloudflare.com/clairic-extraction-model/",
+      "title": "Introducing Clairic, a new System One class of extraction models",
+      "source": "blog.cloudflare.com",
+      "source_group": "tech_blog",
+      "published_at": "2026-10-20T02:48:26+09:00",
+      "category": "ai",
+      "keywords": [
+        "cloudflare",
+        "llm",
+        "llm-cost"
+      ],
+      "score": 82,
+      "why": "matched: llm（推論コスト・抽出モデル）",
+      "read_min": 10,
+      "tldr": "Cloudflare が、非構造化テキストと画像から型付きの値を抽出・計算・予測する「System One」型モデル Clairic を Workers AI でプレビュー公開。推論トークンを生成せず 1 パスで答え、各値に信頼度を付ける。",
+      "points": [
+        "推論過程を出さない「System One」と、段階的に推論する LLM（System Two）を使い分ける構成を提案。選択肢から選ぶ Clef などの決定モデルも併せて紹介",
+        "デモのパイプラインでは LLM のみの構成に比べて約 3.2 倍速く（19.3 秒 vs 61.7 秒）、コストは約 49% 減。課金は入力トークンのみ",
+        "多段の算術や多数行の集計はまだ不得意で、値の抽出は Clairic、計算はコードに任せるよう推奨。オープンウェイトの公開も予定（時期は未定）"
+      ],
+      "code": {
+        "file": "worker.js",
+        "lang": "javascript",
+        "text": "const { answers } = await env.AI.run(\"@cf/cloudflare/clairic\", {\n  state: email,\n  fields: {\n    order_id:     { type: \"text\", instructions: \"Order number\" },\n    delivered_on: { type: \"date\", instructions: \"Delivery date\" },\n    amount_paid:  { type: \"number\", decimals: 2, unit: \"USD\",\n                    instructions: \"Total paid including tax\" },\n    damage:       { type: \"list\", items: \"text\",\n                    instructions: \"Each kind of damage described\" },\n  },\n});"
+      },
+      "signal": null,
+      "pick": true
+    },
+    {
+      "id": "2026-10-21-bedrock-claude-structured-outputs",
+      "url": "https://aws.amazon.com/about-aws/whats-new/2026/10/claude-structured-outputs-bedrock/",
+      "title": "Structured outputs for Claude models available on Amazon Bedrock",
+      "source": "aws.amazon.com",
+      "source_group": "news",
+      "published_at": "2026-10-20T23:00:00+09:00",
+      "category": "ai",
+      "keywords": [
+        "aws",
+        "claude",
+        "structured-outputs"
+      ],
+      "score": 86,
+      "why": "matched: aws, llm",
+      "read_min": 6,
+      "tldr": "Amazon Bedrock で全 Claude モデルの structured outputs が bedrock-runtime と bedrock-mantle の両エンドポイントで使えるようになった。定義した JSON Schema に沿った応答が返り、独自のパースやリトライが不要になる。",
+      "points": [
+        "2 つの方式がある：応答全体を JSON Schema に従わせる output_config.format（json_schema）と、ツール定義に strict: true を付けて引数を検証する strict tool use",
+        "bedrock-runtime では Converse / InvokeModel / Anthropic Messages API、bedrock-mantle では Messages API で利用できる。Converse API では outputConfig.textFormat を使う",
+        "ドキュメントでは、stop_reason が max_tokens の場合は出力が切れるため、パース前に stop_reason を確認する例を示している"
+      ],
+      "code": {
+        "file": "invoke.py",
+        "lang": "python",
+        "text": "response = bedrock_runtime.invoke_model(\n    modelId=\"global.anthropic.claude-sonnet-5-5\",\n    body=json.dumps({\n        \"anthropic_version\": \"bedrock-2023-05-31\",\n        \"max_tokens\": 512,\n        \"messages\": [{\"role\": \"user\", \"content\": text}],\n        \"output_config\": {\"format\": {\"type\": \"json_schema\", \"schema\": schema}},\n    }),\n)\nbody = json.loads(response[\"body\"].read())\nif body[\"stop_reason\"] == \"end_turn\":\n    result = json.loads(next(b[\"text\"] for b in body[\"content\"] if b[\"type\"] == \"text\"))"
+      },
+      "signal": null,
+      "pick": true
+    },
+    {
+      "id": "2026-10-21-zenn-go-get-6steps",
+      "url": "https://zenn.dev/shiro_kuma_san/articles/8abfbdacfeaa59",
+      "title": "npm と比べて分かった Go の依存管理の「一番の違い」── go get の中身を 6 ステップで追う",
+      "source": "zenn.dev",
+      "source_group": "tech_blog",
+      "published_at": "2026-10-20T07:15:05+09:00",
+      "category": "be",
+      "keywords": [
+        "go",
+        "go-modules",
+        "supply-chain"
+      ],
+      "score": 88,
+      "why": "matched: go, 設計",
+      "read_min": 15,
+      "tldr": "Go Bash vol.3 の登壇内容を実測ログ付きで書き直した記事。npm との一番の違いは依存の置き場所ではなく「信頼の扱い方」で、Go はモジュールの実体をマシン全体で共有しても、信頼はリポジトリごとの go.sum で管理するとまとめている。",
+      "points": [
+        "go get は ①バージョン決定（MVS）②プロキシ／VCS から取得 ③モジュールキャッシュに保存 ④zip からハッシュ計算 ⑤go.sum / sum.golang.org と照合 ⑥go.sum に記録、の 6 ステップ",
+        "go.mod は範囲ではなく最低バージョンを書き、MVS は新版が出ても結果が変わらないため lock ファイルが不要。go.sum は lock ではなくハッシュの台帳",
+        "go.sum に行があるとチェックサム DB への問い合わせを省くため、偽ハッシュ入りの go.sum が入ると検出できない。go.sum の差分もレビュー対象にすべきと指摘"
+      ],
+      "code": {
+        "file": "terminal",
+        "lang": "bash",
+        "text": "$ go get github.com/go-chi/chi/v5\ngo: downloading github.com/go-chi/chi/v5 v5.3.2\ngo: downloading github.com/go-chi/chi v1.5.5      # ① 頼んだのは 1 つなのに 2 つ取得している\ngo: added github.com/go-chi/chi/v5 v5.3.2         # ② v5.3.2 はどう決まった？\n\n$ cat go.sum\ngithub.com/go-chi/chi/v5 v5.3.2 h1:5YQkICvTCSZ25hoRsyJazN0scjzKGiu4VAUc7H1o1nY=\ngithub.com/go-chi/chi/v5 v5.3.2/go.mod h1:R+tYY2hNuVUUjxoPtqUdgBqevM9s9njzkTLutVsOCto="
+      },
+      "signal": null,
+      "pick": true
+    },
+    {
+      "id": "2026-10-21-deepseek-federal-ban",
+      "url": "https://www.reuters.com/technology/us-banning-chinese-ai-deepseek-government-agency-it-systems-2026-10-19/",
+      "title": "DeepSeek banned from U.S. federal civilian agencies under new DHS order",
+      "source": "reuters.com",
+      "source_group": "hackernews",
+      "published_at": "2026-10-20T01:16:46+09:00",
+      "category": "ai",
+      "keywords": [
+        "ai-regulation",
+        "geopolitics"
+      ],
+      "score": 66,
+      "why": "AI 規制・米中対立（HN ▲539）",
+      "read_min": 4,
+      "tldr": "米国土安全保障省（DHS）の新たな命令で、DeepSeek の AI ツールが米連邦の文民機関で使用禁止に。中国政府は 20 日、国家安全保障の概念を過度に拡大解釈していると反発した（AFP）。",
+      "points": [],
+      "code": null,
+      "signal": "▲ 539",
+      "pick": false
+    },
+    {
+      "id": "2026-10-21-deepinfer",
+      "url": "https://github.com/deepseek-ai/DeepInfer",
+      "title": "DeepInfer: High-performance inference framework for DeepSeek models",
+      "source": "github.com",
+      "source_group": "hackernews",
+      "published_at": "2026-10-20T18:08:54+09:00",
+      "category": "ai",
+      "keywords": [
+        "llm",
+        "open-weight"
+      ],
+      "score": 64,
+      "why": "matched: llm（HN ▲1974）",
+      "read_min": 5,
+      "tldr": "DeepSeek のモデル向けの高性能推論フレームワーク「DeepInfer」が GitHub で公開され、HN で 1,900 ポイント超の反応を集めた。",
+      "points": [],
+      "code": null,
+      "signal": "▲ 1974",
+      "pick": false
+    },
+    {
+      "id": "2026-10-21-whatsapp-hidden-llm-instructions",
+      "url": "https://redact.dev/blog/whatsapp-help-pages-hidden-ai-instructions",
+      "title": "WhatsApp's help pages hid LLM instructions: dont recommend a regulator",
+      "source": "redact.dev",
+      "source_group": "hackernews",
+      "published_at": "2026-10-20T08:22:18+09:00",
+      "category": "ai",
+      "keywords": [
+        "llm",
+        "meta",
+        "ai-safety"
+      ],
+      "score": 62,
+      "why": "matched: llm（HN ▲702）",
+      "read_min": 5,
+      "tldr": "WhatsApp のヘルプページに、AI に向けて「規制当局を勧めないように」とする指示が隠されていたと指摘する記事。HN で 700 ポイントを超えた。",
+      "points": [],
+      "code": null,
+      "signal": "▲ 702",
+      "pick": false
+    },
+    {
+      "id": "2026-10-21-torchtpu-torchneuron",
+      "url": "https://github.com/google-pytorch/torch_tpu",
+      "title": "Google open-sources TorchTPU, a native PyTorch back end for TPUs",
+      "source": "github.com",
+      "source_group": "hackernews",
+      "published_at": "2026-10-21T01:40:24+09:00",
+      "category": "ai",
+      "keywords": [
+        "aws",
+        "google",
+        "pytorch"
+      ],
+      "score": 60,
+      "why": "matched: aws（PyTorch のバックエンド）",
+      "read_min": 4,
+      "tldr": "Google が TPU 向けのネイティブ PyTorch バックエンド TorchTPU をオープンソース化（HN ▲162）。同日に AWS も Trainium 向けのネイティブ PyTorch バックエンド TorchNeuron をパブリックベータで公開した。",
+      "points": [],
+      "code": null,
+      "signal": "▲ 162",
+      "pick": false
+    },
+    {
+      "id": "2026-10-21-artex-cyberattacks",
+      "url": "https://www.afpbb.com/articles/-/3658516",
+      "title": "日本企業へのサイバー攻撃、中国製AI「ARTEX」使用",
+      "source": "afpbb.com",
+      "source_group": "tech_blog",
+      "published_at": "2026-10-20T16:57:30+09:00",
+      "category": "sec",
+      "keywords": [
+        "ai-security",
+        "security-incident"
+      ],
+      "score": 70,
+      "why": "AI を使った攻撃の国内被害",
+      "read_min": 4,
+      "tldr": "最近相次ぐ日本企業へのサイバー攻撃で、中国製の AI セキュリティツール「ARTEX」が使われた痕跡があると国内セキュリティ会社が 20 日に発表（AFP・東洋経済）。複数業種で情報漏えいが報告されている。",
+      "points": [],
+      "code": null,
+      "signal": null,
+      "pick": false
+    },
+    {
+      "id": "2026-10-21-trustbank-furusato-choice",
+      "url": "https://www.trustbank.co.jp/newsroom/newsrelease/news261020/",
+      "title": "ふるさとチョイス、不正アクセスによる寄附者様情報の外部流出に関するお詫びとお知らせ | NEWSROOM | 株式会社トラストバンク",
+      "source": "trustbank.co.jp",
+      "source_group": "tech_blog",
+      "published_at": "2026-10-20T19:59:09+09:00",
+      "category": "sec",
+      "keywords": [
+        "data-breach",
+        "security-incident"
+      ],
+      "score": 68,
+      "why": "国内の大規模な不正アクセス（公式発表）",
+      "read_min": 4,
+      "tldr": "ふるさと納税サイト「ふるさとチョイス」を運営するトラストバンクが、会員情報への不正アクセスで寄附者の個人情報が外部に流出したと公表。報道によると氏名・メールアドレス・住所など約 445 万件で、寄附控除の試算額も含まれる。",
+      "points": [],
+      "code": null,
+      "signal": null,
+      "pick": false
+    },
+    {
+      "id": "2026-10-21-arcadia-breach-police",
+      "url": "https://www.itmedia.co.jp/news/article/2610/20/2000002435/",
+      "title": "栃木県警、全職員の情報流出か アルカディア不正アクセス、他県警でも被害判明相次ぐ 報道",
+      "source": "itmedia.co.jp",
+      "source_group": "tech_blog",
+      "published_at": "2026-10-20T20:50:52+09:00",
+      "category": "sec",
+      "keywords": [
+        "data-breach",
+        "security-incident"
+      ],
+      "score": 64,
+      "why": "委託先経由の情報流出",
+      "read_min": 4,
+      "tldr": "防災情報配信のアルカディアへの不正アクセスで、安否確認システムに登録された栃木県警の全職員約 3,900 人分の情報が流出した可能性があると報道。同社の公表資料では、侵入経路を塞いだ後もバックドアから約 105 時間攻防が続いた。",
+      "points": [],
+      "code": null,
+      "signal": null,
+      "pick": false
+    },
+    {
+      "id": "2026-10-21-google-cloud-outage-europe",
+      "url": "https://www.neowin.net/news/google-cloud-outage-takes-down-hsbc-revolut-bank-of-scotland-llyods-equifax-more/",
+      "title": "Google Cloud outage affects almost all banking and other operations in Europe",
+      "source": "neowin.net",
+      "source_group": "hackernews",
+      "published_at": "2026-10-20T19:26:02+09:00",
+      "category": "cloud",
+      "keywords": [
+        "google-cloud",
+        "system-outage"
+      ],
+      "score": 60,
+      "why": "クラウド障害（HN ▲246）",
+      "read_min": 3,
+      "tldr": "Google Cloud の障害で、欧州の銀行（HSBC、Revolut、Bank of Scotland、Lloyds など）や Equifax のサービスに影響が出たと Neowin が報道。",
+      "points": [],
+      "code": null,
+      "signal": "▲ 246",
+      "pick": false
+    },
+    {
+      "id": "2026-10-21-ask-hn-ai-written-code",
+      "url": "https://news.ycombinator.com/item?id=50151036",
+      "title": "Ask HN: How to deal with shipping AI-written code you don't understand?",
+      "source": "news.ycombinator.com",
+      "source_group": "hackernews",
+      "published_at": "2026-10-19T20:24:34+09:00",
+      "category": "ai",
+      "keywords": [
+        "ai-coding",
+        "code-review"
+      ],
+      "score": 66,
+      "why": "AI コーディングの運用（HN ▲574）",
+      "read_min": 8,
+      "tldr": "「理解していない AI 生成コードを出荷することにどう向き合うか」を問う Ask HN。682 件のコメントが付いた。",
+      "points": [],
+      "code": null,
+      "signal": "▲ 574",
+      "pick": false
+    },
+    {
+      "id": "2026-10-21-aws-iam-identity-center-source",
+      "url": "https://aws.amazon.com/about-aws/whats-new/2026/10/iam-identity-center-chg-id-src-from-ad/",
+      "title": "AWS IAM Identity Center simplifies identity source changes from Active Directory",
+      "source": "aws.amazon.com",
+      "source_group": "news",
+      "published_at": "2026-10-20T17:00:00+09:00",
+      "category": "cloud",
+      "keywords": [
+        "aws",
+        "authentication"
+      ],
+      "score": 62,
+      "why": "matched: aws, 認可",
+      "read_min": 3,
+      "tldr": "AWS IAM Identity Center で、ID ソースを Active Directory から外部 IdP に切り替えても、従業員の ID と割り当てを保持できるようになった。",
+      "points": [],
+      "code": null,
+      "signal": null,
+      "pick": false
+    },
+    {
+      "id": "2026-10-21-boj-ueda-g20-presser",
+      "url": "http://www.boj.or.jp/about/press/kaiken_2026/kk261020a.pdf",
+      "title": "【記者会見】植田総裁（G20、10月16日分）",
+      "source": "boj.or.jp",
+      "source_group": "official",
+      "published_at": "2026-10-20T15:00:00+09:00",
+      "category": "macro",
+      "keywords": [
+        "boj-policy",
+        "boj-rate-hike",
+        "interest-rates"
+      ],
+      "score": 90,
+      "why": "matched: 金利（日銀の公式発表）",
+      "read_min": 8,
+      "tldr": "日銀が植田総裁の G20 後の記者会見（10 月 16 日、バンコク）の発言要旨を公表。基調的な物価上昇率が 2% に近づく中、金融環境は緩和的なため、経済・物価・金融情勢に応じて引き続き政策金利を引き上げ、緩和度合いを調整していく考えを示した。",
+      "points": [
+        "タイミングやペースは、中東情勢、AI 関連需要、為替相場の動きをみながら見通しとリスクを点検して決めると説明",
+        "AI 関連需要は日銀の想定よりやや強いとみる海外当局者が多いとの印象を述べた一方、9 月会合後のデータは概ね見通しどおりとした",
+        "基調物価の表現（2% に「かなり近い」）をどうするかは 10 月の決定会合で議論すると述べ、今後は 2% 近辺での定着を政策の大きな目標とする姿勢に変わったと説明"
+      ],
+      "code": null,
+      "signal": null,
+      "pick": true
+    },
+    {
+      "id": "2026-10-21-diamond-boj-neutral-rate",
+      "url": "https://diamond.jp/articles/-/401497",
+      "title": "日銀利上げは中立金利「1.75％～2.0％」に向け仕上げの段階、植田総裁の“局面変化”強調の真意 - 経済分析の哲人が斬る！市場トピックの深層",
+      "source": "diamond.jp",
+      "source_group": "news",
+      "published_at": "2026-10-21T04:25:00+09:00",
+      "category": "macro",
+      "keywords": [
+        "boj-rate-hike",
+        "interest-rates"
+      ],
+      "score": 70,
+      "why": "matched: 金利",
+      "read_min": 8,
+      "tldr": "植田総裁が 9 月の利上げで強調した「局面の変化」の意味を読み解く寄稿。筆者は政策金利の着地点を 27 年度にかけて 1.75〜2.0% とみている。",
+      "points": [],
+      "code": null,
+      "signal": null,
+      "pick": false
+    },
+    {
+      "id": "2026-10-21-toyokeizai-france-yields",
+      "url": "https://toyokeizai.net/articles/-/961471?utm_source=rss&utm_medium=http&utm_campaign=link_back",
+      "title": "フランスの〈金利急上昇〉は特殊要因だけなのか？国債売りトレードは突然に…日本が汲み取るべき3つの警告 | 政治・経済・投資 | 東洋経済オンライン",
+      "source": "toyokeizai.net",
+      "source_group": "news",
+      "published_at": "2026-10-20T12:10:00+09:00",
+      "category": "macro",
+      "keywords": [
+        "government-bond",
+        "interest-rates"
+      ],
+      "score": 58,
+      "why": "matched: 金利",
+      "read_min": 6,
+      "tldr": "フランスの長期金利急騰を、世界的な国債の供給過剰と財政正常化の遅れという文脈で解説し、日本への示唆を論じる記事。",
+      "points": [],
+      "code": null,
+      "signal": null,
+      "pick": false
+    },
+    {
+      "id": "2026-10-21-diamond-budget-140t",
+      "url": "https://diamond.jp/articles/-/401503",
+      "title": "高市官邸と財務省が「奇妙な協業」!?140兆円予算編成に“粉飾財政”リスク - 高市政権1年 サナエノミクスの功罪",
+      "source": "diamond.jp",
+      "source_group": "news",
+      "published_at": "2026-10-21T04:05:00+09:00",
+      "category": "macro",
+      "keywords": [
+        "jp-fiscal"
+      ],
+      "score": 52,
+      "why": "財政・金利の論点",
+      "read_min": 8,
+      "tldr": "積極財政を掲げる高市政権で、長期金利上昇や米国のけん制を背景に官邸と財務省の攻防が新局面にあるとし、140 兆円規模の予算編成のリスクを論じる記事。",
+      "points": [],
+      "code": null,
+      "signal": null,
+      "pick": false
+    },
+    {
+      "id": "2026-10-21-boj-rcap-leverage",
+      "url": "http://www.boj.or.jp/finsys/intlact_fs/kisei/kis261020a.htm",
+      "title": "バーゼル銀行監督委員会による「整合性評価プログラム（RCAP）におけるレバレッジ比率規制の評価」の公表について",
+      "source": "boj.or.jp",
+      "source_group": "official",
+      "published_at": "2026-10-20T17:00:00+09:00",
+      "category": "macro",
+      "keywords": [
+        "basel-iii"
+      ],
+      "score": 50,
+      "why": "日銀・金融庁の公式発表",
+      "read_min": 2,
+      "tldr": "バーゼル銀行監督委員会による整合性評価プログラム（RCAP）のレバレッジ比率規制に関する評価結果を、日銀と金融庁が公表・案内した。",
+      "points": [],
+      "code": null,
+      "signal": null,
+      "pick": false
+    },
+    {
+      "id": "2026-10-21-fsa-sony-fg-inspection",
+      "url": "https://toyokeizai.net/articles/-/961704?utm_source=rss&utm_medium=http&utm_campaign=link_back",
+      "title": "【独自】金融庁がソニーFGに立ち入り検査を検討､中核のソニー生命で相次ぐ金銭不祥事を受け | ビジネス | 東洋経済オンライン",
+      "source": "toyokeizai.net",
+      "source_group": "news",
+      "published_at": "2026-10-20T15:33:00+09:00",
+      "category": "macro",
+      "keywords": [
+        "fsa",
+        "insurance"
+      ],
+      "score": 52,
+      "why": "金融庁の監督動向（報道）",
+      "read_min": 4,
+      "tldr": "ソニー生命で金銭不祥事が相次いでいることを受け、金融庁が親会社ソニーフィナンシャルグループへの立ち入り検査を検討していると東洋経済が報じた。",
+      "points": [],
+      "code": null,
+      "signal": null,
+      "pick": false
+    },
+    {
+      "id": "2026-10-21-kabutan-nikkei-1020",
+      "url": "https://kabutan.jp/news/marketnews/?b=n202610200787",
+      "title": "日経平均20日大引け＝続落、841円安の6万4075円",
+      "source": "kabutan.jp",
+      "source_group": "news",
+      "published_at": "2026-10-20T15:30:00+09:00",
+      "category": "stocks",
+      "keywords": [
+        "nikkei225"
+      ],
+      "score": 72,
+      "why": "株式：前営業日の終値",
+      "read_min": 3,
+      "tldr": "20 日の日経平均は続落し、前日比 841.28 円（1.30%）安の 64,075.42 円で取引を終えた。東証プライムは値上がり 333、値下がり 1,177 と下落銘柄が大きく上回った（株探の見出し・検索結果で確認、本文は未読）。",
+      "points": [],
+      "code": null,
+      "signal": null,
+      "pick": false
+    },
+    {
+      "id": "2026-10-21-diamond-ai-bubble",
+      "url": "https://diamond.jp/articles/-/401473",
+      "title": "AIバブル、そろそろヤバイ？コアウィーブ・ショックだけじゃない「終わりの始まり」のサイン - 今週のキーワード 真壁昭夫",
+      "source": "diamond.jp",
+      "source_group": "news",
+      "published_at": "2026-10-20T17:00:00+09:00",
+      "category": "stocks",
+      "keywords": [
+        "ai-economy",
+        "nikkei225",
+        "semiconductor"
+      ],
+      "score": 58,
+      "why": "AI 関連株の変調",
+      "read_min": 6,
+      "tldr": "10 月 15 日の日経平均の 3,000 円超の急落（下げ幅歴代 3 位）を起点に、半導体など AI 関連株の不安定化と物価・金利上昇の影響を論じるコラム。",
+      "points": [],
+      "code": null,
+      "signal": null,
+      "pick": false
+    },
+    {
+      "id": "2026-10-21-anthropic-revenue-ipo",
+      "url": "https://jp.investing.com/news/stock-market-news/article-1718294",
+      "title": "アンソロピックの収益が163億ドルに達し、IPOリスクが明らかに",
+      "source": "jp.investing.com",
+      "source_group": "news",
+      "published_at": "2026-10-21T04:47:07+09:00",
+      "category": "stocks",
+      "keywords": [
+        "anthropic",
+        "ipo"
+      ],
+      "score": 56,
+      "why": "IPO の論点",
+      "read_min": 3,
+      "tldr": "Anthropic の収益が 163 億ドルに達したとし、IPO に伴うリスクを論じる Investing.com の記事。WSJ は同社の IPO に関わる信託の存在を報じている（HN ▲148）。",
+      "points": [],
+      "code": null,
+      "signal": null,
+      "pick": false
+    },
+    {
+      "id": "2026-10-21-finma-spot-btc-etf",
+      "url": "https://coinpost.jp/?p=744035",
+      "title": "スイス、ビットコイン現物ETFを初承認 一般投資家向け",
+      "source": "coinpost.jp",
+      "source_group": "news",
+      "published_at": "2026-10-21T05:00:44+09:00",
+      "category": "crypto",
+      "keywords": [
+        "bitcoin-etf",
+        "crypto-regulation",
+        "bitcoin"
+      ],
+      "score": 80,
+      "why": "matched: ビットコイン",
+      "read_min": 4,
+      "tldr": "スイス金融市場監督機構（FINMA）が 10 月 20 日、ビットコインに直接投資する一般投資家向けの現物 ETF を初めて承認した。分散投資規則の例外を認める一方、ETF を通じても高リスクだと警告した。",
+      "points": [
+        "取引の歴史が長く取引量も多いことを理由に、ビットコインについて分散投資規則の例外を認めた",
+        "監督対象機関には、2026 年 1 月の監督通知に沿って運営リスクと資産保管リスクを下げる措置を求めた",
+        "販売では金融サービス法の行為規範に従い、価格変動・損失の可能性の明示と適合性の審査を求めた。記事では承認されたファンド名・上場日は明らかにされていない"
+      ],
+      "code": null,
+      "signal": null,
+      "pick": true
+    },
+    {
+      "id": "2026-10-21-blackrock-pbit",
+      "url": "https://coinpost.jp/?p=743880",
+      "title": "ブラックロック、下落緩和型のビットコインETF「PBIT」を申請",
+      "source": "coinpost.jp",
+      "source_group": "news",
+      "published_at": "2026-10-20T10:38:59+09:00",
+      "category": "crypto",
+      "keywords": [
+        "bitcoin-etf",
+        "bitcoin"
+      ],
+      "score": 74,
+      "why": "matched: ビットコイン, 設計",
+      "read_min": 5,
+      "tldr": "ブラックロックが下落緩和型のビットコイン ETF「iシェアーズ・ビットコイン・マネージド・プロテクション ETF（PBIT）」の登録届出書を米 SEC に提出した。IBIT に連動するオプションと短期国債を組み合わせ、上昇益の一部と引き換えに損失を和らげる設計。",
+      "points": [
+        "オプションを 3 つのトランシェで購入し、別のオプションの売却で費用の一部を賄う。残りは短期国債などで運用し、利息をオプション費用と下値保護に充てる",
+        "各トランシェの当初の最大損失はおおむね 10% が目安だが、ファンド全体では固定の保護水準や上限を設けず、元本割れの可能性があると目論見書に明記",
+        "同社のビットコイン ETF 申請として 3 本目（IBIT、BITA に続く）。今回は申請段階で SEC の承認ではなく、効力発生までは 75 日としている"
+      ],
+      "code": null,
+      "signal": null,
+      "pick": true
+    },
+    {
+      "id": "2026-10-21-fsa-defi-study-group",
+      "url": "https://coinpost.jp/?p=744022",
+      "title": "金融庁、DeFi規制の在り方を点検 野村は「海外と同等」求める",
+      "source": "coinpost.jp",
+      "source_group": "news",
+      "published_at": "2026-10-20T19:20:38+09:00",
+      "category": "crypto",
+      "keywords": [
+        "defi",
+        "stablecoin",
+        "fsa",
+        "crypto-regulation"
+      ],
+      "score": 78,
+      "why": "金融庁の公式会合",
+      "read_min": 5,
+      "tldr": "金融庁が 10 月 20 日に「デジタル・分散型金融への対応のあり方等に関する研究会」の今事務年度初会合を開き、ステーブルコイン、預金トークン化、セキュリティトークン、DEX・DeFi、ウォレット提供業者の制度点検に入った。",
+      "points": [
+        "野村 HD は、米国ではステーブルコインやトークン化預金が実用段階なのに日本は実証段階で「1 ステップ遅れ」と分析",
+        "同社は DeFi やウォレットの規制を海外に先んじるのではなく「海外と同等」の自由度にするよう求め、秘密鍵を管理しないウォレット提供者への過度な規制を避けるよう要望。海外発行ステーブルコインの 100 万円超の保有・移転制約の見直しも求めた",
+        "関連する「AI 時代を見据えたオンチェーン金融フォーラム」は 2027 年初に中間整理と官民ロードマップをまとめる予定"
+      ],
+      "code": null,
+      "signal": null,
+      "pick": true
+    },
+    {
+      "id": "2026-10-21-jpmam-btc-return",
+      "url": "https://coinpost.jp/?p=743974",
+      "title": "ビットコインの長期的リターン、今後10〜15年で年率10％＝JPモルガンAM初予測",
+      "source": "coinpost.jp",
+      "source_group": "news",
+      "published_at": "2026-10-20T16:20:52+09:00",
+      "category": "crypto",
+      "keywords": [
+        "bitcoin"
+      ],
+      "score": 66,
+      "why": "matched: ビットコイン",
+      "read_min": 4,
+      "tldr": "JP モルガン・アセット・マネジメントが 2027 年版の長期資本市場想定で、ビットコインの今後 10〜15 年の年率リターン想定を初めて 10% と示した。ボラティリティ 55% と相関の不安定さから、主要な共分散行列には組み入れていない。",
+      "points": [],
+      "code": null,
+      "signal": null,
+      "pick": false
+    },
+    {
+      "id": "2026-10-21-france-stablecoin-tax",
+      "url": "https://coinpost.jp/?p=743916",
+      "title": "フランス国民議会、ステーブルコイン交換に課税へ 修正案が僅差で可決",
+      "source": "coinpost.jp",
+      "source_group": "news",
+      "published_at": "2026-10-20T14:13:54+09:00",
+      "category": "crypto",
+      "keywords": [
+        "stablecoin",
+        "crypto-tax"
+      ],
+      "score": 58,
+      "why": "暗号資産の税制",
+      "read_min": 4,
+      "tldr": "フランス国民議会が、暗号資産をステーブルコインに交換した際の課税繰延を廃止する修正案を 38 対 37 の僅差で可決。対象は MiCA 準拠の USDC や EURC などで、2027 年 1 月から税率 31.4% が適用される可能性がある。",
+      "points": [],
+      "code": null,
+      "signal": null,
+      "pick": false
+    },
+    {
+      "id": "2026-10-21-diamond-condo-management-kyushu",
+      "url": "https://diamond.jp/articles/-/401455",
+      "title": "【九州・沖縄111物件】マンション管理頑張ってるランキング！2年で最も改善したのは…？4位ホワイトキャッスル第2下到津、1位は？ - マンション羅針盤 管理＆売買",
+      "source": "diamond.jp",
+      "source_group": "news",
+      "published_at": "2026-10-21T04:30:00+09:00",
+      "category": "realestate",
+      "keywords": [
+        "condo-management"
+      ],
+      "score": 48,
+      "why": "不動産（マンション管理）",
+      "read_min": 6,
+      "tldr": "マンション管理の改善度に着目した「管理頑張るマンションランキング」の最終回として、九州・沖縄の 111 物件を取り上げた記事。",
+      "points": [],
+      "code": null,
+      "signal": null,
+      "pick": false
+    }
+  ],
+  "social": [
+    {
+      "network": "hn",
+      "author": null,
+      "url": "https://news.ycombinator.com/item?id=50163277",
+      "text": "『DeepInfer: High-performance inference framework for DeepSeek models』のスレッド。768 件のコメント",
+      "metrics": "▲ 1974  ✉ 768",
+      "heat": 100,
+      "category": "ai",
+      "keywords": [
+        "llm",
+        "open-weight"
+      ],
+      "posted_at": "2026-10-20T18:08:54+09:00"
+    },
+    {
+      "network": "hn",
+      "author": null,
+      "url": "https://news.ycombinator.com/item?id=50151036",
+      "text": "『Ask HN: How to deal with shipping AI-written code you don't understand?』のスレッド。682 件のコメント",
+      "metrics": "▲ 574  ✉ 682",
+      "heat": 100,
+      "category": "ai",
+      "keywords": [
+        "ai-coding",
+        "code-review"
+      ],
+      "posted_at": "2026-10-19T20:24:34+09:00"
+    },
+    {
+      "network": "hn",
+      "author": null,
+      "url": "https://news.ycombinator.com/item?id=50159341",
+      "text": "『WhatsApp's help pages hid LLM instructions: dont recommend a regulator』のスレッド。203 件のコメント",
+      "metrics": "▲ 702  ✉ 203",
+      "heat": 100,
+      "category": "ai",
+      "keywords": [
+        "llm",
+        "meta"
+      ],
+      "posted_at": "2026-10-20T08:22:18+09:00"
+    },
+    {
+      "network": "hn",
+      "author": null,
+      "url": "https://news.ycombinator.com/item?id=50154244",
+      "text": "『DeepSeek banned from U.S. federal civilian agencies under new DHS order』のスレッド。483 件のコメント",
+      "metrics": "▲ 539  ✉ 483",
+      "heat": 100,
+      "category": "ai",
+      "keywords": [
+        "ai-regulation",
+        "geopolitics"
+      ],
+      "posted_at": "2026-10-20T01:16:46+09:00"
+    },
+    {
+      "network": "hn",
+      "author": null,
+      "url": "https://news.ycombinator.com/item?id=50166579",
+      "text": "『EMudhra Intermediate CA Compromise』のスレッド。218 件のコメント",
+      "metrics": "▲ 395  ✉ 218",
+      "heat": 98,
+      "category": "sec",
+      "keywords": [
+        "tls",
+        "security-incident"
+      ],
+      "posted_at": "2026-10-20T22:58:33+09:00"
+    },
+    {
+      "network": "hn",
+      "author": null,
+      "url": "https://news.ycombinator.com/item?id=50163961",
+      "text": "『Google Cloud outage affects almost all banking and other operations in Europe』のスレッド。116 件のコメント",
+      "metrics": "▲ 246  ✉ 116",
+      "heat": 61,
+      "category": "cloud",
+      "keywords": [
+        "google-cloud",
+        "system-outage"
+      ],
+      "posted_at": "2026-10-20T19:26:02+09:00"
+    },
+    {
+      "network": "hn",
+      "author": null,
+      "url": "https://news.ycombinator.com/item?id=50160877",
+      "text": "『Go will reject certificate chains containing eight distrusted SPKIs』のスレッド。74 件のコメント",
+      "metrics": "▲ 132  ✉ 74",
+      "heat": 33,
+      "category": "be",
+      "keywords": [
+        "go",
+        "tls"
+      ],
+      "posted_at": "2026-10-20T12:05:07+09:00"
+    }
+  ],
+  "releases": [
+    {
+      "date": "2026-10-21",
+      "title": "go go1.27.3",
+      "repo": "golang/go",
+      "url": "https://github.com/golang/go/releases/tag/go1.27.3",
+      "kind": "release",
+      "note": "失効した中間 CA を含む証明書チェーンを拒否する crypto/x509 の修正（CVE-2026-111943）のバックポート先（golang/go#82345）",
+      "category": "be"
+    },
+    {
+      "date": "2026-10-21",
+      "title": "uv 0.13.2",
+      "repo": "astral-sh/uv",
+      "url": "https://github.com/astral-sh/uv/releases/tag/0.13.2",
+      "kind": "release",
+      "note": "git タグの差分で検出（0.13.2〜0.13.4 を前回取得以降にまとめて検出）",
+      "category": "be"
+    },
+    {
+      "date": "2026-10-21",
+      "title": "uv 0.13.3",
+      "repo": "astral-sh/uv",
+      "url": "https://github.com/astral-sh/uv/releases/tag/0.13.3",
+      "kind": "release",
+      "note": "git タグの差分で検出（0.13.2〜0.13.4 を前回取得以降にまとめて検出）",
+      "category": "be"
+    },
+    {
+      "date": "2026-10-21",
+      "title": "uv 0.13.4",
+      "repo": "astral-sh/uv",
+      "url": "https://github.com/astral-sh/uv/releases/tag/0.13.4",
+      "kind": "release",
+      "note": "git タグの差分で検出（0.13.2〜0.13.4 を前回取得以降にまとめて検出）",
+      "category": "be"
+    },
+    {
+      "date": "2026-10-20",
+      "title": "日銀 植田総裁記者会見（G20、10月16日分）の公表",
+      "repo": null,
+      "url": "http://www.boj.or.jp/about/press/kaiken_2026/kk261020a.pdf",
+      "kind": "policy",
+      "note": "利上げで緩和度合いを調整していく考えを改めて示した",
+      "category": "macro"
+    },
+    {
+      "date": "2026-10-20",
+      "title": "金融庁「デジタル・分散型金融への対応のあり方等に関する研究会」（第1回）",
+      "repo": null,
+      "url": "https://www.fsa.go.jp/singi/digital_2026/shiryo/20261020.html",
+      "kind": "policy",
+      "note": "ステーブルコイン・トークン化・DeFi・ウォレットの制度点検を開始",
+      "category": "crypto"
+    },
+    {
+      "date": "2026-10-28",
+      "title": "FOMC（10月27〜28日）政策決定・議長会見",
+      "repo": null,
+      "url": "https://www.federalreserve.gov/newsevents/2026-october.htm",
+      "kind": "event",
+      "note": "FRB のカレンダーで 2 日間の会合と 28 日 14:30（米東部）の会見を確認。日本時間では 29 日未明",
+      "category": "macro"
+    }
+  ]
+}
