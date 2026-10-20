@@ -36,7 +36,10 @@ python3 scripts/markets.py      # 株価指数・為替・金利・暗号資産 
 
 ### 2. SNS・コミュニティ（WebSearch）
 
-`data/config.json` の `social_queries` を、技術・マネーそれぞれ 2〜3 本ずつ WebSearch する（`allowed_domains` 例：`x.com`, `bsky.app`, `news.ycombinator.com`, `b.hatena.ne.jp`, `reddit.com`）。
+技術・マネーそれぞれ 2〜3 本ずつ WebSearch する（`allowed_domains` 例：`x.com`, `bsky.app`, `news.ycombinator.com`, `b.hatena.ne.jp`, `reddit.com`）。
+
+- 技術：raw の技術記事のうち `buzz` 上位 3 件の話題（製品名・事件名など）で検索する。`data/config.json` の `social_queries.tech` は、上位の話題で投稿が見つからなかったときの予備
+- マネー：`data/config.json` の `social_queries.money` を使う
 
 - 投稿そのものの URL が取れて、本文が確認できたものだけを `social` に入れる（1 日 3〜8 件）。取れなければ空配列でよい
 - `text` は投稿の要点を 1〜2 文で。長文の転載はしない
@@ -58,12 +61,16 @@ python3 scripts/markets.py      # 株価指数・為替・金利・暗号資産 
 
 raw の候補から、技術・マネーそれぞれ 8〜15 件、合計 15〜30 件を選んで `items` にする。
 
-- 選ぶ基準：`interests` との一致 > 反応の大きさ（はてブ数・HN ポイント）> 新規性。同じ話題は 1 件にまとめる
-- 公式発表（日本銀行・金融庁）は重要度が高いものを優先的に入れる
-- そのうち 6〜10 件を `pick: true`（ピックアップ）にする。技術・マネーの両方から選ぶ
+- 同じ話題は 1 件にまとめる（まとめた場合は一番 `buzz` の高い記事を残す）
+- **技術の記事は、世間的な関心の大きさで選ぶ。** raw の `buzz`（はてブ数・HN ポイント・複数ソースへの掲載から計算した 0〜100）の高い順が基本。`interests` との一致では選ばない・順位を上げない（同点に近いときの判断材料にとどめる）
+  - `buzz` が 0 でも、主要 OSS・クラウドの公式発表（大型リリース、重大な脆弱性、サービス障害など）で業界的に影響が大きいものは入れてよい。その場合は `why` に理由を書く
+- **マネーの記事は、これまでどおり持ち主の関心で選ぶ。** `interests` との一致 > 反応の大きさ > 新規性。公式発表（日本銀行・金融庁）は重要度が高いものを優先的に入れる
+- そのうち 6〜10 件を `pick: true`（ピックアップ）にする。技術から 3〜5 件（`buzz` の高い順）、マネーから 3〜5 件
 - **pick の記事は WebFetch で本文を読み**、`tldr`（2〜3 文）・`points`（3 点）を書く。技術記事で本文にコードがあれば、要点を示す 3〜12 行を `code` に抜き出す（なければ `null`）
 - pick 以外の記事は RSS の要約とタイトルから `tldr` を 1〜2 文で書く（`points` は空配列でよい）。本文を読んでいないのに具体的な数字や結論を書かない
-- `score`（0〜100）は持ち主の関心との一致度。`why` にその理由を短く（例 `matched: go, 認可` / `日銀の公式発表`）
+- `score`（0〜100）：技術の記事は raw の `buzz` をそのまま使う（公式発表などで `buzz` が低いものは影響の大きさで 40〜70 を目安に付ける）。マネーの記事は持ち主の関心との一致度
+- `why`：技術は注目度の根拠（例 `はてブ 519` / `HN 711 pt` / `HN 329 pt・3 ソースに掲載` / `Go 公式のセキュリティ修正`）。マネーは一致した関心（例 `matched: nisa, 金利` / `日銀の公式発表`）
+- `signal`：はてブ数があれば `B! 519`、HN ポイントがあれば `▲ 711`（両方あれば `B! 27 · ▲ 329`）
 - `keywords`：記事ごとに 1〜4 個。**小文字・数字・ハイフンの slug**（例 `mcp-server`, `pgvector`, `new-nisa`, `boj-rate-hike`, `bitcoin`, `j-reit`）。過去の日次ファイルや `data/stats.json` にある既存の slug を優先して使い、表記ゆれを作らない（レーダーとマーケットマップはこの slug で集計する）
 - 金融記事は `why` や `tldr` で売買を勧めない。事実と論点の要約にとどめる
 
@@ -139,7 +146,7 @@ git push origin HEAD:main                # main を更新する（これで Acti
 | `data/stats.json` | 日次ファイルから集計したキーワードの推移・リングなど（`update_stats.py` が生成。手で書かない） |
 | `data/markets.json` | 市況（`markets.py` が生成） |
 | `data/state/tags.json` | 監視している OSS の既知タグ（`collect.py` が更新） |
-| `scripts/collect.py` | RSS / HN / git タグの収集 |
+| `scripts/collect.py` | RSS / HN / git タグの収集。はてブ数と HN ポイントから注目度 `buzz` を計算する |
 | `scripts/markets.py` | Yahoo Finance chart API から終値を取得 |
 | `scripts/update_stats.py` | 検証と集計 |
 | `.github/workflows/pages.yml` | claude/** → main マージと Pages デプロイ |

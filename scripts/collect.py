@@ -6,6 +6,7 @@
 
 標準ライブラリのみ。取得できなかったソースは source_status に "failed" と記録して続行する。
 出力はルーチンが要約・選別するための下書きで、サイトはこのファイルを読まない（.gitignore 済み）。
+各記事の `buzz`（0〜100）は世間的な注目度。はてなブックマーク数・HN のポイント・複数ソースへの掲載から計算する。
 
 リリース情報は `git ls-remote --tags` でタグ一覧を取り、data/state/tags.json（前回までに見たタグ）との差分を
 新しいリリースとして扱う（github.com の Atom/API はルーチン環境から取得できないため）。
@@ -13,6 +14,7 @@
 import argparse
 import html
 import json
+import math
 import re
 import subprocess
 import sys
@@ -78,7 +80,7 @@ def parse_feed(raw):
         name = local(el.tag)
         if name not in ("item", "entry"):
             continue
-        rec = {"title": "", "url": "", "published": None, "summary": ""}
+        rec = {"title": "", "url": "", "published": None, "summary": "", "hatebu": None}
         for c in el:
             n = local(c.tag)
             if n == "title":
@@ -93,6 +95,8 @@ def parse_feed(raw):
                 rec["published"] = parse_date(c.text)
             elif n in ("description", "summary", "content", "encoded") and not rec["summary"]:
                 rec["summary"] = strip_tags(c.text or "")
+            elif n == "bookmarkcount" and (c.text or "").strip().isdigit():
+                rec["hatebu"] = int(c.text)  # はてなブックマークの RSS に入っているブクマ数
         if rec["title"] and rec["url"]:
             out.append(rec)
     return out
@@ -126,7 +130,7 @@ def collect_rss(src, since):
         if e["published"] and e["published"] < since:
             continue
         items.append({
-            "title": e["title"], "url": e["url"], "summary": e["summary"],
+            "title": e["title"], "url": e["url"], "summary": e["summary"], "hatebu": e["hatebu"],
             "published_at": e["published"].astimezone(JST).isoformat() if e["published"] else None,
         })
     return items
@@ -148,8 +152,39 @@ def collect_hn(src, since):
             "signal": f"▲ {h.get('points', 0)}",
             "discussion": f"https://news.ycombinator.com/item?id={h['objectID']}",
             "comments": h.get("num_comments", 0),
+            "hn_points": h.get("points", 0),
         })
     return items
+
+
+HATEBU_API = "https://bookmark.hatenaapis.com/count/entries?"
+
+
+def fill_hatebu(items):
+    """はてなブックマーク数を 50 件ずつまとめて取得する。取れなかった分は RSS の値か null のまま"""
+    urls = [it["url"] for it in items]
+    for i in range(0, len(urls), 50):
+        chunk = urls[i:i + 50]
+        try:
+            counts = json.loads(fetch(HATEBU_API + urllib.parse.urlencode([("url", u) for u in chunk])))
+        except Exception as e:  # noqa: BLE001 — ブクマ数が取れなくても収集は続ける
+            print(f"[failed] hatebu count: {e}", file=sys.stderr)
+            continue
+        for it in items[i:i + 50]:
+            n = counts.get(it["url"])
+            if isinstance(n, int):
+                it["hatebu"] = max(n, it.get("hatebu") or 0)
+
+
+def buzz_score(it):
+    """世間的な注目度（0〜100）。はてブ数と HN ポイントを対数で 0〜100 に直した大きい方に、
+    複数のソースに載っていれば +10。はてブ 1000 / HN 1500 で 100 になる"""
+    hb = it.get("hatebu") or 0
+    hn = it.get("hn_points") or 0
+    s = max(100 * math.log10(1 + hb) / math.log10(1001), 100 * math.log10(1 + hn) / math.log10(1501))
+    if it.get("also_in"):
+        s += 10
+    return min(100, round(s))
 
 
 def version_key(tag):
@@ -191,7 +226,7 @@ def main():
     cfg = json.loads(CONFIG.read_text(encoding="utf-8"))
     cats, interests = cfg["categories"], cfg.get("interests", [])
 
-    status, items, seen = {}, [], set()
+    status, items, seen = {}, [], {}
     for src in cfg["sources"]:
         try:
             got = collect_hn(src, since) if src["kind"] == "hn" else collect_rss(src, since)
@@ -203,8 +238,14 @@ def main():
         for it in got:
             key = it["url"].split("#")[0].rstrip("/")
             if key in seen:
+                # 同じ記事が別のソースにも載っている = 注目されている。元の記事に印を付けて情報を足す
+                first = seen[key]
+                if src["name"] != first["source"] and src["name"] not in first.setdefault("also_in", []):
+                    first["also_in"].append(src["name"])
+                for k in ("hn_points", "comments", "discussion", "signal"):
+                    if it.get(k) and not first.get(k):
+                        first[k] = it[k]
                 continue
-            seen.add(key)
             text = it["title"] + " " + it.get("summary", "")
             own = [c for c in cats if c["domain"] == src["domain"]]
             it.update({
@@ -213,6 +254,7 @@ def main():
                 "interest_hits": interest_hits(text, interests),
             })
             items.append(it)
+            seen[key] = it
 
     releases = []
     known = json.loads(TAGS_STATE.read_text(encoding="utf-8")) if TAGS_STATE.exists() else {}
@@ -227,7 +269,10 @@ def main():
         TAGS_STATE.parent.mkdir(parents=True, exist_ok=True)
         TAGS_STATE.write_text(json.dumps(known, ensure_ascii=False, indent=1) + "\n", encoding="utf-8")
 
-    items.sort(key=lambda x: (len(x["interest_hits"]), x.get("published_at") or ""), reverse=True)
+    fill_hatebu(items)
+    for it in items:
+        it["buzz"] = buzz_score(it)
+    items.sort(key=lambda x: (x["buzz"], x.get("published_at") or ""), reverse=True)
     groups = {}
     for it in items:
         groups[it["source_group"]] = groups.get(it["source_group"], 0) + 1

@@ -335,7 +335,7 @@
         h('h3', null, extLink(it.url, it.title)),
         h('p', null, it.tldr),
         (it.keywords || []).length ? h('div', { class: 'tags' }, it.keywords.map((k) => h('a', { class: 'tag', href: '#radar', onclick: () => { S.radarSel = k; } }, k))) : null,
-        h('div', { class: 'match' }, 'MATCH', h('div', { class: 'bar' }, h('span', { style: { width: `${it.score}%` } })), h('b', null, `${it.score}%`)),
+        h('div', { class: 'match' }, c.domain === 'tech' ? 'BUZZ' : 'MATCH', h('div', { class: 'bar' }, h('span', { style: { width: `${it.score}%` } })), h('b', null, `${it.score}%`)),
         it.why && h('span', { class: 'why' }, '↳ ' + it.why),
         h('div', { class: 'acts' },
           h('a', { class: 'btn primary', href: it.url, target: '_blank', rel: 'noopener' }, 'OPEN ↗'),
