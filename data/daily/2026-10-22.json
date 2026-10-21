@@ -1,0 +1,819 @@
+{
+  "date": "2026-10-22",
+  "generated_at": "2026-10-22T05:50:00+09:00",
+  "stats": {
+    "collected": 216,
+    "sources_ok": 23,
+    "sources_total": 26,
+    "by_group": {
+      "hackernews": 47,
+      "tech_blog": 91,
+      "news": 73,
+      "official": 5
+    },
+    "failed_sources": [
+      "coinpost",
+      "coindesk_jp",
+      "suumo_journal"
+    ]
+  },
+  "digest": [
+    {
+      "category": "sec",
+      "text": "PHP コアの RCE 脆弱性 php2shell（CVE-2026-109618 / 109619、CVSS 9.2）が公表され、8.5.12 / 8.4.27 / 8.3.36 / 8.2.35 で修正。Apache + mod_php では認証なしの RCE が実証され、国内でもコドモン・BASE・さくらのレンタルサーバなどが緊急メンテに入った。",
+      "keywords": [
+        "php",
+        "rce",
+        "vulnerability-management"
+      ]
+    },
+    {
+      "category": "sec",
+      "text": "eMudhra の中間 CA 鍵は 1 バイトの小さな値で、公開証明書から一瞬で復元できたことが判明。PyPI では LiteLLM 1.107.0 に認証情報窃取とバックドアが混入し、該当環境では全認証情報のローテーションが推奨されている。",
+      "keywords": [
+        "tls",
+        "supply-chain",
+        "python"
+      ]
+    },
+    {
+      "category": "be",
+      "text": "Cloudflare らが TypeScript の Rust 移植 tsrs を公開（TypeScript 7.0 比で最大 8 倍速と発表）。DuckDB 2.0 LTS、Mistral の音声モデル Voxtral 3 も出た。",
+      "keywords": [
+        "typescript",
+        "rust",
+        "duckdb",
+        "mistral"
+      ]
+    },
+    {
+      "category": "stocks",
+      "text": "21 日の日経平均は 545 円高の 64,621 円で 3 営業日ぶりに反発し、米国株は S&P 500 が 0.58% 高、NASDAQ が 1.05% 高（市況データ）。Meta は AI 投資の資金調達に向けて議決権のない株式の発行を検討と報じられた。FOMC は 27〜28 日。",
+      "keywords": [
+        "nikkei225",
+        "us-stocks",
+        "fed"
+      ]
+    },
+    {
+      "category": "crypto",
+      "text": "ビットコインは約 83,500 ドルで 1 週間ぶりの高値。SpaceX と Tesla の合併協議で両社の約 3 万 BTC が統合される見通しも材料に。投信の 10 月分の資金フローと住宅ローン金利の新しい発表は確認できなかった。",
+      "keywords": [
+        "bitcoin",
+        "bitcoin-treasury"
+      ]
+    }
+  ],
+  "items": [
+    {
+      "id": "2026-10-22-php-php2shell",
+      "url": "https://www.php.net/archive/2026.php#2026-10-21-5",
+      "title": "PHP php2shell（CVE-2026-109618 / 109619）: 重大な RCE 脆弱性 2 件を修正、ただちに更新を",
+      "source": "php.net",
+      "source_group": "hackernews",
+      "published_at": "2026-10-21T05:15:50+09:00",
+      "category": "sec",
+      "keywords": [
+        "php",
+        "rce",
+        "vulnerability-management"
+      ],
+      "score": 100,
+      "why": "HN 1485 pt・はてブ 802（Flatt）・関連記事多数",
+      "read_min": 8,
+      "tldr": "PHP コアの 2 件の RCE 脆弱性「php2shell」（CVE-2026-109618 / CVE-2026-109619、CVSS v4.0 9.2）を修正する 8.5.12 / 8.4.27 / 8.3.36 / 8.2.35 が 10 月 21 日に公開された。メモリ上限到達や致命的エラーで不完全な状態が残り、後続リクエストで悪用される仕組みで、Apache + mod_php では認証なしの RCE が既定設定で実証されている。",
+      "points": [
+        "原因は「OOM 時の中断で部分的に初期化されたデータが残る」(109618) と「致命的エラー後に前リクエストの解放済みメモリを参照する」(109619) の 2 つ。PHP-FPM でもアプリ経由の RCE を確認と PHP Foundation",
+        "GMO Flatt Security は Session Upload Progress（既定で有効）を使う攻撃経路を確認。8.1 以前はサポート外で安全と判断できず、php.ini の変更は一時しのぎで根本対策はパッチ適用としている",
+        "CVE 番号が予定の約 2 日前に漏れ、公開を 1 日前倒し。国内でもコドモン・BASE・さくらのレンタルサーバ・pixiv などが緊急メンテに入った（ITmedia ほか）"
+      ],
+      "code": {
+        "file": "php.ini（パッチ適用までの一時緩和。完全な回避ではない）",
+        "lang": "ini",
+        "text": "session.upload_progress.enabled=0\nmemory_limit=-1\nfatal_error_backtraces=0"
+      },
+      "signal": "B! 98 · ▲ 1485",
+      "pick": true
+    },
+    {
+      "id": "2026-10-22-cloudflare-tsrs",
+      "url": "https://blog.cloudflare.com/typescript-rust-port/",
+      "title": "Introducing tsrs: A port of TypeScript to Rust",
+      "source": "cloudflare blog",
+      "source_group": "tech_blog",
+      "published_at": "2026-10-20T22:00:00+09:00",
+      "category": "be",
+      "keywords": [
+        "typescript",
+        "rust",
+        "cloudflare"
+      ],
+      "score": 93,
+      "why": "HN 426 pt・はてブ 43",
+      "read_min": 7,
+      "tldr": "Cloudflare と VoidZero らが、TypeScript コンパイラの Rust 移植「tsrs」を Oxc の下で公開した。初期ベンチマークで TypeScript 7.0（Go 版）比で最大 8 倍速・メモリ約 70% 減としている。",
+      "points": [
+        "フォークではなく TypeScript チームと協調する忠実な移植が目標。診断の出力順など上流との差は安定版までに減らす方針",
+        "TypeScript 7.1 beta（7.0 比で最大 2.5 倍速）の最適化の一部は tsrs 由来。改善は Go 版にも還元する",
+        "npm で実験版と WebAssembly 版（@tsrs/wasm）を公開。今後 tsc-rs と統合し LSP にも対応、Oxlint の型認識 lint への組み込みも検討"
+      ],
+      "code": {
+        "file": "shell",
+        "lang": "bash",
+        "text": "npm install tsrs\nnpx tsrs"
+      },
+      "signal": "B! 43 · ▲ 426",
+      "pick": true
+    },
+    {
+      "id": "2026-10-22-mistral-voxtral-3",
+      "url": "https://mistral.ai/news/voxtral-3/",
+      "title": "Voxtral 3",
+      "source": "mistral.ai",
+      "source_group": "hackernews",
+      "published_at": "2026-10-21T01:02:07+09:00",
+      "category": "ai",
+      "keywords": [
+        "mistral",
+        "speech-to-text",
+        "ai-agent"
+      ],
+      "score": 91,
+      "why": "HN 754 pt",
+      "read_min": 6,
+      "tldr": "Mistral が音声モデル群 Voxtral 3（文字起こし・リアルタイム文字起こし・TTS）と、LiveKit ベースの音声エージェント SDK を公開した。EU ホストの API とセルフホストでの利用を打ち出している。",
+      "points": [
+        "ASR は 50 以上の言語、話者分離とキーワードによる文脈補正に対応。リアルタイム版は 500ms 未満の遅延をうたう",
+        "同社の発表値では FLEURS（45 言語）の WER が約 4% で Whisper large-v3（約 15〜16%）を下回る。第三者検証ではない",
+        "料金は文字起こしが $0.0035〜0.008/分、TTS が 100 万文字あたり $13。重みの公開やライセンスはページに記載がない"
+      ],
+      "code": null,
+      "signal": "B! 7 · ▲ 754",
+      "pick": true
+    },
+    {
+      "id": "2026-10-22-scotthelme-emudhra-keys",
+      "url": "https://scotthelme.co.uk/eight-bits-of-trust-emudhras-ca-keys-cracked-in-milliseconds/",
+      "title": "Eight Bits of Trust: eMudhra's CA keys cracked in milliseconds",
+      "source": "scotthelme.co.uk",
+      "source_group": "hackernews",
+      "published_at": "2026-10-21T18:08:08+09:00",
+      "category": "sec",
+      "keywords": [
+        "tls",
+        "cryptography",
+        "security-incident"
+      ],
+      "score": 90,
+      "why": "HN 730 pt",
+      "read_min": 10,
+      "tldr": "eMudhra の中間 CA 8 枚の秘密鍵は 384 ビットの乱数ではなく 4・56・115 のような 1 バイトの小さな値で、公開証明書から総当たりで一瞬で復元できたと Scott Helme が解説した。鍵生成スクリプトのバグで作られた弱い鍵を、名前の似たラベルのせいで CSR に使ってしまったと eMudhra は説明している。",
+      "points": [
+        "対象は TLS 用 6 枚とコード署名用 2 枚（2025 年 4 月作成）。Sectigo のクロス署名分を含め 16 枚の証明書に関係する",
+        "Chrome・Firefox は中間 CA をブロックし CT も必須のため保護されるが、curl・Python・Node は既定設定で偽造証明書を受け入れたという検証結果",
+        "鍵は発行時点から実質公開状態で約 17 か月。サーバー・CI/CD・組み込み機器の CA バンドル更新が必要と指摘"
+      ],
+      "code": null,
+      "signal": "▲ 730",
+      "pick": true
+    },
+    {
+      "id": "2026-10-22-safedep-litellm-pypi",
+      "url": "https://safedep.io/litellm-pypi-compromise-credential-stealer-backdoor/",
+      "title": "Compromised LiteLLM 1.107.0 on PyPI Installs a Credential Stealer and Backdoor",
+      "source": "safedep.io",
+      "source_group": "hackernews",
+      "published_at": "2026-10-21T23:00:26+09:00",
+      "category": "sec",
+      "keywords": [
+        "supply-chain",
+        "python",
+        "secrets-management"
+      ],
+      "score": 78,
+      "why": "HN 304 pt・Flatt も解説（はてブ 40）",
+      "read_min": 6,
+      "tldr": "PyPI の LiteLLM 1.107.0 に認証情報窃取とバックドアが仕込まれていた。10 月 21 日 11:39 UTC ごろアップロードされ、PyPI は該当版を削除済み。",
+      "points": [
+        "悪性の .pth で全 Python プロセスに常駐し、SSH 鍵・クラウド/CI の認証情報・LLM API キーなどを収集して外部に送信",
+        "sitecustomize.py のデーモンが毎時コードを取得・実行する仕組みも入っていた。1.106.2 や rc 版は無害とされる",
+        "該当ホストは侵害済みとみなし、到達可能な全認証情報のローテーションと再構築を推奨。依存バージョンの固定も"
+      ],
+      "code": null,
+      "signal": "▲ 304",
+      "pick": true
+    },
+    {
+      "id": "2026-10-22-duckdb-2-0-lts",
+      "url": "https://duckdb.org/2026/10/21/announcing-duckdb-200",
+      "title": "DuckDB 2.0.0 LTS “Cinnamon Teal”",
+      "source": "duckdb.org",
+      "source_group": "hackernews",
+      "published_at": "2026-10-21T23:01:22+09:00",
+      "category": "be",
+      "keywords": [
+        "duckdb"
+      ],
+      "score": 78,
+      "why": "HN 302 pt",
+      "read_min": null,
+      "tldr": "DuckDB 2.0.0 LTS「Cinnamon Teal」がリリース。クライアント・サーバー動作（CONNECT）、非同期 I/O、VARIANT 型、トリガー、CLI のエージェント向けモードなどを追加し、少なくとも 2027 年 10 月までサポートされる。",
+      "points": [],
+      "code": null,
+      "signal": "▲ 302",
+      "pick": false
+    },
+    {
+      "id": "2026-10-22-joshwcomeau-css-future",
+      "url": "https://www.joshwcomeau.com/css/interop-2027/",
+      "title": "The Future of CSS",
+      "source": "joshwcomeau.com",
+      "source_group": "hackernews",
+      "published_at": "2026-10-21T10:47:28+09:00",
+      "category": "be",
+      "keywords": [
+        "css"
+      ],
+      "score": 87,
+      "why": "HN 573 pt",
+      "read_min": null,
+      "tldr": "Josh W. Comeau による CSS の今後についての記事（URL は Interop 2027）。HN で 255 件のコメントを集めた。",
+      "points": [],
+      "code": null,
+      "signal": "B! 2 · ▲ 573",
+      "pick": false
+    },
+    {
+      "id": "2026-10-22-arstechnica-meta-muse",
+      "url": "https://arstechnica.com/security/2026/10/meta-muse-exposes-users-personal-and-business-secrets-when-they-share-conversations/",
+      "title": "Muse exposes users' personal and business secrets when they share conversations",
+      "source": "arstechnica.com",
+      "source_group": "hackernews",
+      "published_at": "2026-10-21T09:45:59+09:00",
+      "category": "ai",
+      "keywords": [
+        "meta",
+        "privacy",
+        "ai-safety"
+      ],
+      "score": 81,
+      "why": "HN 373 pt",
+      "read_min": null,
+      "tldr": "Meta の AI「Muse」で会話を共有すると、ユーザーの個人的・業務上の機密が露出していると Ars Technica が報じた。",
+      "points": [],
+      "code": null,
+      "signal": "B! 1 · ▲ 373",
+      "pick": false
+    },
+    {
+      "id": "2026-10-22-peec-fake-stats-llm",
+      "url": "https://peec.ai/blog/publish-stats-get-cited-the-tactic-that-put-my-data-all-over-the-web",
+      "title": "Publish fake stats, get cited in LLMs",
+      "source": "peec.ai",
+      "source_group": "hackernews",
+      "published_at": "2026-10-20T22:06:22+09:00",
+      "category": "ai",
+      "keywords": [
+        "llm",
+        "hallucination"
+      ],
+      "score": 80,
+      "why": "HN 357 pt",
+      "read_min": null,
+      "tldr": "独自の統計を公開すると LLM の回答に引用されやすくなる、という手法を紹介した記事。HN では「偽の統計でも引用される」として議論になった。",
+      "points": [],
+      "code": null,
+      "signal": "▲ 357",
+      "pick": false
+    },
+    {
+      "id": "2026-10-22-openai-patch-the-planet",
+      "url": "https://openai.com/index/coordinated-disclosure-of-critical-vulnerabilities/",
+      "title": "Patch the Planet: global response coordination as agents uncover vulnerabilities",
+      "source": "openai.com",
+      "source_group": "hackernews",
+      "published_at": "2026-10-21T23:03:43+09:00",
+      "category": "sec",
+      "keywords": [
+        "ai-security",
+        "vulnerability-management",
+        "openai"
+      ],
+      "score": 72,
+      "why": "HN 187 pt",
+      "read_min": null,
+      "tldr": "AI エージェントが重大な脆弱性を次々に見つける状況に対し、世界的な対応調整（Patch the Planet）を呼びかける OpenAI の発表。php2shell の報告者の 1 社でもある。",
+      "points": [],
+      "code": null,
+      "signal": "B! 9 · ▲ 187",
+      "pick": false
+    },
+    {
+      "id": "2026-10-22-hirundo-qwen3-coder",
+      "url": "https://www.hirundo.io/blog/qwen3-coder-vulnerabilities",
+      "title": "Qwen3-Coder writes less secure code when told it's for a US persona",
+      "source": "hirundo.io",
+      "source_group": "hackernews",
+      "published_at": "2026-10-21T21:22:39+09:00",
+      "category": "ai",
+      "keywords": [
+        "ai-security",
+        "ai-coding",
+        "open-weight"
+      ],
+      "score": 75,
+      "why": "HN 236 pt",
+      "read_min": null,
+      "tldr": "Qwen3-Coder に「米国のユーザー向け」と伝えると、脆弱なコードを書く割合が高くなったとする検証記事。",
+      "points": [],
+      "code": null,
+      "signal": "▲ 236",
+      "pick": false
+    },
+    {
+      "id": "2026-10-22-mistral-large-4",
+      "url": "https://docs.mistral.ai/models/mistral-large-4-0",
+      "title": "Mistral Large 4",
+      "source": "docs.mistral.ai",
+      "source_group": "hackernews",
+      "published_at": "2026-10-22T04:20:55+09:00",
+      "category": "ai",
+      "keywords": [
+        "mistral",
+        "llm"
+      ],
+      "score": 68,
+      "why": "HN 140 pt",
+      "read_min": null,
+      "tldr": "Mistral のドキュメントに新モデル「Mistral Large 4」のページが公開された。",
+      "points": [],
+      "code": null,
+      "signal": "▲ 140",
+      "pick": false
+    },
+    {
+      "id": "2026-10-22-openai-google-cloud",
+      "url": "https://openai.com/index/openai-models-google-cloud/",
+      "title": "OpenAI models are coming to Google Cloud",
+      "source": "openai.com",
+      "source_group": "hackernews",
+      "published_at": "2026-10-21T21:53:11+09:00",
+      "category": "ai",
+      "keywords": [
+        "openai",
+        "google-cloud",
+        "llm"
+      ],
+      "score": 70,
+      "why": "HN 162 pt",
+      "read_min": null,
+      "tldr": "OpenAI のモデルが Google Cloud で提供されると OpenAI が発表した。",
+      "points": [],
+      "code": null,
+      "signal": "B! 1 · ▲ 162",
+      "pick": false
+    },
+    {
+      "id": "2026-10-22-nhk-finance-attacks",
+      "url": "https://news.web.nhk/newsweb/na/nd-20261021de62921",
+      "title": "不正アクセス“金融機関が狙われる段階に変わってきた可能性” | NHKニュース",
+      "source": "news.web.nhk",
+      "source_group": "tech_blog",
+      "published_at": "2026-10-21T18:08:57+09:00",
+      "category": "sec",
+      "keywords": [
+        "security-incident",
+        "data-breach"
+      ],
+      "score": 71,
+      "why": "はてブ 136",
+      "read_min": null,
+      "tldr": "証券会社のシステムへの不正アクセスを受け、専門家が「金融機関が狙われる段階に変わってきた可能性」を指摘し、必要ならシステムの一時停止も含めた対応を求めたと NHK が報じた。",
+      "points": [],
+      "code": null,
+      "signal": "B! 136",
+      "pick": false
+    },
+    {
+      "id": "2026-10-22-zaikei-nikkei-close",
+      "url": "https://www.zaikei.co.jp/article/20261021/874391.html",
+      "title": "日経平均大引け：前日比545.82円高の64621.24円",
+      "source": "財経新聞",
+      "source_group": "news",
+      "published_at": null,
+      "category": "stocks",
+      "keywords": [
+        "nikkei225",
+        "topix"
+      ],
+      "score": 82,
+      "why": "matched: 米国株（市況）・前営業日の終値",
+      "read_min": 2,
+      "tldr": "21 日の日経平均は前日比 545.82 円高（+0.85%）の 64,621.24 円で 3 営業日ぶりに反発し、TOPIX も 0.86% 高の 4,043.73。日中は一時 1,300 円超上げたが後場は伸び悩んだ。",
+      "points": [
+        "始値 64,885.95 円、高値 65,404.63 円、安値 64,558.60 円",
+        "前日は 841 円安で続落しており、AI・半導体関連に買い戻しが入ったと株探などが報道（同記事本文には材料の記載なし）",
+        "米国株は 21 日、S&P 500 が 0.58% 高、NASDAQ が 1.05% 高（市況データ）"
+      ],
+      "code": null,
+      "signal": null,
+      "pick": true
+    },
+    {
+      "id": "2026-10-22-investing-fed-balance-sheet",
+      "url": "https://jp.investing.com/news/stock-market-news/article-93CH-1720199",
+      "title": "連邦準備制度、バランスシートを4.5兆ドルに縮小の可能性＝ブルッキングス研究所",
+      "source": "investing.com",
+      "source_group": "news",
+      "published_at": "2026-10-22T04:30:46+09:00",
+      "category": "macro",
+      "keywords": [
+        "fed",
+        "interest-rates",
+        "us-treasury"
+      ],
+      "score": 78,
+      "why": "matched: 金利",
+      "read_min": 3,
+      "tldr": "ブルッキングス研究所の論文が、金利操作の仕組みと銀行の準備金規制を見直せば FRB のバランスシートを現在の約 6.8 兆ドルから約 4.5 兆ドルに縮小できると試算した。",
+      "points": [
+        "準備金は約 3 兆ドルから約 1 兆ドルへ。GDP 比で 2008 年以降最小の規模になるとする",
+        "前提は、必要に応じて流動性を供給できる金利操作ツールの修正と、銀行が手元資金を減らせる規制調整",
+        "ウォーシュ議長が縮小の選択肢を検討するタスクフォースを設置しており、論文は改革の好機と位置づけている"
+      ],
+      "code": null,
+      "signal": null,
+      "pick": true
+    },
+    {
+      "id": "2026-10-22-investing-meta-nonvoting-shares",
+      "url": "https://jp.investing.com/news/stock-market-news/article-1720197",
+      "title": "Meta Platforms、AI投資の資金調達に無議決権株式の発行を検討",
+      "source": "investing.com",
+      "source_group": "news",
+      "published_at": "2026-10-22T04:25:07+09:00",
+      "category": "stocks",
+      "keywords": [
+        "meta",
+        "us-stocks",
+        "data-center"
+      ],
+      "score": 74,
+      "why": "matched: 米国株",
+      "read_min": 3,
+      "tldr": "Meta が AI インフラ投資の資金調達に向け、議決権のない株式の発行を検討していると Semafor が報じた。早ければ 22 日（米国時間）の 7〜9 月期決算と合わせて発表される可能性がある。",
+      "points": [
+        "議決権のない株式のため、ザッカーバーグ CEO の議決権支配は薄まらない。2014 年の Alphabet の仕組みにならう形",
+        "発行規模は示されていない。買収や人材獲得に株式を使う狙いも伝えられている",
+        "既存株主には経済的な希薄化のリスクがあると記事は指摘。Meta はコメントしていない"
+      ],
+      "code": null,
+      "signal": null,
+      "pick": true
+    },
+    {
+      "id": "2026-10-22-coindesk-btc-spacex-tesla",
+      "url": "https://coindesk.com/ja/markets/2026/10/21/crypto-rises-with-asian-tech-stocks-zcash-extends-gain-after-setting-upgrade-date",
+      "title": "スペースXとテスラが3万BTCを保有し合併を模索する中、ビットコインが上昇：本日の暗号資産市場",
+      "source": "CoinDesk Japan",
+      "source_group": "news",
+      "published_at": null,
+      "category": "crypto",
+      "keywords": [
+        "bitcoin",
+        "bitcoin-treasury"
+      ],
+      "score": 80,
+      "why": "matched: ビットコイン",
+      "read_min": 4,
+      "tldr": "ビットコインはアジアのハイテク株の反発とともに約 83,500 ドルまで上がり、1 週間ぶりの高値を付けた。マスク氏が SpaceX と Tesla の合併協議に向けた特別委員会の設置に触れ、両社の約 3 万 BTC が統合される見通しも材料視された。",
+      "points": [
+        "24 時間で現物 2.6% 高、先物の建玉は約 3% 増。新規資金の流入は限定的とされる",
+        "30 日インプライド・ボラティリティは再び 40% を下回った",
+        "Zcash は 11 月の NU7 アップグレード日程の決定を受けて 24 時間で約 11% 上昇"
+      ],
+      "code": null,
+      "signal": null,
+      "pick": true
+    },
+    {
+      "id": "2026-10-22-diamond-gold-price",
+      "url": "https://diamond.jp/articles/-/401570",
+      "title": "金価格は中東危機でも4100ドル台へ急落！米金利上昇が招くさらなる「下落リスク」 - マーケットフォーカス",
+      "source": "ダイヤモンド",
+      "source_group": "news",
+      "published_at": "2026-10-22T04:25:00+09:00",
+      "category": "macro",
+      "keywords": [
+        "gold",
+        "interest-rates",
+        "crude-oil"
+      ],
+      "score": 66,
+      "why": "matched: 金利",
+      "read_min": null,
+      "tldr": "金価格は 8 月下旬に 1 トロイオンス 4,700 ドル近くまで戻した後、4,100 ドル台に下落。原油高によるインフレ懸念と米金利上昇が背景と解説する記事（本文の大半は有料）。",
+      "points": [],
+      "code": null,
+      "signal": null,
+      "pick": false
+    },
+    {
+      "id": "2026-10-22-nhk-trade-balance-h1",
+      "url": "https://news.web.nhk/newsweb/na/nd-20261021de62600",
+      "title": "今年度上半期の貿易収支 2兆8000億円余の赤字 | NHKニュース",
+      "source": "news.web.nhk",
+      "source_group": "tech_blog",
+      "published_at": "2026-10-21T10:58:17+09:00",
+      "category": "macro",
+      "keywords": [
+        "crude-oil",
+        "jp-fiscal"
+      ],
+      "score": 58,
+      "why": "財務省の貿易統計（報道）",
+      "read_min": null,
+      "tldr": "今年度上半期（4〜9 月）の貿易収支は 2 兆 8,000 億円余りの赤字で、中東情勢を背景としたエネルギー価格の上昇などにより赤字額は前年同期の約 2 倍に拡大した。",
+      "points": [],
+      "code": null,
+      "signal": "B! 14",
+      "pick": false
+    },
+    {
+      "id": "2026-10-22-reuters-anthropic-loss",
+      "url": "https://www.reuters.com/business/anthropic-recorded-net-loss-over-80-billion-first-half-this-year-wsj-reports-2026-10-20/",
+      "title": "Anthropic logged net loss of over $80B in first half of 2026",
+      "source": "reuters.com",
+      "source_group": "hackernews",
+      "published_at": "2026-10-21T05:09:46+09:00",
+      "category": "stocks",
+      "keywords": [
+        "anthropic",
+        "ipo",
+        "ai-economy"
+      ],
+      "score": 62,
+      "why": "HN 183 pt・IPO 関連の続報",
+      "read_min": null,
+      "tldr": "Anthropic が 2026 年上半期に 800 億ドル超の純損失を計上したと WSJ が報じた（ロイター）。IPO 目論見書の草案では、限られた顧客基盤や計算資源の確保などのリスクも示されている（ダイヤモンド／WSJ）。",
+      "points": [],
+      "code": null,
+      "signal": "▲ 183",
+      "pick": false
+    },
+    {
+      "id": "2026-10-22-diamond-france-borrowing",
+      "url": "https://diamond.jp/articles/-/401588",
+      "title": "借り入れコストの高さでギリシャ超え、「フランスの救済は政治的に困難」との説 - KEYWORDで世界を読む",
+      "source": "ダイヤモンド",
+      "source_group": "news",
+      "published_at": "2026-10-22T04:10:00+09:00",
+      "category": "macro",
+      "keywords": [
+        "government-bond",
+        "interest-rates"
+      ],
+      "score": 56,
+      "why": "matched: 金利",
+      "read_min": null,
+      "tldr": "フランスの借り入れコストがギリシャを上回り、「フランスの救済は政治的に困難」との見方も出ていると解説する記事。",
+      "points": [],
+      "code": null,
+      "signal": null,
+      "pick": false
+    },
+    {
+      "id": "2026-10-22-diamond-consumption-tax-miyazawa",
+      "url": "https://diamond.jp/articles/-/401600",
+      "title": "「消費税減税財源の知恵は出し尽くした」自民・宮沢前税制調査会長に聞く、高市積極財政への警告 - 高市政権1年 サナエノミクスの功罪",
+      "source": "ダイヤモンド",
+      "source_group": "news",
+      "published_at": "2026-10-22T04:40:00+09:00",
+      "category": "macro",
+      "keywords": [
+        "consumption-tax",
+        "jp-fiscal"
+      ],
+      "score": 52,
+      "why": "財政・消費税減税の論点",
+      "read_min": null,
+      "tldr": "食料品の消費税減税を掲げる高市政権の積極財政について、自民党の前税制調査会長が財源の問題などを語ったインタビュー。",
+      "points": [],
+      "code": null,
+      "signal": null,
+      "pick": false
+    },
+    {
+      "id": "2026-10-22-asahi-minshu-kaikaku-benefit",
+      "url": "https://www.asahi.com/articles/ASVBN3J85VBNUTFK009M.html",
+      "title": "民主改革、1人に年4万円給付 立憲時代の「消費税ゼロ」から転換：朝日新聞",
+      "source": "asahi.com",
+      "source_group": "tech_blog",
+      "published_at": "2026-10-20T22:27:38+09:00",
+      "category": "macro",
+      "keywords": [
+        "consumption-tax",
+        "jp-fiscal"
+      ],
+      "score": 50,
+      "why": "はてブ 162・消費減税法案の対案",
+      "read_min": null,
+      "tldr": "民主改革の会が、政府の消費減税関連法案への対案として、1 人あたり年 4 万円を給付する案をまとめた。",
+      "points": [],
+      "code": null,
+      "signal": "B! 162",
+      "pick": false
+    },
+    {
+      "id": "2026-10-22-fsa-sec-dialogue",
+      "url": "https://www.fsa.go.jp/inter/etc/20261020.html",
+      "title": "国際関係,「秋季金融庁-米国SEC金融規制対話」の開催について公表しました。",
+      "source": "金融庁",
+      "source_group": "official",
+      "published_at": "2026-10-21T03:00:00+09:00",
+      "category": "macro",
+      "keywords": [
+        "fsa",
+        "sec"
+      ],
+      "score": 48,
+      "why": "金融庁の公式発表",
+      "read_min": null,
+      "tldr": "金融庁が「秋季金融庁-米国 SEC 金融規制対話」の開催を公表した。",
+      "points": [],
+      "code": null,
+      "signal": null,
+      "pick": false
+    },
+    {
+      "id": "2026-10-22-toyokeizai-kids-brokerage",
+      "url": "https://toyokeizai.net/articles/-/960757?utm_source=rss&utm_medium=http&utm_campaign=link_back",
+      "title": "出産祝いとお年玉が｢6歳で200万円｣に！｢子どもの証券口座｣で資産運用した結果…35歳\"サイドFIRE\"の父が実践する投資術 | ライフ | 東洋経済オンライン",
+      "source": "東洋経済",
+      "source_group": "news",
+      "published_at": "2026-10-21T08:30:00+09:00",
+      "category": "funds",
+      "keywords": [
+        "index-fund",
+        "new-nisa"
+      ],
+      "score": 46,
+      "why": "matched: インデックス（資産形成の事例）",
+      "read_min": null,
+      "tldr": "子ども名義の証券口座でお年玉などを運用している個人の事例を紹介する記事。",
+      "points": [],
+      "code": null,
+      "signal": null,
+      "pick": false
+    },
+    {
+      "id": "2026-10-22-diamond-condo-embezzlement",
+      "url": "https://diamond.jp/articles/-/401502",
+      "title": "マンション管理組合資金の「横領」どう防ぐ？管理会社社員や組合理事の犯行が後を絶たず…監事が必ず見るべき「3つの原本」をマンション管理士が解説 - マンション羅針盤 管理＆売買",
+      "source": "ダイヤモンド",
+      "source_group": "news",
+      "published_at": "2026-10-22T04:30:00+09:00",
+      "category": "realestate",
+      "keywords": [
+        "condo-management"
+      ],
+      "score": 44,
+      "why": "マンション管理の論点",
+      "read_min": null,
+      "tldr": "マンション管理組合の資金の横領を防ぐために、監事が確認すべき原本をマンション管理士が解説する記事。",
+      "points": [],
+      "code": null,
+      "signal": null,
+      "pick": false
+    }
+  ],
+  "social": [
+    {
+      "network": "x",
+      "author": "@wiz_io",
+      "url": "https://x.com/wiz_io/status/2112899813264277528",
+      "text": "Wiz Research が php2shell を公表。10 年前からある PHP コアの脆弱性で、CVSS 9.2、インターネットの 70% に影響するとした。",
+      "metrics": null,
+      "heat": null,
+      "category": "sec",
+      "keywords": [
+        "php",
+        "rce"
+      ],
+      "posted_at": "2026-10-21T22:32:00+09:00"
+    },
+    {
+      "network": "x",
+      "author": "@fastly",
+      "url": "https://x.com/fastly/status/2112935567533179306",
+      "text": "Fastly は、保守中の全 PHP バージョンが影響を受け、公表前から実際の攻撃の痕跡があると投稿。",
+      "metrics": null,
+      "heat": null,
+      "category": "sec",
+      "keywords": [
+        "php",
+        "rce"
+      ],
+      "posted_at": "2026-10-22T00:54:00+09:00"
+    },
+    {
+      "network": "x",
+      "author": "@AlmaLinux",
+      "url": "https://x.com/AlmaLinux/status/2112942932881703275",
+      "text": "AlmaLinux 8 / 9 / 10 はいずれも影響を受ける PHP を含んでおり、修正パッケージをテスト用に当日中に出すと告知。",
+      "metrics": null,
+      "heat": null,
+      "category": "sec",
+      "keywords": [
+        "php",
+        "linux"
+      ],
+      "posted_at": "2026-10-22T01:23:00+09:00"
+    },
+    {
+      "network": "x",
+      "author": "@GergelyOrosz",
+      "url": "https://x.com/GergelyOrosz/status/2112837687480623200",
+      "text": "eMudhra は 384 ビットの安全な秘密鍵を作るべきところ、1〜256 の数値を鍵にしていたと驚きを込めて紹介。",
+      "metrics": null,
+      "heat": null,
+      "category": "sec",
+      "keywords": [
+        "tls",
+        "cryptography"
+      ],
+      "posted_at": "2026-10-21T18:25:00+09:00"
+    },
+    {
+      "network": "hn",
+      "author": null,
+      "url": "https://news.ycombinator.com/item?id=50172041",
+      "text": "『Security advisory: Critical remote code execution vulnerabilities, update now』のスレッド。647 件のコメント",
+      "metrics": "▲ 1485  ✉ 647",
+      "heat": 100,
+      "category": "sec",
+      "keywords": [
+        "php",
+        "rce"
+      ],
+      "posted_at": "2026-10-21T05:15:50+09:00"
+    },
+    {
+      "network": "hn",
+      "author": null,
+      "url": "https://news.ycombinator.com/item?id=50165953",
+      "text": "『Introducing tsrs: A port of TypeScript to Rust』のスレッド。209 件のコメント",
+      "metrics": "▲ 426  ✉ 209",
+      "heat": 100,
+      "category": "be",
+      "keywords": [
+        "typescript",
+        "rust"
+      ],
+      "posted_at": "2026-10-20T22:00:00+09:00"
+    },
+    {
+      "network": "hn",
+      "author": null,
+      "url": "https://news.ycombinator.com/item?id=50171966",
+      "text": "『Anthropic logged net loss of over $80B in first half of 2026』のスレッド。90 件のコメント",
+      "metrics": "▲ 183  ✉ 90",
+      "heat": 45,
+      "category": "stocks",
+      "keywords": [
+        "anthropic",
+        "ipo"
+      ],
+      "posted_at": "2026-10-21T05:09:46+09:00"
+    }
+  ],
+  "releases": [
+    {
+      "date": "2026-10-21",
+      "title": "PHP 8.5.12 / 8.4.27 / 8.3.36 / 8.2.35",
+      "repo": "php/php-src",
+      "url": "https://www.php.net/archive/2026.php#2026-10-21-5",
+      "kind": "release",
+      "note": "php2shell（CVE-2026-109618 / 109619）の修正。公式サイトの告知で確認（監視対象の git タグではない）",
+      "category": "sec"
+    },
+    {
+      "date": "2026-10-21",
+      "title": "DuckDB 2.0.0 LTS",
+      "repo": "duckdb/duckdb",
+      "url": "https://duckdb.org/2026/10/21/announcing-duckdb-200",
+      "kind": "release",
+      "note": "LTS。少なくとも 2027 年 10 月までサポート。公式ブログで確認",
+      "category": "be"
+    },
+    {
+      "date": "2026-10-28",
+      "title": "FOMC（10月27〜28日）政策決定・議長会見",
+      "repo": null,
+      "url": "https://www.federalreserve.gov/newsevents/2026-october.htm",
+      "kind": "event",
+      "note": "28 日 14:30（米東部）に会見。日本時間では 29 日未明",
+      "category": "macro"
+    }
+  ]
+}
