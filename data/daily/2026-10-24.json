@@ -1,0 +1,777 @@
+{
+  "date": "2026-10-24",
+  "generated_at": "2026-10-24T05:45:00+09:00",
+  "stats": {
+    "collected": 227,
+    "sources_ok": 25,
+    "sources_total": 26,
+    "by_group": {
+      "hackernews": 48,
+      "tech_blog": 89,
+      "official": 13,
+      "news": 77
+    },
+    "failed_sources": [
+      "coindesk_jp"
+    ]
+  },
+  "digest": [
+    {
+      "category": "ai",
+      "text": "Anthropic と Theorem が、Claude で 123 の OSS ライブラリ（239 エントリポイント）の「クラッシュしない」ことを Rocq の証明で示したと公表した。証明は計約 1.8 億行、過程で数百件のバグを修正。ただし仕様や前提の誤りは検証できないと限界も明記している。",
+      "keywords": [
+        "formal-verification",
+        "claude"
+      ]
+    },
+    {
+      "category": "sec",
+      "text": "PHP の RCE の禁輸期間中に修正の予告を HN に投稿した人物が「禁輸を知らなかった」と謝罪し、698 pt を集めた。同情的な反応が多く、議論は伝達の上流や Chainguard の先行公開に向かっている。",
+      "keywords": [
+        "php",
+        "vulnerability-management"
+      ]
+    },
+    {
+      "category": "sec",
+      "text": "国内の漏えいの続報が重なった。佐川急便は流出のおそれを最大 5,323 万件と公表し、タイムズカーは免許証画像の外部送信が疑われるのべ 146 万人に 1 人 3,000 円の見舞金を出す。パナソニック HD は禁止された生成 AI に約 33 万人分の個人情報が送られたと発表した。",
+      "keywords": [
+        "data-breach"
+      ]
+    },
+    {
+      "category": "macro",
+      "text": "日銀の金融システムレポートは、金融システムは全体として安定と評価した。そのうえで、AI 投資の期待後退による株価調整、三大都市圏の不動産価格の上昇、35 年超の住宅ローンの増加、地域銀行の預金の不安定化をリスクに挙げた。",
+      "keywords": [
+        "boj-policy",
+        "real-estate-prices",
+        "mortgage-rates"
+      ]
+    },
+    {
+      "category": "crypto",
+      "text": "メタの決算をきっかけに AI 関連株が売られ、半導体株指数は 6.7% 安。ビットコインは一時 8 万 1,000 ドルを割り、現物 ETF は 22 日に 6.35 億ドルの純流出だった（CoinPost）。23 日の日経平均は一時 1,445 円安のあと、終値は 215 円安の 6 万 2,693 円。投信の 10 月分の資金フローと住宅ローン金利の新しい発表は確認できなかった。",
+      "keywords": [
+        "bitcoin",
+        "bitcoin-etf",
+        "semiconductor"
+      ]
+    }
+  ],
+  "items": [
+    {
+      "id": "2026-10-24-anthropic-formal-verif",
+      "url": "https://www.anthropic.com/research/formal-verification",
+      "title": "LLMs are making formal software verification feasible at a much larger scale",
+      "source": "tech",
+      "source_group": "tech_blog",
+      "published_at": "2026-10-23T11:02:59+09:00",
+      "category": "ai",
+      "keywords": [
+        "formal-verification",
+        "claude",
+        "anthropic",
+        "memory-safety"
+      ],
+      "score": 93,
+      "why": "HN 435 pt・はてブ 17",
+      "read_min": 15,
+      "tldr": "Anthropic と Theorem が、Claude を使って 123 の OSS ライブラリの 239 エントリポイントについて「64 MB 以下のどんな入力でもクラッシュしない」ことを機械検証可能な証明（Rocq）で示したと公表した。証明は合計約 1 億 8,000 万行で、作業期間は数週間。",
+      "points": [
+        "OSS-Fuzz のファズテストを仕様に変換し、RISC-V の実行ファイルと Linux の意味論をもとに Claude が証明を書き、Rocq で検査する。途中で数百件のバグを見つけて修正した（libexpat の CVE-2026-56132 の再発見を含む）",
+        "証明は数億トークンかかることもあり、コストが課題。36 件の小課題では Opus 5.5 が Opus 5 より約 40% 少ないトークンで半数を証明し、作業場所を共有するエージェントはさらに 17% 少なかった",
+        "「形式検証済み＝バグなし」ではないと明記。仕様や機械の意味論の誤り、x86/ARM・glibc との差、検証していない入口などの限界を挙げ、未修正のバグが分かる証明は公開を控える"
+      ],
+      "code": null,
+      "signal": "B! 17 · ▲ 435",
+      "pick": true
+    },
+    {
+      "id": "2026-10-24-localwiki",
+      "url": "https://edjefferson.com/localwiki/",
+      "title": "Local Wikipedia: Wikipedia, but only for things a half hour walk from you",
+      "source": "tech",
+      "source_group": "hackernews",
+      "published_at": "2026-10-23T08:01:18+09:00",
+      "category": "be",
+      "keywords": [
+        "wikipedia",
+        "privacy"
+      ],
+      "score": 95,
+      "why": "HN 1,071 pt",
+      "read_min": 3,
+      "tldr": "現在地や地名から、歩いて 30 分ほどの範囲にある位置情報付きの Wikipedia 記事を一覧する個人制作のサイト。Wikipedia 本体とは無関係と明記している。",
+      "points": [
+        "対象は座標が付いた Wikipedia 記事だけ。徒歩 30 分圏で 25 件未満なら約 6 マイル以内の近い 25 件、500 件を超えたら近い 500 件に絞る",
+        "位置情報はブラウザ内にとどまり、共有リンクには含まれないと説明している",
+        "A〜Z の索引、距離順、ランダム表示、別の地域を試す機能がある。実装技術はページに書かれていない"
+      ],
+      "code": null,
+      "signal": "B! 1 · ▲ 1071",
+      "pick": true
+    },
+    {
+      "id": "2026-10-24-docker-is-weird",
+      "url": "https://codeandcake.dev/posts/2026-10-22-docker-is-weird",
+      "title": "Docker is weird",
+      "source": "tech",
+      "source_group": "hackernews",
+      "published_at": "2026-10-23T08:45:56+09:00",
+      "category": "cloud",
+      "keywords": [
+        "docker",
+        "linux",
+        "sandbox"
+      ],
+      "score": 91,
+      "why": "HN 802 pt",
+      "read_min": 8,
+      "tldr": "小さなコンテナランタイムを自作している筆者が、Docker の内部の「変なところ」を解説した記事。コンテナは VM ではなく制限付きの普通のプロセスで、イメージはただのディレクトリだと説明する。",
+      "points": [
+        "コンテナは単一の機能ではなく、namespace・cgroup・ネットワーク分離など約 5 つのカーネル機能の組み合わせ。ホストの /proc から普通のプロセスとして見える",
+        "イメージは展開したフォルダで、chroot / pivot_root でプロセスのルートにする。Go はマルチスレッドで fork もできないため、runc は C の nsenter を Go ランタイム起動前に動かし、/proc/self/exe を再実行して fork の代わりにしている",
+        "多くのカーネル API が root を要するためデーモンは root で動くのが普通。rootless も進んだが、ネットワークはユーザー空間で作り直す必要がある"
+      ],
+      "code": null,
+      "signal": "B! 2 · ▲ 802",
+      "pick": true
+    },
+    {
+      "id": "2026-10-24-hn-php-embargo",
+      "url": "https://news.ycombinator.com/item?id=50193416",
+      "title": "Tell HN: I unknowingly broke the PHP RCE embargo. I am sorry",
+      "source": "news.ycombinator.com",
+      "source_group": "hackernews",
+      "published_at": "2026-10-22T19:11:44+09:00",
+      "category": "sec",
+      "keywords": [
+        "php",
+        "rce",
+        "vulnerability-management"
+      ],
+      "score": 90,
+      "why": "HN 698 pt。同じ話題の Amazon の PHP2Shell 事前悪用の報告（HN 267 pt）・コドモンの対応記（はてブ 167）をまとめた",
+      "read_min": 10,
+      "tldr": "PHP の RCE（CVE-2026-109618 / 109619）の禁輸期間中に、近く出る修正について HN に投稿した人物が「禁輸を知らずに破ってしまった」と謝罪した。投稿者は、知人から禁輸はないと聞いていたと説明している。",
+      "points": [
+        "投稿者は PHP を 4 週間ごとにソースからビルドしており、同じ立場の人に更新の緊急性を知らせるつもりで投稿したという",
+        "コメントは同情的なものが多く、知らなかった禁輸は破りようがない、責任は伝達の上流にあるという意見が目立つ。対策の時間ができたと感謝する声もある",
+        "Chainguard の先行公開への批判や、「responsible disclosure」と「coordinated disclosure」のどちらの呼び方が適切かという議論も出ている"
+      ],
+      "code": null,
+      "signal": "B! 1 · ▲ 698",
+      "pick": true
+    },
+    {
+      "id": "2026-10-24-modelcompare-controversial",
+      "url": "https://www.modelcompare.ai/blog/ai-models-controversial-take-on-humans",
+      "title": "Every AI model has the same \"controversial\" take on humans",
+      "source": "tech",
+      "source_group": "hackernews",
+      "published_at": "2026-10-23T01:08:00+09:00",
+      "category": "ai",
+      "keywords": [
+        "llm",
+        "ai-safety"
+      ],
+      "score": 88,
+      "why": "HN 605 pt",
+      "read_min": 7,
+      "tldr": "13 の言語モデルに「人間についての一番物議を醸す意見」を 3 回ずつ聞いたところ、多くが「人は真実や原則より所属や地位、自分の物語を優先する」という同じ答えに収束したという実験。",
+      "points": [
+        "拒否を除く 38 回答のうち 32 回が同じ趣旨で、13 モデル中 8 モデルは 3 回とも同じだった。全 64 回の呼び出し費用は 1.64 ドル",
+        "画像モデルでは 12 枚中 10 枚が「スマホ漬けで地球を傷つける人間」という別の共通ネタを描き、テキストの回答とは一致しなかった",
+        "筆者は、似た文章で学習したモデルは同じ考えに収束しやすく、複数モデルでブレストしても多様性はあまり増えないと論じている"
+      ],
+      "code": null,
+      "signal": "B! 2 · ▲ 605",
+      "pick": true
+    },
+    {
+      "id": "2026-10-24-pwn-watch",
+      "url": "https://pwn.watch/",
+      "title": "pwn.watch · live security incidents",
+      "source": "tech",
+      "source_group": "tech_blog",
+      "published_at": "2026-10-23T21:54:57+09:00",
+      "category": "sec",
+      "keywords": [
+        "security-incident"
+      ],
+      "score": 91,
+      "why": "HN 374 pt・はてブ 8",
+      "read_min": null,
+      "tldr": "進行中のセキュリティインシデントをまとめて表示するサイト。メール通知の登録もできる（本文となる記事はないため pick にしていない）。",
+      "points": [],
+      "code": null,
+      "signal": "B! 8 · ▲ 374",
+      "pick": false
+    },
+    {
+      "id": "2026-10-24-calif-iphone",
+      "url": "https://blog.calif.io/p/iphone",
+      "title": "Today, we hacked what we'd set out to hack: the iPhone",
+      "source": "tech",
+      "source_group": "hackernews",
+      "published_at": "2026-10-24T01:21:50+09:00",
+      "category": "sec",
+      "keywords": [
+        "ios",
+        "vulnerability-management"
+      ],
+      "score": 86,
+      "why": "HN 534 pt",
+      "read_min": null,
+      "tldr": "Calif が Hexacon（パリ）で iPhone への攻撃デモを行ったと告知した短い投稿。Signal の 1 クリック攻撃などのデモ名が並ぶが、iOS のバージョンや技術的な詳細は「いずれ公開する」としている。",
+      "points": [],
+      "code": null,
+      "signal": "▲ 534",
+      "pick": false
+    },
+    {
+      "id": "2026-10-24-nvidia-openshell",
+      "url": "https://github.com/NVIDIA/OpenShell",
+      "title": "OpenShell – A safe, private runtime for fleets of autonomous AI agents",
+      "source": "tech",
+      "source_group": "hackernews",
+      "published_at": "2026-10-23T02:44:06+09:00",
+      "category": "ai",
+      "keywords": [
+        "ai-agent",
+        "sandbox",
+        "nvidia",
+        "kubernetes"
+      ],
+      "score": 85,
+      "why": "HN 487 pt",
+      "read_min": null,
+      "tldr": "NVIDIA が、自律 AI エージェントをサンドボックスで動かすランタイム OpenShell を Apache 2.0 で公開した。ファイル・ネットワーク・プロセスをポリシーで制限し、認証情報は許可した宛先へのリクエストにだけ付ける。",
+      "points": [],
+      "code": null,
+      "signal": "B! 6 · ▲ 487",
+      "pick": false
+    },
+    {
+      "id": "2026-10-24-kimi-k31-pro",
+      "url": "https://www.kimi.ai/blog/kimi-k3-1-pro",
+      "title": "Kimi K3.1 Pro and K3.1 Pro Highspeed",
+      "source": "tech",
+      "source_group": "hackernews",
+      "published_at": "2026-10-24T01:59:08+09:00",
+      "category": "ai",
+      "keywords": [
+        "llm"
+      ],
+      "score": 84,
+      "why": "HN 450 pt",
+      "read_min": null,
+      "tldr": "Moonshot AI が Kimi K3.1 Pro と高速版の K3.1 Pro Highspeed を発表した（本文は未読）。",
+      "points": [],
+      "code": null,
+      "signal": "▲ 450",
+      "pick": false
+    },
+    {
+      "id": "2026-10-24-keep-android-open",
+      "url": "https://keepandroidopen.org/?",
+      "title": "Your Phone Is About to Stop Being Yours: 70 Days Until Lockdown",
+      "source": "tech",
+      "source_group": "hackernews",
+      "published_at": "2026-10-23T22:19:42+09:00",
+      "category": "sec",
+      "keywords": [
+        "android",
+        "privacy"
+      ],
+      "score": 84,
+      "why": "HN 471 pt・はてブ 8",
+      "read_min": null,
+      "tldr": "Android のアプリ配布の制限（開発者登録の義務化）に反対するキャンペーンサイトが、施行まで 70 日と呼びかけている（本文は未読）。",
+      "points": [],
+      "code": null,
+      "signal": "B! 8 · ▲ 471",
+      "pick": false
+    },
+    {
+      "id": "2026-10-24-nikkei-timescar",
+      "url": "https://www.nikkei.com/article/DGXZQOUC231CP0T21C26A0000000/",
+      "title": "タイムズカー免許証画像流出、「お見舞い」1人3000円 146万人が対象 - 日本経済新聞",
+      "source": "tech",
+      "source_group": "tech_blog",
+      "published_at": "2026-10-23T17:20:32+09:00",
+      "category": "sec",
+      "keywords": [
+        "data-breach",
+        "kyc"
+      ],
+      "score": 81,
+      "why": "はてブ 269",
+      "read_min": null,
+      "tldr": "パーク24は、タイムズカーへの不正アクセスで免許証などの本人確認書類の画像が外部送信されたとみられる人に、1 人 3,000 円の見舞金を払うと発表した。対象はのべ 146 万人あまり。",
+      "points": [],
+      "code": null,
+      "signal": "B! 269",
+      "pick": false
+    },
+    {
+      "id": "2026-10-24-nvd-emudhra-cve",
+      "url": "https://nvd.nist.gov/vuln/detail/cve-2026-111943",
+      "title": "CVE-2026-111943: Compromised Intermediate Certificate Authority",
+      "source": "tech",
+      "source_group": "hackernews",
+      "published_at": "2026-10-22T17:51:31+09:00",
+      "category": "sec",
+      "keywords": [
+        "tls",
+        "certificate-authority"
+      ],
+      "score": 80,
+      "why": "HN 335 pt。eMudhra が Mozilla の調査期限を守らなかった件（HN 188 pt）・OTP ログインの回避（HN 185 pt）をまとめた",
+      "read_min": null,
+      "tldr": "eMudhra の中間 CA が侵害された件に CVE-2026-111943 が付いた。HN では、eMudhra が Mozilla の調査期限に応じなかったことや、同社のログインの OTP を回避できたという報告も話題になっている（いずれも本文は未読）。",
+      "points": [],
+      "code": null,
+      "signal": "B! 1 · ▲ 335",
+      "pick": false
+    },
+    {
+      "id": "2026-10-24-nhk-sagawa",
+      "url": "https://news.web.nhk/newsweb/na/nd-20261023de64285",
+      "title": "佐川急便 流出した個人情報は最大5300万件超の可能性 | NHKニュース",
+      "source": "tech",
+      "source_group": "tech_blog",
+      "published_at": "2026-10-23T16:16:43+09:00",
+      "category": "sec",
+      "keywords": [
+        "data-breach",
+        "security-incident"
+      ],
+      "score": 79,
+      "why": "はてブ 240。ITmedia の続報（はてブ 32）もまとめた",
+      "read_min": null,
+      "tldr": "佐川急便は、不正アクセスで流出したおそれのある個人情報が、荷物の送り主と送り先の氏名・住所など最大 5,323 万件に上る可能性があると明らかにした。",
+      "points": [],
+      "code": null,
+      "signal": "B! 240",
+      "pick": false
+    },
+    {
+      "id": "2026-10-24-sr-sweden-ai-ban",
+      "url": "https://www.sverigesradio.se/artikel/chat-gpt-och-claude-forbjuder-regeringskansliet",
+      "title": "Swedish government offices to ban ChatGPT and Claude",
+      "source": "tech",
+      "source_group": "hackernews",
+      "published_at": "2026-10-23T20:39:54+09:00",
+      "category": "ai",
+      "keywords": [
+        "ai-regulation",
+        "openai",
+        "claude"
+      ],
+      "score": 78,
+      "why": "HN 309 pt",
+      "read_min": null,
+      "tldr": "スウェーデンの政府機関（Regeringskansliet）が ChatGPT と Claude の利用を禁止すると Sveriges Radio が報じた（本文は未読）。",
+      "points": [],
+      "code": null,
+      "signal": "▲ 309",
+      "pick": false
+    },
+    {
+      "id": "2026-10-24-nikkei-panasonic-genai",
+      "url": "https://www.nikkei.com/article/DGXZQOUF237Z60T21C26A0000000/",
+      "title": "パナソニックHD、利用禁止の生成AIに従業員らの情報送出 33万人分 - 日本経済新聞",
+      "source": "tech",
+      "source_group": "tech_blog",
+      "published_at": "2026-10-23T19:56:07+09:00",
+      "category": "sec",
+      "keywords": [
+        "data-breach",
+        "ai-security",
+        "privacy"
+      ],
+      "score": 75,
+      "why": "はてブ 182",
+      "read_min": null,
+      "tldr": "パナソニック HD は、社内で禁止している外部の生成 AI サービスに、グループの従業員や家族らの個人情報約 33 万人分が送られたと発表した。不正アクセスではなく、従業員が社内ルールに反してアップロードしたという。",
+      "points": [],
+      "code": null,
+      "signal": "B! 182",
+      "pick": false
+    },
+    {
+      "id": "2026-10-24-boj-fsr",
+      "url": "http://www.boj.or.jp/research/brp/fsr/fsr261023.htm",
+      "title": "金融システムレポート（2026年10月号）",
+      "source": "boj.or.jp",
+      "source_group": "official",
+      "published_at": "2026-10-23T15:00:00+09:00",
+      "category": "macro",
+      "keywords": [
+        "boj-policy",
+        "real-estate-prices",
+        "regional-banks",
+        "mortgage-rates"
+      ],
+      "score": 90,
+      "why": "日銀の公式発表。matched: 金利, 住宅ローン",
+      "read_min": 20,
+      "tldr": "日銀の金融システムレポート（2026 年 10 月号）は、金融システムは全体として安定を保っていると評価した。リーマン級のショックや、原油高・AI 期待の後退・金利急上昇の複合ストレスにも耐えられる資本と資金調達があるとしている。",
+      "points": [
+        "株価は AI 関連需要でトレンドを上回るが PER は 2008 年以降の平均程度。AI 投資が収益に見合わなければ調整の可能性がある。三大都市圏の不動産価格は上昇ペースが速まり、利回り差が縮んでいるため注視が必要とした",
+        "海外では AI データセンター投資の資金をファンドなどノンバンクが担う割合が増えており、AI 期待が剥落すると日本の銀行・投資家にも波及しうると指摘",
+        "家計は変動金利の上昇を賃上げが和らげているが、35 年超の超長期住宅ローンの増加に注意。地域銀行の円債含み損は拡大、高金利で集めた預金は金利に敏感で不安定になりうるとした"
+      ],
+      "code": null,
+      "signal": null,
+      "pick": true
+    },
+    {
+      "id": "2026-10-24-coinpost-btc-81k",
+      "url": "https://coinpost.jp/?p=744436",
+      "title": "ビットコイン8万1000ドル台に下落、米メタ決算でAI株安",
+      "source": "coinpost.jp",
+      "source_group": "news",
+      "published_at": "2026-10-23T18:05:44+09:00",
+      "category": "crypto",
+      "keywords": [
+        "bitcoin",
+        "bitcoin-etf",
+        "semiconductor",
+        "nikkei225"
+      ],
+      "score": 88,
+      "why": "matched: ビットコイン, 米国株, 金利",
+      "read_min": 10,
+      "tldr": "ビットコインは 22 日の米国時間に一時 8 万 1,000 ドルを割り込み、23 日は 8 万 1,500 ドル前後。メタの決算をきっかけに AI 関連株が売られ、フィラデルフィア半導体株指数は 6.7% 下落した。",
+      "points": [
+        "メタは売上高が予想を上回ったが、AI 投資で設備投資見通しを 1,350〜1,450 億ドルに引き上げ、株価は 6.98% 安。ナスダック総合は 2.6% 安、米 10 年債利回りは 4.95% と 9 月 23 日以来の 5% 割れ",
+        "現物ビットコイン ETF は 22 日に 6 億 3,549 万ドルの純流出で、10 月で最大。Fear & Greed Index は 68 から 50 に下がった",
+        "23 日の日経平均は一時 1,445 円安まで下げたあと、終値は 215 円安の 6 万 2,693 円。記事は FOMC（28 日）と日銀会合（29〜30 日）、中東情勢と原油高を注目点に挙げている"
+      ],
+      "code": null,
+      "signal": null,
+      "pick": true
+    },
+    {
+      "id": "2026-10-24-investing-ny-fx",
+      "url": "https://jp.investing.com/news/forex-news/article-1724097",
+      "title": "10月23日のNY為替概況",
+      "source": "jp.investing.com",
+      "source_group": "news",
+      "published_at": "2026-10-24T05:00:03+09:00",
+      "category": "macro",
+      "keywords": [
+        "fx",
+        "crude-oil",
+        "us-inflation"
+      ],
+      "score": 80,
+      "why": "matched: 為替",
+      "read_min": 3,
+      "tldr": "23 日の NY 外為市場でドル円は 156 円 30 銭まで下げたあと 157 円 08 銭まで上昇した。中東情勢の緊迫で原油が上がり、米長期金利の上昇とともにドル買いが優勢だった。",
+      "points": [
+        "米 10 月の製造業 PMI 速報値は 56.0 で予想（55.5）を上回り、サービス業は 57.9、総合は 57.6",
+        "ミシガン大学消費者信頼感指数の 10 月確定値は 48.0 で速報値（46.3）から上方修正。1 年先の期待インフレ率は 4.7%、5〜10 年先は 3.5% で据え置き",
+        "ユーロドルは 1.1212 ドルまで上げたあと 1.1190 ドルまで下落。週末のフランスの大規模抗議行動を控えた財政・政局不安がユーロの重しになった"
+      ],
+      "code": null,
+      "signal": null,
+      "pick": true
+    },
+    {
+      "id": "2026-10-24-coinpost-ldp-cyber",
+      "url": "https://coinpost.jp/?p=744293",
+      "title": "自民党、「サイバー有事前夜」と提言 暗号資産の追跡や耐量子暗号を明記",
+      "source": "coinpost.jp",
+      "source_group": "news",
+      "published_at": "2026-10-23T10:30:01+09:00",
+      "category": "crypto",
+      "keywords": [
+        "post-quantum",
+        "crypto-regulation",
+        "cryptography"
+      ],
+      "score": 70,
+      "why": "matched: ビットコイン",
+      "read_min": 5,
+      "tldr": "自民党の国家サイバーセキュリティ戦略本部の提言が 22 日に党政調審議会で了承された。現状を「サイバー有事前夜」と位置づけ、官邸主導の「サイバー対処本部（仮称）」の設置を柱にしている。",
+      "points": [
+        "警察庁には、FBI やユーロポールとの国際共同捜査への参加や、攻撃者のインフラの無害化、不正に得た暗号資産の追跡を積極的に行うよう求めた",
+        "政府機関に耐量子計算機暗号（PQC）への移行を急ぐよう求め、優先度の高いシステムには早めの期限を設けるべきだとした。ビットコインの電子署名にも同様の課題があると記事は指摘",
+        "AI による攻撃の自律化に警戒し、近い将来「AI のサイバー飽和攻撃」が現実になると警告している"
+      ],
+      "code": null,
+      "signal": null,
+      "pick": true
+    },
+    {
+      "id": "2026-10-24-fsa-tsumitate-list",
+      "url": "https://www.fsa.go.jp/policy/nisa2/products/index.html",
+      "title": "その他,つみたて投資枠対象商品届出一覧及びつみたて投資枠対象商品の概要を更新しました。",
+      "source": "fsa.go.jp",
+      "source_group": "official",
+      "published_at": "2026-10-24T02:00:00+09:00",
+      "category": "funds",
+      "keywords": [
+        "new-nisa",
+        "index-fund",
+        "fsa"
+      ],
+      "score": 75,
+      "why": "金融庁の公式発表。matched: nisa",
+      "read_min": null,
+      "tldr": "金融庁がつみたて投資枠の対象商品の届出一覧と概要を更新した（追加された商品は未確認）。",
+      "points": [],
+      "code": null,
+      "signal": null,
+      "pick": false
+    },
+    {
+      "id": "2026-10-24-coinpost-metaplanet-holders",
+      "url": "https://coinpost.jp/?p=744491",
+      "title": "モルガン・スタンレー系3社、メタプラネット株を大量保有 証券業務関連などの目的で",
+      "source": "coinpost.jp",
+      "source_group": "news",
+      "published_at": "2026-10-24T05:00:59+09:00",
+      "category": "crypto",
+      "keywords": [
+        "bitcoin-treasury",
+        "bitcoin"
+      ],
+      "score": 65,
+      "why": "matched: ビットコイン。BofA 系 4 社の 5.31% 保有の記事もまとめた",
+      "read_min": null,
+      "tldr": "モルガン・スタンレー系 3 社がメタプラネット株を 5.25% 共同保有したとする大量保有報告書を 22 日に提出した。同じ日にバンク・オブ・アメリカ系 4 社も 5.31% 保有を報告している。",
+      "points": [],
+      "code": null,
+      "signal": null,
+      "pick": false
+    },
+    {
+      "id": "2026-10-24-coinpost-jpm-clarity",
+      "url": "https://coinpost.jp/?p=744481",
+      "title": "JPモルガン、クラリティー法案が前進しなかった悪影響を規制当局が一部相殺と分析 今後の課題は？",
+      "source": "coinpost.jp",
+      "source_group": "news",
+      "published_at": "2026-10-23T21:45:37+09:00",
+      "category": "crypto",
+      "keywords": [
+        "crypto-regulation"
+      ],
+      "score": 60,
+      "why": "matched: ビットコイン（暗号資産規制）",
+      "read_min": null,
+      "tldr": "JP モルガンのアナリストは、クラリティー法案が上院で頓挫した悪影響を、規制当局の最近の措置が一部相殺しているとの見方を示した。市場構造法がなければ政治・法的リスクは残るとしている。",
+      "points": [],
+      "code": null,
+      "signal": null,
+      "pick": false
+    },
+    {
+      "id": "2026-10-24-nikkei-megabank-kyc",
+      "url": "https://www.nikkei.com/article/DGXZQOUB224DA0S6A021C2000000/",
+      "title": "3メガバンク、免許証での本人確認を廃止 前倒しで不正対策 - 日本経済新聞",
+      "source": "tech",
+      "source_group": "tech_blog",
+      "published_at": "2026-10-23T16:25:39+09:00",
+      "category": "macro",
+      "keywords": [
+        "kyc",
+        "fraud-prevention"
+      ],
+      "score": 55,
+      "why": "はてブ 30。銀行の本人確認",
+      "read_min": null,
+      "tldr": "3 メガバンクは、オンライン口座開設での運転免許証の顔写真による本人確認を廃止し、マイナンバーカードなどの IC チップ読み取りに切り替えた。2027 年 4 月の法改正を待たずに前倒しした。",
+      "points": [],
+      "code": null,
+      "signal": "B! 30",
+      "pick": false
+    },
+    {
+      "id": "2026-10-24-coinpost-progmat-jgb",
+      "url": "https://coinpost.jp/?p=744103",
+      "title": "国債トークン化、実機で「経済合理性」検証へ Progmat齊藤氏",
+      "source": "coinpost.jp",
+      "source_group": "news",
+      "published_at": "2026-10-23T12:00:54+09:00",
+      "category": "macro",
+      "keywords": [
+        "tokenization",
+        "jgb"
+      ],
+      "score": 55,
+      "why": "matched: 設計（国債のトークン化）",
+      "read_min": null,
+      "tldr": "Progmat 主催の DCC が、トークン化国債とオンチェーンレポの中間整理を公表した。国債の法的性質を変えずに管理をオンチェーン化する方式を主案とし、11 月開始を目標にカントン・ネットワークで実機検証に移る。",
+      "points": [],
+      "code": null,
+      "signal": null,
+      "pick": false
+    },
+    {
+      "id": "2026-10-24-diamond-midterm-stocks",
+      "url": "https://diamond.jp/articles/-/401717",
+      "title": "米中間選挙が招く「政治停滞」こそが株高材料、米著名投資家が日本株にも強気な理由 - トランプ中間選挙 経済・市場・政策はどうなる？",
+      "source": "diamond.jp",
+      "source_group": "news",
+      "published_at": "2026-10-24T04:50:00+09:00",
+      "category": "stocks",
+      "keywords": [
+        "us-stocks",
+        "nikkei225"
+      ],
+      "score": 55,
+      "why": "matched: 米国株",
+      "read_min": null,
+      "tldr": "米著名投資家ケン・フィッシャー氏が、11 月の米中間選挙後の「政治の停滞」を株式の追い風とみる理由を語ったインタビュー（本文は未読、同氏の見解の紹介）。",
+      "points": [],
+      "code": null,
+      "signal": null,
+      "pick": false
+    },
+    {
+      "id": "2026-10-24-toyokeizai-ipo-decline",
+      "url": "https://toyokeizai.net/articles/-/962103?utm_source=rss&utm_medium=http&utm_campaign=link_back",
+      "title": "Mujin､SmartHR､WHILL…資金調達二極化､IPO急減で｢選別の時代｣に本格突入､成熟ベンチャーが打つ次の一手 | ビジネス | 東洋経済オンライン",
+      "source": "toyokeizai.net",
+      "source_group": "news",
+      "published_at": "2026-10-23T18:00:00+09:00",
+      "category": "stocks",
+      "keywords": [
+        "ipo"
+      ],
+      "score": 45,
+      "why": "matched: 株式（IPO 市場）",
+      "read_min": null,
+      "tldr": "スタートアップの資金調達が二極化し、IPO が急減するなか、上場を急がない成熟ベンチャーの戦略や M&A など新しい出口づくりを取り上げた特集記事（本文は未読）。",
+      "points": [],
+      "code": null,
+      "signal": null,
+      "pick": false
+    }
+  ],
+  "social": [
+    {
+      "network": "x",
+      "author": "@AnthropicAI",
+      "url": "https://x.com/AnthropicAI/status/2113390212911083894",
+      "text": "Frontier Red Team のブログで、Claude を使って大規模なソフトウェアを形式検証した取り組みを紹介。これまで小さなコードでしか現実的でなかった検証を AI で広げられるとしている。",
+      "metrics": null,
+      "heat": null,
+      "category": "ai",
+      "keywords": [
+        "formal-verification",
+        "claude"
+      ],
+      "posted_at": "2026-10-23T07:01:06+09:00"
+    },
+    {
+      "network": "x",
+      "author": "@Sans_Google",
+      "url": "https://x.com/Sans_Google/status/2113326765678465386",
+      "text": "Quad9 は裁判所の命令でサイトをブロックするより、フランスから撤退することを選んだと紹介。11 月 24 日からフランス国内では使えなくなる。",
+      "metrics": null,
+      "heat": null,
+      "category": "cloud",
+      "keywords": [
+        "dns"
+      ],
+      "posted_at": "2026-10-23T02:48:59+09:00"
+    },
+    {
+      "network": "hn",
+      "author": null,
+      "url": "https://news.ycombinator.com/item?id=50202681",
+      "text": "『Docker is weird』のスレッド。332 件のコメント",
+      "metrics": "▲ 802  ✉ 332",
+      "heat": 100,
+      "category": "cloud",
+      "keywords": [
+        "docker",
+        "linux"
+      ],
+      "posted_at": "2026-10-23T08:45:56+09:00"
+    },
+    {
+      "network": "hn",
+      "author": null,
+      "url": "https://news.ycombinator.com/item?id=50193416",
+      "text": "『Tell HN: I unknowingly broke the PHP RCE embargo. I am sorry』のスレッド。247 件のコメント",
+      "metrics": "▲ 698  ✉ 247",
+      "heat": 100,
+      "category": "sec",
+      "keywords": [
+        "php",
+        "rce"
+      ],
+      "posted_at": "2026-10-22T19:11:44+09:00"
+    },
+    {
+      "network": "hn",
+      "author": null,
+      "url": "https://news.ycombinator.com/item?id=50197313",
+      "text": "『Every AI model has the same \"controversial\" take on humans』のスレッド。580 件のコメント",
+      "metrics": "▲ 605  ✉ 580",
+      "heat": 100,
+      "category": "ai",
+      "keywords": [
+        "llm"
+      ],
+      "posted_at": "2026-10-23T01:08:00+09:00"
+    },
+    {
+      "network": "hn",
+      "author": null,
+      "url": "https://news.ycombinator.com/item?id=50202217",
+      "text": "『LLMs are making formal software verification feasible at a much larger scale』のスレッド。275 件のコメント",
+      "metrics": "▲ 435  ✉ 275",
+      "heat": 100,
+      "category": "ai",
+      "keywords": [
+        "formal-verification"
+      ],
+      "posted_at": "2026-10-23T11:02:59+09:00"
+    }
+  ],
+  "releases": [
+    {
+      "date": "2026-10-23",
+      "title": "OpenSSL 4.1.0",
+      "repo": "openssl/openssl",
+      "url": "https://github.com/openssl/openssl/releases/tag/openssl-4.1.0",
+      "kind": "release",
+      "note": "監視対象の git タグではなく HN（170 pt）で確認。内容は未確認",
+      "category": "sec"
+    },
+    {
+      "date": "2026-10-23",
+      "title": "Ruby の正規表現エンジン Onigmo の RCE 修正（Ruby 4.0.9 / 3.4.12 / 3.3.13）",
+      "repo": null,
+      "url": "https://forest.watch.impress.co.jp/docs/news/2150800.html",
+      "kind": "release",
+      "note": "窓の杜の見出しで確認（GitLab が発見）。本文は未読",
+      "category": "sec"
+    },
+    {
+      "date": "2026-10-28",
+      "title": "FOMC（10月27〜28日）政策決定・議長会見",
+      "repo": null,
+      "url": "https://www.federalreserve.gov/newsevents/2026-october.htm",
+      "kind": "event",
+      "note": "日本時間では 29 日未明の発表",
+      "category": "macro"
+    },
+    {
+      "date": "2026-10-30",
+      "title": "日銀 金融政策決定会合（10月29〜30日）・総裁会見",
+      "repo": null,
+      "url": "https://www.boj.or.jp/announcements/calendar/index.htm",
+      "kind": "event",
+      "note": "日銀の公表日程で確認。総裁の定例会見は 30 日 15:30 から",
+      "category": "macro"
+    }
+  ]
+}
