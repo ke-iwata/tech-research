@@ -1,0 +1,779 @@
+{
+  "date": "2026-10-25",
+  "generated_at": "2026-10-25T05:45:00+09:00",
+  "stats": {
+    "collected": 202,
+    "sources_ok": 25,
+    "sources_total": 26,
+    "by_group": {
+      "hackernews": 44,
+      "tech_blog": 75,
+      "official": 8,
+      "news": 75
+    },
+    "failed_sources": [
+      "coindesk_jp"
+    ]
+  },
+  "digest": [
+    {
+      "category": "sec",
+      "text": "Brotli デコーダの脆弱性 CVE-2026-111497 が Node.js から Python・Bun・Envoy・curl などへ広がり「HTTP2Shell」と呼ばれ始めた。Brotli 1.2.1 などへの更新と、br エンコーディングの遮断が勧められている。",
+      "keywords": [
+        "rce",
+        "vulnerability-management"
+      ]
+    },
+    {
+      "category": "sec",
+      "text": "GMO の「お名前.com デスクトップクラウド」事件は第 4 報で金銭要求と脅迫が判明。全利用者に 5,000 円の見舞金と損失補償を決め、政府に能動的サイバー防御の措置を要請した。",
+      "keywords": [
+        "security-incident",
+        "ransomware"
+      ]
+    },
+    {
+      "category": "ai",
+      "text": "Block がテキストを使わず会話音声だけで学習した全二重の音声会話モデル Dessa を発表。HN では Apple Music の iPod 風 404 ページや、GrapheneOS を認める銀行アプリが約 12 に増えた話も上位に入った。",
+      "keywords": [
+        "speech-to-text",
+        "android"
+      ]
+    },
+    {
+      "category": "funds",
+      "text": "2026 年上期の NISA 買付は 13.8 兆円と過去最高水準。成長投資枠でつみたて対象のインデックス投信をまとめて買う動きがみられる一方、成長投資枠のみの対象投信への流入は 8 月以降に急減速した。",
+      "keywords": [
+        "new-nisa",
+        "fund-flows"
+      ]
+    },
+    {
+      "category": "macro",
+      "text": "ムーディーズはフランスの格付け Aa3 を据え置いたが見通しはネガティブ。仏 10 年債利回りは 2002 年以来の 5.14% に上昇した。日経平均は 23 日に 6 万 2,693 円（前日比 -0.34%）で週を終えた。",
+      "keywords": [
+        "government-bond",
+        "nikkei225"
+      ]
+    }
+  ],
+  "items": [
+    {
+      "id": "2026-10-25-hn-apple-music-ipod",
+      "url": "https://music.apple.com/this-url-doesnt-exist",
+      "title": "Apple Music 404 Not Found",
+      "source": "music.apple.com",
+      "source_group": "hackernews",
+      "published_at": "2026-10-23T21:28:47+09:00",
+      "category": "be",
+      "keywords": [
+        "apple",
+        "easter-egg"
+      ],
+      "score": 93,
+      "why": "HN 897 pt",
+      "read_min": 5,
+      "tldr": "Apple Music の 404 ページが、クリックホイールで操作できる iPod 風のイースターエッグになっていると話題になった。iPod 時代の楽曲から作ったプレイリストが入っており、収録曲数は国ごとに異なる。",
+      "points": [
+        "music.apple.com/us/ipod から直接開ける。iOS の Safari では Music アプリに飛ぶため、リンクの長押しで開く必要がある",
+        "iPod と同じく Settings > About で中央ボタンを長押しすると、ブロック崩し「Brick」が遊べるとの報告がある",
+        "ページの裏側のデータは JSON で配信されており、コメントでは米国 1,029 曲、フランス 1,217 曲と国ごとの差が指摘された"
+      ],
+      "code": null,
+      "signal": "▲ 897",
+      "pick": true
+    },
+    {
+      "id": "2026-10-25-hn-grapheneos-banking",
+      "url": "https://grapheneos.social/@GrapheneOS/117492375462459244",
+      "title": "Around a dozen banking apps began specifically permitting GrapheneOS",
+      "source": "grapheneos.social",
+      "source_group": "hackernews",
+      "published_at": "2026-10-24T10:15:14+09:00",
+      "category": "sec",
+      "keywords": [
+        "android",
+        "authentication",
+        "privacy"
+      ],
+      "score": 87,
+      "why": "HN 592 pt",
+      "read_min": 8,
+      "tldr": "GrapheneOS が、主に EU の銀行など約 12 の銀行アプリに GrapheneOS の利用を明示的に認めさせたと明かした。銀行名は挙げていない。Play Integrity API 依存をやめ、Android のキー構成証明（key attestation）で OS を検証する方式への移行を求めている。",
+      "points": [
+        "銀行側の対応は、独自の改ざん検知を GrapheneOS の保護機能とぶつからないよう直す、Play Integrity API をやめる、key attestation で検証する、の 3 通り",
+        "key attestation では verified boot の鍵ハッシュ・パッチレベル・アプリ署名鍵などを確認でき、署名鍵を公開している OS なら Google 認定外でも許可できる",
+        "公式ビルドのみ許可されて非公式ビルドでは動かないアプリもある。HN では、EU の規制が端末の完全性検証を求める流れや、ハードウェアトークン廃止の是非も議論された"
+      ],
+      "code": null,
+      "signal": "▲ 592",
+      "pick": true
+    },
+    {
+      "id": "2026-10-25-block-dessa",
+      "url": "https://block.xyz/dessa",
+      "title": "Dessa: Conversation Model trained only on speech",
+      "source": "block.xyz",
+      "source_group": "hackernews",
+      "published_at": "2026-10-24T04:09:54+09:00",
+      "category": "ai",
+      "keywords": [
+        "speech-to-text",
+        "llm",
+        "local-llm"
+      ],
+      "score": 85,
+      "why": "HN 488 pt",
+      "read_min": 5,
+      "tldr": "Block の AI 研究チームが、音声を入力して音声で返す全二重の会話モデル Dessa を発表した。テキストデータや既存の学習済みモデルを使わず、人の会話音声だけでゼロから学習したという。",
+      "points": [
+        "聞きながら話す全二重方式で、テキスト化では失われる感情・笑い・間を扱えるとしている",
+        "学習は NVIDIA GB200 NVL72 1 台で、LLM より数百分の一の語数から言語を学んだと説明。推論は実時間より速く、MacBook Pro M4 Max 以上でローカル動作するという",
+        "モデルサイズやライセンスは非公表。当面はウェイトリスト制で、AI 安全性の研究者に限って早期アクセスを提供する"
+      ],
+      "code": null,
+      "signal": "▲ 488",
+      "pick": true
+    },
+    {
+      "id": "2026-10-25-github-obs-33",
+      "url": "https://github.com/obsproject/obs-studio/releases/tag/33.0.0",
+      "title": "OBS Studio 33",
+      "source": "github.com",
+      "source_group": "hackernews",
+      "published_at": "2026-10-24T13:49:58+09:00",
+      "category": "be",
+      "keywords": [
+        "oss",
+        "nvidia"
+      ],
+      "score": 82,
+      "why": "HN 411 pt",
+      "read_min": 4,
+      "tldr": "配信・録画ソフト OBS Studio 33.0.0 が公開された。内蔵ブラウザ（CEF）を 127 から 150 に更新し、プラグインの読み込み場所を整理したほか、Arm64 で NVIDIA のハードウェアエンコード（NVENC）に対応した。",
+      "points": [
+        "公式プラグインは新しい core フォルダへ。サードパーティ製は新しい配置場所に移り、旧来の場所からの読み込みは OBS 34.0 まで続く",
+        "プレビューのスナップ表示の改善、音声モニタリング用ホットキーの追加、ゲームキャプチャの全画面検出の改善など",
+        "開発者向けに FFmpeg 6.x/7.x と Qt 6.4〜6.9 のサポートを終了。Ubuntu 24.04 のサポートも外れた。libnsgif 1.0.0 への更新はプラグインに破壊的変更となる"
+      ],
+      "code": null,
+      "signal": "▲ 411",
+      "pick": true
+    },
+    {
+      "id": "2026-10-25-aikido-http2shell",
+      "url": "https://www.aikido.dev/blog/python-packages-vulnerable-node2shell-brotli-cve-2026-111497",
+      "title": "Node2Shell evolves to HTTP2Shell, blast radius affects many HTTP libs and apps",
+      "source": "aikido.dev",
+      "source_group": "hackernews",
+      "published_at": "2026-10-24T17:06:39+09:00",
+      "category": "sec",
+      "keywords": [
+        "rce",
+        "vulnerability-management",
+        "python",
+        "supply-chain"
+      ],
+      "score": 75,
+      "why": "HN 233 pt・関連スレッド HN 182 pt",
+      "read_min": 8,
+      "tldr": "Node.js の「Node2Shell」として知られた CVE-2026-111497 は、Google の Brotli デコーダの境界外書き込み（CVSS v4 9.2）が原因で、Python・Bun・Envoy・Istio・curl など HTTP で Brotli を展開する多くのライブラリに影響が広がった。Aikido はこれを「HTTP2Shell」と呼び、認証なしで細工したリクエストを送るだけでコード実行に至るおそれがあるとしている。",
+      "points": [
+        "原因は DecodeBlockTypeAndLength() が真偽値しか返さず「不正なストリーム」と「入力待ち」を区別できないこと。修正版はエラーコードを返すよう変更した",
+        "修正版は Brotli 1.2.1（旧系列は 1.0.10 / 1.1.1）、Node.js 22.23.4 / 24.22.1 / 26.12.1、Python Brotli 1.2.1、Bun 1.4.4、Envoy 1.40.0 ほか",
+        "すぐ更新できない場合は Content-Encoding に br を含むリクエストを拒否し、外向き通信では br 付きの応答を展開前に拒否する。Accept-Encoding から br を外すだけでは不十分"
+      ],
+      "code": {
+        "file": "check-brotli.sh",
+        "lang": "bash",
+        "text": "# Python 環境で Brotli の有無と依存元を確認\npip show Brotli brotlicffi\npipdeptree -r -p Brotli\ngrep -i brotli poetry.lock uv.lock requirements*.txt\n\n# 修正版へ更新\npip install -U \"Brotli>=1.2.1\"\npip install -U \"brotlicffi>=1.2.1.0\""
+      },
+      "signal": "▲ 233",
+      "pick": true
+    },
+    {
+      "id": "2026-10-25-gmo-onamae-cloud-4",
+      "url": "https://group.gmo/info/alert/20261024/",
+      "title": "【重要】お名前.com デスクトップクラウドサービスに対するサイバー攻撃について（第4報） | GMOインターネットグループ株式会社",
+      "source": "group.gmo",
+      "source_group": "tech_blog",
+      "published_at": "2026-10-24T12:11:09+09:00",
+      "category": "sec",
+      "keywords": [
+        "security-incident",
+        "ransomware",
+        "fraud-prevention"
+      ],
+      "score": 76,
+      "why": "はてブ 191",
+      "read_min": 6,
+      "tldr": "GMO インターネットが「お名前.com デスクトップクラウド」へのサイバー攻撃の第 4 報を公表。全利用者への一律 5,000 円の見舞金と、不正アクセスに起因する取引損失の補償を決め、攻撃者から金銭要求と脅迫を受けていることも明らかにした。要求には応じず、政府関係機関に「能動的サイバー防御」の措置を要請したという。",
+      "points": [],
+      "code": null,
+      "signal": "B! 191",
+      "pick": false
+    },
+    {
+      "id": "2026-10-25-x-samsung-tv-root",
+      "url": "https://twitter.com/log4j/status/2113014142600953868?s=46",
+      "title": "Root shell on Samsung TV",
+      "source": "twitter.com",
+      "source_group": "hackernews",
+      "published_at": "2026-10-24T14:49:57+09:00",
+      "category": "sec",
+      "keywords": [
+        "iot-security",
+        "privacy"
+      ],
+      "score": 84,
+      "why": "HN 465 pt",
+      "read_min": 3,
+      "tldr": "Samsung のテレビで root シェルを取り、ファームウェアから常時の音声聞き取りや音の分類などのデータ収集機能が見つかったとする X の投稿。詳しい技術的な説明は出ておらず、HN では信頼性を疑う声と、プライバシー上の懸念を指摘する声の両方があった。",
+      "points": [],
+      "code": null,
+      "signal": "▲ 465",
+      "pick": false
+    },
+    {
+      "id": "2026-10-25-verge-google-gmail-ads",
+      "url": "https://www.theverge.com/tech/1017600/google-personal-intelligence-privacy-policy-ads-update",
+      "title": "Now Google says it might use your Gmail and Google Photos data to target ads",
+      "source": "theverge.com",
+      "source_group": "hackernews",
+      "published_at": "2026-10-24T04:34:15+09:00",
+      "category": "ai",
+      "keywords": [
+        "google",
+        "privacy"
+      ],
+      "score": 81,
+      "why": "HN 373 pt",
+      "read_min": 5,
+      "tldr": "Google がプライバシーポリシーを更新し、Gmail や Google フォトのデータを広告のターゲティングに使う可能性があると明記したと The Verge が報じた。",
+      "points": [],
+      "code": null,
+      "signal": "▲ 373",
+      "pick": false
+    },
+    {
+      "id": "2026-10-25-rqlite-12-years",
+      "url": "https://philipotoole.com/twelve-years-of-distributed-sqlite/",
+      "title": "Twelve years of distributed SQLite",
+      "source": "philipotoole.com",
+      "source_group": "hackernews",
+      "published_at": "2026-10-24T10:16:58+09:00",
+      "category": "be",
+      "keywords": [
+        "sqlite",
+        "oss"
+      ],
+      "score": 80,
+      "why": "HN 345 pt",
+      "read_min": 10,
+      "tldr": "SQLite を Raft で分散させるデータベース rqlite の作者が、12 年間の開発を振り返った記事。",
+      "points": [],
+      "code": null,
+      "signal": "▲ 345",
+      "pick": false
+    },
+    {
+      "id": "2026-10-25-github-openssl-4-1",
+      "url": "https://github.com/openssl/openssl/releases/tag/openssl-4.1.0",
+      "title": "OpenSSL 4.1.0",
+      "source": "github.com",
+      "source_group": "hackernews",
+      "published_at": "2026-10-23T21:42:44+09:00",
+      "category": "sec",
+      "keywords": [
+        "tls",
+        "cryptography",
+        "oss"
+      ],
+      "score": 72,
+      "why": "HN 186 pt",
+      "read_min": 3,
+      "tldr": "OpenSSL 4.1.0 がリリースされた。",
+      "points": [],
+      "code": null,
+      "signal": "▲ 186",
+      "pick": false
+    },
+    {
+      "id": "2026-10-25-roku-gitlab-move",
+      "url": "https://blog.roku.com/developer/gitlab-move",
+      "title": "Roku developer repositories moved from GitHub to GitLab",
+      "source": "blog.roku.com",
+      "source_group": "hackernews",
+      "published_at": "2026-10-25T01:06:26+09:00",
+      "category": "be",
+      "keywords": [
+        "github",
+        "git"
+      ],
+      "score": 72,
+      "why": "HN 189 pt",
+      "read_min": 3,
+      "tldr": "Roku が開発者向けのリポジトリを GitHub から GitLab に移したと告知した。",
+      "points": [],
+      "code": null,
+      "signal": "▲ 189",
+      "pick": false
+    },
+    {
+      "id": "2026-10-25-alexsci-uuidv7",
+      "url": "https://alexsci.com/blog/uuidv7-is-weird/",
+      "title": "UUIDv7: Timestamps aren’t time-ordered and other oddities",
+      "source": "alexsci.com",
+      "source_group": "hackernews",
+      "published_at": "2026-10-24T01:39:45+09:00",
+      "category": "be",
+      "keywords": [
+        "postgres",
+        "api-design"
+      ],
+      "score": 70,
+      "why": "HN 168 pt",
+      "read_min": 8,
+      "tldr": "UUIDv7 のタイムスタンプが必ずしも時刻順にならないことなど、仕様上の意外な性質をまとめた記事。",
+      "points": [],
+      "code": null,
+      "signal": "▲ 168",
+      "pick": false
+    },
+    {
+      "id": "2026-10-25-openai-training-env",
+      "url": "https://openai.com/index/securing-our-frontier-model-training-environment/",
+      "title": "Securing our frontier model training environment",
+      "source": "openai.com",
+      "source_group": "hackernews",
+      "published_at": "2026-10-24T04:50:56+09:00",
+      "category": "ai",
+      "keywords": [
+        "openai",
+        "ai-security",
+        "ai-safety"
+      ],
+      "score": 65,
+      "why": "HN 116 pt・はてブでも話題",
+      "read_min": 6,
+      "tldr": "OpenAI が最先端モデルの学習環境のセキュリティ対策を説明した。国内では「訓練中の最先端 AI をインターネットから遮断する」発表として紹介されている。",
+      "points": [],
+      "code": null,
+      "signal": "▲ 116",
+      "pick": false
+    },
+    {
+      "id": "2026-10-25-rtfeldman-fp-vs-c",
+      "url": "https://rtfeldman.com/fp-vs-c",
+      "title": "How close can pure functional programming get to C?",
+      "source": "rtfeldman.com",
+      "source_group": "hackernews",
+      "published_at": "2026-10-24T12:43:54+09:00",
+      "category": "be",
+      "keywords": [
+        "programming-language",
+        "memory"
+      ],
+      "score": 75,
+      "why": "HN 232 pt",
+      "read_min": 12,
+      "tldr": "純粋関数型プログラミングでどこまで C 言語に近い性能を出せるかを論じた記事。",
+      "points": [],
+      "code": null,
+      "signal": "▲ 232",
+      "pick": false
+    },
+    {
+      "id": "2026-10-25-diamond-nisa-growth",
+      "url": "https://diamond.jp/articles/-/401665",
+      "title": "NISA買付は成長投資枠がけん引！投資信託全体の傾向としては年後半は毎月分配型の存在感が高まる？【投資信託の最前線】 - ダイヤモンドZAi NISA投信グランプリ2026",
+      "source": "diamond.jp",
+      "source_group": "news",
+      "published_at": "2026-10-24T21:00:00+09:00",
+      "category": "funds",
+      "keywords": [
+        "new-nisa",
+        "index-fund",
+        "fund-flows"
+      ],
+      "score": 88,
+      "why": "matched: nisa, インデックス",
+      "read_min": 8,
+      "tldr": "2026 年上期の NISA 口座の買付額は 13.8 兆円と過去最高水準で、成長投資枠の買付がつみたて投資枠を大きく上回った。成長投資枠でつみたて対象のインデックス投信をまとめて買う動きがあるとみられる一方、NISA 対象外の毎月分配型への資金流入も安定している。",
+      "points": [
+        "上期の資金流入は、つみたて投資枠の対象投信（347 本）で計 6.3 兆円、成長投資枠のみの対象投信（2,011 本）で 3.8 兆円。全世界株式・米国株式の低コスト投信に集中",
+        "成長投資枠のみの対象投信は、年初は金関連、4 月以降は日本株・テーマ株・新興国株の大型新規設定が買付を押し上げたが、8 月以降は流入が急減速",
+        "年初（2025 年・2026 年の 1 月）につみたて対象投信への流入が突出しており、年初一括購入の影響とみられる"
+      ],
+      "code": null,
+      "signal": null,
+      "pick": true
+    },
+    {
+      "id": "2026-10-25-coinpost-btc-cost-basis",
+      "url": "https://coinpost.jp/?p=744525",
+      "title": "ビットコイン、8万ドルまで下落後 ETF・企業の取得単価付近で反発＝グラスノード",
+      "source": "coinpost.jp",
+      "source_group": "news",
+      "published_at": "2026-10-24T17:00:17+09:00",
+      "category": "crypto",
+      "keywords": [
+        "bitcoin",
+        "bitcoin-etf",
+        "bitcoin-treasury"
+      ],
+      "score": 80,
+      "why": "matched: ビットコイン",
+      "read_min": 5,
+      "tldr": "グラスノードの週間レポートによると、10 月 15 日に約 8 万ドルまで下げたビットコインは、米現物 ETF（約 8 万 1,500 ドル）とトレジャリー企業（約 8 万 200 ドル）の平均取得単価のすぐ下で買いが入り、数日で持ち直した。",
+      "points": [
+        "ETF の平均取得単価は春には上値の抵抗線だったが、10 月以降は下値の支持線として働いているという",
+        "上値では 8 万 5,000〜8 万 7,500 ドルに 6〜12 か月前の購入層の取得単価（約 8 万 6,700 ドル）、売り注文、大きな清算クラスターが集中。下値の清算は 7 万 9,600 ドル付近",
+        "10 月 19 日の米現物 ETF への流入は約 6 億 5,300 万ドルと 9 月 22 日以来の水準。一方、6 月以降のトレジャリー企業の月間購入量は 2024 年 11 月のピークの 1 割未満"
+      ],
+      "code": null,
+      "signal": null,
+      "pick": true
+    },
+    {
+      "id": "2026-10-25-coinpost-solana-alpenglow",
+      "url": "https://coinpost.jp/?p=744547",
+      "title": "ソラナ、取引確定時間が約85分の1に 「アルペングロー」がメインネットで稼働",
+      "source": "coinpost.jp",
+      "source_group": "news",
+      "published_at": "2026-10-24T14:00:03+09:00",
+      "category": "crypto",
+      "keywords": [
+        "blockchain-infra",
+        "layer2"
+      ],
+      "score": 62,
+      "why": "新コンセンサスのメインネット稼働",
+      "read_min": 4,
+      "tldr": "ソラナの新しいコンセンサス「Alpenglow」がメインネット（ベータ）で稼働し、取引の確定（ファイナリティ）までの時間が約 12.8 秒から約 150 ミリ秒に縮まった。開発は Anza。",
+      "points": [
+        "従来の TowerBFT を投票方式「Votor」に置き換え、バリデータの投票処理をオフチェーンに移してチェーンの容量を取引に回す",
+        "悪意のあるステーク 20%・オフラインのステーク 20% があっても安全に動くとされる",
+        "ブロック伝搬の新方式「Rotor」は未導入で、時期は今後発表される"
+      ],
+      "code": null,
+      "signal": null,
+      "pick": true
+    },
+    {
+      "id": "2026-10-25-investing-france-moodys",
+      "url": "https://jp.investing.com/news/most-popular-news/article-1724323",
+      "title": "フランス、ムーディーズの格下げを回避――抗議活動と予算審議の停滞が続く中",
+      "source": "jp.investing.com",
+      "source_group": "news",
+      "published_at": "2026-10-25T04:18:05+09:00",
+      "category": "macro",
+      "keywords": [
+        "government-bond",
+        "interest-rates"
+      ],
+      "score": 66,
+      "why": "matched: 金利",
+      "read_min": 4,
+      "tldr": "ムーディーズはフランスの格付けを Aa3 に据え置き、見通しはネガティブのままとした。財政赤字の拡大と国債利回りの上昇、抗議デモの激化が財政健全化の妨げになりうると指摘している。",
+      "points": [
+        "フランス 10 年国債利回りは今週 5.14% と 2002 年 7 月以来の高水準に。ドイツ国債との利回り差は 178bp と 9 月初旬の 85bp から拡大した",
+        "政府は 2027 年の財政赤字を GDP 比 5.4% から 5% に縮める緊縮予算を目指すが、国民議会は社会保障法案の歳入部分を否決した",
+        "S&P とフィッチは 2025 年末に格下げ済みで、S&P は 11 月 27 日に見直しを予定している"
+      ],
+      "code": null,
+      "signal": null,
+      "pick": true
+    },
+    {
+      "id": "2026-10-25-sankei-gasoline-subsidy",
+      "url": "https://www.sankei.com/article/20261023-PXW47TZ6IFKPDBU7JWYYXOADRE/",
+      "title": "高市首相がガソリン補助金の見直し検討指示 段階的縮小へ、与野党の財政懸念の声踏まえ",
+      "source": "sankei.com",
+      "source_group": "tech_blog",
+      "published_at": "2026-10-23T19:58:13+09:00",
+      "category": "macro",
+      "keywords": [
+        "jp-fiscal",
+        "crude-oil",
+        "inflation"
+      ],
+      "score": 70,
+      "why": "はてブ 143・財政と物価に関わる政策",
+      "read_min": 3,
+      "tldr": "高市首相が、中東情勢に伴う燃料高対策として続けるガソリン補助金の見直しを経産相に指示すると表明した。補助でレギュラーガソリンは全国平均 1 リットル 170 円程度に抑えられており、段階的に縮小する方向。",
+      "points": [],
+      "code": null,
+      "signal": "B! 143",
+      "pick": false
+    },
+    {
+      "id": "2026-10-25-diamond-nidec-ceo",
+      "url": "https://diamond.jp/articles/-/401781",
+      "title": "【スクープ】ニデック取締役会が岸田社長を電撃解任！1兆円規模減損の責任問うも不可解な決議、「内紛劇」で迷走リスクが再燃《再配信》 - 今だからこそ読みたい！注目特集",
+      "source": "diamond.jp",
+      "source_group": "news",
+      "published_at": "2026-10-25T04:50:00+09:00",
+      "category": "stocks",
+      "keywords": [
+        "corporate-governance",
+        "accounting-fraud"
+      ],
+      "score": 55,
+      "why": "日本株の大型ガバナンス問題",
+      "read_min": 6,
+      "tldr": "ダイヤモンド編集部によると、ニデックは 9 月 25 日の臨時取締役会で社長の解任を決議していた。不正会計を受けて 1 兆円規模の減損を 2026 年 3 月期に修正計上する方針も判明したという。",
+      "points": [],
+      "code": null,
+      "signal": null,
+      "pick": false
+    },
+    {
+      "id": "2026-10-25-toyokeizai-ai-capex-midterm",
+      "url": "https://toyokeizai.net/articles/-/962425?utm_source=rss&utm_medium=http&utm_campaign=link_back",
+      "title": "【AI投資の危機】アメリカ中間選挙で高まる｢急ブレーキ｣のリスク､民主党勝利でデータセンター規制強化の可能性 | 政治・経済・投資 | 東洋経済オンライン",
+      "source": "toyokeizai.net",
+      "source_group": "news",
+      "published_at": "2026-10-24T15:00:00+09:00",
+      "category": "stocks",
+      "keywords": [
+        "data-center",
+        "us-stocks"
+      ],
+      "score": 52,
+      "why": "matched: 米国株（関連）",
+      "read_min": 6,
+      "tldr": "米中間選挙を前に、データセンター建設への世論の反発が AI 投資の勢いを左右する要素になっているとの解説。民主党が勝てば規制強化の可能性があるとしている。",
+      "points": [],
+      "code": null,
+      "signal": null,
+      "pick": false
+    },
+    {
+      "id": "2026-10-25-coinpost-gmo-coin-alert",
+      "url": "https://coinpost.jp/?p=744587",
+      "title": "GMOコイン、自動売買の不正取引で注意喚起",
+      "source": "coinpost.jp",
+      "source_group": "news",
+      "published_at": "2026-10-24T13:50:09+09:00",
+      "category": "crypto",
+      "keywords": [
+        "crypto-exchange",
+        "fraud-prevention"
+      ],
+      "score": 60,
+      "why": "国内取引所の注意喚起",
+      "read_min": 2,
+      "tldr": "GMO コインが、自動売買ツールによるものとみられる不正取引について注意喚起した。自社口座の不正操作は現時点で確認されていないとし、取引履歴・パスキー・API キーの確認を利用者に求めている。",
+      "points": [],
+      "code": null,
+      "signal": null,
+      "pick": false
+    },
+    {
+      "id": "2026-10-25-coinpost-franklin-btc-etf",
+      "url": "https://coinpost.jp/?p=744553",
+      "title": "米フランクリン、配当金でビットコインへの投資を増やすETF2本を登録",
+      "source": "coinpost.jp",
+      "source_group": "news",
+      "published_at": "2026-10-24T10:55:18+09:00",
+      "category": "crypto",
+      "keywords": [
+        "bitcoin",
+        "crypto-etf",
+        "us-stocks"
+      ],
+      "score": 62,
+      "why": "matched: 米国株, ビットコイン",
+      "read_min": 2,
+      "tldr": "フランクリン・テンプルトンが、配当金でビットコインへの投資を積み増す米国株 ETF 2 本の証券登録を完了した。取引開始時期は書類に記載がない。",
+      "points": [],
+      "code": null,
+      "signal": null,
+      "pick": false
+    },
+    {
+      "id": "2026-10-25-coinpost-metaplanet-capital",
+      "url": "https://coinpost.jp/?p=744502",
+      "title": "メタプラネット開示、キャピタル・リサーチが議決権11％超の主要株主に",
+      "source": "coinpost.jp",
+      "source_group": "news",
+      "published_at": "2026-10-24T07:35:40+09:00",
+      "category": "crypto",
+      "keywords": [
+        "bitcoin-treasury",
+        "bitcoin"
+      ],
+      "score": 56,
+      "why": "matched: ビットコイン",
+      "read_min": 2,
+      "tldr": "メタプラネットは、米キャピタル・リサーチが議決権 11.11% を持つ主要株主になったと開示した。モルガン・スタンレー系やバンク・オブ・アメリカ系も 5% 超の保有を報告している。",
+      "points": [],
+      "code": null,
+      "signal": null,
+      "pick": false
+    },
+    {
+      "id": "2026-10-25-coinpost-sec-token-exchanges",
+      "url": "https://coinpost.jp/?p=744566",
+      "title": "米SEC、証券トークン取引所運営計画3社を公表 OKX・ICE合弁など",
+      "source": "coinpost.jp",
+      "source_group": "news",
+      "published_at": "2026-10-24T13:00:18+09:00",
+      "category": "crypto",
+      "keywords": [
+        "tokenization",
+        "sec"
+      ],
+      "score": 50,
+      "why": "トークン化証券の制度動向",
+      "read_min": 2,
+      "tldr": "米 SEC が、イノベーション免除に基づいてトークン化証券の取引所運営を届け出た 3 社を公表した。OKX と ICE の合弁会社 OKXICE などが含まれる。",
+      "points": [],
+      "code": null,
+      "signal": null,
+      "pick": false
+    },
+    {
+      "id": "2026-10-25-coinpost-eth-finality",
+      "url": "https://coinpost.jp/?p=744561",
+      "title": "イーサリアム、取引確定を16分から4分へ短縮案 チェーン間送金が安くなる可能性",
+      "source": "coinpost.jp",
+      "source_group": "news",
+      "published_at": "2026-10-24T13:30:04+09:00",
+      "category": "crypto",
+      "keywords": [
+        "ethereum"
+      ],
+      "score": 45,
+      "why": "技術的な改善提案",
+      "read_min": 2,
+      "tldr": "イーサリアムの研究者らが、取引の確定までの時間を平均約 16 分から約 4 分に縮める改善提案の草案を出した。設計は未完成で、実装時期は決まっていない。",
+      "points": [],
+      "code": null,
+      "signal": null,
+      "pick": false
+    },
+    {
+      "id": "2026-10-25-coinpost-uniswap-v4-hook",
+      "url": "https://coinpost.jp/?p=744548",
+      "title": "ユニスワップ、v4に外部流動性を取り込み 手数料はUNIトークン焼却に寄与",
+      "source": "coinpost.jp",
+      "source_group": "news",
+      "published_at": "2026-10-24T15:00:05+09:00",
+      "category": "crypto",
+      "keywords": [
+        "defi"
+      ],
+      "score": 40,
+      "why": "DeFi 大手の機能追加",
+      "read_min": 2,
+      "tldr": "ユニスワップが、v4 で外部の流動性をプールとして扱えるアグリゲーターフックの提供を始めた。外部経由のスワップもプロトコル手数料を払い、UNI の焼却につながる。",
+      "points": [],
+      "code": null,
+      "signal": null,
+      "pick": false
+    }
+  ],
+  "social": [
+    {
+      "network": "x",
+      "author": "@AikidoSecurity",
+      "url": "https://x.com/AikidoSecurity/status/2113759110625906950",
+      "text": "Node.js・Python に影響するとされた CVE-2026-111497 が「HTTP2Shell」に発展し、Brotli 展開を通じて HTTP を扱う多くのライブラリやアプリが認証前 RCE の対象になると警告。",
+      "metrics": null,
+      "heat": null,
+      "category": "sec",
+      "keywords": [
+        "rce",
+        "vulnerability-management"
+      ],
+      "posted_at": null
+    },
+    {
+      "network": "x",
+      "author": "@RonMasas",
+      "url": "https://x.com/RonMasas/status/2113315979405258810",
+      "text": "CVE-2026-111497 を認証前 RCE として再現したと報告。脆弱な Node.js では app.use(express.json()) だけで、Brotli リクエスト 1 つでコード実行にさらされるとしている。",
+      "metrics": null,
+      "heat": null,
+      "category": "sec",
+      "keywords": [
+        "rce"
+      ],
+      "posted_at": null
+    },
+    {
+      "network": "x",
+      "author": "@connect24h",
+      "url": "https://x.com/connect24h/status/2113516905051103677",
+      "text": "Node2Shell の要点を日本語で整理。Express 5 / body-parser 2.x や fetch()、node:zlib で攻撃者の Brotli データを処理すると RCE の可能性があり、修正版は Node.js 22.23.4・24.22.1・26.12.1。",
+      "metrics": null,
+      "heat": null,
+      "category": "sec",
+      "keywords": [
+        "rce"
+      ],
+      "posted_at": null
+    },
+    {
+      "network": "x",
+      "author": "@kianworld",
+      "url": "https://x.com/kianworld/status/2113519872999301172",
+      "text": "Apple Music の 404 ページに、ちゃんと動く iPod が隠れていると紹介。",
+      "metrics": null,
+      "heat": null,
+      "category": "be",
+      "keywords": [
+        "apple"
+      ],
+      "posted_at": null
+    },
+    {
+      "network": "hn",
+      "author": null,
+      "url": "https://news.ycombinator.com/item?id=50207910",
+      "text": "『Apple Music 404 Not Found』のスレッド。265 件のコメント",
+      "metrics": "▲ 897  ✉ 265",
+      "heat": 100,
+      "category": "be",
+      "keywords": [
+        "apple"
+      ],
+      "posted_at": "2026-10-23T21:28:47+09:00"
+    },
+    {
+      "network": "hn",
+      "author": null,
+      "url": "https://news.ycombinator.com/item?id=50217495",
+      "text": "『Around a dozen banking apps began specifically permitting GrapheneOS』のスレッド。254 件のコメント",
+      "metrics": "▲ 592  ✉ 254",
+      "heat": 100,
+      "category": "sec",
+      "keywords": [
+        "android"
+      ],
+      "posted_at": "2026-10-24T10:15:14+09:00"
+    }
+  ],
+  "releases": [
+    {
+      "date": "2026-10-24",
+      "title": "OBS Studio 33.0.0",
+      "repo": "obsproject/obs-studio",
+      "url": "https://github.com/obsproject/obs-studio/releases/tag/33.0.0",
+      "kind": "release",
+      "note": "CEF 150 への更新、プラグイン配置の整理、Arm64 での NVENC 対応",
+      "category": "be"
+    },
+    {
+      "date": "2026-10-23",
+      "title": "OpenSSL 4.1.0",
+      "repo": "openssl/openssl",
+      "url": "https://github.com/openssl/openssl/releases/tag/openssl-4.1.0",
+      "kind": "release",
+      "note": "HN で 186 pt。変更内容は本文未確認",
+      "category": "sec"
+    }
+  ]
+}
