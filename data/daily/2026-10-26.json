@@ -1,0 +1,720 @@
+{
+  "date": "2026-10-26",
+  "generated_at": "2026-10-26T05:40:00+09:00",
+  "stats": {
+    "collected": 173,
+    "sources_ok": 25,
+    "sources_total": 26,
+    "by_group": {
+      "hackernews": 40,
+      "tech_blog": 75,
+      "news": 58
+    },
+    "failed_sources": [
+      "coindesk_jp"
+    ]
+  },
+  "digest": [
+    {
+      "category": "sec",
+      "text": "認証局 eMudhra の中間 CA 8 個の秘密鍵が、キーセレモニーのバグで 256 未満の整数になっており、誰でも復元できた。ブラウザや Apple はブロック済みだが、独自の証明書ストアを持つ実装は更新が要る。",
+      "keywords": [
+        "certificate-authority",
+        "tls"
+      ]
+    },
+    {
+      "category": "be",
+      "text": "Dan Luu の「もっと野心的にソフトウェアを作ろう」が HN 696 pt で首位。AI とテストを組み合わせた Postgres の Rust 再実装が本体の実バグを見つけた例などを挙げる。ヒープも GC も持たないシステム言語 Goose も 540 pt を集めた。",
+      "keywords": [
+        "ai-coding",
+        "programming-language"
+      ]
+    },
+    {
+      "category": "ai",
+      "text": "Apollo の Slok 氏は、売上と利益率が伸びているのは Mag 7 だけで S&P 493 には AI の成果が見えないと指摘。Meta の設備投資の上方修正を受けて、AI 投資を支える資本は足りるのかという懸念も出ている。",
+      "keywords": [
+        "ai-economy",
+        "us-stocks"
+      ]
+    },
+    {
+      "category": "sec",
+      "text": "GMO のクラウド事件では FX 口座で知らないうちに取引される被害が報じられ、攻撃者は 27 日正午を期限に利用者 PC の乗っ取りを予告している。ピッコマはメール配信の委託先経由でメールアドレス約 100 万件が流出した。",
+      "keywords": [
+        "security-incident",
+        "data-breach"
+      ]
+    },
+    {
+      "category": "macro",
+      "text": "今週は FOMC（27〜28 日）と日銀会合（29〜30 日）。日経平均は 23 日に 6 万 2,693 円で、週間では 4.0% 下落。ビットコインは 8 万ドル台前半で FOMC 待ちとなっている。",
+      "keywords": [
+        "fed",
+        "boj-policy",
+        "bitcoin"
+      ]
+    }
+  ],
+  "items": [
+    {
+      "id": "2026-10-26-danluu-ambitious",
+      "url": "https://danluu.com/ambitious/",
+      "title": "We should be more ambitious with the software we build",
+      "source": "hackernews",
+      "source_group": "hackernews",
+      "published_at": "2026-10-25T06:47:31+09:00",
+      "category": "be",
+      "keywords": [
+        "ai-coding",
+        "software-design",
+        "postgres"
+      ],
+      "score": 90,
+      "why": "HN 696 pt",
+      "read_min": 15,
+      "tldr": "Dan Luu は、AI によって以前は非現実的だった規模のソフトウェアを個人でも作れるようになったので、もっと野心的に作るべきだと主張する。徹底したテストとベンチマークがあれば、AI 生成でも実用的な品質に届くという。",
+      "points": [
+        "Postgres の Rust 再実装 pgrust は、テストを通じて SP-GiST・JSONPath・pgcrypto・money 型などの Postgres 本体の実バグを見つけている",
+        "筆者は正規表現エンジン、ripgrep のフォーク、Rust のビルド高速化などを数時間単位で作れたと報告し、以前なら 1 年以上かかった作業だとする",
+        "合格基準が明確でない問題ではエージェントのループが機能しにくいという反論も紹介し、アムダールの法則で全体の高速化は限定的だと認めている"
+      ],
+      "code": null,
+      "signal": "▲ 696",
+      "pick": true
+    },
+    {
+      "id": "2026-10-26-jxck-emudhra",
+      "url": "https://blog.jxck.io/entries/2026-10-25/emudhra.html",
+      "title": "eMudhra のインシデントは Web にとって何を意味するのか | blog.jxck.io",
+      "source": "hatena/it",
+      "source_group": "tech_blog",
+      "published_at": "2026-10-25T05:22:49+09:00",
+      "category": "sec",
+      "keywords": [
+        "certificate-authority",
+        "tls",
+        "cryptography"
+      ],
+      "score": 87,
+      "why": "はてブ 414・Apple や Qiita にも関連記事",
+      "read_min": 12,
+      "tldr": "認証局 eMudhra の中間 CA 8 個の秘密鍵が、キーセレモニー時のスクリプトのバグで実質 1 バイトの弱い値になっており、公開情報から復元できた。Jxck 氏は「Web で絶対に起こってはいけないことが起きた」として、失効の難しさと独自の証明書ストアを持つ実装への影響を論じている。",
+      "points": [
+        "P-384 の鍵は 48 バイトの乱数であるべきところ、上位 47 バイトが 0 で、総当たり約 256 回で復元できた。秘密鍵が外に出ていなくても漏えいと同等",
+        "問題の中間 CA は Sectigo のクロスルーティングの下にもあり、eMudhra のルートを外すだけでは信頼経路が残るため、CRLSet・OneCRL などでの失効が要る",
+        "Electron アプリ、curl、言語ランタイムなど独自の証明書ストアを持つものは更新が遅れやすい。Apple は 10 月 19 日から該当証明書を自動でブロックしている（Apple サポート記事）"
+      ],
+      "code": null,
+      "signal": "B! 414",
+      "pick": true
+    },
+    {
+      "id": "2026-10-26-apollo-ai-payoff",
+      "url": "https://www.apollo.com/wealth/insights-news/insights/daily-spark/no-signs-of-ai-payoff-outside-the-tech-sector",
+      "title": "No signs of AI payoff outside the tech sector",
+      "source": "hackernews",
+      "source_group": "hackernews",
+      "published_at": "2026-10-25T04:47:19+09:00",
+      "category": "ai",
+      "keywords": [
+        "ai-economy",
+        "us-stocks"
+      ],
+      "score": 87,
+      "why": "HN 599 pt",
+      "read_min": 3,
+      "tldr": "Apollo のチーフエコノミスト Torsten Slok は、巨額の AI 投資にもかかわらず、テック以外では財務面の成果がまだ見えないと指摘した。売上と利益率が伸びているのは Mag 7 だけで、残る S&P 493 は横ばいだという。",
+      "points": [
+        "インフレ調整後の従業員 1 人当たり売上高は Mag 7 で上昇、S&P 493 では横ばい（Bloomberg・Macrobond）",
+        "利益率も S&P 493 では上昇の兆しがなく、サンフランシスコ連銀の全要素生産性にも AI による押し上げは表れていない",
+        "AI 支出はごく少数の企業に集中しているとし、AI の成否は Mag 7 ではなく S&P 493 で決まると結論づけている"
+      ],
+      "code": null,
+      "signal": "▲ 599",
+      "pick": true
+    },
+    {
+      "id": "2026-10-26-goose-lang",
+      "url": "https://aardappel.github.io/goose/",
+      "title": "The Goose Programming Language",
+      "source": "hackernews",
+      "source_group": "hackernews",
+      "published_at": "2026-10-25T04:06:55+09:00",
+      "category": "be",
+      "keywords": [
+        "programming-language",
+        "memory-safety"
+      ],
+      "score": 86,
+      "why": "HN 540 pt",
+      "read_min": 10,
+      "tldr": "Wouter van Oortmerssen 氏による新しいシステム言語 Goose は、ヒープも GC もライフタイム注釈も持たずにメモリ安全を目指す。データはコンパイラが静的に管理するデータスタックに置かれ、スコープを抜けるとまとめて解放される。",
+      "points": [
+        "アロケータ・GC・参照カウント・デストラクタがなく、解放はスタックを戻すだけで行う",
+        "メモリが移動しないので、配列が伸びても参照が無効にならない。C++ の reserve や Rust のインデックス管理のような回避策が要らない",
+        "単一の C ファイルにコンパイルされ、extern fn で C を直接呼べる。ページのベンチマークでは C++・Rust より高速・省メモリとしている"
+      ],
+      "code": {
+        "file": null,
+        "lang": "goose",
+        "text": "struct Item { id: i32, weight: f32 }\nvar items: Item[>..] = [];\nlet first .= items.push(Item { 1, 0.5 });"
+      },
+      "signal": "▲ 540",
+      "pick": true
+    },
+    {
+      "id": "2026-10-26-stealmybitcoin",
+      "url": "https://stealmybitcoin.com/",
+      "title": "Show HN: Steal My Bitcoin",
+      "source": "hackernews",
+      "source_group": "hackernews",
+      "published_at": "2026-10-25T05:30:31+09:00",
+      "category": "sec",
+      "keywords": [
+        "php",
+        "rce",
+        "bitcoin"
+      ],
+      "score": 87,
+      "why": "HN 570 pt",
+      "read_min": null,
+      "tldr": "脆弱な PHP サイトにビットコインのウォレットを置き、侵入できれば持ち帰ってよいとする公開チャレンジ。X では PHP2Shell 系の脆弱性を試す企画として話題になっている。",
+      "points": [],
+      "code": null,
+      "signal": "▲ 570",
+      "pick": false
+    },
+    {
+      "id": "2026-10-26-apricitas-creative-jobs",
+      "url": "https://www.apricitas.io/p/ai-and-the-fall-of-the-creative-class",
+      "title": "America has lost 200k of jobs in media, film and the arts. How much is AI?",
+      "source": "hackernews",
+      "source_group": "hackernews",
+      "published_at": "2026-10-25T08:11:54+09:00",
+      "category": "ai",
+      "keywords": [
+        "ai-economy"
+      ],
+      "score": 85,
+      "why": "HN 486 pt",
+      "read_min": null,
+      "tldr": "米国でメディア・映画・芸術分野の雇用が約 20 万人減ったとして、そのうちどれだけが AI の影響かを検証する記事。HN で 500 件超のコメントが付いた。",
+      "points": [],
+      "code": null,
+      "signal": "▲ 486",
+      "pick": false
+    },
+    {
+      "id": "2026-10-26-cerebras-trillion",
+      "url": "https://www.cerebras.ai/blog/how-we-deploy-trillion-parameter-frontier-models-on-cerebras",
+      "title": "Cerebras Deploys Trillion-Parameter AI Models",
+      "source": "hackernews",
+      "source_group": "hackernews",
+      "published_at": "2026-10-25T10:33:49+09:00",
+      "category": "ai",
+      "keywords": [
+        "llm",
+        "semiconductor"
+      ],
+      "score": 79,
+      "why": "HN 334 pt",
+      "read_min": null,
+      "tldr": "Cerebras が 1 兆パラメータ級のフロンティアモデルを自社のウェハースケールチップでどう動かしているかを解説した公式ブログ。",
+      "points": [],
+      "code": null,
+      "signal": "▲ 334",
+      "pick": false
+    },
+    {
+      "id": "2026-10-26-gpu-unlock",
+      "url": "https://github.com/Zagitta/gpu-unlock",
+      "title": "GPU-unlock: FP/BF16 instruction issue rate on Nvidia 3000's cards",
+      "source": "hackernews",
+      "source_group": "hackernews",
+      "published_at": "2026-10-24T18:58:27+09:00",
+      "category": "be",
+      "keywords": [
+        "nvidia"
+      ],
+      "score": 79,
+      "why": "HN 327 pt・はてブ 29",
+      "read_min": null,
+      "tldr": "NVIDIA RTX 3000 シリーズで FP/BF16 命令の発行レートの制限を外すとする GitHub のプロジェクト。",
+      "points": [],
+      "code": null,
+      "signal": "B! 29 · ▲ 327",
+      "pick": false
+    },
+    {
+      "id": "2026-10-26-freedns",
+      "url": "https://freedns.afraid.org/",
+      "title": "FreeDNS",
+      "source": "hackernews",
+      "source_group": "hackernews",
+      "published_at": "2026-10-25T00:20:01+09:00",
+      "category": "cloud",
+      "keywords": [
+        "dns"
+      ],
+      "score": 80,
+      "why": "HN 349 pt・はてブ 11",
+      "read_min": null,
+      "tldr": "老舗の無料ダイナミック DNS・DNS ホスティングサービス FreeDNS が HN の上位に入った。",
+      "points": [],
+      "code": null,
+      "signal": "B! 11 · ▲ 349",
+      "pick": false
+    },
+    {
+      "id": "2026-10-26-samsung-tracking",
+      "url": "https://twitter.com/mike64_t/status/2114150399406202896",
+      "title": "Samsung running a TensorFlow lite model on 960x540 image to track you",
+      "source": "hackernews",
+      "source_group": "hackernews",
+      "published_at": "2026-10-25T19:42:01+09:00",
+      "category": "sec",
+      "keywords": [
+        "privacy",
+        "iot-security"
+      ],
+      "score": 77,
+      "why": "HN 285 pt・関連スレッド HN 133 pt",
+      "read_min": null,
+      "tldr": "Samsung のデバイスが 960×540 の画像に TensorFlow Lite のモデルを走らせて利用者を追跡しているという X の投稿が話題に。Samsung のテレビが Bluetooth で家の中のマイクを探しているという別の投稿も HN に上がった。",
+      "points": [],
+      "code": null,
+      "signal": "▲ 285",
+      "pick": false
+    },
+    {
+      "id": "2026-10-26-google-finland-trees",
+      "url": "https://nypost.com/2026/10/24/business/google-illegally-tore-down-250k-trees-for-finland-data-center-infuriating-locals-report/",
+      "title": "Google illegally cut down 250K trees in Finland for data center",
+      "source": "hackernews",
+      "source_group": "hackernews",
+      "published_at": "2026-10-24T23:38:34+09:00",
+      "category": "cloud",
+      "keywords": [
+        "data-center",
+        "google"
+      ],
+      "score": 76,
+      "why": "HN 255 pt",
+      "read_min": null,
+      "tldr": "Google がフィンランドのデータセンター建設で 25 万本の木を違法に伐採したと地元が反発している、と NY Post が報じた。",
+      "points": [],
+      "code": null,
+      "signal": "▲ 255",
+      "pick": false
+    },
+    {
+      "id": "2026-10-26-lynchlab-skin-cancer",
+      "url": "https://lynchlab.net/llm-skin-cancer",
+      "title": "A 10-year-old CNN outperforms frontier LLMs for skin cancer diagnosis",
+      "source": "hackernews",
+      "source_group": "hackernews",
+      "published_at": "2026-10-26T02:15:38+09:00",
+      "category": "ai",
+      "keywords": [
+        "llm",
+        "medical-ai"
+      ],
+      "score": 75,
+      "why": "HN 245 pt",
+      "read_min": null,
+      "tldr": "皮膚がんの診断で、10 年前の CNN がフロンティア LLM を上回ったとする研究室の報告。",
+      "points": [],
+      "code": null,
+      "signal": "▲ 245",
+      "pick": false
+    },
+    {
+      "id": "2026-10-26-yomiuri-gmo-fx",
+      "url": "https://www.yomiuri.co.jp/national/20261024-GYT1T00360/",
+      "title": "知らぬ間にＦＸ「取引」、一瞬で１１９万円消失…ＧＭＯに安心感あったのに「これ現実なの？」",
+      "source": "hatena/it",
+      "source_group": "tech_blog",
+      "published_at": "2026-10-25T05:11:22+09:00",
+      "category": "sec",
+      "keywords": [
+        "security-incident",
+        "ransomware",
+        "fx"
+      ],
+      "score": 71,
+      "why": "はてブ 132・関連記事（日経・NHK）も上位",
+      "read_min": null,
+      "tldr": "GMO のクラウドサービスへの不正アクセスで、FX 取引をしていた個人投資家が知らない間に取引され資産を失ったと読売新聞が報じた。日経によると、攻撃者は 27 日正午までに身代金を払わなければ利用者の PC を乗っ取ると予告している。",
+      "points": [],
+      "code": null,
+      "signal": "B! 132",
+      "pick": false
+    },
+    {
+      "id": "2026-10-26-nhk-piccoma",
+      "url": "https://news.web.nhk/newsweb/na/nd-20261025de65227",
+      "title": "電子漫画「ピッコマ」 顧客のメールアドレス約100万件流出 | NHKニュース",
+      "source": "hatena/it",
+      "source_group": "tech_blog",
+      "published_at": "2026-10-25T18:19:35+09:00",
+      "category": "sec",
+      "keywords": [
+        "data-breach"
+      ],
+      "score": 61,
+      "why": "はてブ 69",
+      "read_min": null,
+      "tldr": "電子漫画「ピッコマ」の運営会社は、メール配信に使っている委託先が不正アクセスを受け、顧客のメールアドレス約 100 万件が流出したと発表した。",
+      "points": [],
+      "code": null,
+      "signal": "B! 69",
+      "pick": false
+    },
+    {
+      "id": "2026-10-26-publickey-duckdb2",
+      "url": "https://www.publickey1.jp/blog/26/duckdb_20_ltsquack.html",
+      "title": "「DuckDB 2.0 LTS」正式リリース。Quackプロトコルによるクライアント/サーバ機能や非同期処理による高速化など",
+      "source": "publickey",
+      "source_group": "news",
+      "published_at": "2026-10-26T00:44:47+09:00",
+      "category": "be",
+      "keywords": [
+        "duckdb"
+      ],
+      "score": 60,
+      "why": "DuckDB の LTS 版の正式リリース（主要 OSS の公式発表）",
+      "read_min": null,
+      "tldr": "DuckDB 2.0 LTS（Cinnamon Teal）が正式リリースされた。Quack プロトコルによるクライアント/サーバ機能、スキーマレスの VARIANT 型、非同期 I/O によるリモートファイル読み込みの高速化などが入り、少なくとも 2027 年 10 月までサポートされる。",
+      "points": [],
+      "code": null,
+      "signal": null,
+      "pick": false
+    },
+    {
+      "id": "2026-10-26-coinpost-btc-fomc",
+      "url": "https://coinpost.jp/?p=744399",
+      "title": "ビットコイン、8.5万ドル手前で失速 FOMCが最大の焦点｜bitbankアナリスト寄稿",
+      "source": "CoinPost",
+      "source_group": "news",
+      "published_at": "2026-10-25T11:30:17+09:00",
+      "category": "crypto",
+      "keywords": [
+        "bitcoin",
+        "fed"
+      ],
+      "score": 82,
+      "why": "matched: ビットコイン",
+      "read_min": 6,
+      "tldr": "bitbank アナリストの週次レポート。ビットコインは 8.5 万ドル手前で失速し、AI・半導体株安に連れて対円で 1,300 万円を割り込んだ。今週の FOMC が最大の焦点としている。",
+      "points": [
+        "ドル建てでは 8.5 万ドル手前から失速し、約 8.1 万ドル付近で下げ止まった。対円では 22 日に 1,300 万円を割り、一時約 1,275 万円まで下げた",
+        "10 月の FOMC は据え置きが主なシナリオで、12 月の利上げは 7 割以上織り込まれている。議長会見で示される今後の利上げの道筋が注目点",
+        "AI 投資の採算や半導体需要への懸念でビットコインはハイテク株との連動を強めており、8 万ドル付近が需給面の支えとして意識されている"
+      ],
+      "code": null,
+      "signal": null,
+      "pick": true
+    },
+    {
+      "id": "2026-10-26-investing-ai-capital",
+      "url": "https://jp.investing.com/news/stock-market-news/article-1724434",
+      "title": "野心的なAI投資計画を賄う資本は十分に存在するのか",
+      "source": "investing.com",
+      "source_group": "news",
+      "published_at": "2026-10-26T00:27:32+09:00",
+      "category": "stocks",
+      "keywords": [
+        "us-stocks",
+        "meta",
+        "data-center"
+      ],
+      "score": 70,
+      "why": "matched: 米国株",
+      "read_min": 5,
+      "tldr": "Meta が「ますます厳しい資金調達環境」に言及したことで、AI 投資を支える資本は足りるのかという懸念が広がり、関連株が売られた。一方で Yardeni は、資本の引き締めは過剰投資のリスクを下げる健全な動きだとみている。",
+      "points": [
+        "Meta の売上高は前年比 26% 増の 646 億ドルだったが、フリーキャッシュフローは -21 億ドル。2026 年の設備投資予測の下限を 1,350 億ドルから 1,450 億ドルに引き上げた",
+        "Broadcom の CEO は資本が AI 開発の最大の制約になりうると警告。報道時点で Nvidia は 4.4% 安、CoreWeave は 10.1% 安、ナスダックは 2.6% 安",
+        "Amazon・Alphabet・Meta・Microsoft・Oracle の 5 社の支出は 2026 年に約 7,800 億ドル、2027〜2030 年は年 1 兆ドル超の見込み"
+      ],
+      "code": null,
+      "signal": null,
+      "pick": true
+    },
+    {
+      "id": "2026-10-26-impress-sbi-zerokan",
+      "url": "https://www.watch.impress.co.jp/docs/news/2144946.html",
+      "title": "SBI証券、こどもNISA専用の信託報酬0%投信「ゼロカン」",
+      "source": "watch.impress.co.jp",
+      "source_group": "news",
+      "published_at": "2026-10-01T20:00:00+09:00",
+      "category": "funds",
+      "keywords": [
+        "new-nisa",
+        "index-fund"
+      ],
+      "score": 80,
+      "why": "matched: nisa, インデックス",
+      "read_min": 4,
+      "tldr": "SBI 証券は、こどもNISA 専用の信託報酬 0.00% の投信「ゼロカン」（SBI・ゼロ・オールカントリー・インデックス・ファンド）を扱う。10 月 1 日の発表で、設定は 11 月 17 日、こどもNISA は 2027 年 1 月に始まる予定。",
+      "points": [
+        "連動指数は MSCI オール・カントリー・ワールド・インデックス（配当込み・円換算）。積立購入はこどもNISA に限られる",
+        "成人後は残高が通常の NISA に引き継がれ、信託報酬 0.00% のまま保有できる",
+        "同じマザーファンドを使う成人向けの「SBI オールカントリー」（信託報酬 年 0.055%）も同日に設定される"
+      ],
+      "code": null,
+      "signal": null,
+      "pick": true
+    },
+    {
+      "id": "2026-10-26-coinpost-delphi",
+      "url": "https://coinpost.jp/?p=744542",
+      "title": "『投機』がこの10年のテーマ、注目すべきは予測市場・無期限先物取引所＝Delphi Digital",
+      "source": "CoinPost",
+      "source_group": "news",
+      "published_at": "2026-10-25T09:00:19+09:00",
+      "category": "crypto",
+      "keywords": [
+        "prediction-market",
+        "crypto-exchange"
+      ],
+      "score": 55,
+      "why": "予測市場・取引インフラの調査レポート",
+      "read_min": 5,
+      "tldr": "Delphi Digital は、投機が「建設型」と「宝くじ型」の両方で同時に加速していると分析し、個別の対象より取引所や決済インフラといった「胴元」に注目すべきだとした。",
+      "points": [
+        "Kalshi と Polymarket の合計取引高は 2026 年 7 月に 530 億ドルで、前年同月の約 25 倍",
+        "S&P 500 指数オプションに占める 0DTE（当日満期）の割合は 2025 年の 59% から 2026 年 7 月に過去最高の 66% へ",
+        "暗号資産取引所での非暗号資産デリバティブの月間取引量は 2026 年 1 月の 520 億ドルから 6 月に 2,680 億ドルへ増えた"
+      ],
+      "code": null,
+      "signal": null,
+      "pick": true
+    },
+    {
+      "id": "2026-10-26-diamond-yen",
+      "url": "https://diamond.jp/articles/-/401716",
+      "title": "円安トレンドは本当に終わったのか？日米牽制でもドル円「156～160円」を見込む理由 - 為替ウォッチ",
+      "source": "ダイヤモンド",
+      "source_group": "news",
+      "published_at": "2026-10-26T04:25:00+09:00",
+      "category": "macro",
+      "keywords": [
+        "fx"
+      ],
+      "score": 72,
+      "why": "matched: 為替",
+      "read_min": null,
+      "tldr": "日米当局の円安けん制で円安トレンド転換の声が出ているが、みずほ証券の山本雅文氏はこれに懐疑的で、見出しではドル円 156〜160 円を見込むとしている（根拠の本文は有料部分）。",
+      "points": [],
+      "code": null,
+      "signal": null,
+      "pick": false
+    },
+    {
+      "id": "2026-10-26-diamond-takaichi-trade",
+      "url": "https://diamond.jp/articles/-/401617",
+      "title": "「高市トレード」なお前向きな海外投資家の注目セクターは？問われる政策の重点と財政規律 - 高市政権1年 サナエノミクスの功罪",
+      "source": "ダイヤモンド",
+      "source_group": "news",
+      "published_at": "2026-10-26T04:40:00+09:00",
+      "category": "stocks",
+      "keywords": [
+        "nikkei225",
+        "topix",
+        "jp-fiscal"
+      ],
+      "score": 65,
+      "why": "matched: 金利（関連）・日本株",
+      "read_min": null,
+      "tldr": "高市政権の 1 年で TOPIX は 31%、日経平均は 48% 上がり、海外から 8 兆円超が流入した。政策関連株の明暗や、長期金利の上昇が示す財政への懸念を検証する記事。",
+      "points": [],
+      "code": null,
+      "signal": null,
+      "pick": false
+    },
+    {
+      "id": "2026-10-26-diamond-france-debt",
+      "url": "https://diamond.jp/articles/-/401807",
+      "title": "フランス債務危機が深刻化、外国勢が投資撤退検討 - WSJ PickUp",
+      "source": "ダイヤモンド",
+      "source_group": "news",
+      "published_at": "2026-10-26T04:00:00+09:00",
+      "category": "macro",
+      "keywords": [
+        "government-bond",
+        "geopolitics"
+      ],
+      "score": 55,
+      "why": "matched: 金利（関連）",
+      "read_min": null,
+      "tldr": "フランスの財政危機が深まり、外国の投資家が投資の引き揚げを検討していると WSJ が報じた。",
+      "points": [],
+      "code": null,
+      "signal": null,
+      "pick": false
+    },
+    {
+      "id": "2026-10-26-diamond-insurance-ro",
+      "url": "https://diamond.jp/articles/-/401777",
+      "title": "保険の比較推奨販売「ロ方式」、金融庁が監督指針に込めた“真意”とは？パブコメで書き換わった3カ所と「提示」「推奨」の決定的な違い【前編】 - 保険 激震！ 生保・損保・代理店",
+      "source": "ダイヤモンド",
+      "source_group": "news",
+      "published_at": "2026-10-26T04:50:00+09:00",
+      "category": "macro",
+      "keywords": [
+        "insurance",
+        "fsa"
+      ],
+      "score": 48,
+      "why": "金融庁の監督指針改正",
+      "read_min": null,
+      "tldr": "2028 年 3 月から乗り合い代理店の比較推奨販売が顧客の意向に沿って選ぶ「ロ方式」に一本化される。パブコメで書き換わった監督指針の文言を解説する記事。",
+      "points": [],
+      "code": null,
+      "signal": null,
+      "pick": false
+    },
+    {
+      "id": "2026-10-26-toyokeizai-skhynix",
+      "url": "https://toyokeizai.net/articles/-/961503?utm_source=rss&utm_medium=http&utm_campaign=link_back",
+      "title": "身売り寸前から変貌を遂げた韓国半導体｢SKハイニックス｣ 生成AIブームでHBM需要に着火 | 政治・経済・投資 | 東洋経済オンライン",
+      "source": "東洋経済",
+      "source_group": "news",
+      "published_at": "2026-10-25T11:30:00+09:00",
+      "category": "stocks",
+      "keywords": [
+        "semiconductor"
+      ],
+      "score": 45,
+      "why": "AI 半導体関連（HBM）",
+      "read_min": null,
+      "tldr": "SK ハイニックスが HBM で Nvidia と組み、Samsung を上回るまでに復活した経緯をたどる記事。",
+      "points": [],
+      "code": null,
+      "signal": null,
+      "pick": false
+    },
+    {
+      "id": "2026-10-26-investing-us-canada",
+      "url": "https://jp.investing.com/news/economy-news/article-1724440",
+      "title": "米国とカナダ、貿易協定合意に「非常に近い」とホワイトハウス顧問",
+      "source": "investing.com",
+      "source_group": "news",
+      "published_at": "2026-10-26T03:59:15+09:00",
+      "category": "macro",
+      "keywords": [
+        "geopolitics"
+      ],
+      "score": 40,
+      "why": "米国の通商政策",
+      "read_min": null,
+      "tldr": "ホワイトハウスの顧問は、米国とカナダが貿易協定の合意に「非常に近い」と述べた。",
+      "points": [],
+      "code": null,
+      "signal": null,
+      "pick": false
+    }
+  ],
+  "social": [
+    {
+      "network": "x",
+      "author": "@snakeyesV1",
+      "url": "https://x.com/snakeyesV1/status/2112720612313407762",
+      "text": "eMudhra の中間 CA の鍵は盗まれたのではなく 4、56、66 などの小さな整数だったと整理。研究者が 10 月 17 日に 8 個の鍵を公開証明書から復元できると気づいたのが発端としている。",
+      "metrics": null,
+      "heat": null,
+      "category": "sec",
+      "keywords": [
+        "certificate-authority",
+        "cryptography"
+      ],
+      "posted_at": null
+    },
+    {
+      "network": "x",
+      "author": "@AnzalAbidi",
+      "url": "https://x.com/AnzalAbidi/status/2112943256522850576",
+      "text": "侵害された eMudhra の証明書チェーン 12 本を macOS・モバイルブラウザ・Go・Node・Python・Java で試し、安全なもの・まだ露出しているもの・macOS の回避策の穴を報告。",
+      "metrics": null,
+      "heat": null,
+      "category": "sec",
+      "keywords": [
+        "certificate-authority",
+        "tls"
+      ],
+      "posted_at": null
+    },
+    {
+      "network": "x",
+      "author": "@RGB_Lights",
+      "url": "https://x.com/RGB_Lights/status/2114361307969249374",
+      "text": "Steal My Bitcoin について「ビットコインで動く exploit を買おうとしている」と皮肉るコメント。",
+      "metrics": null,
+      "heat": null,
+      "category": "sec",
+      "keywords": [
+        "rce",
+        "bitcoin"
+      ],
+      "posted_at": null
+    },
+    {
+      "network": "hn",
+      "author": null,
+      "url": "https://news.ycombinator.com/item?id=50225695",
+      "text": "『We should be more ambitious with the software we build』のスレッド。644 件のコメント",
+      "metrics": "▲ 696  ✉ 644",
+      "heat": 100,
+      "category": "be",
+      "keywords": [
+        "ai-coding"
+      ],
+      "posted_at": "2026-10-25T06:47:31+09:00"
+    },
+    {
+      "network": "hn",
+      "author": null,
+      "url": "https://news.ycombinator.com/item?id=50224463",
+      "text": "『No signs of AI payoff outside the tech sector』のスレッド。643 件のコメント",
+      "metrics": "▲ 599  ✉ 643",
+      "heat": 100,
+      "category": "ai",
+      "keywords": [
+        "ai-economy"
+      ],
+      "posted_at": "2026-10-25T04:47:19+09:00"
+    }
+  ],
+  "releases": [
+    {
+      "date": "2026-10-25",
+      "title": "DuckDB 2.0 LTS",
+      "repo": "duckdb/duckdb",
+      "url": "https://www.publickey1.jp/blog/26/duckdb_20_ltsquack.html",
+      "kind": "release",
+      "note": "Quack プロトコルによるクライアント/サーバ機能、VARIANT 型、非同期 I/O。2027 年 10 月までサポート",
+      "category": "be"
+    },
+    {
+      "date": "2026-10-28",
+      "title": "FOMC（10 月 27〜28 日）",
+      "repo": null,
+      "url": "https://www.oanda.jp/lab-education/beginners/fundamentals_analysis/fomc-meeting",
+      "kind": "event",
+      "note": "結果発表は日本時間 29 日午前 3 時。据え置きが主なシナリオとの見方",
+      "category": "macro"
+    },
+    {
+      "date": "2026-10-30",
+      "title": "日銀 金融政策決定会合（10 月 29〜30 日）",
+      "repo": null,
+      "url": "https://www.dlri.co.jp/files/macro/666536.pdf",
+      "kind": "event",
+      "note": "展望レポートを公表。利上げ見送りが有力との予想が多い",
+      "category": "macro"
+    }
+  ]
+}
