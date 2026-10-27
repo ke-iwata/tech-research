@@ -1,0 +1,705 @@
+{
+  "date": "2026-10-28",
+  "generated_at": "2026-10-28T05:45:00+09:00",
+  "stats": {
+    "collected": 232,
+    "sources_ok": 25,
+    "sources_total": 26,
+    "by_group": {
+      "hackernews": 49,
+      "tech_blog": 85,
+      "news": 84,
+      "official": 14
+    },
+    "failed_sources": [
+      "coindesk_jp"
+    ]
+  },
+  "digest": [
+    {
+      "category": "ai",
+      "text": "OpenAI が数学・CS・物理の 3 つの新発見を発表し HN 1,113 pt で首位。うち 1 つは指数時間仮説（ETH）を偽とする Lean 形式化付きの論文で、外部研究者による検証はこれから。DeepMind はワールドモデル Genie 4 をリサーチプレビューで公開。",
+      "keywords": [
+        "openai",
+        "formal-verification",
+        "world-model"
+      ]
+    },
+    {
+      "category": "sec",
+      "text": "Cloudflare Workers AI の GLM-5.3 で 8/27〜9/9 に他人のプロンプト・生成内容が 155 件の応答に混入していたと公表。国内では So-net が会員情報約 214 万件の漏えいを公表し、GMO は不正アクセス犯の情報に 100 万ドルの懸賞金を出す。",
+      "keywords": [
+        "ai-security",
+        "data-breach",
+        "security-incident"
+      ]
+    },
+    {
+      "category": "be",
+      "text": "CPython の実験的 JIT は、運営委員会が求めた PEP 836 が取り下げられ main から削除される見通し。",
+      "keywords": [
+        "python"
+      ]
+    },
+    {
+      "category": "stocks",
+      "text": "27 日の日経平均は 1,078 円高の 6 万 3,268 円で 4 日ぶり反発（AI・半導体株主導、TOPIX は 0.6% 高）。今夜 FOMC 結果、30 日に日銀会合（見送り観測の報道あり）。",
+      "keywords": [
+        "nikkei225",
+        "boj-policy",
+        "fed"
+      ]
+    }
+  ],
+  "items": [
+    {
+      "id": "2026-10-28-deepmind-genie-4",
+      "url": "https://deepmind.google/blog/genie-4-a-new-generation-of-world-simulation/",
+      "title": "Genie 4",
+      "source": "hackernews",
+      "source_group": "hackernews",
+      "published_at": "2026-10-28T01:06:01+09:00",
+      "category": "ai",
+      "keywords": [
+        "google",
+        "world-model"
+      ],
+      "score": 84,
+      "why": "HN 468 pt",
+      "read_min": 6,
+      "tldr": "Google DeepMind が世界シミュレーション用のワールドモデル Genie 4 を発表した。自然言語でシーンをリアルタイムに操作でき、音声も同時に生成する。現時点では信頼できるテスター向けのリサーチプレビュー。",
+      "points": [
+        "天候・カメラ・人物や物体の追加などを自然言語で指示してシミュレーションをリアルタイムに変えられ、プロンプトは Gemini がシーンに合わせて調整する",
+        "環境音・音楽・対話音声を映像と同時に生成し、Gemini 3.8 Flash がシーンを監視して目標を段階に分け、各段階の成否を確認する",
+        "解像度・長さ・遅延の数値は非公開で、長いセッションでは一貫性がずれることがあると明記。Google AI Ultra の Project Genie と Gemini API / AI Studio の早期アクセス先に順次提供"
+      ],
+      "code": null,
+      "signal": "▲ 468",
+      "pick": true
+    },
+    {
+      "id": "2026-10-28-lwn-cpython-jit-removal",
+      "url": "https://lwn.net/SubscriberLink/1102102/0c00e4d550f25f8c/",
+      "title": "Python's experimental JIT to be removed（CPython の実験的 JIT が削除へ）",
+      "source": "hackernews",
+      "source_group": "hackernews",
+      "published_at": "2026-10-27T20:17:57+09:00",
+      "category": "be",
+      "keywords": [
+        "python",
+        "programming-language"
+      ],
+      "score": 81,
+      "why": "HN 369 pt",
+      "read_min": 7,
+      "tldr": "CPython 3.13 で入った実験的 JIT が main ブランチから削除される見通しになった。運営委員会が求めた PEP 836 が 10 月 19 日に取り下げられ、6 か月の猶予内に PEP が承認されなかったため。",
+      "points": [
+        "運営委員会は 2026 年 6 月、保守体制・互換性・成功指標・スケジュールを定めた PEP が承認されるまで main での JIT 開発を止め、6 か月以内に承認されなければ削除するとしていた",
+        "メンテナが PEP 836 を出したが、委員会は 9 月にサポート計画・性能基準・プラットフォーム差・セキュリティなどの詳細不足を指摘。著者らは手が回らないとして撤回した",
+        "後継は示されていない。参照実装は公開され、main 以外での開発継続は可能とされる。記事にベンチマーク値はない"
+      ],
+      "code": null,
+      "signal": "B! 1 · ▲ 369",
+      "pick": true
+    },
+    {
+      "id": "2026-10-28-cloudflare-kv-cache-exposure",
+      "url": "https://blog.cloudflare.com/kv-cache-exposure-remediation/",
+      "title": "Cross-request KV cache exposure in the GLM-5.3 Workers AI model, and our remediation with SGLang",
+      "source": "cloudflare blog",
+      "source_group": "tech_blog",
+      "published_at": "2026-10-27T07:01:23+09:00",
+      "category": "sec",
+      "keywords": [
+        "cloudflare",
+        "ai-security",
+        "llm"
+      ],
+      "score": 81,
+      "why": "HN 176 pt・Cloudflare 公式の事後報告",
+      "read_min": 12,
+      "tldr": "Cloudflare Workers AI の GLM-5.3 で、8 月 27 日〜9 月 9 日に他の利用者のプロンプトや生成内容が応答に混入していた。155 件の応答が該当し、設定ミスと SGLang のバグが重なったのが原因。",
+      "points": [
+        "影響は @cf/zai-org/glm-5.3 のみで、該当した 155 件はすべて 681,280 トークン超の長いプロンプト。9 月 8 日に研究者の通報で判明し、意図的な悪用の痕跡はないとしている",
+        "コンテキスト長 1,048,576 に対し prefill 側の KV キャッシュが 681,280 トークンしかなく、分離型 prefill/decode の SGLang が長すぎる要求を中断せず、decode 側が前の要求の古い KV ページを参照した",
+        "KV プールを約 204 万トークンに拡大し、長すぎる要求を受付時に拒否する修正を SGLang に取り込んだ（v0.5.22 以降推奨）。運用者には KV プールとコンテキスト長の照合や --disaggregation-enable-kv-checksum の有効化を勧めている"
+      ],
+      "code": null,
+      "signal": "▲ 176",
+      "pick": true
+    },
+    {
+      "id": "2026-10-28-impress-sonet-breach",
+      "url": "https://internet.watch.impress.co.jp/docs/news/2151585.html",
+      "title": "So-net、会員データベースへの不正アクセスで会員情報約214万件などが漏えい。一部退会者も含む Plala（Sコース）会員情報も対象",
+      "source": "hatena/it",
+      "source_group": "tech_blog",
+      "published_at": "2026-10-27T17:12:02+09:00",
+      "category": "sec",
+      "keywords": [
+        "data-breach",
+        "security-incident"
+      ],
+      "score": 65,
+      "why": "はてブ上位・国内 ISP の大規模漏えい",
+      "read_min": 4,
+      "tldr": "So-net の会員データベースに不正アクセスがあり、会員情報約 214 万件、Plala（S コース）会員約 44 万件、メールアドレスとメールパスワード約 5.4 万件などが漏えいした。10 月 27 日に公表。",
+      "points": [
+        "So-net 会員 2,141,986 件（退会者 272,215 件を含む）と Plala（S コース）会員 443,495 件の氏名・電話番号・メールアドレス・ID・生年月日・性別・接続 ID が対象。会員のログインパスワードは含まれないとしている",
+        "メールアドレスとメールパスワード 54,401 件も漏えいし、同社は 10 月 27 日にメールパスワードをリセット。銀行口座情報 16 件も含まれる",
+        "10 月 23 日に不正アクセスを確認してサーバーを停止、24 日に漏えいを確認、27 日に公表。侵入期間と経路は調査中"
+      ],
+      "code": null,
+      "signal": "B! 88",
+      "pick": true
+    },
+    {
+      "id": "2026-10-28-openai-three-discoveries",
+      "url": "https://openai.com/index/building-scientific-understanding-with-academic-communities/",
+      "title": "Three new discoveries in mathematics, computer science, and physics（OpenAI）",
+      "source": "hackernews",
+      "source_group": "hackernews",
+      "published_at": "2026-10-27T06:35:28+09:00",
+      "category": "ai",
+      "keywords": [
+        "openai",
+        "formal-verification"
+      ],
+      "score": 96,
+      "why": "HN 1113 pt（ETH 反証の論文 HN 768 pt を統合）",
+      "read_min": null,
+      "tldr": "OpenAI が数学・計算機科学・物理の 3 つの新発見を発表し、その 1 つは「指数時間仮説（ETH）は偽」とする論文で Lean による形式化を伴う。独立した研究者による検証はこれからとされる（本文は取得できず、発表タイトルと X 上の研究者の投稿で確認した範囲）。",
+      "points": [],
+      "code": null,
+      "signal": "B! 9 · ▲ 1113",
+      "pick": false
+    },
+    {
+      "id": "2026-10-28-j11g-mythical-man-month-ai",
+      "url": "https://j11g.com/the-mythical-man-month-in-the-age-of-ai",
+      "title": "The Mythical Man-Month in the Age of AI",
+      "source": "hackernews",
+      "source_group": "hackernews",
+      "published_at": "2026-10-27T15:25:37+09:00",
+      "category": "ai",
+      "keywords": [
+        "ai-coding",
+        "software-design"
+      ],
+      "score": 82,
+      "why": "HN 389 pt",
+      "read_min": null,
+      "tldr": "『人月の神話』の論点を AI コーディング時代に当てはめて考えるエッセイ。HN で 278 件のコメントが付いた。",
+      "points": [],
+      "code": null,
+      "signal": "B! 1 · ▲ 389",
+      "pick": false
+    },
+    {
+      "id": "2026-10-28-ghostty-1-4",
+      "url": "https://ghostty.org/docs/install/release-notes/1-4-0",
+      "title": "Ghostty 1.4.0",
+      "source": "hackernews",
+      "source_group": "hackernews",
+      "published_at": "2026-10-28T01:51:22+09:00",
+      "category": "be",
+      "keywords": [
+        "cli",
+        "oss"
+      ],
+      "score": 81,
+      "why": "HN 384 pt",
+      "read_min": null,
+      "tldr": "ターミナルエミュレーター Ghostty の 1.4.0 がリリースされた。",
+      "points": [],
+      "code": null,
+      "signal": "▲ 384",
+      "pick": false
+    },
+    {
+      "id": "2026-10-28-ieee-wikipedia-ai-cleanup",
+      "url": "https://spectrum.ieee.org/wikipedia-wikiproject-ai-writing-cleanup",
+      "title": "Wikipedia's Cleanup of AI-Generated Content",
+      "source": "hackernews",
+      "source_group": "hackernews",
+      "published_at": "2026-10-27T20:08:15+09:00",
+      "category": "ai",
+      "keywords": [
+        "wikipedia",
+        "llm"
+      ],
+      "score": 81,
+      "why": "HN 375 pt",
+      "read_min": null,
+      "tldr": "Wikipedia の有志プロジェクトによる AI 生成文章の除去作業を紹介する IEEE Spectrum の記事。",
+      "points": [],
+      "code": null,
+      "signal": "▲ 375",
+      "pick": false
+    },
+    {
+      "id": "2026-10-28-stanforddaily-claude-books",
+      "url": "https://stanforddaily.com/2026/10/27/professors-books-pirated-to-train-claude/",
+      "title": "Anthropic trained Claude on illegally obtained Stanford professors' books",
+      "source": "hackernews",
+      "source_group": "hackernews",
+      "published_at": "2026-10-28T00:28:26+09:00",
+      "category": "ai",
+      "keywords": [
+        "anthropic",
+        "licensing"
+      ],
+      "score": 77,
+      "why": "HN 273 pt",
+      "read_min": null,
+      "tldr": "Stanford 大学の教授らの著書が違法に入手された形で Claude の学習に使われたと Stanford Daily が報じた。",
+      "points": [],
+      "code": null,
+      "signal": "▲ 273",
+      "pick": false
+    },
+    {
+      "id": "2026-10-28-microsoft-type-server-protocol",
+      "url": "https://github.com/microsoft/pylance-release/blob/main/docs/tsp/type-server-protocol.md",
+      "title": "Type Server Protocol（Microsoft / Pylance）",
+      "source": "hackernews",
+      "source_group": "hackernews",
+      "published_at": "2026-10-27T03:14:49+09:00",
+      "category": "be",
+      "keywords": [
+        "python",
+        "lsp"
+      ],
+      "score": 76,
+      "why": "HN 264 pt",
+      "read_min": null,
+      "tldr": "Microsoft が Pylance のリポジトリで Type Server Protocol の仕様文書を公開した。型チェッカーを言語サーバーから切り離して提供するためのプロトコルとみられる（仕様本文は未確認）。",
+      "points": [],
+      "code": null,
+      "signal": "B! 1 · ▲ 264",
+      "pick": false
+    },
+    {
+      "id": "2026-10-28-itmedia-gmo-bounty",
+      "url": "https://www.itmedia.co.jp/news/article/2610/27/2000002642/",
+      "title": "GMO、不正アクセス実行犯の手がかりに懸賞金 1億5000万円規模",
+      "source": "hatena/it",
+      "source_group": "tech_blog",
+      "published_at": "2026-10-27T20:23:36+09:00",
+      "category": "sec",
+      "keywords": [
+        "security-incident",
+        "fx"
+      ],
+      "score": 74,
+      "why": "はてブ 170",
+      "read_min": null,
+      "tldr": "GMO インターネットグループが、FX 自動売買用 VPS「お名前.com デスクトップクラウド」への不正アクセスについて、実行犯の特定につながる情報に総額 100 万ドル（約 1 億 5000 万円）の懸賞金を出すと発表した。28 日正午から受け付ける。",
+      "points": [],
+      "code": null,
+      "signal": "B! 170",
+      "pick": false
+    },
+    {
+      "id": "2026-10-28-idcf-incident-report",
+      "url": "https://www.idcf.jp/news/topics/20261027001",
+      "title": "【第7報】不正アクセスに関する調査結果および今後の対応について（IDCフロンティア）",
+      "source": "idcf.jp",
+      "source_group": "tech_blog",
+      "published_at": "2026-10-27T16:55:13+09:00",
+      "category": "sec",
+      "keywords": [
+        "security-incident",
+        "data-breach"
+      ],
+      "score": 67,
+      "why": "はてブ 98・事業者の公式発表",
+      "read_min": null,
+      "tldr": "IDC フロンティアが IDCF クラウドへの不正アクセスについて、調査完了を受けた第 7 報で確認した事実・影響範囲・原因・対策を公表した。",
+      "points": [],
+      "code": null,
+      "signal": "B! 98",
+      "pick": false
+    },
+    {
+      "id": "2026-10-28-wiz-php2shell",
+      "url": "https://www.wiz.io/blog/php2shell-exploitation-so-far",
+      "title": "PHP2Shell: Exploitation attempts and remediation trends",
+      "source": "hackernews",
+      "source_group": "hackernews",
+      "published_at": "2026-10-27T22:52:12+09:00",
+      "category": "sec",
+      "keywords": [
+        "php",
+        "rce",
+        "vulnerability-management"
+      ],
+      "score": 70,
+      "why": "HN 168 pt",
+      "read_min": null,
+      "tldr": "Wiz が PHP の脆弱性「PHP2Shell」について、これまでに観測した悪用の試みと修正の進み具合をまとめた。",
+      "points": [],
+      "code": null,
+      "signal": "B! 1 · ▲ 168",
+      "pick": false
+    },
+    {
+      "id": "2026-10-28-newmo-riskjudge",
+      "url": "https://tech.newmo.me/entry/2026/10/27/100000",
+      "title": "プルリクエストのリスクを判定する仕組み - newmo 技術ブログ",
+      "source": "hatena/it",
+      "source_group": "tech_blog",
+      "published_at": "2026-10-27T14:57:00+09:00",
+      "category": "ai",
+      "keywords": [
+        "code-review",
+        "ai-coding"
+      ],
+      "score": 67,
+      "why": "はてブ 102",
+      "read_min": null,
+      "tldr": "newmo がモノレポで運用する、AI が PR を読んで安全と判断したものを bot が承認する仕組み「riskjudge」の作り方を紹介している。",
+      "points": [],
+      "code": null,
+      "signal": "B! 102",
+      "pick": false
+    },
+    {
+      "id": "2026-10-28-publickey-bun-formatter",
+      "url": "https://www.publickey1.jp/blog/26/javascriptbunprettier300prettier.html",
+      "title": "JavaScriptランタイムの「Bun」がPrettier互換で300倍以上高速なフォーマッタに。Prettier設定ファイルもそのまま利用可能",
+      "source": "publickey",
+      "source_group": "news",
+      "published_at": "2026-10-28T00:27:52+09:00",
+      "category": "be",
+      "keywords": [
+        "typescript",
+        "oss"
+      ],
+      "score": 45,
+      "why": "はてブ 3・主要ランタイムの新機能",
+      "read_min": null,
+      "tldr": "Bun v1.4.4（10 月 22 日リリース）に Prettier 互換のフォーマッターが入った。Prettier より 300 倍以上速いとされ、Prettier の設定ファイルをそのまま使える。",
+      "points": [],
+      "code": null,
+      "signal": "B! 3",
+      "pick": false
+    },
+    {
+      "id": "2026-10-28-oanda-nikkei-1027",
+      "url": "https://www.oanda.jp/lab-education/market_news/mn_1040815_202610271758/",
+      "title": "日経平均サマリー（27日）",
+      "source": "oanda.jp",
+      "source_group": "news",
+      "published_at": "2026-10-27T17:58:00+09:00",
+      "category": "stocks",
+      "keywords": [
+        "nikkei225",
+        "topix",
+        "semiconductor"
+      ],
+      "score": 85,
+      "why": "matched: 米国株・前営業日の市況",
+      "read_min": 3,
+      "tldr": "10 月 27 日の日経平均は前日比 1,078 円 72 銭高の 6 万 3,268 円 37 銭で 4 日ぶりに反発した。米ハイテク株高を受けて半導体などの AI 関連株に買いが入った一方、TOPIX は 0.6% 高にとどまった。",
+      "points": [
+        "日経平均は寄り付き後に上げ幅が 1,000 円を超え、10 時過ぎから伸び悩んだが 6 万 3,000 円付近で持ち直した。TOPIX は 24.39 ポイント高の 3,997.37",
+        "東証プライムは値下がり銘柄の方が多く、指数との乖離が目立った。グロース 250 指数は 2.7% 高",
+        "業種別では非鉄金属・電気機器・銀行が上昇、不動産・医薬品・陸運が下落。日本取引所グループは上期決算が期待に届かず下落した"
+      ],
+      "code": null,
+      "signal": null,
+      "pick": true
+    },
+    {
+      "id": "2026-10-28-coinpost-btc-target-cut",
+      "url": "https://coinpost.jp/?p=744774",
+      "title": "ビットコインの2026年末目標価格、シティなど3社が引き下げ 15万ドルまで約88％上昇必要",
+      "source": "CoinPost",
+      "source_group": "news",
+      "published_at": "2026-10-27T08:30:09+09:00",
+      "category": "crypto",
+      "keywords": [
+        "bitcoin",
+        "interest-rates"
+      ],
+      "score": 80,
+      "why": "matched: ビットコイン, 金利",
+      "read_min": 4,
+      "tldr": "スタンダードチャータード・バーンスタイン・シティが 2026 年末のビットコイン目標価格を年初から引き下げていたことを CoinPost がまとめた。現在の約 8 万ドルから 15 万ドルに届くには約 88% の上昇が要る。",
+      "points": [
+        "スタンダードチャータードは 15 万ドルから 10 万ドル（2 月）、バーンスタインは 15 万ドルから約 12.5 万ドル（8 月）に引き下げ、15 万ドル到達は 2027 年半ばとみている",
+        "シティは年初の 14.3 万ドルから 7 月に 8.2 万ドルまで下げ、10 月初めに現物 ETF への資金流入再開を理由に 11.3 万ドル（12 か月先）へ引き上げた",
+        "逆風として、原油高によるインフレ懸念と米長期金利の上昇、9 月の FRB 利上げ、米上院でのクラリティー法案の審議入り否決を挙げている。価格は 2025 年 10 月の最高値から約 37% 安"
+      ],
+      "code": null,
+      "signal": null,
+      "pick": true
+    },
+    {
+      "id": "2026-10-28-coinpost-sbi-blackrock-mmf",
+      "url": "https://coinpost.jp/?p=744829",
+      "title": "SBI・スターテイル、ブラックロックとトークン化MMF連携を検討へ",
+      "source": "CoinPost",
+      "source_group": "news",
+      "published_at": "2026-10-27T11:05:40+09:00",
+      "category": "crypto",
+      "keywords": [
+        "tokenization",
+        "stablecoin"
+      ],
+      "score": 72,
+      "why": "matched: 投資信託（MMF）",
+      "read_min": 3,
+      "tldr": "SBI ホールディングスとスターテイルがブラックロックと基本合意し、トークン化 MMF と円建てステーブルコイン JPYSC の連携を検討する。開始時期は示されていない。",
+      "points": [
+        "ブラックロック側は BlackRock Financial Management とブラックロック・ジャパンが参加し、技術・インフラ、事業・販売、規制・市場整備の 3 領域で検討する",
+        "JPYSC は SBI 新生信託銀行が発行し、2026 年 6 月 24 日に提供開始。現在は SBI VC トレードの口座内でのみ使える",
+        "対象となるトークン化 MMF の具体名は記事に記載がなく、枠組みは国内外の金融機関に開かれているとしている"
+      ],
+      "code": null,
+      "signal": null,
+      "pick": true
+    },
+    {
+      "id": "2026-10-28-diamond-cb-ai-mentions",
+      "url": "https://diamond.jp/articles/-/402035",
+      "title": "日銀・FRBの議事に「AI」登場回数が激増！中銀はAIの何を議論し、金融政策はどう変わるのか？ - 経済分析の哲人が斬る！市場トピックの深層",
+      "source": "ダイヤモンド",
+      "source_group": "news",
+      "published_at": "2026-10-28T04:30:00+09:00",
+      "category": "macro",
+      "keywords": [
+        "boj-policy",
+        "fed"
+      ],
+      "score": 60,
+      "why": "matched: 金利",
+      "read_min": null,
+      "tldr": "日銀と FRB の議事で「AI」への言及が急増していることを取り上げ、中央銀行が AI の何を議論し、金融政策にどう影響しうるかを解説するコラム。",
+      "points": [],
+      "code": null,
+      "signal": null,
+      "pick": false
+    },
+    {
+      "id": "2026-10-28-diamond-boj-governor",
+      "url": "https://diamond.jp/articles/-/402026",
+      "title": "【日銀の次期正副総裁を予想】高市政権が狙う「人事による日銀支配」に円安・債券安で警鐘を鳴らす市場…金融正常化の行方は？ - 高市政権1年 サナエノミクスの功罪",
+      "source": "ダイヤモンド",
+      "source_group": "news",
+      "published_at": "2026-10-28T04:35:00+09:00",
+      "category": "macro",
+      "keywords": [
+        "boj-policy",
+        "jgb",
+        "jp-fiscal"
+      ],
+      "score": 58,
+      "why": "matched: 金利（日銀人事）",
+      "read_min": null,
+      "tldr": "日銀の次期正副総裁人事を予想し、政権の人事による影響力と、円安・債券安で警戒を示す市場の見方を論じる記事。",
+      "points": [],
+      "code": null,
+      "signal": null,
+      "pick": false
+    },
+    {
+      "id": "2026-10-28-coinpost-ripple-trust-bank",
+      "url": "https://coinpost.jp/?p=744793",
+      "title": "リップルが米信託銀行設立で最終承認を獲得、ステーブルコイン準備金を保管可能に",
+      "source": "CoinPost",
+      "source_group": "news",
+      "published_at": "2026-10-27T09:50:48+09:00",
+      "category": "crypto",
+      "keywords": [
+        "stablecoin",
+        "crypto-regulation"
+      ],
+      "score": 55,
+      "why": "matched: 仮想通貨（制度）",
+      "read_min": null,
+      "tldr": "米通貨監督庁がリップルの信託銀行設立に最終承認を出した。ステーブルコイン RLUSD の準備金管理と企業向けの暗号資産保管を連邦の監督下で担う。",
+      "points": [],
+      "code": null,
+      "signal": null,
+      "pick": false
+    },
+    {
+      "id": "2026-10-28-coinpost-cftc-registration",
+      "url": "https://coinpost.jp/?p=744927",
+      "title": "米CFTC、仮想通貨取引所の任意登録を推進",
+      "source": "CoinPost",
+      "source_group": "news",
+      "published_at": "2026-10-27T16:00:41+09:00",
+      "category": "crypto",
+      "keywords": [
+        "crypto-regulation",
+        "crypto-exchange"
+      ],
+      "score": 50,
+      "why": "matched: 仮想通貨（規制）",
+      "read_min": null,
+      "tldr": "米商品先物取引委員会（CFTC）が暗号資産取引所の任意登録を推進していると CoinPost が報じた。",
+      "points": [],
+      "code": null,
+      "signal": null,
+      "pick": false
+    },
+    {
+      "id": "2026-10-28-coinpost-stock-tokenization-oppose",
+      "url": "https://coinpost.jp/?p=745033",
+      "title": "マイクロソフトやIBMなど計26社が株式トークン化に反対、OKXとICEの計画めぐり",
+      "source": "CoinPost",
+      "source_group": "news",
+      "published_at": "2026-10-27T21:50:40+09:00",
+      "category": "stocks",
+      "keywords": [
+        "tokenization",
+        "us-stocks"
+      ],
+      "score": 50,
+      "why": "matched: 米国株",
+      "read_min": null,
+      "tldr": "OKX と ICE による株式トークン化の計画をめぐり、マイクロソフトや IBM など 26 社が反対を表明したと CoinPost が報じた。",
+      "points": [],
+      "code": null,
+      "signal": null,
+      "pick": false
+    },
+    {
+      "id": "2026-10-28-suumo-yuzawa-resort-condo",
+      "url": "https://suumo.jp/journal/2026/10/27/221720/",
+      "title": "【湯沢のリゾマンすごい】温泉・プール付きで300万円台も！雪国なのに雪かきほぼ不要…かつての「負動産」に移住者が集まり“富動産”に化けた理由｜新潟県湯沢町",
+      "source": "SUUMOジャーナル",
+      "source_group": "news",
+      "published_at": "2026-10-27T07:00:09+09:00",
+      "category": "realestate",
+      "keywords": [
+        "real-estate-prices",
+        "housing"
+      ],
+      "score": 48,
+      "why": "matched: 不動産",
+      "read_min": null,
+      "tldr": "新潟県湯沢町のリゾートマンションに移住者が集まり、温泉・プール付きで 300 万円台の物件もあると紹介する記事。",
+      "points": [],
+      "code": null,
+      "signal": "B! 144",
+      "pick": false
+    }
+  ],
+  "social": [
+    {
+      "network": "x",
+      "author": "@fortnow",
+      "url": "https://x.com/fortnow/status/2114875562623635783",
+      "text": "計算量理論の研究者が、OpenAI が 3SAT を 2^{o(n)} 時間で解けるとして指数時間仮説（ETH）を偽と主張し、Lean による形式化を付けていると紹介。",
+      "metrics": null,
+      "heat": null,
+      "category": "ai",
+      "keywords": [
+        "openai",
+        "formal-verification"
+      ],
+      "posted_at": null
+    },
+    {
+      "network": "x",
+      "author": "@AndrewCurran_",
+      "url": "https://x.com/AndrewCurran_/status/2114836071028785289",
+      "text": "OpenAI が発表した 3 つの発見（局所平滑化と掛谷予想、ETH の反証、量子色力学と標準模型の完備化の存在）を列挙。",
+      "metrics": null,
+      "heat": null,
+      "category": "ai",
+      "keywords": [
+        "openai"
+      ],
+      "posted_at": null
+    },
+    {
+      "network": "x",
+      "author": "@DFIR_Radar",
+      "url": "https://x.com/DFIR_Radar/status/2114855682486788464",
+      "text": "Cloudflare Workers AI の GLM-5.3 で KV キャッシュのテナント分離が崩れ、13 日間で 155 件の応答に他の利用者のデータが混入したと要約。",
+      "metrics": null,
+      "heat": null,
+      "category": "sec",
+      "keywords": [
+        "cloudflare",
+        "ai-security"
+      ],
+      "posted_at": null
+    },
+    {
+      "network": "hn",
+      "author": null,
+      "url": "https://news.ycombinator.com/item?id=50257419",
+      "text": "『Python's experimental JIT to be removed』のスレッド。194 件のコメント",
+      "metrics": "▲ 369  ✉ 194",
+      "heat": 92,
+      "category": "be",
+      "keywords": [
+        "python"
+      ],
+      "posted_at": "2026-10-27T20:17:57+09:00"
+    },
+    {
+      "network": "hn",
+      "author": null,
+      "url": "https://news.ycombinator.com/item?id=50261319",
+      "text": "『Genie 4』のスレッド。275 件のコメント",
+      "metrics": "▲ 468  ✉ 275",
+      "heat": 100,
+      "category": "ai",
+      "keywords": [
+        "google",
+        "world-model"
+      ],
+      "posted_at": "2026-10-28T01:06:01+09:00"
+    },
+    {
+      "network": "x",
+      "author": "@nikkei",
+      "url": "https://x.com/nikkei/status/2113161395126562935",
+      "text": "日経新聞が、日銀は 10 月会合で連続利上げを見送る方向で、2% の物価目標に事実上到達したと判断していると報道（見出しの告知）。",
+      "metrics": null,
+      "heat": null,
+      "category": "macro",
+      "keywords": [
+        "boj-policy",
+        "boj-rate-hike"
+      ],
+      "posted_at": null
+    }
+  ],
+  "releases": [
+    {
+      "date": "2026-10-28",
+      "title": "uv 0.13.6",
+      "repo": "astral-sh/uv",
+      "url": "https://github.com/astral-sh/uv/releases/tag/0.13.6",
+      "kind": "release",
+      "note": "git タグの差分から検出",
+      "category": "be"
+    },
+    {
+      "date": "2026-10-29",
+      "title": "FOMC 結果発表（10 月 27〜28 日会合）",
+      "repo": null,
+      "url": "https://x.com/WizarGod/status/2114744982540329303",
+      "kind": "event",
+      "note": "結果発表は日本時間 29 日午前 3 時",
+      "category": "macro"
+    },
+    {
+      "date": "2026-10-30",
+      "title": "日銀 金融政策決定会合（10 月 29〜30 日）",
+      "repo": null,
+      "url": "https://www.dlri.co.jp/files/macro/666536.pdf",
+      "kind": "event",
+      "note": "展望レポートを公表。会合前の報道では利上げ見送り観測",
+      "category": "macro"
+    }
+  ]
+}
