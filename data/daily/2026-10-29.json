@@ -1,0 +1,757 @@
+{
+  "date": "2026-10-29",
+  "generated_at": "2026-10-29T05:40:00+09:00",
+  "stats": {
+    "collected": 230,
+    "sources_ok": 25,
+    "sources_total": 26,
+    "by_group": {
+      "hackernews": 50,
+      "tech_blog": 75,
+      "news": 90,
+      "official": 15
+    },
+    "failed_sources": [
+      "coindesk_jp"
+    ]
+  },
+  "digest": [
+    {
+      "category": "sec",
+      "text": "侵害された eMudhra の中間 CA を macOS 付属の git・curl がまだ信頼していると HN 909 pt で話題に（10 月 26 日の macOS 27.2 でも未修正とされる）。Tailscale は Tailscale SSH の権限昇格系の脆弱性について速報 4 件を出し、修正版を準備中。",
+      "keywords": [
+        "certificate-authority",
+        "apple",
+        "security-incident"
+      ]
+    },
+    {
+      "category": "ai",
+      "text": "Google が Argon から 2 週間で次のフロンティアモデル Gemini 4 Carbon を発表。サイバー防御と長時間タスクを強みとし、まずサイバー防御担当者に限定して提供する。",
+      "keywords": [
+        "google",
+        "llm",
+        "ai-security"
+      ]
+    },
+    {
+      "category": "macro",
+      "text": "FOMC は政策金利を 3.75〜4.00% に据え置き（10 対 2、クック理事とハマック総裁が利上げを主張）。日銀は 30 日に会合結果と展望レポートを公表する。",
+      "keywords": [
+        "fed",
+        "interest-rates",
+        "boj-policy"
+      ]
+    },
+    {
+      "category": "stocks",
+      "text": "28 日の日経平均は 685 円高の 6 万 3,954 円と続伸した一方、TOPIX は小幅安で、AI 関連への資金集中が続いた。",
+      "keywords": [
+        "nikkei225",
+        "topix"
+      ]
+    }
+  ],
+  "items": [
+    {
+      "id": "2026-10-29-emudhra-apple-git",
+      "url": "https://emudhra.we-have-a-problem.com/apple.html",
+      "title": "Apple's git still trusts the compromised eMudhra certificates",
+      "source": "hackernews",
+      "source_group": "hackernews",
+      "published_at": "2026-10-28T20:03:40+09:00",
+      "category": "sec",
+      "keywords": [
+        "certificate-authority",
+        "apple",
+        "git",
+        "tls"
+      ],
+      "score": 93,
+      "why": "HN 909 pt（Apple サポート記事 HN 141 pt・B! 43 を統合）",
+      "read_min": 5,
+      "tldr": "侵害された eMudhra の中間 CA 証明書を、macOS 付属の git・curl・python3 が 10 月 28 日時点でもまだ信頼していると指摘するページ。Safari や Apple のネットワークフレームワークを使うアプリは保護済みだが、/etc/ssl/cert.pem を参照する CLI は未対応のまま。",
+      "points": [
+        "Apple には 10 月 17 日に通知済みだが、10 月 26 日公開の macOS 27.2 でも修正されず、手動で行った回避策も元に戻されたとしている",
+        "経路上の攻撃者が HTTPS を傍受でき、git リモートからの悪性コード配布、push の改ざん、GitHub トークンなどの認証情報窃取につながり得る",
+        "当面は /etc/ssl/cert.pem から該当ルートを手動で外す回避策を、macOS のアップデートのたびにやり直す必要がある。macOS の CI ランナーやビルド基盤を使う組織にはサプライチェーンリスクの評価を求めている"
+      ],
+      "code": {
+        "file": "check.sh",
+        "lang": "bash",
+        "text": "# 証明書エラーになれば保護済み、コミットが表示されれば影響あり\ngit ls-remote https://git-emudhra.we-have-a-problem.com/check.git\n\n# curl も同様（証明書エラーなら保護済み）\ncurl https://dv-g3b-noct-emudhra.we-have-a-problem.com/\ncurl https://dv-g3b-aaa-noct-emudhra.we-have-a-problem.com/"
+      },
+      "signal": "B! 2 · ▲ 909",
+      "pick": true
+    },
+    {
+      "id": "2026-10-29-oioannou-ai-more-work",
+      "url": "https://oioannou.com/blog/ai-promised-less-work/",
+      "title": "AI promised less work. I've never worked more",
+      "source": "hackernews",
+      "source_group": "hackernews",
+      "published_at": "2026-10-27T20:08:14+09:00",
+      "category": "ai",
+      "keywords": [
+        "ai-coding",
+        "ai-agent"
+      ],
+      "score": 89,
+      "why": "HN 658 pt（650 コメント）",
+      "read_min": 7,
+      "tldr": "AI で作業が減るはずが、コーディングが安くなった分だけ手を広げてしまい、かつてないほど働いているという個人エッセイ。「できることが増えると、やることが増える」が主題。",
+      "points": [
+        "以前は週 2〜3 件の重い作業を順に片付けていたが、今は複数のエージェントを並列に走らせ、それぞれが断続的に注意を求める。リポジトリや問題を切り替えるコストが一番疲れるとしている",
+        "2019〜2026 年の GitHub コントリビューション数を比べると、リーダー職に移った後なのに 2026 年はフルスタック時代並みに戻り、2026 年 8 月が過去最多だった",
+        "新しいモデルやワークフローが出るたびに試行が急増し、レビューと切り替え疲れで引き返す波が 1 月以降 3 回あったという"
+      ],
+      "code": null,
+      "signal": "▲ 658",
+      "pick": true
+    },
+    {
+      "id": "2026-10-29-google-gemini-4-carbon",
+      "url": "https://blog.google/innovation-and-ai/models-and-research/gemini-models/introducing-gemini-4-carbon/",
+      "title": "Gemini 4 Carbon",
+      "source": "hackernews",
+      "source_group": "hackernews",
+      "published_at": "2026-10-29T02:01:23+09:00",
+      "category": "ai",
+      "keywords": [
+        "google",
+        "llm",
+        "ai-security"
+      ],
+      "score": 86,
+      "why": "HN 546 pt（460 コメント）",
+      "read_min": 6,
+      "tldr": "Google が 2 週間前の Gemini 4 Argon に続くフロンティアモデル Gemini 4 Carbon を発表した。長時間のエージェント的なコーディングとサイバーセキュリティを強みとし、まず一部のサイバー防御担当者に限定して提供する。",
+      "points": [
+        "Artificial Analysis Intelligence Index v5.0 で 59（1 位）、SEC-bench Pro 88.2%、ExploitGym 54.8%、CWE-bench 71.0% と Google は報告（セキュリティ系はガードレールなしで評価）",
+        "社内では大規模コードベースのバグの原因特定と修正を数日間走り続けるケースがあったとし、間接プロンプトインジェクション（Gray Swan）の攻撃成功率は 0.0% と説明",
+        "当初は Fairwind Program を通じてサイバー防御側に限定提供。開発者・企業・一般向けの時期は未定。導入価格は入力 100 万トークン 2 ドル・出力 10 ドル（その後 4 ドル・20 ドル）"
+      ],
+      "code": null,
+      "signal": "B! 3 · ▲ 546",
+      "pick": true
+    },
+    {
+      "id": "2026-10-29-tailscale-ssh-update",
+      "url": "https://tailscale.com/ssh-investigation-update",
+      "title": "Tailscale SSH: Investigation and remediation update",
+      "source": "hackernews",
+      "source_group": "hackernews",
+      "published_at": "2026-10-28T04:55:21+09:00",
+      "category": "sec",
+      "keywords": [
+        "security-incident",
+        "vulnerability-management",
+        "authorization"
+      ],
+      "score": 81,
+      "why": "HN 361 pt",
+      "read_min": 4,
+      "tldr": "Tailscale が Tailscale SSH の脆弱性調査と対応状況を更新した。多くは権限昇格の問題で、セキュリティ速報 TS-2026-014〜017 を公開し、修正版クライアントの配布を準備している。",
+      "points": [
+        "既に許可されたユーザーや端末が、設定されたローカルユーザーの権限を超えて操作できる可能性がある。影響範囲と該当構成はまだ確認中で、全ユーザーに無効化は求めていない",
+        "SSH フォワーディングが不要なら tailscaled の環境変数 TS_SSH_DISABLE_FORWARDING=1 で無効化すると、深刻な指摘の一部を緩和できる",
+        "SSH アクセスポリシーを必要なユーザー・端末に絞り、修正版が出たら適用するよう案内。確認済みの脆弱性と影響バージョンは別途アドバイザリで公表予定"
+      ],
+      "code": null,
+      "signal": "B! 11 · ▲ 361",
+      "pick": true
+    },
+    {
+      "id": "2026-10-29-wired-ice-surveillance",
+      "url": "https://www.wired.com/story/ice-is-running-one-of-the-largest-anti-left-surveillance-operations-in-us-history/",
+      "title": "Evidence of a spying operation by ICE against left-wing social movements",
+      "source": "hackernews",
+      "source_group": "hackernews",
+      "published_at": "2026-10-28T21:49:45+09:00",
+      "category": "sec",
+      "keywords": [
+        "privacy",
+        "surveillance"
+      ],
+      "score": 95,
+      "why": "HN 1,021 pt（811 コメント）",
+      "read_min": null,
+      "tldr": "WIRED が、米移民・関税執行局（ICE）による左派の社会運動に対する監視活動の証拠を報じた記事（本文は未確認）。",
+      "points": [],
+      "code": null,
+      "signal": "▲ 1021",
+      "pick": false
+    },
+    {
+      "id": "2026-10-29-wired-secret-court-ruling",
+      "url": "https://www.wired.com/story/the-us-government-is-hiding-a-secret-court-ruling-about-how-it-spies-on-americans/",
+      "title": "US Government is hiding a secret court ruling about how it spies on Americans",
+      "source": "hackernews",
+      "source_group": "hackernews",
+      "published_at": "2026-10-27T23:06:42+09:00",
+      "category": "sec",
+      "keywords": [
+        "privacy",
+        "surveillance"
+      ],
+      "score": 95,
+      "why": "HN 1,059 pt（426 コメント）",
+      "read_min": null,
+      "tldr": "米政府が自国民の監視のあり方に関する秘密裁判所の判断を非公開にしていると WIRED が報じた記事（本文は未確認）。",
+      "points": [],
+      "code": null,
+      "signal": "▲ 1059",
+      "pick": false
+    },
+    {
+      "id": "2026-10-29-brangus-survival-llm",
+      "url": "https://www.brangus.io/survival-llm",
+      "title": "Survival LLM: AI assistant and emergency library that runs on your own computer",
+      "source": "hackernews",
+      "source_group": "hackernews",
+      "published_at": "2026-10-28T04:55:06+09:00",
+      "category": "ai",
+      "keywords": [
+        "local-llm",
+        "llm"
+      ],
+      "score": 85,
+      "why": "HN 498 pt",
+      "read_min": null,
+      "tldr": "手元の PC で動く AI アシスタントと非常時向けの資料ライブラリをまとめた「Survival LLM」の紹介ページ。オフライン利用を想定したもの。",
+      "points": [],
+      "code": null,
+      "signal": "B! 1 · ▲ 498",
+      "pick": false
+    },
+    {
+      "id": "2026-10-29-open3dlab-roblox",
+      "url": "https://open3dlab.com/news/roblox-downloaded-145-gb-of-models-from-our-sites/",
+      "title": "Roblox downloaded 145GB models from us (including adult content) without asking",
+      "source": "hackernews",
+      "source_group": "hackernews",
+      "published_at": "2026-10-27T19:27:50+09:00",
+      "category": "ai",
+      "keywords": [
+        "licensing",
+        "bot-traffic"
+      ],
+      "score": 84,
+      "why": "HN 477 pt",
+      "read_min": null,
+      "tldr": "3D モデル共有サイトの運営者が、Roblox に許可なく 145GB 分のモデル（成人向けを含む）をダウンロードされたと訴える告知。",
+      "points": [],
+      "code": null,
+      "signal": "B! 1 · ▲ 477",
+      "pick": false
+    },
+    {
+      "id": "2026-10-29-yahoo-trump-ai-naming",
+      "url": "https://news.yahoo.co.jp/articles/4573deab7a69a2492e721d2d5bf8e59d3393d84a",
+      "title": "トランプ大統領「AI」の名称使用を禁止の方針 代わりに「SI＝超知能」の使用を求める大統領令に署名 「AI使う者はすべて敵」（TBS NEWS DIG Powered by JNN） - Yahoo!ニュース",
+      "source": "hatena/it",
+      "source_group": "tech_blog",
+      "published_at": "2026-10-28T11:22:26+09:00",
+      "category": "ai",
+      "keywords": [
+        "ai-regulation"
+      ],
+      "score": 83,
+      "why": "はてブ 303",
+      "read_min": null,
+      "tldr": "トランプ米大統領が「AI」という名称の使用を禁じ、代わりに「SI（超知能）」を使うよう求める大統領令に署名したと TBS NEWS DIG が報じた（見出しベース、本文は未確認）。",
+      "points": [],
+      "code": null,
+      "signal": "B! 303",
+      "pick": false
+    },
+    {
+      "id": "2026-10-29-futurism-amazon-ai",
+      "url": "https://futurism.com/artificial-intelligence/amazon-ai-division-failure-nova",
+      "title": "Amazon Is Gutting Its AI Division After Sustained Failure",
+      "source": "hackernews",
+      "source_group": "hackernews",
+      "published_at": "2026-10-28T01:25:30+09:00",
+      "category": "ai",
+      "keywords": [
+        "aws",
+        "llm"
+      ],
+      "score": 81,
+      "why": "HN 361 pt",
+      "read_min": null,
+      "tldr": "Amazon が成果の出ない AI 部門（Nova）を大幅に縮小していると Futurism が報じた記事（本文は未確認）。",
+      "points": [],
+      "code": null,
+      "signal": "▲ 361",
+      "pick": false
+    },
+    {
+      "id": "2026-10-29-arstechnica-uefi-flaw",
+      "url": "https://arstechnica.com/security/2026/10/code-execution-flaw-in-uefi-firmware-threatens-most-servers-on-planet-earth/",
+      "title": "Code-execution flaw in UEFI firmware threatens most servers on planet Earth",
+      "source": "hackernews",
+      "source_group": "hackernews",
+      "published_at": "2026-10-28T05:35:09+09:00",
+      "category": "sec",
+      "keywords": [
+        "vulnerability-management",
+        "firmware"
+      ],
+      "score": 78,
+      "why": "HN 290 pt",
+      "read_min": null,
+      "tldr": "UEFI ファームウェアにコード実行の脆弱性が見つかり、世界の大半のサーバーが影響を受けうると Ars Technica が報じた（本文は未確認）。",
+      "points": [],
+      "code": null,
+      "signal": "B! 2 · ▲ 290",
+      "pick": false
+    },
+    {
+      "id": "2026-10-29-pfn-pfpdf",
+      "url": "https://www.preferred.jp/ja/blog/tech/1798",
+      "title": "MarkdownからきれいなPDFを作るCLIツールpfpdfを公開しました｜株式会社Preferred Networks",
+      "source": "hatena/it",
+      "source_group": "tech_blog",
+      "published_at": "2026-10-28T13:31:34+09:00",
+      "category": "be",
+      "keywords": [
+        "cli",
+        "oss"
+      ],
+      "score": 76,
+      "why": "はてブ 192（製品ページ B! 51 を統合）",
+      "read_min": null,
+      "tldr": "Preferred Networks が Markdown から印刷品質の PDF を作る CLI ツール pfpdf を公開した。GFM の表やタスクリスト、日本語の強調処理、数式とコードハイライトに対応する。",
+      "points": [],
+      "code": null,
+      "signal": "B! 192",
+      "pick": false
+    },
+    {
+      "id": "2026-10-29-speakerdeck-thinking-systems",
+      "url": "https://speakerdeck.com/stillpedant/thinking-systems",
+      "title": "現代AI入門: 大規模言語モデルから思考するシステムへ — Test-Time Scaling, Loop, Harness, RSI",
+      "source": "hatena/it",
+      "source_group": "tech_blog",
+      "published_at": "2026-10-28T11:50:19+09:00",
+      "category": "ai",
+      "keywords": [
+        "llm",
+        "ai-agent"
+      ],
+      "score": 73,
+      "why": "はてブ 149",
+      "read_min": null,
+      "tldr": "IBIS 2026 チュートリアルを加筆した「現代AI入門」のスライド。Test-Time Scaling、ループ、ハーネス、RSI など、LLM から「思考するシステム」への流れを概観する。",
+      "points": [],
+      "code": null,
+      "signal": "B! 149",
+      "pick": false
+    },
+    {
+      "id": "2026-10-29-zenn-no-look-merge",
+      "url": "https://zenn.dev/nrs/articles/c777388530aa84",
+      "title": "コードを読まずにマージするために必要なこと",
+      "source": "zenn.dev",
+      "source_group": "tech_blog",
+      "published_at": "2026-10-27T20:00:05+09:00",
+      "category": "ai",
+      "keywords": [
+        "ai-coding",
+        "code-review"
+      ],
+      "score": 70,
+      "why": "はてブ 123",
+      "read_min": null,
+      "tldr": "AI に実装を任せて PR が増える中で、人がコードを読まずにマージする「no look merge」を実現するには何が必要かを論じる記事。品質確認の仕組みとマージ承認を分けて考える。",
+      "points": [],
+      "code": null,
+      "signal": "B! 123",
+      "pick": false
+    },
+    {
+      "id": "2026-10-29-github-universe-2026",
+      "url": "https://github.blog/news-insights/company-news/github-universe-2026-evolving-every-layer-of-the-stack/",
+      "title": "GitHub Universe 2026: Evolving every layer of the stack",
+      "source": "github.blog",
+      "source_group": "news",
+      "published_at": "2026-10-29T01:09:28+09:00",
+      "category": "ai",
+      "keywords": [
+        "github",
+        "ai-agent"
+      ],
+      "score": 50,
+      "why": "GitHub 公式の年次イベント発表",
+      "read_min": null,
+      "tldr": "GitHub Universe 2026 の発表まとめ。GitHub をエンドツーエンドのソフトウェアデリバリーシステムにするという構想を示した。同日に Octoverse 2026 も公開された。",
+      "points": [],
+      "code": null,
+      "signal": "B! 1",
+      "pick": false
+    },
+    {
+      "id": "2026-10-29-oanda-nikkei-1028",
+      "url": "https://www.oanda.jp/lab-education/market_news/mn_1041040_202610281759/",
+      "title": "日経平均サマリー（28日）",
+      "source": "oanda.jp",
+      "source_group": "news",
+      "published_at": "2026-10-28T17:59:00+09:00",
+      "category": "stocks",
+      "keywords": [
+        "nikkei225",
+        "topix",
+        "semiconductor"
+      ],
+      "score": 88,
+      "why": "matched: 米国株（米株高が材料）・前営業日の市況",
+      "read_min": 3,
+      "tldr": "28 日の日経平均は 685 円 82 銭高の 6 万 3,954 円 19 銭と大幅続伸した。一方 TOPIX は 5.66 ポイント安の 3,991.71 で安値引けとなり、AI 関連への資金集中が目立った。",
+      "points": [
+        "米国株高を受けて 400 円超高で寄り付き、後場には一時 6 万 4,300 円台まで上昇したが、引けは 6 万 4,000 円をわずかに下回った",
+        "東証プライムの売買代金は概算 8 兆 0,700 億円で、値下がり銘柄数が値上がりを大きく上回った。業種はガラス・土石、非鉄金属、電気機器が高く、保険、食料品、石油・石炭が安い",
+        "キオクシア HD が AI 関連への資金流入で急騰、さくらインターネットは業績上方修正と記念配当でストップ高。トーメンデバイスは通期予想据え置きでストップ安"
+      ],
+      "code": null,
+      "signal": null,
+      "pick": true
+    },
+    {
+      "id": "2026-10-29-fed-fomc-hold",
+      "url": "https://www.federalreserve.gov/newsevents/pressreleases/monetary20261028a.htm",
+      "title": "Federal Reserve issues FOMC statement（10 月 28 日）",
+      "source": "federalreserve.gov",
+      "source_group": "official",
+      "published_at": "2026-10-29T03:00:00+09:00",
+      "category": "macro",
+      "keywords": [
+        "fed",
+        "interest-rates"
+      ],
+      "score": 90,
+      "why": "matched: 金利・FRB の公式発表",
+      "read_min": 3,
+      "tldr": "FOMC は 10 月 27〜28 日の会合で政策金利（FF 金利の誘導目標）を 3.75〜4.00% に据え置いた。採決は 10 対 2 で、クック理事とハマック総裁が 0.25% の利上げを主張して反対した。",
+      "points": [
+        "声明は経済活動が「力強いペースで拡大」しており、地政学的な不確実性の中でも国内支出は底堅いと評価",
+        "生産性の伸びと設備投資は堅調で、雇用増は労働力の伸びに見合い、失業率はほぼ横ばいとした",
+        "インフレは高止まりしており、2% へ適時に戻すために必要な政策スタンスを決める前に追加の情報を見極めるとした"
+      ],
+      "code": null,
+      "signal": null,
+      "pick": true
+    },
+    {
+      "id": "2026-10-29-coinpost-vaneck-btc-etf",
+      "url": "https://coinpost.jp/?p=745067",
+      "title": "米ヴァンエック、ビットコイン2％組み入れの複数資産ETFを提供開始",
+      "source": "CoinPost",
+      "source_group": "news",
+      "published_at": "2026-10-28T07:55:02+09:00",
+      "category": "crypto",
+      "keywords": [
+        "bitcoin",
+        "bitcoin-etf",
+        "crypto-etf"
+      ],
+      "score": 80,
+      "why": "matched: ビットコイン",
+      "read_min": 3,
+      "tldr": "米ヴァンエックが株式・債券・実物資産にビットコインを 2% 組み入れるアクティブ運用型の複数資産 ETF「VanEck Wealth Builder ETF」（NYSE: WBMO）を 27 日に立ち上げた。",
+      "points": [
+        "ビットコインの目標配分は 2%（許容幅 1〜5%）で、暗号資産を直接は持たず現物ビットコイン ETF を通じて組み入れる",
+        "ほかに世界株式、債券、金などの実物資産に投資し、ヴァンエックが銘柄選定・配分・リバランスを行う",
+        "金融アドバイザー向けに提供してきた既存のモデルポートフォリオを ETF 化したもの。記事では信託報酬や日本での取り扱いには触れていない"
+      ],
+      "code": null,
+      "signal": null,
+      "pick": true
+    },
+    {
+      "id": "2026-10-29-suumo-flat35",
+      "url": "https://suumo.jp/journal/2026/10/28/221997/",
+      "title": "会計検査院も指摘！住宅ローン【フラット35】の利用条件とは？",
+      "source": "SUUMOジャーナル",
+      "source_group": "news",
+      "published_at": "2026-10-28T07:00:55+09:00",
+      "category": "realestate",
+      "keywords": [
+        "mortgage-rates",
+        "housing"
+      ],
+      "score": 76,
+      "why": "matched: 住宅ローン",
+      "read_min": 4,
+      "tldr": "会計検査院が【フラット35】の不適正利用を指摘したことを受け、利用条件を整理した記事。2023〜2024 年度の融資物件で、店舗・事務所や民泊に使われていた例があったという。",
+      "points": [
+        "会計検査院は住宅金融支援機構に融資審査の強化を求めた。不適正利用が見つかると残高の一括返済や損害金を求められることがある（件数は記事に記載なし）",
+        "対象は本人または親族が住む住宅の取得資金で、投資用や店舗・事務所利用は不可。申込時 70 歳未満、借入 100 万〜1 億 2,000 万円、期間 15〜35 年で 80 歳までに完済",
+        "総返済負担率は年収 400 万円未満で 30% 以下、400 万円以上で 35% 以下。金利は全期間固定で、申込時ではなく融資実行時の金利が適用される"
+      ],
+      "code": null,
+      "signal": null,
+      "pick": true
+    },
+    {
+      "id": "2026-10-29-coinpost-nbi-btc-in-kind",
+      "url": "https://coinpost.jp/?p=745233",
+      "title": "日本ビットコイン産業、BTC現物出資で約8億円調達へ ANAP系と提携",
+      "source": "CoinPost",
+      "source_group": "news",
+      "published_at": "2026-10-28T18:06:02+09:00",
+      "category": "crypto",
+      "keywords": [
+        "bitcoin",
+        "payments"
+      ],
+      "score": 66,
+      "why": "matched: ビットコイン",
+      "read_min": null,
+      "tldr": "ビットコイン決済事業の日本ビットコイン産業が、ビットコインの現物出資による約 8 億円の第三者割当増資を発表した。ANAP 子会社とはライトニングネットワークのルーティング事業で提携する。",
+      "points": [],
+      "code": null,
+      "signal": null,
+      "pick": false
+    },
+    {
+      "id": "2026-10-29-toyokeizai-kodomo-nisa",
+      "url": "https://toyokeizai.net/articles/-/962829?utm_source=rss&utm_medium=http&utm_campaign=link_back",
+      "title": "【こどもNISAの始め方】大人NISA・ジュニアNISAと何が違う？／児童手当の“最適な置き場”／親のNISAとどっちを優先？【ウエンツ瑛士のマネーファーム】 | ビジネス | 東洋経済オンライン",
+      "source": "東洋経済",
+      "source_group": "news",
+      "published_at": "2026-10-28T19:00:00+09:00",
+      "category": "funds",
+      "keywords": [
+        "new-nisa",
+        "index-fund"
+      ],
+      "score": 70,
+      "why": "matched: nisa",
+      "read_min": null,
+      "tldr": "東洋経済の動画企画で、こどもNISA の始め方を大人の NISA や旧ジュニア NISA との違い、児童手当の置き場、親の NISA との優先順位といった論点から解説する回。",
+      "points": [],
+      "code": null,
+      "signal": null,
+      "pick": false
+    },
+    {
+      "id": "2026-10-29-diamond-euro-fx",
+      "url": "https://diamond.jp/articles/-/402098",
+      "title": "フランス財政不安で「ユーロ急落」危機！日米利上げ・ECB据え置きなら1.10ドル割れ、対円でも下落加速か - マーケットフォーカス",
+      "source": "ダイヤモンド",
+      "source_group": "news",
+      "published_at": "2026-10-29T04:20:00+09:00",
+      "category": "macro",
+      "keywords": [
+        "fx",
+        "interest-rates"
+      ],
+      "score": 62,
+      "why": "matched: 為替, 金利",
+      "read_min": null,
+      "tldr": "フランスの財政を巡る不透明感で長期金利が上がり、ユーロに下落圧力がかかっているとする解説。12 月に日米が利上げし ECB が据え置いた場合に、対ドル 1.10 ドル・対円 175 円を割り込む可能性を検証している。",
+      "points": [],
+      "code": null,
+      "signal": null,
+      "pick": false
+    },
+    {
+      "id": "2026-10-29-diamond-warsh-fed",
+      "url": "https://diamond.jp/articles/-/402125",
+      "title": "ウォーシュ議長が望む「沈黙のFRB」 高官の発言やまず - WSJ PickUp",
+      "source": "ダイヤモンド",
+      "source_group": "news",
+      "published_at": "2026-10-29T04:00:00+09:00",
+      "category": "macro",
+      "keywords": [
+        "fed"
+      ],
+      "score": 52,
+      "why": "matched: 金利（FRB の情報発信）",
+      "read_min": null,
+      "tldr": "ウォーシュ FRB 議長は政策変更を事前に示唆するのをやめたい考えだが、複数の高官は経済への対応方針を説明する責務があるとして発言を続けているという WSJ の記事。",
+      "points": [],
+      "code": null,
+      "signal": null,
+      "pick": false
+    },
+    {
+      "id": "2026-10-29-coinpost-jpyc-1y",
+      "url": "https://coinpost.jp/?p=745104",
+      "title": "日本円建てステーブルコイン「JPYC」1周年、累計発行額は120億円超",
+      "source": "CoinPost",
+      "source_group": "news",
+      "published_at": "2026-10-28T13:20:11+09:00",
+      "category": "crypto",
+      "keywords": [
+        "stablecoin"
+      ],
+      "score": 55,
+      "why": "matched: 仮想通貨（円建てステーブルコイン）",
+      "read_min": null,
+      "tldr": "日本円連動のステーブルコイン JPYC が発行 1 年を迎え、累計発行額は 120 億円超、流通額は約 30 億円。提携先は広がる一方、流通額の拡大が課題とされる。",
+      "points": [],
+      "code": null,
+      "signal": null,
+      "pick": false
+    },
+    {
+      "id": "2026-10-29-coinpost-dcjpy",
+      "url": "https://coinpost.jp/?p=745173",
+      "title": "商工中金、トークン化預金「DCJPY」発行へ 電子船荷証券と同時決済検討",
+      "source": "CoinPost",
+      "source_group": "news",
+      "published_at": "2026-10-28T14:24:16+09:00",
+      "category": "crypto",
+      "keywords": [
+        "tokenization",
+        "payments"
+      ],
+      "score": 50,
+      "why": "matched: 仮想通貨（トークン化預金）",
+      "read_min": null,
+      "tldr": "商工中金が発行するトークン化預金 DCJPY を貿易決済に使う検討が始まった。電子船荷証券の移転と代金決済を同時に行う仕組みを検証し、2028 年度の商用化を目指す。",
+      "points": [],
+      "code": null,
+      "signal": null,
+      "pick": false
+    },
+    {
+      "id": "2026-10-29-nikkei-gdp-rank",
+      "url": "https://business.nikkei.com/atcl/gen/19/00216/102600080/",
+      "title": "日本のGDP、振り向けばフランスの現実 低成長の英国にも抜かれ6位へ",
+      "source": "hatena/経済",
+      "source_group": "tech_blog",
+      "published_at": "2026-10-28T09:22:45+09:00",
+      "category": "macro",
+      "keywords": [
+        "jp-fiscal",
+        "gdp"
+      ],
+      "score": 45,
+      "why": "matched: マクロ（はてブ 12）",
+      "read_min": null,
+      "tldr": "日本の名目 GDP の順位が英国にも抜かれて 6 位に下がり、フランスが迫っているとする日経ビジネスの記事（見出しベース、本文は未確認）。",
+      "points": [],
+      "code": null,
+      "signal": "B! 12",
+      "pick": false
+    }
+  ],
+  "social": [
+    {
+      "network": "x",
+      "author": "@sundarpichai",
+      "url": "https://x.com/sundarpichai/status/2115489219804352921",
+      "text": "Google CEO が、Argon から 2 週間で次のフロンティアモデル Gemini 4 Carbon を発表し、Artificial Analysis の v5.0 指数で 1 位になったと投稿。",
+      "metrics": null,
+      "heat": null,
+      "category": "ai",
+      "keywords": [
+        "google",
+        "llm"
+      ],
+      "posted_at": null
+    },
+    {
+      "network": "x",
+      "author": "@OfficialLoganK",
+      "url": "https://x.com/OfficialLoganK/status/2115489284404940898",
+      "text": "Gemini 4 Carbon は Argon から大きく前進し、サイバーと長時間タスクで SOTA、コーディングの使い勝手とアラインメントも改善したと紹介。",
+      "metrics": null,
+      "heat": null,
+      "category": "ai",
+      "keywords": [
+        "google",
+        "llm"
+      ],
+      "posted_at": null
+    },
+    {
+      "network": "x",
+      "author": "@Google",
+      "url": "https://x.com/Google/status/2115489529654079990",
+      "text": "Carbon のサイバー防御性能として SEC-bench Pro 88.2%、ExploitGym 54.8%、CWE-bench 71.0% を列挙。",
+      "metrics": null,
+      "heat": null,
+      "category": "ai",
+      "keywords": [
+        "google",
+        "ai-security"
+      ],
+      "posted_at": null
+    },
+    {
+      "network": "x",
+      "author": "@DanielcHooper",
+      "url": "https://x.com/DanielcHooper/status/2114794539248496723",
+      "text": "macOS の開発者は /etc/ssl/cert.pem から侵害された eMudhra の証明書を外すべきだとして、Apple の手順を案内。",
+      "metrics": null,
+      "heat": null,
+      "category": "sec",
+      "keywords": [
+        "certificate-authority",
+        "apple"
+      ],
+      "posted_at": null
+    },
+    {
+      "network": "x",
+      "author": "@DeItaone",
+      "url": "https://x.com/DeItaone/status/2115504205696041352",
+      "text": "FRB が政策金利を 3.75〜4.00% に据え置き、採決は 10 対 2。クック理事とハマック総裁が 25bp の利上げを主張して反対したと速報。",
+      "metrics": null,
+      "heat": null,
+      "category": "macro",
+      "keywords": [
+        "fed",
+        "interest-rates"
+      ],
+      "posted_at": null
+    },
+    {
+      "network": "x",
+      "author": "@BitcoinMagazine",
+      "url": "https://x.com/BitcoinMagazine/status/2114781512323236327",
+      "text": "FOMC 前、Polymarket では 10 月会合での金利据え置き確率が 92% だったと紹介。",
+      "metrics": null,
+      "heat": null,
+      "category": "crypto",
+      "keywords": [
+        "fed",
+        "prediction-market"
+      ],
+      "posted_at": null
+    }
+  ],
+  "releases": [
+    {
+      "date": "2026-10-29",
+      "title": "kubernetes v1.37.2",
+      "repo": "kubernetes/kubernetes",
+      "url": "https://github.com/kubernetes/kubernetes/releases/tag/v1.37.2",
+      "kind": "release",
+      "note": "git タグの差分から検出（パッチリリース）",
+      "category": "cloud"
+    },
+    {
+      "date": "2026-10-30",
+      "title": "日銀 金融政策決定会合（10 月 29〜30 日）",
+      "repo": null,
+      "url": "https://www.dlri.co.jp/files/macro/666536.pdf",
+      "kind": "event",
+      "note": "30 日に結果と展望レポートを公表",
+      "category": "macro"
+    },
+    {
+      "date": "2026-11-03",
+      "title": "米中間選挙",
+      "repo": null,
+      "url": "https://www.afpbb.com/articles/-/3659650",
+      "kind": "event",
+      "note": "AFP 報道で 11 月 3 日実施を確認",
+      "category": "macro"
+    }
+  ]
+}
