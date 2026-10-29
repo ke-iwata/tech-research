@@ -1,0 +1,742 @@
+{
+  "date": "2026-10-30",
+  "generated_at": "2026-10-30T05:45:00+09:00",
+  "stats": {
+    "collected": 220,
+    "sources_ok": 25,
+    "sources_total": 26,
+    "by_group": {
+      "hackernews": 49,
+      "tech_blog": 77,
+      "news": 85,
+      "official": 9
+    },
+    "failed_sources": [
+      "coindesk_jp"
+    ]
+  },
+  "digest": [
+    {
+      "category": "sec",
+      "text": "HN 1528 pt で首位の記事は、ボット対策用フィンガープリント・スクリプトが兵器関連の語や偽プロンプトを埋め込んで LLM の安全拒否を誘い、AI による難読化解除を妨げていた事例を解析した。Alpine の GitLab への CVE-2026-97229 悪用の試みやグッドスマイルカンパニーのカード情報漏えいなど、インシデント報告も続いた。",
+      "keywords": [
+        "ai-security",
+        "security-incident",
+        "data-breach"
+      ]
+    },
+    {
+      "category": "ai",
+      "text": "Mistral が約 1T パラメータの MoE モデル Mistral Large 4 の重みを公開した（修正 MIT ライセンス、MaaS 提供は別ライセンス）。Claude Code がバックグラウンドエージェントの状況表示のために約 30 秒ごとに全トランスクリプトをモデルへ送り、推定コストの 16% 前後を占めるとする検証も HN 552 pt を集めた。",
+      "keywords": [
+        "mistral",
+        "open-weight",
+        "claude",
+        "llm-cost"
+      ]
+    },
+    {
+      "category": "stocks",
+      "text": "29 日の日経平均は 705 円高の 6 万 4,659 円と 3 日続伸し、上方修正したアドバンテスト 1 銘柄で約 453 円を押し上げた。Alphabet の 7〜9 月期は売上高が 25% 増だった。",
+      "keywords": [
+        "nikkei225",
+        "us-stocks",
+        "google"
+      ]
+    },
+    {
+      "category": "macro",
+      "text": "日銀は 30 日に会合結果と展望レポートを公表する（会合前の報道は連続利上げ見送り）。NY 市場ではドル円が一時 158.13 円まで上げた後、157.71 円で引けた。ビットコインは 8 万 5,000 ドルを上値の壁としたレンジ相場が続き、ボラティリティは低下している（Glassnode）。",
+      "keywords": [
+        "boj-policy",
+        "fx",
+        "bitcoin"
+      ]
+    }
+  ],
+  "items": [
+    {
+      "id": "2026-10-30-nullptrs-fingerprint-anti-llm",
+      "url": "https://nullpt.rs/fingerprinting-bioweapons",
+      "title": "Why is this fingerprinting script creating bioweapons?",
+      "source": "hackernews",
+      "source_group": "hackernews",
+      "published_at": "2026-10-29T02:13:29+09:00",
+      "category": "sec",
+      "keywords": [
+        "ai-security",
+        "privacy",
+        "bot-traffic"
+      ],
+      "score": 100,
+      "why": "HN 1528 pt",
+      "read_min": 12,
+      "tldr": "Tranco 上位約 1 万サイトの巡回中に見つかった、servicepipe.tech 配信のブラウザ・フィンガープリント用スクリプトを解析した記事。関数名や不可視の Unicode タグ文字に隠した文字列に毒物・兵器関連の語や偽の「システム上書き」プロンプトを埋め込み、LLM の安全拒否を誘発して難読化解除を妨げる「anti-LLM 難読化」とみられる。",
+      "points": [
+        "ブラウザ側の処理は navigator 情報・WebGL の GPU 情報・window のキー数などを集める一般的なボット対策で、筆者は「拍子抜け」と評している",
+        "Claude 系のモデルは解析を拒否し、GLM-5.3 は同じ依頼に応じたと報告。中国の政治的な語句など検閲フィルタを狙ったとみられる文字列も混在していた",
+        "Node 環境かつ特定の環境変数のときだけ動く部分には、.env・.npmrc・Kubernetes／Git 設定の読み取りや、固定 IP からのバイナリ取得・cron 登録・データ送信のシェルコマンドが含まれる（読み取りのコールバックは空で、筆者はおとりの可能性も指摘）"
+      ],
+      "code": {
+        "file": "decode.js",
+        "lang": "javascript",
+        "text": "var cleartext = [...payload].map(function (c) {\n    return String.fromCodePoint(c.codePointAt(0) - 917504);\n}).join(\"\");"
+      },
+      "signal": "B! 1 · ▲ 1528",
+      "pick": true
+    },
+    {
+      "id": "2026-10-30-mistral-large-4-weights",
+      "url": "https://mistral.ai/news/mistral-large-4-oss/",
+      "title": "We're releasing the weights of Mistral Large 4",
+      "source": "hackernews",
+      "source_group": "hackernews",
+      "published_at": "2026-10-29T23:13:21+09:00",
+      "category": "ai",
+      "keywords": [
+        "mistral",
+        "open-weight",
+        "llm"
+      ],
+      "score": 93,
+      "why": "HN 893 pt",
+      "read_min": 6,
+      "tldr": "Mistral AI が 10 月初旬に API 提供を始めた約 1T パラメータの MoE モデル Mistral Large 4 の重みを公開した。マルチモーダル入力に対応し、推論の深さを Low／Medium／High の 3 段階で切り替えられる。",
+      "points": [
+        "ライセンスは修正 MIT の「Mistral Ecosystem Open-Weight」。改変・商用利用は自由だが、Model-as-a-Service として提供する事業者は別途商用ライセンスが必要",
+        "自社発表の指標では FrontierCode 2.0 で 19.7%（オープンウェイト最高）、Artificial Analysis Coding Agent Index で 48%（GLM-5.3 とほぼ同等、トークン数は約 47% 少ない）、Terminal-Bench 4.0 で 41%",
+        "Hugging Face で重みを公開し vLLM／SGLang で動かせるほか、Mistral API・OpenRouter・NVIDIA NIM・Microsoft Foundry でも提供。API 価格は 100 万トークンあたり入力 0.70 ドル・出力 2.10 ドル"
+      ],
+      "code": null,
+      "signal": "B! 1 · ▲ 893",
+      "pick": true
+    },
+    {
+      "id": "2026-10-30-hn-stackoverflow-questions",
+      "url": "https://data.stackexchange.com/stackoverflow/query/1926661#graph?t=1",
+      "title": "StackOverflow now gets fewer than 1000 questions a month",
+      "source": "hackernews",
+      "source_group": "hackernews",
+      "published_at": "2026-10-29T08:35:02+09:00",
+      "category": "ai",
+      "keywords": [
+        "ai-economy",
+        "ai-coding"
+      ],
+      "score": 90,
+      "why": "HN 747 pt・657 コメント",
+      "read_min": 4,
+      "tldr": "Stack Exchange Data Explorer のクエリで、Stack Overflow の月間質問数が 1,000 件を下回ったことが示され、HN で 657 件のコメントを集めた。リンク先はグラフのみで、議論は衰退の原因に集中した。",
+      "points": [
+        "コメントで引用された同クエリの値では、ピークは 2014 年 3 月の約 20.7 万件、ChatGPT 公開時の 2022 年 11 月には約 10.9 万件まで減っていた",
+        "LLM が決定打になったという見方と、重複判定による過剰なクローズやモデレーション文化で 2017 年ごろから減り始めていたという見方が並んだ",
+        "回答の陳腐化や、CC BY-SA のもとで運営側が回答を編集することの是非も論点になった"
+      ],
+      "code": null,
+      "signal": "▲ 747",
+      "pick": true
+    },
+    {
+      "id": "2026-10-30-qwenputer-riscv",
+      "url": "https://divagr.com/blog/qwenputer",
+      "title": "Qwenputer: A functioning, deterministic RISC-V CPU inside Qwen3.5",
+      "source": "hackernews",
+      "source_group": "hackernews",
+      "published_at": "2026-10-29T09:25:45+09:00",
+      "category": "ai",
+      "keywords": [
+        "llm",
+        "open-weight"
+      ],
+      "score": 89,
+      "why": "HN 669 pt",
+      "read_min": 15,
+      "tldr": "Qwen 3.5 4B の重みに 32 ビット RISC-V CPU（RV32IM＋Zba＋多倍長演算ユニット）をコンパイルして埋め込んだ実験。Gated DeltaNet 層の状態を RAM として使い、外部ツールなしで順伝播の中で命令を実行する。",
+      "points": [
+        "学習ではなくコンパイラで重みを直接設定し、元の 32 層の前に 11 層を追加。元の重みは変えず、通常の文章出力は元モデルとほぼ同じ（KL 6e-4）",
+        "公式の riscv-tests に合格し、約 23 万出力位置を参照実装と照合して不一致ゼロ。NUPA の多倍長整数演算は 48.6% から 100% に向上",
+        "チェックポイントは 18.8 GB で 24 GB GPU で動く。L4 でのバッチ実行は CPU トークン毎秒約 3,200 で、ネイティブ計算より遅い"
+      ],
+      "code": {
+        "file": "README（Try it）",
+        "lang": "bash",
+        "text": "git clone https://github.com/divagr18/qwenputer && cd qwenputer/experimental/riscv && uv sync --extra hf\nhf download divagr1925/Qwen3.5-4B-Qwenputer --local-dir qwenputer-rv\nuv run python -m chipformer.rv.chat qwenputer-rv --firmware tests/data/rv/calc-bridge.elf \\\n    --ask \"Use calc: what is 123456789 * 987654321?\""
+      },
+      "signal": "B! 3 · ▲ 669",
+      "pick": true
+    },
+    {
+      "id": "2026-10-30-gist-claude-code-agent-summary",
+      "url": "https://gist.github.com/flamerix-ai/c3905705cc4205e5de3011fa2e74efce",
+      "title": "Claude Code regularly sends each background agent's transcript to its model",
+      "source": "hackernews",
+      "source_group": "hackernews",
+      "published_at": "2026-10-29T12:33:42+09:00",
+      "category": "ai",
+      "keywords": [
+        "claude",
+        "llm-cost",
+        "ai-agent"
+      ],
+      "score": 86,
+      "why": "HN 552 pt",
+      "read_min": 8,
+      "tldr": "Claude Code がエージェントパネルの 3〜5 語の状況表示を作るため、約 30 秒ごとにバックグラウンドエージェントの全トランスクリプトをそのモデルに送っているとする検証記事。筆者によれば v2.1.232 以降デフォルトで有効で、無効化する設定はない。",
+      "points": [
+        "OpenTelemetry の api_request を query_source 別に集計すると、agent_summary が推定コストの約 16.4%、リクエストの約 19.7% を占め、メイン会話（15.7%）を上回ったという（請求額ではなく推定値）",
+        "サブスクリプション利用ではレート制限の枠を消費する形になる。GitHub の issue には 18〜26% という別の計測も挙がっている",
+        "回避策として、Bun の --preload で setTimeout をラップし要約タイマーだけを発火させないスクリプトを公開。更新のたびに動作確認が必要としている"
+      ],
+      "code": {
+        "file": "no-agent-summary.js",
+        "lang": "javascript",
+        "text": "const t = orig(() => {}, 2 ** 31 - 1); // clearTimeout-compatible handle, never fires\nif (t && typeof t.unref === \"function\") t.unref();\nreturn t;"
+      },
+      "signal": "▲ 552",
+      "pick": true
+    },
+    {
+      "id": "2026-10-30-ashunar0-cloudflare-free",
+      "url": "https://ashunar0.dev/posts/cloudflare-free-plan/",
+      "title": "Cloudflare はなんでこんなに無料で使わせてくれるの？",
+      "source": "ashunar0.dev",
+      "source_group": "tech_blog",
+      "published_at": "2026-10-29T12:25:44+09:00",
+      "category": "cloud",
+      "keywords": [
+        "cloudflare",
+        "edge"
+      ],
+      "score": 86,
+      "why": "はてブ 390",
+      "read_min": 8,
+      "tldr": "Workers・Pages・D1・R2 などの無料枠がなぜここまで大きいのかを、Cloudflare の事業モデルから考える個人ブログ記事。",
+      "points": [],
+      "code": null,
+      "signal": "B! 390",
+      "pick": false
+    },
+    {
+      "id": "2026-10-30-wired-dhs-leak",
+      "url": "https://www.wired.com/story/massive-leak-exposes-41000-homeland-security-workers-including-undercover-ice-agents/",
+      "title": "Leak Exposes 41,000 Homeland Security Workers–Including Undercover ICE Agents",
+      "source": "hackernews",
+      "source_group": "hackernews",
+      "published_at": "2026-10-29T06:03:24+09:00",
+      "category": "sec",
+      "keywords": [
+        "data-breach",
+        "security-incident"
+      ],
+      "score": 82,
+      "why": "HN 389 pt・関連 2 スレッド（246 pt・134 pt）を統合",
+      "read_min": 6,
+      "tldr": "米国土安全保障省（DHS）の職員約 4 万 1,000 人分の情報がリークサイトで公開されたと WIRED が報じた。見出しでは身分を伏せた ICE 職員も含まれるとしている。",
+      "points": [],
+      "code": null,
+      "signal": "B! 1 · ▲ 389",
+      "pick": false
+    },
+    {
+      "id": "2026-10-30-smsofdeath-android-dos",
+      "url": "https://smsofdeath.com/",
+      "title": "Zero click, silent, remote Android DoS",
+      "source": "hackernews",
+      "source_group": "hackernews",
+      "published_at": "2026-10-29T16:08:50+09:00",
+      "category": "sec",
+      "keywords": [
+        "android",
+        "vulnerability-management"
+      ],
+      "score": 78,
+      "why": "HN 300 pt",
+      "read_min": 5,
+      "tldr": "ユーザー操作なしで遠隔から Android 端末をサービス不能にできるとする脆弱性の公開ページ。サイト名から SMS 経由の攻撃とみられる。",
+      "points": [],
+      "code": null,
+      "signal": "B! 1 · ▲ 300",
+      "pick": false
+    },
+    {
+      "id": "2026-10-30-itmedia-goodsmile-card",
+      "url": "https://www.itmedia.co.jp/news/article/2610/29/2000002716/",
+      "title": "グッスマ、顧客の2800人のカード番号全16桁＋セキュリティコードなど流出か 下4桁は40万枚分",
+      "source": "ITmedia NEWS",
+      "source_group": "tech_blog",
+      "published_at": "2026-10-29T15:15:08+09:00",
+      "category": "sec",
+      "keywords": [
+        "data-breach",
+        "payments"
+      ],
+      "score": 75,
+      "why": "はてブ 176（KAI-YOU の同件 B! 65 を統合）",
+      "read_min": 4,
+      "tldr": "グッドスマイルカンパニーは 10 月 29 日、公式ショップの決済ページに不正なプログラムが設置され、顧客 2,800 人のカード番号（全 16 桁）・有効期限・セキュリティコードなどが漏えいした可能性があると発表した。",
+      "points": [],
+      "code": null,
+      "signal": "B! 176",
+      "pick": false
+    },
+    {
+      "id": "2026-10-30-alpine-gitlab-cve",
+      "url": "https://alpinelinux.org/posts/GitLab-security-incident-CVE-2026-97229.html",
+      "title": "GitLab Security Incident: Attempted Exploitation of CVE-2026-97229",
+      "source": "hackernews",
+      "source_group": "hackernews",
+      "published_at": "2026-10-29T08:45:46+09:00",
+      "category": "sec",
+      "keywords": [
+        "security-incident",
+        "rce",
+        "supply-chain"
+      ],
+      "score": 75,
+      "why": "HN 241 pt",
+      "read_min": 5,
+      "tldr": "Alpine Linux が自前の GitLab に対して CVE-2026-97229 を悪用しようとする攻撃があったと報告するインシデント記事。",
+      "points": [],
+      "code": null,
+      "signal": "▲ 241",
+      "pick": false
+    },
+    {
+      "id": "2026-10-30-surge-dayjob-tax",
+      "url": "https://surgehq.ai/blog/dayjob-tax",
+      "title": "Dayjob: Tax – evaluating AI agents on 50 professional tax assignments",
+      "source": "hackernews",
+      "source_group": "hackernews",
+      "published_at": "2026-10-29T00:46:30+09:00",
+      "category": "ai",
+      "keywords": [
+        "ai-agent",
+        "llm"
+      ],
+      "score": 75,
+      "why": "HN 249 pt",
+      "read_min": 10,
+      "tldr": "Surge AI が税務の実務課題 50 件で AI エージェントを評価するベンチマーク「Dayjob: Tax」を公開した。",
+      "points": [],
+      "code": null,
+      "signal": "B! 1 · ▲ 249",
+      "pick": false
+    },
+    {
+      "id": "2026-10-30-fowler-llm-voice",
+      "url": "https://martinfowler.com/bliki/LLM-Voice.html",
+      "title": "LLM Voice",
+      "source": "hackernews",
+      "source_group": "hackernews",
+      "published_at": "2026-10-29T23:57:55+09:00",
+      "category": "ai",
+      "keywords": [
+        "llm"
+      ],
+      "score": 74,
+      "why": "HN 221 pt",
+      "read_min": 4,
+      "tldr": "Martin Fowler の bliki で、LLM が書いた文章に特有の文体（LLM Voice）を取り上げたエッセイ。",
+      "points": [],
+      "code": null,
+      "signal": "▲ 221",
+      "pick": false
+    },
+    {
+      "id": "2026-10-30-dreamgroup-php2shell",
+      "url": "https://dreamgroup.com/blog/chained-php2shell-exploit-roots-25-servers",
+      "title": "Chained PHP2Shell exploit roots 25 servers, including US Government servers",
+      "source": "hackernews",
+      "source_group": "hackernews",
+      "published_at": "2026-10-29T19:42:41+09:00",
+      "category": "sec",
+      "keywords": [
+        "php",
+        "rce"
+      ],
+      "score": 74,
+      "why": "HN 219 pt",
+      "read_min": 8,
+      "tldr": "PHP の脆弱性を連鎖させた「PHP2Shell」で、米政府のものを含む 25 台のサーバーの root 権限が奪われたとする報告。",
+      "points": [],
+      "code": null,
+      "signal": "B! 1 · ▲ 219",
+      "pick": false
+    },
+    {
+      "id": "2026-10-30-orange-edge-fullchain",
+      "url": "https://blog.orange.tw/posts/2026-10-the-last-proof-of-human-craft-browser-full-chain/",
+      "title": "Forging a Microsoft Edge Full Chain with Logic Bugs Only",
+      "source": "hackernews",
+      "source_group": "hackernews",
+      "published_at": "2026-10-29T15:47:28+09:00",
+      "category": "sec",
+      "keywords": [
+        "microsoft",
+        "rce"
+      ],
+      "score": 74,
+      "why": "HN 224 pt",
+      "read_min": 20,
+      "tldr": "Orange Tsai が、メモリ破壊を使わずロジックバグだけで Microsoft Edge のフルチェーン攻撃を組み立てた過程を解説する記事。",
+      "points": [],
+      "code": null,
+      "signal": "B! 1 · ▲ 224",
+      "pick": false
+    },
+    {
+      "id": "2026-10-30-oanda-nikkei-1029",
+      "url": "https://www.oanda.jp/lab-education/market_news/mn_1041283_202610291750/",
+      "title": "日経平均サマリー（29日）",
+      "source": "oanda.jp",
+      "source_group": "news",
+      "published_at": "2026-10-29T17:50:00+09:00",
+      "category": "stocks",
+      "keywords": [
+        "nikkei225",
+        "topix",
+        "semiconductor"
+      ],
+      "score": 88,
+      "why": "matched: 米国株（AI 関連）・前営業日の市況",
+      "read_min": 3,
+      "tldr": "29 日の日経平均は 705 円高の 6 万 4,659 円と 3 日続伸した。業績予想を上方修正したアドバンテストが約 6% 上がり、1 銘柄で指数を約 453 円押し上げた。",
+      "points": [
+        "TOPIX は 11.57 ポイント高の 4,003.28 で、前場のマイナスから引けにかけてプラスに転じた",
+        "サムスン電子が決算後に大きく下げた 10 時過ぎに AI 関連の買いが一服したが、後場は一時 800 円超高まで上昇した",
+        "プライム市場の売買代金は約 13.86 兆円と TOPIX のリバランス需要で膨らんだ。銀行・証券・鉱業が上昇し、機械・電気機器・繊維が下落。上方修正が期待に届かなかったコマツは後場に急落した"
+      ],
+      "code": null,
+      "signal": null,
+      "pick": true
+    },
+    {
+      "id": "2026-10-30-gigazine-alphabet-q3",
+      "url": "https://gigazine.net/news/20261029-alphabet-q3-earning/",
+      "title": "Google親会社Alphabetの収益は前年同期比25％増加、クラウド事業の収益は2倍以上",
+      "source": "GIGAZINE",
+      "source_group": "tech_blog",
+      "published_at": "2026-10-29T11:52:20+09:00",
+      "category": "stocks",
+      "keywords": [
+        "us-stocks",
+        "google"
+      ],
+      "score": 80,
+      "why": "matched: 米国株（HN「Google Search is now less than half of Alphabet's revenue」347 pt と同じ話題）",
+      "read_min": 5,
+      "tldr": "Alphabet の 2026 年 7〜9 月期決算は売上高が前年同期比 25% 増で、年換算では 5,000 億ドルに達した。見出しではクラウド事業の収益が 2 倍以上としている。",
+      "points": [
+        "検索とその他の広告は 12% 増の 633 億ドルで、検索クエリの伸びは過去 5 年で最大",
+        "YouTube 広告は 9% 増の 112 億ドル。YouTube Music／Premium の加入者は試用を含め 1 億 5,000 万人を超えた",
+        "自社モデルの API 処理量は毎分約 320 億トークンで前四半期比 40% 増、Gemini アプリの利用者は 10 億人に達した"
+      ],
+      "code": null,
+      "signal": "B! 14 · ▲ 347",
+      "pick": true
+    },
+    {
+      "id": "2026-10-30-coinpost-btc-glassnode",
+      "url": "https://coinpost.jp/?p=745356",
+      "title": "ビットコイン、8万5000ドルの壁に阻まれレンジ相場続く＝グラスノード分析",
+      "source": "CoinPost",
+      "source_group": "news",
+      "published_at": "2026-10-29T14:47:25+09:00",
+      "category": "crypto",
+      "keywords": [
+        "bitcoin",
+        "bitcoin-etf"
+      ],
+      "score": 85,
+      "why": "matched: ビットコイン",
+      "read_min": 5,
+      "tldr": "Glassnode の週次レポートでは、ビットコインは今年 4 度押し戻された 8 万 5,000 ドルが上値の壁となり、レンジ内の動きが続いている。ETF 需要は後退し、ボラティリティも大きく下がっている。",
+      "points": [
+        "年初来で 8 万 5,000 ドルを上回って終えた日は 5 日だけ。現物 ETF の平均取得単価は約 8 万 1,500 ドル、短期保有者の取得単価は約 7 万 5,800 ドルとされる",
+        "米現物 ETF は 10 月 19 日に約 6.5 億ドルの流入があったが、22 日だけで約 5.4 億ドルが流出し、直近 2 週間の純流入は 6,700 万ドルにとどまる",
+        "1 カ月の実現ボラティリティは年率約 25% と 2023 年夏並みの低さで、2015 年以降これを下回った期間は約 5% しかない"
+      ],
+      "code": null,
+      "signal": null,
+      "pick": true
+    },
+    {
+      "id": "2026-10-30-coinpost-visa-stablecoin",
+      "url": "https://coinpost.jp/?p=745421",
+      "title": "ビザ、ステーブルコイン精算が10倍に 年換算約3.9兆円突破",
+      "source": "CoinPost",
+      "source_group": "news",
+      "published_at": "2026-10-29T16:26:16+09:00",
+      "category": "crypto",
+      "keywords": [
+        "stablecoin",
+        "payments"
+      ],
+      "score": 72,
+      "why": "matched: 仮想通貨（ステーブルコイン決済）・米国株（ビザ決算）",
+      "read_min": 4,
+      "tldr": "ビザの 2026 年度第 4 四半期（7〜9 月）決算で、ステーブルコインによる精算額が年換算 250 億ドル（約 3.9 兆円）を超え、前年の約 10 倍になった。",
+      "points": [
+        "精算に対応するのは USDC・USDG・EURC・PYUSD・SBC の 5 種で、対応チェーンは前年の 2 倍超の 10 に増えた",
+        "ビザも参加するコンソーシアムのステーブルコイン Open USD（OUSD）は 9 月 30 日の開始から 10 月 15 日までに流通量 8 億ドルを超えた",
+        "通期の純収益は 15% 増の約 460 億ドルで過去最高。第 4 四半期は 13% 増の 121 億ドルだった"
+      ],
+      "code": null,
+      "signal": null,
+      "pick": true
+    },
+    {
+      "id": "2026-10-30-investing-ny-fx-1029",
+      "url": "https://jp.investing.com/news/forex-news/article-1733319",
+      "title": "10月29日のNY為替概況",
+      "source": "Investing.com",
+      "source_group": "news",
+      "published_at": "2026-10-30T04:45:05+09:00",
+      "category": "macro",
+      "keywords": [
+        "fx",
+        "us-inflation",
+        "gdp"
+      ],
+      "score": 72,
+      "why": "matched: 為替",
+      "read_min": 3,
+      "tldr": "29 日の NY 市場でドル円は 158.13 円まで上げた後、157.71 円で引けた。米 7〜9 月期 GDP 速報値（年率 3.4%）が予想を上回り、9 月のコア PCE は前年比 3.1% だった。",
+      "points": [],
+      "code": null,
+      "signal": null,
+      "pick": false
+    },
+    {
+      "id": "2026-10-30-toyokeizai-long-rates",
+      "url": "https://toyokeizai.net/articles/-/962868",
+      "title": "なぜ｢長期金利上昇｣はいったん一服したのか…AI半導体株との連動､米中間選挙後は〈油断禁物〉",
+      "source": "東洋経済",
+      "source_group": "news",
+      "published_at": "2026-10-29T14:00:00+09:00",
+      "category": "macro",
+      "keywords": [
+        "jgb",
+        "interest-rates",
+        "boj-policy"
+      ],
+      "score": 70,
+      "why": "matched: 金利",
+      "read_min": 6,
+      "tldr": "日米とも今回は利上げ見送りとの見方を示し、長期金利上昇の一服の背景に AI 半導体株との連動があると論じる記事。本文の大半は有料会員限定のため、読めた導入部分の範囲で記載。",
+      "points": [],
+      "code": null,
+      "signal": null,
+      "pick": false
+    },
+    {
+      "id": "2026-10-30-toyokeizai-us-stocks-midterm",
+      "url": "https://toyokeizai.net/articles/-/962965",
+      "title": "【中間選挙後「何が起きても株は上がる」】AI関連で波乱続く「米国株相場」の今後／アンソロピック上場の影響度／グーグル最新決算を読み解く／「利上げ見送り」10月FOMCの意味／リスク",
+      "source": "東洋経済",
+      "source_group": "news",
+      "published_at": "2026-10-29T19:00:00+09:00",
+      "category": "stocks",
+      "keywords": [
+        "us-stocks",
+        "fed"
+      ],
+      "score": 68,
+      "why": "matched: 米国株",
+      "read_min": 10,
+      "tldr": "11 月 3 日の米中間選挙を前に、選挙結果と米国株相場の関係、Alphabet の決算、10 月 FOMC の据え置きなどを取り上げる解説（RSS の要約から）。",
+      "points": [],
+      "code": null,
+      "signal": null,
+      "pick": false
+    },
+    {
+      "id": "2026-10-30-coinpost-ledger-tampered",
+      "url": "https://coinpost.jp/?p=745446",
+      "title": "レジャー製ウォレットの不正部品で約4.3億円被害、シンガポール警察が報告",
+      "source": "CoinPost",
+      "source_group": "news",
+      "published_at": "2026-10-29T21:55:59+09:00",
+      "category": "crypto",
+      "keywords": [
+        "wallet",
+        "supply-chain"
+      ],
+      "score": 60,
+      "why": "matched: 仮想通貨（ウォレットの安全性）",
+      "read_min": 3,
+      "tldr": "シンガポール警察は 28 日、小売店で買われた Ledger 製ハードウェアウォレットに、リカバリーフレーズや秘密鍵を盗める不正部品が組み込まれていたと発表した。9 月 10 日以降少なくとも 2 件、約 4.3 億円の被害が出ている。",
+      "points": [],
+      "code": null,
+      "signal": null,
+      "pick": false
+    },
+    {
+      "id": "2026-10-30-coinpost-dtcc-tokenization",
+      "url": "https://coinpost.jp/?p=745308",
+      "title": "米大手清算・決済機関DTCC、トークン化サービスを開始 金融20社が利用契約",
+      "source": "CoinPost",
+      "source_group": "news",
+      "published_at": "2026-10-29T13:55:50+09:00",
+      "category": "crypto",
+      "keywords": [
+        "tokenization",
+        "us-stocks"
+      ],
+      "score": 55,
+      "why": "matched: 米国株（大型株・ETF・米国債のトークン化）",
+      "read_min": 3,
+      "tldr": "DTCC 傘下の DTC がトークン化証券サービス「DTS」を始め、JP モルガンなど 20 社が利用契約を結んだ。対象は大型株・ETF・米国債。",
+      "points": [],
+      "code": null,
+      "signal": null,
+      "pick": false
+    },
+    {
+      "id": "2026-10-30-coinpost-jpyc-tax-refund",
+      "url": "https://coinpost.jp/?p=745397",
+      "title": "日本免税とUPBOND、JPYCで訪日客に免税還付 11月1日開始",
+      "source": "CoinPost",
+      "source_group": "news",
+      "published_at": "2026-10-29T15:37:25+09:00",
+      "category": "crypto",
+      "keywords": [
+        "jpyc",
+        "stablecoin"
+      ],
+      "score": 55,
+      "why": "matched: 仮想通貨（円建てステーブルコイン）",
+      "read_min": 3,
+      "tldr": "日本免税は 11 月 1 日から、訪日客の免税還付金を円建てステーブルコイン JPYC で受け取れるサービスを始める。同日始まる免税制度の「リファンド方式」に合わせたもの。",
+      "points": [],
+      "code": null,
+      "signal": null,
+      "pick": false
+    },
+    {
+      "id": "2026-10-30-diamond-condo-repair",
+      "url": "https://diamond.jp/articles/-/402169",
+      "title": "【マンション大規模修繕の勘所】談合と管理会社バックマージンに怒るだけでは管理組合の負担は減らない、組合が「本当にすべきこと」とは？",
+      "source": "ダイヤモンド",
+      "source_group": "news",
+      "published_at": "2026-10-30T04:30:00+09:00",
+      "category": "realestate",
+      "keywords": [
+        "condo-management",
+        "housing"
+      ],
+      "score": 50,
+      "why": "matched: 不動産（マンション管理）",
+      "read_min": 8,
+      "tldr": "公正取引委員会がマンション大規模修繕工事の談合を認定し、コンサルタント 2 社と施工会社 40 社に行政処分を出したことを受け、管理組合が取るべき対応を論じる記事（RSS の要約から）。",
+      "points": [],
+      "code": null,
+      "signal": null,
+      "pick": false
+    }
+  ],
+  "social": [
+    {
+      "network": "hn",
+      "author": null,
+      "url": "https://news.ycombinator.com/item?id=50276998",
+      "text": "『Why is this fingerprinting script creating bioweapons?』のスレッド。284 件のコメント",
+      "metrics": "▲ 1,528  ✉ 284",
+      "heat": 100,
+      "category": "sec",
+      "keywords": [
+        "ai-security",
+        "privacy"
+      ],
+      "posted_at": "2026-10-29T02:13:29+09:00"
+    },
+    {
+      "network": "hn",
+      "author": null,
+      "url": "https://news.ycombinator.com/item?id=50289418",
+      "text": "『We're releasing the weights of Mistral Large 4』のスレッド。255 件のコメント",
+      "metrics": "▲ 893  ✉ 255",
+      "heat": 100,
+      "category": "ai",
+      "keywords": [
+        "mistral",
+        "open-weight"
+      ],
+      "posted_at": "2026-10-29T23:13:21+09:00"
+    },
+    {
+      "network": "x",
+      "author": "@DanielLockyer",
+      "url": "https://x.com/DanielLockyer/status/2115360923145712015",
+      "text": "Stack Overflow の先月の質問数が 1,000 件未満となり、最低記録を更新したと投稿。",
+      "metrics": null,
+      "heat": null,
+      "category": "ai",
+      "keywords": [
+        "ai-economy"
+      ],
+      "posted_at": null
+    },
+    {
+      "network": "hn",
+      "author": null,
+      "url": "https://news.ycombinator.com/item?id=50284255",
+      "text": "『Claude Code regularly sends each background agent's transcript to its model』のスレッド。220 件のコメント",
+      "metrics": "▲ 552  ✉ 220",
+      "heat": 100,
+      "category": "ai",
+      "keywords": [
+        "claude",
+        "llm-cost"
+      ],
+      "posted_at": "2026-10-29T12:33:42+09:00"
+    },
+    {
+      "network": "hn",
+      "author": null,
+      "url": "https://news.ycombinator.com/item?id=50282838",
+      "text": "『Qwenputer: A functioning, deterministic RISC-V CPU inside Qwen3.5』のスレッド。141 件のコメント",
+      "metrics": "▲ 669  ✉ 141",
+      "heat": 100,
+      "category": "ai",
+      "keywords": [
+        "llm"
+      ],
+      "posted_at": "2026-10-29T09:25:45+09:00"
+    },
+    {
+      "network": "x",
+      "author": "@nikkei",
+      "url": "https://x.com/nikkei/status/2113161395126562935",
+      "text": "日経電子版が、日銀は 10 月会合で連続利上げを見送る方向で、2% の物価目標に事実上到達したと報じた（会合前の報道）。",
+      "metrics": null,
+      "heat": null,
+      "category": "macro",
+      "keywords": [
+        "boj-policy",
+        "boj-rate-hike"
+      ],
+      "posted_at": null
+    }
+  ],
+  "releases": [
+    {
+      "date": "2026-10-30",
+      "title": "日銀 金融政策決定会合（10 月 29〜30 日）結果・展望レポート公表",
+      "repo": null,
+      "url": "https://www.dlri.co.jp/files/macro/666536.pdf",
+      "kind": "event",
+      "note": "30 日に結果と展望レポートを公表。会合前には連続利上げ見送りとの報道（日経）があった",
+      "category": "macro"
+    },
+    {
+      "date": "2026-11-03",
+      "title": "米中間選挙",
+      "repo": null,
+      "url": "https://www.afpbb.com/articles/-/3659650",
+      "kind": "event",
+      "note": "11 月 3 日実施（前日の確認に基づく）",
+      "category": "macro"
+    }
+  ]
+}
