@@ -1,0 +1,833 @@
+{
+  "date": "2026-11-01",
+  "generated_at": "2026-11-01T05:50:00+09:00",
+  "stats": {
+    "collected": 215,
+    "sources_ok": 25,
+    "sources_total": 26,
+    "by_group": {
+      "hackernews": 48,
+      "tech_blog": 81,
+      "official": 7,
+      "news": 79
+    },
+    "failed_sources": [
+      "coindesk_jp"
+    ]
+  },
+  "digest": [
+    {
+      "category": "crypto",
+      "text": "Binance はハッキング損失の補償に 63.4 億ドル（約 1 兆円）の自社資金を確保したと発表。30 日の米市場では Coinbase が約 11% 下げるなど暗号資産関連株が軒並み下落し、CFTC 委員長は取引所が任意で選べる連邦登録の枠組みを提案した。",
+      "keywords": [
+        "exchange-hack",
+        "crypto-exchange",
+        "crypto-regulation"
+      ]
+    },
+    {
+      "category": "ai",
+      "text": "米下院民主党が、AI バブルが崩壊しても AI 企業を救済せず通常の破産手続きに委ねるべきだとする決議案を提出（HN 654 pt）。OpenAI の資金調達が目標の半分に届かなかったとの報道も重なった。",
+      "keywords": [
+        "ai-economy",
+        "ai-regulation"
+      ]
+    },
+    {
+      "category": "sec",
+      "text": "ChatGPT の共有リンクを開くだけでアカウントの会話を読み出せた脆弱性の詳細が公開された（修正済み）。Scribd の漏えい通知、Bunny CDN・Linode のインシデント公表など、サービス側のセキュリティ事案が相次いだ。",
+      "keywords": [
+        "ai-security",
+        "data-breach",
+        "security-incident"
+      ]
+    },
+    {
+      "category": "sec",
+      "text": "GMO の不正アクセス問題で、子会社が 2024 年 4 月に脆弱性を指摘していたと日経・NHK が報道。同社は 11 月 2 日に会見の予定。",
+      "keywords": [
+        "security-incident",
+        "vulnerability-management"
+      ]
+    },
+    {
+      "category": "stocks",
+      "text": "日経平均は 10 月 30 日に 63,290 円（前日比 −2.12%）で週を終えた。数値は markets.json による（マネー補完の検索では当日の市況記事を確認できず、記事は追加していない）。",
+      "keywords": [
+        "nikkei225"
+      ]
+    }
+  ],
+  "items": [
+    {
+      "id": "2026-11-01-house-ai-bailout",
+      "url": "https://progressives.house.gov/2026/10/reps-casar-waters-lead-democratic-resolution-opposing-a-i-bubble-bailout-for-big-tech-commit-to-protecting-american-people-instead",
+      "title": "US Reps Lead Democratic Resolution Opposing A.I. Bubble Bailout for Big Tech",
+      "source": "hackernews",
+      "source_group": "hackernews",
+      "published_at": "2026-10-30T21:08:00+09:00",
+      "category": "ai",
+      "keywords": [
+        "ai-economy",
+        "ai-regulation"
+      ],
+      "score": 89,
+      "why": "HN 654 pt・521 コメント",
+      "read_min": 4,
+      "tldr": "米下院の Casar 議員と Waters 議員が 10 月 29 日、AI 関連の資産バブルが崩壊した場合に AI 企業や経営陣を救済することに反対する決議案を提出した。民主党議員 11 人が共同提出者に加わり、救済の代わりに労働者・年金受給者などの保護を優先するよう求めている。",
+      "points": [
+        "緊急融資や資本注入など、破綻した AI 企業を支えたり通常の破産手続きを妨げたりする特別支援に反対し、経営陣の「ゴールデンパラシュート」も認めないとする",
+        "根拠として、AI 関連企業が数兆ドル規模の債務を抱え、その多くが不透明なプライベートクレジット市場で調達されていること、株式市場の PER が 1990 年代のハイテクバブル期に迫ることを挙げている",
+        "雇用創出・失業保険などへの直接の財政支出、年金の保護、投機的バブルを防ぐ透明性の強化を支持。決議は法的拘束力を持たない意思表明"
+      ],
+      "code": null,
+      "signal": "▲ 654",
+      "pick": true
+    },
+    {
+      "id": "2026-11-01-cyberplace-claude-code-ext",
+      "url": "https://cyberplace.social/@GossiTheDog/117528831681803563",
+      "title": "Backdoors in official Claude Code extensions",
+      "source": "hackernews",
+      "source_group": "hackernews",
+      "published_at": "2026-10-30T20:05:53+09:00",
+      "category": "sec",
+      "keywords": [
+        "supply-chain",
+        "ai-security",
+        "claude"
+      ],
+      "score": 89,
+      "why": "HN 655 pt・DoublePulsar の記事も HN 399 pt（前日からの続報）",
+      "read_min": null,
+      "tldr": "Cursor のマーケットプレイスで配布された Claude Code 拡張の改ざん版にリモートアクセス用のマルウェアが含まれていたとする投稿。Microsoft は改ざん版が VS Code Marketplace には届いていないと説明している（The Hacker News の X 投稿による）。",
+      "points": [],
+      "code": null,
+      "signal": "▲ 655",
+      "pick": false
+    },
+    {
+      "id": "2026-11-01-nikkei-gmo-vuln",
+      "url": "https://www.nikkei.com/article/DGXZQOUC30A460Q6A031C2000000/",
+      "title": "GMO不正侵入、システム脆弱性を2年前に把握 子会社指摘も対策後手 - 日本経済新聞",
+      "source": "nikkei.com",
+      "source_group": "tech_blog",
+      "published_at": "2026-10-31T17:05:25+09:00",
+      "category": "sec",
+      "keywords": [
+        "security-incident",
+        "vulnerability-management"
+      ],
+      "score": 81,
+      "why": "はてブ 267・NHK も同趣旨を報道（はてブ 71）",
+      "read_min": null,
+      "tldr": "GMO インターネットグループのサービスへの不正アクセス問題で、子会社のセキュリティー企業が 2024 年 4 月にシステムの脆弱性を指摘し抜本的な見直しを求めていたと報じられた。NHK によると、同社は 11 月 2 日に会見を開く予定（本文の大半は有料で未確認）。",
+      "points": [],
+      "code": null,
+      "signal": "B! 267",
+      "pick": false
+    },
+    {
+      "id": "2026-11-01-hn-scribd-breach",
+      "url": "https://news.ycombinator.com/item?id=50312756",
+      "title": "Tell HN: Scribd Breached",
+      "source": "hackernews",
+      "source_group": "hackernews",
+      "published_at": "2026-10-31T11:46:36+09:00",
+      "category": "sec",
+      "keywords": [
+        "data-breach",
+        "payments"
+      ],
+      "score": 79,
+      "why": "HN 328 pt・118 コメント",
+      "read_min": 3,
+      "tldr": "Scribd が利用者に不正アクセスの通知を送り始め、受信者が HN に共有した。通知によるとメールアドレスやカード番号の下 4 桁・有効期限・発行会社・決済履歴が第三者に見られた可能性がある。",
+      "points": [
+        "通知は通知代行の Epiq 経由のメールで「段階的に」送られており、受信日は 10 月 26 日や 30 日など利用者によって異なる",
+        "Scribd は影響を受けたシステムを保護して不正アクセスを止め、法執行機関とデータ保護当局に届け出たと説明。悪用の証拠はないとしている",
+        "スレッドでは、サポートサイトの告知が乏しく問い合わせを電話窓口に誘導している点への批判や、使い捨てのバーチャルカードを勧める声が多かった"
+      ],
+      "code": null,
+      "signal": "B! 1 · ▲ 328",
+      "pick": true
+    },
+    {
+      "id": "2026-11-01-tangled-federated-forge",
+      "url": "https://tangled.org/blog/forge/",
+      "title": "The federated code forge",
+      "source": "hackernews",
+      "source_group": "hackernews",
+      "published_at": "2026-10-31T00:44:29+09:00",
+      "category": "be",
+      "keywords": [
+        "git",
+        "oss",
+        "at-protocol"
+      ],
+      "score": 79,
+      "why": "HN 323 pt",
+      "read_min": 6,
+      "tldr": "AT Protocol 上に作られたコードフォージ Tangled が大型リリースを発表し、「初めての本格的な連合型フォージ」をうたった。Git ホスティングや CI ランナーなど必要な部分だけを自前で運用しつつ、他のサーバーの利用者と共同作業できる。",
+      "points": [
+        "Go のモノリス（appview）を、エッジで配信する Svelte のフロントエンドと、Rust 製の読み取り専用インメモリ・インデクサ bobbin（11 以上のリージョン）に置き換えた",
+        "Git サーバーと SSH サーバーを 1 バイナリにした Rust 製の knot2 では、Issue・PR・コメント・ラベルなどをリポジトリ内の Git オブジェクトの連鎖（COB）として保存する",
+        "組織アカウント（独自の DID とハンドルを持つ）、Git と Jujutsu の両方で使えるスタック PR を追加。Lexicon は sh.tangled.* から org.tangled.* に移り、セルフホストは knot v1.20.0 への更新が必要"
+      ],
+      "code": null,
+      "signal": "B! 1 · ▲ 323",
+      "pick": true
+    },
+    {
+      "id": "2026-11-01-fortune-cisco-ai-tokens",
+      "url": "https://fortune.com/2026/10/30/cisco-president-jeetu-patel-gen-z-27-year-old-unlimited-ai-tokens-rewrite-legacy-code-entry-level-jobs/",
+      "title": "Cisco gives engineer unlimited AI tokens to rewrite legacy code",
+      "source": "hackernews",
+      "source_group": "hackernews",
+      "published_at": "2026-10-30T23:08:20+09:00",
+      "category": "ai",
+      "keywords": [
+        "ai-coding",
+        "ai-adoption"
+      ],
+      "score": 78,
+      "why": "HN 297 pt・361 コメント",
+      "read_min": null,
+      "tldr": "Cisco が若手エンジニアに AI のトークンを無制限に与え、レガシーコードの書き直しを任せているという Fortune の記事。エントリーレベルの仕事と AI の関係をめぐって HN で議論になった。",
+      "points": [],
+      "code": null,
+      "signal": "▲ 297",
+      "pick": false
+    },
+    {
+      "id": "2026-11-01-parameter-chatgpt-takeover",
+      "url": "https://www.parameter.ai/labs/we-found-a-gap-at-openai",
+      "title": "Do the math: How we took over ChatGPT accounts",
+      "source": "hackernews",
+      "source_group": "hackernews",
+      "published_at": "2026-10-31T19:30:11+09:00",
+      "category": "sec",
+      "keywords": [
+        "openai",
+        "ai-security",
+        "sandbox"
+      ],
+      "score": 77,
+      "why": "HN 275 pt・126 コメント",
+      "read_min": 10,
+      "tldr": "ChatGPT の公開共有リンクを開くだけで、攻撃者の JavaScript が被害者のログイン中のセッションで動き、非公開の会話を読み出して外部に送れる脆弱性の報告。OpenAI は P1 と評価し、10 月 26 日までに 2 つの Web フロントエンドで修正した。",
+      "points": [
+        "数式入力ライブラリ MathLive のメッセージ受信処理が送信元（origin）を検証せず、キーボード配列の設定として渡された HTML を innerHTML でそのまま挿入していた",
+        "挿入された iframe に sandbox 属性がなく chatgpt.com の権限を引き継ぎ、CSP が許可していた YouTube の oEmbed JSONP を使ってスクリプトを実行できた",
+        "10 月 18 日にバグバウンティへ報告、21 日に P2 から P1 へ引き上げ、26 日に解決（報奨金 5,000 ドル）。著者は event.origin と event.source の両方の検証、設定値に生の HTML を通さないこと、CSP は補助策と位置づけることを勧めている"
+      ],
+      "code": null,
+      "signal": "B! 1 · ▲ 275",
+      "pick": true
+    },
+    {
+      "id": "2026-11-01-github-nesformer",
+      "url": "https://github.com/dbreunig/nesformer",
+      "title": "Show HN: A working Nintendo in ~1GB of Qwen weights",
+      "source": "hackernews",
+      "source_group": "hackernews",
+      "published_at": "2026-10-31T01:40:22+09:00",
+      "category": "ai",
+      "keywords": [
+        "world-model",
+        "open-weight"
+      ],
+      "score": 77,
+      "why": "HN 280 pt・142 コメント",
+      "read_min": null,
+      "tldr": "Qwen の重み約 1GB の中でファミコン（NES）を動かすという Show HN のプロジェクト。モデルの重みに計算機を埋め込む試みとして注目を集めた。",
+      "points": [],
+      "code": null,
+      "signal": "▲ 280",
+      "pick": false
+    },
+    {
+      "id": "2026-11-01-zenn-security-thinking",
+      "url": "https://zenn.dev/cscloud_blog/articles/a987163efae5d8",
+      "title": "今後のセキュリティの考え方",
+      "source": "zenn.dev",
+      "source_group": "tech_blog",
+      "published_at": "2026-10-30T19:30:27+09:00",
+      "category": "sec",
+      "keywords": [
+        "aws",
+        "vulnerability-management",
+        "waf"
+      ],
+      "score": 77,
+      "why": "はてブ 207",
+      "read_min": null,
+      "tldr": "重大脆弱性を狙う攻撃への備えをテーマにしたウェビナーの補足として、AWS 環境を例にアタックサーフェスや管理面を減らす考え方をまとめた記事。ポートを閉じるといった基本から説明している。",
+      "points": [],
+      "code": null,
+      "signal": "B! 207",
+      "pick": false
+    },
+    {
+      "id": "2026-11-01-gazlog-altman-dram",
+      "url": "https://gazlog.jp/entry/open-ai-ceo-memory-should-go-to-dc/",
+      "title": "OpenAI CEOが個人PCにメモリを積むのは「かなりひどい」と発言。DRAMはクラウドに集約すべきと主張",
+      "source": "gazlog.jp",
+      "source_group": "tech_blog",
+      "published_at": "2026-10-31T11:56:44+09:00",
+      "category": "ai",
+      "keywords": [
+        "openai",
+        "memory",
+        "local-llm"
+      ],
+      "score": 75,
+      "why": "はてブ 180・TechnoEdge の記事もはてブ 163",
+      "read_min": null,
+      "tldr": "OpenAI の Altman CEO がポッドキャストで、PC の DRAM はほとんど使われておらず、個人が大量に積むのは「かなりひどい」配分でクラウドに集約すべきだと語った。メモリ不足が続くなかでローカル AI を望む層から反発を招いている。",
+      "points": [],
+      "code": null,
+      "signal": "B! 180",
+      "pick": false
+    },
+    {
+      "id": "2026-11-01-bunny-security-incident",
+      "url": "https://status.bunny.net/incidents/p6gf1by9kr7m",
+      "title": "Bunny CDN Security Incident",
+      "source": "hackernews",
+      "source_group": "hackernews",
+      "published_at": "2026-10-31T04:05:22+09:00",
+      "category": "cloud",
+      "keywords": [
+        "security-incident",
+        "cdn"
+      ],
+      "score": 74,
+      "why": "HN 220 pt",
+      "read_min": null,
+      "tldr": "CDN 事業者 Bunny がステータスページでセキュリティインシデントを公表した。同じ週に Northflank や Linode などクラウド事業者の公表が相次いでいる。",
+      "points": [],
+      "code": null,
+      "signal": "▲ 220",
+      "pick": false
+    },
+    {
+      "id": "2026-11-01-talos-volta-infostealer",
+      "url": "https://blog.talosintelligence.com/appraisal-by-ai-model-driven-victim-prioritization-in-the-volta-infostealer/",
+      "title": "Malware uses LLMs to rank victims by how much they're worth",
+      "source": "hackernews",
+      "source_group": "hackernews",
+      "published_at": "2026-10-31T23:29:03+09:00",
+      "category": "sec",
+      "keywords": [
+        "ai-security",
+        "infostealer"
+      ],
+      "score": 73,
+      "why": "HN 204 pt・108 コメント",
+      "read_min": null,
+      "tldr": "Cisco Talos が、情報窃取型マルウェア Volta が LLM を使って感染端末の価値を見積もり、攻撃の優先順位を付けていると報告した。",
+      "points": [],
+      "code": null,
+      "signal": "▲ 204",
+      "pick": false
+    },
+    {
+      "id": "2026-11-01-linode-security-incident",
+      "url": "https://status.linode.com/incidents/nt58zhx3pmgm",
+      "title": "Linode Security Incident",
+      "source": "hackernews",
+      "source_group": "hackernews",
+      "published_at": "2026-10-31T06:57:40+09:00",
+      "category": "cloud",
+      "keywords": [
+        "security-incident"
+      ],
+      "score": 72,
+      "why": "HN 194 pt・108 コメント",
+      "read_min": null,
+      "tldr": "Linode（Akamai Cloud）がステータスページでセキュリティインシデントを公表し、HN で議論になった。",
+      "points": [],
+      "code": null,
+      "signal": "▲ 194",
+      "pick": false
+    },
+    {
+      "id": "2026-11-01-wsj-openai-raise",
+      "url": "https://www.wsj.com/tech/ai/openai-raises-less-than-half-of-30-billion-target-in-latest-round-91aecdc5",
+      "title": "OpenAI raises less than half of $30B target",
+      "source": "hackernews",
+      "source_group": "hackernews",
+      "published_at": "2026-10-31T12:22:44+09:00",
+      "category": "ai",
+      "keywords": [
+        "openai",
+        "ai-economy"
+      ],
+      "score": 71,
+      "why": "HN 176 pt・176 コメント",
+      "read_min": null,
+      "tldr": "WSJ によると、OpenAI の最新の資金調達は目標の 300 億ドルの半分に届かなかった。AI 投資の過熱をめぐる議論のなかで注目された。",
+      "points": [],
+      "code": null,
+      "signal": "▲ 176",
+      "pick": false
+    },
+    {
+      "id": "2026-11-01-firezone-sanstun",
+      "url": "https://www.firezone.dev/blog/introducing-sanstun",
+      "title": "Sanstun: A sans-IO, parallel-friendly WireGuard implementation in Rust",
+      "source": "hackernews",
+      "source_group": "hackernews",
+      "published_at": "2026-10-31T06:30:00+09:00",
+      "category": "be",
+      "keywords": [
+        "rust",
+        "networking"
+      ],
+      "score": 69,
+      "why": "HN 154 pt",
+      "read_min": null,
+      "tldr": "Firezone が、I/O を持たない（sans-IO）設計で並列処理しやすい Rust 製の WireGuard 実装 Sanstun を公開した。",
+      "points": [],
+      "code": null,
+      "signal": "▲ 154",
+      "pick": false
+    },
+    {
+      "id": "2026-11-01-coinpost-binance-compensation",
+      "url": "https://coinpost.jp/?p=745769",
+      "title": "バイナンス、ハッキング被害の補償に約1兆円を確保",
+      "source": "coinpost.jp",
+      "source_group": "news",
+      "published_at": "2026-10-31T06:05:39+09:00",
+      "category": "crypto",
+      "keywords": [
+        "exchange-hack",
+        "crypto-exchange",
+        "bitcoin"
+      ],
+      "score": 95,
+      "why": "matched: ビットコイン（取引所ハッキングの続報）",
+      "read_min": 4,
+      "tldr": "Binance は、約 63 億ドル相当が流出したハッキングの損失を利用者に負わせず自社で負担するため、63.4 億ドル超（約 1 兆円）の自社資金を確保したと発表した。原資は利用者保護基金（SAFU）と自社の財務資金。",
+      "points": [
+        "確保額のうち約 50 億ドル（被害額の約 8 割）は流出したのと同じ銘柄で保有しており、残りは市場取引と店頭取引で買い付ける。流動性の低いトークンは時間がかかる可能性がある",
+        "凍結・保護済みの約 30 億ドルはこの数字に含まれず、当局やパートナーと回収を進めている。秘密鍵が漏えいした痕跡は確認されていないという",
+        "出金は停止中で、安全確認を条件に段階的な再開を目指す。準備金証明（PoR）の結果は 11 月 2 日までに公表し、技術的な調査結果と事後検証報告も出す方針"
+      ],
+      "code": null,
+      "signal": null,
+      "pick": true
+    },
+    {
+      "id": "2026-11-01-coinpost-crypto-stocks",
+      "url": "https://coinpost.jp/?p=745773",
+      "title": "米仮想通貨関連株が全面安、1兆円規模のハッキングも市場全体への脅威は限定的とアナリストが見解",
+      "source": "coinpost.jp",
+      "source_group": "news",
+      "published_at": "2026-10-31T07:05:00+09:00",
+      "category": "stocks",
+      "keywords": [
+        "us-stocks",
+        "crypto-exchange"
+      ],
+      "score": 88,
+      "why": "matched: 米国株",
+      "read_min": 3,
+      "tldr": "Binance のハッキングを受け、10 月 30 日の米国市場で暗号資産関連株が軒並み下落した。Coinbase は第 3 四半期の売上高が前年同期比 35% 減となった決算も重なった。",
+      "points": [
+        "下落率は Coinbase −10.62%、Circle −9.3%、IREN −8.7%、Strategy −7.8%、Robinhood −7.2%、MARA 約 −5.5%",
+        "米国の調査会社 3 社は 10 月 30 日のレポートで、今回の流出は現時点で暗号資産市場全体への大きな脅威にはならないとの見方で一致した",
+        "Compass Point は、Binance が保有する USDT・ビットコイン・USDC などから補償に足る流動性があるとの見方を示した（各社の見解であり、相場の方向を示すものではない）"
+      ],
+      "code": null,
+      "signal": null,
+      "pick": true
+    },
+    {
+      "id": "2026-11-01-coinpost-cftc-protection",
+      "url": "https://coinpost.jp/?p=745772",
+      "title": "米CFTC委員長、バイナンス被害めぐり仮想通貨取引所が選べる伝統金融並みの保護を提案",
+      "source": "coinpost.jp",
+      "source_group": "news",
+      "published_at": "2026-10-31T07:32:52+09:00",
+      "category": "crypto",
+      "keywords": [
+        "crypto-regulation",
+        "crypto-exchange"
+      ],
+      "score": 80,
+      "why": "matched: ビットコイン（取引所規制の論点）",
+      "read_min": 3,
+      "tldr": "米 CFTC の Selig 委員長は 10 月 30 日、Binance のハッキングを受け、暗号資産取引所が任意で選べる連邦登録の枠組みを提案した。登録した取引所には米デリバティブ市場と同等のサイバーセキュリティ基準と顧客保護ルールを適用する。",
+      "points": [
+        "委員長は Binance などを、米市場で求められる保護策を欠いた規制外のオフショア業者と位置づけ、今月 CFTC が示したルール案の必要性を裏づけると述べた",
+        "登録は任意で、すべての取引所に義務づけるには議会の立法が必要。現物取引所は州のライセンスで営業を続けることもできる",
+        "CFTC は 10 月 5 日にリテール向けレバレッジ取引の規則案 2 本を事前公表しており、意見募集は 12 月 14 日まで"
+      ],
+      "code": null,
+      "signal": null,
+      "pick": true
+    },
+    {
+      "id": "2026-11-01-investing-boe-lti",
+      "url": "https://jp.investing.com/news/economy-news/article-1735705",
+      "title": "イングランド銀行、高リスク住宅ローンの上限を収入の5倍に引き上げ検討",
+      "source": "jp.investing.com",
+      "source_group": "news",
+      "published_at": "2026-11-01T00:00:00+09:00",
+      "category": "realestate",
+      "keywords": [
+        "housing",
+        "mortgage-rates"
+      ],
+      "score": 78,
+      "why": "matched: 住宅ローン",
+      "read_min": 3,
+      "tldr": "英 FT によると、イングランド銀行（BoE）は、高リスクとされる住宅ローンの基準（年収倍率 4.5 倍以上）を 5 倍に引き上げる緩和を検討している。決定ではなく検討段階で、住宅取得のしやすさを求める声が背景にある。",
+      "points": [
+        "現行では年収の 4.5 倍以上の融資を高 LTI とし、金融政策委員会（FPC）が市場全体の新規融資の 15% 未満に抑えるよう勧告している。10 月 28 日には個々の貸し手への 15% 上限が撤廃された",
+        "直近四半期の高 LTI 融資の比率は 14.1%。UK Finance は、基準を 5 倍にすると年間新規融資の約 7% に当たる追加の融資余力が生まれる可能性があると試算",
+        "Nationwide によると住宅価格の前年比上昇率は 9 月の 0.8% から 10 月は 0.5% に鈍化しており、住宅ローン金利の上昇が需要を抑えている"
+      ],
+      "code": null,
+      "signal": null,
+      "pick": true
+    },
+    {
+      "id": "2026-11-01-coinpost-tether-reserves",
+      "url": "https://coinpost.jp/?p=745813",
+      "title": "テザー社、USDT準備金の超過分が1兆円超えに回復 6月末から約2倍に",
+      "source": "coinpost.jp",
+      "source_group": "news",
+      "published_at": "2026-10-31T13:10:53+09:00",
+      "category": "crypto",
+      "keywords": [
+        "stablecoin",
+        "us-treasury"
+      ],
+      "score": 70,
+      "why": "matched: 金利（米国債の保有）・ビットコイン",
+      "read_min": 3,
+      "tldr": "Tether が 2026 年第 3 四半期の準備金証明を公表し、USDT の負債を上回る超過準備が 9 月末で約 79.5 億ドル（約 1.3 兆円）と、6 月末の約 41 億ドルから約 2 倍になった。",
+      "points": [
+        "総資産は約 1,910 億ドル、総負債は約 1,830 億ドルで、負債の大半は流通する USDT",
+        "米国債の保有は直接・間接で約 1,324 億ドル。ビットコインの保有は約 83.7 億ドルで、6 月末の約 58 億ドルから価格上昇で増えた",
+        "第 3 四半期の純営業利益は 15 億ドルで前四半期並み。証明は BDO が担当"
+      ],
+      "code": null,
+      "signal": null,
+      "pick": true
+    },
+    {
+      "id": "2026-11-01-coinpost-clarity-act",
+      "url": "https://coinpost.jp/?p=745789",
+      "title": "米クラリティー法案が再び焦点に、バイナンス被害で資産凍結の法的保護めぐり論争広がる",
+      "source": "coinpost.jp",
+      "source_group": "news",
+      "published_at": "2026-10-31T13:45:50+09:00",
+      "category": "crypto",
+      "keywords": [
+        "crypto-regulation"
+      ],
+      "score": 72,
+      "why": "matched: ビットコイン（暗号資産規制）",
+      "read_min": null,
+      "tldr": "Binance のハッキングを受け、Lummis 上院議員がクラリティー法案が成立していれば不審な取引を凍結できたと主張し、反論も出ている。業界団体は議会に取引所の連邦監督を求めている。",
+      "points": [],
+      "code": null,
+      "signal": null,
+      "pick": false
+    },
+    {
+      "id": "2026-11-01-coinpost-iore-btc-sale",
+      "url": "https://coinpost.jp/?p=745770",
+      "title": "東証上場イオレ、保有151.21ビットコインを全量売却へ AIデータセンター投資に充当",
+      "source": "coinpost.jp",
+      "source_group": "news",
+      "published_at": "2026-10-31T10:20:48+09:00",
+      "category": "crypto",
+      "keywords": [
+        "bitcoin-treasury",
+        "data-center"
+      ],
+      "score": 75,
+      "why": "matched: ビットコイン",
+      "read_min": null,
+      "tldr": "東証上場のイオレが保有する 151.21 BTC の全量売却を決議した。売却見込額は 18.31 億円、売却損は約 2.54 億円の見込みで、代金は AI データセンター関連投資に充てる。",
+      "points": [],
+      "code": null,
+      "signal": null,
+      "pick": false
+    },
+    {
+      "id": "2026-11-01-coinpost-trezor-tamper",
+      "url": "https://coinpost.jp/?p=745714",
+      "title": "レジャーに続きトレザーでも不正部品の報告 東南アジア販売店経由",
+      "source": "coinpost.jp",
+      "source_group": "news",
+      "published_at": "2026-10-30T17:29:38+09:00",
+      "category": "crypto",
+      "keywords": [
+        "wallet",
+        "supply-chain"
+      ],
+      "score": 55,
+      "why": "matched: ビットコイン（ウォレットの安全性）",
+      "read_min": null,
+      "tldr": "Trezor が、東南アジアの販売店経由で売られた Safe 5 に不正な部品が組み込まれていたとの報告を公表し、同店で 3 月以降に購入した利用者に新しいリカバリーフレーズへの資金移動を求めた。",
+      "points": [],
+      "code": null,
+      "signal": null,
+      "pick": false
+    },
+    {
+      "id": "2026-11-01-coinpost-chainalysis-breach",
+      "url": "https://coinpost.jp/?p=745824",
+      "title": "仮想通貨犯罪追跡大手チェイナリシス、不正アクセス被害に",
+      "source": "coinpost.jp",
+      "source_group": "news",
+      "published_at": "2026-10-31T14:02:04+09:00",
+      "category": "crypto",
+      "keywords": [
+        "data-breach",
+        "security-incident"
+      ],
+      "score": 50,
+      "why": "暗号資産業界のセキュリティ事案",
+      "read_min": null,
+      "tldr": "暗号資産分析大手 Chainalysis が 10 月 30 日、顧客のユーザー ID や氏名などへの不正アクセスを公表した。",
+      "points": [],
+      "code": null,
+      "signal": null,
+      "pick": false
+    },
+    {
+      "id": "2026-11-01-fsa-cap-adequacy",
+      "url": "https://www.fsa.go.jp/news/r8/shouken/20261030/20261030.html",
+      "title": "「金融商品取引業等に関する内閣府令の一部を改正する内閣府令」等の公布及びパブリックコメントの結果について公表しました。",
+      "source": "fsa.go.jp",
+      "source_group": "official",
+      "published_at": "2026-10-31T02:00:00+09:00",
+      "category": "macro",
+      "keywords": [
+        "fsa"
+      ],
+      "score": 55,
+      "why": "金融庁の公式発表",
+      "read_min": null,
+      "tldr": "金融庁が、金融商品取引業者の自己資本規制比率の計算で、解約可能なリース関連の固定資産などの扱いを定める内閣府令と告示の改正を公布し、10 月 30 日に施行した。意見募集には 27 件のコメントが寄せられた。",
+      "points": [],
+      "code": null,
+      "signal": null,
+      "pick": false
+    },
+    {
+      "id": "2026-11-01-investing-france-bonds",
+      "url": "https://jp.investing.com/news/stock-market-news/article-1735713",
+      "title": "フランス国債売りが世界の政府に警告を発する",
+      "source": "jp.investing.com",
+      "source_group": "news",
+      "published_at": "2026-11-01T03:53:38+09:00",
+      "category": "macro",
+      "keywords": [
+        "government-bond",
+        "interest-rates"
+      ],
+      "score": 52,
+      "why": "matched: 金利",
+      "read_min": null,
+      "tldr": "フランス国債の売りを取り上げ、財政への懸念が各国政府への警告になっているとする論評記事。",
+      "points": [],
+      "code": null,
+      "signal": null,
+      "pick": false
+    },
+    {
+      "id": "2026-11-01-hokkaido-gasoline-subsidy",
+      "url": "https://www.hokkaido-np.co.jp/article/1399939/",
+      "title": "首相、ガソリン補助金縮小へかじ 物価対策浸透せず不満？：北海道新聞デジタル",
+      "source": "hokkaido-np.co.jp",
+      "source_group": "news",
+      "published_at": "2026-10-31T05:40:35+09:00",
+      "category": "macro",
+      "keywords": [
+        "inflation",
+        "jp-fiscal"
+      ],
+      "score": 48,
+      "why": "物価対策・財政の論点",
+      "read_min": null,
+      "tldr": "政府がガソリン価格を抑える補助金の縮小へ方針を切り替えた。財政負担の増加に加え、物価高対策が評価されていないとの危機感が背景にあると報じられた。",
+      "points": [],
+      "code": null,
+      "signal": "B! 25",
+      "pick": false
+    },
+    {
+      "id": "2026-11-01-toyokeizai-samsung",
+      "url": "https://toyokeizai.net/articles/-/963016?utm_source=rss&utm_medium=http&utm_campaign=link_back",
+      "title": "サムスン電子が4四半期連続で過去最高益､3カ月で営業利益12兆円を記録､AI全盛でも手放しで喜べないこれだけの理由",
+      "source": "toyokeizai.net",
+      "source_group": "news",
+      "published_at": "2026-10-31T11:30:00+09:00",
+      "category": "stocks",
+      "keywords": [
+        "semiconductor",
+        "memory"
+      ],
+      "score": 50,
+      "why": "半導体・メモリ需要の決算",
+      "read_min": null,
+      "tldr": "サムスン電子の半導体部門が四半期の営業利益で初めて 100 兆ウォンを超えた一方、SK ハイニックスや TSMC との競争、組織と人材の課題が残るとする記事。",
+      "points": [],
+      "code": null,
+      "signal": null,
+      "pick": false
+    },
+    {
+      "id": "2026-11-01-diamond-optics-earnings",
+      "url": "https://diamond.jp/articles/-/402323",
+      "title": "HOYAは営業利益3割増、富士フイルムは減益…キヤノンは上期増益、ニコンは赤字続く〈26年4～6月期決算〉",
+      "source": "diamond.jp",
+      "source_group": "news",
+      "published_at": "2026-10-31T11:45:00+09:00",
+      "category": "stocks",
+      "keywords": [
+        "earnings"
+      ],
+      "score": 45,
+      "why": "国内企業の決算比較",
+      "read_min": null,
+      "tldr": "キヤノン・ニコン・HOYA・富士フイルムの直近四半期決算を前年同期と比べた連載記事。見出しでは HOYA が営業利益 3 割増、ニコンが赤字継続とされる。",
+      "points": [],
+      "code": null,
+      "signal": null,
+      "pick": false
+    }
+  ],
+  "social": [
+    {
+      "network": "x",
+      "author": "@TheHackersNews",
+      "url": "https://x.com/TheHackersNews/status/2116528634894905484",
+      "text": "Microsoft は改ざん版 Claude Code 拡張 2.1.313 が VS Code Marketplace には届いていないと確認。Cursor は鍵をローテーションしてマーケットプレイスを再構築したが、攻撃者が正規の拡張 ID で公開できた経緯は不明と伝えた。",
+      "metrics": null,
+      "heat": null,
+      "category": "sec",
+      "keywords": [
+        "supply-chain",
+        "ai-security"
+      ],
+      "posted_at": "2026-10-31T22:52:04+09:00"
+    },
+    {
+      "network": "x",
+      "author": "@alexalbert__",
+      "url": "https://x.com/alexalbert__/status/2116185803433071061",
+      "text": "問題の拡張は Claude Code 拡張を改ざんしたコピーで、Anthropic が作成・公開したものではないと説明。",
+      "metrics": null,
+      "heat": null,
+      "category": "sec",
+      "keywords": [
+        "supply-chain",
+        "claude"
+      ],
+      "posted_at": "2026-10-31T00:09:47+09:00"
+    },
+    {
+      "network": "x",
+      "author": "@unusual_whales",
+      "url": "https://x.com/unusual_whales/status/2115496372824899853",
+      "text": "米下院民主党が、金融危機の際に議会は AI 企業を救済せず通常の破産手続きに委ねるべきだとする決議案を提出したと速報。",
+      "metrics": null,
+      "heat": null,
+      "category": "ai",
+      "keywords": [
+        "ai-economy",
+        "ai-regulation"
+      ],
+      "posted_at": "2026-10-29T02:30:13+09:00"
+    },
+    {
+      "network": "x",
+      "author": "@CoinDesk",
+      "url": "https://x.com/CoinDesk/status/2116215227704283235",
+      "text": "Binance がハッキング損失の補償に 63.4 億ドルの自社資金を確保し、うち 50 億ドルは同じトークンで保有済み。未回収の 33 億ドルは FBI やシークレットサービスと追跡中と伝えた。",
+      "metrics": null,
+      "heat": null,
+      "category": "crypto",
+      "keywords": [
+        "exchange-hack",
+        "crypto-exchange"
+      ],
+      "posted_at": "2026-10-31T02:06:42+09:00"
+    },
+    {
+      "network": "hatena",
+      "author": null,
+      "url": "https://b.hatena.ne.jp/entry/s/www.nikkei.com/article/DGXZQOUC30A460Q6A031C2000000/",
+      "text": "『GMO不正侵入、システム脆弱性を2年前に把握 子会社指摘も対策後手』のブックマークページ。267 件のブックマーク",
+      "metrics": "B! 267",
+      "heat": null,
+      "category": "sec",
+      "keywords": [
+        "security-incident"
+      ],
+      "posted_at": null
+    },
+    {
+      "network": "hn",
+      "author": null,
+      "url": "https://news.ycombinator.com/item?id=50314699",
+      "text": "『Do the math: How we took over ChatGPT accounts』のスレッド。126 件のコメント",
+      "metrics": "▲ 275  ✉ 126",
+      "heat": 69,
+      "category": "sec",
+      "keywords": [
+        "openai",
+        "ai-security"
+      ],
+      "posted_at": "2026-10-31T19:30:11+09:00"
+    }
+  ],
+  "releases": [
+    {
+      "date": "2026-11-02",
+      "title": "GMO インターネットグループが不正アクセス問題で会見",
+      "repo": null,
+      "url": "https://news.web.nhk/newsweb/na/nd-20261031de69024",
+      "kind": "event",
+      "note": "NHK の報道による（11 月 2 日予定）",
+      "category": "sec"
+    },
+    {
+      "date": "2026-11-03",
+      "title": "米中間選挙",
+      "repo": null,
+      "url": "https://www.afpbb.com/articles/-/3659650",
+      "kind": "event",
+      "note": "11 月 3 日実施（前日までの確認に基づく）",
+      "category": "macro"
+    },
+    {
+      "date": "2026-11-06",
+      "title": "米雇用統計（10 月分）",
+      "repo": null,
+      "url": "https://www.oanda.jp/lab-education/beginners/fundamentals_analysis/us_job_report/",
+      "kind": "event",
+      "note": "日本時間 11 月 6 日 22:30 発表予定（OANDA の指標一覧による。BLS の公式日程は未確認）",
+      "category": "macro"
+    },
+    {
+      "date": "2026-10-30",
+      "title": "金融商品取引業等に関する内閣府令の改正（自己資本規制比率の計算）",
+      "repo": null,
+      "url": "https://www.fsa.go.jp/news/r8/shouken/20261030/20261030.html",
+      "kind": "policy",
+      "note": "10 月 30 日に公布・施行。パブリックコメント 27 件",
+      "category": "macro"
+    }
+  ]
+}
