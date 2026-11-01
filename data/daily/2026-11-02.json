@@ -1,0 +1,751 @@
+{
+ "date": "2026-11-02",
+ "generated_at": "2026-11-02T05:50:00+09:00",
+ "stats": {
+  "collected": 143,
+  "sources_ok": 25,
+  "sources_total": 26,
+  "by_group": {
+   "hackernews": 32,
+   "tech_blog": 53,
+   "news": 58
+  },
+  "failed_sources": [
+   "coindesk_jp"
+  ]
+ },
+ "digest": [
+  {
+   "category": "sec",
+   "text": "Linux カーネルの IPv4 TCP に認証不要でリモートから突ける use-after-free（CVE-2026-98432、CVSS 9.8）。Red Hat が 10 月 30 日に Critical へ引き上げ、Ubuntu・RHEL は 31 日時点で修正未提供。MPTCP リスナーを持つホストの確認が推奨されている（HN 647 pt）。",
+   "keywords": [
+    "linux",
+    "rce",
+    "vulnerability-management"
+   ]
+  },
+  {
+   "category": "ai",
+   "text": "Karpathy 氏が HN で推薦された YouTube 動画だけを集めた「HackerTube」を Claude Code で約 2 時間で構築し、HN 1985 pt を集めた。小型モデル 5 体の協調で LiveCodeBench Hard の一部を解く Memdoor の例も話題に。",
+   "keywords": [
+    "ai-coding",
+    "multi-agent"
+   ]
+  },
+  {
+   "category": "ai",
+   "text": "AI 学習への利用可否を robots.txt の共通トークンで伝える IETF ドラフトに OpenAI・Google・Microsoft が対応を表明（Microsoft は 2027 年 2 月から）。",
+   "keywords": [
+    "ai-regulation",
+    "robots-txt"
+   ]
+  },
+  {
+   "category": "crypto",
+   "text": "ビットコインは AI 投資の採算性への懸念とバイナンスの大規模流出が重なり 1,200 万円近辺まで下落。バイナンスは流出分の 95% を補填し出金を段階的に再開すると発表した。焦点は 3 日の米中間選挙と 6 日の米雇用統計。",
+   "keywords": [
+    "bitcoin",
+    "exchange-hack"
+   ]
+  },
+  {
+   "category": "stocks",
+   "text": "TSMC・パナソニックが AI インフラ需要を背景に好決算を示す一方、アルファベットは広告の伸びが予想に届かず時間外で一時 10% 近く下落。マネー補完の検索（株式・投信・不動産）では当日の記事を確認できず、記事は追加していない。",
+   "keywords": [
+    "earnings",
+    "semiconductor"
+   ]
+  }
+ ],
+ "items": [
+  {
+   "id": "2026-11-02-hn-hackertube",
+   "url": "https://karpathy.bearblog.dev/hacker-tube/",
+   "title": "HackerTube: YouTube built from videos recommended by HN",
+   "source": "hackernews",
+   "source_group": "hackernews",
+   "published_at": "2026-11-01T04:56:53+09:00",
+   "category": "ai",
+   "keywords": [
+    "ai-coding",
+    "claude"
+   ],
+   "score": 100,
+   "why": "HN 1985 pt・495 コメント",
+   "read_min": null,
+   "tldr": "Andrej Karpathy 氏が、Hacker News のコメントで推薦された YouTube 動画だけを集めた動画サイト「HackerTube」を公開した。開発はほぼすべて Claude Code に任せ、土曜の朝の約 2 時間で作ったという。",
+   "points": [
+    "Hugging Face で公開されている HN の全コメントのデータセットを絞り込み、Claude Code の Workflow 機能で Sonnet を走らせてスパムを除去。YouTube 動画を推薦する約 4 万件のコメントに絞った",
+    "収録は 2007〜2026 年に推薦された 6,454 本・150 トピック。アカウントなしでブラウザのセッションに状態を持つ「ForYou」推薦やキーボード操作に対応し、サイトのデータをエクスポートして各自のエージェントで作り直せる",
+    "人手の作業は YouTube メタデータ API キーの発行、VPS の起動、ドメイン購入だけ。サーバーの IP を渡してデプロイ・堅牢化・最適化まで Claude に任せたと説明している"
+   ],
+   "code": null,
+   "signal": "▲ 1985",
+   "pick": true
+  },
+  {
+   "id": "2026-11-02-atlasum-linux-tcp-uaf",
+   "url": "https://atlasum.net/blog/cve-2026-98432-linux-ipv4-tcp-uaf",
+   "title": "TCP Use-After-Free: CVE-2026-98432 / CVSS 9.8",
+   "source": "hackernews",
+   "source_group": "hackernews",
+   "published_at": "2026-11-01T04:16:30+09:00",
+   "category": "sec",
+   "keywords": [
+    "linux",
+    "rce",
+    "vulnerability-management"
+   ],
+   "score": 89,
+   "why": "HN 647 pt・311 コメント／AWS もセキュリティ速報を公開",
+   "read_min": null,
+   "tldr": "Linux カーネルの IPv4 TCP 接続確立処理に use-after-free（CVE-2026-98432、CVSS 9.8）。認証不要のリモート攻撃が可能な競合状態で、Anthropic は Claude が MPTCP リスナーを持つサーバーで root としてコマンドを実行する PoC を作ったと説明している。",
+   "points": [
+    "受け入れ時に半開きソケットの IPv4 オプションをコピーせず新しい接続へ渡し、別 CPU が読んでいる最中に解放してしまうのが原因。kfree() を kfree_rcu() に変える修正が 5.10.272 / 5.15.223 / 6.1.190 / 6.6.159 / 6.12.113 / 6.18.56 / 7.2.10 / 7.3 に入った",
+    "Debian・SUSE・Oracle UEK・Amazon Linux は修正済み、Ubuntu と RHEL は 10 月 31 日時点で未提供。Red Hat は 10 月 30 日に評価を Critical に引き上げ、IPv4 オプション付き TCP パケットを落とす nftables / iptables の暫定ルールを公開した（完全には防げないと注記）",
+    "MPTCP は CVE の記載にないが、Go の一部の構成ではデフォルトで MPTCP リスナーを開く。10 月 31 日時点で GitHub の 36 リポジトリが CVE に言及し、少なくとも 6 件に PoC などがある。CISA の KEV には未掲載"
+   ],
+   "code": {
+    "file": "mitigation.sh",
+    "lang": "bash",
+    "text": "# MPTCP リスナーを持つホストを優先して確認する\nss -Mlnp\n\n# MPTCP を使っていなければ無効化（カーネル修正の代わりにはならない）\n# /etc/sysctl.d/ に設定し、MPTCP リスナーを持つサービスを再起動する\nnet.mptcp.enabled = 0"
+   },
+   "signal": "▲ 647",
+   "pick": true
+  },
+  {
+   "id": "2026-11-02-hn-anthropic-blocks",
+   "url": "https://twitter.com/jiahaoshao1/status/2116475922190922088",
+   "title": "Anthropic blocks users for anything touching training larger models",
+   "source": "hackernews",
+   "source_group": "hackernews",
+   "published_at": "2026-11-01T04:39:19+09:00",
+   "category": "ai",
+   "keywords": [
+    "anthropic",
+    "ai-safety"
+   ],
+   "score": 83,
+   "why": "HN 437 pt・247 コメント／Mashable の関連記事も HN 176 pt",
+   "read_min": null,
+   "tldr": "Anthropic が大規模モデルの学習に関わる利用をしたユーザーをブロックしているとする X の投稿。HN では、セキュリティレビューやカーネル開発でも分類器が反応するという報告が相次いだ（元投稿の本文は未確認）。Mashable は Claude によるゲームのリバースエンジニアリング・複製を防ぐ措置を報じている。",
+   "points": [],
+   "code": null,
+   "signal": "▲ 437",
+   "pick": false
+  },
+  {
+   "id": "2026-11-02-gh-memdoor-team-solve",
+   "url": "https://github.com/guregodevo/memdoor/tree/main/examples/workflows/team-solve",
+   "title": "Memdoor: A team of 5 Qwen3.8-27B models beats Fable 5 on LiveCodeBench Hard",
+   "source": "hackernews",
+   "source_group": "hackernews",
+   "published_at": "2026-11-01T07:46:12+09:00",
+   "category": "ai",
+   "keywords": [
+    "multi-agent",
+    "open-weight"
+   ],
+   "score": 82,
+   "why": "HN 394 pt・194 コメント",
+   "read_min": null,
+   "tldr": "ワークフロー実行ツール Memdoor の例「team-solve」は、小型モデル 5 役（計画・発想 2・解答・レビュー・修正）がファイル経由で協調して競技プログラミングを解く。Qwen3.8-27B で LiveCodeBench Hard の最初の 10 問を各 5 回解き、平均 9.8 点と、元論文のハーネス（9.6）や Fable 5 の単発呼び出し（8.0）を上回った。",
+   "points": [
+    "8 個の YAML だけで構成した DAG（plan → ideate×2 → solve → test → review → repair → verify）。各ステップは新しいコンテキストで始まり、成否はモデルでなくサンプルテストを実行するスクリプトが判定する",
+    "OpenRouter 上で実行し、1 回の中央値は約 40 分・0.39 ドル、50 回で計 35.79 ドル。Ollama などのローカル実行も可能（コンテキストを 32K に上げる必要がある）",
+    "作者自身が「元論文のハーネスと同等であり改善ではない」と注記。10 問のみで、問題は 2025 年春のコンテストのため学習データ混入も否定できない。元論文の 100 問ではハーネス 92.4、Fable 5 は 90.4"
+   ],
+   "code": {
+    "file": "README",
+    "lang": "bash",
+    "text": "memdoor connect openrouter        # or anthropic, openai, gemini, chatgpt\nmkdir -p ~/.memdoor/workflows\ncp -r memdoor/examples/workflows/team-solve ~/.memdoor/workflows/\nmkdir my-problem && cd my-problem\nmemdoor workflow run team-solve --wait   # exit 0 when every sample passes"
+   },
+   "signal": "▲ 394",
+   "pick": true
+  },
+  {
+   "id": "2026-11-02-nikkei-irasutoya-ai",
+   "url": "https://www.nikkei.com/article/DGXZQOUC284ZY0Y6A021C2000000/",
+   "title": "いらすとや、ファンが生息域踏査 AIに押されサイト訪問者は減少 - 日本経済新聞",
+   "source": "hatena/it",
+   "source_group": "tech_blog",
+   "published_at": "2026-11-01T09:48:55+09:00",
+   "category": "ai",
+   "keywords": [
+    "image-generation",
+    "ai-economy"
+   ],
+   "score": 80,
+   "why": "はてブ上位（buzz 80）",
+   "read_min": null,
+   "tldr": "フリー素材サイト「いらすとや」が生成 AI に押され、データ分析会社の推計で 9 月の利用者数が前年同月比 2 割減ったと日経が報じた（RSS の要約による。本文は有料で未確認）。",
+   "points": [],
+   "code": null,
+   "signal": "B! 244",
+   "pick": false
+  },
+  {
+   "id": "2026-11-02-jepsen-particledb",
+   "url": "https://jepsen.io/analyses/particledb-1.1.4",
+   "title": "Jepsen: ParticleDB 1.1.4",
+   "source": "hackernews",
+   "source_group": "hackernews",
+   "published_at": "2026-10-31T22:39:52+09:00",
+   "category": "be",
+   "keywords": [
+    "db-transaction",
+    "vector-db"
+   ],
+   "score": 79,
+   "why": "HN 321 pt・179 コメント",
+   "read_min": null,
+   "tldr": "Jepsen が AI 向けマルチモデル DB「ParticleDB」（Orkes、Rust 製、Postgres / Redis 互換）を単一ノードで検証し、96 件の問題を報告した。トランザクション異常からデータ破損、制約の無視まで幅広く、Jepsen は新規導入の停止と移行を勧めている。",
+   "points": [
+    "確定済み書き込みの消失、G1a/G1b、Lost Update、G-single、read skew、stale read などを確認。NOT NULL / UNIQUE が当初無視され、主キーが NULL や重複になる、値が別の列に入るといった破損もあった",
+    "WAL のビット反転で一部データを失ったまま稼働を続け、読み書き先の取り違えでは全データを失った。ホームページは「Full ACID」をうたう一方、本文はスナップショット分離と説明していた",
+    "多くは 1.1.18.11.rc-22 で解消したが、既定の occ モードで確定済み書き込みが消える問題などが残った。Orkes は 1.1.19-rc.13 で全て修正したとするが Jepsen は未検証"
+   ],
+   "code": {
+    "file": "anomaly.sql",
+    "lang": "sql",
+    "text": "SELECT * FROM t WHERE 4 = 5;\n-- returned the row (5, 6)"
+   },
+   "signal": "▲ 321",
+   "pick": true
+  },
+  {
+   "id": "2026-11-02-hn-molly-signal-fork",
+   "url": "https://piefed.world/post/1503394",
+   "title": "Molly (Signal fork) has not been updated since 3 months and is vulnerable",
+   "source": "hackernews",
+   "source_group": "hackernews",
+   "published_at": "2026-10-31T19:23:41+09:00",
+   "category": "sec",
+   "keywords": [
+    "privacy",
+    "mobile-app"
+   ],
+   "score": 79,
+   "why": "HN 329 pt・188 コメント",
+   "read_min": null,
+   "tldr": "Signal のフォーク「Molly」が 3 か月更新されておらず、既知の脆弱性が残っているとする投稿（タイトルと HN の掲載による）。",
+   "points": [],
+   "code": null,
+   "signal": "▲ 329",
+   "pick": false
+  },
+  {
+   "id": "2026-11-02-itmedia-robots-ai-training",
+   "url": "https://www.itmedia.co.jp/news/article/2611/01/2000002776/",
+   "title": "AI学習への利用拒否をrobots.txtで一括指定へ OpenAIやGoogleなどが対応表明",
+   "source": "hatena/it",
+   "source_group": "tech_blog",
+   "published_at": "2026-11-01T09:58:30+09:00",
+   "category": "ai",
+   "keywords": [
+    "ai-regulation",
+    "bot-traffic",
+    "robots-txt"
+   ],
+   "score": 78,
+   "why": "はてブ上位（buzz 78）・Impress Watch も報道",
+   "read_min": null,
+   "tldr": "サイト運営者が AI 学習への利用可否を robots.txt で各社にまとめて伝える共通の仕組みに、OpenAI・Google・Microsoft が対応を表明し、Anthropic も実装を進めている。Anthropic の標準化担当者が IETF AIPREF ワーキンググループに個人提出したドラフトで、正式な標準ではまだない。",
+   "points": [
+    "新しいポリシートークン「__usage_ai-training」の下で Disallow が学習への反対、Allow が許可を表す。新しいディレクティブは追加しないため既存のパーサーに影響はなく、クロール自体は止めない",
+    "Microsoft は 2027 年 2 月 1 日から読み取りを始め、Google も 2027 年を目標とする。OpenAI は数か月以内に対応予定。Google は共通シグナルでの拒否を Google-Extended の拒否としても扱う",
+    "「AI 学習」は生成モデルの学習済みパラメータを変えることと定義し、非生成目的の学習は対象外。トークンがなければ意思表示なしとみなす。各社は独自の制御や契約顧客の扱いを優先できる"
+   ],
+   "code": {
+    "file": "robots.txt",
+    "lang": "text",
+    "text": "User-Agent: __usage_ai-training\nDisallow: /\nAllow: /press-kit/"
+   },
+   "signal": "B! 214",
+   "pick": true
+  },
+  {
+   "id": "2026-11-02-hn-lenovo-fingerprint-usb",
+   "url": "https://www.reddit.com/r/technology/comments/1xl2pr3/lenovos_encrypted_fingerprint_usb_drive_is_just/",
+   "title": "Lenovo's 'encrypted' fingerprint USB is just an unencrypted SD card in a case",
+   "source": "hackernews",
+   "source_group": "hackernews",
+   "published_at": "2026-11-01T23:34:43+09:00",
+   "category": "sec",
+   "keywords": [
+    "cryptography",
+    "privacy"
+   ],
+   "score": 77,
+   "why": "HN 270 pt",
+   "read_min": null,
+   "tldr": "Lenovo の「暗号化」指紋認証 USB ドライブが、実際はケースに入った暗号化なしの SD カードだったとする報告（タイトルと HN の掲載による）。",
+   "points": [],
+   "code": null,
+   "signal": "▲ 270",
+   "pick": false
+  },
+  {
+   "id": "2026-11-02-jetstream-brazil-prompt-injection",
+   "url": "https://jetstream.security/insights/brazilian-court-sanctions-prompt-injection-filing/",
+   "title": "Brazilian Court Sanctions Lawyers for Prompt Injection in Court Filing",
+   "source": "hackernews",
+   "source_group": "hackernews",
+   "published_at": "2026-11-01T11:19:53+09:00",
+   "category": "ai",
+   "keywords": [
+    "prompt-injection",
+    "ai-regulation"
+   ],
+   "score": 77,
+   "why": "HN 276 pt・158 コメント",
+   "read_min": null,
+   "tldr": "ブラジルの裁判所が、裁判書面にプロンプトインジェクションを仕込んだ弁護士に制裁を科したと報じる記事（タイトルと HN の掲載による）。",
+   "points": [],
+   "code": null,
+   "signal": "▲ 276",
+   "pick": false
+  },
+  {
+   "id": "2026-11-02-nolan-ai-cost-js-frameworks",
+   "url": "https://nolanlawson.com/2026/10/28/the-ai-cost-of-javascript-frameworks/",
+   "title": "The AI cost of JavaScript frameworks",
+   "source": "hackernews",
+   "source_group": "hackernews",
+   "published_at": "2026-11-01T15:06:19+09:00",
+   "category": "ai",
+   "keywords": [
+    "ai-coding",
+    "typescript"
+   ],
+   "score": 75,
+   "why": "HN 246 pt・171 コメント",
+   "read_min": null,
+   "tldr": "Nolan Lawson 氏が、JavaScript フレームワークの選択が AI コーディングのコストに与える影響を論じたブログ記事（タイトルと HN の掲載による）。",
+   "points": [],
+   "code": null,
+   "signal": "▲ 246",
+   "pick": false
+  },
+  {
+   "id": "2026-11-02-pivotlake-memory-latency",
+   "url": "https://pivotlake.io/blog/its-the-memory-latency-stupid/",
+   "title": "It's the memory latency, stupid",
+   "source": "hackernews",
+   "source_group": "hackernews",
+   "published_at": "2026-11-01T03:38:16+09:00",
+   "category": "be",
+   "keywords": [
+    "memory"
+   ],
+   "score": 75,
+   "why": "HN 244 pt",
+   "read_min": null,
+   "tldr": "性能のボトルネックとしてメモリレイテンシの重要性を論じる記事（タイトルと HN の掲載による）。",
+   "points": [],
+   "code": null,
+   "signal": "▲ 244",
+   "pick": false
+  },
+  {
+   "id": "2026-11-02-openai-chatgpt-codex-limits",
+   "url": "https://help.openai.com/en/articles/20001625-understanding-chatgpt-and-codex-usage-limits",
+   "title": "ChatGPT and Codex usage limits merging",
+   "source": "hackernews",
+   "source_group": "hackernews",
+   "published_at": "2026-11-01T06:49:07+09:00",
+   "category": "ai",
+   "keywords": [
+    "openai",
+    "ai-coding"
+   ],
+   "score": 73,
+   "why": "HN 208 pt・155 コメント",
+   "read_min": null,
+   "tldr": "OpenAI のヘルプ記事で、ChatGPT と Codex の利用上限が統合されることが示された（タイトルと HN の掲載による。詳細は未確認）。",
+   "points": [],
+   "code": null,
+   "signal": "▲ 208",
+   "pick": false
+  },
+  {
+   "id": "2026-11-02-nullprogram-prospero",
+   "url": "https://nullprogram.com/blog/2026/10/31/",
+   "title": "Prospero: A new coding harness for a more civilized age",
+   "source": "hackernews",
+   "source_group": "hackernews",
+   "published_at": "2026-10-31T20:54:59+09:00",
+   "category": "ai",
+   "keywords": [
+    "ai-coding",
+    "cli"
+   ],
+   "score": 73,
+   "why": "HN 201 pt・131 コメント",
+   "read_min": null,
+   "tldr": "nullprogram（Chris Wellons 氏）のブログで、新しいコーディング用ハーネス「Prospero」を紹介する記事（タイトルと HN の掲載による）。",
+   "points": [],
+   "code": null,
+   "signal": "▲ 201",
+   "pick": false
+  },
+  {
+   "id": "2026-11-02-cnet-rakuten-nttdata-breach",
+   "url": "https://japan.cnet.com/article/35254251/",
+   "title": "楽天証券、顧客情報流出の可能性 NTTデータ委託先不正アクセスで",
+   "source": "hatena/it",
+   "source_group": "tech_blog",
+   "published_at": "2026-11-01T08:27:23+09:00",
+   "category": "sec",
+   "keywords": [
+    "data-breach",
+    "security-incident"
+   ],
+   "score": 69,
+   "why": "はてブ上位（buzz 69）・日経も報道",
+   "read_min": null,
+   "tldr": "NTT データの委託先が提供する「デジタル証券プラットフォーム」が 10 月 30 日に不正アクセスを受け、社債購入の特典申し込みなどに使われていた楽天証券の顧客情報が流出した可能性がある。委託先の企業名や流出の恐れがある件数は明らかにされていない（RSS の要約による）。",
+   "points": [],
+   "code": null,
+   "signal": "B! 117",
+   "pick": false
+  },
+  {
+   "id": "2026-11-02-coinpost-btc-drop",
+   "url": "https://coinpost.jp/?p=745685",
+   "title": "ビットコイン、急落し1200万円台に AI関連決算と雇用統計が焦点｜bitbankアナリスト寄稿",
+   "source": "CoinPost",
+   "source_group": "news",
+   "published_at": "2026-11-01T11:30:13+09:00",
+   "category": "crypto",
+   "keywords": [
+    "bitcoin",
+    "exchange-hack",
+    "us-jobs"
+   ],
+   "score": 88,
+   "why": "matched: ビットコイン",
+   "read_min": null,
+   "tldr": "ビットコインは 10 月 30 日に一時 1,200 万円近辺まで下げ、週内に 8 万ドルを明確に割り込んだ。米大手の AI 投資の採算性への懸念と、バイナンスからの大規模な不正流出の報道が重なったとアナリストは分析している。",
+   "points": [
+    "27 日は約 1,280 万円まで上昇し FOMC 後に一時 1,290 万円をつけたが、29 日の米アマゾン決算後に 1,250 万円を割り込み、30 日正午時点で 1,220 万円台",
+    "アルファベット決算を機に AI 投資の採算性への懸念が再燃し、アマゾンが設備投資の増額とキャッシュフローの悪化を示したことで米株先物とともに下落した",
+    "今後の焦点として 11 月 3 日の米中間選挙、パランティア・AMD などの決算、6 日の 10 月米雇用統計、バイナンスからの資金流出の動向を挙げている"
+   ],
+   "code": null,
+   "signal": null,
+   "pick": true
+  },
+  {
+   "id": "2026-11-02-toyokeizai-binance-withdrawals",
+   "url": "https://toyokeizai.net/articles/-/963196?utm_source=rss&utm_medium=http&utm_campaign=link_back",
+   "title": "バイナンスが出金再開へ､流出したトークン63億ドルのうち95％を補填…FBIは北朝鮮の関与を指摘 | 政治・経済・投資 | 東洋経済オンライン",
+   "source": "東洋経済",
+   "source_group": "news",
+   "published_at": "2026-11-01T16:00:00+09:00",
+   "category": "crypto",
+   "keywords": [
+    "exchange-hack",
+    "crypto-exchange"
+   ],
+   "score": 78,
+   "why": "matched: ビットコイン（取引所の流出）",
+   "read_min": null,
+   "tldr": "バイナンスは約 63 億ドルのトークン流出のうち 95% を補填し、出金を段階的に再開すると発表した。見出しでは FBI が北朝鮮の関与を指摘したとしている（ロイター配信。本文の大半は会員限定で未確認）。",
+   "points": [],
+   "code": null,
+   "signal": null,
+   "pick": false
+  },
+  {
+   "id": "2026-11-02-diamond-term-premium",
+   "url": "https://diamond.jp/articles/-/402267",
+   "title": "金利上昇を主導する「期間プレミアム」はどこまで拡大するのか？供給インフレ時代の“新常態” - Diamond マーケットラボ",
+   "source": "ダイヤモンド",
+   "source_group": "news",
+   "published_at": "2026-11-02T04:20:00+09:00",
+   "category": "macro",
+   "keywords": [
+    "interest-rates",
+    "us-treasury"
+   ],
+   "score": 80,
+   "why": "matched: 金利",
+   "read_min": null,
+   "tldr": "世界的な長期金利上昇の背景にある「期間プレミアム」の拡大を分析する連載記事。読めた冒頭では、2020 年以降の米 10 年債利回りの上昇 3.8 ポイントのうち約 2.0 ポイントが期間プレミアムの拡大によるとの推計を示している（以降は有料で未確認）。",
+   "points": [],
+   "code": null,
+   "signal": null,
+   "pick": false
+  },
+  {
+   "id": "2026-11-02-diamond-alphabet-wsj",
+   "url": "https://diamond.jp/articles/-/402311",
+   "title": "アルファベットにまだ勝算あり、AI逆風下でも - WSJ PickUp",
+   "source": "ダイヤモンド",
+   "source_group": "news",
+   "published_at": "2026-11-02T04:00:00+09:00",
+   "category": "stocks",
+   "keywords": [
+    "us-stocks",
+    "earnings",
+    "google"
+   ],
+   "score": 72,
+   "why": "matched: 米国株",
+   "read_min": null,
+   "tldr": "WSJ のコラム。7〜9 月期の広告売上高が予想に届かずアルファベット株は時間外で一時 10% 近く下げ、予想 PER は約 20 倍と同業より低い。AI エージェントによる検索の侵食などの懸念を挙げつつ、対抗できる手札があると論じている（冒頭のみ確認）。",
+   "points": [],
+   "code": null,
+   "signal": null,
+   "pick": false
+  },
+  {
+   "id": "2026-11-02-toyokeizai-tsmc-q3",
+   "url": "https://toyokeizai.net/articles/-/962899?utm_source=rss&utm_medium=http&utm_campaign=link_back",
+   "title": "半導体TSMCの売上高が予想上限を超え､10～12月期も2桁増収へ…AI需要は｢減速の兆しなし｣ | 政治・経済・投資 | 東洋経済オンライン",
+   "source": "東洋経済",
+   "source_group": "news",
+   "published_at": "2026-11-01T11:30:00+09:00",
+   "category": "stocks",
+   "keywords": [
+    "semiconductor",
+    "earnings"
+   ],
+   "score": 62,
+   "why": "AI 需要と半導体決算（matched なし）",
+   "read_min": null,
+   "tldr": "TSMC の 7〜9 月期売上高は 467 億ドルで会社予想の上限を超え、10〜12 月期は 523〜543 億ドルの見通しを示した。経営陣は AI 需要に「減速の兆しは見られない」としている。",
+   "points": [
+    "売上高は米ドルベースで 16.2% 増、営業利益率 58.7%。粗利益率は 2nm 立ち上げの初期費用で 1.3 ポイント低下し 66.4%",
+    "用途別では HPC が売上の 68% で 22% 増。7nm 以下の先端プロセスがウエハー売上の 79%（3nm 33%、5nm 28%、2nm 8%）",
+    "10〜12 月期は中央値で前年同期比 58% 増の見通し、粗利益率 65〜67%。世界で約 20 の工場プロジェクトが進み、米テキサス州が追加の候補地に挙がる（記事の一部は有料で未確認）"
+   ],
+   "code": null,
+   "signal": null,
+   "pick": true
+  },
+  {
+   "id": "2026-11-02-investing-panasonic-q2",
+   "url": "https://jp.investing.com/news/transcripts/article-93CH-1735917",
+   "title": "パナソニック、2027年度第2四半期の利益が過去最高を更新し、通期見通しを上方修正",
+   "source": "investing.com",
+   "source_group": "news",
+   "published_at": "2026-11-01T21:02:25+09:00",
+   "category": "stocks",
+   "keywords": [
+    "earnings",
+    "data-center"
+   ],
+   "score": 60,
+   "why": "国内大型株の決算（matched なし）",
+   "read_min": null,
+   "tldr": "パナソニックの 7〜9 月期は売上高 2 兆 736 億円（前年同期比 8% 増）、営業利益 1,807 億円で、純利益は同期として過去最高。AI インフラ向け部材の需要が想定を上回り、通期の調整後営業利益見通しを 6,500 億円から 7,800 億円に引き上げた。",
+   "points": [
+    "導電性高分子コンデンサーや多層回路基板材料などの AI インフラ事業が最も伸び、2029 年度の同事業の売上目標を 1 兆 3,800 億円から 1 兆 6,000 億円に引き上げた",
+    "通期の営業利益見通しは 5,900 億円から 7,100 億円へ。2029 年度の調整後営業利益目標（7,500 億円超）を 2 年前倒しで達成する見込みとし、年間配当予想を 40 円から 70 円に引き上げた",
+    "銅・樹脂・メモリ・物流のコスト上昇で 570 億円、ドラム式洗濯乾燥機のリコールで 202 億円の利益押し下げ。データセンター建設の遅れや競争激化をリスクに挙げた"
+   ],
+   "code": null,
+   "signal": null,
+   "pick": true
+  },
+  {
+   "id": "2026-11-02-coinpost-weekly-crypto",
+   "url": "https://coinpost.jp/?p=745600",
+   "title": "週刊仮想通貨ニュース（10/30）｜バイナンス流出・BTC価格予測・リップルの発表のまとめ",
+   "source": "CoinPost",
+   "source_group": "news",
+   "published_at": "2026-11-01T09:25:25+09:00",
+   "category": "crypto",
+   "keywords": [
+    "bitcoin",
+    "exchange-hack"
+   ],
+   "score": 55,
+   "why": "matched: ビットコイン",
+   "read_min": null,
+   "tldr": "CoinPost の週間まとめ。バイナンスの不正流出、リップルの年間プロダクト収益の発表、ビットワイズによるビットコインの価格予測などが関心を集めた（RSS の要約による）。",
+   "points": [],
+   "code": null,
+   "signal": null,
+   "pick": false
+  },
+  {
+   "id": "2026-11-02-diamond-takaichi-investment",
+   "url": "https://diamond.jp/articles/-/402276",
+   "title": "日本経済停滞の原因は「人口減少ではなく投資不足」、高市政権ブレーン・会田卓司氏が語る370兆円成長戦略の勝算とリフレ政策の終焉 - 高市政権1年 サナエノミクスの功罪",
+   "source": "ダイヤモンド",
+   "source_group": "news",
+   "published_at": "2026-11-02T04:35:00+09:00",
+   "category": "macro",
+   "keywords": [
+    "jp-fiscal"
+   ],
+   "score": 50,
+   "why": "国内の財政・成長戦略（matched なし）",
+   "read_min": null,
+   "tldr": "高市政権の経済ブレーンの会田卓司氏へのインタビュー。日本の長期停滞の原因は人口減少ではなく国内の投資不足だとし、官民 370 兆円超の投資構想や「責任ある積極財政」の狙いを語っている（RSS の要約による）。",
+   "points": [],
+   "code": null,
+   "signal": null,
+   "pick": false
+  },
+  {
+   "id": "2026-11-02-diamond-chip-export-lobby",
+   "url": "https://diamond.jp/articles/-/402294",
+   "title": "マイクロンvs米半導体製造装置大手2社が対中規制で「ロビー合戦」、中間選挙の結果で勝者も変わる!? - トランプ中間選挙 経済・市場・政策はどうなる？",
+   "source": "ダイヤモンド",
+   "source_group": "news",
+   "published_at": "2026-11-02T04:25:00+09:00",
+   "category": "stocks",
+   "keywords": [
+    "semiconductor",
+    "geopolitics"
+   ],
+   "score": 50,
+   "why": "米中間選挙と半導体規制（matched なし）",
+   "read_min": null,
+   "tldr": "米国の半導体対中規制をめぐり、マイクロンと半導体製造装置大手 2 社がロビー活動で対立しており、中間選挙で鍵となる議員の当落次第で規制が新たな局面を迎える可能性があるとする記事（RSS の要約による）。",
+   "points": [],
+   "code": null,
+   "signal": null,
+   "pick": false
+  },
+  {
+   "id": "2026-11-02-diamond-it-vendors-earnings",
+   "url": "https://diamond.jp/articles/-/402337",
+   "title": "富士通は最終減益、NECは純利益2.6倍…明暗分かれたITベンダー3社〈26年4～6月期決算〉 - ダイヤモンド 決算報",
+   "source": "ダイヤモンド",
+   "source_group": "news",
+   "published_at": "2026-11-01T11:45:00+09:00",
+   "category": "stocks",
+   "keywords": [
+    "earnings"
+   ],
+   "score": 45,
+   "why": "国内 IT 大手の決算（matched なし）",
+   "read_min": null,
+   "tldr": "富士通・野村総合研究所・NEC の直近四半期決算を売上高の前年比で比べる連載。富士通は最終減益、NEC は純利益 2.6 倍と明暗が分かれた（見出しと RSS の要約による）。",
+   "points": [],
+   "code": null,
+   "signal": null,
+   "pick": false
+  }
+ ],
+ "social": [
+  {
+   "network": "x",
+   "author": "@jurlycat",
+   "url": "https://x.com/jurlycat/status/2116710997121700318",
+   "text": "Karpathy 氏は YouTube の質の低いおすすめに嫌気がさし、Claude に代わりのサイトを約 2 時間で作らせたと紹介。2007〜2026 年の HN の推薦から 6,454 本・150 トピックを収録し、コメントの選別には Sonnet を使ったと伝えた。",
+   "metrics": null,
+   "heat": null,
+   "category": "ai",
+   "keywords": [
+    "ai-coding",
+    "claude"
+   ],
+   "posted_at": null
+  },
+  {
+   "network": "x",
+   "author": "@cyb3rops",
+   "url": "https://x.com/cyb3rops/status/2115806593635811634",
+   "text": "CVE-2026-98432 は 2015 年 10 月の Linux TCP/IPv4 の性能最適化で入り込み、11 年以上残っていたと指摘し、サイバーセキュリティの将来への懸念を示した。",
+   "metrics": null,
+   "heat": null,
+   "category": "sec",
+   "keywords": [
+    "linux",
+    "vulnerability-management"
+   ],
+   "posted_at": null
+  },
+  {
+   "network": "x",
+   "author": "@t_nihonmatsu",
+   "url": "https://x.com/t_nihonmatsu/status/2115974783800324110",
+   "text": "Amazon Linux 2023 でも CVSS が 7.0 から 8.1 に引き上げられたと指摘。sysctl net.mptcp.enabled で実行時の有効・無効を確認すべきだが、脆弱性自体は MPTCP 固有ではなく通常の IPv4 TCP 処理にあると説明した。",
+   "metrics": null,
+   "heat": null,
+   "category": "sec",
+   "keywords": [
+    "linux",
+    "aws"
+   ],
+   "posted_at": null
+  },
+  {
+   "network": "x",
+   "author": "@peterktodd",
+   "url": "https://x.com/peterktodd/status/2116039936453337117",
+   "text": "ss -Mlnp が何か返すなら今回のエクスプロイトの影響を受ける可能性があるとし、パッチ適用に加えて net.mptcp.enabled=0 で MPTCP を無効化する方法を紹介した。",
+   "metrics": null,
+   "heat": null,
+   "category": "sec",
+   "keywords": [
+    "linux",
+    "vulnerability-management"
+   ],
+   "posted_at": null
+  },
+  {
+   "network": "hn",
+   "author": null,
+   "url": "https://news.ycombinator.com/item?id=50319358",
+   "text": "『Anthropic blocks users for anything touching training larger models』のスレッド。247 件のコメント",
+   "metrics": "▲ 437  ✉ 247",
+   "heat": 100,
+   "category": "ai",
+   "keywords": [
+    "anthropic",
+    "ai-safety"
+   ],
+   "posted_at": "2026-11-01T04:39:19+09:00"
+  },
+  {
+   "network": "x",
+   "author": "@sbivc_official",
+   "url": "https://x.com/sbivc_official/status/2116029886649557165",
+   "text": "米国時間 11 月 3 日の米中間選挙を前に、暗号資産市場は米長期金利の高止まりや政治的不透明感、AI 関連規制への警戒から上値の重い展開が続いているとするレポートを紹介。",
+   "metrics": null,
+   "heat": null,
+   "category": "crypto",
+   "keywords": [
+    "bitcoin",
+    "crypto-regulation"
+   ],
+   "posted_at": null
+  }
+ ],
+ "releases": [
+  {
+   "date": "2026-11-02",
+   "title": "GMO インターネットグループが不正アクセス問題で会見",
+   "repo": null,
+   "url": "https://news.web.nhk/newsweb/na/nd-20261031de69024",
+   "kind": "event",
+   "note": "NHK の報道による（11 月 2 日予定。前日の確認に基づく）",
+   "category": "sec"
+  },
+  {
+   "date": "2026-11-03",
+   "title": "米中間選挙",
+   "repo": null,
+   "url": "https://coinpost.jp/?p=745685",
+   "kind": "event",
+   "note": "11 月 3 日実施（CoinPost のアナリスト寄稿で確認）",
+   "category": "macro"
+  },
+  {
+   "date": "2026-11-06",
+   "title": "米雇用統計（10 月分）",
+   "repo": null,
+   "url": "https://coinpost.jp/?p=745685",
+   "kind": "event",
+   "note": "11 月 6 日発表予定（CoinPost のアナリスト寄稿による。BLS の公式日程は未確認）",
+   "category": "macro"
+  }
+ ]
+}
