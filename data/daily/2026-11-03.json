@@ -1,0 +1,801 @@
+{
+  "date": "2026-11-03",
+  "generated_at": "2026-11-03T06:10:00+09:00",
+  "stats": {
+    "collected": 199,
+    "sources_ok": 25,
+    "sources_total": 26,
+    "by_group": {
+      "hackernews": 49,
+      "tech_blog": 70,
+      "news": 71,
+      "official": 9
+    },
+    "failed_sources": [
+      "coindesk_jp"
+    ]
+  },
+  "digest": [
+    {
+      "category": "sec",
+      "text": "Linux TCP の CVE-2026-98432（CVSS 9.8）で、Debian などが修正済みなのに Ubuntu は全サポート版が未修正だと批判するブログ「WTF Ubuntu?」が HN 1001 pt。国内では GMO 熊谷代表の初の会見（はてブ 312）と、GMO トラスト・ログインの約 9 年の公開領域設定ミス（4.5 万人分）が注目を集めた。",
+      "keywords": [
+        "linux",
+        "vulnerability-management",
+        "security-incident"
+      ]
+    },
+    {
+      "category": "ai",
+      "text": "HN で推薦された本を集めた「Hacker Books」が HN 1790 pt と、HackerTube に続く派生サイトが相次ぐ。LLM に重みを直接編集させ Qwen3.5-0.8B の MATH-500 を 7.9%→48.1% にした「Weight-Space Programming」の報告も 669 pt。",
+      "keywords": [
+        "hacker-news",
+        "weight-editing"
+      ]
+    },
+    {
+      "category": "macro",
+      "text": "日銀は 10 月 30 日の会合で政策金利 1.25% を据え置き（1.5% への利上げ案は否決）、物価見通しは上振れリスク優勢とした。保有 ETF の売却は 2027 年 1 月から年 8,600 億円程度に倍増、J-REIT は年 50 億円を継続。",
+      "keywords": [
+        "boj-policy",
+        "interest-rates",
+        "j-reit"
+      ]
+    },
+    {
+      "category": "crypto",
+      "text": "金融庁の研究会でステーブルコインの 1 件 100 万円上限の見直しが議論され、JPYC・SBI VC トレードが緩和を求め全銀協は慎重。BTCPay Server はホットウォレットからの不正流出の報告を受けて運営者にサーバー停止を呼びかけた。",
+      "keywords": [
+        "stablecoin",
+        "bitcoin"
+      ]
+    },
+    {
+      "category": "stocks",
+      "text": "11 月 2 日の日経平均はキオクシア急落が重荷となり 208 円安の 63,081 円。11 月の住宅ローン固定 10 年は大手 4 行が引き下げ、三菱 UFJ は引き上げ。投資信託の 10 月の資金流入は検索で当月の数字を確認できず、記事は追加していない。",
+      "keywords": [
+        "nikkei225",
+        "mortgage-rates"
+      ]
+    }
+  ],
+  "items": [
+    {
+      "id": "2026-11-03-hn-hackerbooks",
+      "url": "https://hackerbooks.org",
+      "title": "Show HN: HackerBooks – HackerTube, but for books mentioned on HN",
+      "source": "hackernews",
+      "source_group": "hackernews",
+      "published_at": "2026-11-02T00:58:28+09:00",
+      "category": "ai",
+      "keywords": [
+        "hacker-news",
+        "ai-coding"
+      ],
+      "score": 100,
+      "why": "HN 1790 pt・297 コメント／派生の HackerHack・Wikihack も上位",
+      "read_min": null,
+      "tldr": "Hacker News のコメントで言及された本を集めたサイト「Hacker Books」が公開された。2007〜2026 年の 28 万件超の言及から 15,766 冊を収録し、前日話題の HackerTube の「本版」として HN 1790 pt を集めた。",
+      "points": [
+        "人気順・最も推薦された本・急上昇・トレンド・「For You」の一覧と、書名・著者の検索、全 30 分野の分類を備える。最多はフィクション・文学の 3,273 冊",
+        "j/k での移動や / で検索など、HackerTube と同様のキーボード操作に対応。リスト更新時のメール購読もある",
+        "同じ形式の派生として、HN の投稿を集めた「HackerHack」（はてブ 800）や Wikipedia 記事版の「Wikihack」（HN 325 pt）も続いた。作者は Y Combinator・HN とは無関係と明記している"
+      ],
+      "code": null,
+      "signal": "B! 6 · ▲ 1790",
+      "pick": true
+    },
+    {
+      "id": "2026-11-03-chalmovsky-wtf-ubuntu",
+      "url": "https://chalmovsky.com/posts/wtf-ubuntu",
+      "title": "WTF Ubuntu?",
+      "source": "hackernews",
+      "source_group": "hackernews",
+      "published_at": "2026-11-02T23:52:00+09:00",
+      "category": "sec",
+      "keywords": [
+        "linux",
+        "vulnerability-management",
+        "ubuntu"
+      ],
+      "score": 94,
+      "why": "HN 1001 pt・489 コメント",
+      "read_min": null,
+      "tldr": "Linux カーネルの TCP の脆弱性 CVE-2026-98432（CVSS 9.8）について、Debian が 10 月 16 日に修正を出したのに Ubuntu は 11 月 2 日時点で全サポート版が未修正だと批判するブログ。筆者は Ubuntu のサーバーをすべて停止し、別ディストリへ移すと書いた。",
+      "points": [
+        "Debian・Arch Linux・Alpine などボランティア運営のディストリは修正済み。セキュリティのサブスクリプションを売る Canonical の Ubuntu だけが LTS を含めて「Vulnerable」のままだと対比している（11 月 2 日 14:48 UTC 時点）",
+        "CVSS 9.8 と判定されてから 9 日、root を取る動作エクスプロイトが報告されてから 6 日経っても修正が出ていない点を挙げ、「迅速なパッチ提供」をうたう公式サイトの記述と矛盾すると指摘",
+        "HN のスレッドでは、Ubuntu Pro や snap への不満、Debian・Fedora への乗り換え論、CVSS 9.8 が実際のリスクを表しているかの議論が広がった"
+      ],
+      "code": null,
+      "signal": "▲ 1001",
+      "pick": true
+    },
+    {
+      "id": "2026-11-03-rikiyat-weight-space",
+      "url": "https://rikiyat.github.io/blog/weight-space-programming/",
+      "title": "Astra can read and write weights to improve Qwen",
+      "source": "hackernews",
+      "source_group": "hackernews",
+      "published_at": "2026-11-03T03:21:28+09:00",
+      "category": "ai",
+      "keywords": [
+        "llm",
+        "open-weight",
+        "weight-editing"
+      ],
+      "score": 89,
+      "why": "HN 669 pt・191 コメント",
+      "read_min": null,
+      "tldr": "フロンティア LLM「Astra」にニューラルネットの重みを直接読み書きさせる「Weight-Space Programming」の初期結果。勾配も学習ループも使わず、Qwen3.5-0.8B の重みの 0.016% を書き換えて数学ベンチマークの正答率を大きく上げたと報告している。",
+      "points": [
+        "Astra は重みを読み込んだ Python カーネル（GPU なし）と学習用問題を与えられ、同じ文章を繰り返すループの原因が層 15・19 の MLP が書き込む 1 つの方向にあると特定。各層 64 列からその方向を差し引いた（131,072 個の重み）",
+        "フォワードパス 50 回の予算で MATH-500 は 7.9%→48.1%、GSM8K は 13.8%→67.1%、上限トークンに達する回答は 93.0%→33.1% に。10・25 回の予算では改善は小さかった",
+        "ループしにくい Gemma 3 270M では改善がなく、記事は「隠れていた能力の障害は外せても、無い能力は足せない」と結論。ほかに PPO 方策の修復や 9×9 囲碁のネットを重みからゼロで書く実験も載せ、全ログを GitHub で公開している"
+      ],
+      "code": null,
+      "signal": "▲ 669",
+      "pick": true
+    },
+    {
+      "id": "2026-11-03-thedrive-flock-unplugged",
+      "url": "https://www.thedrive.com/news/my-city-canceled-flocks-contract-flock-ignored-it-so-the-police-chief-unplugged-the-cameras",
+      "title": "Police chief unplugs cameras after Flock ignores contract cancellation",
+      "source": "hackernews",
+      "source_group": "hackernews",
+      "published_at": "2026-11-01T23:36:13+09:00",
+      "category": "sec",
+      "keywords": [
+        "surveillance",
+        "privacy"
+      ],
+      "score": 84,
+      "why": "HN 463 pt・158 コメント",
+      "read_min": null,
+      "tldr": "米プリマス市が Flock Safety のナンバー読み取りカメラ（ALPR）の契約を解除したのに同社が撤去に応じず、警察署長が職員にカメラの電源を抜かせたという記事。発端は誤認識による誤った追跡と警察の出動だった。",
+      "points": [
+        "9 月 22 日に市議会が Flock の ALPR の使用中止を議決。翌 23 日に警察がアカウントを停止し、郵送とメールで正式な解約通知を送った",
+        "1 週間以上 Flock の本社・法務から返答がなく、10 月初旬以降に署長がカメラの電源コードを抜かせた。記者が 2 台で実際に抜かれていることを確認した",
+        "カメラの所有権は Flock にあり、10 月 23 日の記事公開時点でも設置されたまま撤去時期は未定。Flock は記者の問い合わせにも答えていない"
+      ],
+      "code": null,
+      "signal": "▲ 463",
+      "pick": true
+    },
+    {
+      "id": "2026-11-03-itmedia-gmo-press",
+      "url": "https://www.itmedia.co.jp/news/article/2611/02/2000002806/",
+      "title": "GMO熊谷代表、会見で改めて謝罪 SNS投稿巡り「配慮が欠けていた」",
+      "source": "hatena/it",
+      "source_group": "tech_blog",
+      "published_at": "2026-11-02T16:17:57+09:00",
+      "category": "sec",
+      "keywords": [
+        "security-incident",
+        "incident-response"
+      ],
+      "score": 83,
+      "why": "はてブ 312（同じ会見の記事が毎日新聞 270・ITmedia 156 など多数）",
+      "read_min": null,
+      "tldr": "GMO インターネットグループの熊谷代表が 11 月 2 日、FX 自動売買用 VPS「お名前.com デスクトップクラウド」への不正アクセスを巡って初の記者会見を開き謝罪した。会見の進め方や発言には X などで批判が相次いだ。",
+      "points": [],
+      "code": null,
+      "signal": "B! 312",
+      "pick": false
+    },
+    {
+      "id": "2026-11-03-terrytao-math-changed",
+      "url": "https://terrytao.wordpress.com/2026/11/01/mathematics-has-changed-lets-act-like-it/",
+      "title": "Mathematics has changed. Let's act like it",
+      "source": "hackernews",
+      "source_group": "hackernews",
+      "published_at": "2026-11-02T03:28:42+09:00",
+      "category": "ai",
+      "keywords": [
+        "ai-adoption"
+      ],
+      "score": 81,
+      "why": "HN 373 pt・486 コメント",
+      "read_min": null,
+      "tldr": "数学者テレンス・タオ氏のブログ記事「Mathematics has changed. Let's act like it」。HN では 486 件のコメントが付いた（本文は未読）。",
+      "points": [],
+      "code": null,
+      "signal": "▲ 373",
+      "pick": false
+    },
+    {
+      "id": "2026-11-03-itmedia-gmo-trust-login",
+      "url": "https://www.itmedia.co.jp/news/article/2611/02/2000002780/",
+      "title": "ロゴ画像用の公開領域に顧客ファイルも保存 GMO系シングルサインオン、4.5万人分漏えい",
+      "source": "hatena/it",
+      "source_group": "tech_blog",
+      "published_at": "2026-11-02T10:59:35+09:00",
+      "category": "sec",
+      "keywords": [
+        "data-breach",
+        "authentication"
+      ],
+      "score": 79,
+      "why": "はてブ 233",
+      "read_min": null,
+      "tldr": "GMO グローバルサインは、SSO サービス「GMO トラスト・ログイン」で顧客情報を含む一時ファイルをロゴ画像と同じ公開領域に保存する設計になっていたため、利用企業 2,492 社・4 万 5,030 人分の氏名やメールアドレスなどが約 9 年間漏えいの対象になっていたと発表した（RSS の要約による）。",
+      "points": [],
+      "code": null,
+      "signal": "B! 233",
+      "pick": false
+    },
+    {
+      "id": "2026-11-03-hn-subvocal",
+      "url": "https://news.ycombinator.com/item?id=50340088",
+      "title": "Show HN: Subvocal – Talk to your computer without making noise",
+      "source": "hackernews",
+      "source_group": "hackernews",
+      "published_at": "2026-11-03T02:16:17+09:00",
+      "category": "ai",
+      "keywords": [
+        "speech-to-text"
+      ],
+      "score": 78,
+      "why": "HN 298 pt・205 コメント",
+      "read_min": null,
+      "tldr": "声を出さずにコンピュータへ話しかける入力手段をうたう Show HN「Subvocal」（タイトルによる）。",
+      "points": [],
+      "code": null,
+      "signal": "▲ 298",
+      "pick": false
+    },
+    {
+      "id": "2026-11-03-guardian-supermarket-freezers",
+      "url": "https://www.theguardian.com/world/2026/nov/02/supermarket-freezers-across-europe-hit-by-second-suspected-cyber-attack",
+      "title": "Supermarket freezers across Europe hit by second suspected cyber-attack",
+      "source": "hackernews",
+      "source_group": "hackernews",
+      "published_at": "2026-11-02T20:50:13+09:00",
+      "category": "sec",
+      "keywords": [
+        "iot-security",
+        "security-incident"
+      ],
+      "score": 78,
+      "why": "HN 291 pt・356 コメント／BBC の同件記事も HN 108 pt",
+      "read_min": null,
+      "tldr": "欧州各地のスーパーの冷凍設備がサイバー攻撃とみられる被害に再び遭ったと Guardian が報じた。BBC はベルギーとスウェーデンでの被害を伝えている（見出しによる）。",
+      "points": [],
+      "code": null,
+      "signal": "▲ 291",
+      "pick": false
+    },
+    {
+      "id": "2026-11-03-gh-omnidiff",
+      "url": "https://github.com/ivankovic/omnidiff",
+      "title": "Show HN: OmniDiff – Opensource, super fast, content aware Git difftool, in Rust",
+      "source": "hackernews",
+      "source_group": "hackernews",
+      "published_at": "2026-11-01T22:02:30+09:00",
+      "category": "be",
+      "keywords": [
+        "git",
+        "rust",
+        "cli"
+      ],
+      "score": 78,
+      "why": "HN 302 pt・94 コメント",
+      "read_min": null,
+      "tldr": "Rust 製の Git 用 difftool「OmniDiff」が Show HN で公開された。内容を考慮した差分表示と速さをうたうオープンソース（タイトルによる）。",
+      "points": [],
+      "code": null,
+      "signal": "B! 3 · ▲ 302",
+      "pick": false
+    },
+    {
+      "id": "2026-11-03-techcrunch-apollo-ai-payoff",
+      "url": "https://techcrunch.com/2026/10/25/ai-delivers-zero-financial-payoff-to-most-companies-according-to-apollo-economist/",
+      "title": "AI delivers 'zero financial payoff' to most companies, Apollo economist says",
+      "source": "hackernews",
+      "source_group": "hackernews",
+      "published_at": "2026-11-02T07:10:45+09:00",
+      "category": "ai",
+      "keywords": [
+        "ai-economy"
+      ],
+      "score": 75,
+      "why": "HN 241 pt・247 コメント",
+      "read_min": null,
+      "tldr": "Apollo のエコノミストが「AI はほとんどの企業に財務的な見返りをもたらしていない」と指摘したと TechCrunch が報じた（見出しによる）。",
+      "points": [],
+      "code": null,
+      "signal": "▲ 241",
+      "pick": false
+    },
+    {
+      "id": "2026-11-03-cnbc-anthropic-s1",
+      "url": "https://www.cnbc.com/2026/11/02/anthropic-ant-s-1-quarter-financials.html",
+      "title": "Anthropic reports $17B in Q3 revenue, commitments of $895B in revised S-1",
+      "source": "hackernews",
+      "source_group": "hackernews",
+      "published_at": "2026-11-02T23:38:45+09:00",
+      "category": "ai",
+      "keywords": [
+        "anthropic",
+        "ipo"
+      ],
+      "score": 73,
+      "why": "HN 203 pt・224 コメント",
+      "read_min": null,
+      "tldr": "Anthropic が修正した S-1（上場申請書類）で、第 3 四半期の売上高 170 億ドルと 8,950 億ドルのコミットメントを開示したと CNBC が報じた（見出しによる）。",
+      "points": [],
+      "code": null,
+      "signal": "▲ 203",
+      "pick": false
+    },
+    {
+      "id": "2026-11-03-triggerdev-env-exposed",
+      "url": "https://trigger.dev/blog/security-incident-nov-2026",
+      "title": "Trigger.dev customer environment variables exposed",
+      "source": "hackernews",
+      "source_group": "hackernews",
+      "published_at": "2026-11-02T10:09:16+09:00",
+      "category": "sec",
+      "keywords": [
+        "secrets-management",
+        "security-incident"
+      ],
+      "score": 70,
+      "why": "HN 161 pt・85 コメント",
+      "read_min": null,
+      "tldr": "ジョブ実行基盤の Trigger.dev が、顧客の環境変数が露出したセキュリティインシデントを公表した（タイトルによる）。環境変数に API キーなどを置いている利用者は確認が必要になる。",
+      "points": [],
+      "code": null,
+      "signal": "B! 1 · ▲ 161",
+      "pick": false
+    },
+    {
+      "id": "2026-11-03-publickey-copilot-fusion",
+      "url": "https://www.publickey1.jp/blog/26/githubcopilot_fusionaigithub_universe_2026.html",
+      "title": "GitHub、「Copilot Fusion」正式リリース。タスクに応じて最適なAIモデル選択で高性能かつ低コストに。GitHub Universe 2026",
+      "source": "publickey",
+      "source_group": "news",
+      "published_at": "2026-11-02T23:36:38+09:00",
+      "category": "ai",
+      "keywords": [
+        "github",
+        "ai-coding"
+      ],
+      "score": 55,
+      "why": "はてブ 45・Publickey",
+      "read_min": null,
+      "tldr": "GitHub は GitHub Universe 2026 で、タスクに応じて最適な AI モデルを選ぶ「GitHub Copilot Fusion」の正式リリースを発表した。性能を保ちつつコストを下げることをうたう（RSS の要約による）。",
+      "points": [],
+      "code": null,
+      "signal": "B! 45",
+      "pick": false
+    },
+    {
+      "id": "2026-11-03-boj-kaiken-1030",
+      "url": "http://www.boj.or.jp/about/press/kaiken_2026/kk261102a.pdf",
+      "title": "【記者会見】植田総裁（10月30日分）",
+      "source": "日本銀行",
+      "source_group": "official",
+      "published_at": "2026-11-02T14:10:00+09:00",
+      "category": "macro",
+      "keywords": [
+        "boj-policy",
+        "interest-rates",
+        "j-reit"
+      ],
+      "score": 92,
+      "why": "日銀の公式発表（matched: 金利, j-reit）",
+      "read_min": null,
+      "tldr": "日銀は 10 月 30 日の決定会合で政策金利 1.25% 程度の据え置きを賛成多数で決め、1.5% への利上げ案は否決された。展望レポートでは物価見通しのリスクを上振れ方向とし、植田総裁は経済・物価に応じて引き続き利上げしていく方針を示した。",
+      "points": [
+        "高田委員が「中立金利に近づけるペースを速める局面に入った」として 1.5% 程度への引き上げを提案したが、反対多数で否決。展望レポートは全員一致",
+        "コア CPI は足元 2% 程度で、原油高・AI 需要による半導体価格の上昇・円安の影響で「2% をはっきり上回る水準」まで伸びを高めると予想。27 年度の見通しは前回から幾分上振れた",
+        "保有 ETF の売却ペースを、市場の売買代金に占める割合 0.05% から 0.1% 相当の年 8,600 億円程度（簿価）に引き上げ、2027 年 1 月から実施（全員一致）。J-REIT は年 50 億円程度の売却を据え置く"
+      ],
+      "code": null,
+      "signal": null,
+      "pick": true
+    },
+    {
+      "id": "2026-11-03-yahoo-mortgage-nov",
+      "url": "https://news.yahoo.co.jp/articles/0f09c9b3be16f07e0075abcec0a92baada87bfe9",
+      "title": "11月住宅ローン固定金利、4行が引き下げ（時事通信）",
+      "source": "Yahoo!ニュース",
+      "source_group": "news",
+      "published_at": "2026-10-30T00:00:00+09:00",
+      "category": "realestate",
+      "keywords": [
+        "mortgage-rates",
+        "interest-rates"
+      ],
+      "score": 85,
+      "why": "matched: 住宅ローン, 金利",
+      "read_min": null,
+      "tldr": "大手銀行 5 行が 10 月 30 日に 11 月の住宅ローン金利を発表し、固定 10 年の最優遇金利は三井住友銀行など 4 行が引き下げ、三菱 UFJ 銀行は引き上げた。理由は長期金利の動向などとしている（時事通信）。",
+      "points": [],
+      "code": null,
+      "signal": null,
+      "pick": false
+    },
+    {
+      "id": "2026-11-03-coinpost-stablecoin-cap",
+      "url": "https://coinpost.jp/?p=746032",
+      "title": "ステーブルコインの100万円上限、金融庁研究会で議論 全銀協は慎重",
+      "source": "CoinPost",
+      "source_group": "news",
+      "published_at": "2026-11-02T19:21:32+09:00",
+      "category": "crypto",
+      "keywords": [
+        "stablecoin",
+        "crypto-regulation",
+        "jpyc",
+        "fsa"
+      ],
+      "score": 75,
+      "why": "金融庁研究会の議論（matched なし・ステーブルコイン規制）",
+      "read_min": null,
+      "tldr": "金融庁の「デジタル・分散型金融への対応のあり方等に関する研究会」第 2 回（11 月 2 日）で、ステーブルコインの 1 件 100 万円の上限が議論された。JPYC と SBI VC トレードは見直しを求め、全銀協は上限だけの緩和に極めて慎重な検討を求めた。",
+      "points": [
+        "JPYC は、自治体が 10 万人に 5 万円ずつ給付する 50 億円の発行に 5,000 回の分割が必要になると試算。国・自治体や本人確認済み法人などへの上限撤廃か別枠を、利用者保護策と合わせた段階的な検討として求めた",
+        "SBI VC トレードは USDC・RLUSD など 4 号電子決済手段の 100 万円の移転・保有上限の撤廃を要望。同社の「貸コイン」残高は 10 月時点で約 107 億円（JPYSC 76.5 億円、USDC 30.6 億円）",
+        "全銀協は、第二種資金移動業の枠組みのまま上限だけ緩めると、資金保全に最大 10 日超・供託の払い戻しに最低 170 日かかり得ることや、24 時間移転による償還集中（デジタル・ラン）のリスクがあるとし、高額取引は第一種で行うのが基本とした"
+      ],
+      "code": null,
+      "signal": null,
+      "pick": true
+    },
+    {
+      "id": "2026-11-03-coinpost-btcpay-hot-wallet",
+      "url": "https://coinpost.jp/?p=745885",
+      "title": "BTCPay Server、ホットウォレット不正流出の報告受けサーバー停止を要請",
+      "source": "CoinPost",
+      "source_group": "news",
+      "published_at": "2026-11-02T09:35:32+09:00",
+      "category": "crypto",
+      "keywords": [
+        "bitcoin",
+        "wallet",
+        "security-incident"
+      ],
+      "score": 75,
+      "why": "matched: ビットコイン",
+      "read_min": null,
+      "tldr": "ビットコイン決済ソフト BTCPay Server の開発チームが 11 月 2 日、複数のサーバーでホットウォレットの資金が抜き取られたとの報告を受け、調査完了までサーバーを停止するよう運営者に呼びかけた。原因と被害規模は未公表。",
+      "points": [
+        "停止要請は特定のバージョンに限らず、停止には ./btcpay-down.sh を使うよう案内。修正版の公開はまだ発表されていない",
+        "10 月 29 日に重大な脆弱性 1 件などを直した緊急版 2.4.7 が出ているが、今回の件との関係は明らかにされていない",
+        "8 月には 2.4.2 より前の脆弱性で LND の認証情報が盗まれた。そのとき影響外とされたオンチェーンのホットウォレットが今回は報告の対象になっている"
+      ],
+      "code": null,
+      "signal": null,
+      "pick": true
+    },
+    {
+      "id": "2026-11-03-coinpost-next-tech-btc",
+      "url": "https://coinpost.jp/?p=745949",
+      "title": "米上場企業、5833BTCのビットコイン売却か担保化を検討 バイナンス事件受け",
+      "source": "CoinPost",
+      "source_group": "news",
+      "published_at": "2026-11-02T14:55:04+09:00",
+      "category": "crypto",
+      "keywords": [
+        "bitcoin",
+        "bitcoin-treasury"
+      ],
+      "score": 72,
+      "why": "matched: ビットコイン, 米国株",
+      "read_min": null,
+      "tldr": "米ナスダック上場のネクスト・テクノロジーの取締役会が、保有する約 5,833 BTC の売却または担保設定を全会一致で承認した。バイナンスの不正流出などでカストディと市場のリスクが高まったことを理由に挙げている。",
+      "points": [
+        "売却の数量・時期は未定で、全量売却が決まったわけではない。CEO に取引所での売却、相対取引、融資の担保設定の 3 つの方法で分割実行する権限を与えた",
+        "同社は保有分をバイナンスに預けていないと明言。CoinDesk によるとほぼ全量が日本の機関投資家向けカストディアンにあるが、事業者名は非公表",
+        "保有 BTC の評価額は約 4 億 5,000 万ドル（1 BTC＝7 万 7,000 ドル換算）で、推計時価総額約 780 万ドルの約 58 倍にあたると記事は指摘している"
+      ],
+      "code": null,
+      "signal": null,
+      "pick": true
+    },
+    {
+      "id": "2026-11-03-zaikei-nikkei-close-1102",
+      "url": "https://www.zaikei.co.jp/article/20261102/875868.html",
+      "title": "日経平均大引け：前週末比208.25円安の63081.86円",
+      "source": "財経新聞（フィスコ）",
+      "source_group": "news",
+      "published_at": "2026-11-02T15:36:00+09:00",
+      "category": "stocks",
+      "keywords": [
+        "nikkei225",
+        "semiconductor"
+      ],
+      "score": 70,
+      "why": "matched: なし（前営業日の市況）",
+      "read_min": null,
+      "tldr": "11 月 2 日の日経平均は前週末比 208.25 円安の 63,081.86 円で続落した。キオクシア HD の決算後の急落とリクルート HD で約 274 円押し下げられ、東京エレクトロンが下支えした（フィスコ・株探の記事の検索結果による）。",
+      "points": [],
+      "code": null,
+      "signal": null,
+      "pick": false
+    },
+    {
+      "id": "2026-11-03-diamond-aida-boj-rate",
+      "url": "https://diamond.jp/articles/-/402427",
+      "title": "高市政権の経済ブレーン会田卓司氏「緩やかな利上げには反対しない」、日銀の政策金利は「2029年に2.5％」と予想 - 高市政権1年 サナエノミクスの功罪",
+      "source": "ダイヤモンド",
+      "source_group": "news",
+      "published_at": "2026-11-03T04:50:00+09:00",
+      "category": "macro",
+      "keywords": [
+        "boj-rate-hike",
+        "interest-rates",
+        "fx"
+      ],
+      "score": 70,
+      "why": "matched: 金利, 為替",
+      "read_min": null,
+      "tldr": "高市政権の経済ブレーン・会田卓司氏が「緩やかな利上げには反対しない」とし、日銀の政策金利は 2029 年に 2.5% と予想するインタビュー後編。長期金利上昇や円安の要因、円高に転じる条件も語っている（RSS の要約による）。",
+      "points": [],
+      "code": null,
+      "signal": null,
+      "pick": false
+    },
+    {
+      "id": "2026-11-03-nikkei-deflation-declaration",
+      "url": "https://www.nikkei.com/article/DGXZQOUB2866Z0Y6A021C2000000/",
+      "title": "避けたい「デフレ脱却宣言」 政府と日銀、緩和出口で苦悩 - 日本経済新聞",
+      "source": "hatena/経済",
+      "source_group": "tech_blog",
+      "published_at": "2026-11-02T02:45:03+09:00",
+      "category": "macro",
+      "keywords": [
+        "boj-policy",
+        "jp-fiscal"
+      ],
+      "score": 65,
+      "why": "はてブ 81（matched: 金利の周辺）",
+      "read_min": null,
+      "tldr": "日銀が 2% の物価目標到達を宣言するなか、政府内では「デフレ脱却宣言」が積極財政の手足を縛りかねないとの警戒があると日経が報じた（有料記事。RSS の要約による）。",
+      "points": [],
+      "code": null,
+      "signal": "B! 81",
+      "pick": false
+    },
+    {
+      "id": "2026-11-03-coinpost-dprk-crypto-theft",
+      "url": "https://coinpost.jp/?p=745872",
+      "title": "北朝鮮の仮想通貨窃取累計約1.9兆円、GDP45％相当＝アナリスト",
+      "source": "CoinPost",
+      "source_group": "news",
+      "published_at": "2026-11-02T08:31:51+09:00",
+      "category": "crypto",
+      "keywords": [
+        "exchange-hack",
+        "bitcoin"
+      ],
+      "score": 60,
+      "why": "バイナンス流出の続報",
+      "read_min": null,
+      "tldr": "バイナンスから 60 億ドル超が流出した事件を受け、北朝鮮ラザルスによる暗号資産の累計窃取額は 118.7 億ドル（北朝鮮の GDP の 45% 相当）に達したとアナリストが試算した（RSS の要約による）。",
+      "points": [],
+      "code": null,
+      "signal": null,
+      "pick": false
+    },
+    {
+      "id": "2026-11-03-diamond-anthropic-ipo",
+      "url": "https://diamond.jp/articles/-/402488",
+      "title": "時価総額「300兆円」予想なのになぜ？米アンソロピック上場が「AIバブル崩壊」の引き金になり得るワケ - 今週のキーワード 真壁昭夫",
+      "source": "ダイヤモンド",
+      "source_group": "news",
+      "published_at": "2026-11-03T05:00:00+09:00",
+      "category": "stocks",
+      "keywords": [
+        "anthropic",
+        "ipo",
+        "us-stocks"
+      ],
+      "score": 60,
+      "why": "matched: 米国株",
+      "read_min": null,
+      "tldr": "Anthropic が早ければ 11 月中旬に上場する見通しで、時価総額は最大 314 兆円との予想がある一方、それが「AI バブル崩壊」の引き金になり得るとの見方を解説する記事（RSS の要約による）。",
+      "points": [],
+      "code": null,
+      "signal": null,
+      "pick": false
+    },
+    {
+      "id": "2026-11-03-toyokeizai-kioxia",
+      "url": "https://toyokeizai.net/articles/-/963314?utm_source=rss&utm_medium=http&utm_campaign=link_back",
+      "title": "〈AIバブル崩壊の兆し？〉キオクシア絶好調決算に現れた\"変調\"､株価大幅下落でも｢基本的に業績は上昇傾向｣の背景 | ビジネス | 東洋経済オンライン",
+      "source": "東洋経済",
+      "source_group": "news",
+      "published_at": "2026-11-02T18:00:00+09:00",
+      "category": "stocks",
+      "keywords": [
+        "earnings",
+        "semiconductor"
+      ],
+      "score": 55,
+      "why": "国内株の材料（matched なし）",
+      "read_min": null,
+      "tldr": "キオクシアは過去最高益を記録したが、市場予想を下回る業績見通しで株価が急落した。AI・サーバー向け需要が強い一方、市況や設備投資競争の不透明さが残ると東洋経済が分析している（RSS の要約による）。",
+      "points": [],
+      "code": null,
+      "signal": null,
+      "pick": false
+    },
+    {
+      "id": "2026-11-03-fortune-labor-share",
+      "url": "https://fortune.com/article/why-did-us-workers-just-take-home-smallest-share-of-capital-since-1947-lowest-ever-recorded/",
+      "title": "U.S. workers took home their smallest share of capital since at least 1947",
+      "source": "hackernews",
+      "source_group": "hackernews",
+      "published_at": "2026-11-02T08:20:31+09:00",
+      "category": "macro",
+      "keywords": [
+        "us-jobs",
+        "inflation"
+      ],
+      "score": 50,
+      "why": "HN 335 pt",
+      "read_min": null,
+      "tldr": "米国の労働者の取り分（労働分配率）が少なくとも 1947 年以降で最低になったと Fortune が報じた（見出しによる）。",
+      "points": [],
+      "code": null,
+      "signal": "▲ 335",
+      "pick": false
+    },
+    {
+      "id": "2026-11-03-toyokeizai-ikeda-shiga",
+      "url": "https://toyokeizai.net/articles/-/963164?utm_source=rss&utm_medium=http&utm_campaign=link_back",
+      "title": "池田泉州HDと滋賀銀の経営統合が変える関西勢力図と地銀再編のうねり…注目は南都･紀陽･京都銀とありあけ出資行の行方 | ビジネス | 東洋経済オンライン",
+      "source": "東洋経済",
+      "source_group": "news",
+      "published_at": "2026-11-02T11:30:00+09:00",
+      "category": "stocks",
+      "keywords": [
+        "regional-banks"
+      ],
+      "score": 45,
+      "why": "地銀再編（matched なし）",
+      "read_min": null,
+      "tldr": "池田泉州 HD と滋賀銀行が 10 月 29 日に経営統合に関する発表を行い、関西最大の地銀グループが誕生する見通しに。周辺地銀を巻き込む広域再編の呼び水になるかを東洋経済が論じている（RSS の要約による）。",
+      "points": [],
+      "code": null,
+      "signal": null,
+      "pick": false
+    },
+    {
+      "id": "2026-11-03-fsa-fatf-statement",
+      "url": "https://www.fsa.go.jp/inter/fatf/20261102/20261102.html",
+      "title": "国際関係,FATF声明の公表について（2026年10月プレナリー）掲載しました。",
+      "source": "金融庁",
+      "source_group": "official",
+      "published_at": "2026-11-03T00:00:00+09:00",
+      "category": "macro",
+      "keywords": [
+        "fsa",
+        "kyc"
+      ],
+      "score": 40,
+      "why": "金融庁の公式発表",
+      "read_min": null,
+      "tldr": "金融庁が FATF（金融活動作業部会）の 2026 年 10 月全体会合の声明を掲載した（タイトルによる）。",
+      "points": [],
+      "code": null,
+      "signal": null,
+      "pick": false
+    }
+  ],
+  "social": [
+    {
+      "network": "hn",
+      "author": null,
+      "url": "https://news.ycombinator.com/item?id=50337608",
+      "text": "『WTF Ubuntu?』のスレッド。489 件のコメント",
+      "metrics": "▲ 1,001  ✉ 489",
+      "heat": 100,
+      "category": "sec",
+      "keywords": [
+        "linux",
+        "ubuntu"
+      ],
+      "posted_at": "2026-11-02T23:52:00+09:00"
+    },
+    {
+      "network": "x",
+      "author": "@vikingmute",
+      "url": "https://x.com/vikingmute/status/2117069310640497073",
+      "text": "Karpathy 氏の HackerTube に続き HackerBooks が登場したと紹介。HN の投稿から 1 万 5 千冊超を抜き出し、上位は『The Art of Computer Programming』や『GEB』などの大著だと伝えた。",
+      "metrics": null,
+      "heat": null,
+      "category": "ai",
+      "keywords": [
+        "hacker-news"
+      ],
+      "posted_at": null
+    },
+    {
+      "network": "x",
+      "author": "@nico_nico_news",
+      "url": "https://x.com/nico_nico_news/status/2117164535488635018",
+      "text": "GMO の会見で熊谷社長が「人も企業も政府もこのスピードに合わせられなければ、インターネットが使えなくなる」と述べ、命懸けでインターネットを綺麗にすると語ったと伝えた。",
+      "metrics": null,
+      "heat": null,
+      "category": "sec",
+      "keywords": [
+        "security-incident",
+        "incident-response"
+      ],
+      "posted_at": null
+    },
+    {
+      "network": "x",
+      "author": "@koto_tsumu",
+      "url": "https://x.com/koto_tsumu/status/2117155303737503887",
+      "text": "GMO の会見について、被害情報より自社の取り組みのアピールが先に立ち、消費者が知りたい話が出てこないと批判した。",
+      "metrics": null,
+      "heat": null,
+      "category": "sec",
+      "keywords": [
+        "incident-response"
+      ],
+      "posted_at": null
+    },
+    {
+      "network": "x",
+      "author": "@CoinDesk",
+      "url": "https://x.com/CoinDesk/status/2117208336684740637",
+      "text": "バイナンスは 63 億ドルのハッキング後に出金を再開し、純流出は 36.4 億ドルと総資産 1,710 億ドルの 2.1% にとどまったと伝えた。",
+      "metrics": null,
+      "heat": null,
+      "category": "crypto",
+      "keywords": [
+        "exchange-hack",
+        "crypto-exchange"
+      ],
+      "posted_at": null
+    },
+    {
+      "network": "x",
+      "author": "@t_ryoma1985",
+      "url": "https://x.com/t_ryoma1985/status/2116020999514935491",
+      "text": "日銀の 10 月展望レポートを要約。実質 GDP の見通しは前回からほぼ変わらず、2027 年度のコア CPI を +2.6% に上方修正し物価は上振れリスク優勢と整理した。",
+      "metrics": null,
+      "heat": null,
+      "category": "macro",
+      "keywords": [
+        "boj-policy"
+      ],
+      "posted_at": null
+    }
+  ],
+  "releases": [
+    {
+      "date": "2026-10-30",
+      "title": "日銀、保有 ETF の売却ペースを年 8,600 億円程度に引き上げ（2027 年 1 月から）",
+      "repo": null,
+      "url": "http://www.boj.or.jp/about/press/kaiken_2026/kk261102a.pdf",
+      "kind": "policy",
+      "note": "10 月 30 日の決定会合で全員一致。J-REIT は年 50 億円程度の売却を継続（総裁会見の記録による）",
+      "category": "macro"
+    },
+    {
+      "date": "2026-11-03",
+      "title": "米中間選挙",
+      "repo": null,
+      "url": "https://coinpost.jp/?p=745685",
+      "kind": "event",
+      "note": "11 月 3 日実施（CoinPost のアナリスト寄稿で確認）",
+      "category": "macro"
+    },
+    {
+      "date": "2026-11-06",
+      "title": "米雇用統計（10 月分）",
+      "repo": null,
+      "url": "https://coinpost.jp/?p=745685",
+      "kind": "event",
+      "note": "11 月 6 日発表予定（CoinPost のアナリスト寄稿による。BLS の公式日程は未確認）",
+      "category": "macro"
+    }
+  ]
+}
