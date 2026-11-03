@@ -1,0 +1,819 @@
+{
+  "date": "2026-11-04",
+  "generated_at": "2026-11-04T05:40:00+09:00",
+  "stats": {
+    "collected": 208,
+    "sources_ok": 25,
+    "sources_total": 26,
+    "by_group": {
+      "hackernews": 48,
+      "tech_blog": 75,
+      "news": 81,
+      "official": 4
+    },
+    "failed_sources": [
+      "coindesk_jp"
+    ]
+  },
+  "digest": [
+    {
+      "category": "ai",
+      "text": "前日 HN 2911 pt を集めた「GPT-6 Astra が Qwen の重みを編集して数学性能を改善」に、生の重みを読んだのは小さなネットワークだけで Qwen の結果は Python 実行に頼っていたとする反論が HN 781 pt。NVIDIA の企業データ向けオントロジー基盤「Auto Ontology」の公開も注目された。",
+      "keywords": [
+        "weight-editing",
+        "nvidia"
+      ]
+    },
+    {
+      "category": "sec",
+      "text": "Postman デスクトップが既存ユーザーに Codex / Claude Code 用プラグインと起動時フックを無断で入れたとする Issue が HN 663 pt。Linux TCP の CVE-2026-98432（CVSS 9.8）は Ubuntu の LTS 各版で依然未修正と伝えられた（592 pt）。",
+      "keywords": [
+        "supply-chain",
+        "ubuntu",
+        "vulnerability-management"
+      ]
+    },
+    {
+      "category": "stocks",
+      "text": "Intel 株は 11 月 2 日に約 9% 下落し、半導体・メモリ株の時価総額は 10 月 6 日以降で約 3.7 兆ドル減と Yahoo Finance が伝えた。Oracle は AI 投資向けに 200 億ドルの株式・社債発行を届け出た。日本は 3 日が祝日のため新しい終値はなく、投信の 10 月の資金流入と 11 月の住宅ローン金利は検索で当月の数字を確認できず追加していない。",
+      "keywords": [
+        "us-stocks",
+        "semiconductor"
+      ]
+    },
+    {
+      "category": "macro",
+      "text": "高市政権の 1 年で 10 年国債利回りは約 153bp 上昇し、米独より上げ幅が大きいとの分析。日銀は展望レポートで基調的物価上昇率が 2% 目標とおおむね整合的になったと初めて明示した。",
+      "keywords": [
+        "jgb",
+        "interest-rates",
+        "boj-policy"
+      ]
+    },
+    {
+      "category": "crypto",
+      "text": "ビットコインが 8 万ドルを割り込み、ウィンターミュートは下落の大半をバイナンス流出後の清算によるものとみている。メタプラネットは 10 月に約 253 億円の自社株買いを実施し、社債 80 億円の完済で BTC 購入枠が約 334 億円に戻った。",
+      "keywords": [
+        "bitcoin",
+        "bitcoin-treasury"
+      ]
+    }
+  ],
+  "items": [
+    {
+      "id": "2026-11-04-hn-astra-misleading",
+      "url": "https://honnibal.dev/blog/astra-read-write-misleading",
+      "title": "The 'Astra can read and write weights to improve Qwen' post is misleading",
+      "source": "hackernews",
+      "source_group": "hackernews",
+      "published_at": "2026-11-03T21:21:17+09:00",
+      "category": "ai",
+      "keywords": [
+        "weight-editing",
+        "open-weight",
+        "llm"
+      ],
+      "score": 91,
+      "why": "HN 781 pt・181 コメント／前日の Astra 記事（HN 2911 pt）への反論",
+      "read_min": null,
+      "tldr": "GPT-6 Astra が Qwen の重みを編集して数学性能を上げたという前日の話題について、Matthew Honnibal 氏が「生の重みを読むだけで改善した」という見せ方は誤解を招くと指摘した。生の重みを直接読んだのは 1.7 万〜17.2 万パラメータの小さなネットワークの実験だけで、Qwen の改善は Python の実行とモデルの試走に頼っていたという。",
+      "points": [
+        "MATH-500 を 7.9%→48.1% に上げた Qwen の実験は、Astra が Python を使い最大 50 バッチの練習問題でモデルを走らせた結果で、「重みを見ただけ」ではない",
+        "MinAtar の結果が PPO-100M を上回ったのは Breakout（517 対 25）のみで、Seaquest（53 対 89）や Asterix（53 対 55）では負けている。Gemma 3 での実験 7a・8b は失敗",
+        "手法の異なる結果を 1 つの技術としてまとめた点を問題視しつつ、重みの解析・改変を AI にやらせたこと自体は成果だとしている。Simon Willison 氏の「手元の Qwen 3.8 27B でも重みを解釈できる」記事（HN 278 pt）も同じ話題で上位に入った"
+      ],
+      "code": null,
+      "signal": "▲ 781",
+      "pick": true
+    },
+    {
+      "id": "2026-11-04-hn-postman-ai-plugins",
+      "url": "https://github.com/postmanlabs/postman-app-support/issues/14370",
+      "title": "Postman silently auto-installs AI plugins and attempts to share all API data",
+      "source": "hackernews",
+      "source_group": "hackernews",
+      "published_at": "2026-11-04T02:22:37+09:00",
+      "category": "sec",
+      "keywords": [
+        "supply-chain",
+        "ai-security",
+        "ai-coding",
+        "claude"
+      ],
+      "score": 89,
+      "why": "HN 663 pt・213 コメント",
+      "read_min": null,
+      "tldr": "Postman デスクトップ 12.33.4 が、既存ユーザーの Mac に Codex 用と Claude Code 用のプラグインや CLI を同意なく自動でインストールしたと GitHub Issue で報告された。報告者は起動時フックやリモート MCP サーバーの設定まで書き込まれたとして、オプトイン化とロールバック手段を求めている。",
+      "points": [
+        "ログに auto-existing-upgrade で codex:installed / claude-code:installed が記録され、~/.codex/config.toml にフックの信頼レコードが書かれた。インストーラ自身が approvePostmanHook でフックを承認していたという",
+        "SessionStart フックは「重要な API 作業の前に postman:api-engineer スキルを読み込む」よう指示する内容で、mcp.postman.com の MCP サーバーも設定されたが、認証がなく接続は失敗していた",
+        "タイトルの「API データを共有しようとする」点について、Issue 本文はデータの送信が起きたとは示しておらず、望まない統合と指示の変更を記録したものだと報告者自身が述べている。取得時点で Postman の公式回答は確認できない"
+      ],
+      "code": null,
+      "signal": "▲ 663",
+      "pick": true
+    },
+    {
+      "id": "2026-11-04-hn-website-backup",
+      "url": "https://blog.mistys-internet.website/post/2026/10/29/if-you-love-a-website-back-it-up/",
+      "title": "If you love a website, back it up",
+      "source": "hackernews",
+      "source_group": "hackernews",
+      "published_at": "2026-11-02T22:25:35+09:00",
+      "category": "be",
+      "keywords": [
+        "web-archiving",
+        "oss"
+      ],
+      "score": 88,
+      "why": "HN 644 pt・149 コメント",
+      "read_min": null,
+      "tldr": "Web アーカイブの仕事をしている筆者が、好きだったアニメのファンサイトが消えてドメインがギャンブル広告に変わった経験から、大事なサイトは個人で保存しておこうと呼びかけた。ブラウザ拡張から自前でホストできるクローラまで、手軽な道具を紹介している。",
+      "points": [
+        "最も手軽なのは Chrome 拡張「ArchiveWeb.page」。記録を開始してページを閲覧し、止めるだけで 1 ページ・サイト全体・SNS の投稿を保存できる。単体アプリ版もある",
+        "大きなサイトにはクローラ「Browsertrix」。開始ページからリンクをたどり、ドメイン全体・特定ディレクトリ・1 ページと直下のリンクなどに範囲を絞れる。有料だが OSS なので自前でホストもできる",
+        "保存結果は WARC / WACZ の 1 ファイルになり、ReplayWeb.page で再生したり Web サイトに埋め込んだりして共有できる"
+      ],
+      "code": null,
+      "signal": "▲ 644",
+      "pick": true
+    },
+    {
+      "id": "2026-11-04-hn-ubuntu-cve-unpatched",
+      "url": "https://freenode.net/article/ubuntu-lts-kernels-still-unfixed-for-critical-cve-2026-98432",
+      "title": "Ubuntu still has not released patch for Linux 0day RCE in almost 3 weeks",
+      "source": "hackernews",
+      "source_group": "hackernews",
+      "published_at": "2026-11-03T03:39:38+09:00",
+      "category": "sec",
+      "keywords": [
+        "linux",
+        "ubuntu",
+        "vulnerability-management",
+        "rce"
+      ],
+      "score": 87,
+      "why": "HN 592 pt・185 コメント／前日の「WTF Ubuntu?」の続報",
+      "read_min": null,
+      "tldr": "Linux カーネル TCP の CVE-2026-98432（CVSS 9.8）について、Ubuntu 22.04 / 24.04 / 26.04 LTS に修正済みカーネルがまだ出ていないと伝える記事が HN 上位に入った。Canonical は修正の時期も示していないという。",
+      "points": [
+        "10 月 31 日付の記事で、22.04・24.04・26.04 の各 LTS に修正パッケージがないとしている",
+        "管理者の選択肢は、標準カーネルのまま待つ、ツリー外の緩和策を当てる（あれば）、修正済みのリリースやカーネルに移す、のいずれかだと整理",
+        "特にインターネットに公開したサーバーやマルチテナントの自前運用環境への影響を懸念している。具体的な回避コマンドは記事に書かれていない"
+      ],
+      "code": null,
+      "signal": "▲ 592",
+      "pick": true
+    },
+    {
+      "id": "2026-11-04-hatena-nvidia-auto-ontology",
+      "url": "https://github.com/NVIDIA/auto-ontology",
+      "title": "GitHub - NVIDIA/auto-ontology: Auto Ontology is a Python framework for building semantic, graph-based context layers",
+      "source": "hatena/it",
+      "source_group": "tech_blog",
+      "published_at": "2026-11-03T21:34:20+09:00",
+      "category": "ai",
+      "keywords": [
+        "nvidia",
+        "ai-agent",
+        "postgres",
+        "rag"
+      ],
+      "score": 86,
+      "why": "はてブ 26・HN 252 pt",
+      "read_min": null,
+      "tldr": "NVIDIA が、企業データの上に AI エージェント向けの意味的なコンテキスト層（オントロジー）を作る Python フレームワーク「Auto Ontology」を Apache 2.0 で公開した。メタデータからオントロジーを生成し、自然言語の質問を SQL に変換して実行する。",
+      "points": [
+        "データの所在・意味・使ってよいかをエージェントに伝える層として、定義の食い違いの調整や、生成したクエリを認定済みの定義と系譜で検証する仕組みを持つ",
+        "構成は Next.js 16 のフロント、FastAPI + LangChain のバックエンド、取り込みワーカー、pgvector 付き Postgres。モデルは NVIDIA NIM を使い、接続先は Databricks・Postgres・Snowflake・DuckDB",
+        "MCP・CLI・API で提供し、Better Auth による SSO / RBAC、Helm チャートと Docker Compose での配備に対応。外部からのコントリビューションは現在受け付けていない"
+      ],
+      "code": {
+        "file": "README.md",
+        "lang": "python",
+        "text": "import os\nimport requests\n\nsession = requests.Session()\nsession.headers[\"x-api-key\"] = os.environ[\"AUTO_ONTOLOGY_API_TOKEN\"]\n\nterms = session.get(\"https://auto_ontology.example.com/api/terms\").json()\n\nanswer = session.post(\n    \"https://auto_ontology.example.com/api/chat/completions\",\n    json={\"question\": \"How many orders shipped last week?\"},\n).json()"
+      },
+      "signal": "B! 26 · ▲ 252",
+      "pick": true
+    },
+    {
+      "id": "2026-11-04-anond-domain-renewal",
+      "url": "https://anond.hatelabo.jp/20261103160506",
+      "title": "ドメイン更新料が2,676円から18,139円に。通知から約45時間で判断を迫られた話",
+      "source": "hatena/it",
+      "source_group": "tech_blog",
+      "published_at": "2026-11-03T16:06:48+09:00",
+      "category": "cloud",
+      "keywords": [
+        "dns",
+        "domain-pricing"
+      ],
+      "score": 86,
+      "why": "はてブ 380／続報記事（はてブ 18）もあり",
+      "read_min": null,
+      "tldr": "お名前.com で管理していたドメインの更新関連費用が前年の 2,676 円から 18,139 円に上がり、通知から回答期限まで約 45 時間しかなかったという体験談。毎年 1 万円だったドメインが 17 万円超を提示された件の続報（上位レジストリのプレミアム化で据え置きとの回答）も同時に読まれた。",
+      "points": [],
+      "code": null,
+      "signal": "B! 380",
+      "pick": false
+    },
+    {
+      "id": "2026-11-04-zenn-isucon2026-win",
+      "url": "https://zenn.dev/luvtechno/articles/isucon2026-competition-day",
+      "title": "ISUCON2026 で優勝しました（当日編）",
+      "source": "zenn.dev",
+      "source_group": "tech_blog",
+      "published_at": "2026-11-02T22:26:09+09:00",
+      "category": "be",
+      "keywords": [
+        "ai-agent",
+        "claude",
+        "go",
+        "postgres"
+      ],
+      "score": 85,
+      "why": "はてブ 354",
+      "read_min": null,
+      "tldr": "ISUCON2026 で 1 人チームが最終スコア 625,857 点で優勝した。起動後は人間の入力が 0 回の自律型競技エージェント（Claude Code 上で動作）で臨み、Postgres をやめてメモリ上にデータを持つ構成などに作り替えたという参加記。",
+      "points": [],
+      "code": null,
+      "signal": "B! 354",
+      "pick": false
+    },
+    {
+      "id": "2026-11-04-hn-sec-anthropic-ipo",
+      "url": "https://www.techpolicy.press/the-sec-should-block-anthropics-ipo-to-protect-the-public/",
+      "title": "The SEC Should Block Anthropic's IPO to Protect the Public",
+      "source": "hackernews",
+      "source_group": "hackernews",
+      "published_at": "2026-11-03T07:30:47+09:00",
+      "category": "ai",
+      "keywords": [
+        "anthropic",
+        "ipo"
+      ],
+      "score": 82,
+      "why": "HN 390 pt・308 コメント",
+      "read_min": null,
+      "tldr": "Tech Policy Press の論説で、公共の保護のために米 SEC は Anthropic の IPO を止めるべきだと主張したもの。前日の S-1 修正（Q3 売上 170 億ドル）に続き、上場をめぐる議論が HN で広がった。",
+      "points": [],
+      "code": null,
+      "signal": "▲ 390",
+      "pick": false
+    },
+    {
+      "id": "2026-11-04-hn-renault-nav-jailbreak",
+      "url": "https://blog.nns.ee/2026/11/02/renault-hack/",
+      "title": "Jailbreaking my car's navigation system just so I can change the time",
+      "source": "hackernews",
+      "source_group": "hackernews",
+      "published_at": "2026-11-03T01:29:19+09:00",
+      "category": "sec",
+      "keywords": [
+        "jailbreak",
+        "firmware"
+      ],
+      "score": 82,
+      "why": "HN 392 pt・145 コメント",
+      "read_min": null,
+      "tldr": "ルノー車のナビの時刻を変えるためだけに、車載ナビシステムを脱獄するまでを書いたブログ。",
+      "points": [],
+      "code": null,
+      "signal": "B! 1 · ▲ 392",
+      "pick": false
+    },
+    {
+      "id": "2026-11-04-cloudflare-dns-zone-builds",
+      "url": "https://blog.cloudflare.com/dns-targeted-zone-builds/",
+      "title": "How we halved DNS build delay and cut memory use by 85%",
+      "source": "cloudflare blog",
+      "source_group": "tech_blog",
+      "published_at": "2026-11-02T23:00:00+09:00",
+      "category": "cloud",
+      "keywords": [
+        "cloudflare",
+        "dns"
+      ],
+      "score": 82,
+      "why": "HN 192 pt・Cloudflare 公式ブログ",
+      "read_min": null,
+      "tldr": "Cloudflare が、ゾーン設定の変更のたびに数千万レコード規模の DNS ゾーンを丸ごと再構築していた処理を見直し、安全な最小の範囲だけを再構築するプランナーを作った。RSS の要約では、全体再構築を 40%、ピークメモリを 85% 減らし、反映の遅延を半減したとしている。",
+      "points": [],
+      "code": null,
+      "signal": "▲ 192",
+      "pick": false
+    },
+    {
+      "id": "2026-11-04-hn-google-schools-ai",
+      "url": "https://www.nytimes.com/2026/11/03/us/google-search-schools-restrict-ai.html",
+      "title": "Google will turn off search for schools that reject AI",
+      "source": "hackernews",
+      "source_group": "hackernews",
+      "published_at": "2026-11-04T00:25:47+09:00",
+      "category": "ai",
+      "keywords": [
+        "google",
+        "ai-adoption"
+      ],
+      "score": 81,
+      "why": "HN 379 pt・293 コメント",
+      "read_min": null,
+      "tldr": "NYT の報道で、Google が AI 機能を拒む学校に対して検索を提供しなくなるという話題。教育現場での AI の扱いをめぐって HN で議論になった。",
+      "points": [],
+      "code": null,
+      "signal": "▲ 379",
+      "pick": false
+    },
+    {
+      "id": "2026-11-04-hn-anthropic-internal-ai-cost",
+      "url": "https://www.businessinsider.com/anthropic-claude-internal-ai-use-exceeds-employee-pay-tokens-2026-11",
+      "title": "Anthropic's internal AI use, at retail prices, now exceeds its employee pay",
+      "source": "hackernews",
+      "source_group": "hackernews",
+      "published_at": "2026-11-03T01:40:29+09:00",
+      "category": "ai",
+      "keywords": [
+        "anthropic",
+        "llm-cost"
+      ],
+      "score": 80,
+      "why": "HN 346 pt・267 コメント",
+      "read_min": null,
+      "tldr": "Business Insider の報道で、Anthropic 社内の AI 利用量を小売価格で換算すると従業員の給与総額を上回るという話題。",
+      "points": [],
+      "code": null,
+      "signal": "B! 1 · ▲ 346",
+      "pick": false
+    },
+    {
+      "id": "2026-11-04-hn-openai-codex-training",
+      "url": "https://news.ycombinator.com/item?id=50352757",
+      "title": "OpenAI seems to be silently re-enabling model training on Codex chats",
+      "source": "hackernews",
+      "source_group": "hackernews",
+      "published_at": "2026-11-03T23:53:41+09:00",
+      "category": "ai",
+      "keywords": [
+        "openai",
+        "privacy",
+        "ai-coding"
+      ],
+      "score": 79,
+      "why": "HN 332 pt・99 コメント",
+      "read_min": null,
+      "tldr": "OpenAI が Codex のチャットをモデル学習に使う設定を、利用者に知らせず再び有効にしているようだとする HN の投稿。設定画面の挙動をめぐり報告が続いた。",
+      "points": [],
+      "code": null,
+      "signal": "▲ 332",
+      "pick": false
+    },
+    {
+      "id": "2026-11-04-togetter-yubikey",
+      "url": "https://togetter.com/li/2766080",
+      "title": "「GoogleやAppleのアカウントを守るためにYubiKeyを使っている」物理キーが注目を集め、売り切れが相次いでいる→導入前に知っておきたい注意点は？",
+      "source": "hatena/it",
+      "source_group": "tech_blog",
+      "published_at": "2026-11-03T12:56:08+09:00",
+      "category": "sec",
+      "keywords": [
+        "authentication",
+        "passkey"
+      ],
+      "score": 78,
+      "why": "はてブ 220",
+      "read_min": null,
+      "tldr": "Google や Apple のアカウント乗っ取り対策として物理キー「YubiKey」が注目され、売り切れが相次いでいるというまとめ。購入時はファームウェアの版（後から更新できない）や予備キーの登録を確認するよう勧める投稿が集まった。",
+      "points": [],
+      "code": null,
+      "signal": "B! 220",
+      "pick": false
+    },
+    {
+      "id": "2026-11-04-hn-openai-scaling-git",
+      "url": "https://openai.com/index/scaling-git-at-openai/",
+      "title": "Scaling Git at OpenAI",
+      "source": "hackernews",
+      "source_group": "hackernews",
+      "published_at": "2026-11-03T08:47:56+09:00",
+      "category": "be",
+      "keywords": [
+        "git",
+        "openai"
+      ],
+      "score": 76,
+      "why": "HN 259 pt・176 コメント",
+      "read_min": null,
+      "tldr": "OpenAI が社内の Git 運用をどう大規模化しているかを紹介した公式ブログ。",
+      "points": [],
+      "code": null,
+      "signal": "B! 3 · ▲ 259",
+      "pick": false
+    },
+    {
+      "id": "2026-11-04-coinpost-btc-below-80k",
+      "url": "https://coinpost.jp/?p=746073",
+      "title": "ビットコイン8万ドル割れ、ウィンターミュートは7.68万ドルを注視",
+      "source": "CoinPost",
+      "source_group": "news",
+      "published_at": "2026-11-03T11:18:45+09:00",
+      "category": "crypto",
+      "keywords": [
+        "bitcoin",
+        "exchange-hack"
+      ],
+      "score": 90,
+      "why": "matched: ビットコイン",
+      "read_min": null,
+      "tldr": "ビットコインが 8 万ドルを割り込み、マーケットメイカーのウィンターミュートは 50 週移動平均線の約 7.68 万ドルを維持すべき水準として注視していると伝えた。同社は週間の下落の大半をバイナンスの資産流出によるものとみている。",
+      "points": [
+        "10 月 29 日のバイナンス流出（同社推計約 63 億ドル）後に清算額が 15 億ドルに達し、約 85% がロング。押し目買いはレバレッジ付き先物が中心で現物の買いが不足していたという",
+        "マクロ面では 7〜9 月期の米 GDP が年率 3.4% 増と予想を上回る一方、AI 関連株の売りでナスダックは 1.97% 安。FRB は政策金利 3.75〜4.00% を据え置き、反対 2 票はいずれも利上げを主張した",
+        "同社は 8 万ドルを現物・ETF の買いを伴って回復すれば短期の警戒を解き、50 週線を割れば一段と慎重になるとしている（記事中の見解の紹介であり、売買の推奨ではない）"
+      ],
+      "code": null,
+      "signal": null,
+      "pick": true
+    },
+    {
+      "id": "2026-11-04-diamond-jgb-1-5pt-rise",
+      "url": "https://diamond.jp/articles/-/402483",
+      "title": "高市政権1年で「長期金利1.5％」上昇…日銀けん制の“逆効果”と、アベノミクス時代の終わりの認識を - 高市政権1年 サナエノミクスの功罪",
+      "source": "ダイヤモンド",
+      "source_group": "news",
+      "published_at": "2026-11-04T04:25:00+09:00",
+      "category": "macro",
+      "keywords": [
+        "jgb",
+        "interest-rates",
+        "jp-fiscal"
+      ],
+      "score": 88,
+      "why": "matched: 金利",
+      "read_min": null,
+      "tldr": "高市政権の発足から 1 年で日本の 10 年国債利回りは 1.67% から直近 2.9% 前後へ約 153bp 上昇し、米国債（118bp）やドイツ国債（79bp）より上げ幅が大きいと分析した記事（無料部分を読んだ範囲）。筆者は首相の利上げけん制への疑念がかえって長期金利を押し上げていると指摘する。",
+      "points": [
+        "10 年債利回りは 2026 年 10 月 7 日に 3.105% まで上昇。政権発足前の 1 年間の上昇幅は約 70bp だった",
+        "米国は FRB の利上げ転換が主因だが、日本は日銀の利上げが進まないとの見方から実質短期金利の予想が後退し、インフレ予想とタームプレミアムの拡大が長期金利を押し上げているとする",
+        "デフレ下を前提にしたアベノミクスとは状況が違い、積極財政の「壁」になっていると論じる。後半は有料部分のため未確認"
+      ],
+      "code": null,
+      "signal": null,
+      "pick": true
+    },
+    {
+      "id": "2026-11-04-hn-chip-rout-intel",
+      "url": "https://finance.yahoo.com/markets/article/the-intel-stock-collapse-is-getting-worse--and-the-37-trillion-chip-rout-is-spreading-212154947.html",
+      "title": "Intel stock collapse worsens as $3.5T chip rout spreads",
+      "source": "hackernews",
+      "source_group": "hackernews",
+      "published_at": "2026-11-03T09:08:53+09:00",
+      "category": "stocks",
+      "keywords": [
+        "us-stocks",
+        "semiconductor"
+      ],
+      "score": 85,
+      "why": "matched: 米国株",
+      "read_min": null,
+      "tldr": "Yahoo Finance によると、11 月 2 日に Intel 株は約 9% 下落し、10 月 30 日の約 29% 安（1974 年以来最悪の日）に続いた。半導体・メモリ株の時価総額は 10 月 6 日以降で約 3.7 兆ドル減ったという（HN の見出しは 3.5 兆ドル）。",
+      "points": [
+        "11 月 2 日は S&P 500 の約 7 割が上昇する中で半導体株がほぼ全面安となり、1 日で 4,000 億ドル超が失われた",
+        "10 月 6 日以降の減少額は Nvidia 約 8,960 億ドル、TSMC 約 4,350 億ドル、AMD 約 2,980 億ドル、Intel 約 2,790 億ドル。Micron・Sandisk・Seagate・Western Digital も同日 6〜8% 安",
+        "記事は Intel の急落を業績見通しの失望によるものとし、半導体全体の売りの単一の原因は示していない。AMD は 11 月 3 日引け後に決算を発表予定"
+      ],
+      "code": null,
+      "signal": "▲ 224",
+      "pick": true
+    },
+    {
+      "id": "2026-11-04-coinpost-metaplanet-buyback",
+      "url": "https://coinpost.jp/?p=746072",
+      "title": "メタプラネットが253億円の自社株買い ビットコイン購入配分を80億円戻す",
+      "source": "CoinPost",
+      "source_group": "news",
+      "published_at": "2026-11-03T12:15:56+09:00",
+      "category": "crypto",
+      "keywords": [
+        "bitcoin-treasury",
+        "bitcoin"
+      ],
+      "score": 80,
+      "why": "matched: ビットコイン",
+      "read_min": null,
+      "tldr": "メタプラネットは 10 月 14〜31 日に自社株 9,644 万株余りを約 252.7 億円で取得したと発表した。80 億円の社債を繰上償還して完済し、その分ビットコイン購入に充てる枠が約 334 億円に戻った。",
+      "points": [
+        "自社株買いは上限 2 億株・600 億円（期限 2027 年 10 月 13 日）の枠に対し、株数で約 48%、金額で約 42% を消化。残りの枠は約 347 億円",
+        "償還したのは EVO FUND 割当の第 20 回普通社債（80 億円・無利息、期日 2027 年 4 月 23 日）で、手元資金で返済した",
+        "第 27 回新株予約権は 10 月の行使が 0 株で、行使済みは約 5.3%。記事にはビットコインの保有数量は書かれていない"
+      ],
+      "code": null,
+      "signal": null,
+      "pick": true
+    },
+    {
+      "id": "2026-11-04-diamond-boj-2pct-reached",
+      "url": "https://diamond.jp/articles/-/402464",
+      "title": "日銀が2％物価目標“到達”を初表明、インフレ率を目標水準に「定着」させる2つの鍵 - 日銀 早耳深掘",
+      "source": "ダイヤモンド",
+      "source_group": "news",
+      "published_at": "2026-11-04T04:15:00+09:00",
+      "category": "macro",
+      "keywords": [
+        "boj-policy",
+        "inflation"
+      ],
+      "score": 82,
+      "why": "matched: 金利・日銀",
+      "read_min": null,
+      "tldr": "日銀が 10 月の展望レポートで、基調的な物価上昇率が 2% の目標とおおむね整合的な水準になったと初めて明示したことを解説する記事。植田総裁は持続的な安定にはまだ至っていないとの慎重な姿勢を示したという。",
+      "points": [],
+      "code": null,
+      "signal": null,
+      "pick": false
+    },
+    {
+      "id": "2026-11-04-investing-uwm-mortgage",
+      "url": "https://jp.investing.com/news/earnings/article-93CH-1739771",
+      "title": "UWMホールディングス、住宅ローン市場の冷え込みで収益が試練に",
+      "source": "investing.com",
+      "source_group": "news",
+      "published_at": "2026-11-04T04:59:56+09:00",
+      "category": "realestate",
+      "keywords": [
+        "mortgage-rates",
+        "earnings"
+      ],
+      "score": 70,
+      "why": "matched: 住宅ローン",
+      "read_min": null,
+      "tldr": "米住宅ローン大手 UWM ホールディングスの決算を前に、住宅ローン市場の冷え込みで収益が試されるとの見出しの記事（本文は未読）。",
+      "points": [],
+      "code": null,
+      "signal": null,
+      "pick": false
+    },
+    {
+      "id": "2026-11-04-coinpost-midterms-crypto",
+      "url": "https://coinpost.jp/?p=746093",
+      "title": "民主党が議会を制したら仮想通貨市場の法整備に逆風か、米中間選挙は今夜投票",
+      "source": "CoinPost",
+      "source_group": "news",
+      "published_at": "2026-11-03T20:20:44+09:00",
+      "category": "crypto",
+      "keywords": [
+        "crypto-regulation",
+        "us-midterms"
+      ],
+      "score": 72,
+      "why": "matched: ビットコイン（仮想通貨規制）",
+      "read_min": null,
+      "tldr": "米中間選挙で民主党が大勝した場合、仮想通貨規制は法案成立から調査・監視へ軸足が移り、クラリティー法案が停滞し続けるとの見方を紹介した記事。",
+      "points": [],
+      "code": null,
+      "signal": null,
+      "pick": false
+    },
+    {
+      "id": "2026-11-04-hn-oracle-20b-ai-funding",
+      "url": "https://www.cnbc.com/2026/11/02/oracle-files-to-sell-20-billion-in-new-stock-bonds-to-finance-ai-buildout.html",
+      "title": "Oracle files to sell $20B in new stock, bonds to finance AI buildout",
+      "source": "hackernews",
+      "source_group": "hackernews",
+      "published_at": "2026-11-03T04:27:37+09:00",
+      "category": "stocks",
+      "keywords": [
+        "us-stocks",
+        "data-center",
+        "ai-economy"
+      ],
+      "score": 68,
+      "why": "matched: 米国株",
+      "read_min": null,
+      "tldr": "CNBC の報道で、Oracle が AI インフラ整備の資金として新株と社債で計 200 億ドルの調達を届け出たという話題。",
+      "points": [],
+      "code": null,
+      "signal": "▲ 197",
+      "pick": false
+    },
+    {
+      "id": "2026-11-04-toyokeizai-apple-q4",
+      "url": "https://toyokeizai.net/articles/-/963382?utm_source=rss&utm_medium=http&utm_campaign=link_back",
+      "title": "アップル新CEO就任後初の決算7－9月期は売上高の伸びが鈍化､中国事業も市場予想に届かず | 政治・経済・投資 | 東洋経済オンライン",
+      "source": "東洋経済",
+      "source_group": "news",
+      "published_at": "2026-11-03T08:00:00+09:00",
+      "category": "stocks",
+      "keywords": [
+        "earnings",
+        "apple",
+        "us-stocks"
+      ],
+      "score": 66,
+      "why": "matched: 米国株",
+      "read_min": null,
+      "tldr": "Apple の 7〜9 月期決算は売上高は増えたものの伸びが鈍化し、中国事業も市場予想に届かなかったと伝える記事。新 CEO 就任後初の決算となった。",
+      "points": [],
+      "code": null,
+      "signal": null,
+      "pick": false
+    },
+    {
+      "id": "2026-11-04-coinpost-mercado-bitcoin-hack",
+      "url": "https://coinpost.jp/?p=746048",
+      "title": "ブラジル大手取引所Mercado Bitcoin、推計63億円超流出で入出金停止",
+      "source": "CoinPost",
+      "source_group": "news",
+      "published_at": "2026-11-03T08:16:03+09:00",
+      "category": "crypto",
+      "keywords": [
+        "exchange-hack",
+        "crypto-exchange"
+      ],
+      "score": 65,
+      "why": "matched: 仮想通貨取引所",
+      "read_min": null,
+      "tldr": "ブラジルの大手取引所 Mercado Bitcoin がセキュリティ事案を受けて 2 日に入出金を停止した。Hypernative の推計では 63 億円超相当が流出し、同社は顧客被害やデータ流出はないとしている。",
+      "points": [],
+      "code": null,
+      "signal": null,
+      "pick": false
+    },
+    {
+      "id": "2026-11-04-coinpost-sbi-erebor",
+      "url": "https://coinpost.jp/?p=746053",
+      "title": "SBI、米エレボール銀行に1億ドル出資へ ステーブルコイン入出金に対応",
+      "source": "CoinPost",
+      "source_group": "news",
+      "published_at": "2026-11-03T08:50:05+09:00",
+      "category": "crypto",
+      "keywords": [
+        "stablecoin"
+      ],
+      "score": 62,
+      "why": "matched: ステーブルコイン",
+      "read_min": null,
+      "tldr": "SBI ホールディングスが、ステーブルコインの入出金に対応する米デジタルバンクのエレボールに 1 億ドルを出資する。同行は 2026 年 2 月の開業後、預金が 70 億ドルを超えたという。",
+      "points": [],
+      "code": null,
+      "signal": null,
+      "pick": false
+    },
+    {
+      "id": "2026-11-04-fsa-growth-finance-wg3",
+      "url": "https://www.fsa.go.jp/news/r8/singi/20261109.html",
+      "title": "金融審議会「成長企業への資金供給の在り方等に関するワーキング・グループ」（第３回）の開催について公表しました。",
+      "source": "金融庁",
+      "source_group": "official",
+      "published_at": "2026-11-03T02:00:00+09:00",
+      "category": "macro",
+      "keywords": [
+        "fsa"
+      ],
+      "score": 55,
+      "why": "金融庁の公式発表",
+      "read_min": null,
+      "tldr": "金融庁が、金融審議会「成長企業への資金供給の在り方等に関するワーキング・グループ」第 3 回を 11 月 9 日に開くと公表した。一般傍聴はなく YouTube で配信する。",
+      "points": [],
+      "code": null,
+      "signal": null,
+      "pick": false
+    }
+  ],
+  "social": [
+    {
+      "network": "x",
+      "author": "@hosseeb",
+      "url": "https://x.com/hosseeb/status/2117380109355352166",
+      "text": "Astra が Qwen の重みを編集した論文について、「LLM の透視能力で重みを外科的に書き換えた」のではなく、公開済みの解釈可能性の手法を Astra が見つけて自分で実装した、と補足した。",
+      "metrics": null,
+      "heat": null,
+      "category": "ai",
+      "keywords": [
+        "weight-editing",
+        "open-weight"
+      ],
+      "posted_at": null
+    },
+    {
+      "network": "hn",
+      "author": null,
+      "url": "https://news.ycombinator.com/item?id=50354960",
+      "text": "『Postman silently auto-installs AI plugins and attempts to share all API data』のスレッド。213 件のコメント",
+      "metrics": "▲ 663  ✉ 213",
+      "heat": 100,
+      "category": "sec",
+      "keywords": [
+        "supply-chain",
+        "ai-security"
+      ],
+      "posted_at": "2026-11-04T02:22:37+09:00"
+    },
+    {
+      "network": "hn",
+      "author": null,
+      "url": "https://news.ycombinator.com/item?id=50336518",
+      "text": "『If you love a website, back it up』のスレッド。149 件のコメント",
+      "metrics": "▲ 644  ✉ 149",
+      "heat": 100,
+      "category": "be",
+      "keywords": [
+        "web-archiving"
+      ],
+      "posted_at": "2026-11-02T22:25:35+09:00"
+    },
+    {
+      "network": "hn",
+      "author": null,
+      "url": "https://news.ycombinator.com/item?id=50341462",
+      "text": "『Ubuntu still has not released patch for Linux 0day RCE in almost 3 weeks』のスレッド。185 件のコメント",
+      "metrics": "▲ 592  ✉ 185",
+      "heat": 100,
+      "category": "sec",
+      "keywords": [
+        "linux",
+        "ubuntu"
+      ],
+      "posted_at": "2026-11-03T03:39:38+09:00"
+    },
+    {
+      "network": "hn",
+      "author": null,
+      "url": "https://news.ycombinator.com/item?id=50344919",
+      "text": "『The SEC Should Block Anthropic's IPO to Protect the Public』のスレッド。308 件のコメント",
+      "metrics": "▲ 390  ✉ 308",
+      "heat": 97,
+      "category": "ai",
+      "keywords": [
+        "anthropic",
+        "ipo"
+      ],
+      "posted_at": "2026-11-03T07:30:47+09:00"
+    },
+    {
+      "network": "hn",
+      "author": null,
+      "url": "https://news.ycombinator.com/item?id=50348962",
+      "text": "『GitHub - NVIDIA/auto-ontology: Auto Ontology is a Python framework for building semantic, graph-based reasoning layers over data. It enables deterministic query generation, better context retrieval, and more explainable AI for LLM and agent workflows.』のスレッド。116 件のコメント",
+      "metrics": "▲ 252  ✉ 116",
+      "heat": 63,
+      "category": "ai",
+      "keywords": [
+        "nvidia",
+        "ai-agent"
+      ],
+      "posted_at": "2026-11-03T21:34:20+09:00"
+    },
+    {
+      "network": "hn",
+      "author": null,
+      "url": "https://news.ycombinator.com/item?id=50346153",
+      "text": "『Intel stock collapse worsens as $3.5T chip rout spreads』のスレッド。213 件のコメント",
+      "metrics": "▲ 224  ✉ 213",
+      "heat": 56,
+      "category": "stocks",
+      "keywords": [
+        "us-stocks",
+        "semiconductor"
+      ],
+      "posted_at": "2026-11-03T09:08:53+09:00"
+    }
+  ],
+  "releases": [
+    {
+      "date": "2026-11-04",
+      "title": "uv 0.13.7",
+      "repo": "astral-sh/uv",
+      "url": "https://github.com/astral-sh/uv/releases/tag/0.13.7",
+      "kind": "release",
+      "note": "git タグの差分で検出",
+      "category": "be"
+    },
+    {
+      "date": "2026-11-03",
+      "title": "米中間選挙の投票",
+      "repo": null,
+      "url": "https://news.web.nhk/newsweb/na/nd-20261103de69868",
+      "kind": "event",
+      "note": "米国時間 11 月 3 日（日本時間 3 日夜から）投票（NHK の記事見出しで確認）",
+      "category": "macro"
+    },
+    {
+      "date": "2026-11-03",
+      "title": "AMD 7〜9 月期決算",
+      "repo": null,
+      "url": "https://finance.yahoo.com/markets/article/the-intel-stock-collapse-is-getting-worse--and-the-37-trillion-chip-rout-is-spreading-212154947.html",
+      "kind": "event",
+      "note": "米国時間 11 月 3 日の引け後に発表予定（Yahoo Finance の記事による）",
+      "category": "stocks"
+    },
+    {
+      "date": "2026-11-09",
+      "title": "金融審議会「成長企業への資金供給の在り方等に関する WG」第 3 回",
+      "repo": null,
+      "url": "https://www.fsa.go.jp/news/r8/singi/20261109.html",
+      "kind": "event",
+      "note": "11 月 9 日 10:00〜12:00、YouTube 配信（金融庁の公表による）",
+      "category": "macro"
+    }
+  ]
+}
