@@ -1,0 +1,769 @@
+{
+  "date": "2026-11-05",
+  "generated_at": "2026-11-05T05:45:00+09:00",
+  "stats": {
+    "collected": 227,
+    "sources_ok": 25,
+    "sources_total": 26,
+    "by_group": {
+      "hackernews": 49,
+      "tech_blog": 86,
+      "news": 86,
+      "official": 6
+    },
+    "failed_sources": [
+      "coindesk_jp"
+    ]
+  },
+  "digest": [
+    {
+      "category": "stocks",
+      "text": "米中間選挙で民主党が上下両院の多数派を奪還する見通しとなり、4 日の日経平均は AI・半導体株を中心に一時 3000 円超下げ、終値は 893 円安の 6 万 2188 円。ビットコインは一時 7 万 5000 ドル台まで下げた後に反発した。",
+      "keywords": [
+        "us-midterms",
+        "nikkei225",
+        "bitcoin"
+      ]
+    },
+    {
+      "category": "crypto",
+      "text": "議会の主導権が民主党に移ることで、暗号資産の市場構造法案（CLARITY 法案）の成立は一段と難しくなったとの見方。1 月 3 日の会期末までに上院を通らなければ廃案になる。",
+      "keywords": [
+        "crypto-regulation",
+        "us-midterms"
+      ]
+    },
+    {
+      "category": "sec",
+      "text": "PHP の脆弱性「PHP2Shell」を、研究者が AI を使って 2 週間で任意コード実行に発展させた事例から、「AI が 40 年分の技術的負債の返済を迫っている」とする IEEE Spectrum の記事が HN で 866 pt を集めた。",
+      "keywords": [
+        "php",
+        "ai-security"
+      ]
+    },
+    {
+      "category": "ai",
+      "text": "AI のプライバシーをめぐり、Gemini の有料個人プランでも保存チャットが学習に使われうるという指摘が HN で議論に。重みの読解では Qwen 3.8 27B がローカルで論文の課題を追試した。",
+      "keywords": [
+        "privacy",
+        "google",
+        "weight-editing"
+      ]
+    },
+    {
+      "category": "be",
+      "text": "はてブでは理論面から E2E テストを整理した「E2E テスト大全」が 600 超のブックマークを集めた。E2E は代表シナリオに絞り、分岐は単体テストで押さえるべきだと説く。",
+      "keywords": [
+        "testing",
+        "software-design"
+      ]
+    }
+  ],
+  "items": [
+    {
+      "id": "2026-11-05-kuniwak-e2ebok",
+      "url": "https://blog.kuniwak.com/entry/e2ebok",
+      "title": "E2Eテスト大全（あなたの知らない、E2Eテスト周辺の理論） - 若くない何かの悩み",
+      "source": "tech",
+      "source_group": "tech_blog",
+      "published_at": "2026-11-04T06:27:17+09:00",
+      "category": "be",
+      "keywords": [
+        "testing",
+        "software-design",
+        "ai-coding"
+      ],
+      "score": 93,
+      "why": "はてブ 614",
+      "read_min": 25,
+      "tldr": "E2E テストの定義・検出できる欠陥・利点と欠点を理論面から整理した長文記事。E2E は銀の弾丸ではなく、単体テストや設計段階の形式的検証と役割分担すべきだと主張する。",
+      "points": [
+        "UI から永続化層までを結合してインターフェース側から操作・検証するテストを E2E と定義し、外部サービスのテストダブル化は許容。バックエンドと結合しない UI スクショ比較は E2E に含めない",
+        "利点は結合バグの検出やレガシーコードの保護ネット。欠点は実行時間（数十秒）と不確実性の累積で、失敗率 0.1% の部品が 100 個直列だと成功率は約 90.5% になるという例を示す",
+        "AI に E2E 中心で指示すると待ちと修正ループが長くなるため、分岐は単体テストで網羅し E2E は代表シナリオに絞る指示を勧める（筆者の主張で効果測定ではない）"
+      ],
+      "code": null,
+      "signal": "B! 614",
+      "pick": true
+    },
+    {
+      "id": "2026-11-05-ieee-php2shell",
+      "url": "https://spectrum.ieee.org/ai-in-cybersecurity-php2shell-vulnerability",
+      "title": "AI is forcing us to pay off 40 years of technical debt",
+      "source": "tech",
+      "source_group": "hackernews",
+      "published_at": "2026-11-04T20:52:17+09:00",
+      "category": "sec",
+      "keywords": [
+        "php",
+        "ai-security",
+        "vulnerability-management",
+        "rce"
+      ],
+      "score": 92,
+      "why": "HN 866 pt",
+      "read_min": 10,
+      "tldr": "10 月末に公表された PHP の脆弱性「PHP2Shell」を題材に、AI が古いソフトウェアの脆弱性発見を加速させ「40 年分の技術的負債」の返済を迫っているとする IEEE Spectrum の記事。",
+      "points": [
+        "2024 年に報告されたまま放置されていたメモリ不足のバグを、OpenAI 支援の Calif の監査で研究者が AI を使い 2 週間で任意コード実行に発展させた。Wiz が確認・拡張した",
+        "パッチは悪用前に出たとされるが、4 人のエンジニアが 2 か月かけた。攻撃は 1 経路で足りるが修正は全経路を塞ぐ必要があるという非対称性を指摘",
+        "防御側への資金・AI トークン予算の提供や、形式検証で AI 生成パッチに機械検証の証明を付けることを提言。2027 年初めに「本当に悪い」事件が起きうるとの見方も紹介"
+      ],
+      "code": null,
+      "signal": "B! 1 · ▲ 866",
+      "pick": true
+    },
+    {
+      "id": "2026-11-05-simonw-qwen-weights",
+      "url": "https://simonwillison.net/2026/Nov/3/qwen-can-interpret-model-weights/",
+      "title": "Qwen 3.8 27B on my laptop can interpret model weights, too",
+      "source": "tech",
+      "source_group": "hackernews",
+      "published_at": "2026-11-04T02:40:00+09:00",
+      "category": "ai",
+      "keywords": [
+        "weight-editing",
+        "local-llm",
+        "open-weight"
+      ],
+      "score": 90,
+      "why": "HN 709 pt",
+      "read_min": 8,
+      "tldr": "「GPT-6 Astra が重みを読んで学習したゲームを当てた」という論文を受け、Simon Willison がノート PC 上の Qwen 3.8 27B で同じ課題を試した記録。ツールなしでも 4 ゲーム中 3 つをおおむね言い当てた。",
+      "points": [
+        "Atari 系ゲームを学習した方策ネットワークの重みをテキストで渡し「ツールなしで重みから答えよ」と指示。Q4_K_M 量子化版（約 17GB）を LM Studio で実行",
+        "Qwen は Pac-Man・Pong・Breakout を確信度 72〜88% で推定したが、1 問に 46 分〜1 時間超かかった。Freeway は外した。比較の Kimi K3.1 Pro は Breakout を約 10 分で正答",
+        "鉛筆と紙を使う根気強い人間でも同じ答えに届くとして、論文への過度な解釈（ソースコードが不要になる等）には否定的。ツールなしの読解と、コード実行で重みを編集する話は分けるべきとする"
+      ],
+      "code": {
+        "file": "shell",
+        "lang": "bash",
+        "text": "llm -f https://raw.githubusercontent.com/RikiyaT/lm_understand-logs/refs/heads/main/exp1_which_game/runs/breakout/prompt.txt \\\n  -m openrouter/moonshotai/kimi-k3.1-pro\n\nLMSTUDIO_TIMEOUT=900 \\\n  llm -f https://raw.githubusercontent.com/RikiyaT/lm_understand-logs/refs/heads/main/exp1_which_game/runs/pacman/prompt.txt \\\n  -m lmstudio/qwen/qwen3.8-27b"
+      },
+      "signal": "B! 1 · ▲ 709",
+      "pick": true
+    },
+    {
+      "id": "2026-11-05-hn-gemini-training",
+      "url": "https://news.ycombinator.com/item?id=50363461",
+      "title": "Tell HN: Gemini trains on chat history, even for subscribers (personal accounts)",
+      "source": "tech",
+      "source_group": "hackernews",
+      "published_at": "2026-11-04T19:10:27+09:00",
+      "category": "ai",
+      "keywords": [
+        "google",
+        "privacy",
+        "llm"
+      ],
+      "score": 86,
+      "why": "HN 539 pt",
+      "read_min": 6,
+      "tldr": "個人向けの有料 Google AI プランでも、保存された Gemini のチャット履歴が学習に使われうると指摘した Tell HN。オプトアウトは履歴保存（Keep Activity）を切るか一時チャットを使うしかないという。",
+      "points": [
+        "Keep Activity をオフにすると学習には使われないが、チャットは 72 時間で消える。投稿者は「有料なら自分は商品ではない」と思っていたと書く",
+        "Google のヘルプページを引き、一部のチャットは人間のレビュアーが読むこと、機密情報を入力しないよう警告されていることを紹介",
+        "コメント欄では、主要各社とも安全目的のレビューはある、エンタープライズや ZDR 契約なら学習対象外、Claude は履歴を残したまま学習をオプトアウトできる、などの比較が出た。スレッド内に Google の回答はない"
+      ],
+      "code": null,
+      "signal": "B! 1 · ▲ 539",
+      "pick": true
+    },
+    {
+      "id": "2026-11-05-mindstudio-rtx-spark",
+      "url": "https://www.mindstudio.ai/blog/linux-nvidia-rtx-spark-laptop",
+      "title": "Nvidia RTX Spark encrypted firmware slows inference speed to 35% on Linux",
+      "source": "tech",
+      "source_group": "hackernews",
+      "published_at": "2026-11-04T17:46:29+09:00",
+      "category": "ai",
+      "keywords": [
+        "nvidia",
+        "firmware",
+        "linux",
+        "local-llm"
+      ],
+      "score": 86,
+      "why": "HN 523 pt",
+      "read_min": 9,
+      "tldr": "DGX Spark と同じ GPU 設計を積む RTX Spark ノート PC で、ネイティブ Linux だと推論速度が Windows の数分の 1 に落ちる問題の検証記事。原因は Windows 専用の電力制御コンポーネントが使う暗号化された電力設定テーブルだとする。",
+      "points": [
+        "GPT-OSS-120B で Windows 65.4 tok/s、WSL 65.1 tok/s に対し、ネイティブ Linux（AC 接続時）は 13.9 tok/s。GPU クロックは Windows 約 2.2GHz、Linux 約 780MHz",
+        "温度は 40〜47℃ で熱による制限ではなく、電力管理の問題と分析。Windows でもこのコントローラを無効にすると約 83 → 31 tok/s に落ちた",
+        "鍵を抜き出す回避策は 1 台限りで不安定（カーネルパニックも発生）。根本解決には NVIDIA が Linux ドライバに同等の処理を入れる必要があるとする"
+      ],
+      "code": null,
+      "signal": "▲ 523",
+      "pick": true
+    },
+    {
+      "id": "2026-11-05-nhk-muji-card",
+      "url": "https://news.web.nhk/newsweb/na/nd-20261104de70494",
+      "title": "良品計画 クレカ番号の全桁 約109万件が漏えいのおそれ | NHKニュース",
+      "source": "tech",
+      "source_group": "tech_blog",
+      "published_at": "2026-11-04T18:17:59+09:00",
+      "category": "sec",
+      "keywords": [
+        "data-breach",
+        "payments"
+      ],
+      "score": 86,
+      "why": "はてブ 386",
+      "read_min": 3,
+      "tldr": "良品計画で、クレジットカード番号の全桁を含む約 109 万件の情報が漏えいしたおそれがあると NHK が報じた（見出しによる）。",
+      "points": [],
+      "code": null,
+      "signal": "B! 386",
+      "pick": false
+    },
+    {
+      "id": "2026-11-05-webkit-adaptive-dark",
+      "url": "https://webkit.org/blog/18541/introducing-adaptive-dark-mode/",
+      "title": "Safari introduces Adaptive Dark Mode in 27.3",
+      "source": "tech",
+      "source_group": "hackernews",
+      "published_at": "2026-11-04T06:39:05+09:00",
+      "category": "be",
+      "keywords": [
+        "css",
+        "apple"
+      ],
+      "score": 85,
+      "why": "HN 490 pt",
+      "read_min": 6,
+      "tldr": "WebKit が Safari 27.3 で「Adaptive Dark Mode」を導入すると発表。ダークモード非対応のサイトにも暗い配色を適用する機能で、HN で 490 pt を集めた。",
+      "points": [],
+      "code": null,
+      "signal": "B! 3 · ▲ 490",
+      "pick": false
+    },
+    {
+      "id": "2026-11-05-register-binance-dprk",
+      "url": "https://www.theregister.com/security/2026/11/03/north-korean-fake-job-interview-led-to-63b-binance-heist/5307398",
+      "title": "North Korean fake job interview led to $6.3B Binance heist",
+      "source": "tech",
+      "source_group": "hackernews",
+      "published_at": "2026-11-04T23:09:55+09:00",
+      "category": "sec",
+      "keywords": [
+        "exchange-hack",
+        "supply-chain",
+        "security-incident"
+      ],
+      "score": 84,
+      "why": "HN 454 pt",
+      "read_min": 5,
+      "tldr": "Binance から 63 億ドル相当の暗号資産が流出した事件について、北朝鮮系の偽の採用面接が発端だったと The Register が報道。別の報道では、検索結果に出た偽サイトから改ざん版 Homebrew をインストールしたことが侵入の始まりとされる。",
+      "points": [],
+      "code": null,
+      "signal": "▲ 454",
+      "pick": false
+    },
+    {
+      "id": "2026-11-05-fertig-cpp26",
+      "url": "https://andreasfertig.com/blog/2026/11/cpp26-dis-failed-how-does-cpp-survive/",
+      "title": "C++26 Disapproved",
+      "source": "tech",
+      "source_group": "hackernews",
+      "published_at": "2026-11-04T09:33:22+09:00",
+      "category": "be",
+      "keywords": [
+        "programming-language",
+        "memory-safety"
+      ],
+      "score": 82,
+      "why": "HN 397 pt",
+      "read_min": 6,
+      "tldr": "C++26 が承認されなかったことを受け、C++ が今後どう生き残るかを論じたブログ記事。HN で 300 件超のコメントがついた。",
+      "points": [],
+      "code": null,
+      "signal": "B! 2 · ▲ 397",
+      "pick": false
+    },
+    {
+      "id": "2026-11-05-interdb-pg-internals",
+      "url": "https://www.interdb.jp/pg/index.html",
+      "title": "The Internals of PostgreSQL",
+      "source": "tech",
+      "source_group": "hackernews",
+      "published_at": "2026-11-04T06:51:06+09:00",
+      "category": "be",
+      "keywords": [
+        "postgres"
+      ],
+      "score": 81,
+      "why": "HN 362 pt",
+      "read_min": 30,
+      "tldr": "PostgreSQL の内部構造（プロセス・ストレージ・MVCC・WAL など）を解説するオンライン書籍「The Internals of PostgreSQL」が HN で再び話題に。",
+      "points": [],
+      "code": null,
+      "signal": "B! 6 · ▲ 362",
+      "pick": false
+    },
+    {
+      "id": "2026-11-05-namespace-mac-scale",
+      "url": "https://namespace.so/blog/mac-at-any-scale",
+      "title": "Mac at any scale",
+      "source": "tech",
+      "source_group": "hackernews",
+      "published_at": "2026-11-03T23:53:42+09:00",
+      "category": "cloud",
+      "keywords": [
+        "apple",
+        "paas"
+      ],
+      "score": 82,
+      "why": "HN 405 pt",
+      "read_min": 8,
+      "tldr": "CI 基盤の Namespace が、macOS の実行環境を大規模に提供する仕組みを紹介したブログ。HN で 405 pt。",
+      "points": [],
+      "code": null,
+      "signal": "B! 3 · ▲ 405",
+      "pick": false
+    },
+    {
+      "id": "2026-11-05-anthropic-provable-inference",
+      "url": "https://www.anthropic.com/research/provable-inference",
+      "title": "Progress on provable inference for large language models",
+      "source": "tech",
+      "source_group": "tech_blog",
+      "published_at": "2026-11-03T20:27:53+09:00",
+      "category": "ai",
+      "keywords": [
+        "anthropic",
+        "formal-verification",
+        "llm"
+      ],
+      "score": 76,
+      "why": "HN 121 pt",
+      "read_min": 10,
+      "tldr": "Anthropic が大規模言語モデルの推論を検証可能にする「provable inference」の研究進捗を公開した。",
+      "points": [],
+      "code": null,
+      "signal": "B! 8 · ▲ 121",
+      "pick": false
+    },
+    {
+      "id": "2026-11-05-hf-kimi-k31-pro",
+      "url": "https://huggingface.co/moonshotai/Kimi-K3.1-Pro",
+      "title": "Kimi K3.1 Pro model weights are out",
+      "source": "tech",
+      "source_group": "hackernews",
+      "published_at": "2026-11-05T00:30:30+09:00",
+      "category": "ai",
+      "keywords": [
+        "open-weight",
+        "llm"
+      ],
+      "score": 75,
+      "why": "HN 232 pt",
+      "read_min": 3,
+      "tldr": "Moonshot AI が Kimi K3.1 Pro のモデル重みを Hugging Face で公開した。",
+      "points": [],
+      "code": null,
+      "signal": "B! 1 · ▲ 232",
+      "pick": false
+    },
+    {
+      "id": "2026-11-05-githubstatus-incident",
+      "url": "https://www.githubstatus.com/incidents/smtdswd1h2w4",
+      "title": "Incident with Pull Requests, Git Operations and Issues",
+      "source": "tech",
+      "source_group": "hackernews",
+      "published_at": "2026-11-04T19:00:06+09:00",
+      "category": "cloud",
+      "keywords": [
+        "github",
+        "incident-response",
+        "git"
+      ],
+      "score": 74,
+      "why": "HN 228 pt",
+      "read_min": 2,
+      "tldr": "GitHub で Pull Requests・Git 操作・Issues に影響する障害が発生し、ステータスページでインシデントとして報告された。",
+      "points": [],
+      "code": null,
+      "signal": "▲ 228",
+      "pick": false
+    },
+    {
+      "id": "2026-11-05-semafor-datacenter-ballot",
+      "url": "https://www.semafor.com/article/11/04/2026/us-voters-roundly-reject-data-centers-in-ballot-measures",
+      "title": "US voters roundly reject data centers in ballot measures",
+      "source": "tech",
+      "source_group": "hackernews",
+      "published_at": "2026-11-04T23:27:02+09:00",
+      "category": "ai",
+      "keywords": [
+        "data-center",
+        "us-midterms"
+      ],
+      "score": 77,
+      "why": "HN 281 pt",
+      "read_min": 4,
+      "tldr": "米中間選挙と同時に行われた住民投票で、データセンター建設に関する案件が相次いで否決されたと Semafor が報じた（見出しによる）。",
+      "points": [],
+      "code": null,
+      "signal": "▲ 281",
+      "pick": false
+    },
+    {
+      "id": "2026-11-05-hn-gitbook-breach",
+      "url": "https://news.ycombinator.com/item?id=50354336",
+      "title": "Gitbook Breached",
+      "source": "tech",
+      "source_group": "hackernews",
+      "published_at": "2026-11-04T01:45:49+09:00",
+      "category": "sec",
+      "keywords": [
+        "security-incident",
+        "data-breach"
+      ],
+      "score": 70,
+      "why": "HN 162 pt",
+      "read_min": 3,
+      "tldr": "「Gitbook が侵害された」とする HN の投稿。公式発表の有無や影響範囲はこのスレッドだけでは確認できていない。",
+      "points": [],
+      "code": null,
+      "signal": "B! 1 · ▲ 162",
+      "pick": false
+    },
+    {
+      "id": "2026-11-05-newsweek-nikkei-1104",
+      "url": "https://www.newsweekjapan.jp/articles/-/338998",
+      "title": "日経平均は3日続落、米中間選の民主勝利で 6万円割れ寸前で下げ縮小",
+      "source": "newsweekjapan.jp",
+      "source_group": "news",
+      "published_at": null,
+      "category": "stocks",
+      "keywords": [
+        "nikkei225",
+        "us-midterms",
+        "semiconductor"
+      ],
+      "score": 85,
+      "why": "matched: 米国株（日経平均・米中間選挙の影響）",
+      "read_min": 4,
+      "tldr": "11 月 4 日の日経平均は 893 円安の 6 万 2188 円で 3 日続落。米中間選挙で民主党が上下両院の過半数を握る見通しとなり、AI・半導体株が売られて一時 6 万 30 円まで下げたが、午後は好決算を手がかりに下げ幅を縮めた。",
+      "points": [
+        "終値 6 万 2188 円 63 銭（-1.42%）、一時 3000 円超安で 7 月 29 日の安値を下回った。TOPIX は 3895.38（-0.89%）、プライム売買代金は約 10.8 兆円",
+        "データセンター投資が鈍るとの懸念からキオクシア HD・アドバンテスト・ソフトバンク G などが大幅安",
+        "6 万円前後は割安との押し目買いや、IHI の上方修正、大手商社の好決算で市場心理が持ち直した。33 業種中 8 業種が上昇（空運・不動産など）"
+      ],
+      "code": null,
+      "signal": null,
+      "pick": true
+    },
+    {
+      "id": "2026-11-05-coinpost-btc-midterm",
+      "url": "https://coinpost.jp/?p=746369",
+      "title": "民主党が圧勝で米議会を奪還、ビットコインは前日比1.2%上昇",
+      "source": "money",
+      "source_group": "news",
+      "published_at": "2026-11-04T22:00:37+09:00",
+      "category": "crypto",
+      "keywords": [
+        "bitcoin",
+        "us-midterms",
+        "crypto-regulation"
+      ],
+      "score": 88,
+      "why": "matched: ビットコイン",
+      "read_min": 4,
+      "tldr": "米中間選挙で民主党が上下両院の多数派を奪還し、ビットコインは開票中に約 7 週間ぶりの安値を付けた後、7 万 8000 ドル台へ前日比 1.2% 反発した。業界が支援した候補の落選も伝えられる。",
+      "points": [
+        "民主党は上院 54・下院 225 議席を確保（記事時点の集計）。テキサス州では 38 年ぶりに民主党が上院議席を獲得",
+        "業界は 1 億 7000 万ドル超を選挙に投じたが、業界に懐疑的な候補がオハイオ州上院選で当選し、業界寄りの共和党下院議員 3 人が落選",
+        "上院銀行委員会・下院金融サービス委員会の委員長は民主党になる見通しで、市場構造法案は現行の形での成立がほぼ困難との見方を紹介"
+      ],
+      "code": null,
+      "signal": null,
+      "pick": true
+    },
+    {
+      "id": "2026-11-05-coinpost-clarity-midterm",
+      "url": "https://coinpost.jp/?p=746298",
+      "title": "米中間選挙で民主党が両院奪還へ、仮想通貨政策の主導権が交代か",
+      "source": "money",
+      "source_group": "news",
+      "published_at": "2026-11-04T15:16:28+09:00",
+      "category": "crypto",
+      "keywords": [
+        "crypto-regulation",
+        "us-midterms",
+        "stablecoin"
+      ],
+      "score": 80,
+      "why": "matched: ビットコイン（米規制の行方）",
+      "read_min": 5,
+      "tldr": "中間選挙で民主党が議会を制する見通しとなり、暗号資産の市場構造法案（CLARITY 法案）の成立が一段と難しくなったとの論点を整理した記事。ステーブルコイン規制の GENIUS 法は成立済みで効力は続く。",
+      "points": [
+        "CLARITY 法案は 2025 年 7 月に下院で可決されたが、上院では 9 月 15 日の手続き投票が 49 対 50 で必要な 60 票に届かなかった。1 月 3 日の会期末までに上院を通らなければ廃案",
+        "開票の進行に合わせてビットコインはアジア時間 4 日に一時 2.8% 安の 7 万 5630 ドルを付けた",
+        "銀行委員会の委員長は民主党のウォーレン議員が有力とされ、SEC・CFTC の委員承認にも民主党の同意が必要になる"
+      ],
+      "code": null,
+      "signal": null,
+      "pick": true
+    },
+    {
+      "id": "2026-11-05-diamond-takaichi-boj",
+      "url": "https://diamond.jp/articles/-/402597",
+      "title": "高市“高圧政策”は潜在成長率を上げられるか、日銀「利上げシナリオ」狂わせるインフレ加速懸念 - 経済分析の哲人が斬る！市場トピックの深層",
+      "source": "money",
+      "source_group": "news",
+      "published_at": "2026-11-05T04:10:00+09:00",
+      "category": "macro",
+      "keywords": [
+        "boj-rate-hike",
+        "inflation",
+        "jp-fiscal"
+      ],
+      "score": 78,
+      "why": "matched: 金利",
+      "read_min": 6,
+      "tldr": "高市政権の積極財政は需要を押し上げる「高圧経済政策」の性格を持つとし、潜在成長率が上がる前にインフレが加速すれば日銀の利上げシナリオを狂わせかねないと論じる寄稿（後半は有料のため未確認）。",
+      "points": [],
+      "code": null,
+      "signal": null,
+      "pick": false
+    },
+    {
+      "id": "2026-11-05-diamond-fudosan-mortgage-nov",
+      "url": "https://diamond-fudosan.jp/articles/-/132585",
+      "title": "2026年11月の住宅ローン金利（フラット35・変動金利・10年固定）を予想！　金利の推移、今後の動向を確認しよう",
+      "source": "diamond-fudosan.jp",
+      "source_group": "news",
+      "published_at": null,
+      "category": "realestate",
+      "keywords": [
+        "mortgage-rates",
+        "interest-rates"
+      ],
+      "score": 76,
+      "why": "matched: 住宅ローン, 金利",
+      "read_min": 6,
+      "tldr": "2026 年 11 月の住宅ローン金利をまとめた記事。フラット 35（21〜35 年）は 3.810% で、ネット銀行の変動・10 年固定は銀行によって上げ下げが分かれた。記事内には前月比の数字に食い違いがある。",
+      "points": [],
+      "code": null,
+      "signal": null,
+      "pick": false
+    },
+    {
+      "id": "2026-11-05-nikkeiasia-ai-debt",
+      "url": "https://asia.nikkei.com/business/technology/artificial-intelligence/us-tech-giants-hidden-ai-debt-swells-90-to-3.2tn-in-6-months",
+      "title": "US tech giants' hidden AI debt swells 90% to $3.2T in 6 months",
+      "source": "tech",
+      "source_group": "hackernews",
+      "published_at": "2026-11-04T06:26:44+09:00",
+      "category": "stocks",
+      "keywords": [
+        "ai-economy",
+        "us-stocks",
+        "data-center"
+      ],
+      "score": 70,
+      "why": "matched: 米国株",
+      "read_min": 5,
+      "tldr": "米大手テック企業の AI 関連の「隠れ債務」が半年で 90% 増え 3.2 兆ドルに膨らんだと日経アジアが報じた（見出しによる）。",
+      "points": [],
+      "code": null,
+      "signal": "▲ 402",
+      "pick": false
+    },
+    {
+      "id": "2026-11-05-tomshw-amd-intel",
+      "url": "https://www.tomshardware.com/pc-components/cpus/amd-expects-to-outsell-intel-in-q4-for-the-first-time-in-history-usd17b-guidance-would-exceed-intels-projections",
+      "title": "AMD expects to outsell Intel in Q4 for the first time in history",
+      "source": "tech",
+      "source_group": "hackernews",
+      "published_at": "2026-11-05T00:38:34+09:00",
+      "category": "stocks",
+      "keywords": [
+        "semiconductor",
+        "us-stocks",
+        "earnings"
+      ],
+      "score": 68,
+      "why": "matched: 米国株",
+      "read_min": 4,
+      "tldr": "AMD が 10〜12 月期に売上高で初めて Intel を上回る見通しだと Tom's Hardware が報じた（見出しによる）。",
+      "points": [],
+      "code": null,
+      "signal": "▲ 321",
+      "pick": false
+    },
+    {
+      "id": "2026-11-05-coinpost-btc-sellers",
+      "url": "https://coinpost.jp/?p=746347",
+      "title": "ビットコイン売り手に枯渇の兆し 需要はなお不足＝アナリスト",
+      "source": "money",
+      "source_group": "news",
+      "published_at": "2026-11-04T17:17:51+09:00",
+      "category": "crypto",
+      "keywords": [
+        "bitcoin"
+      ],
+      "score": 66,
+      "why": "matched: ビットコイン",
+      "read_min": 3,
+      "tldr": "ビットコインの売り手に枯渇の兆しが見える一方、需要はなお不足しているとのアナリストの見方を伝える記事（RSS の要約による）。",
+      "points": [],
+      "code": null,
+      "signal": null,
+      "pick": false
+    },
+    {
+      "id": "2026-11-05-coinpost-block-btc",
+      "url": "https://coinpost.jp/?p=746317",
+      "title": "米ブロック社、ビットコイン関連粗利益が半減 Cash Appの手数料引き下げで",
+      "source": "money",
+      "source_group": "news",
+      "published_at": "2026-11-04T16:26:23+09:00",
+      "category": "stocks",
+      "keywords": [
+        "bitcoin",
+        "earnings",
+        "us-stocks"
+      ],
+      "score": 64,
+      "why": "matched: 米国株, ビットコイン",
+      "read_min": 3,
+      "tldr": "米ブロック社の決算で、Cash App の手数料引き下げによりビットコイン関連の粗利益が半減した（見出しによる）。",
+      "points": [],
+      "code": null,
+      "signal": null,
+      "pick": false
+    },
+    {
+      "id": "2026-11-05-diamond-gdp-6th",
+      "url": "https://diamond.jp/articles/-/402567",
+      "title": "日本のGDP「世界6位転落」は衰退の証しか、円安で縮む経済規模と脱デフレで見え始めた国内経済の変化 - マーケットフォーカス",
+      "source": "money",
+      "source_group": "news",
+      "published_at": "2026-11-05T04:35:00+09:00",
+      "category": "macro",
+      "keywords": [
+        "gdp",
+        "fx"
+      ],
+      "score": 60,
+      "why": "matched: 為替",
+      "read_min": 6,
+      "tldr": "日本の名目 GDP が世界 6 位に下がる見通しについて、円安による目減りと脱デフレによる国内経済の変化の両面から考える記事。",
+      "points": [],
+      "code": null,
+      "signal": null,
+      "pick": false
+    },
+    {
+      "id": "2026-11-05-coinpost-bok-crypto",
+      "url": "https://coinpost.jp/?p=746175",
+      "title": "韓国中銀、金融機関31社に仮想通貨リスク調査 取引所停止も想定",
+      "source": "money",
+      "source_group": "news",
+      "published_at": "2026-11-04T10:30:39+09:00",
+      "category": "crypto",
+      "keywords": [
+        "crypto-regulation",
+        "crypto-exchange"
+      ],
+      "score": 55,
+      "why": "matched: ビットコイン",
+      "read_min": 3,
+      "tldr": "韓国銀行が金融機関 31 社を対象に暗号資産リスクの調査を行い、取引所の停止も想定しているという（見出しによる）。",
+      "points": [],
+      "code": null,
+      "signal": null,
+      "pick": false
+    }
+  ],
+  "social": [
+    {
+      "network": "x",
+      "author": "@business",
+      "url": "https://x.com/business/status/2117836801188491415",
+      "text": "Bloomberg が、民主党の議会制覇への見方が強まるなかビットコインが小幅に下落し、もともと弱い投資家心理に政治の不確実性が加わったと投稿した。",
+      "metrics": null,
+      "heat": null,
+      "category": "crypto",
+      "keywords": [
+        "bitcoin",
+        "us-midterms"
+      ],
+      "posted_at": null
+    },
+    {
+      "network": "x",
+      "author": "@BiteyeCN",
+      "url": "https://x.com/BiteyeCN/status/2117924001628500081",
+      "text": "民主党が上下両院を制したことで、CLARITY 法案の停滞やステーブルコインの利回りをめぐる対立など、米国の暗号資産政策にどんな影響が出るかを 5 つの観点で整理するスレッドを投稿した。",
+      "metrics": null,
+      "heat": null,
+      "category": "crypto",
+      "keywords": [
+        "crypto-regulation",
+        "us-midterms"
+      ],
+      "posted_at": null
+    },
+    {
+      "network": "hn",
+      "author": null,
+      "url": "https://news.ycombinator.com/item?id=50364336",
+      "text": "『AI is forcing us to pay off 40 years of technical debt』のスレッド。515 件のコメント",
+      "metrics": "▲ 866  ✉ 515",
+      "heat": 100,
+      "category": "sec",
+      "keywords": [
+        "ai-security",
+        "php"
+      ],
+      "posted_at": "2026-11-04T20:52:17+09:00"
+    },
+    {
+      "network": "hn",
+      "author": null,
+      "url": "https://news.ycombinator.com/item?id=50355251",
+      "text": "『Qwen 3.8 27B on my laptop can interpret model weights, too』のスレッド。206 件のコメント",
+      "metrics": "▲ 709  ✉ 206",
+      "heat": 100,
+      "category": "ai",
+      "keywords": [
+        "weight-editing",
+        "local-llm"
+      ],
+      "posted_at": "2026-11-04T02:40:00+09:00"
+    },
+    {
+      "network": "hn",
+      "author": null,
+      "url": "https://news.ycombinator.com/item?id=50363461",
+      "text": "『Tell HN: Gemini trains on chat history, even for subscribers (personal accounts)』のスレッド。138 件のコメント",
+      "metrics": "▲ 539  ✉ 138",
+      "heat": 100,
+      "category": "ai",
+      "keywords": [
+        "google",
+        "privacy"
+      ],
+      "posted_at": "2026-11-04T19:10:27+09:00"
+    },
+    {
+      "network": "hn",
+      "author": null,
+      "url": "https://news.ycombinator.com/item?id=50362905",
+      "text": "『Nvidia RTX Spark encrypted firmware slows inference speed to 35% on Linux』のスレッド。232 件のコメント",
+      "metrics": "▲ 523  ✉ 232",
+      "heat": 100,
+      "category": "ai",
+      "keywords": [
+        "nvidia",
+        "firmware"
+      ],
+      "posted_at": "2026-11-04T17:46:29+09:00"
+    }
+  ],
+  "releases": []
+}
