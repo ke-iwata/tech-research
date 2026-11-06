@@ -1,0 +1,789 @@
+{
+  "date": "2026-11-07",
+  "generated_at": "2026-11-07T06:40:00+09:00",
+  "stats": {
+    "collected": 235,
+    "sources_ok": 25,
+    "sources_total": 26,
+    "by_group": {
+      "hackernews": 50,
+      "tech_blog": 81,
+      "news": 89,
+      "official": 15
+    },
+    "failed_sources": [
+      "coindesk_jp"
+    ]
+  },
+  "digest": [
+    {
+      "category": "ai",
+      "text": "Claude Code がアカウントのメールアドレスを User-Agent に入れて外部サイトへ送っていたという issue が HN で 1,525 pt。v2.1.317 の組み込みプラグインで遮断したとの回答があるが、UA 以外のヘッダーやスクリプト経由の抜け道が指摘されている。",
+      "keywords": [
+        "claude",
+        "privacy"
+      ]
+    },
+    {
+      "category": "stocks",
+      "text": "米中間選挙で民主党が大勝し、データセンター投資の鈍化懸念から 5 日の米国株はナスダック 5.52% 安・S&P 500 4.36% 安。6 日の日経平均は 3,643 円（5.96%）安の 5 万 7434 円で、下げ幅は歴代 3 位。6 日の米国株は反発した。",
+      "keywords": [
+        "us-stocks",
+        "nikkei225",
+        "us-midterms"
+      ]
+    },
+    {
+      "category": "crypto",
+      "text": "米株急落でビットコインも 24 時間で 5% 超下げ 7 万 6,000 ドル割れ。BTC と S&P 500 の長期の累積相関指標が 2015 年以降で初めてプラスになったとの分析が出た。",
+      "keywords": [
+        "bitcoin",
+        "us-stocks"
+      ]
+    },
+    {
+      "category": "macro",
+      "text": "ドコモ（最大 29.5 万件）など不正アクセスによる漏えいが相次ぐなか、金融庁が金融機関の利用者へ、なりすましメールへの警戒やフィッシング耐性のある多要素認証の利用を呼びかけた。",
+      "keywords": [
+        "fsa",
+        "security-incident",
+        "data-breach"
+      ]
+    },
+    {
+      "category": "macro",
+      "text": "食料品の消費税率を来年 4 月から 2 年間 1% に下げる法案が衆議院を通過し、参議院では 11 日に審議入りする見通し。",
+      "keywords": [
+        "consumption-tax",
+        "jp-fiscal"
+      ]
+    }
+  ],
+  "items": [
+    {
+      "id": "2026-11-07-claude-code-email-ua",
+      "url": "https://github.com/anthropics/claude-code/issues/107757",
+      "title": "Claude Code sends your email address to websites",
+      "source": "github.com",
+      "source_group": "hackernews",
+      "published_at": "2026-11-06T07:17:15+09:00",
+      "category": "ai",
+      "keywords": [
+        "claude",
+        "privacy",
+        "ai-security",
+        "ai-agent"
+      ],
+      "score": 100,
+      "why": "HN 1,525 pt・はてブ 32（GIGAZINE の紹介記事）",
+      "read_min": 6,
+      "tldr": "Claude Code が Web 検索やシェルで外部サイトにリクエストを送る際、アカウントのメールアドレスを User-Agent ヘッダーに入れていたというバグ報告（#107757）が HN で 1,525 pt を集めた。Anthropic 側のコントリビューターは v2.1.317 で既定有効の組み込みプラグイン cc-plugin-privacy を入れて遮断したと回答しているが、スレッドでは抜け道が指摘されている。",
+      "points": [
+        "報告者は v2.1.318（macOS）で、Web 検索時に User-Agent へメールアドレスが入り、第三者に渡った結果、詐欺メールが毎日届くようになったと説明。設定での on/off ではなく挙動自体の削除を求めている",
+        "コメントでは、モデルが自分で組み立てた curl やスクリプトの User-Agent に、プロジェクト名と連絡先メールが入っていた例が共有された。SEC EDGAR や Wikimedia のように UA に連絡先を求めるサイトの作法をなぞっている可能性も挙がった",
+        "cc-plugin-privacy は「アカウントのアドレスを含み User-Agent を指定するシェル呼び出しを拒否する」ルールだが、UA 以外のヘッダーや、Edit でスクリプトに書き込んでから実行する経路は捕まえられないと指摘されている。issue は open のまま"
+      ],
+      "code": {
+        "file": "issue #107757 のコメント（伏せ字は原文どおり）",
+        "lang": "bash",
+        "text": "curl -sf -A \"<project-name>-site-build/1.0 (<account email>)\" \\\n  \"https://<public geocoding API>/search?q=<address query>\"\n\n# Python スクリプト内\nheaders={'User-Agent': '<tool-name>/0.1 (mailto:<account email>)'}"
+      },
+      "signal": "B! 32 · ▲ 1525",
+      "pick": true
+    },
+    {
+      "id": "2026-11-07-kagi-search-for-everyone",
+      "url": "https://kagi.com/changelog#11820",
+      "title": "Search for everyone",
+      "source": "kagi.com",
+      "source_group": "hackernews",
+      "published_at": "2026-11-06T05:03:34+09:00",
+      "category": "be",
+      "keywords": [
+        "search-engine",
+        "privacy"
+      ],
+      "score": 90,
+      "why": "HN 734 pt",
+      "read_min": 3,
+      "tldr": "有料検索エンジンの Kagi が、アカウントなしでも検索を使えるようにした（11 月 5 日の changelog）。未登録で 50 回、登録すればさらに 100 回まで試せる。",
+      "points": [
+        "ゲスト検索は有料プランより機能を落とした「degraded experience」で、ゲストであることを示すバナーが出る",
+        "Kagi は広告を一切出さず、宣伝は口コミに頼っていると改めて説明し、利用者に紹介を呼びかけている",
+        "告知には検索の価格やゲスト利用時のプライバシー条件の変更は書かれていない"
+      ],
+      "code": null,
+      "signal": "▲ 734",
+      "pick": true
+    },
+    {
+      "id": "2026-11-07-ms-paint-rce",
+      "url": "https://www.cve.org/CVERecord?id=CVE-2026-83844",
+      "title": "MS Paint Remote Code Execution Vulnerability",
+      "source": "cve.org",
+      "source_group": "hackernews",
+      "published_at": "2026-11-06T05:43:42+09:00",
+      "category": "sec",
+      "keywords": [
+        "rce",
+        "microsoft",
+        "vulnerability-management"
+      ],
+      "score": 89,
+      "why": "HN 693 pt",
+      "read_min": 4,
+      "tldr": "Windows のペイントに「リモートコード実行」の CVE-2026-83844 が登録され、HN で 693 pt。HN で引用された MSRC の説明は境界外読み取りでネットワーク越し・認証不要とするが、ペイントにどんなネットワーク経路があるのかは不明で、記述の正確さを疑う声も多い。",
+      "points": [
+        "HN で引用された説明では、原因は境界外読み取り（out-of-bounds read）。ペイントのバージョン 11.0.0.0〜11.2605.91.0 未満が対象とされ、修正版は Windows Update ではなく Microsoft Store 経由で配布されたという報告がある",
+        "公開済み・悪用確認はいずれも「No」、悪用可能性の評価は「Exploitation Less Likely」と引用されている",
+        "「特別に細工したパケットを影響のあるサービスに送る」という定型文が 10 月の多数の CVE と同じだとの指摘があり、画像ファイル経由ではないかという推測も出たが確認はされていない（CVE ページ本体は取得できず、HN のスレッドで確認）"
+      ],
+      "code": null,
+      "signal": "▲ 693",
+      "pick": true
+    },
+    {
+      "id": "2026-11-07-blender-bui",
+      "url": "https://github.com/ppmpreetham/BUI",
+      "title": "Blender's UI and Runtime: Much Faster Than GPUI",
+      "source": "github.com",
+      "source_group": "hackernews",
+      "published_at": "2026-11-06T16:40:35+09:00",
+      "category": "be",
+      "keywords": [
+        "gui-toolkit",
+        "benchmark"
+      ],
+      "score": 88,
+      "why": "HN 604 pt",
+      "read_min": 6,
+      "tldr": "Blender の UI コード（interface_widgets.cc）を C に移植し、単独の UI ツールキットとして使えるようにした BUI が HN で 604 pt。Python・Rust・JavaScript・C/C++ から共通の C ランタイム経由で使え、ブラウザや WebView は使わない。",
+      "points": [
+        "作者の計測（Ryzen 7 5800U・Windows、3,000 セルのアニメーション）では GPU 描画で 59.9 fps、GPUI は 19.9 fps。1 フレームの CPU 時間は 11.6 ms 対 50.5 ms、メモリは 40 MB 対 77 MB、初回フレームは約 5 ms 対約 220 ms とされる（環境で変わると注記）",
+        "Python は tkinter 風・Qt 風・Dear ImGui 風の書き方、JavaScript は React / Svelte と DOM 風 API を用意。Blender のインストールは不要",
+        "ライセンスは GPL-3.0-or-later。Windows と Linux に対応し、macOS は実験的。IME や字形ごとのフォントフォールバックは今後対応とされる"
+      ],
+      "code": null,
+      "signal": "B! 3 · ▲ 604",
+      "pick": true
+    },
+    {
+      "id": "2026-11-07-asn-bank-grapheneos",
+      "url": "https://github.com/PrivSec-dev/banking-apps-compat-report/issues/105",
+      "title": "Dutch 'idealist' bank ASN blocks non-Google Android, including GrapheneOS",
+      "source": "github.com",
+      "source_group": "hackernews",
+      "published_at": "2026-11-06T18:27:12+09:00",
+      "category": "sec",
+      "keywords": [
+        "android",
+        "mobile-app"
+      ],
+      "score": 87,
+      "why": "HN 588 pt",
+      "read_min": 3,
+      "tldr": "オランダの ASN 銀行のアプリが、GrapheneOS を含む Google 認証のない Android 端末を締め出したという報告。HN で 588 pt、378 件のコメント。",
+      "points": [],
+      "code": null,
+      "signal": "▲ 588",
+      "pick": false
+    },
+    {
+      "id": "2026-11-07-cuban-facebook-scam-ads",
+      "url": "https://finance.yahoo.com/technology/ai/articles/mark-cuban-says-facebook-knowingly-213000020.html",
+      "title": "Cuban: Facebook knowingly runs AI deepfake scam ads; docs say $16B fraud revenue",
+      "source": "finance.yahoo.com",
+      "source_group": "hackernews",
+      "published_at": "2026-11-06T08:09:57+09:00",
+      "category": "ai",
+      "keywords": [
+        "deepfake",
+        "meta",
+        "fraud-prevention"
+      ],
+      "score": 85,
+      "why": "HN 483 pt",
+      "read_min": 4,
+      "tldr": "マーク・キューバン氏が、Facebook は AI ディープフェイクを使った詐欺広告を承知で配信していると批判したという記事。見出しでは、内部文書に詐欺関連の広告収入 160 億ドルとの記載があるとしている。",
+      "points": [],
+      "code": null,
+      "signal": "▲ 483",
+      "pick": false
+    },
+    {
+      "id": "2026-11-07-mcp-explained",
+      "url": "https://mcp-explained.com/",
+      "title": "MCP Explained",
+      "source": "mcp-explained.com",
+      "source_group": "hackernews",
+      "published_at": "2026-11-05T23:08:35+09:00",
+      "category": "ai",
+      "keywords": [
+        "mcp-server"
+      ],
+      "score": 79,
+      "why": "HN 327 pt",
+      "read_min": 8,
+      "tldr": "MCP（Model Context Protocol）の仕組みを解説するサイト。HN で 327 pt、133 件のコメント。",
+      "points": [],
+      "code": null,
+      "signal": "▲ 327",
+      "pick": false
+    },
+    {
+      "id": "2026-11-07-gemini-omni-1-2-flash",
+      "url": "https://blog.google/innovation-and-ai/technology/developers-tools/introducing-gemini-omni-1-2-flash/",
+      "title": "Gemini Omni 1.2 Flash",
+      "source": "blog.google",
+      "source_group": "hackernews",
+      "published_at": "2026-11-06T22:35:27+09:00",
+      "category": "ai",
+      "keywords": [
+        "google",
+        "llm"
+      ],
+      "score": 76,
+      "why": "HN 250 pt・Google 公式",
+      "read_min": 4,
+      "tldr": "Google が Gemini Omni 1.2 Flash を発表した。HN で 250 pt、194 件のコメント。",
+      "points": [],
+      "code": null,
+      "signal": "▲ 250",
+      "pick": false
+    },
+    {
+      "id": "2026-11-07-baidu-ernie-5-5-flash-base",
+      "url": "https://ernie.baidu.com/release/ernie-5-5-flash-base/",
+      "title": "Baidu released ERNIE 5.5 Flash Base",
+      "source": "ernie.baidu.com",
+      "source_group": "hackernews",
+      "published_at": "2026-11-05T18:29:12+09:00",
+      "category": "ai",
+      "keywords": [
+        "llm",
+        "open-weight"
+      ],
+      "score": 71,
+      "why": "HN 184 pt",
+      "read_min": 4,
+      "tldr": "Baidu が ERNIE 5.5 Flash のベースモデルを公開した。HN で 184 pt。",
+      "points": [],
+      "code": null,
+      "signal": "▲ 184",
+      "pick": false
+    },
+    {
+      "id": "2026-11-07-firenook",
+      "url": "https://firenook.dev/",
+      "title": "Show HN: Firenook – Firebase emulators in Rust: 40× faster writes, 10× less RAM",
+      "source": "firenook.dev",
+      "source_group": "hackernews",
+      "published_at": "2026-11-05T22:07:29+09:00",
+      "category": "be",
+      "keywords": [
+        "local-cloud-emulator",
+        "rust"
+      ],
+      "score": 70,
+      "why": "HN 167 pt",
+      "read_min": 3,
+      "tldr": "Firebase のエミュレーターを Rust で作り直した Firenook の Show HN。見出しでは書き込みが 40 倍速く、メモリは 10 分の 1 としている。",
+      "points": [],
+      "code": null,
+      "signal": "▲ 167",
+      "pick": false
+    },
+    {
+      "id": "2026-11-07-unleash-11-years",
+      "url": "https://github.com/Unleash/unleash",
+      "title": "We've built an open-source feature flag server for 11 years",
+      "source": "github.com",
+      "source_group": "hackernews",
+      "published_at": "2026-11-06T20:40:06+09:00",
+      "category": "be",
+      "keywords": [
+        "oss",
+        "feature-flags"
+      ],
+      "score": 66,
+      "why": "HN 122 pt・はてブ 9",
+      "read_min": 3,
+      "tldr": "OSS のフィーチャーフラグサーバー Unleash の開発者が、11 年続けてきた経験を語った HN の投稿。",
+      "points": [],
+      "code": null,
+      "signal": "B! 9 · ▲ 122",
+      "pick": false
+    },
+    {
+      "id": "2026-11-07-docomo-breach-295k",
+      "url": "https://www.watch.impress.co.jp/docs/news/2154508.html",
+      "title": "ドコモ不正アクセス、「料金プラン」などの情報も流出 29.5万件",
+      "source": "tech",
+      "source_group": "tech_blog",
+      "published_at": "2026-11-06T20:22:32+09:00",
+      "category": "sec",
+      "keywords": [
+        "data-breach",
+        "security-incident"
+      ],
+      "score": 66,
+      "why": "はてブ 93・関連記事 3 本（総務省の指導を含む）",
+      "read_min": 3,
+      "tldr": "ドコモオンラインショップと My docomo への不正アクセスで、料金プランなどを含む最大 29.5 万件の情報が流出したと続報。総務省はドコモに特定利用者情報の保護に向けた措置を指導した。",
+      "points": [],
+      "code": null,
+      "signal": "B! 93",
+      "pick": false
+    },
+    {
+      "id": "2026-11-07-jnsa-quiz-breach",
+      "url": "https://www.itmedia.co.jp/news/article/2611/06/2000002978/",
+      "title": "セキュリティ啓発団体に不正アクセス 個人情報最大1.5万件漏えいか",
+      "source": "tech",
+      "source_group": "tech_blog",
+      "published_at": "2026-11-06T17:41:42+09:00",
+      "category": "sec",
+      "keywords": [
+        "data-breach",
+        "security-incident"
+      ],
+      "score": 63,
+      "why": "はてブ 75（JNSA の公式発表も B! 23）",
+      "read_min": 3,
+      "tldr": "日本ネットワークセキュリティ協会（JNSA）が運営する「情報セキュリティ理解度チェックサービス」が不正アクセスを受け、ID やハッシュ化したパスワードなど最大 1 万 5128 件の個人情報が漏えいした可能性があると発表した。",
+      "points": [],
+      "code": null,
+      "signal": "B! 75",
+      "pick": false
+    },
+    {
+      "id": "2026-11-07-nvke",
+      "url": "https://github.com/dsx-ai-factory/nvke",
+      "title": "Nvidia Kubernetes Engine (NVKE)",
+      "source": "github.com",
+      "source_group": "hackernews",
+      "published_at": "2026-11-06T12:16:26+09:00",
+      "category": "cloud",
+      "keywords": [
+        "kubernetes",
+        "nvidia"
+      ],
+      "score": 65,
+      "why": "HN 118 pt",
+      "read_min": 3,
+      "tldr": "「Nvidia Kubernetes Engine（NVKE）」と名付けられた GitHub リポジトリが HN で 118 pt。",
+      "points": [],
+      "code": null,
+      "signal": "▲ 118",
+      "pick": false
+    },
+    {
+      "id": "2026-11-07-aws-security-hub-sbom",
+      "url": "https://aws.amazon.com/about-aws/whats-new/2026/11/security-hub-sbom-inventory/",
+      "title": "AWS Security Hub now provides an SBOM inventory for your compute resources - AWS",
+      "source": "tech",
+      "source_group": "tech_blog",
+      "published_at": "2026-11-06T11:59:55+09:00",
+      "category": "cloud",
+      "keywords": [
+        "aws",
+        "supply-chain"
+      ],
+      "score": 48,
+      "why": "はてブ 13・AWS 公式",
+      "read_min": 2,
+      "tldr": "AWS Security Hub が、コンピュートリソースの SBOM（ソフトウェア部品表）インベントリを提供するようになった。",
+      "points": [],
+      "code": null,
+      "signal": "B! 13",
+      "pick": false
+    },
+    {
+      "id": "2026-11-07-nasdaq-correction-midterms",
+      "url": "https://www.cnbc.com/2026/11/04/stock-market-today-live-updates.html",
+      "title": "Nasdaq plummets 4% into correction territory",
+      "source": "cnbc.com",
+      "source_group": "hackernews",
+      "published_at": "2026-11-06T02:11:15+09:00",
+      "category": "stocks",
+      "keywords": [
+        "us-stocks",
+        "us-midterms",
+        "semiconductor",
+        "data-center"
+      ],
+      "score": 92,
+      "why": "matched: 米国株",
+      "read_min": 5,
+      "tldr": "11 月 5 日の米国株は、ナスダック総合指数が 5.52% 安の 24,315.00、S&P 500 が 4.36% 安、ダウが 1,833 ドル（3.44%）安と、3 指数とも 2025 年 4 月以来の大きな下げになった。中間選挙で民主党が上下両院を制し、データセンター建設が鈍るとの懸念から AI・半導体株が売られ、ナスダックは先月の最高値から 10% 超下げた。",
+      "points": [
+        "Broadcom −10%、Nvidia −9%、Micron と AMD はともに −15%、Qualcomm は弱い業績見通しも重なり −9%。半導体 ETF（SOXX）は 2020 年 3 月以来の大幅安",
+        "サンダース上院議員がデータセンターの全国的なモラトリアムを訴えていることや、複数の州でデータセンター関連の住民投票が否決されたことが材料に挙げられた",
+        "選挙結果を受けた前日の上昇分は打ち消された。なお 11 月 6 日の終値ではナスダックは 1.47% 高と反発している（data/markets.json）"
+      ],
+      "code": null,
+      "signal": "▲ 224",
+      "pick": true
+    },
+    {
+      "id": "2026-11-07-nikkei-3643-drop",
+      "url": "https://www.nikkei.com/article/DGXZQOFL060SRTW6A101C2000000/",
+      "title": "日経平均株価の終値3643円安、下げ幅歴代3位 半年ぶり6万円割れ - 日本経済新聞",
+      "source": "nikkei.com",
+      "source_group": "tech_blog",
+      "published_at": "2026-11-06T12:52:18+09:00",
+      "category": "stocks",
+      "keywords": [
+        "nikkei225",
+        "us-midterms",
+        "semiconductor"
+      ],
+      "score": 90,
+      "why": "matched: 米国株（波及）・はてブ 19",
+      "read_min": 3,
+      "tldr": "11 月 6 日の日経平均は 5 日続落し、終値は前日比 3,643 円 13 銭（5.96%）安の 5 万 7434 円 77 銭。下げ幅は歴代 3 位で、半年ぶりに 6 万円を割り込んだ。AI 規制に前向きとされる米民主党の大勝でデータセンター投資が鈍るとの懸念が強まった。",
+      "points": [],
+      "code": null,
+      "signal": "B! 19",
+      "pick": false
+    },
+    {
+      "id": "2026-11-07-fsa-cyber-request",
+      "url": "https://www.fsa.go.jp/news/r8/sonota/20261106/20261106.html",
+      "title": "現下の情勢を踏まえた金融機関利用者へのお願いについて公表しました。",
+      "source": "fsa.go.jp",
+      "source_group": "official",
+      "published_at": "2026-11-07T03:15:00+09:00",
+      "category": "macro",
+      "keywords": [
+        "fsa",
+        "security-incident",
+        "fraud-prevention"
+      ],
+      "score": 82,
+      "why": "金融庁の公式発表",
+      "read_min": 3,
+      "tldr": "金融庁が 11 月 6 日、相次ぐ不正アクセスと顧客情報の漏えいを受けて、金融機関の利用者に向けた注意喚起を公表した。漏えい情報を悪用した、実在の事業者や行政機関を装う不審メールが増えるおそれがあるとしている。",
+      "points": [
+        "背景として、インターネットに公開された顧客向けサービスや業務システムへの不正アクセスが相次いでいること、政府がサイバーセキュリティ関係閣僚会議で「サイバーセキュリティ緊急対策パッケージ」を決めたことを挙げている",
+        "利用者へのお願いは 4 点。メール内のリンクを安易にクリックしない、パスワードを使い回さない、フィッシング耐性のある多要素認証を使う",
+        "身に覚えのない取引の通知があれば、取引先の金融機関にすぐ連絡するよう求めている"
+      ],
+      "code": null,
+      "signal": null,
+      "pick": true
+    },
+    {
+      "id": "2026-11-07-consumption-tax-cut-lower-house",
+      "url": "https://news.web.nhk/newsweb/na/nd-20261106de71359",
+      "title": "消費税減税法案 衆議院を通過 自民・維新などの賛成多数で可決 | NHKニュース",
+      "source": "news.web.nhk",
+      "source_group": "tech_blog",
+      "published_at": "2026-11-06T14:06:57+09:00",
+      "category": "macro",
+      "keywords": [
+        "consumption-tax",
+        "jp-fiscal"
+      ],
+      "score": 74,
+      "why": "はてブ 73・関連記事 3 本",
+      "read_min": 3,
+      "tldr": "食料品の消費税率を来年 4 月から 2 年間 1% に下げる消費税減税関連法案が、11 月 6 日の衆議院本会議で自民・維新両党などの賛成多数で可決され、参議院に送られた。",
+      "points": [
+        "対象は食料品で、税率を 1% に引き下げ、期間は来年 4 月から 2 年間",
+        "採決前に石破前首相ら 4 人が退席した。日経の報道では国民民主や公明など全野党が反対した",
+        "参議院では 11 日に審議入りする見通し。財源の詳細は記事からは確認できなかった"
+      ],
+      "code": null,
+      "signal": "B! 73",
+      "pick": true
+    },
+    {
+      "id": "2026-11-07-btc-sp500-correlation",
+      "url": "https://coinpost.jp/?p=746854",
+      "title": "ビットコイン、米株と連動する時間が増加 長期指標が初のゼロ超え＝アナリスト",
+      "source": "coinpost.jp",
+      "source_group": "news",
+      "published_at": "2026-11-06T16:43:06+09:00",
+      "category": "crypto",
+      "keywords": [
+        "bitcoin",
+        "us-stocks"
+      ],
+      "score": 88,
+      "why": "matched: ビットコイン, 米国株",
+      "read_min": 3,
+      "tldr": "CryptoQuant のアナリストが、ビットコインと S&P 500 の相関を長期で追う累積 Z スコアが 2015 年以降で初めてゼロを上回ったと指摘した。5 日の米株急落ではビットコインも 24 時間で 5% 超下げ、7 万 6,000 ドルを割り込んだ。",
+      "points": [
+        "指標は 90 日窓の BTC と S&P 500 のリターン相関を Z スコアにして 2015 年から積み上げたもの。プラスは平常より相関が強い状態を意味する。一方、相関の 90 日変化率は +6.3% に低下し、連動が強まるペースは鈍っている",
+        "5 日の下落では約 10.8 億ドル分のレバレッジポジションが清算され、コインベースとストラテジーの株価もそれぞれ約 10% 下げた",
+        "アナリストは、ETF やカストディの整備で BTC がプロの運用に組み込まれた市場の成熟を背景に挙げ、ゼロ超えは数値より象徴的な意味が大きいと述べた"
+      ],
+      "code": null,
+      "signal": null,
+      "pick": true
+    },
+    {
+      "id": "2026-11-07-chainalysis-credential-exposure",
+      "url": "https://coinpost.jp/?p=746798",
+      "title": "チェイナリシス、全ユーザーのパスワードハッシュ露出 KYTも停止",
+      "source": "coinpost.jp",
+      "source_group": "news",
+      "published_at": "2026-11-06T12:30:17+09:00",
+      "category": "crypto",
+      "keywords": [
+        "security-incident",
+        "data-breach",
+        "crypto-exchange"
+      ],
+      "score": 70,
+      "why": "matched: 仮想通貨（AML インフラの障害）",
+      "read_min": 4,
+      "tldr": "ブロックチェーン分析大手のチェイナリシスが、全ユーザーのパスワードハッシュと有効な認証トークンが攻撃者に露出したと公表した。取引所のマネーロンダリング対策に使われる KYT とアドレススクリーニングも一時停止した。",
+      "points": [
+        "10 月 30 日の初報では、露出したのは氏名やメールアドレスなど機密性の低い情報で、認証情報への影響はないとしていた。11 月 4 日に全ユーザーのハッシュとトークンの露出を公表した。オンパス攻撃で一部顧客の実パスワードが露出したことも明らかにした",
+        "初報では、攻撃者が AI エージェント的な手法でシステムや社内ツールにアクセスしたと説明している。調査データの閲覧や、アドレスと所有者を結び付けるデータの改ざんの証拠は見つかっていないという",
+        "全ユーザーのパスワードリセット、必要に応じた API キーの更新、信頼する IP の許可リスト登録を求めている。KYT の復旧は 5 日（米東部時間）開始の予定とされた"
+      ],
+      "code": null,
+      "signal": null,
+      "pick": true
+    },
+    {
+      "id": "2026-11-07-boj-ueda-imf-lecture",
+      "url": "http://www.boj.or.jp/about/press/koen_2026/ko261107a.htm",
+      "title": "【講演】植田総裁「日本の経常収支黒字と企業行動の変容」（IMF）",
+      "source": "boj.or.jp",
+      "source_group": "official",
+      "published_at": "2026-11-07T01:00:00+09:00",
+      "category": "macro",
+      "keywords": [
+        "boj-policy"
+      ],
+      "score": 70,
+      "why": "日銀の公式発表",
+      "read_min": 10,
+      "tldr": "植田総裁が IMF の Michel Camdessus Central Banking Lecture で「日本の経常収支黒字と企業行動の変容」と題して講演した（11 月 7 日公表）。",
+      "points": [],
+      "code": null,
+      "signal": null,
+      "pick": false
+    },
+    {
+      "id": "2026-11-07-binance-hack-btc-drawdown",
+      "url": "https://coinpost.jp/?p=746715",
+      "title": "バイナンス流出後のビットコイン最大下落は5.7％、過去例では中程度＝クリプトクアント",
+      "source": "coinpost.jp",
+      "source_group": "news",
+      "published_at": "2026-11-06T10:25:55+09:00",
+      "category": "crypto",
+      "keywords": [
+        "bitcoin",
+        "exchange-hack"
+      ],
+      "score": 70,
+      "why": "matched: ビットコイン",
+      "read_min": 3,
+      "tldr": "CryptoQuant によると、バイナンスのハッキング後 112 時間のビットコインの最大下落率は 5.7% で、過去 38 件の取引所ハッキングの中では中程度だった。",
+      "points": [],
+      "code": null,
+      "signal": null,
+      "pick": false
+    },
+    {
+      "id": "2026-11-07-warren-senate-banking",
+      "url": "https://coinpost.jp/?p=746832",
+      "title": "仮想通貨懐疑派ウォーレン氏、米上院銀行委員長へ 予測市場調査も視野＝WSJ",
+      "source": "coinpost.jp",
+      "source_group": "news",
+      "published_at": "2026-11-06T15:05:50+09:00",
+      "category": "crypto",
+      "keywords": [
+        "crypto-regulation",
+        "us-midterms"
+      ],
+      "score": 66,
+      "why": "matched: 仮想通貨規制",
+      "read_min": 3,
+      "tldr": "WSJ によると、仮想通貨に懐疑的なウォーレン上院議員が 2027 年 1 月から上院銀行委員長に就く見込み。予測市場のインサイダー取引疑惑や仮想通貨企業の消費者保護を調べる可能性がある。",
+      "points": [],
+      "code": null,
+      "signal": null,
+      "pick": false
+    },
+    {
+      "id": "2026-11-07-amundi-tokenized-index-fund",
+      "url": "https://coinpost.jp/?p=746769",
+      "title": "欧州大手アムンディ、イーサリアム上で株式指数ファンドをトークン化 従来の商品規模は約4兆円",
+      "source": "coinpost.jp",
+      "source_group": "news",
+      "published_at": "2026-11-06T11:35:41+09:00",
+      "category": "funds",
+      "keywords": [
+        "tokenization",
+        "index-fund",
+        "ethereum"
+      ],
+      "score": 65,
+      "why": "matched: インデックス",
+      "read_min": 3,
+      "tldr": "欧州の資産運用大手アムンディが、主力の欧州株式指数ファンドにイーサリアム上でトークン化したシェアクラスを設けた。従来の商品規模は約 4 兆円。",
+      "points": [],
+      "code": null,
+      "signal": null,
+      "pick": false
+    },
+    {
+      "id": "2026-11-07-trump-defeat-japan-risk",
+      "url": "https://diamond.jp/articles/-/402822",
+      "title": "トランプ大敗で何が起きる？AI投資減速だけじゃない、日本を襲う「もう一つのリスク」 - 伊藤忠総研「世界経済ニュースの読み解き方」",
+      "source": "diamond.jp",
+      "source_group": "news",
+      "published_at": "2026-11-07T05:00:00+09:00",
+      "category": "macro",
+      "keywords": [
+        "us-midterms",
+        "fed",
+        "ai-economy"
+      ],
+      "score": 62,
+      "why": "matched: 米国株・金利",
+      "read_min": 6,
+      "tldr": "伊藤忠総研によるコラム。トランプ大統領の中間選挙大敗で AI 投資にブレーキがかかる可能性に加え、FRB の独立性や通商政策がどう変わるかを、日本企業への影響とともに解説している。",
+      "points": [],
+      "code": null,
+      "signal": null,
+      "pick": false
+    },
+    {
+      "id": "2026-11-07-google-terawulf-anthropic",
+      "url": "https://coinpost.jp/?p=746730",
+      "title": "グーグル、ビットコイン採掘企業のAI拠点を支援 アンソロピックの不払いに備え",
+      "source": "coinpost.jp",
+      "source_group": "news",
+      "published_at": "2026-11-06T10:15:32+09:00",
+      "category": "crypto",
+      "keywords": [
+        "bitcoin",
+        "data-center",
+        "anthropic"
+      ],
+      "score": 60,
+      "why": "matched: ビットコイン",
+      "read_min": 3,
+      "tldr": "ビットコイン採掘から AI インフラに転換したテラウルフが、アンソロピック向けデータセンターのリースについて、不払い時の支払いをグーグルが支える信用補完契約を結んだ。約 190 億ドル規模の契約を裏付けとする借入を後押しする。",
+      "points": [],
+      "code": null,
+      "signal": "B! 1",
+      "pick": false
+    },
+    {
+      "id": "2026-11-07-shimane-bank-loss",
+      "url": "https://toyokeizai.net/articles/-/962915?utm_source=rss&utm_medium=http&utm_campaign=link_back",
+      "title": "島根銀行が大幅赤字予想に転落､\"100億円の増資\"を迫られた事情 大口融資先の｢全東信｣も破産 | 政治・経済・投資 | 東洋経済オンライン",
+      "source": "toyokeizai.net",
+      "source_group": "news",
+      "published_at": "2026-11-06T11:30:00+09:00",
+      "category": "stocks",
+      "keywords": [
+        "regional-banks"
+      ],
+      "score": 50,
+      "why": "matched: 地銀",
+      "read_min": 5,
+      "tldr": "島根銀行が大幅赤字予想に転落し、SBI 新生銀行を引受先とする第三者割当増資で 100 億円を調達すると 10 月 16 日に発表した。大口融資先の破産が背景にある。",
+      "points": [],
+      "code": null,
+      "signal": null,
+      "pick": false
+    }
+  ],
+  "social": [
+    {
+      "network": "hn",
+      "author": null,
+      "url": "https://news.ycombinator.com/item?id=50385272",
+      "text": "『Claude Code sends your email address to websites』のスレッド。479 件のコメント。",
+      "metrics": "▲ 1,525  ✉ 479",
+      "heat": 100,
+      "category": "ai",
+      "keywords": [
+        "claude",
+        "privacy"
+      ],
+      "posted_at": "2026-11-06T07:17:15+09:00"
+    },
+    {
+      "network": "x",
+      "author": "@mitsuhiko",
+      "url": "https://x.com/mitsuhiko/status/2118487181366804847",
+      "text": "メールアドレスが送られるのは Claude Code ではなく Claude モデルの振る舞いで、401/403 の後やサーバーが（robots.txt などで）求めたときに起きやすいと指摘した。",
+      "metrics": null,
+      "heat": null,
+      "category": "ai",
+      "keywords": [
+        "claude",
+        "privacy"
+      ],
+      "posted_at": "2026-11-06T08:34:38+09:00"
+    },
+    {
+      "network": "x",
+      "author": "@P7RIM3",
+      "url": "https://x.com/P7RIM3/status/2118482582195069275",
+      "text": "Claude Code v2.1.318 が Web 検索中に User-Agent へメールアドレスを入れ、第三者に渡って詐欺メールが届いたという報告を紹介し、AI ツールにもプライバシーレビューが必要だと述べた。",
+      "metrics": null,
+      "heat": null,
+      "category": "ai",
+      "keywords": [
+        "claude",
+        "privacy",
+        "ai-security"
+      ],
+      "posted_at": "2026-11-06T08:16:21+09:00"
+    },
+    {
+      "network": "x",
+      "author": "@The_Cyber_News",
+      "url": "https://x.com/The_Cyber_News/status/2118716305243312209",
+      "text": "Claude Code がユーザーのメールアドレスを HTTP の User-Agent ヘッダーで第三者サイトに送っていたと報じる記事を紹介した。",
+      "metrics": null,
+      "heat": null,
+      "category": "ai",
+      "keywords": [
+        "claude",
+        "privacy"
+      ],
+      "posted_at": "2026-11-06T23:45:05+09:00"
+    },
+    {
+      "network": "x",
+      "author": "@goto_finance",
+      "url": "https://x.com/goto_finance/status/2118108295487684733",
+      "text": "東京市場では民主党大勝による AI データセンター規制の警戒で日経平均が一時 3000 円安となったが、一夜明けた NY 市場は上昇し、日経平均先物は下げ幅をほぼ埋めたと解説した。",
+      "metrics": null,
+      "heat": null,
+      "category": "stocks",
+      "keywords": [
+        "nikkei225",
+        "us-midterms"
+      ],
+      "posted_at": "2026-11-05T07:29:04+09:00"
+    },
+    {
+      "network": "hn",
+      "author": null,
+      "url": "https://news.ycombinator.com/item?id=50381623",
+      "text": "『Nasdaq plummets 4% into correction territory』のスレッド。183 件のコメント。",
+      "metrics": "▲ 224  ✉ 183",
+      "heat": 56,
+      "category": "stocks",
+      "keywords": [
+        "us-stocks",
+        "us-midterms"
+      ],
+      "posted_at": "2026-11-06T02:11:15+09:00"
+    }
+  ],
+  "releases": []
+}
