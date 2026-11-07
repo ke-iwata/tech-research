@@ -1,0 +1,758 @@
+{
+  "date": "2026-11-08",
+  "generated_at": "2026-11-08T06:30:00+09:00",
+  "stats": {
+    "collected": 187,
+    "sources_ok": 25,
+    "sources_total": 26,
+    "by_group": {
+      "tech_blog": 57,
+      "hackernews": 41,
+      "news": 82,
+      "official": 7
+    },
+    "failed_sources": [
+      "coindesk_jp"
+    ]
+  },
+  "digest": [
+    {
+      "category": "be",
+      "text": "Ghostty のターミナル・エミュレーション部を切り出した libghostty-vt が 1.0 になり、C ABI の安定を宣言（HN 968 pt）。JetBrains IDE や Neovim がすでに採用している。",
+      "keywords": [
+        "terminal-emulator",
+        "oss"
+      ]
+    },
+    {
+      "category": "be",
+      "text": "GitHub が新しい Git ストレージ基盤を解説。オブジェクトを Blob Storage に置き ref 更新だけを合意させる構成で、1 リポジトリに 5,000 エージェント・毎秒 7,200 push を社内で確認した。",
+      "keywords": [
+        "git",
+        "github"
+      ]
+    },
+    {
+      "category": "ai",
+      "text": "安価な判定モデルで一次判定し、確信度が中間の案件だけ Claude Opus に回すと、Opus 単独とほぼ同じ精度を約 4 分の 1 のコストで出せたとの検証が HN で 567 pt。",
+      "keywords": [
+        "llm-cost",
+        "llm-as-judge"
+      ]
+    },
+    {
+      "category": "crypto",
+      "text": "米中間選挙後のテック株急落で、5 日の米ビットコイン現物 ETF は 4.3 億ドルの純流出（2〜5 日累計 8.7 億ドル）。米財務省は MEXC を米金融システムから締め出す命令を出した。",
+      "keywords": [
+        "bitcoin-etf",
+        "crypto-exchange"
+      ]
+    },
+    {
+      "category": "macro",
+      "text": "植田日銀総裁が IMF で講演し、日本の経常黒字が海外投資の所得中心に移った背景を企業行動の変化から説明。設備投資や銀行貸出の伸びにリスクテイクの変化が見えるとした。",
+      "keywords": [
+        "boj-policy",
+        "current-account"
+      ]
+    }
+  ],
+  "items": [
+    {
+      "id": "2026-11-08-hn-libghostty",
+      "url": "https://mitchellh.com/writing/libghostty-1-0",
+      "title": "Libghostty 1.0",
+      "source": "hatena/it",
+      "source_group": "tech_blog",
+      "published_at": "2026-11-07T20:09:17+09:00",
+      "category": "be",
+      "keywords": [
+        "terminal-emulator",
+        "oss",
+        "zig"
+      ],
+      "score": 100,
+      "why": "HN 968 pt・はてブ 9",
+      "read_min": 8,
+      "tldr": "Ghostty のターミナル・エミュレーション部分を切り出した C ライブラリ libghostty-vt が 1.0 になり、ライブラリと C ABI の安定を宣言した。JetBrains IDE のターミナルや Neovim（libvterm の置き換え）などがすでに採用している。",
+      "points": [
+        "全オブジェクトを不透明ハンドルにし、値は enum キーの getter/setter で読み書きする設計。新しいヘッダーで古いライブラリを使うと GHOSTTY_UNSUPPORTED を返し、CI で libabigail による ABI 差分チェックを行う",
+        "MIT ライセンスで実行時依存は libc のみ。Linux（glibc/musl）・macOS・iOS・FreeBSD・Windows・Android・WebAssembly で CI テストし、スレッドを作らずアロケータも差し替えられる",
+        "JetBrains IDE（作者によると 1,250 万人超のアクティブユーザー）、Neovim、KDE の実験的な Konsole 代替、Turborepo、OrbStack などが利用。Rust・Go・Python など各言語のバインディングもある"
+      ],
+      "code": null,
+      "signal": "B! 9 · ▲ 968",
+      "pick": true
+    },
+    {
+      "id": "2026-11-08-hn-asn-grapheneos",
+      "url": "https://github.com/PrivSec-dev/banking-apps-compat-report/issues/105",
+      "title": "Dutch 'idealist' bank ASN blocks non-Google Android, including GrapheneOS",
+      "source": "hackernews",
+      "source_group": "hackernews",
+      "published_at": "2026-11-06T18:27:12+09:00",
+      "category": "sec",
+      "keywords": [
+        "android",
+        "privacy"
+      ],
+      "score": 88,
+      "why": "HN 641 pt",
+      "read_min": 3,
+      "tldr": "オランダの ASN Bank のアプリが、Google 認証のない Android（GrapheneOS を含む）での利用をブロックしたという互換性レポートの issue。HN で 641 pt・420 件のコメントを集めた。",
+      "points": [],
+      "code": null,
+      "signal": "▲ 641",
+      "pick": false
+    },
+    {
+      "id": "2026-11-08-hn-jev-opus",
+      "url": "https://hightouch.com/blog/llm-judges-identity-resolution",
+      "title": "A Jev that can ask Opus for help gives Opus accuracy at 4x lower cost",
+      "source": "hackernews",
+      "source_group": "hackernews",
+      "published_at": "2026-11-07T04:48:51+09:00",
+      "category": "ai",
+      "keywords": [
+        "llm-cost",
+        "llm-as-judge",
+        "claude"
+      ],
+      "score": 87,
+      "why": "HN 567 pt",
+      "read_min": 9,
+      "tldr": "Hightouch が ID 統合（同一人物の名寄せ）の判定で、0〜1 の確信度を返す高速な判定モデル Jev を一次判定に使い、確信度が中間の案件だけ Claude Opus に回す構成を検証した。易しいテストでは Opus 単独とほぼ同じ精度を約 4 分の 1 のコストで出した。",
+      "points": [
+        "易しいテスト：Opus 単独 99.0%・1,000 件あたり $3.86 に対し、Jev＋Opus は 98.8%・$0.88。Jev 単独は 95.7%・$0.05",
+        "難しいテスト：Opus 単独 95.1%・$5.39 に対し、Jev＋Opus は 95.3%・$2.94 と同等精度でコストは約半分",
+        "確信度 30〜90% の帯だけ Opus に回す（易しいテストで約 22%）。データが難しくなると中間の確信度が増え、プロンプトを変えなくても Opus に回る割合が自動で上がる"
+      ],
+      "code": null,
+      "signal": "B! 1 · ▲ 567",
+      "pick": true
+    },
+    {
+      "id": "2026-11-08-hn-mac-family-classifier",
+      "url": "https://8rank.ai/game/apple-intelligence-personal-knowledge-graph",
+      "title": "Every Mac comes with an (undocumented) family member classifier",
+      "source": "hackernews",
+      "source_group": "hackernews",
+      "published_at": "2026-11-07T18:46:03+09:00",
+      "category": "sec",
+      "keywords": [
+        "privacy",
+        "apple"
+      ],
+      "score": 85,
+      "why": "HN 484 pt",
+      "read_min": 5,
+      "tldr": "Mac に、利用者の連絡先から家族などを推定する文書化されていない分類器（Apple Intelligence の個人ナレッジグラフ）が入っているという記事。HN で 484 pt。",
+      "points": [],
+      "code": null,
+      "signal": "B! 1 · ▲ 484",
+      "pick": false
+    },
+    {
+      "id": "2026-11-08-hn-github-git-storage",
+      "url": "https://github.blog/engineering/architecture-optimization/inside-githubs-new-git-storage-architecture/",
+      "title": "Inside GitHub's new Git storage architecture",
+      "source": "hatena/it",
+      "source_group": "tech_blog",
+      "published_at": "2026-11-07T07:30:33+09:00",
+      "category": "be",
+      "keywords": [
+        "git",
+        "github",
+        "object-storage"
+      ],
+      "score": 83,
+      "why": "HN 210 pt・はてブ 8",
+      "read_min": 10,
+      "tldr": "GitHub が Universe で発表した新しい Git ストレージ基盤の解説。Git オブジェクトは Azure Blob Storage に置き、参照（ref）の更新だけを専用の複製ログ Ref-CAS で合意させることで、1 リポジトリに数千のエージェントが同時に push できる構成にした。",
+      "points": [
+        "設計の柱は「調整を最小にする」と「ストレージとコンピュートの分離」。オブジェクトは不変なので並行に書き、ref の更新だけをクォーラムの compare-and-swap で確定する",
+        "読み書きは使い捨ての仮想レプリカが担い、ローカルディスクはいつでも作り直せるキャッシュ。圧縮（compaction）と GC はバックグラウンドのノードがシャード単位で行う",
+        "社内テストで 1 リポジトリに 5,000 エージェント・毎秒 7,200 push。現在は限定プライベートプレビューで、来年初めに広く展開する予定"
+      ],
+      "code": null,
+      "signal": "B! 8 · ▲ 210",
+      "pick": true
+    },
+    {
+      "id": "2026-11-08-hn-ai-accelerating-ai-research",
+      "url": "https://www.planned-obsolescence.org/p/ai-is-dramatically-accelerating-ai",
+      "title": "AI is dramatically accelerating AI research",
+      "source": "hackernews",
+      "source_group": "hackernews",
+      "published_at": "2026-11-07T05:27:23+09:00",
+      "category": "ai",
+      "keywords": [
+        "ai-research",
+        "ai-agent"
+      ],
+      "score": 80,
+      "why": "HN 354 pt・はてブ 22",
+      "read_min": 7,
+      "tldr": "AI が AI 研究そのものを大きく加速させている、と論じる Planned Obsolescence のエッセイ。HN で 354 pt・329 件のコメント。",
+      "points": [],
+      "code": null,
+      "signal": "B! 22 · ▲ 354",
+      "pick": false
+    },
+    {
+      "id": "2026-11-08-hn-gemini-omni-flash",
+      "url": "https://blog.google/innovation-and-ai/technology/developers-tools/introducing-gemini-omni-1-2-flash/",
+      "title": "Gemini Omni 1.2 Flash",
+      "source": "hackernews",
+      "source_group": "hackernews",
+      "published_at": "2026-11-06T22:35:27+09:00",
+      "category": "ai",
+      "keywords": [
+        "google",
+        "llm"
+      ],
+      "score": 80,
+      "why": "HN 356 pt",
+      "read_min": 4,
+      "tldr": "Google が開発者向けに Gemini Omni 1.2 Flash を発表した。HN で 356 pt。",
+      "points": [],
+      "code": null,
+      "signal": "▲ 356",
+      "pick": false
+    },
+    {
+      "id": "2026-11-08-hn-firecracker-escape",
+      "url": "https://pwn.ai/blog/firecracker-escape",
+      "title": "Firecracker VM Escape: PwnEscape Part 2",
+      "source": "hackernews",
+      "source_group": "hackernews",
+      "published_at": "2026-11-07T04:33:38+09:00",
+      "category": "sec",
+      "keywords": [
+        "virtualization",
+        "sandbox",
+        "aws"
+      ],
+      "score": 77,
+      "why": "HN 277 pt",
+      "read_min": 15,
+      "tldr": "microVM の VMM である Firecracker からホストへ抜ける攻撃チェーンの解説（PwnEscape Part 2）。KVM_RUN の戻り経路でホストカーネル上の vCPU スレッドのレジスタ退避領域を書き換え、ホスト上で root としてコードを実行した。",
+      "points": [
+        "検証環境は x86-64 の Firecracker v1.16.1、ホストカーネル 7.0.0-1011-aws。jailer は使っていない",
+        "Part 1 で得たホストメモリの読み書き手段を使い、ゲストのページに置いた目印（nonce）で EPT の変換を確かめながらホスト物理アドレスを特定した",
+        "Firecracker は動き続け、VM にも SSH で入れたまま。本番の jailer（権限降格・namespace・seccomp）がある場合は別途評価が必要と記事自身が断っている"
+      ],
+      "code": {
+        "file": "記事中の疑似コード",
+        "lang": "python",
+        "text": "for root in candidate_ept_roots:\n    page_hpa = walk_ept(root, guest_gpa)\n    if page_hpa is invalid:\n        continue\n    contents = read_host(page_hpa, length(nonce))\n    if contents == nonce:\n        candidates.append((root, page_hpa))"
+      },
+      "signal": "▲ 277",
+      "pick": true
+    },
+    {
+      "id": "2026-11-08-hn-asahi-linux",
+      "url": "https://asahilinux.org/2026/11/progress-report-7-3/",
+      "title": "Asahi Linux Progress Linux 7.3",
+      "source": "hackernews",
+      "source_group": "hackernews",
+      "published_at": "2026-11-07T14:20:18+09:00",
+      "category": "be",
+      "keywords": [
+        "linux",
+        "apple"
+      ],
+      "score": 75,
+      "why": "HN 247 pt",
+      "read_min": 8,
+      "tldr": "Apple Silicon Mac 向け Linux ディストリビューション Asahi Linux の、Linux 7.3 時点の進捗レポート。HN で 247 pt。",
+      "points": [],
+      "code": null,
+      "signal": "▲ 247",
+      "pick": false
+    },
+    {
+      "id": "2026-11-08-hn-15k-infected-sites",
+      "url": "https://scotthelme.co.uk/we-know-15-579-websites-are-infected-how-do-we-tell-them/",
+      "title": "We know 15k websites are infected. how do we tell them?",
+      "source": "hackernews",
+      "source_group": "hackernews",
+      "published_at": "2026-11-07T03:13:35+09:00",
+      "category": "sec",
+      "keywords": [
+        "incident-response",
+        "supply-chain"
+      ],
+      "score": 70,
+      "why": "HN 164 pt",
+      "read_min": 8,
+      "tldr": "Scott Helme が、マルウェアに感染していると把握している 15,579 サイトに、どうやって知らせればよいかを問う記事。HN で 164 pt。",
+      "points": [],
+      "code": null,
+      "signal": "▲ 164",
+      "pick": false
+    },
+    {
+      "id": "2026-11-08-nhk-gmo-ad",
+      "url": "https://news.web.nhk/newsweb/na/nd-20261107de72062",
+      "title": "GMO 管理者が全情報アクセス可能 リスク指摘も十分対策されず | NHKニュース",
+      "source": "hatena/it",
+      "source_group": "tech_blog",
+      "published_at": "2026-11-07T12:30:33+09:00",
+      "category": "sec",
+      "keywords": [
+        "security-incident",
+        "active-directory"
+      ],
+      "score": 73,
+      "why": "はてブ 153",
+      "read_min": 3,
+      "tldr": "GMO インターネットグループのサービスへの不正アクセスをめぐり、子会社では 2 年前から Active Directory を通じて管理者が全利用者の情報にアクセスできる状態で、リスクの指摘を受けても十分な対策が取られていなかったと NHK が報じた。",
+      "points": [],
+      "code": null,
+      "signal": null,
+      "pick": false
+    },
+    {
+      "id": "2026-11-08-hatena-rohto-breach",
+      "url": "https://www.itmedia.co.jp/news/article/2611/06/2000002984/",
+      "title": "ロート製薬、約280万人分の個人情報漏えい 9715件は通話音声データとクレカ情報が流出",
+      "source": "hatena/it",
+      "source_group": "tech_blog",
+      "published_at": "2026-11-07T10:47:18+09:00",
+      "category": "sec",
+      "keywords": [
+        "data-breach",
+        "security-incident"
+      ],
+      "score": 50,
+      "why": "はてブ 30",
+      "read_min": 3,
+      "tldr": "ロート製薬が、9 月に公表した通信販売システムへの不正アクセスの調査結果として、顧客 279 万 7,545 人分の個人情報漏えいと、うち 9,715 人分のクレジットカード情報の不正取得を発表した。",
+      "points": [],
+      "code": null,
+      "signal": null,
+      "pick": false
+    },
+    {
+      "id": "2026-11-08-hatena-isucon-claude-code",
+      "url": "https://sizu.me/laiso/posts/k59is4cnd77f",
+      "title": "ISUCON2026をClaude Codeが優勝したらしい｜laiso",
+      "source": "hatena/it",
+      "source_group": "tech_blog",
+      "published_at": "2026-11-07T19:00:45+09:00",
+      "category": "ai",
+      "keywords": [
+        "ai-coding",
+        "claude",
+        "ai-agent"
+      ],
+      "score": 67,
+      "why": "はてブ 102",
+      "read_min": 4,
+      "tldr": "ISUCON2026 で、参加者が 3 か月以上かけて作り込んだ Claude Code のハーネスを本番 8 時間無停止で自律実行させ、1 位のスコアを出したという紹介記事。",
+      "points": [],
+      "code": null,
+      "signal": null,
+      "pick": false
+    },
+    {
+      "id": "2026-11-08-hn-rune-rust-ui",
+      "url": "https://github.com/anomalyco/rune",
+      "title": "Rune: A native GPU-rendered Rust UI framework for macOS, Windows, Linux and web",
+      "source": "hackernews",
+      "source_group": "hackernews",
+      "published_at": "2026-11-07T01:31:32+09:00",
+      "category": "be",
+      "keywords": [
+        "rust",
+        "gui-toolkit"
+      ],
+      "score": 71,
+      "why": "HN 175 pt",
+      "read_min": 5,
+      "tldr": "macOS・Windows・Linux・Web で動く、GPU 描画のネイティブ Rust UI フレームワーク Rune。HN で 175 pt。",
+      "points": [],
+      "code": null,
+      "signal": "B! 1 · ▲ 175",
+      "pick": false
+    },
+    {
+      "id": "2026-11-08-hn-msft-oracle-capacity",
+      "url": "https://www.reuters.com/business/microsoft-is-winding-down-oracle-deal-rent-ai-cloud-capacity-bloomberg-news-2026-11-06/",
+      "title": "Microsoft is winding down Oracle deal to rent AI cloud capacity",
+      "source": "hackernews",
+      "source_group": "hackernews",
+      "published_at": "2026-11-07T03:04:06+09:00",
+      "category": "cloud",
+      "keywords": [
+        "microsoft",
+        "data-center"
+      ],
+      "score": 64,
+      "why": "HN 105 pt",
+      "read_min": 3,
+      "tldr": "Microsoft が、AI 向けクラウド容量を Oracle から借りる契約を縮小しているとロイターが Bloomberg の報道として伝えた。",
+      "points": [],
+      "code": null,
+      "signal": "▲ 105",
+      "pick": false
+    },
+    {
+      "id": "2026-11-08-boj-ueda-current-account",
+      "url": "http://www.boj.or.jp/about/press/koen_2026/ko261107a.htm",
+      "title": "【講演】植田総裁「日本の経常収支黒字と企業行動の変容」（IMF）",
+      "source": "日本銀行",
+      "source_group": "official",
+      "published_at": "2026-11-07T01:00:00+09:00",
+      "category": "macro",
+      "keywords": [
+        "boj-policy",
+        "current-account"
+      ],
+      "score": 90,
+      "why": "日銀の公式発表",
+      "read_min": 12,
+      "tldr": "植田総裁が IMF の講演で、日本の経常収支黒字が貿易黒字から海外投資の所得（第一次所得収支）中心へ移った背景を、企業の貯蓄・投資行動の変化から説明した。足元では設備投資や銀行貸出の伸びに企業のリスクテイクの変化が見えるとしつつ、内需主導の調整に向かうかはまだ分からないと述べた。",
+      "points": [
+        "経常黒字はこの 40 年ほど GDP 比 2〜4% で推移。貿易黒字は縮小して赤字に転じた一方、第一次所得収支の黒字は GDP 比 6% 以上に拡大した",
+        "高齢化で家計の純貯蓄は減ったが、バブル崩壊後に企業が投資を抑えて純貯蓄主体になり、それを相殺した。対外直接投資の収益率は多くの期間で 8% を超えた",
+        "感染症流行後の設備投資は 1990 年代初頭のピークを上回り、銀行貸出の伸びは 5% 以上と過去 30 年で最も速い。金融政策の先行きへの直接の言及はない"
+      ],
+      "code": null,
+      "signal": null,
+      "pick": true
+    },
+    {
+      "id": "2026-11-08-coinpost-btc-eth-etf-outflow",
+      "url": "https://coinpost.jp/?p=746955",
+      "title": "米中間選挙後投資家の資金引き上げ加速、BTC・ETH現物ETFから合計840億円流出",
+      "source": "CoinPost",
+      "source_group": "news",
+      "published_at": "2026-11-07T08:05:57+09:00",
+      "category": "crypto",
+      "keywords": [
+        "bitcoin-etf",
+        "crypto-etf",
+        "us-midterms"
+      ],
+      "score": 85,
+      "why": "matched: ビットコイン",
+      "read_min": 4,
+      "tldr": "米中間選挙後に米テック株が急落した 5 日、米国のビットコイン現物 ETF は 4.30 億ドル、イーサリアム現物 ETF は約 1 億ドルの純流出となった。ビットコイン現物 ETF は 12 本すべてで純流入がなかった。",
+      "points": [
+        "SoSoValue の集計で、ビットコイン現物 ETF の 11 月 2〜5 日の累計流出は 8.7 億ドル。最大は Fidelity の FBTC（2 億ドル）、次いで BlackRock の IBIT（1.05 億ドル）",
+        "イーサリアム現物 ETF は BlackRock の ETHA と ETHB で流出の 97% 超を占めた。4 日の 5,302 万ドルの流入を上回る流出",
+        "同日は BTC が 5.6%、ETH が 7.8% 下落し、BTC は一時 7 万 5,642 ドルまで下げた。24 時間の清算額は 10 億ドルを超えた"
+      ],
+      "code": null,
+      "signal": null,
+      "pick": true
+    },
+    {
+      "id": "2026-11-08-coinpost-mexc-fincen",
+      "url": "https://coinpost.jp/?p=746930",
+      "title": "米財務省、仮想通貨取引所MEXCを米金融システムから排除",
+      "source": "CoinPost",
+      "source_group": "news",
+      "published_at": "2026-11-07T05:55:29+09:00",
+      "category": "crypto",
+      "keywords": [
+        "crypto-exchange",
+        "crypto-regulation"
+      ],
+      "score": 70,
+      "why": "matched: 暗号資産規制",
+      "read_min": 4,
+      "tldr": "米財務省の金融犯罪取締ネットワーク（FinCEN）が 6 日、暗号資産取引所 MEXC Global との送金を米金融機関に禁じる命令を出し、同取引所を米金融システムから事実上締め出した。",
+      "points": [
+        "2021 年 5 月〜2026 年 5 月に少なくとも 160 億ドルの取引が、イラン・北朝鮮・ロシアの制裁逃れやサイバー犯罪に使われたとしている",
+        "うちロシアの制裁逃れ関連が約 15 億ドル、制裁対象のイラン系取引所 40 超との直接取引が約 10 億ドル",
+        "財務省は、MEXC はイラン・北朝鮮の利用者を禁じる規定を持ちながら管理が機能していなかったと説明。記事に MEXC 側の反応や日本の利用者への影響は書かれていない"
+      ],
+      "code": null,
+      "signal": null,
+      "pick": true
+    },
+    {
+      "id": "2026-11-08-afp-paraguay-deposit-freeze",
+      "url": "https://www.afpbb.com/articles/-/3661281",
+      "title": "パラグアイ大統領が辞任表明、人口のほぼ半数が預金凍結で混乱",
+      "source": "hatena/経済",
+      "source_group": "tech_blog",
+      "published_at": "2026-11-06T17:08:23+09:00",
+      "category": "macro",
+      "keywords": [
+        "banking-crisis",
+        "geopolitics"
+      ],
+      "score": 65,
+      "why": "はてブ 93",
+      "read_min": 3,
+      "tldr": "パラグアイで中央銀行が 3 日、資本不足に陥ったウエノ銀行を管理下に置き、年金受給者を含む約 300 万人（人口のほぼ半数）の預金が凍結された。抗議が広がるなか、同行と関係のあったペニャ大統領が 5 日に辞任を表明した。",
+      "points": [
+        "ペニャ氏は同行を所有する企業グループの株を持っていたが、昨年売却した",
+        "3〜4 日には首都アスンシオンの支店に預金を引き出そうとする長い列ができ、5 日には議会前に数千人が集まった",
+        "議会は辞任の受理を保留したまま、利益相反などを理由に全会一致で弾劾手続きを始め、ペニャ氏は暫定的に職務を続けている"
+      ],
+      "code": null,
+      "signal": null,
+      "pick": true
+    },
+    {
+      "id": "2026-11-08-togetter-nikkei-plunge",
+      "url": "https://togetter.com/li/2767385",
+      "title": "「すべてが絶妙すぎる再現」日経平均が歴史的な暴落をしているのに合わせて、いらすとやが呆然とする男性を投稿",
+      "source": "hatena/経済",
+      "source_group": "tech_blog",
+      "published_at": "2026-11-06T19:00:00+09:00",
+      "category": "stocks",
+      "keywords": [
+        "nikkei225",
+        "us-stocks"
+      ],
+      "score": 75,
+      "why": "matched: 米国株",
+      "read_min": 2,
+      "tldr": "6 日の日経平均は前日比 3,643 円 13 銭（5.96%）安の 5 万 7,434 円 77 銭と 5 日続落し、下げ幅は歴代 3 位、半年ぶりに 6 万円を割った（日本経済新聞の報道を引用したまとめ）。",
+      "points": [],
+      "code": null,
+      "signal": "B! 38",
+      "pick": false
+    },
+    {
+      "id": "2026-11-08-hn-anthropic-ipo-valuation",
+      "url": "https://www.bloomberg.com/news/articles/2026-11-06/anthropic-ipo-valuation-expectations-pressured-after-ai-rout",
+      "title": "Anthropic IPO buyers see valuation as low as $1.1T",
+      "source": "hackernews",
+      "source_group": "hackernews",
+      "published_at": "2026-11-07T01:54:36+09:00",
+      "category": "stocks",
+      "keywords": [
+        "anthropic",
+        "ipo"
+      ],
+      "score": 60,
+      "why": "HN 301 pt",
+      "read_min": 3,
+      "tldr": "AI 関連株の急落を受けて、Anthropic の IPO で買い手が想定する評価額が 1.1 兆ドルまで下がっていると Bloomberg が報じた（本文は有料のため見出しのみ）。",
+      "points": [],
+      "code": null,
+      "signal": "▲ 301",
+      "pick": false
+    },
+    {
+      "id": "2026-11-08-coinpost-anthropic-preipo-option",
+      "url": "https://coinpost.jp/?p=746918",
+      "title": "米アンソロピックの上場前予想株価連動オプション、ハイパーコールが9日に提供開始へ",
+      "source": "CoinPost",
+      "source_group": "news",
+      "published_at": "2026-11-06T22:20:10+09:00",
+      "category": "stocks",
+      "keywords": [
+        "anthropic",
+        "ipo",
+        "prediction-market"
+      ],
+      "score": 50,
+      "why": "matched: 米国株",
+      "read_min": 2,
+      "tldr": "ハイパーコールが、上場前の Anthropic の予想株価に連動する現金精算型のオプション市場を 9 日に始める見通し。株式は受け取れず、米国の顧客は利用できない。",
+      "points": [],
+      "code": null,
+      "signal": null,
+      "pick": false
+    },
+    {
+      "id": "2026-11-08-diamond-em-tech-funds",
+      "url": "https://diamond.jp/articles/-/402764",
+      "title": "新興国株指数の急落は「買い場」か「危険信号」か？利益予測がブレても長期視点なら強気でいい理由【投資信託の最前線】 - ダイヤモンドZAi NISA投信グランプリ2026",
+      "source": "ダイヤモンド",
+      "source_group": "news",
+      "published_at": "2026-11-07T21:00:00+09:00",
+      "category": "funds",
+      "keywords": [
+        "emerging-markets",
+        "semiconductor",
+        "index-fund"
+      ],
+      "score": 55,
+      "why": "matched: nisa",
+      "read_min": 5,
+      "tldr": "年初来で 5 割近く上がっていた台湾・韓国を中心とする新興国のハイテク・半導体株が急落し、値動きが荒くなっている背景を、BNP パリバ・アセットマネジメントのレポートから解説する投資信託の連載記事。",
+      "points": [],
+      "code": null,
+      "signal": null,
+      "pick": false
+    },
+    {
+      "id": "2026-11-08-coinpost-dol-401k-crypto",
+      "url": "https://coinpost.jp/?p=746928",
+      "title": "米労働省、仮想通貨含む確定拠出年金の代替資産規則を審査に提出",
+      "source": "CoinPost",
+      "source_group": "news",
+      "published_at": "2026-11-07T06:22:21+09:00",
+      "category": "funds",
+      "keywords": [
+        "retirement-plan",
+        "crypto-regulation"
+      ],
+      "score": 50,
+      "why": "matched: 投資信託",
+      "read_min": 2,
+      "tldr": "米労働省が、暗号資産などの代替資産を含むファンドを 401k で提供する際の受託者義務を明確にする規則案を、ホワイトハウスの情報規制問題室に提出した。",
+      "points": [],
+      "code": null,
+      "signal": null,
+      "pick": false
+    },
+    {
+      "id": "2026-11-08-coinpost-fincen-travel-rule-withdrawn",
+      "url": "https://coinpost.jp/?p=746941",
+      "title": "米当局、仮想通貨含む国際送金の本人情報収集を拡大する案を撤回",
+      "source": "CoinPost",
+      "source_group": "news",
+      "published_at": "2026-11-07T07:15:55+09:00",
+      "category": "crypto",
+      "keywords": [
+        "kyc",
+        "crypto-regulation"
+      ],
+      "score": 45,
+      "why": "matched: 暗号資産規制",
+      "read_min": 2,
+      "tldr": "FinCEN と FRB が、暗号資産を含む国際送金で本人情報を集める基準額を 3,000 ドルから 250 ドルに下げる規則案を撤回すると発表した。撤回は 9 日に発効する。",
+      "points": [],
+      "code": null,
+      "signal": null,
+      "pick": false
+    },
+    {
+      "id": "2026-11-08-coinpost-iren-mining-to-ai",
+      "url": "https://coinpost.jp/?p=746965",
+      "title": "米IREN決算、ビットコイン採掘から年内に実質撤退見込み AI事業へ移行",
+      "source": "CoinPost",
+      "source_group": "news",
+      "published_at": "2026-11-07T12:50:46+09:00",
+      "category": "crypto",
+      "keywords": [
+        "bitcoin-mining",
+        "data-center",
+        "earnings"
+      ],
+      "score": 45,
+      "why": "matched: ビットコイン",
+      "read_min": 2,
+      "tldr": "IREN が 7〜9 月期決算で AI クラウド売上の急増を示し、年末までにビットコイン採掘から AI 事業への移行をほぼ終える方針を示した。テラウルフも同期の売上の 83% が HPC リースで、採掘収益は前年比約 7 割減った。",
+      "points": [],
+      "code": null,
+      "signal": null,
+      "pick": false
+    },
+    {
+      "id": "2026-11-08-fsa-major-banks-guideline",
+      "url": "https://www.fsa.go.jp/news/r8/sonota/20261106-2/20261106-2.html",
+      "title": "「主要行等向けの総合的な監督指針」等の一部改正（案）に対するパブリックコメントの結果等について公表しました。",
+      "source": "金融庁",
+      "source_group": "official",
+      "published_at": "2026-11-06T20:00:00+09:00",
+      "category": "macro",
+      "keywords": [
+        "fsa",
+        "bank-supervision"
+      ],
+      "score": 45,
+      "why": "金融庁の公式発表",
+      "read_min": 2,
+      "tldr": "金融庁が「主要行等向けの総合的な監督指針」等の一部改正案について、パブリックコメントの結果を公表した。",
+      "points": [],
+      "code": null,
+      "signal": null,
+      "pick": false
+    }
+  ],
+  "social": [
+    {
+      "network": "hn",
+      "author": null,
+      "url": "https://news.ycombinator.com/item?id=50399933",
+      "text": "『Libghostty 1.0』のスレッド。166 件のコメント。",
+      "metrics": "▲ 968  ✉ 166",
+      "heat": 100,
+      "category": "be",
+      "keywords": [
+        "terminal-emulator",
+        "oss"
+      ],
+      "posted_at": "2026-11-07T20:09:17+09:00"
+    },
+    {
+      "network": "hn",
+      "author": null,
+      "url": "https://news.ycombinator.com/item?id=50390124",
+      "text": "『Dutch 'idealist' bank ASN blocks non-Google Android, including GrapheneOS』のスレッド。420 件のコメント。",
+      "metrics": "▲ 641  ✉ 420",
+      "heat": 100,
+      "category": "sec",
+      "keywords": [
+        "android",
+        "privacy"
+      ],
+      "posted_at": "2026-11-06T18:27:12+09:00"
+    },
+    {
+      "network": "hn",
+      "author": null,
+      "url": "https://news.ycombinator.com/item?id=50397429",
+      "text": "『A Jev that can ask Opus for help gives Opus accuracy at 4x lower cost』のスレッド。140 件のコメント。",
+      "metrics": "▲ 567  ✉ 140",
+      "heat": 100,
+      "category": "ai",
+      "keywords": [
+        "llm-cost",
+        "llm-as-judge"
+      ],
+      "posted_at": "2026-11-07T04:48:51+09:00"
+    },
+    {
+      "network": "x",
+      "author": "@garko_otoku",
+      "url": "https://x.com/garko_otoku/status/2118505324953137497",
+      "text": "6 日の東京市場で日経平均が寄り付きに前日比 4,107 円安となり、5 万 7,000 円台まで下げたと伝え、背景をまとめるスレッドを投稿した。",
+      "metrics": null,
+      "heat": null,
+      "category": "stocks",
+      "keywords": [
+        "nikkei225"
+      ],
+      "posted_at": "2026-11-06T09:46:44+09:00"
+    },
+    {
+      "network": "x",
+      "author": "@Newsforce",
+      "url": "https://x.com/Newsforce/status/2118521299622367366",
+      "text": "世界的な売りで日本株が急落し、1 時間で約 73 兆円（4,640 億ドル）の時価総額が失われたとの推計を速報した。",
+      "metrics": null,
+      "heat": null,
+      "category": "stocks",
+      "keywords": [
+        "nikkei225"
+      ],
+      "posted_at": "2026-11-06T10:50:12+09:00"
+    },
+    {
+      "network": "x",
+      "author": "@thepfund",
+      "url": "https://x.com/thepfund/status/2118211886475030736",
+      "text": "11 月 4 日の米ビットコイン現物 ETF は 7,461 万ドルの純流入だったが、5 日間累計では 10.7 億ドルの流出で 7 月 1 日以来の規模だと集計した。",
+      "metrics": null,
+      "heat": null,
+      "category": "crypto",
+      "keywords": [
+        "bitcoin-etf"
+      ],
+      "posted_at": "2026-11-05T14:20:42+09:00"
+    }
+  ],
+  "releases": []
+}
