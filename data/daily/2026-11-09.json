@@ -1,0 +1,737 @@
+{
+  "date": "2026-11-09",
+  "generated_at": "2026-11-09T05:40:00+09:00",
+  "stats": {
+    "collected": 145,
+    "sources_ok": 25,
+    "sources_total": 26,
+    "by_group": {
+      "hackernews": 31,
+      "tech_blog": 54,
+      "news": 60
+    },
+    "failed_sources": [
+      "coindesk_jp"
+    ]
+  },
+  "digest": [
+    {
+      "category": "stocks",
+      "text": "6 日の日経平均は 3,643 円安の 5 万 7,434 円と過去 3 番目の下げ幅で、約半年ぶりに 6 万円を割った。前日の米 SOX 指数の約 12% 下落と、中間選挙後の AI データセンター規制への懸念が重なった。",
+      "keywords": [
+        "nikkei225",
+        "semiconductor",
+        "ai-regulation"
+      ]
+    },
+    {
+      "category": "sec",
+      "text": "Claude Code の「今後確認しない」で承認したコマンドが settings.local.json に平文で残り、GitHub の公開ファイル 1,122 件から 1,379 件の秘密情報が見つかったと Apiiro が報告（HN 529 pt）。",
+      "keywords": [
+        "ai-coding",
+        "secrets-management"
+      ]
+    },
+    {
+      "category": "sec",
+      "text": "macOS に同梱された XGBoost モデルが、メッセージや写真の共起から人ごとに「家族らしさ」を毎日採点していることを解析した記事が HN で 834 pt。",
+      "keywords": [
+        "apple",
+        "privacy"
+      ]
+    },
+    {
+      "category": "crypto",
+      "text": "ビットコインはハイテク株安につれて 1,200 万円前後に軟化し、100 日移動平均線を割り込んだ。今週は 10 日の米 CPI、13 日の PPI と AI インフラ企業の決算が焦点。",
+      "keywords": [
+        "bitcoin",
+        "us-inflation"
+      ]
+    }
+  ],
+  "items": [
+    {
+      "id": "2026-11-09-hn-nfsu2-browser",
+      "url": "https://nfsu2.xyz/",
+      "title": "Need for Speed Underground 2 online in the browser",
+      "source": "hackernews",
+      "source_group": "hackernews",
+      "published_at": "2026-11-07T18:36:36+09:00",
+      "category": "be",
+      "keywords": [
+        "static-recompilation",
+        "browser-games"
+      ],
+      "score": 96,
+      "why": "HN 1100 pt",
+      "read_min": 3,
+      "tldr": "PC 版『Need for Speed Underground 2』のコードを Chrome / Firefox 向けに再コンパイルし、ブラウザで遊べるようにしたファンプロジェクト。EA とは無関係と明記している。",
+      "points": [
+        "x86 から C への静的リコンパイラ NFSU2Recomp（MIT ライセンスのフォーク）が土台で、N64: Recompiled や XenonRecomp に着想を得たとしている",
+        "最大 120fps・ワイド画面、フリーロームとフレンドとのオンラインレース、キーボード・コントローラー・ハンドル・タッチ操作に対応",
+        "ゲームデータは端末側に保存し、事前読み込みや削除ができる。データの入手元はページに書かれておらず、権利者向けの連絡先を載せている"
+      ],
+      "code": null,
+      "signal": "▲ 1100",
+      "pick": true
+    },
+    {
+      "id": "2026-11-09-hn-mac-family-classifier",
+      "url": "https://8rank.ai/game/apple-intelligence-personal-knowledge-graph",
+      "title": "Every Mac comes with an (undocumented) family member classifier",
+      "source": "hackernews",
+      "source_group": "hackernews",
+      "published_at": "2026-11-07T18:46:03+09:00",
+      "category": "sec",
+      "keywords": [
+        "apple",
+        "privacy",
+        "on-device-ai"
+      ],
+      "score": 92,
+      "why": "HN 834 pt・はてブ 2",
+      "read_min": 20,
+      "tldr": "macOS に同梱された CoreML モデルが、メッセージや写真の共起から「家族らしさ」を人ごとに採点していることを解析した記事。結果は ~/Library/IntelligencePlatform の SQLite に毎日書き込まれる。",
+      "points": [
+        "EntityTagging_Family / FamilyAndFriends の 2 モデルは 144 個の特徴量を入力にする XGBoost の二値分類器。特徴量は姓・住所など識別系が約 20、メッセージの相手・時間帯・場所が約 40、写真の同席が約 84",
+        "データは Full Disk Access で保護された 51 個の SQLite に置かれ、家族スコアは entityTagging.db に 1 人 1 行で毎日再計算される",
+        "削除された記録が expired_stable_graph に移って読めるまま残っていたと報告。ただし確率から確信度への変換などは推測で、裏付けはないと筆者自身が断っている"
+      ],
+      "code": {
+        "file": "terminal",
+        "lang": "sh",
+        "text": "man 8 knowledgeconstructiond\n\n# knowledgeconstructiond analyzes the content on this device to help\n# build a knowledge graph representing the device and the user. It ..."
+      },
+      "signal": "B! 2 · ▲ 834",
+      "pick": true
+    },
+    {
+      "id": "2026-11-09-hn-openstick-homelab",
+      "url": "https://blog.bosscher.ch/posts/openstick/",
+      "title": "What I run on my $10 USD OpenStick homelab",
+      "source": "hackernews",
+      "source_group": "hackernews",
+      "published_at": "2026-11-08T03:12:12+09:00",
+      "category": "cloud",
+      "keywords": [
+        "homelab",
+        "linux"
+      ],
+      "score": 90,
+      "why": "HN 734 pt・はてブ 12",
+      "read_min": 8,
+      "tldr": "送料込み 10 ドルの 4G USB ドングル「OpenStick」に Debian を入れ、Podman で 10 種類ほどのサービスを動かしている自宅サーバーの紹介。",
+      "points": [
+        "ハードは 1GHz の Cortex-A53 4 コア、RAM 512MB（使えるのは約 450MB）、eMMC 4GB、Wi-Fi・4G モデム・GPS 付きでファンレス",
+        "AdGuard Home、Cloudflare Tunnel、Beszel、Gatus、Dozzle、RSS リーダー、ブックマーク保存などを systemd + Podman で運用",
+        "リソースは厳しく、アーカイブ処理などで負荷が跳ねる。Cloudflare に通信が見える点や、非公式バイナリの利用には注意が要ると筆者も書いている"
+      ],
+      "code": null,
+      "signal": "B! 12 · ▲ 734",
+      "pick": true
+    },
+    {
+      "id": "2026-11-09-hn-claude-to-pi",
+      "url": "https://caleb.software/posts/claude-to-pi.html",
+      "title": "Goodbye Claude, hello Pi",
+      "source": "hackernews",
+      "source_group": "hackernews",
+      "published_at": "2026-11-08T12:11:48+09:00",
+      "category": "ai",
+      "keywords": [
+        "ai-coding",
+        "claude",
+        "coding-agent"
+      ],
+      "score": 88,
+      "why": "HN 610 pt・はてブ 1",
+      "read_min": 7,
+      "tldr": "Claude Code からオープンソースのコーディング・ハーネス「Pi」に乗り換えた理由を書いた個人ブログ。設定の重複、VS Code 連携の不具合、頻繁なシステムプロンプト変更などを挙げている。",
+      "points": [
+        "CLAUDE.md と AGENTS.md の同期、IDE の選択範囲を 1 セッションしか受け取れない問題、VS Code 拡張で半分のスラッシュコマンドが動かないことなどを不満点に挙げる",
+        "今年の 244 リリースのうち 4 分の 3 超がシステムプロンプトかツール説明を変更し、既定の Bash ツール説明だけで約 3,000 トークンあると指摘",
+        "Pi は安定性・ミニマルさ・拡張性が魅力で、すでに自作拡張も書いたとする。使用モデルや費用には触れておらず、筆者は自らの偏りも認めている"
+      ],
+      "code": null,
+      "signal": "B! 1 · ▲ 610",
+      "pick": true
+    },
+    {
+      "id": "2026-11-09-hn-claude-code-secrets-leak",
+      "url": "https://apiiro.com/blog/coding-agents-leaking-secrets-github-dont-ask-again",
+      "title": "Claude Code's \"Don't Ask Again\" exposes passwords in 1,122 public GitHub files",
+      "source": "hackernews",
+      "source_group": "hackernews",
+      "published_at": "2026-11-08T05:45:32+09:00",
+      "category": "sec",
+      "keywords": [
+        "ai-coding",
+        "secrets-management",
+        "claude"
+      ],
+      "score": 86,
+      "why": "HN 529 pt・はてブ 44（日本語記事）",
+      "read_min": 6,
+      "tldr": "Claude Code で「今後確認しない」を選ぶと承認したコマンドが .claude/settings.local.json に平文で残り、GitHub 上の公開ファイル 1,122 件から 1,379 件の秘密情報が見つかったと Apiiro が報告した（はてブでも Dev & Gadget の記事が 44）。",
+      "points": [
+        "10 万 4,185 件の公開 settings.local.json を調べ、DB パスワード 379 件・SSH ログイン 43 件・GitHub/GitLab/npm トークン 42 件・AWS キー 23 件などを検出。過去の版やフォークを含めると 1,994 リポジトリ・2,539 件",
+        "ファイルはグローバルの git exclude には入るがプロジェクトの .gitignore には追加されず、既にコミット済みなら効かない。gitleaks・TruffleHog の両方が 215 件を見逃した（PGPASSWORD= などコマンド中のパスワード）",
+        "対策は露出した資格情報のローテーション、git rm --cached と .gitignore 追加、秘密は環境変数経由にする、Bash(npm run:*) のようなパターン承認にする、エージェント用フォルダを秘密スキャンの対象にする"
+      ],
+      "code": {
+        "file": "terminal",
+        "lang": "sh",
+        "text": "# 既にコミットした承認ルールを追跡対象から外す\ngit rm --cached .claude/settings.local.json\necho '.claude/settings.local.json' >> .gitignore\n\n# 承認は具体的なコマンドではなくパターンで\n#   Bash(npm run:*)\n# 秘密はコマンドに直書きせず環境変数で渡す（例 $DB_URL）"
+      },
+      "signal": "▲ 529",
+      "pick": true
+    },
+    {
+      "id": "2026-11-09-hn-msr-ai-frontiers",
+      "url": "https://hunch.net/?p=13764006",
+      "title": "The end of Microsoft Research's AI Frontiers group",
+      "source": "hackernews",
+      "source_group": "hackernews",
+      "published_at": "2026-11-08T03:02:17+09:00",
+      "category": "ai",
+      "keywords": [
+        "microsoft",
+        "ai-research"
+      ],
+      "score": 85,
+      "why": "HN 485 pt・はてブ 1",
+      "read_min": 5,
+      "tldr": "Microsoft Research の AI Frontiers グループが終わりを迎えたことについて、研究者ブログ hunch.net が書いた記事。HN で 300 件超のコメントが付いた。",
+      "points": [],
+      "code": null,
+      "signal": "B! 1 · ▲ 485",
+      "pick": false
+    },
+    {
+      "id": "2026-11-09-hn-discord-electron",
+      "url": "https://www.windowslatest.com/2026/11/06/every-windows-11-app-should-kill-electron-and-discord-just-showed-why-no-starting-screen-and-70-less-ram-even-with-two-accounts-signed-in/",
+      "title": "Every Windows 11 app should kill Electron, and Discord just showed why",
+      "source": "hackernews",
+      "source_group": "hackernews",
+      "published_at": "2026-11-07T20:11:15+09:00",
+      "category": "be",
+      "keywords": [
+        "electron",
+        "desktop-app"
+      ],
+      "score": 83,
+      "why": "HN 438 pt",
+      "read_min": 5,
+      "tldr": "Discord の Windows 版が起動画面をなくし、2 アカウントでログインしてもメモリ使用量を 70% 減らしたとして、Electron 製アプリの重さを論じる記事。",
+      "points": [],
+      "code": null,
+      "signal": "▲ 438",
+      "pick": false
+    },
+    {
+      "id": "2026-11-09-hn-maxxbench",
+      "url": "https://maxxbench.unlap.ai/research/why-maxxbench/",
+      "title": "MaxxBench – \"Nice DeepSWE score. But is it true?\"",
+      "source": "hackernews",
+      "source_group": "hackernews",
+      "published_at": "2026-11-08T02:19:00+09:00",
+      "category": "ai",
+      "keywords": [
+        "benchmark",
+        "ai-coding"
+      ],
+      "score": 81,
+      "why": "HN 376 pt・はてブ 1",
+      "read_min": 5,
+      "tldr": "コーディング系ベンチマーク DeepSWE のスコアは本当に信頼できるのか、という問題意識から作られた新しい評価「MaxxBench」の紹介。",
+      "points": [],
+      "code": null,
+      "signal": "B! 1 · ▲ 376",
+      "pick": false
+    },
+    {
+      "id": "2026-11-09-hn-llama-modchip",
+      "url": "https://github.com/synchopate/llama-modchip",
+      "title": "Llama-modchip: 284B DeepSeek on 64GB RAM, no GPU",
+      "source": "hackernews",
+      "source_group": "hackernews",
+      "published_at": "2026-11-08T19:22:04+09:00",
+      "category": "ai",
+      "keywords": [
+        "local-llm",
+        "open-weight"
+      ],
+      "score": 77,
+      "why": "HN 287 pt",
+      "read_min": 5,
+      "tldr": "GPU なし・RAM 64GB の環境で 2,840 億パラメータの DeepSeek を動かすとうたう OSS「llama-modchip」が GitHub で公開された。",
+      "points": [],
+      "code": null,
+      "signal": "▲ 287",
+      "pick": false
+    },
+    {
+      "id": "2026-11-09-hn-coldframe-honeypot",
+      "url": "https://github.com/hedgerow-dev/coldframe",
+      "title": "Show HN: Coldframe, a honeypot that poses as a supermarket fridge controller",
+      "source": "hackernews",
+      "source_group": "hackernews",
+      "published_at": "2026-11-08T02:27:30+09:00",
+      "category": "sec",
+      "keywords": [
+        "honeypot",
+        "iot-security"
+      ],
+      "score": 77,
+      "why": "HN 271 pt",
+      "read_min": 5,
+      "tldr": "スーパーの冷蔵ケースのコントローラーを装うハニーポット「Coldframe」が Show HN で公開された。産業用・IoT 機器を狙う攻撃の観測用。",
+      "points": [],
+      "code": null,
+      "signal": "▲ 271",
+      "pick": false
+    },
+    {
+      "id": "2026-11-09-hn-goldman-claude-code",
+      "url": "https://www.thestateofai.com/news/goldman-sachs-claude-code-traders-bankers",
+      "title": "Goldman Sachs Is Pulling Claude Code from Its Bankers and Traders",
+      "source": "hackernews",
+      "source_group": "hackernews",
+      "published_at": "2026-11-09T03:16:07+09:00",
+      "category": "ai",
+      "keywords": [
+        "ai-coding",
+        "claude",
+        "ai-adoption"
+      ],
+      "score": 75,
+      "why": "HN 240 pt",
+      "read_min": 5,
+      "tldr": "Goldman Sachs が銀行員・トレーダー向けの Claude Code の利用を取りやめると報じられ、HN で議論になった。",
+      "points": [],
+      "code": null,
+      "signal": "▲ 240",
+      "pick": false
+    },
+    {
+      "id": "2026-11-09-hiraoku-mcp-revival",
+      "url": "https://hiraoku.dev/blog/mcp-cli-cloud/",
+      "title": "MCPはなぜ復権したのか：CLIが支持された理由と、流れを変えた仕様変更 | Hiraoku.dev",
+      "source": "hatena/it",
+      "source_group": "tech_blog",
+      "published_at": "2026-11-08T11:33:33+09:00",
+      "category": "ai",
+      "keywords": [
+        "mcp-server",
+        "ai-agent",
+        "cli"
+      ],
+      "score": 73,
+      "why": "はてブ 151",
+      "read_min": 5,
+      "tldr": "MCP への批判と CLI 支持が広がった理由を振り返り、2026 年 7 月 28 日版仕様のステートレス化やツールの遅延読み込み・コード実行が再評価につながったと解説する記事。",
+      "points": [],
+      "code": null,
+      "signal": "B! 151",
+      "pick": false
+    },
+    {
+      "id": "2026-11-09-atmarkit-multi-agent-patterns",
+      "url": "https://atmarkit.itmedia.co.jp/ait/articles/2611/08/news001.html",
+      "title": "【図解あり】マルチエージェント設計「15のパターン」 GitHub、Google、Siemensの知見を一気に整理",
+      "source": "hatena/it",
+      "source_group": "tech_blog",
+      "published_at": "2026-11-08T15:14:17+09:00",
+      "category": "ai",
+      "keywords": [
+        "multi-agent",
+        "ai-agent",
+        "software-design"
+      ],
+      "score": 71,
+      "why": "はてブ 137",
+      "read_min": 5,
+      "tldr": "GitHub・Google・Siemens の知見をもとに、マルチエージェントシステムの設計パターン 15 種と、エージェントの暴走を防ぐ 6 つの基本原則を図解で整理した @IT の記事。",
+      "points": [],
+      "code": null,
+      "signal": "B! 137",
+      "pick": false
+    },
+    {
+      "id": "2026-11-09-hn-openai-11b",
+      "url": "https://247wallst.com/investing/2026/11/07/openai-just-raised-11-billion-at-a-1-25-trillion-valuation-below-the-1-4-trillion-it-first-sought/",
+      "title": "OpenAI raises $11B at a $1.25T valuation",
+      "source": "hackernews",
+      "source_group": "hackernews",
+      "published_at": "2026-11-08T23:49:23+09:00",
+      "category": "ai",
+      "keywords": [
+        "openai",
+        "ai-economy"
+      ],
+      "score": 70,
+      "why": "HN 169 pt",
+      "read_min": 5,
+      "tldr": "OpenAI が評価額 1.25 兆ドルで 110 億ドルを調達したと報じられた。当初目指した 1.4 兆ドルは下回ったとされる。",
+      "points": [],
+      "code": null,
+      "signal": "▲ 169",
+      "pick": false
+    },
+    {
+      "id": "2026-11-09-gaitame-nikkei-crash",
+      "url": "https://gaitame.com/media/entry/2026/11/06/164550",
+      "title": "来週の日経平均見通し（11/9～11/13）｜一時4,000円超の暴落で6万円割れ！AI関連株の下落は止まらないのか？米CPIに注目",
+      "source": "gaitame.com",
+      "source_group": "news",
+      "published_at": "2026-11-06T16:45:50+09:00",
+      "category": "stocks",
+      "keywords": [
+        "nikkei225",
+        "semiconductor",
+        "us-midterms",
+        "ai-regulation"
+      ],
+      "score": 90,
+      "why": "matched: 米国株, 金利（WebSearch で補完）",
+      "read_min": 6,
+      "tldr": "6 日の日経平均は前日比 3,643 円安の 5 万 7,434 円で、下げ幅は過去 3 番目。約半年ぶりに 6 万円を割り込んだ。前日の米国で SOX 指数が約 12% 下落したことと、中間選挙後の AI データセンター規制への懸念が重なった。",
+      "points": [
+        "5 日の米国は SOX 指数が約 12%（2020 年 3 月以来の下落率）、ナスダック 100 が 6.4% 下落し、東京でもアドバンテスト・東京エレクトロン・キオクシア・ソフトバンクグループなど AI 関連が売られた",
+        "VIX は約 70% 上昇して 20 台後半、日経 VI は 40 を超えた。日米の国債利回りは低下し、リスク回避の動きが広がった",
+        "今週の材料は 10 日の米 10 月 CPI と 13 日の PPI、AI 規制の具体的な動き。記事は短期的な上値は限られるとの見方を示している"
+      ],
+      "code": null,
+      "signal": null,
+      "pick": true
+    },
+    {
+      "id": "2026-11-09-togetter-nisa-midterms",
+      "url": "https://togetter.com/li/2767802",
+      "title": "「国が博打を打たせているようなもの」アメリカ中間選挙の結果に株式市場は沸いたが、NISAなど株価が上がる政策は問題をすり替えている印象を感じられる",
+      "source": "hatena/経済",
+      "source_group": "tech_blog",
+      "published_at": "2026-11-08T00:31:12+09:00",
+      "category": "funds",
+      "keywords": [
+        "new-nisa",
+        "us-midterms",
+        "us-stocks"
+      ],
+      "score": 82,
+      "why": "matched: nisa",
+      "read_min": 6,
+      "tldr": "米中間選挙後の株式市場の動きをきっかけに、NISA など株価を押し上げる政策を支持することへの疑問をまとめた Togetter。株価偏重で円安・物価高・実質賃金の問題が見えにくくなるという意見と、株高を望むのは自然だという反論が並ぶ。",
+      "points": [
+        "株価は経済の実態を示さない、株の利益で政治家や政策を支持すると判断がゆがむ、という指摘が中心",
+        "反論として、株を持つ人が株高を望むのは自然で、AI 関連株の調整は長期的にはリスクが小さいという見方も紹介されている",
+        "多くは個人の投稿の引用で、データによる検証はされていない。具体的な指数の数値も載っていない"
+      ],
+      "code": null,
+      "signal": "B! 200",
+      "pick": true
+    },
+    {
+      "id": "2026-11-09-coinpost-btc-weekly",
+      "url": "https://coinpost.jp/?p=746873",
+      "title": "ビットコイン、ハイテク株急落で1200万円台に軟化 AI規制議論とCPIが焦点｜bitbankアナリスト寄稿",
+      "source": "CoinPost",
+      "source_group": "news",
+      "published_at": "2026-11-08T11:30:23+09:00",
+      "category": "crypto",
+      "keywords": [
+        "bitcoin",
+        "us-midterms",
+        "us-inflation"
+      ],
+      "score": 85,
+      "why": "matched: ビットコイン, 金利",
+      "read_min": 5,
+      "tldr": "ビットコインは米中間選挙後のハイテク株急落につれて 1,200 万円前後まで軟化し、100 日移動平均線を割り込んだ。bitbank のアナリストは、今週の米 CPI・PPI と AI インフラ企業の決算が焦点だとしている。",
+      "points": [
+        "週初に 1,250 万円を試した後、選挙結果を受けて一時 1,200 万円割れから 1,280 万円まで振れ、木曜のハイテク株安で 1,200 万円前後に戻った",
+        "Arm・Qualcomm の決算への反応の弱さと、民主党議員による AI 規制論が米ハイテク株を押し下げ、BTC も連れ安になったと分析",
+        "下値の目安として 200 日移動平均線（約 1,160 万円）と 7 万ドル（約 1,105 万円）を挙げる。原油安が続けばインフレ圧力の緩和につながる可能性にも触れている"
+      ],
+      "code": null,
+      "signal": null,
+      "pick": true
+    },
+    {
+      "id": "2026-11-09-diamond-nikkei-70k",
+      "url": "https://diamond.jp/articles/-/402809",
+      "title": "日経平均は26年度末には「7万円回復」か、高市政策で“株高不況”が続く理由 - 高市政権1年 サナエノミクスの功罪",
+      "source": "ダイヤモンド",
+      "source_group": "news",
+      "published_at": "2026-11-09T04:30:00+09:00",
+      "category": "stocks",
+      "keywords": [
+        "nikkei225",
+        "jp-fiscal",
+        "inflation"
+      ],
+      "score": 72,
+      "why": "matched: 為替, 金利",
+      "read_min": 8,
+      "tldr": "高市政権の積極財政で国債安・円安が進む中でも株価が上がってきた背景として、AI・半導体ブームと物価高対策に支えられた名目業績の膨張を挙げる記事。実質賃金は伸び悩んでいるとする。",
+      "points": [],
+      "code": null,
+      "signal": null,
+      "pick": false
+    },
+    {
+      "id": "2026-11-09-diamond-wsj-nasdaq",
+      "url": "https://diamond.jp/articles/-/402842",
+      "title": "ウォール街に突き付けられるAIの現実、ナスダック2.5兆ドル消失 - WSJ PickUp",
+      "source": "ダイヤモンド",
+      "source_group": "news",
+      "published_at": "2026-11-09T04:05:00+09:00",
+      "category": "stocks",
+      "keywords": [
+        "us-stocks",
+        "ai-economy",
+        "us-midterms"
+      ],
+      "score": 78,
+      "why": "matched: 米国株",
+      "read_min": 5,
+      "tldr": "中間選挙で AI インフラ拡大に懐疑的な勢力が伸びた 2 日後に、ナスダックで 2.5 兆ドルの時価総額が失われたと伝える WSJ の記事。",
+      "points": [],
+      "code": null,
+      "signal": null,
+      "pick": false
+    },
+    {
+      "id": "2026-11-09-coinpost-weekly-1106",
+      "url": "https://coinpost.jp/?p=746797",
+      "title": "週刊仮想通貨ニュース（11/6）｜米中間選挙・米市場構造法案協議・バイナンス攻撃のまとめ",
+      "source": "CoinPost",
+      "source_group": "news",
+      "published_at": "2026-11-08T09:25:25+09:00",
+      "category": "crypto",
+      "keywords": [
+        "crypto-regulation",
+        "exchange-hack",
+        "us-midterms"
+      ],
+      "score": 70,
+      "why": "matched: ビットコイン（暗号資産全般）",
+      "read_min": 5,
+      "tldr": "今週の暗号資産ニュースのまとめ。バイナンスへの攻撃の手口、米中間選挙の結果と影響、米下院民主党による新たな市場構造法案の協議が関心を集めた。",
+      "points": [],
+      "code": null,
+      "signal": null,
+      "pick": false
+    },
+    {
+      "id": "2026-11-09-investing-weekly-5",
+      "url": "https://jp.investing.com/news/stock-market-news/article-1747603",
+      "title": "今週注目すべき5銘柄：決算とインフレ指標が市場を左右",
+      "source": "investing.com",
+      "source_group": "news",
+      "published_at": "2026-11-09T00:50:25+09:00",
+      "category": "stocks",
+      "keywords": [
+        "us-stocks",
+        "earnings",
+        "us-inflation"
+      ],
+      "score": 66,
+      "why": "matched: 米国株",
+      "read_min": 4,
+      "tldr": "決算発表とインフレ指標が相場を左右するとして、今週の米国市場で注目される 5 銘柄を挙げる記事。",
+      "points": [],
+      "code": null,
+      "signal": null,
+      "pick": false
+    },
+    {
+      "id": "2026-11-09-diamond-quality-growth",
+      "url": "https://diamond.jp/articles/-/402839",
+      "title": "年初来値上がり率でアドバンテストをベイカレントが逆転！AI＆半導体バブル崩壊でも負けない「リスクオフ地合い耐性が高い」出遅れ株の条件とは？ - 先読み！企業業績 株式相場の歩き方",
+      "source": "ダイヤモンド",
+      "source_group": "news",
+      "published_at": "2026-11-09T04:35:00+09:00",
+      "category": "stocks",
+      "keywords": [
+        "nikkei225",
+        "semiconductor"
+      ],
+      "score": 62,
+      "why": "matched: 米国株（米半導体株安と連動）",
+      "read_min": 8,
+      "tldr": "AI・半導体関連の急落で日経平均が下げる中、信用買い残の膨張など需給の悪化を指摘し、かつて売られた SaaS 系などクオリティグロース株の見直しを論じる記事。",
+      "points": [],
+      "code": null,
+      "signal": null,
+      "pick": false
+    },
+    {
+      "id": "2026-11-09-diamond-utility-risk",
+      "url": "https://diamond.jp/articles/-/402835",
+      "title": "【電力・ガス12社】倒産危険度ランキング2027最新版！1位は東電HD、不祥事続いた中部電は何位に？ - 27年版・倒産危険度ランキング【危険水域360社】 「金利ショック」が招く大量淘汰",
+      "source": "ダイヤモンド",
+      "source_group": "news",
+      "published_at": "2026-11-09T04:40:00+09:00",
+      "category": "macro",
+      "keywords": [
+        "interest-rates",
+        "crude-oil"
+      ],
+      "score": 58,
+      "why": "matched: 金利",
+      "read_min": 8,
+      "tldr": "金利上昇とホルムズ海峡封鎖による中東リスク、不祥事などを背景に、電力・ガス業界の倒産危険度ランキングを検証する記事。危険水域の 12 社を挙げる。",
+      "points": [],
+      "code": null,
+      "signal": null,
+      "pick": false
+    },
+    {
+      "id": "2026-11-09-diamond-condo-kickback",
+      "url": "https://diamond.jp/articles/-/402571",
+      "title": "なぜマンション管理会社は「談合」「紹介料授受」に手を染めるのか？マンション管理士が明かす業界の不都合な真実 - マンション羅針盤 管理＆売買",
+      "source": "ダイヤモンド",
+      "source_group": "news",
+      "published_at": "2026-11-09T04:25:00+09:00",
+      "category": "realestate",
+      "keywords": [
+        "condo-management"
+      ],
+      "score": 60,
+      "why": "matched: 不動産（マンション管理）",
+      "read_min": 8,
+      "tldr": "マンション大規模修繕工事の談合に公取委の処分が出たのに続き、処分の対象外だった管理会社と施工会社の間の紹介料（バックマージン）問題を取り上げる記事。続きは有料。",
+      "points": [],
+      "code": null,
+      "signal": null,
+      "pick": false
+    },
+    {
+      "id": "2026-11-09-toyokeizai-yuzawa-resort",
+      "url": "https://toyokeizai.net/articles/-/963812?utm_source=rss&utm_medium=http&utm_campaign=link_back",
+      "title": "｢湯沢のリゾマン｣温泉･プール付きで300万円台も！かつての｢負動産｣に移住者が集まり\"富動産\"に化けた理由 | ライフ | 東洋経済オンライン",
+      "source": "東洋経済",
+      "source_group": "news",
+      "published_at": "2026-11-08T07:00:00+09:00",
+      "category": "realestate",
+      "keywords": [
+        "real-estate-prices",
+        "housing"
+      ],
+      "score": 55,
+      "why": "matched: 不動産",
+      "read_min": 7,
+      "tldr": "「負動産」と呼ばれてきた新潟県湯沢町のリゾートマンションに、都心へのアクセスや温泉・共用施設を評価する移住者が集まっていると伝える記事。",
+      "points": [],
+      "code": null,
+      "signal": null,
+      "pick": false
+    }
+  ],
+  "social": [
+    {
+      "network": "hn",
+      "author": null,
+      "url": "https://news.ycombinator.com/item?id=50403052",
+      "text": "『Need for Speed Underground 2 online in the browser』のスレッド。277 件のコメント。",
+      "metrics": "▲ 1,100  ✉ 277",
+      "heat": 100,
+      "category": "be",
+      "keywords": [
+        "static-recompilation",
+        "browser-games"
+      ],
+      "posted_at": "2026-11-07T18:36:36+09:00"
+    },
+    {
+      "network": "hn",
+      "author": null,
+      "url": "https://news.ycombinator.com/item?id=50403097",
+      "text": "『Every Mac comes with an (undocumented) family member classifier』のスレッド。438 件のコメント。",
+      "metrics": "▲ 834  ✉ 438",
+      "heat": 100,
+      "category": "sec",
+      "keywords": [
+        "apple",
+        "privacy"
+      ],
+      "posted_at": "2026-11-07T18:46:03+09:00"
+    },
+    {
+      "network": "hn",
+      "author": null,
+      "url": "https://news.ycombinator.com/item?id=50406670",
+      "text": "『What I run on my $10 USD OpenStick homelab』のスレッド。129 件のコメント。",
+      "metrics": "▲ 734  ✉ 129",
+      "heat": 100,
+      "category": "cloud",
+      "keywords": [
+        "homelab"
+      ],
+      "posted_at": "2026-11-08T03:12:12+09:00"
+    },
+    {
+      "network": "hn",
+      "author": null,
+      "url": "https://news.ycombinator.com/item?id=50410107",
+      "text": "『Goodbye Claude, hello Pi』のスレッド。393 件のコメント。",
+      "metrics": "▲ 610  ✉ 393",
+      "heat": 100,
+      "category": "ai",
+      "keywords": [
+        "ai-coding",
+        "claude"
+      ],
+      "posted_at": "2026-11-08T12:11:48+09:00"
+    },
+    {
+      "network": "hn",
+      "author": null,
+      "url": "https://news.ycombinator.com/item?id=50407882",
+      "text": "『Claude Code's \"Don't Ask Again\" exposes passwords in 1,122 public GitHub files』のスレッド。380 件のコメント。",
+      "metrics": "▲ 529  ✉ 380",
+      "heat": 100,
+      "category": "sec",
+      "keywords": [
+        "ai-coding",
+        "secrets-management"
+      ],
+      "posted_at": "2026-11-08T05:45:32+09:00"
+    },
+    {
+      "network": "hn",
+      "author": null,
+      "url": "https://news.ycombinator.com/item?id=50406563",
+      "text": "『The end of Microsoft Research's AI Frontiers group』のスレッド。302 件のコメント。",
+      "metrics": "▲ 485  ✉ 302",
+      "heat": 100,
+      "category": "ai",
+      "keywords": [
+        "microsoft",
+        "ai-research"
+      ],
+      "posted_at": "2026-11-08T03:02:17+09:00"
+    }
+  ],
+  "releases": [
+    {
+      "date": "2026-11-10",
+      "title": "米 10 月 消費者物価指数（CPI）",
+      "repo": null,
+      "url": "https://gaitame.com/media/entry/2026/11/06/164550",
+      "kind": "event",
+      "note": "外為どっとコム・CoinPost の記事で 11/10 発表と確認",
+      "category": "macro"
+    },
+    {
+      "date": "2026-11-13",
+      "title": "米 10 月 生産者物価指数（PPI）",
+      "repo": null,
+      "url": "https://coinpost.jp/?p=746873",
+      "kind": "event",
+      "note": "外為どっとコム・CoinPost の記事で 11/13 発表と確認",
+      "category": "macro"
+    }
+  ]
+}
