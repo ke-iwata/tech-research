@@ -1,0 +1,774 @@
+{
+  "date": "2026-11-10",
+  "generated_at": "2026-11-10T06:20:00+09:00",
+  "stats": {
+    "collected": 206,
+    "sources_ok": 25,
+    "sources_total": 26,
+    "by_group": {
+      "hackernews": 49,
+      "tech_blog": 72,
+      "news": 78,
+      "official": 7
+    },
+    "failed_sources": [
+      "coindesk_jp"
+    ]
+  },
+  "digest": [
+    {
+      "category": "ai",
+      "text": "ゴールドマン・サックスが Claude Code と GitHub のコーディング支援ツールを技術者だけに限り、大半のトレーダー・バンカーは使えなくなった。HN で 873 pt。",
+      "keywords": [
+        "ai-coding",
+        "claude"
+      ]
+    },
+    {
+      "category": "ai",
+      "text": "Anthropic が Claude Fable 5.2 / Mythos 5.2 を発表。出力は最大 30% 速くなり、料金は入力 8 ドル・出力 40 ドル（100 万トークンあたり）。",
+      "keywords": [
+        "anthropic",
+        "claude"
+      ]
+    },
+    {
+      "category": "sec",
+      "text": "Outlook.com が DMARC のないドメインからのメールを一部拒否し始めたとの報告。コネクテッドカー基盤の認証情報埋め込みで遠隔解錠できたという研究も注目を集めた。",
+      "keywords": [
+        "dns",
+        "iot-security"
+      ]
+    },
+    {
+      "category": "realestate",
+      "text": "11 月の住宅ローン金利は、変動が大半据え置き、35 年固定は主要 7 行すべてが引き下げ。日銀の次の利上げは 12 月との見方も出ている。",
+      "keywords": [
+        "mortgage-rates",
+        "boj-rate-hike"
+      ]
+    },
+    {
+      "category": "crypto",
+      "text": "ストラテジーが 1,036 BTC を買い増して保有は 85 万 BTC 超に。国内では Progmat が日本国債のトークン化（tJGB）でカントン開発元と基本合意した。",
+      "keywords": [
+        "bitcoin-treasury",
+        "tokenization"
+      ]
+    }
+  ],
+  "items": [
+    {
+      "id": "2026-11-10-hn-goldman-claude-code",
+      "url": "https://www.thestateofai.com/news/goldman-sachs-claude-code-traders-bankers",
+      "title": "Goldman Sachs is pulling Claude Code from its bankers and traders",
+      "source": "www.thestateofai.com",
+      "source_group": "hackernews",
+      "published_at": "2026-11-09T03:16:07+09:00",
+      "category": "ai",
+      "keywords": [
+        "ai-coding",
+        "claude",
+        "ai-adoption"
+      ],
+      "score": 93,
+      "why": "HN 873 pt",
+      "read_min": 4,
+      "tldr": "ゴールドマン・サックスが 10 月に社内ガイダンスを改め、Claude Code と GitHub のコーディング支援ツールを技術者に限ることにした（Bloomberg の報道）。大半のトレーダーとバンカーは使えなくなった。",
+      "points": [
+        "対象は従業員約 4 万 7,000 人のうち、利用を続けられる技術者の約 1 万 2,000 人。ストラテジスト（Strats）も利用できるとされる",
+        "理由は生産性とリスクの見直しで、職種ごとに使えるツールを分ける形。4 月には香港のバンカーの Claude 利用を止めていた",
+        "記事は、同社が Anthropic の IPO の主幹事を務めていることにも触れている"
+      ],
+      "code": null,
+      "signal": "▲ 873",
+      "pick": true
+    },
+    {
+      "id": "2026-11-10-anthropic-fable-mythos-5-2",
+      "url": "https://www.anthropic.com/claude-fable-and-mythos-5-2",
+      "title": "Claude Fable 5.2 and Mythos 5.2",
+      "source": "www.anthropic.com",
+      "source_group": "hackernews",
+      "published_at": "2026-11-10T03:56:29+09:00",
+      "category": "ai",
+      "keywords": [
+        "anthropic",
+        "claude",
+        "benchmark",
+        "ai-security"
+      ],
+      "score": 84,
+      "why": "HN 453 pt",
+      "read_min": 10,
+      "tldr": "Anthropic が Claude Fable 5.2 と Claude Mythos 5.2 を発表した。2 つは同じ基盤モデルで、Fable は全ユーザー向け、Mythos はサイバー・生命科学の審査プログラムを通した限定提供。",
+      "points": [
+        "出力速度は 5.1 世代より最大 30% 速い。FrontierSWE v2 で 69.9%（Opus 5.5 は 62.3%）など、難しい技術課題向けのベンチマークで上回るとしている",
+        "料金は入力 100 万トークンあたり 8 ドル・出力 40 ドル。高速モード（最大 2.5 倍）は 16 ドル・80 ドル。AWS・Google Cloud・Azure でも提供",
+        "安全分類器の誤ブロックは Fable 5.1 比で約 55% 減ったとし、サンドボックス脱出の試行を測る評価を新たに作ったと説明している"
+      ],
+      "code": null,
+      "signal": "B! 1 · ▲ 453",
+      "pick": true
+    },
+    {
+      "id": "2026-11-10-hn-ketchup",
+      "url": "https://ketchup3d.github.io/app/",
+      "title": "KetchUp – Open-source SketchUp alternative built with Rust and WebGPU",
+      "source": "ketchup3d.github.io",
+      "source_group": "hackernews",
+      "published_at": "2026-11-09T07:35:35+09:00",
+      "category": "be",
+      "keywords": [
+        "rust",
+        "oss",
+        "desktop-app"
+      ],
+      "score": 90,
+      "why": "HN 713 pt",
+      "read_min": 3,
+      "tldr": "SketchUp の代わりを狙ったオープンソースの 3D モデリングアプリ。Rust 製で、ブラウザでは WebGPU か WebGL2 で動く。ページ上の表記は「BenchUp」になっている。",
+      "points": [
+        "木工・家具の設計向けで、線や長方形の作図、Push/Pull での立体化、寸法の直接入力やスナップ、グループ・コンポーネントの管理ができる",
+        "MIT ライセンス。ブラウザ版のほか Windows・macOS（Apple Silicon）・Linux のネイティブ版がある。アカウントやクラウド保存は不要",
+        "SketchUp（.skp）のジオメトリを読み込んで OBJ で書き出せる。テクスチャ・シーンなどには対応していない"
+      ],
+      "code": null,
+      "signal": "B! 2 · ▲ 713",
+      "pick": true
+    },
+    {
+      "id": "2026-11-10-hn-car-unlock",
+      "url": "https://shubs.io/unlocking-any-car-from-x-brand-in-most-of-the-world/",
+      "title": "Unlocking any car from X brand in most of the world",
+      "source": "shubs.io",
+      "source_group": "hackernews",
+      "published_at": "2026-11-09T09:10:50+09:00",
+      "category": "sec",
+      "keywords": [
+        "iot-security",
+        "authentication",
+        "vulnerability-management"
+      ],
+      "score": 87,
+      "why": "HN 589 pt",
+      "read_min": 12,
+      "tldr": "研究者が、ある自動車メーカー（社名は伏せている）のコネクテッドカー基盤の欠陥を報告した。オーストラリアではナンバープレートが分かれば、対象車両に解錠などの遠隔コマンドを送れたという。",
+      "points": [
+        "モバイルアプリの JavaScript バンドルに ID 管理基盤（ForgeRock OpenIDM）の管理者認証情報が埋め込まれ、内部向けの管理ツールがネットに公開されていた",
+        "WAF はパス処理の違いで回避でき、オーストラリア環境には MFA を迂回できる設定の不備があった。顧客の氏名・連絡先などにも届いた可能性があるとしている",
+        "記事の掲載は 11 月 7 日で、調査は 7 月に始まったとみられる。ベンダーへの通知や修正の状況は本文に書かれていない"
+      ],
+      "code": null,
+      "signal": "▲ 589",
+      "pick": true
+    },
+    {
+      "id": "2026-11-10-hn-outlook-dmarc",
+      "url": "https://mailroute.net/blog/outlook-rejecting-email-without-dmarc",
+      "title": "Outlook.com is rejecting email from domains without DMARC",
+      "source": "mailroute.net",
+      "source_group": "hackernews",
+      "published_at": "2026-11-09T04:20:32+09:00",
+      "category": "sec",
+      "keywords": [
+        "dns",
+        "authentication",
+        "microsoft"
+      ],
+      "score": 86,
+      "why": "HN 523 pt",
+      "read_min": 5,
+      "tldr": "メール事業者 MailRoute のブログによると、Outlook.com（Hotmail・Live・MSN を含む）が 11 月 5 日ごろから、DMARC レコードのないドメインからのメールの一部を拒否している。少量送信でも対象になりうる。",
+      "points": [
+        "返されるエラーは「550 5.7.1 Message rejected: Message lacks SPF/DKIM/DMARC Auth Records」。執筆時点で Microsoft の公式発表はないとしている",
+        "全部ではなく一部が拒否されるため、届いたことがあっても安全とは限らない",
+        "DMARC を通すには、SPF か DKIM が From のドメインと一致している必要がある。まず監視用の p=none から始める例を示している"
+      ],
+      "code": {
+        "file": "_dmarc.example.com (DNS)",
+        "lang": "bash",
+        "text": "# DNS に TXT レコードを追加\n# 名前: _dmarc   値: v=DMARC1; p=none\n\n# 確認\ndig +short TXT _dmarc.example.com\n# \"v=DMARC1; p=none\" が返れば設定済み"
+      },
+      "signal": "B! 2 · ▲ 523",
+      "pick": true
+    },
+    {
+      "id": "2026-11-10-hn-opus-thinking",
+      "url": "https://twitter.com/shanemelaugh/status/2119192075505893695",
+      "title": "Is Opus 5.5 nerfed? Thinking patterns changed on November 3",
+      "source": "twitter.com",
+      "source_group": "hackernews",
+      "published_at": "2026-11-09T16:04:25+09:00",
+      "category": "ai",
+      "keywords": [
+        "claude",
+        "llm"
+      ],
+      "score": 86,
+      "why": "HN 551 pt",
+      "read_min": 2,
+      "tldr": "「Opus 5.5 の思考パターンが 11 月 3 日に変わった」とする X の投稿が HN で議論になった。投稿者の観察で、Anthropic の説明ではない。",
+      "points": [],
+      "code": null,
+      "signal": "▲ 551",
+      "pick": false
+    },
+    {
+      "id": "2026-11-10-hn-ai-bubble",
+      "url": "https://matteoraso.github.io/im-not-convinced-the-ai-bubble-exists.html#im-not-convinced-the-ai-bubble-exists",
+      "title": "I'm not convinced the AI bubble exists",
+      "source": "matteoraso.github.io",
+      "source_group": "hackernews",
+      "published_at": "2026-11-09T08:44:36+09:00",
+      "category": "ai",
+      "keywords": [
+        "ai-economy"
+      ],
+      "score": 86,
+      "why": "HN 531 pt",
+      "read_min": 8,
+      "tldr": "「AI バブルは存在しないのでは」と論じる個人ブログ。HN で 900 件を超えるコメントが付いた。",
+      "points": [],
+      "code": null,
+      "signal": "▲ 531",
+      "pick": false
+    },
+    {
+      "id": "2026-11-10-hn-llama-modchip",
+      "url": "https://github.com/synchopate/llama-modchip",
+      "title": "Llama-modchip: 284B DeepSeek on 64GB RAM, no GPU",
+      "source": "github.com",
+      "source_group": "hackernews",
+      "published_at": "2026-11-08T19:22:04+09:00",
+      "category": "ai",
+      "keywords": [
+        "local-llm",
+        "open-weight"
+      ],
+      "score": 84,
+      "why": "HN 472 pt",
+      "read_min": 5,
+      "tldr": "GPU なし・64GB RAM の環境で 284B パラメーターの DeepSeek を動かすとする GitHub のプロジェクト。",
+      "points": [],
+      "code": null,
+      "signal": "B! 2 · ▲ 472",
+      "pick": false
+    },
+    {
+      "id": "2026-11-10-wirelesswire-local-ai",
+      "url": "https://wirelesswire.jp/2026/11/94903/",
+      "title": "ソフトウェア産業が消滅する日──小さなローカルAIが暴く「プログラムを売る」という商売の終焉",
+      "source": "tech",
+      "source_group": "tech_blog",
+      "published_at": "2026-11-09T12:53:21+09:00",
+      "category": "ai",
+      "keywords": [
+        "local-llm",
+        "ai-coding"
+      ],
+      "score": 80,
+      "why": "はてブ 253",
+      "read_min": 8,
+      "tldr": "Apple Silicon の Mac で小さなローカル AI（9B）を動かすツール「mightyCode」を作った筆者が、「プログラムを売る」商売の行方を論じるコラム。",
+      "points": [],
+      "code": null,
+      "signal": "B! 253",
+      "pick": false
+    },
+    {
+      "id": "2026-11-10-hn-chatgpt-ssh-agent",
+      "url": "https://news.ycombinator.com/item?id=50422628",
+      "title": "ChatGPT Desktop forwards your SSH agent to remote machines",
+      "source": "news.ycombinator.com",
+      "source_group": "hackernews",
+      "published_at": "2026-11-09T17:17:49+09:00",
+      "category": "sec",
+      "keywords": [
+        "openai",
+        "openssh",
+        "desktop-app"
+      ],
+      "score": 72,
+      "why": "HN 191 pt",
+      "read_min": 3,
+      "tldr": "ChatGPT のデスクトップアプリがリモートのマシンに SSH エージェントを転送している、と指摘する HN の投稿。",
+      "points": [],
+      "code": null,
+      "signal": "▲ 191",
+      "pick": false
+    },
+    {
+      "id": "2026-11-10-lorekit-agent-memory",
+      "url": "https://www.lorekit.io/blog/open-agent-memory-format",
+      "title": "Agent memory needs its OpenTelemetry moment",
+      "source": "www.lorekit.io",
+      "source_group": "hackernews",
+      "published_at": "2026-11-08T17:40:23+09:00",
+      "category": "ai",
+      "keywords": [
+        "ai-agent",
+        "observability",
+        "memory"
+      ],
+      "score": 72,
+      "why": "HN 188 pt",
+      "read_min": 6,
+      "tldr": "AI エージェントの記憶（メモリ）にも OpenTelemetry のような共通フォーマットが必要だとして、オープンなメモリ形式を提案する記事。",
+      "points": [],
+      "code": null,
+      "signal": "▲ 188",
+      "pick": false
+    },
+    {
+      "id": "2026-11-10-hn-openai-11b",
+      "url": "https://247wallst.com/investing/2026/11/07/openai-just-raised-11-billion-at-a-1-25-trillion-valuation-below-the-1-4-trillion-it-first-sought/",
+      "title": "OpenAI raises $11B at a $1.25T valuation",
+      "source": "247wallst.com",
+      "source_group": "hackernews",
+      "published_at": "2026-11-08T23:49:23+09:00",
+      "category": "ai",
+      "keywords": [
+        "openai",
+        "ai-economy"
+      ],
+      "score": 72,
+      "why": "HN 189 pt",
+      "read_min": 4,
+      "tldr": "OpenAI が評価額 1.25 兆ドルで 110 億ドルを調達したと伝える記事。当初目指した 1.4 兆ドルは下回ったとしている。",
+      "points": [],
+      "code": null,
+      "signal": "▲ 189",
+      "pick": false
+    },
+    {
+      "id": "2026-11-10-yahoo-nitori-breach",
+      "url": "https://news.yahoo.co.jp/articles/ec14e72be9639e846f42978f9e81da07fdd05687",
+      "title": "ニトリ、不正アクセスで会員情報最大3762万件が流出の可能性",
+      "source": "tech",
+      "source_group": "tech_blog",
+      "published_at": "2026-11-09T17:57:55+09:00",
+      "category": "sec",
+      "keywords": [
+        "data-breach",
+        "security-incident"
+      ],
+      "score": 66,
+      "why": "はてブ 96 + 42・2 ソースに掲載",
+      "read_min": 3,
+      "tldr": "ニトリホールディングスが不正アクセスを受け、個人・法人会員の情報が最大約 3,762 万件流出した可能性があると発表した。氏名・住所・電話番号などが対象で、11 月 6 日に不正アクセスを確認したという。",
+      "points": [],
+      "code": null,
+      "signal": "B! 96",
+      "pick": false
+    },
+    {
+      "id": "2026-11-10-hn-github-down",
+      "url": "https://github.com/torvalds/linux",
+      "title": "GitHub Down Again?",
+      "source": "github.com",
+      "source_group": "hackernews",
+      "published_at": "2026-11-08T18:56:07+09:00",
+      "category": "cloud",
+      "keywords": [
+        "github",
+        "incident-response"
+      ],
+      "score": 66,
+      "why": "HN 121 pt",
+      "read_min": 1,
+      "tldr": "GitHub がまた落ちているのではと話題になった HN のスレッド。リンク先は torvalds/linux のリポジトリで、障害の公式情報ではない。",
+      "points": [],
+      "code": null,
+      "signal": "B! 47 · ▲ 121",
+      "pick": false
+    },
+    {
+      "id": "2026-11-10-publickey-mcp-ruby-sdk",
+      "url": "https://www.publickey1.jp/blog/26/mcpmcpruby_sdkmcp_sdk_tier_1.html",
+      "title": "MCP仕様を完全にサポートしたMCP公式のRuby SDKが登場。「MCP SDK Tier 1」に到達と",
+      "source": "tech",
+      "source_group": "news",
+      "published_at": "2026-11-09T00:12:29+09:00",
+      "category": "ai",
+      "keywords": [
+        "mcp-server"
+      ],
+      "score": 57,
+      "why": "はてブ 52",
+      "read_min": 4,
+      "tldr": "MCP の仕様策定を担う Agentic AI Foundation（AAIF）が、MCP 公式の Ruby SDK が仕様を完全にサポートし「MCP SDK Tier 1」に到達したと発表した。",
+      "points": [],
+      "code": null,
+      "signal": "B! 52",
+      "pick": false
+    },
+    {
+      "id": "2026-11-10-coinpost-strategy-btc",
+      "url": "https://coinpost.jp/?p=747113",
+      "title": "ストラテジー、129億円相当のビットコインを買い増し 2週連続",
+      "source": "money",
+      "source_group": "news",
+      "published_at": "2026-11-09T22:20:48+09:00",
+      "category": "crypto",
+      "keywords": [
+        "bitcoin",
+        "bitcoin-treasury",
+        "strategy"
+      ],
+      "score": 88,
+      "why": "matched: ビットコイン, 米国株",
+      "read_min": 3,
+      "tldr": "米ストラテジーが 11 月 2〜8 日に 1,036 BTC（約 8,190 万ドル）を追加購入し、2 週連続の買い増しになった。保有量は 850,364 BTC。",
+      "points": [
+        "平均購入単価は 79,012 ドル。累計の購入総額は 641 億 6,000 万ドルで、平均単価は 75,456 ドル",
+        "資金は ATM（時価発行）によるクラス A 普通株の売却でまかない、純収入は 2 億 8,380 万ドル",
+        "同時に変動利付の永久優先株（STRC）を 1 億 8,830 万ドルで買い戻した。米ドル準備金は 47 億 7,000 万ドル"
+      ],
+      "code": null,
+      "signal": null,
+      "pick": true
+    },
+    {
+      "id": "2026-11-10-coinpost-tjgb",
+      "url": "https://coinpost.jp/?p=747082",
+      "title": "Progmatとカントン開発元、日本国債のトークン化で基本合意",
+      "source": "money",
+      "source_group": "news",
+      "published_at": "2026-11-09T17:35:20+09:00",
+      "category": "macro",
+      "keywords": [
+        "jgb",
+        "tokenization",
+        "blockchain-infra"
+      ],
+      "score": 78,
+      "why": "matched: 金利（国債）",
+      "read_min": 4,
+      "tldr": "Progmat と米デジタル・アセットが、日本国債などをカントン・ネットワーク上で取引・決済する基本合意書を結んだ。国債の法的性質を保ったままトークン化する「tJGB」を目指す。",
+      "points": [
+        "口座管理機関は既存の顧客口座とは別にトークン用口座を設け、振替口座簿とオンチェーンのデータを連携させる",
+        "Progmat の基盤とカントンを常時同期させ、24 時間 365 日の決済を可能にする構想",
+        "DCC のワーキング・グループは 11 月をめどに実機検証へ移り、国内外のレポ・担保プラットフォームとの接続を試す"
+      ],
+      "code": null,
+      "signal": null,
+      "pick": true
+    },
+    {
+      "id": "2026-11-10-coinpost-fsa-eu-forum",
+      "url": "https://coinpost.jp/?p=747025",
+      "title": "金融庁と欧州委員会、ステーブルコインやトークン化で意見交換",
+      "source": "money",
+      "source_group": "news",
+      "published_at": "2026-11-09T08:15:57+09:00",
+      "category": "crypto",
+      "keywords": [
+        "fsa",
+        "stablecoin",
+        "crypto-regulation"
+      ],
+      "score": 76,
+      "why": "金融庁の公式発表（共同声明）",
+      "read_min": 3,
+      "tldr": "金融庁が、11 月 4〜5 日に東京で開いた日 EU 合同金融規制フォーラム第 7 回会合の共同声明を公表した。暗号資産・ステーブルコイン・トークン化のほか、サステナブルファイナンスや銀行規制も議題になった。",
+      "points": [
+        "欧州委員会が EU の暗号資産規制（MiCA）の実施状況と、終わったばかりの公開協議の主な論点を報告した",
+        "金融庁もデジタル金融の動向を説明したが、声明は双方の具体的な中身を明らかにしていない",
+        "AI の活用とサイバーレジリエンスも取り上げられた。次回は 2027 年にブリュッセルで開く予定"
+      ],
+      "code": null,
+      "signal": null,
+      "pick": true
+    },
+    {
+      "id": "2026-11-10-diamond-fudosan-mortgage",
+      "url": "https://diamond-fudosan.jp/articles/-/1113360",
+      "title": "11月の住宅ローン金利の動向、フラット35は引き下げでも3.81%! 変動金利・10年固定・全期間固定金利の最新ランキングは?",
+      "source": "diamond-fudosan.jp",
+      "source_group": "news",
+      "published_at": "2026-11-03T00:00:00+09:00",
+      "category": "realestate",
+      "keywords": [
+        "mortgage-rates",
+        "interest-rates",
+        "housing"
+      ],
+      "score": 85,
+      "why": "matched: 住宅ローン, 金利",
+      "read_min": 6,
+      "tldr": "11 月の住宅ローン金利は、変動型が大半の銀行で据え置き、10 年固定は引き下げと引き上げが分かれ、35 年固定は主要 7 行すべてが引き下げた。フラット 35（買取型）は 3.810%。",
+      "points": [
+        "変動金利は主要 14 行のうち 4 行が引き上げ、10 行が据え置き。上位 5 行では SBI 新生銀行が 0.250% 引き上げた",
+        "10 年固定は主要 13 行のうち 7 行が引き下げ、5 行が引き上げ。みずほ銀行は 0.200%、りそな銀行は 0.140% 引き下げた",
+        "フラット 35 は前月から引き下げとする一方、本文には引き上げとする記述もあり、前月比は記事内で食い違っている"
+      ],
+      "code": null,
+      "signal": null,
+      "pick": true
+    },
+    {
+      "id": "2026-11-10-diamond-boj-hike-pace",
+      "url": "https://diamond.jp/articles/-/402933",
+      "title": "日銀「2％到達」宣言は単なる通過儀礼、3～4カ月に一度のペースで利上げは続く - 日銀 早耳深掘",
+      "source": "money",
+      "source_group": "news",
+      "published_at": "2026-11-10T04:17:00+09:00",
+      "category": "macro",
+      "keywords": [
+        "boj-rate-hike",
+        "boj-policy",
+        "interest-rates"
+      ],
+      "score": 84,
+      "why": "matched: 金利（日銀）",
+      "read_min": 6,
+      "tldr": "日銀の「基調的な物価上昇率 2% 到達」宣言は通過儀礼にすぎず、次の利上げは 12 月、その後も 3〜4 カ月に一度のペースで続くとする筆者の見方を示す連載記事。",
+      "points": [],
+      "code": null,
+      "signal": null,
+      "pick": false
+    },
+    {
+      "id": "2026-11-10-investing-bls-cpi",
+      "url": "https://jp.investing.com/news/economy-news/article-1749208",
+      "title": "BLS、10月CPIレポートから前年比数値を除外へ",
+      "source": "money",
+      "source_group": "news",
+      "published_at": "2026-11-10T04:43:50+09:00",
+      "category": "macro",
+      "keywords": [
+        "us-inflation",
+        "inflation"
+      ],
+      "score": 60,
+      "why": "matched: 為替（米指標）",
+      "read_min": 2,
+      "tldr": "米労働統計局（BLS）が、10 月の CPI レポートから前年比の数値を除外する方針と伝える記事。",
+      "points": [],
+      "code": null,
+      "signal": null,
+      "pick": false
+    },
+    {
+      "id": "2026-11-10-toyokeizai-midterm-stocks",
+      "url": "https://toyokeizai.net/articles/-/964032?utm_source=rss&utm_medium=http&utm_campaign=link_back",
+      "title": "市場は｢アメリカ共和党大敗｣で何を恐れたのか？｢今回の株価急落はバブル崩壊ではない｣と言える｢6つのポイント｣ | 政治・経済・投資 | 東洋経済オンライン",
+      "source": "money",
+      "source_group": "news",
+      "published_at": "2026-11-09T07:30:00+09:00",
+      "category": "stocks",
+      "keywords": [
+        "us-stocks",
+        "us-midterms"
+      ],
+      "score": 72,
+      "why": "matched: 米国株",
+      "read_min": 6,
+      "tldr": "米中間選挙での共和党の大敗を受けた株価急落について、投資家が恐れているのは政策変更より「政治的不確実性」だとし、バブル崩壊ではないとする見方を 6 つのポイントで示す記事。",
+      "points": [],
+      "code": null,
+      "signal": null,
+      "pick": false
+    },
+    {
+      "id": "2026-11-10-toyokeizai-trading-houses",
+      "url": "https://toyokeizai.net/articles/-/963744?utm_source=rss&utm_medium=http&utm_campaign=link_back",
+      "title": "総合商社5社がそろって増益､過去最高益も続出…資源高と事業改革が追い風も景気後退に耐える｢本当の稼ぐ力｣が焦点 | ビジネス | 東洋経済オンライン",
+      "source": "money",
+      "source_group": "news",
+      "published_at": "2026-11-09T08:00:00+09:00",
+      "category": "stocks",
+      "keywords": [
+        "earnings"
+      ],
+      "score": 55,
+      "why": "決算（日本株）",
+      "read_min": 5,
+      "tldr": "大手総合商社 5 社の 2026 年 4〜9 月期決算が出そろい、資源価格の上昇などを背景に 5 社とも純利益が前年同期を上回った。三井物産・伊藤忠商事・丸紅は上期として過去最高を更新した。",
+      "points": [],
+      "code": null,
+      "signal": null,
+      "pick": false
+    },
+    {
+      "id": "2026-11-10-coinpost-fsa-phishing",
+      "url": "https://coinpost.jp/?p=747060",
+      "title": "金融庁、金融機関利用者に不審メールへの警戒呼びかけ 多要素認証の利用も",
+      "source": "money",
+      "source_group": "news",
+      "published_at": "2026-11-09T14:29:35+09:00",
+      "category": "macro",
+      "keywords": [
+        "fsa",
+        "passkey",
+        "fraud-prevention"
+      ],
+      "score": 58,
+      "why": "金融庁の公式発表",
+      "read_min": 2,
+      "tldr": "金融庁が 6 日、金融機関を装うフィッシングメールへの警戒を呼びかけた。メールや SMS のワンタイムパスワードは突破される恐れがあるとして、パスキーなどフィッシング耐性のある多要素認証を勧めている。",
+      "points": [],
+      "code": null,
+      "signal": null,
+      "pick": false
+    },
+    {
+      "id": "2026-11-10-coinpost-vitalik-eth",
+      "url": "https://coinpost.jp/?p=747054",
+      "title": "ヴィタリック、イーサリアムは手数料バーンより価値の保存を重視すべきと主張",
+      "source": "money",
+      "source_group": "news",
+      "published_at": "2026-11-09T14:40:38+09:00",
+      "category": "crypto",
+      "keywords": [
+        "ethereum"
+      ],
+      "score": 50,
+      "why": "matched: 仮想通貨",
+      "read_min": 2,
+      "tldr": "イーサリアム共同創設者のブテリン氏が、ETH は手数料バーンより価値の保存手段としての側面を重視すべきだと主張した。",
+      "points": [],
+      "code": null,
+      "signal": null,
+      "pick": false
+    }
+  ],
+  "social": [
+    {
+      "network": "x",
+      "author": "@HedgieMarkets",
+      "url": "https://x.com/HedgieMarkets/status/2119788849996161150",
+      "text": "ゴールドマン・サックスが大半のトレーダーとバンカーから AI コーディングツールを取り上げ、Claude Code と GitHub のツールを約 1 万 2,000 人の技術者に限ったと紹介する投稿。",
+      "metrics": null,
+      "heat": null,
+      "category": "ai",
+      "keywords": [
+        "ai-coding",
+        "claude"
+      ],
+      "posted_at": null
+    },
+    {
+      "network": "x",
+      "author": "@moneycontrolcom",
+      "url": "https://x.com/moneycontrolcom/status/2117273022763528280",
+      "text": "ゴールドマンが数カ月認めていたバンカーの Claude Code・GitHub 利用を、社内ガイダンスの更新で技術者だけに限ったとする Bloomberg 報道を伝える投稿。",
+      "metrics": null,
+      "heat": null,
+      "category": "ai",
+      "keywords": [
+        "ai-coding",
+        "ai-adoption"
+      ],
+      "posted_at": null
+    },
+    {
+      "network": "hn",
+      "author": null,
+      "url": "https://news.ycombinator.com/item?id=50415628",
+      "text": "『Goldman Sachs is pulling Claude Code from its bankers and traders』のスレッド。469 件のコメント。",
+      "metrics": "▲ 873  ✉ 469",
+      "heat": 100,
+      "category": "ai",
+      "keywords": [
+        "ai-coding",
+        "claude"
+      ],
+      "posted_at": "2026-11-09T03:16:07+09:00"
+    },
+    {
+      "network": "hn",
+      "author": null,
+      "url": "https://news.ycombinator.com/item?id=50418176",
+      "text": "『KetchUp – Open-source SketchUp alternative built with Rust and WebGPU』のスレッド。218 件のコメント。",
+      "metrics": "▲ 713  ✉ 218",
+      "heat": 100,
+      "category": "be",
+      "keywords": [
+        "rust",
+        "oss"
+      ],
+      "posted_at": "2026-11-09T07:35:35+09:00"
+    },
+    {
+      "network": "hn",
+      "author": null,
+      "url": "https://news.ycombinator.com/item?id=50419215",
+      "text": "『Unlocking any car from X brand in most of the world』のスレッド。319 件のコメント。",
+      "metrics": "▲ 589  ✉ 319",
+      "heat": 100,
+      "category": "sec",
+      "keywords": [
+        "iot-security"
+      ],
+      "posted_at": "2026-11-09T09:10:50+09:00"
+    },
+    {
+      "network": "hn",
+      "author": null,
+      "url": "https://news.ycombinator.com/item?id=50416158",
+      "text": "『Outlook.com is rejecting email from domains without DMARC』のスレッド。348 件のコメント。",
+      "metrics": "▲ 523  ✉ 348",
+      "heat": 100,
+      "category": "sec",
+      "keywords": [
+        "dns",
+        "microsoft"
+      ],
+      "posted_at": "2026-11-09T04:20:32+09:00"
+    },
+    {
+      "network": "hn",
+      "author": null,
+      "url": "https://news.ycombinator.com/item?id=50429906",
+      "text": "『Claude Fable 5.2 and Mythos 5.2』のスレッド。186 件のコメント。",
+      "metrics": "▲ 453  ✉ 186",
+      "heat": 100,
+      "category": "ai",
+      "keywords": [
+        "anthropic",
+        "claude"
+      ],
+      "posted_at": "2026-11-10T03:56:29+09:00"
+    }
+  ],
+  "releases": [
+    {
+      "date": "2026-11-10",
+      "title": "米 10 月 消費者物価指数（CPI）",
+      "repo": null,
+      "url": "https://gaitame.com/media/entry/2026/11/06/164550",
+      "kind": "event",
+      "note": "11/10 発表（前日に確認済み）。BLS は前年比の数値をレポートから外す方針と報じられている",
+      "category": "macro"
+    },
+    {
+      "date": "2026-11-13",
+      "title": "米 10 月 生産者物価指数（PPI）",
+      "repo": null,
+      "url": "https://coinpost.jp/?p=746873",
+      "kind": "event",
+      "note": "外為どっとコム・CoinPost の記事で 11/13 発表と確認（前日に確認済み）",
+      "category": "macro"
+    },
+    {
+      "date": "2026-11-09",
+      "title": "Playwright v1.65.0",
+      "repo": "microsoft/playwright",
+      "url": "https://github.com/microsoft/playwright/releases/tag/v1.65.0",
+      "kind": "release",
+      "note": "はてブ経由で GitHub のリリースページを確認（内容は未読）",
+      "category": "be"
+    },
+    {
+      "date": "2026-11-09",
+      "title": "Libghostty 1.0",
+      "repo": null,
+      "url": "https://www.publickey1.jp/blog/26/libghostty_10windowsrex.html",
+      "kind": "release",
+      "note": "Publickey の記事。Windows 版マルチプレクサ「Rex」もまもなく登場とされる",
+      "category": "be"
+    }
+  ]
+}
