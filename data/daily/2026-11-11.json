@@ -1,0 +1,768 @@
+{
+  "date": "2026-11-11",
+  "generated_at": "2026-11-11T06:10:00+09:00",
+  "stats": {
+    "collected": 230,
+    "sources_ok": 25,
+    "sources_total": 26,
+    "by_group": {
+      "tech_blog": 81,
+      "hackernews": 49,
+      "news": 94,
+      "official": 6
+    },
+    "failed_sources": [
+      "coindesk_jp"
+    ]
+  },
+  "digest": [
+    {
+      "category": "ai",
+      "text": "Amazon が社内のチケット分類を Claude Sonnet 4.6 から意思決定モデル Strands Decider に置き換え、100 万件あたりのコストを約 2.2 万ドルから約 500 ドルに下げたと公開。HN で 655 pt。",
+      "keywords": [
+        "llm-cost",
+        "aws"
+      ]
+    },
+    {
+      "category": "ai",
+      "text": "個人向け Gemini の Connected Apps で Drive / Gmail の内容が人間のレビュアーに回りうるとする検証リポジトリが HN 702 pt。DeepMind は Signal プロトコル実装を Lean で形式検証した AlphaProof Code を発表した。",
+      "keywords": [
+        "privacy",
+        "formal-verification"
+      ]
+    },
+    {
+      "category": "sec",
+      "text": "ソフトバンク社長が AI での再診断で自社システムに 3 万 5,000 件の脆弱性が新たに見つかったと明かした。Git は 6 件の脆弱性修正を公開、Notion は AI ベンダー Fireworks AI のインシデントの影響を告知。",
+      "keywords": [
+        "vulnerability-management",
+        "supply-chain"
+      ]
+    },
+    {
+      "category": "macro",
+      "text": "日銀の 10 月会合の主な意見で、政策金利を早く中立水準に近づけるべきとの意見や ETF 売却ペースの見直しを求める意見が出た。9 月の実質消費支出は前年比 6.8% 減。",
+      "keywords": [
+        "boj-policy",
+        "boj-rate-hike"
+      ]
+    },
+    {
+      "category": "crypto",
+      "text": "米上場企業 14 社が 2026 年に計約 10.8 万 BTC を売却（Lookonchain 集計、マイナー 2 社で約 56%）。国内では証券監視委が「BTC 現物 ETF にも投資できる」と勧誘した無登録 3 社の差止めを申し立てた。",
+      "keywords": [
+        "bitcoin-mining",
+        "fraud-prevention"
+      ]
+    }
+  ],
+  "items": [
+    {
+      "id": "2026-11-11-zenn-claude-code-tips",
+      "url": "https://zenn.dev/oikon/articles/claude-code-recipe",
+      "title": "Claude Codeで最近使っているTips【2026/11】",
+      "source": "zenn.dev",
+      "source_group": "tech_blog",
+      "published_at": "2026-11-10T07:01:05+09:00",
+      "category": "ai",
+      "keywords": [
+        "claude",
+        "ai-coding",
+        "coding-agent"
+      ],
+      "score": 98,
+      "why": "はてブ 430・2 ソースに掲載",
+      "read_min": 10,
+      "tldr": "Claude Code の書籍著者が 2026 年 11 月時点で使っている Tips をまとめた記事。会話履歴を汚さない /btw、HTML レポート出力、Claude Mods、マルチエージェント、Remote Control を紹介している。",
+      "points": [
+        "/btw で会話履歴に残さず進捗確認や /compact 用の指示文作成ができる。仕様やレポートは Markdown ではなく HTML で出させるとモバイルからも読みやすい",
+        "JS / TS で書ける Claude Mods でプロンプト一覧（prompt-rail）やプロンプトキャッシュの状態・残り時間（prompt-cache-control）を表示できる",
+        "Orchestrator-Subagent と Agent Teams（実験的機能）の使い分け、Remote Control で手元のセッションにブラウザやモバイルから接続する方法も解説"
+      ],
+      "code": {
+        "file": "install.sh",
+        "lang": "bash",
+        "text": "npx claude-code-templates@latest --mod observability/prompt-cache-control\n\nclaude plugin marketplace add oikon48/prompt-rail\nclaude plugin install prompt-rail@oikon48\n\n# 表示例\n# cache ██████████ 98% read 80k · wrote 1k · new 300 ⏱ 3:41 5m · warm: keep going"
+      },
+      "signal": "B! 430",
+      "pick": true
+    },
+    {
+      "id": "2026-11-11-hn-gemini-human-annotators",
+      "url": "https://github.com/thisisme6598/gemini_files/",
+      "title": "Google Gemini routes personal Drive files and emails to human annotators",
+      "source": "github.com",
+      "source_group": "hackernews",
+      "published_at": "2026-11-10T03:24:38+09:00",
+      "category": "ai",
+      "keywords": [
+        "google",
+        "privacy",
+        "ai-security"
+      ],
+      "score": 90,
+      "why": "HN 702 pt",
+      "read_min": 6,
+      "tldr": "個人向け Gemini で Connected Apps を有効にすると、明示的な指定なしに Drive や Gmail の検索が走り、取得内容が人間のレビュアーに回りうると主張する GitHub リポジトリ。Google のヘルプ記事の記述変更を根拠に挙げている。",
+      "points": [
+        "旅行・請求・予約などの話題で Drive / Gmail 検索が背景で走り、取得量は抜粋からファイル全文まで確率的に変わるとする",
+        "2023 年のブログでは個人の Gmail / Drive の内容は人間のレビュアーに見られないと説明していたが、10 月 16 日付のヘルプ記事でレビューの可能性が明記されたと指摘",
+        "再現は作者個人の少数の試行で第三者検証はない。Workspace の商用アカウントは別の契約で人間のレビューが除外されるとしている"
+      ],
+      "code": null,
+      "signal": "▲ 702",
+      "pick": true
+    },
+    {
+      "id": "2026-11-11-hn-amazon-strands-decider",
+      "url": "https://strandsagents.com/blog/amazon-saves-millions-replacing-sonnet-with-strands-decider/",
+      "title": "Amazon saves millions by replacing Sonnet 4.6 with Strands Decider",
+      "source": "strandsagents.com",
+      "source_group": "hackernews",
+      "published_at": "2026-11-10T15:01:08+09:00",
+      "category": "ai",
+      "keywords": [
+        "llm-cost",
+        "aws",
+        "ai-agent"
+      ],
+      "score": 89,
+      "why": "HN 655 pt",
+      "read_min": 7,
+      "tldr": "Amazon 社内のチケット分類（約 20 ラベル）で、Claude Sonnet 4.6 を選択肢の確率だけを返す意思決定モデル Strands Decider（Gemma 4 ベース）に置き換えた事例。100 万件あたりのコストは約 2 万 2,200 ドルから約 500 ドルになったとしている。",
+      "points": [
+        "1 回の処理時間は 4,215ms から 897ms、1 件あたりのトークンは 6,724 から 2,010 に減った。精度は同程度とし、具体的な数値は示していない",
+        "SQS → Lambda → SageMaker の構成で、Sonnet と並列実行して結果を比べる DUAL モードを経て切り替えた",
+        "JSON のキー順序で出力確率が最大 0.19 変わったためキーをソートして送る。説明文が必要な用途やカテゴリが頻繁に変わる用途には向かないとしている"
+      ],
+      "code": null,
+      "signal": "▲ 655",
+      "pick": true
+    },
+    {
+      "id": "2026-11-11-hn-alphaproof-code",
+      "url": "https://deepmind.google/blog/introducing-alphaproof-code/",
+      "title": "AlphaProof Code",
+      "source": "deepmind.google",
+      "source_group": "hackernews",
+      "published_at": "2026-11-10T21:11:12+09:00",
+      "category": "ai",
+      "keywords": [
+        "formal-verification",
+        "cryptography",
+        "ai-research"
+      ],
+      "score": 85,
+      "why": "HN 510 pt",
+      "read_min": 8,
+      "tldr": "Google DeepMind が形式検証のエージェント型フレームワーク AlphaProof Code を発表。Signal プロトコルの実装（コンパイル後のコードを含む）が主要なセキュリティ特性を満たすことを Lean で証明したとしている。",
+      "points": [
+        "人間がセキュリティ目標を形式仕様に落として専門家がレビューし、Gemini Carbon を使うエージェントが証明を書き、Lean が検証する分担",
+        "生成した Lean コードは 600 万行超、人間のレビューが必要だったのは約 1%、期間は 4 週間",
+        "修正済みの実バグ 2 件を再導入し、脆弱な版が安全でないことも機械検証で示した。検証成果物はオープンソースで公開"
+      ],
+      "code": null,
+      "signal": "▲ 510",
+      "pick": true
+    },
+    {
+      "id": "2026-11-11-hn-e-means",
+      "url": "https://e-means.github.io/",
+      "title": "E-means: Outperforming k-means in one-tenth the epochs",
+      "source": "e-means.github.io",
+      "source_group": "hackernews",
+      "published_at": "2026-11-10T03:45:43+09:00",
+      "category": "ai",
+      "keywords": [
+        "algorithm",
+        "ai-research"
+      ],
+      "score": 85,
+      "why": "HN 491 pt",
+      "read_min": 5,
+      "tldr": "k-means より少ないエポック（10 分の 1）で上回るとうたうクラスタリング手法「E-means」の紹介ページ。",
+      "points": [],
+      "code": null,
+      "signal": "▲ 491",
+      "pick": false
+    },
+    {
+      "id": "2026-11-11-hn-fable-5-2-one-shot",
+      "url": "https://notesbylex.com/fable-5-2-one-shotted-my-nephews-dream-game",
+      "title": "Fable 5.2 one-shotted my nephew's dream game",
+      "source": "notesbylex.com",
+      "source_group": "hackernews",
+      "published_at": "2026-11-10T08:08:13+09:00",
+      "category": "ai",
+      "keywords": [
+        "claude",
+        "anthropic",
+        "benchmark"
+      ],
+      "score": 84,
+      "why": "HN 469 pt・関連で Artificial Analysis 65 点の話題が HN 368 pt、公式プロンプトガイドがはてブ 294",
+      "read_min": 6,
+      "tldr": "Claude Fable 5.2 が甥の考えたゲームを一度の指示で作り上げたという体験記。発表翌日も Fable 5.2 関連の話題（Artificial Analysis のスコア、公式のプロンプトガイド）が HN・はてブで上位に並んだ。",
+      "points": [],
+      "code": null,
+      "signal": "▲ 469",
+      "pick": false
+    },
+    {
+      "id": "2026-11-11-zenn-meta-muse-coding",
+      "url": "https://zenn.dev/watany/articles/342b9815dd0553",
+      "title": "退屈なCoding AgentはMuseにやらせよう",
+      "source": "zenn.dev",
+      "source_group": "tech_blog",
+      "published_at": "2026-11-10T11:35:05+09:00",
+      "category": "ai",
+      "keywords": [
+        "meta",
+        "ai-agent",
+        "coding-agent"
+      ],
+      "score": 84,
+      "why": "はてブ 167・2 ソースに掲載",
+      "read_min": 8,
+      "tldr": "Meta のパーソナル AI エージェント「Muse」にコーディング作業を任せる使い方の紹介。無料版の中身は Muse Spark 1.3 で、コードも割と書けるとしている。",
+      "points": [],
+      "code": null,
+      "signal": "B! 167",
+      "pick": false
+    },
+    {
+      "id": "2026-11-11-hn-google-tpu-8",
+      "url": "https://blog.google/innovation-and-ai/infrastructure-and-cloud/global-network/tpu-8i-max-and-8tx/",
+      "title": "TPU 8tx and TPU 8i Max",
+      "source": "blog.google",
+      "source_group": "hackernews",
+      "published_at": "2026-11-10T06:56:57+09:00",
+      "category": "cloud",
+      "keywords": [
+        "google-cloud",
+        "semiconductor",
+        "data-center"
+      ],
+      "score": 76,
+      "why": "HN 254 pt",
+      "read_min": 5,
+      "tldr": "Google が TPU の新世代「TPU 8tx」「TPU 8i Max」を発表。",
+      "points": [],
+      "code": null,
+      "signal": "▲ 254",
+      "pick": false
+    },
+    {
+      "id": "2026-11-11-hn-gemini-4-carbon",
+      "url": "https://blog.google/innovation-and-ai/models-and-research/gemini-models/gemini-4-carbon-now-available/",
+      "title": "Gemini 4 Carbon is now available",
+      "source": "blog.google",
+      "source_group": "hackernews",
+      "published_at": "2026-11-11T01:07:15+09:00",
+      "category": "ai",
+      "keywords": [
+        "google",
+        "llm"
+      ],
+      "score": 75,
+      "why": "HN 249 pt",
+      "read_min": 4,
+      "tldr": "Google が Gemini 4 Carbon の提供を開始。",
+      "points": [],
+      "code": null,
+      "signal": "▲ 249",
+      "pick": false
+    },
+    {
+      "id": "2026-11-11-hn-ai-fragile-codebase",
+      "url": "https://evanxmerz.com/post/ai-usage-generates-a-fragile-codebase/",
+      "title": "AI usage generates a fragile codebase",
+      "source": "evanxmerz.com",
+      "source_group": "hackernews",
+      "published_at": "2026-11-10T19:25:58+09:00",
+      "category": "ai",
+      "keywords": [
+        "ai-coding",
+        "software-design"
+      ],
+      "score": 75,
+      "why": "HN 237 pt・関連の「100% AI 義務化から 1 年」スレッドも HN 144 pt",
+      "read_min": 6,
+      "tldr": "AI の利用でコードベースが脆くなるという主張の記事。「100% AI を義務化して 1 年、誰もコードを理解していない」という Reddit の投稿も HN で話題になった。",
+      "points": [],
+      "code": null,
+      "signal": "▲ 237",
+      "pick": false
+    },
+    {
+      "id": "2026-11-11-cnet-softbank-ai-vulns",
+      "url": "https://japan.cnet.com/article/35254620/",
+      "title": "ソフトバンク社長「自社システムをGPT-6 Astraで診断したら3.5万件の追加脆弱性を発見」と明かす",
+      "source": "hatena/it",
+      "source_group": "tech_blog",
+      "published_at": "2026-11-10T07:53:05+09:00",
+      "category": "sec",
+      "keywords": [
+        "vulnerability-management",
+        "ai-security",
+        "incident-response"
+      ],
+      "score": 75,
+      "why": "はてブ 173（関連の ITmedia 記事 はてブ 27）",
+      "read_min": 4,
+      "tldr": "ソフトバンクの宮川社長が決算説明会で、子会社 IDC フロンティアへの不正アクセスを謝罪。自社システムを新しい AI モデルで再診断すると脆弱性が新たに 3 万 5,000 件見つかったと明かし、パッチ対応に疲弊していると語った。",
+      "points": [],
+      "code": null,
+      "signal": "B! 173",
+      "pick": false
+    },
+    {
+      "id": "2026-11-11-hn-dotnet-11-runtime",
+      "url": "https://learn.microsoft.com/en-us/dotnet/core/whats-new/dotnet-11/runtime",
+      "title": "What's new in the .NET 11 runtime",
+      "source": "learn.microsoft.com",
+      "source_group": "hackernews",
+      "published_at": "2026-11-10T21:20:07+09:00",
+      "category": "be",
+      "keywords": [
+        "microsoft",
+        "programming-language"
+      ],
+      "score": 71,
+      "why": "HN 177 pt・Publickey でも正式リリースを報道",
+      "read_min": 6,
+      "tldr": ".NET 11 ランタイムの新機能のドキュメント。Publickey によると .NET 11 が正式リリースされ、C# への共用型の導入や JIT / AOT コンパイラの高速化などが含まれる。",
+      "points": [],
+      "code": null,
+      "signal": "▲ 177",
+      "pick": false
+    },
+    {
+      "id": "2026-11-11-hn-notion-fireworks-incident",
+      "url": "https://www.notion.com/help/security-incident-involving-a-third-party-ai-vendor",
+      "title": "Fireworks AI security breach impacts Notion and their customers",
+      "source": "www.notion.com",
+      "source_group": "hackernews",
+      "published_at": "2026-11-10T16:19:38+09:00",
+      "category": "sec",
+      "keywords": [
+        "supply-chain",
+        "security-incident",
+        "data-breach"
+      ],
+      "score": 69,
+      "why": "HN 151 pt",
+      "read_min": 4,
+      "tldr": "Notion が、利用している AI ベンダー Fireworks AI で発生したセキュリティインシデントにより、一部のワークスペースに影響が及ぶ可能性があると告知した。",
+      "points": [],
+      "code": null,
+      "signal": "▲ 151",
+      "pick": false
+    },
+    {
+      "id": "2026-11-11-publickey-agent-substrate",
+      "url": "https://www.publickey1.jp/blog/26/googlekubernetes10aiagent_sustrategvisorcncf.html",
+      "title": "Google、Kubernetesで10倍高密度にAIエージェントを実行可能にする「Agent Sustrate」と「gVisor」、オープンソースとしてCNCFに寄贈と発表",
+      "source": "publickey",
+      "source_group": "news",
+      "published_at": "2026-11-10T00:25:30+09:00",
+      "category": "cloud",
+      "keywords": [
+        "kubernetes",
+        "ai-agent",
+        "sandbox"
+      ],
+      "score": 51,
+      "why": "はてブ 34",
+      "read_min": 4,
+      "tldr": "Google が Kubernetes 上で AI エージェントを高密度に動かすための「Agent Substrate」とサンドボックスの gVisor を、オープンソースとして CNCF に寄贈すると発表。",
+      "points": [],
+      "code": null,
+      "signal": "B! 34",
+      "pick": false
+    },
+    {
+      "id": "2026-11-11-ghblog-git-vulns",
+      "url": "https://github.blog/open-source/git/git-security-vulnerabilities-announced-7/",
+      "title": "Git security vulnerabilities announced",
+      "source": "github.blog",
+      "source_group": "news",
+      "published_at": "2026-11-11T03:00:00+09:00",
+      "category": "sec",
+      "keywords": [
+        "git",
+        "vulnerability-management"
+      ],
+      "score": 60,
+      "why": "Git 公式のセキュリティ修正（GitHub Blog）",
+      "read_min": 4,
+      "tldr": "Git が 6 件の脆弱性を修正するアップデートを公開。再帰クローン、参照の扱い、マージ、バイナリパッチ、インポートに関するもの。",
+      "points": [],
+      "code": null,
+      "signal": null,
+      "pick": false
+    },
+    {
+      "id": "2026-11-11-boj-opinions-oct",
+      "url": "http://www.boj.or.jp/mopo/mpmsche_minu/opinion_2026/opi261030.pdf",
+      "title": "金融政策決定会合における主な意見（10月29、30日開催分）",
+      "source": "boj.or.jp",
+      "source_group": "official",
+      "published_at": "2026-11-10T08:50:00+09:00",
+      "category": "macro",
+      "keywords": [
+        "boj-policy",
+        "boj-rate-hike",
+        "etf"
+      ],
+      "score": 92,
+      "why": "日銀の公式発表・matched: 金利",
+      "read_min": 10,
+      "tldr": "10 月会合の主な意見が公表された。据え置きを支持する意見の一方、基調的な物価上昇率は 2% に達しており政策金利を早く中立水準に近づけるべきだとする意見や、ETF の売却ペースを見直す時期だとする意見が出た。",
+      "points": [
+        "基調的な物価上昇率は 2% の目標と概ね整合的な水準との見方。消費者物価（除く生鮮）は年度末に向けて 3% を超えて上昇すると見込む意見も",
+        "「次の利上げは過度に慎重にならず、できるときに」「中立金利は 1% より相応に上」とする一方、利上げが物価を押し下げるリスクに留意すべきとの意見も",
+        "ETF 売却は 1 月の開始から約 1 年で市場に大きな影響なく進んだとして、売却ペースの見直しを求める意見が複数あった"
+      ],
+      "code": null,
+      "signal": null,
+      "pick": true
+    },
+    {
+      "id": "2026-11-11-coinpost-sesc-unregistered",
+      "url": "https://coinpost.jp/?p=747289",
+      "title": "証券監視委、無登録3社に差止め申立て ビットコインETF投資も可能と勧誘",
+      "source": "CoinPost",
+      "source_group": "news",
+      "published_at": "2026-11-10T17:50:42+09:00",
+      "category": "funds",
+      "keywords": [
+        "fraud-prevention",
+        "bitcoin-etf",
+        "fsa"
+      ],
+      "score": 80,
+      "why": "matched: ビットコイン・証券監視委の発表",
+      "read_min": 4,
+      "tldr": "証券取引等監視委員会が、無登録で海外投資商品を勧誘した 3 社と代表者について東京地裁に差止めを申し立てた。ビットコイン現物 ETF にも投資できると説明し、延べ 2,141 名から約 49 億円を集めていた。",
+      "points": [
+        "2021 年 2 月〜2026 年 2 月に延べ 2,141 名から約 49 億円。うち年 12% の利息をうたう 1 年償還の社債で延べ 402 名から約 25 億円",
+        "「20 年で積立元本の 160% の配当」と元本確保をうかがわせる勧誘をしたが、監視委は運用成果は保証されないと指摘",
+        "金融庁は同日、3 社を無登録業者の一覧に掲載し、無登録業者に関する注意喚起ページも更新した"
+      ],
+      "code": null,
+      "signal": null,
+      "pick": true
+    },
+    {
+      "id": "2026-11-11-coinpost-listed-btc-sales",
+      "url": "https://coinpost.jp/?p=747315",
+      "title": "米上場企業14社、2026年に1.2兆円相当ビットコインを売却",
+      "source": "CoinPost",
+      "source_group": "news",
+      "published_at": "2026-11-10T21:35:24+09:00",
+      "category": "crypto",
+      "keywords": [
+        "bitcoin",
+        "bitcoin-mining",
+        "bitcoin-treasury"
+      ],
+      "score": 85,
+      "why": "matched: ビットコイン",
+      "read_min": 4,
+      "tldr": "Lookonchain の集計で、米上場企業 14 社が 2026 年に計 10 万 8,247 BTC（約 1.2 兆円）を売却した。MARA と Riot の 2 社で約 56% を占める。",
+      "points": [
+        "MARA が 40,581 BTC、Riot が 20,264 BTC。MARA は四半期終了後に 13,597 BTC を売って BTC 担保ローン 7.5 億ドルを完済した",
+        "Riot は AI データセンター建設と債務返済、Hut 8 は自社株買いに売却資金を充てた",
+        "集計には推計値を含む。Strategy は対象外で、11 月 8 日時点で 850,364 BTC を保有"
+      ],
+      "code": null,
+      "signal": null,
+      "pick": true
+    },
+    {
+      "id": "2026-11-11-toyokeizai-nikkei-ai-cooldown",
+      "url": "https://toyokeizai.net/articles/-/964320?utm_source=rss&utm_medium=http&utm_campaign=link_back",
+      "title": "【AI投資“クールダウン”で何が起きる？】日経平均が一時「6万円割れ」に至った深刻度／中間選挙後の「アノマリー」今回も当てはまる？ ／データセンター企業は“選別”の時代に／中長期での日本株の見通し | ビジネス | 東洋経済オンライン",
+      "source": "東洋経済",
+      "source_group": "news",
+      "published_at": "2026-11-10T19:00:00+09:00",
+      "category": "stocks",
+      "keywords": [
+        "nikkei225",
+        "us-midterms",
+        "data-center"
+      ],
+      "score": 82,
+      "why": "matched: 米国株",
+      "read_min": 6,
+      "tldr": "日経平均は 11 月 6 日に全面安で 6 万円を大きく割り込み 5 月以来の水準に下げたが、10 日には 6 万円台を回復した。記事は米中間選挙での民主党大勝による AI 投資減速懸念を論点にしている。",
+      "points": [
+        "6 日は寄り付きから全面安となり、終値で 6 万円を大きく割り込んだ",
+        "民主党大勝による規制強化などが AI 投資に与える影響を論点とし、「金融システム不安を伴う急落ではない」との見方も示す",
+        "データセンター企業は「選別」の時代に入るとし、中間選挙後のアノマリーや中長期の日米株の見通しも扱う"
+      ],
+      "code": null,
+      "signal": null,
+      "pick": true
+    },
+    {
+      "id": "2026-11-11-nikkei-household-spending",
+      "url": "https://www.nikkei.com/article/DGXZQOUA0911M0Z01C26A1000000/",
+      "title": "9月の実質消費支出6.8%減 コロナ禍以来の減少幅、インフレと天候不順 - 日本経済新聞",
+      "source": "hatena/経済",
+      "source_group": "tech_blog",
+      "published_at": "2026-11-10T10:44:10+09:00",
+      "category": "macro",
+      "keywords": [
+        "inflation",
+        "household-spending"
+      ],
+      "score": 62,
+      "why": "はてブ 46・関連の NHK 記事も掲載",
+      "read_min": 3,
+      "tldr": "総務省の 9 月家計調査で、2 人以上世帯の実質消費支出が前年同月比 6.8% 減。2020 年 9 月以来の減少幅で、インフレによる需要減と天候不順が要因とされる。",
+      "points": [],
+      "code": null,
+      "signal": "B! 46",
+      "pick": false
+    },
+    {
+      "id": "2026-11-11-nikkei-sbg-earnings",
+      "url": "https://www.nikkei.com/article/DGXZQOUB103RY0Q6A111C2000000/",
+      "title": "決算:ソフトバンクＧ最終赤字7680億円 4〜9月、米データセンターで損失 - 日本経済新聞",
+      "source": "hatena/経済",
+      "source_group": "tech_blog",
+      "published_at": "2026-11-10T16:26:02+09:00",
+      "category": "stocks",
+      "keywords": [
+        "earnings",
+        "data-center",
+        "openai"
+      ],
+      "score": 60,
+      "why": "日本株の大型決算",
+      "read_min": 3,
+      "tldr": "ソフトバンクグループの 2026 年 4〜9 月期の最終損益は 7,680 億円の赤字（前年同期は 2 兆 9,240 億円の黒字）。米 AI データセンター計画の変更に伴う損失などがかさんだ。",
+      "points": [],
+      "code": null,
+      "signal": "B! 7",
+      "pick": false
+    },
+    {
+      "id": "2026-11-11-hn-coreweave-bond-yield",
+      "url": "https://www.cnbc.com/2026/11/06/coreweave-bond-yield-tops-16percent-as-ai-credit-stress-rises.html",
+      "title": "CoreWeave bond yield tops 16% as AI credit stress rises",
+      "source": "www.cnbc.com",
+      "source_group": "hackernews",
+      "published_at": "2026-11-10T12:20:06+09:00",
+      "category": "stocks",
+      "keywords": [
+        "ai-economy",
+        "data-center",
+        "us-stocks"
+      ],
+      "score": 58,
+      "why": "HN 190 pt・matched: 米国株",
+      "read_min": 4,
+      "tldr": "CoreWeave の社債利回りが 16% を超え、AI 関連の信用ストレスが高まっていると CNBC が報じた。",
+      "points": [],
+      "code": null,
+      "signal": "▲ 190",
+      "pick": false
+    },
+    {
+      "id": "2026-11-11-coinpost-btc-mid-holders",
+      "url": "https://coinpost.jp/?p=747263",
+      "title": "ビットコイン下落でも中規模層が1.4万BTC超買い増し＝サンティメント",
+      "source": "CoinPost",
+      "source_group": "news",
+      "published_at": "2026-11-10T16:35:30+09:00",
+      "category": "crypto",
+      "keywords": [
+        "bitcoin"
+      ],
+      "score": 70,
+      "why": "matched: ビットコイン",
+      "read_min": 3,
+      "tldr": "ビットコインが 7 万 5,000 ドル付近まで下げる中、1〜100 BTC を保有するウォレットが過去 2 週間で計 1 万 4,000 BTC 超を買い増したとサンティメントが分析した。",
+      "points": [],
+      "code": null,
+      "signal": null,
+      "pick": false
+    },
+    {
+      "id": "2026-11-11-coinpost-xrpl-pqc",
+      "url": "https://coinpost.jp/?p=747250",
+      "title": "XRPレジャーに耐量子署名、財団が導入を提案 開発は2027年後半以降",
+      "source": "CoinPost",
+      "source_group": "news",
+      "published_at": "2026-11-10T15:12:07+09:00",
+      "category": "crypto",
+      "keywords": [
+        "post-quantum",
+        "xrp"
+      ],
+      "score": 50,
+      "why": "暗号資産の技術動向",
+      "read_min": 3,
+      "tldr": "XRPL 財団が、耐量子署名 ML-DSA-44 を XRP レジャーに導入する提案（未承認）の調査を公開。開発は 2027 年後半以降の見通しで、取引サイズの増加などを課題に挙げた。",
+      "points": [],
+      "code": null,
+      "signal": null,
+      "pick": false
+    },
+    {
+      "id": "2026-11-11-diamond-redevelopment-stall",
+      "url": "https://diamond.jp/articles/-/403076",
+      "title": "スーパーゼネコン最高益の裏で都心再開発が続々頓挫！サブコンまでが「仕事を選ぶ側」に回る建設業界異常事態 - ゼネコン・不動産 建設費高騰の呪縛",
+      "source": "ダイヤモンド",
+      "source_group": "news",
+      "published_at": "2026-11-11T04:55:00+09:00",
+      "category": "realestate",
+      "keywords": [
+        "construction-costs",
+        "real-estate-prices"
+      ],
+      "score": 55,
+      "why": "不動産市況（建設費高騰）",
+      "read_min": 5,
+      "tldr": "スーパーゼネコン 4 社が最高益を更新する一方、都心では大規模再開発が次々と止まっている。人手不足でゼネコンやサブコンが案件を選ぶ側に回っていることが背景とされる。",
+      "points": [],
+      "code": null,
+      "signal": null,
+      "pick": false
+    },
+    {
+      "id": "2026-11-11-fsa-esr-notice",
+      "url": "https://www.fsa.go.jp/news/r8/hoken/20261109/20261109.html",
+      "title": "「経済価値ベースのソルベンシー規制に関する告示の一部改正（案）」について公表しました。",
+      "source": "金融庁",
+      "source_group": "official",
+      "published_at": "2026-11-10T02:00:00+09:00",
+      "category": "macro",
+      "keywords": [
+        "fsa",
+        "insurance-regulation"
+      ],
+      "score": 45,
+      "why": "金融庁の公式発表",
+      "read_min": 3,
+      "tldr": "金融庁が、保険会社向けの経済価値ベースのソルベンシー規制（ESR）に関する告示の一部改正案を公表した。",
+      "points": [],
+      "code": null,
+      "signal": null,
+      "pick": false
+    }
+  ],
+  "social": [
+    {
+      "network": "hn",
+      "author": null,
+      "url": "https://news.ycombinator.com/item?id=50429426",
+      "text": "『Google Gemini routes personal Drive files and emails to human annotators』のスレッド。145 件のコメント",
+      "metrics": "▲ 702  ✉ 145",
+      "heat": 100,
+      "category": "ai",
+      "keywords": [
+        "google",
+        "privacy"
+      ],
+      "posted_at": "2026-11-10T03:24:38+09:00"
+    },
+    {
+      "network": "hn",
+      "author": null,
+      "url": "https://news.ycombinator.com/item?id=50436640",
+      "text": "『Amazon saves millions by replacing Sonnet 4.6 with Strands Decider』のスレッド。228 件のコメント",
+      "metrics": "▲ 655  ✉ 228",
+      "heat": 100,
+      "category": "ai",
+      "keywords": [
+        "llm-cost",
+        "aws"
+      ],
+      "posted_at": "2026-11-10T15:01:08+09:00"
+    },
+    {
+      "network": "hn",
+      "author": null,
+      "url": "https://news.ycombinator.com/item?id=50439193",
+      "text": "『AlphaProof Code』のスレッド。163 件のコメント",
+      "metrics": "▲ 510  ✉ 163",
+      "heat": 100,
+      "category": "ai",
+      "keywords": [
+        "formal-verification"
+      ],
+      "posted_at": "2026-11-10T21:11:12+09:00"
+    },
+    {
+      "network": "hn",
+      "author": null,
+      "url": "https://news.ycombinator.com/item?id=50433659",
+      "text": "『Fable 5.2 one-shotted my nephew's dream game』のスレッド。417 件のコメント",
+      "metrics": "▲ 469  ✉ 417",
+      "heat": 100,
+      "category": "ai",
+      "keywords": [
+        "claude",
+        "anthropic"
+      ],
+      "posted_at": "2026-11-10T08:08:13+09:00"
+    },
+    {
+      "network": "hn",
+      "author": null,
+      "url": "https://news.ycombinator.com/item?id=50438318",
+      "text": "『AI usage generates a fragile codebase』のスレッド。288 件のコメント",
+      "metrics": "▲ 237  ✉ 288",
+      "heat": 59,
+      "category": "ai",
+      "keywords": [
+        "ai-coding",
+        "software-design"
+      ],
+      "posted_at": "2026-11-10T19:25:58+09:00"
+    }
+  ],
+  "releases": [
+    {
+      "date": "2026-11-11",
+      "title": "Go go1.27.4",
+      "repo": "golang/go",
+      "url": "https://github.com/golang/go/releases/tag/go1.27.4",
+      "kind": "release",
+      "note": "git タグの差分で検知（リリースノートは未読）",
+      "category": "be"
+    },
+    {
+      "date": "2026-11-10",
+      "title": "Git セキュリティアップデート（6 件の脆弱性修正）",
+      "repo": null,
+      "url": "https://github.blog/open-source/git/git-security-vulnerabilities-announced-7/",
+      "kind": "release",
+      "note": "GitHub Blog の告知。再帰クローン・参照・マージ・バイナリパッチ・インポートに関する修正",
+      "category": "sec"
+    },
+    {
+      "date": "2026-11-10",
+      "title": ".NET 11",
+      "repo": null,
+      "url": "https://www.publickey1.jp/blog/26/net_11cjitaot.html",
+      "kind": "release",
+      "note": "Publickey の記事。C# の共用型、JIT / AOT の高速化など",
+      "category": "be"
+    },
+    {
+      "date": "2026-11-13",
+      "title": "米 10 月 生産者物価指数（PPI）",
+      "repo": null,
+      "url": "https://coinpost.jp/?p=746873",
+      "kind": "event",
+      "note": "外為どっとコム・CoinPost の記事で 11/13 発表と確認（前日の日次ファイルから引き継ぎ）",
+      "category": "macro"
+    }
+  ]
+}
