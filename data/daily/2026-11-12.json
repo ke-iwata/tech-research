@@ -1,0 +1,785 @@
+{
+  "date": "2026-11-12",
+  "generated_at": "2026-11-12T05:40:00+09:00",
+  "stats": {
+    "collected": 221,
+    "sources_ok": 25,
+    "sources_total": 26,
+    "by_group": {
+      "tech_blog": 71,
+      "hackernews": 50,
+      "official": 10,
+      "news": 90
+    },
+    "failed_sources": [
+      "coindesk_jp"
+    ]
+  },
+  "digest": [
+    {
+      "category": "ai",
+      "text": "ISUCON2026 を AI エージェントの完全自律で優勝した参加者が準備編を公開（はてブ 422）。評価 run 159 回・約 200 億トークンをかけ、作り込んだハーネスより素の Claude Code に近い構成の方が強かったという。",
+      "keywords": [
+        "coding-agent",
+        "claude"
+      ]
+    },
+    {
+      "category": "be",
+      "text": "「スマートホーム機器はネットなしで動くべき」が HN 1,124 pt。Verisign が約 2.2 万件の .name ドメイン終了計画を撤回したとの報告も 915 pt を集めた。",
+      "keywords": [
+        "homelab",
+        "dns"
+      ]
+    },
+    {
+      "category": "ai",
+      "text": "48 の AI エージェントで LiDAR データからマヤ遺跡を探した実験が HN 845 pt（後に既知の遺跡と訂正）。Apple のローカル AI 実行アプリの報道、Claude の Whiteboards / Sheets / Data、AWS Nitro Sandboxes も話題に。",
+      "keywords": [
+        "multi-agent",
+        "local-llm"
+      ]
+    },
+    {
+      "category": "crypto",
+      "text": "米 CPI の上振れで 12 月 FOMC の 0.5% ポイント利上げ観測が浮上し、ビットコインが下落。米 BTC・ETH 現物 ETF は 3 営業日連続の純流出で累計約 14.2 億ドル。金融庁は DeFi 研究会の議事要旨を公表した。",
+      "keywords": [
+        "bitcoin",
+        "bitcoin-etf",
+        "crypto-regulation"
+      ]
+    },
+    {
+      "category": "stocks",
+      "text": "11 日の日経平均は 789 円高の 6 万 1,248 円で 3 日続伸し、6 万 1,000 円台を回復した。投資信託の資金流入（10 月分）はまだ公表を確認できなかった。",
+      "keywords": [
+        "nikkei225"
+      ]
+    }
+  ],
+  "items": [
+    {
+      "id": "2026-11-12-zenn-isucon2026-prep",
+      "url": "https://zenn.dev/luvtechno/articles/isucon2026-preparation",
+      "title": "ISUCON2026 で優勝しました（準備編）",
+      "source": "zenn.dev",
+      "source_group": "tech_blog",
+      "published_at": "2026-11-11T14:05:46+09:00",
+      "category": "ai",
+      "keywords": [
+        "coding-agent",
+        "claude",
+        "benchmark"
+      ],
+      "score": 98,
+      "why": "はてブ 422・2 ソースに掲載",
+      "read_min": 12,
+      "tldr": "ISUCON2026 を AI エージェントの完全自律運用で優勝した参加者が、3 か月の準備を振り返った記事。評価の仕組みを作って構成を同じ基準で比べた結果、作り込んだハーネスより素の Claude Code に近い構成の方が強かったという。",
+      "points": [
+        "8〜10 月に評価 run 159 回・延べ 674 時間・約 200 億トークンを使い、過去問環境を AWS に立てて起動から破棄まで自動化する評価ランナーを作った",
+        "手順や並列探索を重ねた full 構成は素の bare 構成に負け、bare に最小限を足した lite を当日使用。API エラー時に continue を送る見張り、終了を早めない Stop フック、監査役サブエージェントなどを追加した",
+        "ベンチマーカーの fd 上限 1024 や再起動後のデータ確認漏れなど評価環境の不備に振り回され、同じ問題でもスコアが大きくばらついた。評価環境の正しさを序盤に確かめるべきだったと振り返る"
+      ],
+      "code": null,
+      "signal": "B! 422",
+      "pick": true
+    },
+    {
+      "id": "2026-11-12-hn-smart-home-offline",
+      "url": "https://docodethatmatters.com/home-automation-overnight-success/",
+      "title": "Smart home devices should work without the internet",
+      "source": "hackernews",
+      "source_group": "hackernews",
+      "published_at": "2026-11-11T00:25:20+09:00",
+      "category": "be",
+      "keywords": [
+        "homelab",
+        "iot-security"
+      ],
+      "score": 96,
+      "why": "HN 1124 pt",
+      "read_min": 8,
+      "tldr": "スマートホーム機器はインターネットが切れても基本機能が動くべきだと主張する記事。筆者は Tasmota・MQTT・Node-RED を自宅のハードウェアで動かし、クラウド連携は付加機能として扱っている。",
+      "points": [
+        "Google による API 変更で Nest 連携が止まった、冷蔵庫の画面に TLS 証明書エラーが出た、温度表示に Wi-Fi が必要なグリル制御器など、クラウド依存の失敗例を挙げる",
+        "コア機能のオフライン動作、壁スイッチなど従来の手動操作の維持、MQTT・Zigbee・Z-Wave などローカルなプロトコルの採用、設定の一元化と定期的な見直しを勧める",
+        "リモートアクセスはルーターの Tailscale に限定し個々の機器は tailnet に入れない。廃棄前にアカウントから機器を外すことも攻撃の入口を減らす対策として挙げている"
+      ],
+      "code": null,
+      "signal": "▲ 1124",
+      "pick": true
+    },
+    {
+      "id": "2026-11-12-hn-name-grandfathered",
+      "url": "https://neil.fraser.name/news/2026/11/10/",
+      "title": ".name Grandfathered",
+      "source": "hackernews",
+      "source_group": "hackernews",
+      "published_at": "2026-11-11T01:37:44+09:00",
+      "category": "cloud",
+      "keywords": [
+        "dns",
+        "domain-pricing"
+      ],
+      "score": 93,
+      "why": "HN 915 pt",
+      "read_min": 3,
+      "tldr": "Verisign が約 2 万 2,000 件の .name ドメインとメール転送を終了する計画を撤回したと、利用者の一人が報告した。11 月 5 日付の ICANN 文書によるもので、既存のドメインと転送は無期限に維持される。",
+      "points": [
+        "既存の .name ドメインとメール転送は終了せずに残る一方、第 3 レベルの .name ドメインの新規登録は締め切られる",
+        "撤回までに、ICANN への再考要請の提出、ICANN 会合での直接の働きかけ、弁護士による異議申し立て、多数の支持書簡など長い取り組みがあった",
+        "記事は政策の変更だけを伝えており、料金についての記載はない"
+      ],
+      "code": null,
+      "signal": "▲ 915",
+      "pick": true
+    },
+    {
+      "id": "2026-11-12-hn-maya-lidar-agents",
+      "url": "https://pietromiotti.com/latest/maya-site/?maya",
+      "title": "Google SWE points 48 AI agents at NASA Lidar, finds unmapped Maya pyramid in 72h",
+      "source": "hackernews",
+      "source_group": "hackernews",
+      "published_at": "2026-11-11T21:05:22+09:00",
+      "category": "ai",
+      "keywords": [
+        "multi-agent",
+        "ai-research"
+      ],
+      "score": 92,
+      "why": "HN 845 pt",
+      "read_min": 6,
+      "tldr": "Google のソフトウェアエンジニアが 48 の AI エージェントで約 1,200 km² の公開 LiDAR データを目視させ、72 時間で未登録とみられる丘上の遺構を見つけたと報告した。ただし追記で、2025 年の論文で既に地図化されていたと訂正している。",
+      "points": [
+        "LiDAR のデータを画像に変換し、エージェントにピラミッド・基壇・広場を探させ、自然の丘や陥没穴、道路を除外させた。特別なモデルや分類器は使っていないという",
+        "候補は生の点群で地表の形状かどうかを確かめ、メキシコ国立人類学歴史研究所（INAH）からは登録された遺跡はないとの非公式な返答を得た",
+        "その後 Estrada-Belli らの 2025 年の論文で既に記録済みと判明し、「発見」ではなく「再発見」だったと追記。筆者は考古学の専門家ではないと断っている"
+      ],
+      "code": null,
+      "signal": "B! 1 · ▲ 845",
+      "pick": true
+    },
+    {
+      "id": "2026-11-12-hn-apple-local-ai-app",
+      "url": "https://9to5mac.com/2026/11/10/apple-has-new-mac-app-coming-to-make-running-local-ai-models-easy/",
+      "title": "Apple has new Mac app coming to make running local AI models easy",
+      "source": "hackernews",
+      "source_group": "hackernews",
+      "published_at": "2026-11-11T06:25:03+09:00",
+      "category": "ai",
+      "keywords": [
+        "apple",
+        "local-llm",
+        "on-device-ai"
+      ],
+      "score": 85,
+      "why": "HN 488 pt",
+      "read_min": 4,
+      "tldr": "Apple がローカルの AI モデルを Mac で簡単に動かせる新しいアプリを準備していると 9to5Mac が報じた。HN では 500 件超のコメントがついている。",
+      "points": [],
+      "code": null,
+      "signal": "B! 1 · ▲ 488",
+      "pick": false
+    },
+    {
+      "id": "2026-11-12-hn-tim-peters",
+      "url": "https://discuss.python.org/t/in-memoriam-tim-peters-1952-2026/110028",
+      "title": "Tim Peters has died",
+      "source": "hackernews",
+      "source_group": "hackernews",
+      "published_at": "2026-11-11T16:03:17+09:00",
+      "category": "be",
+      "keywords": [
+        "programming-language",
+        "oss"
+      ],
+      "score": 84,
+      "why": "HN 458 pt",
+      "read_min": 3,
+      "tldr": "「The Zen of Python」や Timsort で知られる Python のコア開発者 Tim Peters の訃報が Python 公式フォーラムに掲載された。",
+      "points": [],
+      "code": null,
+      "signal": "B! 1 · ▲ 458",
+      "pick": false
+    },
+    {
+      "id": "2026-11-12-hn-anthropic-vulns-tracking",
+      "url": "https://www.vulncheck.com/blog/anthropic-glasswing-november-update",
+      "title": "Tracking Anthropic-discovered vulnerabilities",
+      "source": "hackernews",
+      "source_group": "hackernews",
+      "published_at": "2026-11-11T07:17:56+09:00",
+      "category": "sec",
+      "keywords": [
+        "vulnerability-management",
+        "anthropic",
+        "ai-security"
+      ],
+      "score": 83,
+      "why": "HN 440 pt",
+      "read_min": 6,
+      "tldr": "VulnCheck が、Anthropic が発見・報告した脆弱性の追跡状況を 11 月分としてまとめた記事。HN で 200 件超のコメントがついている。",
+      "points": [],
+      "code": null,
+      "signal": null,
+      "pick": false
+    },
+    {
+      "id": "2026-11-12-hn-modern-web-guidance",
+      "url": "https://github.com/GoogleChrome/modern-web-guidance",
+      "title": "Show HN: Get your coding agent off ~2019 JavaScript, onto modern web primitives",
+      "source": "hackernews",
+      "source_group": "hackernews",
+      "published_at": "2026-11-11T03:01:15+09:00",
+      "category": "ai",
+      "keywords": [
+        "coding-agent",
+        "google",
+        "css"
+      ],
+      "score": 83,
+      "why": "HN 422 pt",
+      "read_min": 4,
+      "tldr": "Google Chrome チームが、コーディングエージェントに古い JavaScript の書き方ではなく最新の Web 標準機能を使わせるためのガイダンスを GitHub で公開し、Show HN に投稿された。",
+      "points": [],
+      "code": null,
+      "signal": "B! 19 · ▲ 422",
+      "pick": false
+    },
+    {
+      "id": "2026-11-12-hn-val-town-winding-down",
+      "url": "https://blog.val.town/winding-down",
+      "title": "Val Town is winding down",
+      "source": "hackernews",
+      "source_group": "hackernews",
+      "published_at": "2026-11-11T02:31:14+09:00",
+      "category": "cloud",
+      "keywords": [
+        "paas"
+      ],
+      "score": 83,
+      "why": "HN 417 pt",
+      "read_min": 4,
+      "tldr": "ブラウザ上で TypeScript の小さなスクリプトをホストできるサービス Val Town が、サービスを終了に向けて縮小すると発表した。",
+      "points": [],
+      "code": null,
+      "signal": "▲ 417",
+      "pick": false
+    },
+    {
+      "id": "2026-11-12-hn-ssh-secure-enclave",
+      "url": "https://gatezh.com/posts/macos-secure-enclave-ssh-keys/",
+      "title": "Protecting SSH Keys with macOS Secure Enclave",
+      "source": "hackernews",
+      "source_group": "hackernews",
+      "published_at": "2026-11-11T13:28:57+09:00",
+      "category": "sec",
+      "keywords": [
+        "openssh",
+        "secrets-management",
+        "apple"
+      ],
+      "score": 81,
+      "why": "HN 366 pt",
+      "read_min": 6,
+      "tldr": "macOS の Secure Enclave に SSH の秘密鍵を保管し、鍵をディスクに置かずに使う方法を解説した記事。",
+      "points": [],
+      "code": null,
+      "signal": "B! 1 · ▲ 366",
+      "pick": false
+    },
+    {
+      "id": "2026-11-12-hn-aws-emulator",
+      "url": "https://github.com/aws/aws-emulator",
+      "title": "AWS Finally Built Its Own AWS Emulator",
+      "source": "hackernews",
+      "source_group": "hackernews",
+      "published_at": "2026-11-12T03:21:38+09:00",
+      "category": "cloud",
+      "keywords": [
+        "aws",
+        "local-cloud-emulator"
+      ],
+      "score": 78,
+      "why": "HN 310 pt",
+      "read_min": 4,
+      "tldr": "AWS 公式の GitHub に AWS サービスのエミュレーター aws-emulator が公開され、LocalStack のようなローカル環境を AWS 自身が用意したとして HN で話題になった。",
+      "points": [],
+      "code": null,
+      "signal": "▲ 310",
+      "pick": false
+    },
+    {
+      "id": "2026-11-12-hn-tv-acr-privacy",
+      "url": "https://www.theverge.com/tech/1012372/tv-privacy-acr-questions",
+      "title": "I asked every TV manufacturer 17 questions about how they spy on you",
+      "source": "hackernews",
+      "source_group": "hackernews",
+      "published_at": "2026-11-11T22:56:05+09:00",
+      "category": "sec",
+      "keywords": [
+        "privacy",
+        "surveillance"
+      ],
+      "score": 78,
+      "why": "HN 306 pt",
+      "read_min": 8,
+      "tldr": "The Verge の記者が主要テレビメーカー各社に、視聴内容を認識して収集する ACR などのデータ収集について 17 の質問を送り、回答をまとめた記事。",
+      "points": [],
+      "code": null,
+      "signal": null,
+      "pick": false
+    },
+    {
+      "id": "2026-11-12-hn-claude-whiteboards-sheets",
+      "url": "https://claude.com/resources/articles/sheets-whiteboards-data",
+      "title": "Claude Whiteboards, Claude Sheets, and Claude Data",
+      "source": "hackernews",
+      "source_group": "hackernews",
+      "published_at": "2026-11-11T02:55:07+09:00",
+      "category": "ai",
+      "keywords": [
+        "claude",
+        "anthropic"
+      ],
+      "score": 77,
+      "why": "HN 275 pt",
+      "read_min": 4,
+      "tldr": "Anthropic が Claude の新機能として Whiteboards・Sheets・Data を紹介した。HN では 200 件超のコメントがついている。",
+      "points": [],
+      "code": null,
+      "signal": "B! 3 · ▲ 275",
+      "pick": false
+    },
+    {
+      "id": "2026-11-12-hn-jane-street-dc-alarm",
+      "url": "https://michael.bacarella.com/2026/11/10/false-smoke-alarm-jane-street-datacenter/",
+      "title": "A false smoke alarm almost drowned Jane Street's only NYC datacenter",
+      "source": "hackernews",
+      "source_group": "hackernews",
+      "published_at": "2026-11-12T01:38:44+09:00",
+      "category": "cloud",
+      "keywords": [
+        "data-center",
+        "incident-response"
+      ],
+      "score": 77,
+      "why": "HN 271 pt",
+      "read_min": 6,
+      "tldr": "Jane Street のニューヨーク唯一のデータセンターで、誤った煙感知警報によりあやうく水没しかけた出来事を当事者が振り返った記事。",
+      "points": [],
+      "code": null,
+      "signal": "▲ 271",
+      "pick": false
+    },
+    {
+      "id": "2026-11-12-publickey-aws-nitro-sandboxes",
+      "url": "https://www.publickey1.jp/blog/26/awsaiec2vmaws_nitro_sandboxes.html",
+      "title": "AWS、AIエージェント向けに強力な隔離環境とネイティブなEC2性能を備えた軽量VM「AWS Nitro Sandboxes」提供開始",
+      "source": "publickey",
+      "source_group": "news",
+      "published_at": "2026-11-12T00:04:47+09:00",
+      "category": "cloud",
+      "keywords": [
+        "aws",
+        "sandbox",
+        "ai-agent"
+      ],
+      "score": 55,
+      "why": "AWS の新サービス発表。AI エージェント実行環境として影響が大きい",
+      "read_min": 4,
+      "tldr": "AWS が、EC2 インスタンス上でほぼネイティブの性能で動き、Nitro のハードウェアレベルで隔離された軽量 VM「AWS Nitro Sandboxes」の提供を始めた。AI エージェント向けの隔離環境と位置づけている。",
+      "points": [],
+      "code": null,
+      "signal": null,
+      "pick": false
+    },
+    {
+      "id": "2026-11-12-coinpost-btc-triple-headwinds",
+      "url": "https://coinpost.jp/?p=747345",
+      "title": "ビットコインに三重苦、利上げ観測・規制懸念・流動性低下で下値警戒｜仮想NISHI",
+      "source": "CoinPost",
+      "source_group": "news",
+      "published_at": "2026-11-11T09:00:38+09:00",
+      "category": "crypto",
+      "keywords": [
+        "bitcoin",
+        "fed",
+        "interest-rates"
+      ],
+      "score": 90,
+      "why": "matched: ビットコイン, 金利",
+      "read_min": 5,
+      "tldr": "ビットコインは 10 日夜から 11 日未明に下落した。米 CPI の上振れで 12 月 FOMC での 0.5% ポイント利上げ観測が浮上したこと、規制懸念、流動性の低下が重なったと分析している。",
+      "points": [
+        "米 10 月 CPI が市場予想を上回り、12 月 FOMC で 0.5% ポイントの大幅利上げ観測が浮上した（記事に CPI の具体的な数値はない）",
+        "米中間選挙後の規制強化への警戒や、CFTC が予測市場大手 Kalshi に法的措置を警告したとの報道、取引所間の送金拒否も不安材料に挙げる",
+        "7 万 2,000 ドル付近と 6 万 9,000 ドルがロング清算の集中しやすい水準として注目され、今後は 11/17 の米小売売上高、11/23 の米 PMI を挙げている"
+      ],
+      "code": null,
+      "signal": null,
+      "pick": true
+    },
+    {
+      "id": "2026-11-12-coinpost-btc-etf-outflow",
+      "url": "https://coinpost.jp/?p=747333",
+      "title": "米ビットコイン・イーサリアム現物ETF、3日連続の純流出 累計2255億円",
+      "source": "CoinPost",
+      "source_group": "news",
+      "published_at": "2026-11-11T09:35:17+09:00",
+      "category": "crypto",
+      "keywords": [
+        "bitcoin-etf",
+        "crypto-etf",
+        "ethereum"
+      ],
+      "score": 86,
+      "why": "matched: ビットコイン",
+      "read_min": 3,
+      "tldr": "SoSoValue のデータで、米国のビットコイン現物 ETF とイーサリアム現物 ETF が 9 日まで 3 営業日連続の純流出となり、累計は約 14.2 億ドル（約 2,255 億円）に達した。",
+      "points": [
+        "9 日はビットコイン現物 ETF が 2 億 108 万ドル、イーサリアム現物 ETF が 1 億 8,451 万ドルの純流出",
+        "ブラックロックの IBIT は 2 億 1,323 万ドルの流出で、10 月 30 日から 7 営業日連続・累計 16.6 億ドルの流出。モルガン・スタンレーの MSBT のみ流入",
+        "10 日はビットコイン現物 ETF が 2,003 万ドルの流入に転じたが、イーサリアム現物 ETF は 4 営業日連続の流出"
+      ],
+      "code": null,
+      "signal": null,
+      "pick": true
+    },
+    {
+      "id": "2026-11-12-coinpost-fsa-defi-study",
+      "url": "https://coinpost.jp/?p=747494",
+      "title": "金融庁研究会でDeFi規制に意見 ゲートキーパーの担い手も論点に",
+      "source": "CoinPost",
+      "source_group": "news",
+      "published_at": "2026-11-11T17:44:29+09:00",
+      "category": "crypto",
+      "keywords": [
+        "crypto-regulation",
+        "fsa",
+        "stablecoin"
+      ],
+      "score": 84,
+      "why": "金融庁の研究会の議事要旨（公式発表）",
+      "read_min": 4,
+      "tldr": "金融庁が「デジタル・分散型金融への対応のあり方等に関する研究会」初会合（10 月 20 日）の議事要旨を公表した。DEX・DeFi の規制の空白を作らない対応や、ステーブルコインの大口償還に伴う国債売却リスクなどが論点になった。",
+      "points": [
+        "日本が規制の空白や規制裁定の場にならないよう DeFi に適時対応すべきとの意見。マネロン対策や、従来の金融機関が担ったゲートキーパーの役割を誰が担うかも課題とされた",
+        "国内の電子決済手段で大口の償還請求があると裏付けの国債が大量に売却されるリスクが指摘され、規制が十分か確認すべきとされた",
+        "パブリックチェーンとの接続には資産の保管や返還の不確実性から慎重論があり、上場株式のトークン化や振替制度の高度化を優先すべきとの意見も出た"
+      ],
+      "code": null,
+      "signal": null,
+      "pick": true
+    },
+    {
+      "id": "2026-11-12-coinpost-glassnode-quantum",
+      "url": "https://coinpost.jp/?p=747332",
+      "title": "グラスノード、ビットコインの35.4％が量子コンピュータの標的になりうると指摘",
+      "source": "CoinPost",
+      "source_group": "news",
+      "published_at": "2026-11-11T10:55:14+09:00",
+      "category": "crypto",
+      "keywords": [
+        "bitcoin",
+        "post-quantum"
+      ],
+      "score": 80,
+      "why": "matched: ビットコイン",
+      "read_min": 3,
+      "tldr": "グラスノードが、ビットコイン供給量の約 35.4%（約 712 万 BTC）は公開鍵が見える状態にあり、将来の量子コンピュータの標的になりうると指摘した。",
+      "points": [
+        "公開鍵が露出している BTC は全供給量の約 35.4%、約 712 万 BTC",
+        "うち 25.8% はアドレスの再利用による露出で、取引所分が 11.6%。新しいアドレスへ移せば露出は解消するという",
+        "記事は、Google の推計では署名の解読に 50 万個未満の量子ビットが必要で、現在の量子コンピュータはこれに届いていないとも伝えている"
+      ],
+      "code": null,
+      "signal": null,
+      "pick": true
+    },
+    {
+      "id": "2026-11-12-kabutan-nikkei-close",
+      "url": "https://kabutan.jp/news/marketnews/?b=n202611111030",
+      "title": "日経平均11日大引け＝3日続伸、789円高の6万1248円",
+      "source": "株探",
+      "source_group": "news",
+      "published_at": null,
+      "category": "stocks",
+      "keywords": [
+        "nikkei225",
+        "topix"
+      ],
+      "score": 78,
+      "why": "matched: 株式（前営業日の終値）",
+      "read_min": 2,
+      "tldr": "11 日の日経平均は前日比 789.01 円高の 6 万 1,248.59 円で 3 日続伸し、6 万 1,000 円台を回復した。TOPIX は 0.92% 高の 3,929.39（検索結果の要約で確認）。",
+      "points": [],
+      "code": null,
+      "signal": null,
+      "pick": false
+    },
+    {
+      "id": "2026-11-12-diamond-ai-stocks-midterms",
+      "url": "https://diamond.jp/articles/-/403170",
+      "title": "米中間選挙後の「AI株」急落は投資機会か？データセンター規制とAI需要から読み解くリスクと投資戦略 - マーケットフォーカス",
+      "source": "ダイヤモンド",
+      "source_group": "news",
+      "published_at": "2026-11-12T04:30:00+09:00",
+      "category": "stocks",
+      "keywords": [
+        "us-stocks",
+        "us-midterms",
+        "data-center"
+      ],
+      "score": 72,
+      "why": "matched: 米国株",
+      "read_min": 6,
+      "tldr": "米中間選挙後、データセンター規制への警戒から AI 関連株が売られ株安が広がった。建設の減速と AI 需要を分けて考える必要があるとして、短期のリスクを検証する記事。",
+      "points": [],
+      "code": null,
+      "signal": null,
+      "pick": false
+    },
+    {
+      "id": "2026-11-12-boj-money-stock-oct",
+      "url": "http://www.boj.or.jp/statistics/money/ms/ms2610.pdf",
+      "title": "マネーストック（10月）",
+      "source": "日本銀行",
+      "source_group": "official",
+      "published_at": "2026-11-11T08:50:00+09:00",
+      "category": "macro",
+      "keywords": [
+        "money-supply"
+      ],
+      "score": 65,
+      "why": "日銀の公式発表",
+      "read_min": 3,
+      "tldr": "日本銀行が 10 月のマネーストック統計を公表した。",
+      "points": [],
+      "code": null,
+      "signal": null,
+      "pick": false
+    },
+    {
+      "id": "2026-11-12-toyokeizai-jgb-strategy",
+      "url": "https://toyokeizai.net/articles/-/964454?utm_source=rss&utm_medium=http&utm_campaign=link_back",
+      "title": "【金利ある時代の有力資産「国債」の戦略的買い方】元本割れなし！無リスク2%の魅力／「変動10年」の金利推移／「預金と国債」利息が増えるのは？",
+      "source": "東洋経済",
+      "source_group": "news",
+      "published_at": "2026-11-11T19:00:00+09:00",
+      "category": "macro",
+      "keywords": [
+        "government-bond",
+        "jgb",
+        "interest-rates"
+      ],
+      "score": 70,
+      "why": "matched: 金利",
+      "read_min": 8,
+      "tldr": "日銀の利上げで「金利ある時代」が戻ったとして、個人向け国債の仕組みや預金との違いを解説する東洋経済の連載記事。",
+      "points": [],
+      "code": null,
+      "signal": null,
+      "pick": false
+    },
+    {
+      "id": "2026-11-12-coinpost-deutsche-bank-custody",
+      "url": "https://coinpost.jp/?p=747504",
+      "title": "ドイツ銀行、法人・機関向け仮想通貨保管を開始、ビットコインなど5銘柄対応",
+      "source": "CoinPost",
+      "source_group": "news",
+      "published_at": "2026-11-11T21:34:42+09:00",
+      "category": "crypto",
+      "keywords": [
+        "bitcoin",
+        "crypto-custody"
+      ],
+      "score": 68,
+      "why": "matched: ビットコイン",
+      "read_min": 2,
+      "tldr": "ドイツ銀行が欧州の法人・機関投資家向けに暗号資産の保管サービスを始めた。ビットコインやイーサリアムなど 5 銘柄に対応し、同行が顧客に代わって秘密鍵を管理する。",
+      "points": [],
+      "code": null,
+      "signal": null,
+      "pick": false
+    },
+    {
+      "id": "2026-11-12-coinpost-bitmine-loss",
+      "url": "https://coinpost.jp/?p=747460",
+      "title": "ビットマイン、通期純損失約1兆円 イーサリアム評価損が響く",
+      "source": "CoinPost",
+      "source_group": "news",
+      "published_at": "2026-11-11T15:44:54+09:00",
+      "category": "crypto",
+      "keywords": [
+        "ethereum",
+        "bitcoin-treasury"
+      ],
+      "score": 60,
+      "why": "matched: 暗号資産（保有企業の決算）",
+      "read_min": 2,
+      "tldr": "イーサリアム保有最大手のビットマインが 8 月期の年次報告書を提出し、保有暗号資産の評価損約 9,850 億円で純損失は約 1 兆円となった。",
+      "points": [],
+      "code": null,
+      "signal": null,
+      "pick": false
+    },
+    {
+      "id": "2026-11-12-suumo-custom-home-costs",
+      "url": "https://suumo.jp/journal/2026/11/11/222314/",
+      "title": "注文住宅は建築費上昇で面積が縮小！でも、省エネ性能は格段に向上？",
+      "source": "SUUMOジャーナル",
+      "source_group": "news",
+      "published_at": "2026-11-11T07:00:01+09:00",
+      "category": "realestate",
+      "keywords": [
+        "construction-costs",
+        "housing"
+      ],
+      "score": 62,
+      "why": "matched: 不動産（住宅取得費）",
+      "read_min": 5,
+      "tldr": "住宅生産団体連合会の 2025 年度の戸建注文住宅の顧客実態調査で、世帯年収が横ばいのなか、床面積の縮小や借入額の増加で建築費の上昇に対応している様子が示された。",
+      "points": [],
+      "code": null,
+      "signal": null,
+      "pick": false
+    },
+    {
+      "id": "2026-11-12-fsa-disclosure-wg",
+      "url": "https://www.fsa.go.jp/news/r8/singi/20261118.html",
+      "title": "金融審議会「ディスクロージャーワーキング・グループ」（第７回）の開催について公表しました。",
+      "source": "金融庁",
+      "source_group": "official",
+      "published_at": "2026-11-12T02:00:00+09:00",
+      "category": "macro",
+      "keywords": [
+        "fsa"
+      ],
+      "score": 50,
+      "why": "金融庁の公式発表",
+      "read_min": 1,
+      "tldr": "金融庁が金融審議会「ディスクロージャーワーキング・グループ」第 7 回の開催を告知した。",
+      "points": [],
+      "code": null,
+      "signal": null,
+      "pick": false
+    }
+  ],
+  "social": [
+    {
+      "network": "x",
+      "author": "@yaotti",
+      "url": "https://x.com/yaotti/status/2118537738551230694",
+      "text": "ISUCON2026 を AI の完全自律で優勝した参加者の準備編を紹介。問題を解く部分は人間不要だったがハーネス改善は人間が回す必要があり、作り込んだハーネスより素のモデルの方が強かった点を挙げている。",
+      "metrics": null,
+      "heat": null,
+      "category": "ai",
+      "keywords": [
+        "coding-agent",
+        "claude"
+      ],
+      "posted_at": null
+    },
+    {
+      "network": "x",
+      "author": "@cryptodotnews",
+      "url": "https://x.com/cryptodotnews/status/2119326689150828670",
+      "text": "米ビットコイン現物 ETF は 10 月 30 日〜11 月 6 日に 19.2 億ドルの純流出、ブラックロックの IBIT は 6 営業日で 14.4 億ドルを失ったと伝える投稿。",
+      "metrics": null,
+      "heat": null,
+      "category": "crypto",
+      "keywords": [
+        "bitcoin-etf"
+      ],
+      "posted_at": null
+    },
+    {
+      "network": "hn",
+      "author": null,
+      "url": "https://news.ycombinator.com/item?id=50441707",
+      "text": "『Smart home devices should work without the internet』のスレッド。416 件のコメント",
+      "metrics": "▲ 1124  ✉ 416",
+      "heat": 100,
+      "category": "be",
+      "keywords": [
+        "homelab",
+        "iot-security"
+      ],
+      "posted_at": "2026-11-11T00:25:20+09:00"
+    },
+    {
+      "network": "hn",
+      "author": null,
+      "url": "https://news.ycombinator.com/item?id=50442736",
+      "text": "『.name Grandfathered』のスレッド。200 件のコメント",
+      "metrics": "▲ 915  ✉ 200",
+      "heat": 100,
+      "category": "cloud",
+      "keywords": [
+        "dns"
+      ],
+      "posted_at": "2026-11-11T01:37:44+09:00"
+    },
+    {
+      "network": "hn",
+      "author": null,
+      "url": "https://news.ycombinator.com/item?id=50452455",
+      "text": "『Google SWE points 48 AI agents at NASA Lidar, finds unmapped Maya pyramid in 72h』のスレッド。312 件のコメント",
+      "metrics": "▲ 845  ✉ 312",
+      "heat": 100,
+      "category": "ai",
+      "keywords": [
+        "multi-agent"
+      ],
+      "posted_at": "2026-11-11T21:05:22+09:00"
+    },
+    {
+      "network": "hn",
+      "author": null,
+      "url": "https://news.ycombinator.com/item?id=50446520",
+      "text": "『Apple has new Mac app coming to make running local AI models easy』のスレッド。508 件のコメント",
+      "metrics": "▲ 488  ✉ 508",
+      "heat": 100,
+      "category": "ai",
+      "keywords": [
+        "local-llm",
+        "apple"
+      ],
+      "posted_at": "2026-11-11T06:25:03+09:00"
+    },
+    {
+      "network": "hn",
+      "author": null,
+      "url": "https://news.ycombinator.com/item?id=50443716",
+      "text": "『Claude Whiteboards, Claude Sheets, and Claude Data』のスレッド。212 件のコメント",
+      "metrics": "▲ 275  ✉ 212",
+      "heat": 68,
+      "category": "ai",
+      "keywords": [
+        "claude"
+      ],
+      "posted_at": "2026-11-11T02:55:07+09:00"
+    }
+  ],
+  "releases": [
+    {
+      "date": "2026-11-13",
+      "title": "米 10 月 生産者物価指数（PPI）",
+      "repo": null,
+      "url": "https://coinpost.jp/?p=746873",
+      "kind": "event",
+      "note": "前日の日次ファイルから引き継ぎ（11/13 発表）",
+      "category": "macro"
+    },
+    {
+      "date": "2026-11-17",
+      "title": "米 10 月 小売売上高",
+      "repo": null,
+      "url": "https://coinpost.jp/?p=747345",
+      "kind": "event",
+      "note": "CoinPost の記事で 11/17 発表と確認",
+      "category": "macro"
+    }
+  ]
+}
