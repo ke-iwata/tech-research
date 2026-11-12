@@ -1,0 +1,824 @@
+{
+  "date": "2026-11-13",
+  "generated_at": "2026-11-13T05:45:00+09:00",
+  "stats": {
+    "collected": 237,
+    "sources_ok": 25,
+    "sources_total": 26,
+    "by_group": {
+      "hackernews": 50,
+      "tech_blog": 81,
+      "news": 95,
+      "official": 11
+    },
+    "failed_sources": [
+      "coindesk_jp"
+    ]
+  },
+  "digest": [
+    {
+      "category": "ai",
+      "text": "NVIDIA のフアン CEO が即日辞任（HN 2,146 pt）。CFO のクレス氏が暫定 CEO、ジョーンズ氏が初の取締役会議長に就き、決算は予定どおり 11/17。報道段階で株価は時間外に 8％程度下げた。",
+      "keywords": [
+        "nvidia",
+        "corporate-governance"
+      ]
+    },
+    {
+      "category": "cloud",
+      "text": "AWS 公式のローカルエミュレータ「AWS Emulator」が HN 957 pt・7 ソースに掲載。Mozc ベースでローカル AI 補正付きの日本語 IME「Mozkey」もはてブ 702 を集めた。",
+      "keywords": [
+        "aws",
+        "local-cloud-emulator",
+        "input-method"
+      ]
+    },
+    {
+      "category": "sec",
+      "text": "良品計画が MUJI Card のカード番号全桁を削除せず保管していた問題で謝罪（はてブ 613）。GitHub Actions を狙った広域サプライチェーン攻撃（11/10〜12）の注意喚起や、Apache HTTP Server の RCE、Node.js の 16 件修正も出た。",
+      "keywords": [
+        "data-breach",
+        "supply-chain",
+        "rce"
+      ]
+    },
+    {
+      "category": "macro",
+      "text": "10 月の国内企業物価は前年比 +7.1％、円ベース輸入物価は +24.8％。日銀の浅田審議委員は、6・9 月の利上げに反対した理由と、利上げ効果のラグへの留意を講演で述べた。",
+      "keywords": [
+        "inflation",
+        "boj-policy"
+      ]
+    },
+    {
+      "category": "crypto",
+      "text": "MSCI がストラテジーとメタプラネットを指数から除外（11/30 発効）。ステーブルコイン供給は 30 日で 142 億ドル減った。日経平均の 12 日終値と投信・住宅ローンのその日のニュースは検索で確認できなかった。",
+      "keywords": [
+        "bitcoin-treasury",
+        "stablecoin"
+      ]
+    }
+  ],
+  "items": [
+    {
+      "id": "2026-11-13-nvidia-huang-resigns",
+      "url": "https://nvidianews.nvidia.com/news/nvidia-announces-ceo-transition",
+      "title": "NVIDIA Announces CEO Transition（Jensen Huang resigns）",
+      "source": "nvidianews.nvidia.com",
+      "source_group": "hackernews",
+      "published_at": "2026-11-12T22:52:29+09:00",
+      "category": "ai",
+      "keywords": [
+        "nvidia",
+        "corporate-governance",
+        "semiconductor"
+      ],
+      "score": 100,
+      "why": "HN 2,146 pt・関連記事が 10 本以上",
+      "read_min": 4,
+      "tldr": "NVIDIA は 11 月 12 日、ジェンスン・フアン氏が社長・CEO・取締役を即日辞任したと発表した。CFO のコレット・クレス氏が暫定 CEO を兼務し、ハーヴィー・C・ジョーンズ氏が同社初の取締役会議長に就いた。",
+      "points": [
+        "公式発表では辞任理由は示されていない。報道では、本人の私生活を巡る報道と取締役会による解任準備が先行していた",
+        "取締役会は社内外の候補から恒久的な CEO を選ぶ。クレス氏は後任決定まで CFO も続ける",
+        "業績見通しの変更は発表されず、第 3 四半期決算は予定どおり 11 月 17 日に発表するとした"
+      ],
+      "code": null,
+      "signal": "▲ 2146",
+      "pick": true
+    },
+    {
+      "id": "2026-11-13-koyasi-mozkey",
+      "url": "https://koyasi777.com/mozkey/",
+      "title": "Mozkey（もずきー）| 書くことに集中できる、日本語入力。",
+      "source": "koyasi777.com",
+      "source_group": "tech_blog",
+      "published_at": "2026-11-12T11:13:52+09:00",
+      "category": "be",
+      "keywords": [
+        "input-method",
+        "local-llm",
+        "oss"
+      ],
+      "score": 95,
+      "why": "はてブ 702",
+      "read_min": 3,
+      "tldr": "Google 日本語入力のオープンソース版 Mozc をベースにした非公式フォークの日本語 IME「Mozkey（もずきー）」。ライブ変換と、ローカル AI「Zenz」による文脈に応じた変換補正を備える。",
+      "points": [
+        "Windows（x64・ARM64）と macOS（Universal）に対応。Linux 版は開発中で、スマートフォンは対象外",
+        "入力中に候補が変わるライブ変換、Zenz（llama.cpp 系コンポーネントを同梱）による文脈補正、選んだ表記の学習を備える",
+        "オフライン動作を重視し、テレメトリや自動更新は持たない。オープンソースで開発され、GitHub Sponsors で支援を受け付けている"
+      ],
+      "code": null,
+      "signal": "B! 702",
+      "pick": true
+    },
+    {
+      "id": "2026-11-13-aws-emulator",
+      "url": "https://github.com/aws/aws-emulator",
+      "title": "AWS emulator",
+      "source": "github.com",
+      "source_group": "hackernews",
+      "published_at": "2026-11-12T03:21:38+09:00",
+      "category": "cloud",
+      "keywords": [
+        "aws",
+        "local-cloud-emulator",
+        "coding-agent"
+      ],
+      "score": 94,
+      "why": "HN 957 pt・はてブ 164・7 ソースに掲載",
+      "read_min": 6,
+      "tldr": "AWS が、AWS アカウントなしで AWS API を使うソフトウェアをローカルや CI でテストできる公式エミュレータ「AWS Emulator」を公開した。Rust 製で CC0-1.0、AI エージェントがコードを書いて作ったことでも話題になった。",
+      "points": [
+        "AWS CLI・SDK のエンドポイントを向けて使う。サーバーモード（Linux は RPM / deb、Windows・macOS は Docker）と、Rust のテストに埋め込むモードがある",
+        "サービスごとに crate を分けた構成で、忠実度スコアはリリースごとに公開。未対応の機能は issues で管理し、PR は受け付けない",
+        "本番利用やセキュリティテストには使わないよう明記。テレメトリは既定でオンで、--telemetry off や EMULATOR_TELEMETRY=off で止められる"
+      ],
+      "code": {
+        "file": "main.rs",
+        "lang": "rust",
+        "text": "use aws_emulator_embedded::{AwsEmulatorEmbedded, EmbeddedOptions, Telemetry};\n\nfn main() {\n    let emulator = AwsEmulatorEmbedded::new(EmbeddedOptions::default().telemetry(Telemetry::Off));\n    let _http_client = emulator.http_client();\n}"
+      },
+      "signal": "B! 164 · ▲ 957",
+      "pick": true
+    },
+    {
+      "id": "2026-11-13-itmedia-muji-card",
+      "url": "https://www.itmedia.co.jp/news/article/2611/12/2000003144/",
+      "title": "無印良品「21年までクレカ番号で顧客を識別していた」 “全ケタ保有＆漏えい“巡り謝罪 削除漏れなぜ発生",
+      "source": "itmedia.co.jp",
+      "source_group": "tech_blog",
+      "published_at": "2026-11-12T17:34:31+09:00",
+      "category": "sec",
+      "keywords": [
+        "data-breach",
+        "payments",
+        "security-incident"
+      ],
+      "score": 93,
+      "why": "はてブ 613",
+      "read_min": 5,
+      "tldr": "良品計画が会見で、2000〜2021 年に MUJI Card のカード番号全桁で会員を識別していたこと、連携終了後も一部の番号を削除せず保管していたことを謝罪した。不正アクセスの影響は顧客情報最大約 2,726 万件、カード番号全桁約 109 万件の可能性とされる。",
+      "points": [
+        "2021 年 7 月のシステム変更で連携を終えたが、一部のカード番号をマスキングや暗号化なしで残していた",
+        "同社は「意図的な保管ではなく運用管理の不備」と説明。人為的ミスかシステムの問題かは調査中",
+        "原因究明と情報管理体制の見直しを進め、カード再発行手数料を全額負担する。改正割賦販売法との関係は確認中"
+      ],
+      "code": null,
+      "signal": "B! 613",
+      "pick": true
+    },
+    {
+      "id": "2026-11-13-anthropic-ipo",
+      "url": "https://ipo.anthropic.com/us/",
+      "title": "Anthropic IPO",
+      "source": "ipo.anthropic.com",
+      "source_group": "hackernews",
+      "published_at": "2026-11-12T20:46:41+09:00",
+      "category": "ai",
+      "keywords": [
+        "anthropic",
+        "ipo"
+      ],
+      "score": 90,
+      "why": "HN 703 pt",
+      "read_min": 3,
+      "tldr": "Anthropic の IPO に関するページ（ipo.anthropic.com）が HN で 703 pt を集めた。本文は未確認のため、詳細はリンク先を参照。",
+      "points": [],
+      "code": null,
+      "signal": "▲ 703",
+      "pick": false
+    },
+    {
+      "id": "2026-11-13-pcwatch-meta-muse",
+      "url": "https://pc.watch.impress.co.jp/docs/topic/feature/2155692.html",
+      "title": "【特集】 AIが“ダチ”になった。Meta「Muse」と過ごした2週間",
+      "source": "pc.watch.impress.co.jp",
+      "source_group": "tech_blog",
+      "published_at": "2026-11-12T06:15:31+09:00",
+      "category": "ai",
+      "keywords": [
+        "meta",
+        "ai-agent"
+      ],
+      "score": 90,
+      "why": "はてブ 497",
+      "read_min": 10,
+      "tldr": "PC Watch の特集。Meta の AI エージェント「Muse」を 2 週間使った体験記で、関連して Muse 専用メールアドレスの提供開始も話題になった。",
+      "points": [],
+      "code": null,
+      "signal": "B! 497",
+      "pick": false
+    },
+    {
+      "id": "2026-11-13-cbs-united-ai-agents",
+      "url": "https://www.cbsnews.com/news/united-airlines-bans-ai-agents-booking-flights/",
+      "title": "United Airlines bans AI agents from booking flights on behalf of travelers",
+      "source": "cbsnews.com",
+      "source_group": "hackernews",
+      "published_at": "2026-11-12T06:24:35+09:00",
+      "category": "ai",
+      "keywords": [
+        "ai-agent",
+        "bot-traffic"
+      ],
+      "score": 89,
+      "why": "HN 651 pt",
+      "read_min": 4,
+      "tldr": "United Airlines が、旅行者に代わって AI エージェントが航空券を予約することを禁じたと CBS News が報じた。",
+      "points": [],
+      "code": null,
+      "signal": "▲ 651",
+      "pick": false
+    },
+    {
+      "id": "2026-11-13-google-gemini-decisions-api",
+      "url": "https://blog.google/innovation-and-ai/technology/developers-tools/gemini-decisions-api/",
+      "title": "Gemini Decisions API",
+      "source": "blog.google",
+      "source_group": "hackernews",
+      "published_at": "2026-11-12T03:32:42+09:00",
+      "category": "ai",
+      "keywords": [
+        "google",
+        "llm"
+      ],
+      "score": 86,
+      "why": "HN 547 pt",
+      "read_min": 4,
+      "tldr": "Google が開発者向けに「Gemini Decisions API」を発表した（Google 公式ブログ）。",
+      "points": [],
+      "code": null,
+      "signal": "B! 12 · ▲ 547",
+      "pick": false
+    },
+    {
+      "id": "2026-11-13-zenn-ubie-cloud-agent",
+      "url": "https://zenn.dev/ubie_dev/articles/45501469c9c044",
+      "title": "Software Factoryの先へ：全社の仕事をAI-NativeにするUbieの内製クラウドエージェント基盤",
+      "source": "zenn.dev",
+      "source_group": "tech_blog",
+      "published_at": "2026-11-12T09:44:52+09:00",
+      "category": "ai",
+      "keywords": [
+        "ai-agent",
+        "coding-agent",
+        "ai-adoption"
+      ],
+      "score": 83,
+      "why": "はてブ 149",
+      "read_min": 12,
+      "tldr": "Ubie CTO が、2023 年から内製してきたクラウドエージェント基盤と、エンジニアリングエージェント「Uvin」を経て全社の仕事を AI-Native にする取り組みを紹介した記事。",
+      "points": [],
+      "code": null,
+      "signal": "B! 149",
+      "pick": false
+    },
+    {
+      "id": "2026-11-13-wiz-apache-httpd-rce",
+      "url": "https://www.wiz.io/blog/cve-2026-119618-rce-apache-http-server-vulnerability",
+      "title": "Critical RCE Vulnerability in Apache HTTP Server",
+      "source": "wiz.io",
+      "source_group": "hackernews",
+      "published_at": "2026-11-12T11:11:11+09:00",
+      "category": "sec",
+      "keywords": [
+        "rce",
+        "http",
+        "vulnerability-management"
+      ],
+      "score": 80,
+      "why": "HN 346 pt",
+      "read_min": 6,
+      "tldr": "Wiz が Apache HTTP Server の重大なリモートコード実行（RCE）脆弱性について解説した。",
+      "points": [],
+      "code": null,
+      "signal": "B! 2 · ▲ 346",
+      "pick": false
+    },
+    {
+      "id": "2026-11-13-google-gemini-4-hydrogen",
+      "url": "https://blog.google/innovation-and-ai/models-and-research/gemini-models/introducing-gemini-4-hydrogen/",
+      "title": "Gemini 4 Hydrogen",
+      "source": "blog.google",
+      "source_group": "hackernews",
+      "published_at": "2026-11-13T03:01:48+09:00",
+      "category": "ai",
+      "keywords": [
+        "google",
+        "llm"
+      ],
+      "score": 78,
+      "why": "HN 302 pt",
+      "read_min": 4,
+      "tldr": "Google が新しいモデル「Gemini 4 Hydrogen」を発表した（Google 公式ブログ）。",
+      "points": [],
+      "code": null,
+      "signal": "B! 1 · ▲ 302",
+      "pick": false
+    },
+    {
+      "id": "2026-11-13-hn-azure-outage",
+      "url": "https://news.ycombinator.com/item?id=50471668",
+      "title": "Ask HN: Microsoft/Azure Outage?",
+      "source": "news.ycombinator.com",
+      "source_group": "hackernews",
+      "published_at": "2026-11-13T03:17:13+09:00",
+      "category": "cloud",
+      "keywords": [
+        "azure",
+        "system-outage",
+        "microsoft"
+      ],
+      "score": 76,
+      "why": "HN 257 pt・Outlook 障害のスレッドも 198 pt",
+      "read_min": 3,
+      "tldr": "Microsoft / Azure の障害を尋ねる HN スレッドが 257 pt。Outlook がつながらず、Microsoft のステータスページも落ちていたとの報道（198 pt）も並んだ。",
+      "points": [],
+      "code": null,
+      "signal": "▲ 257",
+      "pick": false
+    },
+    {
+      "id": "2026-11-13-flatt-gha-supply-chain",
+      "url": "https://blog.flatt.tech/entry/github_actions_widespread_supply_chain_attack",
+      "title": "GitHub Actions を狙った広域サプライチェーン攻撃（11/10~11/12）に関する注意喚起 - GMO Flatt Security Blog",
+      "source": "blog.flatt.tech",
+      "source_group": "tech_blog",
+      "published_at": "2026-11-12T22:19:39+09:00",
+      "category": "sec",
+      "keywords": [
+        "supply-chain",
+        "github-actions",
+        "secrets-management"
+      ],
+      "score": 45,
+      "why": "はてブ 21・GitHub Actions を狙った広域攻撃",
+      "read_min": 8,
+      "tldr": "11 月 10〜12 日に、多数の GitHub リポジトリで悪性コミットにより GitHub Actions のワークフローに悪性コードが注入された。実行されると CI 環境のシークレットを集め、C2 サーバーや Telegram Bot に送るという注意喚起。",
+      "points": [],
+      "code": null,
+      "signal": "B! 21",
+      "pick": false
+    },
+    {
+      "id": "2026-11-13-forest-nodejs-security",
+      "url": "https://forest.watch.impress.co.jp/docs/news/2155706.html",
+      "title": "「Node.js」にセキュリティ更新 ～16件の脆弱性を修正、HTTP/2関連が多数／v22.23.5、v24.22.3、v26.13.1が公開",
+      "source": "forest.watch.impress.co.jp",
+      "source_group": "tech_blog",
+      "published_at": "2026-11-12T14:24:55+09:00",
+      "category": "sec",
+      "keywords": [
+        "vulnerability-management",
+        "http"
+      ],
+      "score": 50,
+      "why": "Node.js 公式のセキュリティ修正（16 件）",
+      "read_min": 3,
+      "tldr": "Node.js がセキュリティ更新を公開し、HTTP/2 関連を中心に 16 件の脆弱性を修正した。対象は v22.23.5、v24.22.3、v26.13.1。",
+      "points": [],
+      "code": null,
+      "signal": "B! 13",
+      "pick": false
+    },
+    {
+      "id": "2026-11-13-postgresql-18-7",
+      "url": "https://www.postgresql.org/about/news/postgresql-187-1712-1616-1520-1425-and-19-rc-2-released-3442/",
+      "title": "PostgreSQL 18.7, 17.12, 16.16, 15.20, 14.25, and 19 RC 2 Released!",
+      "source": "postgresql.org",
+      "source_group": "news",
+      "published_at": "2026-11-12T09:00:00+09:00",
+      "category": "be",
+      "keywords": [
+        "postgres"
+      ],
+      "score": 50,
+      "why": "PostgreSQL 公式の定例アップデート",
+      "read_min": 3,
+      "tldr": "PostgreSQL 18.7、17.12、16.16、15.20、14.25 と 19 RC 2 が公開された。サポート中の全バージョンが対象の更新。",
+      "points": [],
+      "code": null,
+      "signal": null,
+      "pick": false
+    },
+    {
+      "id": "2026-11-13-boj-asada-speech",
+      "url": "https://www.boj.or.jp/about/press/koen_2026/ko261112a.htm",
+      "title": "【挨拶】浅田審議委員「わが国の経済・物価情勢と金融政策」（長崎）",
+      "source": "boj.or.jp",
+      "source_group": "official",
+      "published_at": "2026-11-12T10:30:00+09:00",
+      "category": "macro",
+      "keywords": [
+        "boj-policy",
+        "interest-rates",
+        "inflation"
+      ],
+      "score": 88,
+      "why": "matched: 金利・日銀の公式発表",
+      "read_min": 15,
+      "tldr": "浅田審議委員が長崎で講演。6 月と 9 月の利上げ（政策金利は約 30 年ぶりの 1.25％）に反対票を投じた理由として、足もとのインフレ率が 2％を下回り経済も強いとは言えない点を挙げた。",
+      "points": [
+        "短期の実質金利はマイナスで金融環境はなお緩和的とする一方、利上げの効果には 1 年以上のラグがあり、企業の資金繰りや家計の借入れへの影響を見る必要があると述べた",
+        "見通しのリスク要因に中東情勢・AI 関連需要・為替を挙げた。展望レポートの「物価は上振れリスクの方が大きい」との評価に触れつつ、上振れの程度には不確実性があるとした",
+        "緩和の度合いが小さくなるほど、利上げが経済を下振れさせるリスクは大きくなる点に留意が必要と述べた"
+      ],
+      "code": null,
+      "signal": null,
+      "pick": true
+    },
+    {
+      "id": "2026-11-13-boj-cgpi-2610",
+      "url": "https://www.boj.or.jp/statistics/pi/cgpi_release/cgpi2610.pdf",
+      "title": "企業物価指数（10月）",
+      "source": "boj.or.jp",
+      "source_group": "official",
+      "published_at": "2026-11-12T08:50:00+09:00",
+      "category": "macro",
+      "keywords": [
+        "inflation",
+        "boj-statistics",
+        "fx"
+      ],
+      "score": 80,
+      "why": "matched: 為替・日銀の公式発表",
+      "read_min": 5,
+      "tldr": "10 月の国内企業物価指数は前月比 +0.7％、前年比 +7.1％。円ベースの輸入物価は前年比 +24.8％で、契約通貨ベースの上昇に円安が加わった。",
+      "points": [
+        "国内企業物価は前月比 +0.7％（夏季電力料金調整後 +0.9％）で、前年比は 9 月の 6.8％から 7.1％に拡大",
+        "輸入物価は契約通貨ベースで前月比 +2.3％、円ベースで +3.3％。前月比の寄与は石油・石炭・天然ガスが最大",
+        "輸出物価は円ベースで前年比 +16.7％。国内では化学製品や石油・石炭製品が押し上げた"
+      ],
+      "code": null,
+      "signal": null,
+      "pick": true
+    },
+    {
+      "id": "2026-11-13-coinpost-msci-strategy",
+      "url": "https://coinpost.jp/?p=747512",
+      "title": "米MSCI、ストラテジー・メタプラネットを指数から除外決定 影響は？",
+      "source": "coinpost.jp",
+      "source_group": "news",
+      "published_at": "2026-11-12T07:50:22+09:00",
+      "category": "crypto",
+      "keywords": [
+        "bitcoin-treasury",
+        "index-rebalance",
+        "bitcoin"
+      ],
+      "score": 78,
+      "why": "matched: ビットコイン, インデックス",
+      "read_min": 4,
+      "tldr": "MSCI は 11 月の定期見直しで、ストラテジーを MSCI USA 指数などから、メタプラネットを MSCI ジャパン・スモールキャップ指数から除外すると決めた。11 月 30 日の取引終了時点で発効する。",
+      "points": [
+        "10 月 15 日に導入した、事業実態の乏しい「非事業会社」を対象外とする新ルールが背景",
+        "JP モルガンの推計では連動資金約 28 億ドルが流出し得て、他の指数会社が追随すればさらに約 88 億ドル。ただし前提は 2025 年 11 月の案",
+        "ストラテジーはデジタル資産保有企業への差別的な扱いだと反発している"
+      ],
+      "code": null,
+      "signal": null,
+      "pick": true
+    },
+    {
+      "id": "2026-11-13-coinpost-stablecoin-outflow",
+      "url": "https://coinpost.jp/?p=747545",
+      "title": "仮想通貨の生命線、ステーブルコインが過去30日で2.2兆円減 4年超ぶりの資金流出",
+      "source": "coinpost.jp",
+      "source_group": "news",
+      "published_at": "2026-11-12T10:05:39+09:00",
+      "category": "crypto",
+      "keywords": [
+        "stablecoin",
+        "tether"
+      ],
+      "score": 70,
+      "why": "matched: ビットコイン（暗号資産の資金動向）",
+      "read_min": 4,
+      "tldr": "グラスノードによると、ステーブルコインの供給は過去 30 日で 142 億ドル（約 2.2 兆円）減り、2022 年 6 月以来の速いペースになった。総供給は 2,800 億ドル弱。",
+      "points": [
+        "総供給は 2025 年 9 月以来の水準。2022 年 6 月の 30 日間の減少は約 300 億ドルだった",
+        "クリプトクアントによると USDT の時価総額は 11 月 7 日までの 60 日で 66 億ドル減り、FTX 破綻時（32 億ドル）の 2 倍超",
+        "グラスノードは保有者のドルへの償還で相場を支える資金が減っているとみる一方、30 日変化が増加に転じれば資金流入の兆しになるとした"
+      ],
+      "code": null,
+      "signal": null,
+      "pick": true
+    },
+    {
+      "id": "2026-11-13-toyokeizai-nvda-afterhours",
+      "url": "https://toyokeizai.net/articles/-/964534?utm_source=rss&utm_medium=http&utm_campaign=link_back",
+      "title": "エヌビディア､フアンCEOの解任準備とWSJ報道 時間外で株価8％安 | ビジネス | 東洋経済オンライン",
+      "source": "toyokeizai.net",
+      "source_group": "news",
+      "published_at": "2026-11-12T10:41:00+09:00",
+      "category": "stocks",
+      "keywords": [
+        "nvidia",
+        "us-stocks"
+      ],
+      "score": 75,
+      "why": "matched: 米国株",
+      "read_min": 4,
+      "tldr": "WSJ がフアン CEO の解任準備を報じ、エヌビディア株は時間外取引で 8％程度下落した（見出しより）。その後、同社は CEO の辞任を発表した。",
+      "points": [],
+      "code": null,
+      "signal": null,
+      "pick": false
+    },
+    {
+      "id": "2026-11-13-diamond-boj-etf-gain",
+      "url": "https://diamond.jp/articles/-/403229",
+      "title": "日銀の【ETF】売却益「年1兆円」は政府の財源になる？買い入れの経緯と、巨額の含み益が国庫納付金に直結しない理由を解説 - ビジネスパーソンに必須！経済＆ビジネスの最重要キーワード",
+      "source": "diamond.jp",
+      "source_group": "news",
+      "published_at": "2026-11-13T04:25:00+09:00",
+      "category": "funds",
+      "keywords": [
+        "etf",
+        "jp-fiscal",
+        "boj-policy"
+      ],
+      "score": 65,
+      "why": "matched: 日銀・ETF",
+      "read_min": 8,
+      "tldr": "日銀が保有する ETF の売却益を政府の投資財源に活用する構想が浮上したことを受け、日銀が ETF を買い入れた経緯と売却の仕組み、利益が国庫納付金に直結しない理由を解説する記事。",
+      "points": [],
+      "code": null,
+      "signal": null,
+      "pick": false
+    },
+    {
+      "id": "2026-11-13-nikkei-tax-incentives",
+      "url": "https://www.nikkei.com/article/DGXZQOUA124QY0S6A111C2000000/",
+      "title": "政府・与党、税優遇3件廃止へ 結婚・子育ての贈与税非課税など - 日本経済新聞",
+      "source": "nikkei.com",
+      "source_group": "tech_blog",
+      "published_at": "2026-11-12T19:38:20+09:00",
+      "category": "macro",
+      "keywords": [
+        "jp-fiscal"
+      ],
+      "score": 60,
+      "why": "はてブ 18・税制改正",
+      "read_min": 4,
+      "tldr": "政府・与党は 2027 年度税制改正で、結婚・子育て資金の一括贈与にかかる贈与税の非課税措置など税優遇 3 件を廃止する方針。年末の与党税調で正式に決める。",
+      "points": [],
+      "code": null,
+      "signal": "B! 18",
+      "pick": false
+    },
+    {
+      "id": "2026-11-13-coinpost-bitcoin-core-vulns",
+      "url": "https://coinpost.jp/?p=747551",
+      "title": "ビットコインコア、深刻度の高いバグ含む3件の脆弱性を修正済",
+      "source": "coinpost.jp",
+      "source_group": "news",
+      "published_at": "2026-11-12T10:25:21+09:00",
+      "category": "crypto",
+      "keywords": [
+        "bitcoin",
+        "vulnerability-management"
+      ],
+      "score": 60,
+      "why": "matched: ビットコイン",
+      "read_min": 3,
+      "tldr": "Bitcoin Core が 2025 年 10 月に修正済みだった脆弱性 3 件を公表した。深刻度が高い 1 件はマイナーのブロック作成に影響するものだった。",
+      "points": [],
+      "code": null,
+      "signal": null,
+      "pick": false
+    },
+    {
+      "id": "2026-11-13-diamond-mitsui-jsr",
+      "url": "https://diamond.jp/articles/-/403236",
+      "title": "三井化学が半導体材料大手JSRを1.8兆円で買収へ、その陰で進んだ「事業再編」と今後の化学業界の「青写真」を徹底検証 - 化学サバイバル！",
+      "source": "diamond.jp",
+      "source_group": "news",
+      "published_at": "2026-11-13T04:05:00+09:00",
+      "category": "stocks",
+      "keywords": [
+        "m-and-a",
+        "semiconductor"
+      ],
+      "score": 55,
+      "why": "国内化学業界で過去最大の買収",
+      "read_min": 8,
+      "tldr": "三井化学が日本政策投資銀行と共同で JIC 傘下の半導体材料大手 JSR を買収すると発表した。負債の引き継ぎなどを含む総額は 1 兆 8,400 億円。",
+      "points": [],
+      "code": null,
+      "signal": null,
+      "pick": false
+    },
+    {
+      "id": "2026-11-13-coinpost-minna-bank-backpack",
+      "url": "https://coinpost.jp/?p=747690",
+      "title": "Backpack日本法人がみんなの銀行と提携へ、円の入出金やトークン化預金の活用を検討",
+      "source": "coinpost.jp",
+      "source_group": "news",
+      "published_at": "2026-11-12T21:25:22+09:00",
+      "category": "crypto",
+      "keywords": [
+        "tokenization",
+        "crypto-exchange"
+      ],
+      "score": 50,
+      "why": "暗号資産交換業と銀行の提携",
+      "read_min": 3,
+      "tldr": "みんなの銀行と Backpack の日本法人が基本合意書を結んだ。暗号資産交換業の登録を前提に、円の入出金など銀行機能の組み込みや、将来的なトークン化預金の活用を検討する。",
+      "points": [],
+      "code": null,
+      "signal": null,
+      "pick": false
+    },
+    {
+      "id": "2026-11-13-suumo-gift-rental",
+      "url": "https://suumo.jp/journal/2026/11/12/221438/",
+      "title": "「10年借りたらタダでもらえる賃貸」、全国へ！ 被災地・石巻で11社が参入＆即日満室。長崎発・放置空き家を格安家賃で移住者＆若者の家に変える仕組み｜「贈与型賃貸住宅」に新展開",
+      "source": "suumo.jp",
+      "source_group": "news",
+      "published_at": "2026-11-12T07:00:57+09:00",
+      "category": "realestate",
+      "keywords": [
+        "housing"
+      ],
+      "score": 45,
+      "why": "不動産（空き家活用）",
+      "read_min": 10,
+      "tldr": "「10 年住めば住宅を譲る」贈与型賃貸住宅が長崎から全国に広がり、宮城県石巻市でも事業者が参入したという SUUMO ジャーナルのルポ。",
+      "points": [],
+      "code": null,
+      "signal": null,
+      "pick": false
+    },
+    {
+      "id": "2026-11-13-lpe-retirement-ai-bubble",
+      "url": "https://lpeproject.org/blog/your-retirement-savings-are-fueling-the-ai-bubble/",
+      "title": "Retirement Savings Are Fueling the AI Bubble",
+      "source": "lpeproject.org",
+      "source_group": "hackernews",
+      "published_at": "2026-11-12T04:06:43+09:00",
+      "category": "funds",
+      "keywords": [
+        "ai-economy",
+        "retirement-plan"
+      ],
+      "score": 50,
+      "why": "HN 165 pt・インデックス投資と AI 株の集中",
+      "read_min": 8,
+      "tldr": "退職年金の積立資金が AI バブルを支えているという論考（LPE Project）。HN で 165 pt を集めた。",
+      "points": [],
+      "code": null,
+      "signal": "▲ 165",
+      "pick": false
+    }
+  ],
+  "social": [
+    {
+      "network": "x",
+      "author": "@Reuters",
+      "url": "https://x.com/Reuters/status/2120877439815475687",
+      "text": "速報として、フアン氏が NVIDIA の社長・CEO・取締役を即日辞任したと伝えた。",
+      "metrics": null,
+      "heat": null,
+      "category": "ai",
+      "keywords": [
+        "nvidia",
+        "corporate-governance"
+      ],
+      "posted_at": null
+    },
+    {
+      "network": "x",
+      "author": "@firstadopter",
+      "url": "https://x.com/firstadopter/status/2120877236630827399",
+      "text": "NVIDIA の発表文「CEO Transition」を引用し、クレス CFO の暫定 CEO 就任と初の取締役会議長任命を紹介した。",
+      "metrics": null,
+      "heat": null,
+      "category": "ai",
+      "keywords": [
+        "nvidia"
+      ],
+      "posted_at": null
+    },
+    {
+      "network": "x",
+      "author": "@WSJ",
+      "url": "https://x.com/WSJ/status/2120879589144572204",
+      "text": "フアン氏が NVIDIA の CEO を辞任したと記事リンク付きで伝えた。",
+      "metrics": null,
+      "heat": null,
+      "category": "stocks",
+      "keywords": [
+        "nvidia",
+        "us-stocks"
+      ],
+      "posted_at": null
+    },
+    {
+      "network": "hn",
+      "author": null,
+      "url": "https://news.ycombinator.com/item?id=50456631",
+      "text": "『AWS emulator』のスレッド。261 件のコメント",
+      "metrics": "▲ 957  ✉ 261",
+      "heat": 100,
+      "category": "cloud",
+      "keywords": [
+        "aws",
+        "local-cloud-emulator"
+      ],
+      "posted_at": "2026-11-12T03:21:38+09:00"
+    },
+    {
+      "network": "hn",
+      "author": null,
+      "url": "https://news.ycombinator.com/item?id=50458900",
+      "text": "『United Airlines bans AI agents from booking flights on behalf of travelers』のスレッド。679 件のコメント",
+      "metrics": "▲ 651  ✉ 679",
+      "heat": 100,
+      "category": "ai",
+      "keywords": [
+        "ai-agent"
+      ],
+      "posted_at": "2026-11-12T06:24:35+09:00"
+    },
+    {
+      "network": "hn",
+      "author": null,
+      "url": "https://news.ycombinator.com/item?id=50462177",
+      "text": "『Critical RCE Vulnerability in Apache HTTP Server』のスレッド。186 件のコメント",
+      "metrics": "▲ 346  ✉ 186",
+      "heat": 86,
+      "category": "sec",
+      "keywords": [
+        "rce"
+      ],
+      "posted_at": "2026-11-12T11:11:11+09:00"
+    }
+  ],
+  "releases": [
+    {
+      "date": "2026-11-13",
+      "title": "uv 0.13.8",
+      "repo": "astral-sh/uv",
+      "url": "https://github.com/astral-sh/uv/releases/tag/0.13.8",
+      "kind": "release",
+      "note": "git タグの差分から検出",
+      "category": "be"
+    },
+    {
+      "date": "2026-11-13",
+      "title": "Rust 1.100.0",
+      "repo": "rust-lang/rust",
+      "url": "https://github.com/rust-lang/rust/releases/tag/1.100.0",
+      "kind": "release",
+      "note": "HN 280 pt",
+      "category": "be"
+    },
+    {
+      "date": "2026-11-12",
+      "title": "PostgreSQL 18.7 / 17.12 / 16.16 / 15.20 / 14.25・19 RC 2",
+      "repo": null,
+      "url": "https://www.postgresql.org/about/news/postgresql-187-1712-1616-1520-1425-and-19-rc-2-released-3442/",
+      "kind": "release",
+      "note": "サポート中の全バージョンの定例更新",
+      "category": "be"
+    },
+    {
+      "date": "2026-11-12",
+      "title": "Node.js v22.23.5 / v24.22.3 / v26.13.1",
+      "repo": null,
+      "url": "https://forest.watch.impress.co.jp/docs/news/2155706.html",
+      "kind": "release",
+      "note": "16 件の脆弱性を修正するセキュリティ更新",
+      "category": "sec"
+    },
+    {
+      "date": "2026-11-13",
+      "title": "米 10 月 生産者物価指数（PPI）",
+      "repo": null,
+      "url": "https://coinpost.jp/?p=746873",
+      "kind": "event",
+      "note": "前日の日次ファイルから引き継ぎ（11/13 発表）",
+      "category": "macro"
+    },
+    {
+      "date": "2026-11-17",
+      "title": "NVIDIA 第 3 四半期決算発表",
+      "repo": null,
+      "url": "https://nvidianews.nvidia.com/news/nvidia-announces-ceo-transition",
+      "kind": "event",
+      "note": "CEO 交代の発表文で、予定どおり 11/17 に発表すると確認",
+      "category": "stocks"
+    },
+    {
+      "date": "2026-11-17",
+      "title": "米 10 月 小売売上高",
+      "repo": null,
+      "url": "https://coinpost.jp/?p=747345",
+      "kind": "event",
+      "note": "前日の日次ファイルから引き継ぎ（CoinPost で 11/17 発表と確認）",
+      "category": "macro"
+    }
+  ]
+}
