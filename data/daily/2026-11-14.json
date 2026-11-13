@@ -1,0 +1,807 @@
+{
+  "date": "2026-11-14",
+  "generated_at": "2026-11-14T05:40:00+09:00",
+  "stats": {
+    "collected": 228,
+    "sources_ok": 25,
+    "sources_total": 26,
+    "by_group": {
+      "hackernews": 50,
+      "tech_blog": 86,
+      "news": 88,
+      "official": 4
+    },
+    "failed_sources": [
+      "coindesk_jp"
+    ]
+  },
+  "digest": [
+    {
+      "category": "cloud",
+      "text": "Microsoft 365 で Exchange Online を起点に 20 サービスへ広がる大規模障害（HN 1,141 pt）。サーバーのヘルスチェック失敗と接続処理の過負荷が原因と説明され、取引所はメール不具合で電話・FAX に切り替えた。Claude のエラー増加も HN 465 pt。",
+      "keywords": [
+        "microsoft",
+        "system-outage"
+      ]
+    },
+    {
+      "category": "be",
+      "text": "Rust 1.100 で never 型・Allocator トレイトが安定化し、Cargo に依存のクールダウン（min-publish-age）が入った（HN 865 pt）。サブスク化した刺しゅうミシン用アプリを Rust で自作した Show HN も 712 pt。",
+      "keywords": [
+        "rust",
+        "supply-chain"
+      ]
+    },
+    {
+      "category": "ai",
+      "text": "フアン氏辞任の続報が続き、AP 記事が HN 3,986 pt。Google は Antigravity に Gemini 4 Hydrogen と、Carbon と使い分ける Orchestrator を入れた。",
+      "keywords": [
+        "nvidia",
+        "google",
+        "coding-agent"
+      ]
+    },
+    {
+      "category": "macro",
+      "text": "日銀の浅田審議委員は、政策金利 1.25％が中立金利の推計の幅に入っており、利上げの実体経済への影響は以前より大きいと述べた。米 10 月 PPI は前年比 +6.5％。",
+      "keywords": [
+        "boj-policy",
+        "us-inflation"
+      ]
+    },
+    {
+      "category": "crypto",
+      "text": "メタプラネットが通期営業利益予想を 73.7％下方修正し、米司法省は北朝鮮がバイナンスから盗んだ 12 億ドル超を差し押さえた。マネックス証券の口座開設システムへの不正アクセスも公表された。日経平均の 13 日終値と投信・住宅ローンのその日のニュースは検索で確認できなかった。",
+      "keywords": [
+        "bitcoin-treasury",
+        "exchange-hack",
+        "data-breach"
+      ]
+    }
+  ],
+  "items": [
+    {
+      "id": "2026-11-14-apnews-huang-followup",
+      "url": "https://apnews.com/article/nvidia-megaspeed-china-singapore-huang-5403f152a601cf82ce939f1d24fffa0f",
+      "title": "Jensen Huang resigns（続報：社員の復帰要望・2 人目の社員との関係報道）",
+      "source": "apnews.com",
+      "source_group": "hackernews",
+      "published_at": "2026-11-12T22:52:29+09:00",
+      "category": "ai",
+      "keywords": [
+        "nvidia",
+        "corporate-governance"
+      ],
+      "score": 100,
+      "why": "HN 3,986 pt・続報スレッドも 771 pt / 442 pt",
+      "read_min": 5,
+      "tldr": "NVIDIA のフアン氏辞任を伝える AP 記事が HN で 3,986 pt を集めた。続報として WIRED が社員による復帰要望を、ロイターが 2 人目の社員との関係を報じ、それぞれ HN で 771 pt・442 pt。いずれも本文は読めておらず、見出しから分かる範囲にとどめる。",
+      "points": [],
+      "code": null,
+      "signal": "▲ 3986",
+      "pick": false
+    },
+    {
+      "id": "2026-11-14-ms365-outage",
+      "url": "https://status.cloud.microsoft/",
+      "title": "Service degradation on Microsoft 365（Exchange Online 中心の大規模障害）",
+      "source": "status.cloud.microsoft",
+      "source_group": "hackernews",
+      "published_at": "2026-11-13T03:20:48+09:00",
+      "category": "cloud",
+      "keywords": [
+        "microsoft",
+        "system-outage",
+        "incident-response"
+      ],
+      "score": 96,
+      "why": "HN 1,141 pt・関連スレッド 4 本・piyolog はてブ 205",
+      "read_min": 6,
+      "tldr": "日本時間 11 月 13 日 1 時 17 分に Exchange Online の接続障害（EX1550543）が始まり、Teams・SharePoint・Copilot など 20 サービスに広がった（MO1550821）。Microsoft は 21 時時点でも障害を終了とせず、根本原因はインシデント後の報告書で示すとしている。",
+      "points": [
+        "影響を受けたサーバーが自動ヘルスチェックに失敗して利用できなくなり、安全な接続を確立するプロセスの過負荷で容量が失われたと Microsoft が説明した",
+        "直近のネットワーク構成変更の巻き戻しを進めた。悪意ある活動の兆候はないとしている",
+        "影響サービスは初回更新時の 5 件から 15 時 54 分には 20 件に増えた。21 時時点で欧州は回復が進み、日本は比較的安定していた"
+      ],
+      "code": null,
+      "signal": "B! 35 · ▲ 1141",
+      "pick": true
+    },
+    {
+      "id": "2026-11-14-rust-1-100",
+      "url": "https://blog.rust-lang.org/2026/11/12/Rust-1.100.0/",
+      "title": "Rust 1.100.0",
+      "source": "blog.rust-lang.org",
+      "source_group": "hackernews",
+      "published_at": "2026-11-13T03:39:05+09:00",
+      "category": "be",
+      "keywords": [
+        "rust",
+        "programming-language",
+        "supply-chain"
+      ],
+      "score": 92,
+      "why": "HN 865 pt・リリースタグのスレッドも 314 pt",
+      "read_min": 6,
+      "tldr": "Rust 1.100.0 で never 型（!）が安定化し、関数の戻り値以外でも書けるようになった。Allocator トレイトや DropGuard も安定化し、Cargo は未使用依存の警告と、公開直後のバージョンを避ける min-publish-age を加えた。",
+      "points": [
+        "never 型が安定化し、Infallible は ! の別名になった。2024 より前のエディションでは never 型のフォールバックが () から ! に変わる",
+        "core の Allocator トレイトが安定化し、Vec や Box でカスタムアロケータを使うライブラリを書ける",
+        "Cargo に未使用依存の警告（[lints.cargo]）と global-min-publish-age による依存のクールダウンが入った。ビルドディレクトリの構成変更で既存の回避策が壊れる可能性がある"
+      ],
+      "code": {
+        "file": "main.rs",
+        "lang": "rust",
+        "text": "fn infallible_unwrap<T>(res: Result<T, !>) -> T {\n    // ^^ writing `Result<_, !>` was not allowed before\n    let Ok(v) = res;\n    v\n}"
+      },
+      "signal": "B! 31 · ▲ 865",
+      "pick": true
+    },
+    {
+      "id": "2026-11-14-github-zigzag",
+      "url": "https://github.com/simpsoka/zigzag",
+      "title": "Show HN: My $300 embroidery machine needed a subscription, so I built my own app",
+      "source": "github.com",
+      "source_group": "hackernews",
+      "published_at": "2026-11-13T02:02:42+09:00",
+      "category": "be",
+      "keywords": [
+        "oss",
+        "rust",
+        "mcp-server"
+      ],
+      "score": 90,
+      "why": "HN 712 pt",
+      "read_min": 5,
+      "tldr": "刺しゅうミシン Brother Skitch（PP1）向けに、Bluetooth プロトコルを解析して作った無償・OSS の刺しゅうソフト「ZigZag」。Rust 製で macOS と Windows に対応し、ライセンスは Apache-2.0。",
+      "points": [
+        "Skitch とは btleplug を使った Bluetooth 接続で通信する。プロトコルはリバースエンジニアリングで解析したと README に記載がある",
+        "SVG・PES・DST などを読み込み、PES / DST / JEF などで書き出せる。PNG / JPEG のロゴはトレースして図形にできる",
+        "エディタは egui 製で、CLI とエンジンを共有する。AI エージェント向けに localhost 限定の MCP サーバーと stdio ブリッジも付いている"
+      ],
+      "code": null,
+      "signal": "▲ 712",
+      "pick": true
+    },
+    {
+      "id": "2026-11-14-antigravity-gemini4-hydrogen",
+      "url": "https://antigravity.google/blog/gemini-4-hydrogen-in-google-antigravity/",
+      "title": "Gemini 4 Hydrogen and Orchestrator in Google Antigravity",
+      "source": "antigravity.google",
+      "source_group": "hackernews",
+      "published_at": "2026-11-13T03:52:01+09:00",
+      "category": "ai",
+      "keywords": [
+        "google",
+        "coding-agent",
+        "multi-agent"
+      ],
+      "score": 85,
+      "why": "HN 490 pt・Publickey でリモートエージェントも報道",
+      "read_min": 5,
+      "tldr": "Google の開発環境 Antigravity に Gemini 4 Hydrogen が入り、上位モデルの Carbon と組み合わせて 1 つのタスク内で使い分ける「Orchestrator」も加わった。Publickey は、クラウド上でエージェントが動き続ける「リモートエージェント」機能の搭載も伝えている。",
+      "points": [
+        "Hydrogen は Terminal-Bench 4.1 で 57%（3.8 Flash は 18.2%）。推論の深さは low / medium / high（既定）/ xhigh の 4 段階",
+        "Orchestrator は Carbon が読み取り専用の計画、Hydrogen が編集とテストを担い、Hydrogen が行き詰まると Carbon に戻す。Carbon 単体に近い成功率で、使用枠は平均 24% 少なく 19% 速かったとしている",
+        "Hydrogen は Google AI Pro / Ultra の有料会員向け。Antigravity SDK で両モデルを組み合わせたパイプラインも作れる"
+      ],
+      "code": null,
+      "signal": "B! 1 · ▲ 490",
+      "pick": true
+    },
+    {
+      "id": "2026-11-14-scottjg-coway-purifier",
+      "url": "https://scottjg.com/posts/2026-11-11-reverse-engineering-my-coway-air-purifier-to-ditch-the-cloud/",
+      "title": "Reverse engineering my Coway air purifier to ditch the cloud",
+      "source": "scottjg.com",
+      "source_group": "hackernews",
+      "published_at": "2026-11-13T07:03:09+09:00",
+      "category": "be",
+      "keywords": [
+        "homelab",
+        "firmware",
+        "iot-security"
+      ],
+      "score": 87,
+      "why": "HN 574 pt",
+      "read_min": 10,
+      "tldr": "Coway の空気清浄機を解析し、メーカーのクラウドを使わずに操作できるようにした記録。HN では 160 件のコメントが付いた。",
+      "points": [],
+      "code": null,
+      "signal": "▲ 574",
+      "pick": false
+    },
+    {
+      "id": "2026-11-14-claude-elevated-errors",
+      "url": "https://status.claude.com/incidents/nn11wk485zfn",
+      "title": "Elevated errors on claude.ai, Claude Code, and platform.claude.com",
+      "source": "status.claude.com",
+      "source_group": "hackernews",
+      "published_at": "2026-11-13T19:18:13+09:00",
+      "category": "ai",
+      "keywords": [
+        "claude",
+        "anthropic",
+        "system-outage"
+      ],
+      "score": 84,
+      "why": "HN 465 pt・「Claude Is Down」のスレッドも 191 pt",
+      "read_min": 2,
+      "tldr": "11 月 13 日、claude.ai・Claude Code・platform.claude.com でエラーの増加が起きたとステータスページで告知された。HN では関連する 2 本のスレッドが立った。",
+      "points": [],
+      "code": null,
+      "signal": "▲ 465",
+      "pick": false
+    },
+    {
+      "id": "2026-11-14-github-smolmaxxing",
+      "url": "https://github.com/hyperionaidev/smolmaxxing/",
+      "title": "I'm making LLMs work on small and old devices",
+      "source": "github.com",
+      "source_group": "hackernews",
+      "published_at": "2026-11-13T00:23:10+09:00",
+      "category": "ai",
+      "keywords": [
+        "local-llm",
+        "on-device-ai"
+      ],
+      "score": 84,
+      "why": "HN 463 pt",
+      "read_min": 5,
+      "tldr": "小型・旧型の端末で LLM を動かすことを目指す個人プロジェクト。HN で 176 件のコメントが付いた。",
+      "points": [],
+      "code": null,
+      "signal": "B! 1 · ▲ 463",
+      "pick": false
+    },
+    {
+      "id": "2026-11-14-ktlog-claude-code-ecosystem",
+      "url": "https://ktlog.net/posts/claude-code-ai-ecosystem",
+      "title": "Claude Codeのおすすめ環境を全体図で解説。ハーネス・スキル・MCPの仕組みと実例",
+      "source": "ktlog.net",
+      "source_group": "tech_blog",
+      "published_at": "2026-11-13T14:21:58+09:00",
+      "category": "ai",
+      "keywords": [
+        "claude",
+        "coding-agent",
+        "mcp-server"
+      ],
+      "score": 81,
+      "why": "はてブ 270・同じ話題のスライド「ぼくのClaude Codeの使い方」もはてブ 246",
+      "read_min": 8,
+      "tldr": "Claude Code を入口に、権限ルールなどのハーネスを通してほかの AI・スキル・MCP・外部 API に仕事を振り分ける構成を、全体図と 3 つの実例で解説した記事。札幌の Claude Code Meetup の LT スライドも同時に話題になった。",
+      "points": [],
+      "code": null,
+      "signal": "B! 270",
+      "pick": false
+    },
+    {
+      "id": "2026-11-14-unemploymentlabs-gpu-fingerprint",
+      "url": "https://unemploymentlabs.com/checkpoint-forensics",
+      "title": "Chinese frontier AI models carry the fingerprint of export-controlled GPUs",
+      "source": "unemploymentlabs.com",
+      "source_group": "hackernews",
+      "published_at": "2026-11-13T06:56:11+09:00",
+      "category": "ai",
+      "keywords": [
+        "semiconductor",
+        "open-weight",
+        "ai-research"
+      ],
+      "score": 80,
+      "why": "HN 349 pt",
+      "read_min": 10,
+      "tldr": "中国のフロンティア AI モデルのチェックポイントに、輸出規制対象の GPU で学習した痕跡が残っていると主張する分析記事。HN では 145 件のコメントが付いた。",
+      "points": [],
+      "code": null,
+      "signal": "B! 1 · ▲ 349",
+      "pick": false
+    },
+    {
+      "id": "2026-11-14-edge0-145b",
+      "url": "https://edge0.ai/blog/introducing-edge0-145b-frontier-ai-capabilities-on-your-own-computer",
+      "title": "Edge0-145B: Frontier AI Capabilities on Your Own Computer",
+      "source": "edge0.ai",
+      "source_group": "hackernews",
+      "published_at": "2026-11-13T08:06:17+09:00",
+      "category": "ai",
+      "keywords": [
+        "local-llm",
+        "open-weight"
+      ],
+      "score": 79,
+      "why": "HN 331 pt",
+      "read_min": 5,
+      "tldr": "手元のコンピューターで動かすことを想定した 145B パラメータのモデル「Edge0-145B」の発表。",
+      "points": [],
+      "code": null,
+      "signal": "▲ 331",
+      "pick": false
+    },
+    {
+      "id": "2026-11-14-ign-nintendo-dmca",
+      "url": "https://www.ign.com/articles/nintendo-takes-down-switch-emulators-and-mod-chip-firmware-in-massive-github-dmca-sweep",
+      "title": "Nintendo Takes Down Emulators and Firmware in Massive GitHub DMCA Sweep",
+      "source": "ign.com",
+      "source_group": "hackernews",
+      "published_at": "2026-11-13T01:29:13+09:00",
+      "category": "be",
+      "keywords": [
+        "github",
+        "oss"
+      ],
+      "score": 79,
+      "why": "HN 317 pt",
+      "read_min": 4,
+      "tldr": "任天堂が DMCA 通知で、GitHub 上の Switch エミュレータや改造チップのファームウェアのリポジトリを大量に削除させたと IGN が報じた。",
+      "points": [],
+      "code": null,
+      "signal": "B! 1 · ▲ 317",
+      "pick": false
+    },
+    {
+      "id": "2026-11-14-brave-search-x402",
+      "url": "https://brave.com/blog/search-api-agentic-payments/",
+      "title": "Brave Search API now accepts agentic payments via the x402 protocol",
+      "source": "brave.com",
+      "source_group": "hackernews",
+      "published_at": "2026-11-13T12:08:08+09:00",
+      "category": "ai",
+      "keywords": [
+        "search-engine",
+        "payments",
+        "ai-agent"
+      ],
+      "score": 76,
+      "why": "HN 253 pt",
+      "read_min": 4,
+      "tldr": "Brave Search API が、AI エージェントによる支払いの仕組み x402 プロトコルでの課金を受け付けるようになった。",
+      "points": [],
+      "code": null,
+      "signal": "▲ 253",
+      "pick": false
+    },
+    {
+      "id": "2026-11-14-impress-yubikey-japan",
+      "url": "https://www.watch.impress.co.jp/docs/news/2156008.html",
+      "title": "フィッシング攻撃を“遮断” 物理パスキー「YubiKey」日本で本格展開",
+      "source": "watch.impress.co.jp",
+      "source_group": "tech_blog",
+      "published_at": "2026-11-13T09:44:06+09:00",
+      "category": "sec",
+      "keywords": [
+        "passkey",
+        "authentication"
+      ],
+      "score": 74,
+      "why": "はてブ 160",
+      "read_min": 4,
+      "tldr": "物理パスキーの YubiKey を日本で本格展開するというニュース。フィッシング対策としての位置づけが見出しで示されている。",
+      "points": [],
+      "code": null,
+      "signal": "B! 160",
+      "pick": false
+    },
+    {
+      "id": "2026-11-14-mehmetince-postgres-rce",
+      "url": "https://mehmetince.net/part-3-6-how-i-ended-up-turning-a-22-year-old-postgresql-type-confusion-primitive-into-rce-cve-2026-6460/",
+      "title": "Turning a 22-year-old Postgres type-confusion primitive into RCE",
+      "source": "mehmetince.net",
+      "source_group": "hackernews",
+      "published_at": "2026-11-13T03:22:22+09:00",
+      "category": "sec",
+      "keywords": [
+        "postgres",
+        "rce",
+        "vulnerability-management"
+      ],
+      "score": 74,
+      "why": "HN 228 pt",
+      "read_min": 15,
+      "tldr": "PostgreSQL に 22 年前からある型混同の不具合を RCE につなげた過程を解説する連載記事（CVE-2026-6460）。",
+      "points": [],
+      "code": null,
+      "signal": "B! 1 · ▲ 228",
+      "pick": false
+    },
+    {
+      "id": "2026-11-14-ktai-monex-breach",
+      "url": "https://k-tai.watch.impress.co.jp/docs/news/2156449.html",
+      "title": "マネックス証券、不正アクセスでメールアドレス最大113万件と本人確認書類1600件弱が漏洩のおそれ",
+      "source": "k-tai.watch.impress.co.jp",
+      "source_group": "tech_blog",
+      "published_at": "2026-11-13T21:34:09+09:00",
+      "category": "sec",
+      "keywords": [
+        "data-breach",
+        "security-incident",
+        "kyc"
+      ],
+      "score": 64,
+      "why": "はてブ 81",
+      "read_min": 4,
+      "tldr": "マネックス証券は、外部委託先が運営する口座開設システムへの不正アクセスで、メールアドレス最大 113 万件と本人確認書類の画像 1,592 件が漏えいしたおそれがあると発表した。口座番号やパスワード、基幹システムへの影響は確認されていないとしている。",
+      "points": [],
+      "code": null,
+      "signal": "B! 81",
+      "pick": false
+    },
+    {
+      "id": "2026-11-14-boj-asada-kaiken",
+      "url": "https://www.boj.or.jp/about/press/kaiken_2026/kk261113a.pdf",
+      "title": "【記者会見】浅田審議委員（長崎、11月12日分）",
+      "source": "boj.or.jp",
+      "source_group": "official",
+      "published_at": "2026-11-13T16:30:00+09:00",
+      "category": "macro",
+      "keywords": [
+        "boj-policy",
+        "interest-rates",
+        "boj-rate-hike"
+      ],
+      "score": 90,
+      "why": "matched: 金利・日銀の公式発表",
+      "read_min": 10,
+      "tldr": "日銀の浅田審議委員は長崎での会見で、政策金利 1.25％は日銀推計の中立金利の幅（1％強〜2％台半ば）にすでに入っており、利上げが実体経済に響く可能性は以前より高いと述べた。個人消費は底堅いが力強さを欠くとして、利上げが経済と基調的な物価を押し下げるリスクに留意が必要との見方を示した。",
+      "points": [
+        "基調的な物価上昇率は 2％と概ね整合的になったという 10 月の展望レポートの評価に同意した",
+        "ターミナルレートの具体的な水準は示さなかった。政府の財政政策については所管外として回答を控えた",
+        "懇談会では、物価や金利の急上昇が中小企業の資金繰りを悪化させるおそれがあるとして慎重な対応を求める声や、為替の安定を求める意見が出たと紹介した"
+      ],
+      "code": null,
+      "signal": null,
+      "pick": true
+    },
+    {
+      "id": "2026-11-14-hn-us-ppi-oct",
+      "url": "https://news.ycombinator.com/item?id=50484421",
+      "title": "U.S. October PPI Rises 6.5% YoY, Highest in Nearly Four Years",
+      "source": "news.ycombinator.com",
+      "source_group": "hackernews",
+      "published_at": "2026-11-13T23:53:32+09:00",
+      "category": "macro",
+      "keywords": [
+        "us-inflation",
+        "fed",
+        "interest-rates"
+      ],
+      "score": 80,
+      "why": "matched: 金利（米国の物価指標）",
+      "read_min": 3,
+      "tldr": "米国の 10 月生産者物価指数（PPI）は前年比 6.5％上昇で、2022 年 11 月以来の高い伸びになったと HN の投稿が伝えた。予想（6.6％）はやや下回った。",
+      "points": [
+        "前年比 +6.5％（予想 6.6％、前回 6.3％）",
+        "前月比 +0.3％で、予想の +0.4％を下回った",
+        "投稿本文に出典リンクはなく、コメント欄で BLS の発表や CNBC・ロイターの記事が共有された"
+      ],
+      "code": null,
+      "signal": "▲ 158",
+      "pick": true
+    },
+    {
+      "id": "2026-11-14-coinpost-metaplanet-q3",
+      "url": "https://coinpost.jp/?p=747904",
+      "title": "メタプラネット決算、通期営業利益予想を73.7％下方修正",
+      "source": "coinpost.jp",
+      "source_group": "news",
+      "published_at": "2026-11-13T22:02:20+09:00",
+      "category": "crypto",
+      "keywords": [
+        "bitcoin-treasury",
+        "earnings",
+        "bitcoin"
+      ],
+      "score": 78,
+      "why": "matched: ビットコイン",
+      "read_min": 4,
+      "tldr": "メタプラネットは通期の営業利益予想を 114 億円から 30 億円に、売上高予想を 160 億円から 65 億円に引き下げた。期初に想定した新株発行などによる資金調達を見送り、ビットコインの取得規模が想定を下回ったことを理由に挙げた。",
+      "points": [
+        "1〜9 月の純損益は約 272 億円の赤字。7〜9 月の 1 万 BTC 売却に伴う売却損約 192 億円と評価損が主因",
+        "10 月 14 日〜11 月 12 日に約 283 億円の自社株買いを実施。10 月発行の転換社債の資金は自社株買いを優先する方針",
+        "2,100 BTC の現物出資などで米スーパー・リーグ・エンタープライズを連結子会社化する計画で、第 4 四半期中の完了を予定する"
+      ],
+      "code": null,
+      "signal": null,
+      "pick": true
+    },
+    {
+      "id": "2026-11-14-coinpost-doj-binance-seizure",
+      "url": "https://coinpost.jp/?p=747698",
+      "title": "米司法省、北朝鮮がバイナンスから盗んだ1910億円超の仮想通貨を差し押さえ",
+      "source": "coinpost.jp",
+      "source_group": "news",
+      "published_at": "2026-11-13T07:00:00+09:00",
+      "category": "crypto",
+      "keywords": [
+        "exchange-hack",
+        "crypto-regulation",
+        "geopolitics"
+      ],
+      "score": 72,
+      "why": "matched: ビットコイン（暗号資産の流出事件）",
+      "read_min": 3,
+      "tldr": "米司法省は、北朝鮮のハッカーがバイナンスから盗んだ暗号資産のうち 12 億ドル超（約 1,910 億円）を、裁判所の許可を得て差し押さえ・処分制限の対象にしたと発表した。",
+      "points": [
+        "10 月 30 日ごろ、北朝鮮軍のメンバーが 64 億ドル超相当を盗んだとされる",
+        "追跡で 27 億ドル超相当が凍結され、そのうち 12 億ドル超について差し押さえの許可を得た",
+        "TRM ラボの集計では、北朝鮮による今年の被害額は 10 月 29 日時点で 74 億ドルで、世界のハッキング被害額の 85％を占める"
+      ],
+      "code": null,
+      "signal": null,
+      "pick": true
+    },
+    {
+      "id": "2026-11-14-investing-ny-fx",
+      "url": "https://jp.investing.com/news/forex-news/article-1757250",
+      "title": "NY外為：円一段高、当局の円安是正介入警戒感がくすぶる",
+      "source": "jp.investing.com",
+      "source_group": "news",
+      "published_at": "2026-11-14T04:45:04+09:00",
+      "category": "macro",
+      "keywords": [
+        "fx"
+      ],
+      "score": 70,
+      "why": "matched: 為替",
+      "read_min": 2,
+      "tldr": "NY 外為市場で円が一段高となった。見出しによれば、当局による円安是正の介入への警戒感が背景にある。",
+      "points": [],
+      "code": null,
+      "signal": null,
+      "pick": false
+    },
+    {
+      "id": "2026-11-14-coinpost-ms-outage-exchanges",
+      "url": "https://coinpost.jp/?p=747905",
+      "title": "マイクロソフト大規模障害、複数の株式取引所でメール不具合も売買は継続",
+      "source": "coinpost.jp",
+      "source_group": "news",
+      "published_at": "2026-11-13T21:30:18+09:00",
+      "category": "stocks",
+      "keywords": [
+        "microsoft",
+        "system-outage"
+      ],
+      "score": 62,
+      "why": "matched: 米国株（取引所への影響）",
+      "read_min": 3,
+      "tldr": "Microsoft 365 の大規模障害で、ユーロネクストとナスダックがメールの不具合を明らかにした。取引関係者は電話や FAX に切り替え、主要取引所の中核の取引は止まらなかった。東洋経済も金融市場の混乱を伝えている。",
+      "points": [],
+      "code": null,
+      "signal": null,
+      "pick": false
+    },
+    {
+      "id": "2026-11-14-toyokeizai-nvidia-stock",
+      "url": "https://toyokeizai.net/articles/-/964700",
+      "title": "ジェンスン･フアンCEOが電撃辞任のエヌビディア…｢カリスマ｣が去っても株価を戻せるか アップルとの相違点",
+      "source": "toyokeizai.net",
+      "source_group": "news",
+      "published_at": "2026-11-13T18:00:00+09:00",
+      "category": "stocks",
+      "keywords": [
+        "nvidia",
+        "us-stocks"
+      ],
+      "score": 65,
+      "why": "matched: 米国株",
+      "read_min": 6,
+      "tldr": "フアン氏の辞任後のエヌビディアについて、業績は好調でも株価が急落し先行きの不透明感が広がっているとして、新体制が投資家の信頼を取り戻せるかを論じる記事。",
+      "points": [],
+      "code": null,
+      "signal": null,
+      "pick": false
+    },
+    {
+      "id": "2026-11-14-toyokeizai-coreweave",
+      "url": "https://toyokeizai.net/articles/-/964531",
+      "title": "エヌビディアも出資するAIクラウドのコアウィーブが｢無担保社債に頼らない資金計画｣を提示 売上高は2.7倍に急成長",
+      "source": "toyokeizai.net",
+      "source_group": "news",
+      "published_at": "2026-11-13T11:30:00+09:00",
+      "category": "stocks",
+      "keywords": [
+        "earnings",
+        "data-center",
+        "us-stocks"
+      ],
+      "score": 55,
+      "why": "matched: 米国株",
+      "read_min": 6,
+      "tldr": "AI クラウドのコアウィーブの最新決算で売上高が前年同期比 168％増となり、無担保社債に頼らない資金計画を示したと伝える記事。",
+      "points": [],
+      "code": null,
+      "signal": null,
+      "pick": false
+    },
+    {
+      "id": "2026-11-14-coinpost-dtcc-solana",
+      "url": "https://coinpost.jp/?p=747696",
+      "title": "米証券決済大手DTCC、株式・米国債をソラナ上でトークン化へ",
+      "source": "coinpost.jp",
+      "source_group": "news",
+      "published_at": "2026-11-13T08:12:56+09:00",
+      "category": "crypto",
+      "keywords": [
+        "tokenization",
+        "us-treasury"
+      ],
+      "score": 55,
+      "why": "matched: 米国株（証券のトークン化）",
+      "read_min": 3,
+      "tldr": "米証券決済大手 DTCC が、保管する資産のトークン化サービスをソラナにつなぐ計画を発表した。2027 年下半期の実現を見込み、従来の証券と同じ投資家保護を維持するとしている。",
+      "points": [],
+      "code": null,
+      "signal": null,
+      "pick": false
+    },
+    {
+      "id": "2026-11-14-coinpost-buidl-liquidity",
+      "url": "https://coinpost.jp/?p=747736",
+      "title": "ブラックロックのトークン化ファンド『BUIDL』、年中無休でステーブルコインに交換可能に",
+      "source": "coinpost.jp",
+      "source_group": "news",
+      "published_at": "2026-11-13T09:50:27+09:00",
+      "category": "funds",
+      "keywords": [
+        "tokenization",
+        "stablecoin"
+      ],
+      "score": 50,
+      "why": "投資信託（トークン化ファンド）",
+      "read_min": 3,
+      "tldr": "エセナとセキュリタイズが、ブラックロックのトークン化ファンド BUIDL を市場時間外にも USDC などと交換できる流動性の仕組みを立ち上げた。規模は最大 1 億ドル。",
+      "points": [],
+      "code": null,
+      "signal": null,
+      "pick": false
+    },
+    {
+      "id": "2026-11-14-fsa-phishing-notice",
+      "url": "https://www.fsa.go.jp/ordinary/chuui/chuui_phishing.html",
+      "title": "「インターネット取引サービスへの不正アクセス・不正取引にご注意ください」のページを更新しました。",
+      "source": "fsa.go.jp",
+      "source_group": "official",
+      "published_at": "2026-11-14T01:00:00+09:00",
+      "category": "stocks",
+      "keywords": [
+        "fsa",
+        "fraud-prevention"
+      ],
+      "score": 60,
+      "why": "金融庁の公式発表",
+      "read_min": 2,
+      "tldr": "金融庁が、証券口座などインターネット取引サービスへの不正アクセス・不正取引に関する注意喚起ページを更新した。",
+      "points": [],
+      "code": null,
+      "signal": "B! 21",
+      "pick": false
+    },
+    {
+      "id": "2026-11-14-diamond-realestate-risk",
+      "url": "https://diamond.jp/articles/-/403310",
+      "title": "【不動産69社】倒産危険度ランキング2027最新版！大手デベも上位に",
+      "source": "diamond.jp",
+      "source_group": "news",
+      "published_at": "2026-11-13T17:00:00+09:00",
+      "category": "realestate",
+      "keywords": [
+        "real-estate-prices",
+        "boj-rate-hike"
+      ],
+      "score": 50,
+      "why": "不動産（業界の財務リスク）",
+      "read_min": 5,
+      "tldr": "マンション価格の頭打ちと日銀の利上げが不動産業界を揺さぶっているとして、不動産業界の倒産危険度ランキングを検証する有料記事の紹介。",
+      "points": [],
+      "code": null,
+      "signal": null,
+      "pick": false
+    }
+  ],
+  "social": [
+    {
+      "network": "x",
+      "author": "@MSFT365Status",
+      "url": "https://x.com/MSFT365Status/status/2121303408313303423",
+      "text": "障害で顧客に迷惑をかけたことを謝罪し、サービス全体で広く回復と安定が見られていると報告した。",
+      "metrics": null,
+      "heat": null,
+      "category": "cloud",
+      "keywords": [
+        "microsoft",
+        "system-outage"
+      ],
+      "posted_at": null
+    },
+    {
+      "network": "x",
+      "author": "@downdetector",
+      "url": "https://x.com/downdetector/status/2120981125145174504",
+      "text": "11 月 12 日の Microsoft 障害の報告は約 1 時間で 74 の国と地域に広がったと伝えた。Exchange Online のインシデントは 16:17 UTC 開始。",
+      "metrics": null,
+      "heat": null,
+      "category": "cloud",
+      "keywords": [
+        "microsoft",
+        "system-outage"
+      ],
+      "posted_at": null
+    },
+    {
+      "network": "x",
+      "author": "@wallstengine",
+      "url": "https://x.com/wallstengine/status/2121199821986078725",
+      "text": "WIRED の報道として、NVIDIA 社内の投稿にフアン氏の復帰を求める 1,600 件以上のコメントが付いたと紹介した。",
+      "metrics": null,
+      "heat": null,
+      "category": "ai",
+      "keywords": [
+        "nvidia",
+        "corporate-governance"
+      ],
+      "posted_at": null
+    },
+    {
+      "network": "x",
+      "author": "@phoronix",
+      "url": "https://x.com/phoronix/status/2120953604655763596",
+      "text": "Rust 1.100 のリリースで never 型がついに安定化したと伝えた。",
+      "metrics": null,
+      "heat": null,
+      "category": "be",
+      "keywords": [
+        "rust"
+      ],
+      "posted_at": null
+    },
+    {
+      "network": "x",
+      "author": "@awakecoding",
+      "url": "https://x.com/awakecoding/status/2120955756736393408",
+      "text": "Rust 1.100.0 の公開を、依存のクールダウン対応に注目して紹介した。",
+      "metrics": null,
+      "heat": null,
+      "category": "be",
+      "keywords": [
+        "rust",
+        "supply-chain"
+      ],
+      "posted_at": null
+    },
+    {
+      "network": "hn",
+      "author": null,
+      "url": "https://news.ycombinator.com/item?id=50484421",
+      "text": "『U.S. October PPI Rises 6.5% YoY, Highest in Nearly Four Years』のスレッド。186 件のコメント。",
+      "metrics": "▲ 158  ✉ 186",
+      "heat": 39,
+      "category": "macro",
+      "keywords": [
+        "us-inflation"
+      ],
+      "posted_at": "2026-11-13T23:53:32+09:00"
+    }
+  ],
+  "releases": [
+    {
+      "date": "2026-11-17",
+      "title": "NVIDIA 第 3 四半期決算発表",
+      "repo": null,
+      "url": "https://nvidianews.nvidia.com/news/nvidia-announces-ceo-transition",
+      "kind": "event",
+      "note": "前日の日次ファイルから引き継ぎ（CEO 交代の発表文で 11/17 と確認）",
+      "category": "stocks"
+    },
+    {
+      "date": "2026-11-17",
+      "title": "米 10 月 小売売上高",
+      "repo": null,
+      "url": "https://coinpost.jp/?p=747345",
+      "kind": "event",
+      "note": "前日の日次ファイルから引き継ぎ",
+      "category": "macro"
+    }
+  ]
+}
