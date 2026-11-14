@@ -1,0 +1,834 @@
+{
+  "date": "2026-11-15",
+  "generated_at": "2026-11-15T05:40:00+09:00",
+  "stats": {
+    "collected": 188,
+    "sources_ok": 25,
+    "sources_total": 26,
+    "by_group": {
+      "hackernews": 50,
+      "tech_blog": 64,
+      "official": 1,
+      "news": 73
+    },
+    "failed_sources": [
+      "coindesk_jp"
+    ]
+  },
+  "digest": [
+    {
+      "category": "cloud",
+      "text": "米 FAA が 13 日午後に全国グラウンドストップを出し、4 時間余りで解除した（HN 1,629 pt）。FAA はルーターのデータ過多で古い管制機器が過負荷になったと説明し、13 日は 7,000 便超が欠航した。前日からの Microsoft 365 障害は 14 日に全面復旧。",
+      "keywords": [
+        "system-outage",
+        "networking"
+      ]
+    },
+    {
+      "category": "ai",
+      "text": "ローカル LLM 推論の ggml と llama.cpp がそろって v1.0.0 になり、ggml は非推奨 API を削除した（HN 388 pt）。NVIDIA がスタートアップに資金を出して GPU を買わせたとする疑惑（HN 992 pt）は元記事を読めておらず、真偽は未確認。",
+      "keywords": [
+        "local-llm",
+        "nvidia"
+      ]
+    },
+    {
+      "category": "sec",
+      "text": "Lovable 製アプリ約 3.5 万件を調べた研究で、ログインなしで DB のレコードが読める例が多数見つかった（HN 290 pt）。国内ではプレイドが KARTE への不正アクセスで全サービスを停止し、マネックス証券の本人確認書類画像の漏えい懸念もはてブ 285。",
+      "keywords": [
+        "data-breach",
+        "security-incident"
+      ]
+    },
+    {
+      "category": "crypto",
+      "text": "ビットコインは 13〜14 日に 7 万ドルを割り込み、利上げ警戒と AI 株安にロング清算が重なったとされる。MSCI はストラテジーを 11 月 30 日に指数から除外し、同社 CEO は影響は限定的と述べた。",
+      "keywords": [
+        "bitcoin",
+        "strategy",
+        "index-rebalance"
+      ]
+    },
+    {
+      "category": "stocks",
+      "text": "13 日終値は日経平均 61,142（前日比 +0.53％）、S&P 500 は −0.40％、ドル円 159.88、米 10 年債利回り 5.15％（markets.py の取得値）。日経平均の材料、投信の 11 月の資金流入、住宅ローン金利の 12 月予想は検索で当日のニュースを確認できなかった。",
+      "keywords": [
+        "nikkei225",
+        "us-stocks",
+        "fx"
+      ]
+    }
+  ],
+  "items": [
+    {
+      "id": "2026-11-15-nbcnews-faa-ground-stop",
+      "url": "https://www.nbcnews.com/news/us-news/faa-orders-nationwide-ground-stop-departing-flights-reasons-safety-rcna609247",
+      "title": "FAA issues national ground stop – lifted 4.5 hours later",
+      "source": "tech",
+      "source_group": "hackernews",
+      "published_at": "2026-11-14T06:05:53+09:00",
+      "category": "cloud",
+      "keywords": [
+        "system-outage",
+        "networking",
+        "incident-response"
+      ],
+      "score": 100,
+      "why": "HN 1,629 pt・関連スレッド 3 本も各 200 pt 超",
+      "read_min": 6,
+      "tldr": "米 FAA が 11 月 13 日午後（米東部時間）に全米の出発便を止める全国グラウンドストップを出し、4 時間余りで解除した。FAA はルーターが過大なデータを送り、古い管制機器が過負荷になったと説明している。",
+      "points": [
+        "管制官がレーダーデータと通信の不整合に気づいたのが 15:36、停止命令が 15:54、解除が 20:15（いずれも米東部時間）。医療搬送便は運航を続けた",
+        "原因はルーターのデータ過多で古い管制機器が過負荷になったため、と FAA は説明。国土安全保障長官はサイバー攻撃の証拠はないとし、運輸長官は老朽化した一部アナログの管制システムを挙げた",
+        "13 日は 7,000 便超が欠航し、翌朝も 3,700 便超の欠航が出た。議会は 5 年で 125 億ドルの管制更新を承認済みで、運輸長官は 500 億ドル規模の刷新を求めている"
+      ],
+      "code": null,
+      "signal": "▲ 1629",
+      "pick": true
+    },
+    {
+      "id": "2026-11-15-techpowerup-nvidia-scarcity",
+      "url": "https://www.techpowerup.com/354814/nvidia-allegedly-engineered-scarcity-by-funding-ai-startups-to-buy-its-gpus",
+      "title": "Nvidia allegedly engineered scarcity by funding AI startups to buy its GPUs",
+      "source": "tech",
+      "source_group": "hackernews",
+      "published_at": "2026-11-14T11:52:59+09:00",
+      "category": "ai",
+      "keywords": [
+        "nvidia",
+        "semiconductor",
+        "corporate-governance"
+      ],
+      "score": 94,
+      "why": "HN 992 pt",
+      "read_min": null,
+      "tldr": "NVIDIA が AI スタートアップに資金を出して自社 GPU を買わせ、品薄を演出したとする疑惑を TechPowerUp が報じた。記事本文は読めておらず（403）、HN では元は WSJ の報道だとして、クラウド事業者向けの信用補完の取引をめぐる議論が続いている。",
+      "points": [],
+      "code": null,
+      "signal": "▲ 992",
+      "pick": false
+    },
+    {
+      "id": "2026-11-15-libreoffice-365-days",
+      "url": "https://twitter.com/LibreOffice/status/2121205272479998268",
+      "title": "LibreOffice actually works 365 days a year",
+      "source": "x.com",
+      "source_group": "hackernews",
+      "published_at": "2026-11-14T02:09:58+09:00",
+      "category": "be",
+      "keywords": [
+        "oss",
+        "desktop-app"
+      ],
+      "score": 93,
+      "why": "HN 921 pt",
+      "read_min": null,
+      "tldr": "LibreOffice 公式アカウントの投稿が HN で 921 pt を集めた。HN では、かつての OpenOffice の「火曜日は印刷できない」バグ（file コマンドによるファイル種別の誤判定）へのジョークと読むコメントが多い。",
+      "points": [],
+      "code": null,
+      "signal": "▲ 921",
+      "pick": false
+    },
+    {
+      "id": "2026-11-15-youtube-jonathan-blow-ai",
+      "url": "https://www.youtube.com/watch?v=IRK8h67ol7Q",
+      "title": "Jonathan Blow – If AI solved coding, why is my software still the same? [video]",
+      "source": "tech",
+      "source_group": "hackernews",
+      "published_at": "2026-11-14T00:08:44+09:00",
+      "category": "ai",
+      "keywords": [
+        "ai-coding",
+        "software-design"
+      ],
+      "score": 83,
+      "why": "HN 444 pt・637 コメント",
+      "read_min": null,
+      "tldr": "ゲーム開発者 Jonathan Blow 氏の動画「AI がコーディングを解決したなら、なぜ自分のソフトウェアは変わらないのか」。HN で 637 件のコメントが付いた（動画は未視聴）。",
+      "points": [],
+      "code": null,
+      "signal": "▲ 444",
+      "pick": false
+    },
+    {
+      "id": "2026-11-15-github-ggml-v1",
+      "url": "https://github.com/ggml-org/ggml/releases/tag/v1.0.0",
+      "title": "ggml v1.0.0（llama.cpp v1.0.0 も同時に）",
+      "source": "tech",
+      "source_group": "hackernews",
+      "published_at": "2026-11-14T11:28:29+09:00",
+      "category": "ai",
+      "keywords": [
+        "local-llm",
+        "oss",
+        "on-device-ai"
+      ],
+      "score": 82,
+      "why": "HN 388 pt・llama.cpp v1.0.0 の告知も はてブ 12",
+      "read_min": 5,
+      "tldr": "ローカル LLM 推論を支えるテンソルライブラリ ggml が v1.0.0 になり、Hugging Face のブログでは llama.cpp v1.0.0 も発表された。ggml は非推奨の公開 API と旧来の対角マスク演算を削除し、RPC プロトコルを上げて非互換のピアを拒否するようにした。",
+      "points": [
+        "非推奨 API と DIAG_MASK_INF / DIAG_MASK_ZERO を削除。RPC プロトコルのバージョンを上げ、互換性のない相手は接続を拒否する",
+        "FP8（CUDA の OCP FP8 を含む）対応、YaRN 補正境界の丸めを ggml_rope_set_truncate で設定可能に、TRI の逆伝播を追加",
+        "CUDA・Metal・Vulkan・SYCL・OpenCL・WebGPU・Hexagon など各バックエンドで MoE 周りの融合・修正が多数。リリースノートに安定性の明示的な保証は書かれていない"
+      ],
+      "code": null,
+      "signal": "B! 12 · ▲ 388",
+      "pick": true
+    },
+    {
+      "id": "2026-11-15-guardian-godel-notebooks",
+      "url": "https://www.theguardian.com/science/2026/nov/13/kurt-godel-notebooks-ai-helps-unlock-hidden-discoveries-man-who-transformed-maths",
+      "title": "AI unlocks Gödel's notebooks, said to contain hundreds of proved theorems",
+      "source": "tech",
+      "source_group": "hackernews",
+      "published_at": "2026-11-14T02:30:10+09:00",
+      "category": "ai",
+      "keywords": [
+        "ai-research"
+      ],
+      "score": 82,
+      "why": "HN 416 pt",
+      "read_min": null,
+      "tldr": "AI の助けでゲーデルのノートの解読が進み、数百の証明済み定理が含まれるとされる、と The Guardian が報じた。本文は取得できず、見出しの範囲にとどめる。",
+      "points": [],
+      "code": null,
+      "signal": "▲ 416",
+      "pick": false
+    },
+    {
+      "id": "2026-11-15-joshka-cell-borders",
+      "url": "https://www.joshka.net/cell-borders/",
+      "title": "Terminal borders that don't cost a cell",
+      "source": "tech",
+      "source_group": "hackernews",
+      "published_at": "2026-11-14T08:06:40+09:00",
+      "category": "be",
+      "keywords": [
+        "terminal-emulator",
+        "cli"
+      ],
+      "score": 82,
+      "why": "HN 396 pt",
+      "read_min": 8,
+      "tldr": "罫線文字でセルを 1 列・1 行消費する代わりに、背景色と同じく「セルの属性」として細い枠線を描かせるターミナル拡張の提案。DCS 文字列で指定し、Ghostty のパッチ版で v1 を実装済み。",
+      "points": [
+        "1 セルにつき各辺の半分ずつと中心からの 4 本、最大 12 本の線分を持てる。色・太さ・位置・線種は線分ごとに指定でき、隣接セルとの共有辺は描画時の優先順位で決める",
+        "枠線はセルに属するのでスクロール・消去・リフローに追従し、テキストとしてはコピーされない",
+        "対応は能力問い合わせ＋DA1 で検出し、非対応なら従来の罫線文字にフォールバックする。実装は Ghostty の fork（macOS のみ確認）と、旧仕様の Rio 試作"
+      ],
+      "code": {
+        "file": "cell-border.txt",
+        "lang": "text",
+        "text": "ESC P 1 + b cell-border;pen;48;32;7aa2f7;0;0 ESC \\     bottom edge, blue: an underline\nhello\nESC [ 0 m                                              SGR 0 clears the pen"
+      },
+      "signal": "B! 1 · ▲ 396",
+      "pick": true
+    },
+    {
+      "id": "2026-11-15-47news-monex-mynumber",
+      "url": "https://www.47news.jp/15227159.html",
+      "title": "【速報】マネックス証券、マイナカード画像漏えいか",
+      "source": "tech",
+      "source_group": "tech_blog",
+      "published_at": "2026-11-14T00:36:10+09:00",
+      "category": "sec",
+      "keywords": [
+        "data-breach",
+        "kyc",
+        "security-incident"
+      ],
+      "score": 82,
+      "why": "はてブ 285（前日掲載の続報）",
+      "read_min": null,
+      "tldr": "マネックス証券は 13 日、委託先が運営する口座開設システムへの不正アクセスで、運転免許証やマイナンバーカードなど本人確認書類の画像 1,592 件と最大 113 万件のメールアドレスが漏えいした恐れがあると発表した（RSS の要約による）。",
+      "points": [],
+      "code": null,
+      "signal": "B! 285",
+      "pick": false
+    },
+    {
+      "id": "2026-11-15-crissyfield-lovable-exposure",
+      "url": "https://www.crissyfield.de/research/lovable-en/",
+      "title": "Lovable apps expose passport details and more than 200K private messages",
+      "source": "tech",
+      "source_group": "hackernews",
+      "published_at": "2026-11-15T02:43:10+09:00",
+      "category": "sec",
+      "keywords": [
+        "data-breach",
+        "ai-coding",
+        "privacy"
+      ],
+      "score": 78,
+      "why": "HN 290 pt",
+      "read_min": 7,
+      "tldr": "独 Crissy Field が Common Crawl から Lovable 製の 159,041 プロジェクトを調べ、Supabase を使う 34,545 件のうち多くでログインなしにデータベースのレコードが読めたと報告した。パスポート番号や 20 万件超のチャットなど、アクセス制御の誤りによる露出の実例を挙げている。",
+      "points": [
+        "24,664 サイトがページ読み込み時に Supabase のレコードを送っていた（それ自体は公開用データの可能性もある）。追加の読み取りで 7,403 サイト（30％）の 10,560 テーブルにメールアドレスが見つかった",
+        "例：独ライフスタイル系フォーラムの 8 万超のプロフィールと 20 万超のメッセージ、1,000 件超のパスポート番号などの本人確認情報、チケット・飲食販売の連絡先や決済情報",
+        "調査は Handelsblatt と共同で、同紙が 11 月 2 日に報道。著者は「流出率ではない」と注意し、実データを扱う前の権限・API・アカウント分離の点検を勧めている。Lovable 側の対応は記載なし"
+      ],
+      "code": null,
+      "signal": "▲ 290",
+      "pick": true
+    },
+    {
+      "id": "2026-11-15-unsloth-qwen38",
+      "url": "https://unsloth.ai/docs/models/qwen3.8",
+      "title": "Unsloth Qwen3.8-27B Quantizations – Dynamic v3.1 Update",
+      "source": "tech",
+      "source_group": "hackernews",
+      "published_at": "2026-11-14T09:06:04+09:00",
+      "category": "ai",
+      "keywords": [
+        "local-llm",
+        "open-weight"
+      ],
+      "score": 75,
+      "why": "HN 235 pt",
+      "read_min": null,
+      "tldr": "Unsloth が Qwen3.8-27B の量子化モデルを Dynamic v3.1 として更新した。HN で 235 pt。",
+      "points": [],
+      "code": null,
+      "signal": "B! 1 · ▲ 235",
+      "pick": false
+    },
+    {
+      "id": "2026-11-15-reuters-italy-meta-fine",
+      "url": "https://www.reuters.com/world/italy-fines-meta-887-million-over-android-users-data-access-2026-11-14/",
+      "title": "Italy fines Meta $887M over Android users' data access",
+      "source": "tech",
+      "source_group": "hackernews",
+      "published_at": "2026-11-14T22:48:06+09:00",
+      "category": "sec",
+      "keywords": [
+        "meta",
+        "privacy",
+        "android"
+      ],
+      "score": 74,
+      "why": "HN 229 pt",
+      "read_min": null,
+      "tldr": "イタリア当局が Android 利用者のデータへのアクセスをめぐり Meta に 8 億 8,700 万ドルの制裁金を科した、とロイターが報じた（見出しによる）。",
+      "points": [],
+      "code": null,
+      "signal": "▲ 229",
+      "pick": false
+    },
+    {
+      "id": "2026-11-15-register-ms-outage-recovery",
+      "url": "https://www.theregister.com/saas/2026/11/13/microsoft-outage-gives-customers-a-crash-course-in-dependence-on-redmond/5309805",
+      "title": "Microsoft outage gives customers a crash course in dependence on Redmond（Microsoft 365 は全面復旧）",
+      "source": "tech",
+      "source_group": "hackernews",
+      "published_at": "2026-11-14T03:29:16+09:00",
+      "category": "cloud",
+      "keywords": [
+        "microsoft",
+        "system-outage"
+      ],
+      "score": 71,
+      "why": "HN 181 pt・日経・Impress も復旧を報道",
+      "read_min": null,
+      "tldr": "前日から続いた Microsoft 365 の大規模障害について、日経は 14 日午後 2 時半すぎ（日本時間）に全面復旧が報告されたと伝えた。The Register は顧客の Microsoft 依存を論じ、HN で 181 pt。詳細は後日報告される見込み。",
+      "points": [],
+      "code": null,
+      "signal": "▲ 181",
+      "pick": false
+    },
+    {
+      "id": "2026-11-15-pypi-security-signals",
+      "url": "https://blog.pypi.org/posts/2026-11-06-ui-updates-complete/",
+      "title": "PyPI's redesigned project pages with clearer security signals are now live",
+      "source": "tech",
+      "source_group": "hackernews",
+      "published_at": "2026-11-15T00:40:52+09:00",
+      "category": "sec",
+      "keywords": [
+        "supply-chain",
+        "oss"
+      ],
+      "score": 68,
+      "why": "HN 148 pt",
+      "read_min": null,
+      "tldr": "PyPI のプロジェクトページの刷新が完了し、セキュリティ関連の情報をより分かりやすく表示するようになった（タイトルによる）。",
+      "points": [],
+      "code": null,
+      "signal": "B! 1 · ▲ 148",
+      "pick": false
+    },
+    {
+      "id": "2026-11-15-nikkei-plaid-karte",
+      "url": "https://www.nikkei.com/article/DGXZQOUC13B0E0T11C26A1000000/",
+      "title": "マーケ支援のプレイド、不正アクセスでサービス停止",
+      "source": "tech",
+      "source_group": "tech_blog",
+      "published_at": "2026-11-14T09:47:56+09:00",
+      "category": "sec",
+      "keywords": [
+        "security-incident",
+        "data-breach"
+      ],
+      "score": 55,
+      "why": "はてブ 13・プレイドの公式発表あり",
+      "read_min": null,
+      "tldr": "プレイドは 13 日、主力サービス「KARTE」への第三者の不正アクセスを検知し、緊急メンテナンスとして KARTE 全体を停止したと発表した。情報流出の有無は調査中としている。",
+      "points": [],
+      "code": null,
+      "signal": "B! 13",
+      "pick": false
+    },
+    {
+      "id": "2026-11-15-cursor-security-incident",
+      "url": "https://cursor.com/blog/security-incident-update",
+      "title": "An update on our recent security incident · Cursor",
+      "source": "tech",
+      "source_group": "tech_blog",
+      "published_at": "2026-11-14T11:05:25+09:00",
+      "category": "sec",
+      "keywords": [
+        "supply-chain",
+        "coding-agent",
+        "security-incident"
+      ],
+      "score": 55,
+      "why": "はてブ 14・Cursor 公式のインシデント続報",
+      "read_min": null,
+      "tldr": "Cursor が 10 月 29 日に公表したセキュリティインシデント（拡張機能マーケットプレイスに Claude Code 拡張の悪意ある無許可コピーが出た件）の続報を出した。",
+      "points": [],
+      "code": null,
+      "signal": "B! 14",
+      "pick": false
+    },
+    {
+      "id": "2026-11-15-coinpost-btc-below-70k",
+      "url": "https://coinpost.jp/?p=747946",
+      "title": "ビットコイン7万ドル割れ、AI株安が波及しロング大量清算が下落を加速",
+      "source": "money",
+      "source_group": "news",
+      "published_at": "2026-11-14T09:15:32+09:00",
+      "category": "crypto",
+      "keywords": [
+        "bitcoin",
+        "nvidia",
+        "fed"
+      ],
+      "score": 90,
+      "why": "matched: ビットコイン, 金利",
+      "read_min": 5,
+      "tldr": "ビットコインは 13〜14 日の 2 日間で円建て 100 万円超下げ、7 万ドルを割り込んだ。米追加利上げへの警戒に、NVIDIA の CEO 辞任を受けたハイテク株安が重なり、7.1 万ドル割れでロングの強制清算が連鎖したとみられる。",
+      "points": [
+        "10 日夜の CPI が予想を上回り、12 月 FOMC での 0.5 ポイント利上げ観測が浮上していた。ナスダックとの相関係数は +0.46",
+        "清算は 7.1 万〜6.9 万ドル台に集中していた。清算の総額は記事に書かれていない",
+        "今後の日程として 11/17 米小売売上高、11/23 米 PMI、11/30 ストラテジーの MSCI 指数除外の反映を挙げている"
+      ],
+      "code": null,
+      "signal": null,
+      "pick": true
+    },
+    {
+      "id": "2026-11-15-coinpost-strategy-msci",
+      "url": "https://coinpost.jp/?p=747940",
+      "title": "ストラテジーCEO「MSCI指数連動の株式はわずか3％で除外の影響は限定的」",
+      "source": "money",
+      "source_group": "news",
+      "published_at": "2026-11-14T09:30:01+09:00",
+      "category": "crypto",
+      "keywords": [
+        "strategy",
+        "index-rebalance",
+        "bitcoin-treasury"
+      ],
+      "score": 85,
+      "why": "matched: ビットコイン",
+      "read_min": 4,
+      "tldr": "MSCI は 11 月の定期見直しで、10 月 15 日導入の「非事業会社」ルールによりストラテジーを MSCI USA などの指数から除外すると発表した（11 月 30 日の取引終了時に反映）。同社 CEO は、指数連動の保有は株式の約 3％で影響は小さいと述べた。",
+      "points": [
+        "パッシブファンドは除外時に同社株を売る必要があるが、同社が保有 BTC を強制的に売る必要はない",
+        "BTC への影響は、同社が買い付けを減らすか売却を増やす場合に限られる。11/30 以降の週次 8-K で売却状況が分かる",
+        "CEO は、指数事業者が市場の勝者と敗者を選ぶのは疑問だと MSCI を批判した"
+      ],
+      "code": null,
+      "signal": null,
+      "pick": true
+    },
+    {
+      "id": "2026-11-15-coinpost-sbi-cambodia",
+      "url": "https://coinpost.jp/?p=747969",
+      "title": "SBIとカンボジア中銀、国債にカントン・送金にJPYSCを使う2つの実証へ",
+      "source": "money",
+      "source_group": "news",
+      "published_at": "2026-11-14T13:20:02+09:00",
+      "category": "crypto",
+      "keywords": [
+        "stablecoin",
+        "tokenization",
+        "government-bond"
+      ],
+      "score": 75,
+      "why": "matched: ステーブルコイン",
+      "read_min": 4,
+      "tldr": "SBI ホールディングスはカンボジア国立銀行と、国債のトークン化と円建てステーブルコイン JPYSC による日本・カンボジア間送金の 2 つの実証に向けた基本合意書を結んだ。中間成果は 15・16 日にプノンペンで公表する予定。",
+      "points": [
+        "国債のトークン化は Canton Network を使い、少額から国債を持てる環境を目指す。保有者情報の登録・管理は中銀が担う",
+        "送金は金融機関同士の決済に JPYSC を使う仕組みを閉じた環境で検証する。中継銀行経由の時間とコストが課題とされる",
+        "具体的なサービス内容や提供時期は今後協議する"
+      ],
+      "code": null,
+      "signal": null,
+      "pick": true
+    },
+    {
+      "id": "2026-11-15-coinpost-twenty-one-q3",
+      "url": "https://coinpost.jp/?p=747921",
+      "title": "米上場Twenty One Capital第3四半期決算、ビットコイン評価益で10億ドル超の黒字",
+      "source": "money",
+      "source_group": "news",
+      "published_at": "2026-11-14T08:02:07+09:00",
+      "category": "crypto",
+      "keywords": [
+        "bitcoin-treasury",
+        "earnings",
+        "tether"
+      ],
+      "score": 72,
+      "why": "matched: ビットコイン, 決算",
+      "read_min": 4,
+      "tldr": "テザーが支援する Twenty One Capital の 7〜9 月期純利益は 10 億 8,675 万ドルで、ほぼ全額がビットコインの公正価値増加益だった。1〜9 月期では 1 億 8,648 万ドルの純損失。",
+      "points": [
+        "営業損失は 482 万 8,000 ドル。BTC 価格が 6 月末の約 5.86 万ドルから 9 月末の約 8.37 万ドルに上がり黒字に転じた",
+        "9 月末の保有は 43,514 BTC（評価額約 36 億ドル）で 6 月末から変わらず。うち約 16,116 BTC を転換社債の担保に差し入れている",
+        "CEO は評価益は事業の利益とは別と説明し、マイニング・融資・エネルギーなど現金を生む事業の構築や買収を検討するとした"
+      ],
+      "code": null,
+      "signal": null,
+      "pick": true
+    },
+    {
+      "id": "2026-11-15-nikkei-50yr-mortgage",
+      "url": "https://www.nikkei.com/article/DGXZQOUB12C1Q0S6A111C2000000/",
+      "title": "50年住宅ローン、始まった融資引き締め 金融庁が問題視「新たな火種」",
+      "source": "money",
+      "source_group": "tech_blog",
+      "published_at": "2026-11-14T07:03:15+09:00",
+      "category": "realestate",
+      "keywords": [
+        "mortgage-rates",
+        "fsa",
+        "housing"
+      ],
+      "score": 85,
+      "why": "matched: 住宅ローン",
+      "read_min": null,
+      "tldr": "マンション価格の高騰で人気の 50 年住宅ローンについて、一部の金融機関が内々に審査を厳しくし始め、金融庁は契約者へのリスク説明が十分かを注視していると日経が報じた。本文は会員限定で冒頭のみ確認。",
+      "points": [],
+      "code": null,
+      "signal": "B! 50",
+      "pick": false
+    },
+    {
+      "id": "2026-11-15-diamond-nisa-index",
+      "url": "https://diamond.jp/articles/-/400513",
+      "title": "新NISAの「オルカン」「S＆P500」だけやっている人が見落としていること",
+      "source": "money",
+      "source_group": "news",
+      "published_at": "2026-11-14T08:25:00+09:00",
+      "category": "funds",
+      "keywords": [
+        "new-nisa",
+        "index-fund"
+      ],
+      "score": 70,
+      "why": "matched: nisa, インデックス",
+      "read_min": null,
+      "tldr": "新 NISA で人気の全世界株・S&P500 のインデックス投資について、小型株集中投資の書籍の著者がその弱点を論じる記事（RSS の要約による）。",
+      "points": [],
+      "code": null,
+      "signal": "B! 1",
+      "pick": false
+    },
+    {
+      "id": "2026-11-15-nikkei-norinchukin-ai-etf",
+      "url": "https://www.nikkei.com/article/DGXZQOUB109MD0Q6A111C2000000/",
+      "title": "動いた農林中金、AI株を「底値買い」 長期で安定成長を期待",
+      "source": "tech",
+      "source_group": "tech_blog",
+      "published_at": "2026-11-14T08:26:15+09:00",
+      "category": "stocks",
+      "keywords": [
+        "semiconductor",
+        "etf"
+      ],
+      "score": 65,
+      "why": "matched: etf, 半導体",
+      "read_min": null,
+      "tldr": "約 45 兆円を運用する農林中央金庫が半導体株 ETF への投資に踏み切った、と日経が報じた。海外の年金基金も AI 関連株に押し目買いを入れているという（RSS の要約による）。",
+      "points": [],
+      "code": null,
+      "signal": "B! 37",
+      "pick": false
+    },
+    {
+      "id": "2026-11-15-toyokeizai-ai-bubble",
+      "url": "https://toyokeizai.net/articles/-/964642?utm_source=rss&utm_medium=http&utm_campaign=link_back",
+      "title": "｢アンソロピックの悪質IPO｣＋｢エヌビディアCEOスキャンダル｣……ついにAI･半導体バブル崩壊は決定的瞬間を迎えそうだ",
+      "source": "money",
+      "source_group": "news",
+      "published_at": "2026-11-14T06:30:00+09:00",
+      "category": "stocks",
+      "keywords": [
+        "nvidia",
+        "anthropic",
+        "ipo"
+      ],
+      "score": 60,
+      "why": "matched: 米国株, 半導体",
+      "read_min": null,
+      "tldr": "Anthropic の IPO と NVIDIA の CEO スキャンダルを材料に、AI・半導体バブル崩壊の可能性を論じる東洋経済のコラム（本文は未読）。",
+      "points": [],
+      "code": null,
+      "signal": null,
+      "pick": false
+    },
+    {
+      "id": "2026-11-15-investing-l3harris-faa",
+      "url": "https://jp.investing.com/news/stock-market-news/article-1757598",
+      "title": "ダフィー運輸長官、FAA障害でL3ハリスを調査",
+      "source": "money",
+      "source_group": "news",
+      "published_at": "2026-11-15T03:18:02+09:00",
+      "category": "stocks",
+      "keywords": [
+        "system-outage",
+        "us-stocks"
+      ],
+      "score": 55,
+      "why": "matched: 米国株",
+      "read_min": null,
+      "tldr": "全米グラウンドストップを受け、ダフィー運輸長官が L3ハリスを調査していると伝える記事（見出しによる）。",
+      "points": [],
+      "code": null,
+      "signal": null,
+      "pick": false
+    },
+    {
+      "id": "2026-11-15-coinpost-jpm-13f",
+      "url": "https://coinpost.jp/?p=747926",
+      "title": "JPモルガン、ストラテジー株を36％積み増し、仮想通貨関連保有は1600億円近く",
+      "source": "money",
+      "source_group": "news",
+      "published_at": "2026-11-14T06:00:17+09:00",
+      "category": "crypto",
+      "keywords": [
+        "bitcoin-etf",
+        "strategy"
+      ],
+      "score": 60,
+      "why": "matched: ビットコイン",
+      "read_min": null,
+      "tldr": "JP モルガン・チェースの 13F によると、9 月 30 日時点のビットコイン現物 ETF・ストラテジー・コインベースの保有は合計約 9 億 8,100 万ドル。第 3 四半期にストラテジー株を 36％積み増した（RSS の要約による）。",
+      "points": [],
+      "code": null,
+      "signal": null,
+      "pick": false
+    },
+    {
+      "id": "2026-11-15-coinpost-thai-stablecoin-cap",
+      "url": "https://coinpost.jp/?p=747963",
+      "title": "タイ当局、マネロン対策でステーブルコイン送金に1日約2300万円の上限案",
+      "source": "money",
+      "source_group": "news",
+      "published_at": "2026-11-14T15:00:02+09:00",
+      "category": "crypto",
+      "keywords": [
+        "stablecoin",
+        "crypto-regulation"
+      ],
+      "score": 55,
+      "why": "matched: ステーブルコイン",
+      "read_min": null,
+      "tldr": "タイ証券取引委員会がステーブルコイン取引の告示案を公表した。入出金を事業者ごとに 1 日 500 万バーツまでとし、送金元・先を本人名義口座に限る内容で、26 日まで意見を募る（RSS の要約による）。",
+      "points": [],
+      "code": null,
+      "signal": null,
+      "pick": false
+    },
+    {
+      "id": "2026-11-15-coinpost-asteria-jpyc",
+      "url": "https://coinpost.jp/?p=747923",
+      "title": "東証上場アステリア、約3億円分のJPYCを現金同等物で保有",
+      "source": "money",
+      "source_group": "news",
+      "published_at": "2026-11-14T06:40:11+09:00",
+      "category": "stocks",
+      "keywords": [
+        "jpyc",
+        "earnings"
+      ],
+      "score": 55,
+      "why": "matched: 決算, ステーブルコイン",
+      "read_min": null,
+      "tldr": "アステリアの中間決算短信で、現金及び現金同等物 36 億 9,855 万円のうち JPYC が 2 億 9,900 万円を占めた。営業利益は 302.6％増の 21 億 757 万円（RSS の要約による）。",
+      "points": [],
+      "code": null,
+      "signal": null,
+      "pick": false
+    },
+    {
+      "id": "2026-11-15-gadget2ch-balmuda",
+      "url": "https://www.gadget2ch.com/archives/post-282583.html",
+      "title": "バルミューダ、売上高89億円・最終赤字10億5千万円に下方修正",
+      "source": "money",
+      "source_group": "tech_blog",
+      "published_at": "2026-11-14T07:40:29+09:00",
+      "category": "stocks",
+      "keywords": [
+        "earnings"
+      ],
+      "score": 50,
+      "why": "matched: 決算",
+      "read_min": null,
+      "tldr": "バルミューダは 11 月 13 日、2026 年 12 月期の通期売上高予想を 105 億円から 89 億円に引き下げ、減収見通しに転じた。最終損益は 10 億 5 千万円の赤字予想（RSS の要約による）。",
+      "points": [],
+      "code": null,
+      "signal": "B! 136",
+      "pick": false
+    }
+  ],
+  "social": [
+    {
+      "network": "x",
+      "author": "@Reuters",
+      "url": "https://x.com/Reuters/status/2121354036595319103",
+      "text": "FAA が深刻な管制通信の問題を報告した後、「異常な状況と安全上の理由」で全国グラウンドストップを出したと速報した。",
+      "metrics": null,
+      "heat": null,
+      "category": "cloud",
+      "keywords": [
+        "system-outage"
+      ],
+      "posted_at": null
+    },
+    {
+      "network": "x",
+      "author": "@ABC",
+      "url": "https://x.com/ABC/status/2121389659318088083",
+      "text": "米東部時間 18 時すぎの FAA の更新として、停止は継続中だが航空路管制センターの回復に合わせ、管制指令センターとの調整で出発を認め始めたと伝えた。",
+      "metrics": null,
+      "heat": null,
+      "category": "cloud",
+      "keywords": [
+        "system-outage"
+      ],
+      "posted_at": null
+    },
+    {
+      "network": "x",
+      "author": "@SenateCommerce",
+      "url": "https://x.com/SenateCommerce/status/2121364783911838166",
+      "text": "全国グラウンドストップは FAA の航空路管制センター（ARTCC）に関係するようだとし、ARTCC の近代化を他の事業より優先すべきだと投稿した。",
+      "metrics": null,
+      "heat": null,
+      "category": "cloud",
+      "keywords": [
+        "system-outage",
+        "networking"
+      ],
+      "posted_at": null
+    },
+    {
+      "network": "x",
+      "author": "@TechPowerUp",
+      "url": "https://x.com/TechPowerUp/status/2121370377892876408",
+      "text": "「NVIDIA が AI スタートアップに資金を出して自社 GPU を買わせ、品薄を演出した疑い」とする記事を告知した。",
+      "metrics": null,
+      "heat": null,
+      "category": "ai",
+      "keywords": [
+        "nvidia",
+        "semiconductor"
+      ],
+      "posted_at": null
+    },
+    {
+      "network": "x",
+      "author": "@BullTheoryio",
+      "url": "https://x.com/BullTheoryio/status/2121166572647772461",
+      "text": "WSJ の報道として、NVIDIA が自社チップを買えない AI 企業に数十億ドル規模の金融保証を提供していたと紹介した（投稿者の主張）。",
+      "metrics": null,
+      "heat": null,
+      "category": "ai",
+      "keywords": [
+        "nvidia",
+        "corporate-governance"
+      ],
+      "posted_at": null
+    },
+    {
+      "network": "x",
+      "author": "@Josevizner",
+      "url": "https://x.com/Josevizner/status/2121165693408129072",
+      "text": "ビットコインが 6.9 万ドルを割り込み、48 時間で市場から 2,000 億ドルが消えたとして下落の要因を解説した（スペイン語）。",
+      "metrics": null,
+      "heat": null,
+      "category": "crypto",
+      "keywords": [
+        "bitcoin"
+      ],
+      "posted_at": null
+    },
+    {
+      "network": "hn",
+      "author": null,
+      "url": "https://news.ycombinator.com/item?id=50486482",
+      "text": "『LibreOffice actually works 365 days a year』のスレッド。288 件のコメント。",
+      "metrics": "▲ 921  ✉ 288",
+      "heat": 100,
+      "category": "be",
+      "keywords": [
+        "oss",
+        "desktop-app"
+      ],
+      "posted_at": "2026-11-14T02:09:58+09:00"
+    }
+  ],
+  "releases": [
+    {
+      "date": "2026-11-13",
+      "title": "ggml v1.0.0",
+      "repo": "ggml-org/ggml",
+      "url": "https://github.com/ggml-org/ggml/releases/tag/v1.0.0",
+      "kind": "release",
+      "note": "HN 経由で確認（監視対象の git タグ差分ではない）。非推奨 API を削除し RPC プロトコルを更新",
+      "category": "ai"
+    },
+    {
+      "date": "2026-11-15",
+      "title": "SBI・カンボジア国立銀行の実証 中間成果の公表（Black Swan Summit、11/15〜16）",
+      "repo": null,
+      "url": "https://coinpost.jp/?p=747969",
+      "kind": "event",
+      "note": "CoinPost の記事で日程を確認",
+      "category": "crypto"
+    },
+    {
+      "date": "2026-11-17",
+      "title": "NVIDIA 第 3 四半期決算発表",
+      "repo": null,
+      "url": "https://nvidianews.nvidia.com/news/nvidia-announces-ceo-transition",
+      "kind": "event",
+      "note": "前日の日次ファイルから引き継ぎ",
+      "category": "stocks"
+    },
+    {
+      "date": "2026-11-17",
+      "title": "米 10 月 小売売上高",
+      "repo": null,
+      "url": "https://coinpost.jp/?p=747946",
+      "kind": "event",
+      "note": "CoinPost のビットコイン市況記事の日程で確認",
+      "category": "macro"
+    }
+  ]
+}
