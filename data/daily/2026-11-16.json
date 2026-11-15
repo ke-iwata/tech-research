@@ -1,0 +1,692 @@
+{
+  "date": "2026-11-16",
+  "generated_at": "2026-11-16T05:40:00+09:00",
+  "stats": {
+    "collected": 151,
+    "sources_ok": 25,
+    "sources_total": 26,
+    "by_group": {
+      "hackernews": 35,
+      "tech_blog": 56,
+      "news": 60
+    },
+    "failed_sources": [
+      "coindesk_jp"
+    ]
+  },
+  "digest": [
+    {
+      "category": "sec",
+      "text": "Google Project Zero が脆弱性の開示を「報告から 90 日後」の一律ルールに改め、2027 年 2 月から 60 日、2028 年 1 月から 30 日へ短縮する（HN 300 pt）。AI で発見・悪用が速くなり、パッチ後の猶予が意味を失ったことを理由に挙げた。",
+      "keywords": [
+        "vulnerability-management",
+        "ai-security"
+      ]
+    },
+    {
+      "category": "ai",
+      "text": "「AI 生成コードはすべてオープンソースにすべき」という意見記事が HN 879 pt・465 コメント。Samsung・SK hynix・Micron の DRAM 供給制限をめぐる集団訴訟は米連邦地裁が棄却申立てを退けた（HN 445 pt、共謀は未証明）。",
+      "keywords": [
+        "ai-coding",
+        "licensing",
+        "semiconductor"
+      ]
+    },
+    {
+      "category": "be",
+      "text": "PostgreSQL 19 は正式版が 11 月 19 日の見通しと例年より遅れ、β4 で SQL/PGQ など多数の新機能が取り下げられた。コミッターは LLM によるコードレビューで不具合が早く大量に見つかったことを背景に挙げている。",
+      "keywords": [
+        "postgres",
+        "code-review"
+      ]
+    },
+    {
+      "category": "crypto",
+      "text": "ビットコインは今週 200 日線（1,160 万円前後）を割り、13 日に 1,100 万円近辺まで下落。markets.py の 15 日値は 1,034 万円。上場企業 14 社の 2026 年の BTC 売却は計 10 万 8,247 BTC との集計も出た。",
+      "keywords": [
+        "bitcoin",
+        "bitcoin-treasury"
+      ]
+    },
+    {
+      "category": "macro",
+      "text": "13 日終値は日経平均 61,142（前日比 +0.53％）、S&P 500 −0.40％、米 10 年債 5.15％、ドル円 159.54（markets.py）。カンザスシティ連銀総裁はインフレが目標を「不快なほど」上回ると述べ、先物は 12 月の 0.25pt 利上げを織り込む。投信の 11 月資金流入と住宅ローン金利の 12 月予想は検索で当日のニュースを確認できなかった。",
+      "keywords": [
+        "fed",
+        "interest-rates",
+        "nikkei225"
+      ]
+    }
+  ],
+  "items": [
+    {
+      "id": "2026-11-16-jankiewicz-ai-code-oss",
+      "url": "https://jakub.jankiewicz.org/blog/ai-code-open-source/",
+      "title": "All AI-generated code should be Open Source",
+      "source": "jakub.jankiewicz.org",
+      "source_group": "hackernews",
+      "published_at": "2026-11-15T23:46:58+09:00",
+      "category": "ai",
+      "keywords": [
+        "ai-coding",
+        "licensing",
+        "oss"
+      ],
+      "score": 93,
+      "why": "HN 879 pt",
+      "read_min": 5,
+      "tldr": "筆者が「hot take」と断ったうえで、AI が生成したコードはすべてオープンソース（または CC0）で公開すべきだと主張するブログ記事。学習元の OSS や Stack Overflow のコードを非公開製品に流し込むのは「ライセンス・ロンダリング」だという論点が HN で 465 件のコメントを集めた。",
+      "points": [
+        "AI はオープンソースや CC ライセンスの Stack Exchange のデータで学習しており、その出力をプロプライエタリにするのは帰属義務を回避する「license laundering」にあたると主張",
+        "人間が書いていないコードは著作物として保護されるべきでないとし、米国の「Monkey Selfie」事件や、Wikimedia Commons が AI 生成画像をパブリックドメイン扱いする方針を根拠に挙げる（英国のように機械生成物を限定的に保護する国もあると注記）",
+        "提案は、AI 生成コードを OSS ライセンスで明示的に公開するか CC0 で献上すること。実証データはなく意見記事"
+      ],
+      "code": null,
+      "signal": "▲ 879",
+      "pick": true
+    },
+    {
+      "id": "2026-11-16-eff-privacy-wearables",
+      "url": "https://www.eff.org/deeplinks/2026/11/tech-companies-are-trying-shift-entire-concept-privacy-again",
+      "title": "Tech companies are trying to shift the concept of privacy again",
+      "source": "eff.org",
+      "source_group": "hackernews",
+      "published_at": "2026-11-14T21:45:45+09:00",
+      "category": "sec",
+      "keywords": [
+        "privacy",
+        "surveillance"
+      ],
+      "score": 87,
+      "why": "HN 590 pt",
+      "read_min": 6,
+      "tldr": "EFF が、AI 付きスマートグラスや常時録音・文字起こしのウェアラブルの普及で、プライバシーが「使う人の選択」から「周囲の全員に及ぶ問題」に変わりつつあると論じた。企業のプライバシー保護は所有者しか守らず、非利用者は同意も拒否もできないと指摘する。",
+      "points": [
+        "対象として Meta・Google のスマートグラス、Apple Watch の「Audio Intelligence」（会話の文字起こし・要約）、Amazon の「Bee」などを挙げる",
+        "音声を要約して即破棄する設計でも一時的な取得や政府によるデータ要求の余地は残り、常時記録が当たり前になると私的な会話の自発性や信頼が損なわれる、と主張",
+        "利用者には周囲への明示と同意を得た場面での使用を、Apple にはフィードバックを送ることを呼びかけている"
+      ],
+      "code": null,
+      "signal": "▲ 590",
+      "pick": true
+    },
+    {
+      "id": "2026-11-16-litnews-dram-price-fixing",
+      "url": "https://litnews.ai/articles/garciaguirre-samsung-sk-hynix-micron-dram-conspiracy-suit-survives-dismissal",
+      "title": "Court denies motion to dismiss DRAM price fixing case",
+      "source": "litnews.ai",
+      "source_group": "hackernews",
+      "published_at": "2026-11-15T10:18:36+09:00",
+      "category": "ai",
+      "keywords": [
+        "semiconductor",
+        "memory",
+        "antitrust"
+      ],
+      "score": 83,
+      "why": "HN 445 pt",
+      "read_min": 5,
+      "tldr": "米カリフォルニア北部地区連邦地裁が、Samsung・SK hynix・Micron が汎用 DRAM の供給を絞る共謀をしたとする消費者の集団訴訟について、被告の棄却申立てを全面的に退けた。訴状の主張を前提にした判断で、共謀の事実はまだ証明されていない。",
+      "points": [
+        "原告は 5 州の消費者・中小企業 17 者。3 社が 2022 年後半から DDR5 などの生産を減らし、2023 年から AI 向け HBM に振り向けて供給を制限したとシャーマン法 1 条違反を主張している",
+        "訴状によれば 3 社の世界 DRAM 売上シェアは 2025 年第 3 四半期で 91% 超、汎用 DRAM 価格は 1 年で 171.8% 上昇。HBM の長期囲い込み、Micron の Crucial ブランド閉鎖、似た顧客審査の導入などが共謀を推認させる要素として挙げられた",
+        "被告の答弁期限は 2026 年 12 月 7 日、初回の case management conference は 2027 年 1 月 12 日"
+      ],
+      "code": null,
+      "signal": "▲ 445",
+      "pick": true
+    },
+    {
+      "id": "2026-11-16-techspot-nvidia-circular-financing",
+      "url": "https://www.techspot.com/news/114558-nvidia-deliberately-kept-gpu-prices-high-through-circular.html",
+      "title": "Nvidia deliberately kept GPU prices high through circular financing deals",
+      "source": "techspot.com",
+      "source_group": "hackernews",
+      "published_at": "2026-11-15T07:26:30+09:00",
+      "category": "ai",
+      "keywords": [
+        "nvidia",
+        "semiconductor",
+        "corporate-governance"
+      ],
+      "score": 83,
+      "why": "HN 438 pt",
+      "read_min": null,
+      "tldr": "NVIDIA が循環的な資金提供の取引で GPU 価格を高く保っていたとする TechSpot の記事。前日の「スタートアップに資金を出して GPU を買わせた」疑惑の続きの話題で、本文は読めておらず（403）内容は未確認。",
+      "points": [],
+      "code": null,
+      "signal": "▲ 438",
+      "pick": false
+    },
+    {
+      "id": "2026-11-16-newsjp-microsoft-outage-pool",
+      "url": "https://news.jp/i/1494496378441958289",
+      "title": "独プールで15人体調不良 マイクロソフト障害影響 | NEWSjp",
+      "source": "news.jp",
+      "source_group": "tech_blog",
+      "published_at": "2026-11-15T11:57:16+09:00",
+      "category": "cloud",
+      "keywords": [
+        "system-outage",
+        "microsoft"
+      ],
+      "score": 83,
+      "why": "はてブ 300",
+      "read_min": null,
+      "tldr": "共同通信によると、Microsoft の業務ソフトの大規模障害で、ドイツのテーマパーク内のプールの安全管理システムの警報メールが担当者に届かず、塩素濃度の異常に気付けないまま利用者 15 人が体調不良を訴えた。",
+      "points": [],
+      "code": null,
+      "signal": "B! 300",
+      "pick": false
+    },
+    {
+      "id": "2026-11-16-eff-alpr-warrant",
+      "url": "https://www.eff.org/deeplinks/2026/11/were-asking-appeals-court-require-warrant-alpr-searches",
+      "title": "We're Asking an Appeals Court to Require a Warrant for ALPR Searches",
+      "source": "eff.org",
+      "source_group": "hackernews",
+      "published_at": "2026-11-15T11:00:54+09:00",
+      "category": "sec",
+      "keywords": [
+        "surveillance",
+        "privacy"
+      ],
+      "score": 79,
+      "why": "HN 319 pt",
+      "read_min": null,
+      "tldr": "EFF が、自動ナンバープレート読取（ALPR）データベースの検索に令状を必要とするよう控訴裁判所に求めたと発表した。",
+      "points": [],
+      "code": null,
+      "signal": "▲ 319",
+      "pick": false
+    },
+    {
+      "id": "2026-11-16-projectzero-disclosure-policy",
+      "url": "https://projectzero.google/2026/11/disclosure-policy.html",
+      "title": "Project Zero will disclose vulnerabilities 90 days after reporting",
+      "source": "projectzero.google",
+      "source_group": "hackernews",
+      "published_at": "2026-11-14T20:13:17+09:00",
+      "category": "sec",
+      "keywords": [
+        "vulnerability-management",
+        "google",
+        "ai-security"
+      ],
+      "score": 78,
+      "why": "HN 300 pt・Google Project Zero の公式発表",
+      "read_min": 7,
+      "tldr": "Google Project Zero が脆弱性開示ポリシーを改め、11 月 13 日から「報告から 90 日後に公開」の一律ルールにした。2027 年 2 月 2 日から 60 日、2028 年 1 月 3 日から 30 日へと段階的に短縮する。AI で脆弱性の発見・悪用が速くなったことを理由に挙げている。",
+      "points": [
+        "2021 年からの「90 + 30」方式（修正 90 日＋パッチ配布の猶予 30 日）をやめ、報告日から数える期限だけにした。猶予期間やバリアントの特例もほぼ廃止",
+        "実際に悪用されている脆弱性は Google 全体の開示ポリシーで扱い、他者が公開済みのものやベンダーが求めた場合は早く公開することがある。修正の有無は追跡するが判断基準にはしない",
+        "理由として、AI による発見・悪用の高速化でパッチ後の猶予が「秘密が守られている」という誤った安心感になること、報告数が年に数件から週に数件へ増え個別交渉が難しいことを挙げる。重大度は判断基準にしない"
+      ],
+      "code": null,
+      "signal": "B! 2 · ▲ 300",
+      "pick": true
+    },
+    {
+      "id": "2026-11-16-note-engineer-thoughts",
+      "url": "https://note.com/at_sushi_at/n/n2e6ea3453e37",
+      "title": "今、ソフトウェアエンジニアとして何を思うか｜Mori Atsushi",
+      "source": "note.com",
+      "source_group": "tech_blog",
+      "published_at": "2026-11-15T18:51:50+09:00",
+      "category": "ai",
+      "keywords": [
+        "ai-coding",
+        "coding-agent"
+      ],
+      "score": 80,
+      "why": "はてブ 255",
+      "read_min": null,
+      "tldr": "ソフトウェアエンジニアが、1 年前は AI を「まだ舐めていた」と振り返り、AI がほとんどのコードを書く今のエンジニアの役割について考えを書いたエッセイ。",
+      "points": [],
+      "code": null,
+      "signal": "B! 255",
+      "pick": false
+    },
+    {
+      "id": "2026-11-16-fabscene-solidcraft",
+      "url": "https://fabscene.com/new/interview/solidcraft-open-source-cad-ai-1-5m-downloads-brennen-herbruck/",
+      "title": "個人開発で5週間150万DL、AIと爆速で作るCAD「SolidCraft」 - FabScene（ファブシーン）",
+      "source": "fabscene.com",
+      "source_group": "tech_blog",
+      "published_at": "2026-11-15T08:49:57+09:00",
+      "category": "ai",
+      "keywords": [
+        "ai-coding",
+        "oss"
+      ],
+      "score": 80,
+      "why": "はてブ 258",
+      "read_min": null,
+      "tldr": "AI コーディングツールで個人開発されたオープンソースの 3D CAD「SolidCraft」のインタビュー。RSS の要約では、2026 年 10 月に書き始め、約 5 週間で正式版を 58 回リリースし GitHub から約 150 万回ダウンロードされたとしている。",
+      "points": [],
+      "code": null,
+      "signal": "B! 258",
+      "pick": false
+    },
+    {
+      "id": "2026-11-16-github-deepseek-v3-jax",
+      "url": "https://github.com/Vaibhaav-Tiwari/deepseek-v3-jax",
+      "title": "Show HN: DeepSeek V3 in ~200 lines of pure Jax",
+      "source": "github.com",
+      "source_group": "hackernews",
+      "published_at": "2026-11-15T00:04:15+09:00",
+      "category": "ai",
+      "keywords": [
+        "open-weight",
+        "llm"
+      ],
+      "score": 76,
+      "why": "HN 265 pt",
+      "read_min": null,
+      "tldr": "DeepSeek V3 のモデル構造を純粋な JAX 約 200 行で実装したという Show HN。",
+      "points": [],
+      "code": null,
+      "signal": "▲ 265",
+      "pick": false
+    },
+    {
+      "id": "2026-11-16-google-antigravity-teamwork",
+      "url": "https://research.google/blog/advancing-science-engineering-with-antigravitys-teamwork-feature/",
+      "title": "Advancing science and engineering with Antigravity's /teamwork",
+      "source": "research.google",
+      "source_group": "hackernews",
+      "published_at": "2026-11-14T22:20:43+09:00",
+      "category": "ai",
+      "keywords": [
+        "multi-agent",
+        "coding-agent",
+        "google"
+      ],
+      "score": 73,
+      "why": "HN 209 pt",
+      "read_min": null,
+      "tldr": "Google Research が、Antigravity の /teamwork 機能を科学・工学の作業に使う取り組みをブログで紹介した。",
+      "points": [],
+      "code": null,
+      "signal": "▲ 209",
+      "pick": false
+    },
+    {
+      "id": "2026-11-16-nvidia-glm53-vllm",
+      "url": "https://developer.nvidia.com/blog/when-one-gpu-isnt-enough-serving-glm-5-3-across-two-nvidia-dgx-stations-with-vllm/",
+      "title": "Serving GLM-5.3 at 607.8 tok/s across two Nvidia DGX stations with vLLM",
+      "source": "developer.nvidia.com",
+      "source_group": "hackernews",
+      "published_at": "2026-11-14T23:09:25+09:00",
+      "category": "ai",
+      "keywords": [
+        "open-weight",
+        "local-llm",
+        "nvidia"
+      ],
+      "score": 68,
+      "why": "HN 143 pt",
+      "read_min": null,
+      "tldr": "NVIDIA の技術ブログ。2 台の DGX Station にまたがって vLLM で GLM-5.3 を配信し、607.8 tok/s を出した構成を解説している（数値はタイトルによる）。",
+      "points": [],
+      "code": null,
+      "signal": "▲ 143",
+      "pick": false
+    },
+    {
+      "id": "2026-11-16-publickey-postgresql19-delay",
+      "url": "https://www.publickey1.jp/blog/26/postgresql_194ai.html",
+      "title": "PostgreSQL 19リリース延期の背景。β4で多くの新機能取り下げが発生、原因はAIによるコードレビューか",
+      "source": "publickey1.jp",
+      "source_group": "news",
+      "published_at": "2026-11-16T00:31:49+09:00",
+      "category": "be",
+      "keywords": [
+        "postgres",
+        "code-review",
+        "ai-coding"
+      ],
+      "score": 60,
+      "why": "PostgreSQL のメジャーリリースが例年より遅れ、多数の新機能が取り下げられた",
+      "read_min": null,
+      "tldr": "PostgreSQL 19 は例年の 9〜10 月から遅れ、11 月 12 日に RC2、正式版は 11 月 19 日の見通し。β4 で SQL/PGQ のプロパティグラフ、FOR PORTION OF による時間的更新、パーティションの MERGE / SPLIT などが取り下げられ、コミッターは LLM を使ったコードレビューで不具合報告が早く大量に見つかったことを背景に挙げている。",
+      "points": [],
+      "code": null,
+      "signal": "B! 2",
+      "pick": false
+    },
+    {
+      "id": "2026-11-16-publickey-cloudflare-kitesurf",
+      "url": "https://www.publickey1.jp/blog/26/cloudflareaikitesurf.html",
+      "title": "Cloudflare、AI専用でタブやテーマや拡張などない軽量ヘッドレスブラウザ「Kitesurf」、オープンソースで公開",
+      "source": "publickey1.jp",
+      "source_group": "news",
+      "published_at": "2026-11-16T00:30:19+09:00",
+      "category": "ai",
+      "keywords": [
+        "ai-agent",
+        "cloudflare",
+        "oss"
+      ],
+      "score": 50,
+      "why": "Cloudflare の公式発表（AI エージェント向けブラウザの OSS 公開）",
+      "read_min": null,
+      "tldr": "Cloudflare が、AI エージェントが操作することを想定し、タブやテーマ、拡張機能などを省いた軽量ヘッドレスブラウザ「Kitesurf」をオープンソースで公開した。",
+      "points": [],
+      "code": null,
+      "signal": null,
+      "pick": false
+    },
+    {
+      "id": "2026-11-16-coinpost-btc-200dma",
+      "url": "https://coinpost.jp/?p=747846",
+      "title": "ビットコイン、200日線割れ1100万円台 エヌビディア決算とアンソロピックIPOが焦点｜bitbankアナリスト寄稿",
+      "source": "coinpost.jp",
+      "source_group": "news",
+      "published_at": "2026-11-15T11:30:25+09:00",
+      "category": "crypto",
+      "keywords": [
+        "bitcoin",
+        "nvidia",
+        "ipo"
+      ],
+      "score": 90,
+      "why": "matched: ビットコイン",
+      "read_min": 5,
+      "tldr": "bitbank アナリストの寄稿。ビットコインは今週 200 日移動平均線（1,160 万円前後）を割り込み、13 日には 1,100 万円近辺まで下げた。NVIDIA の CEO 交代報道と、FRB 理事の 12 月 50bp 利上げ示唆・10 月 CPI の上振れが重なったとしている。",
+      "points": [
+        "週初の 1,200 万円付近から下落。7 万ドル、短期保有者の平均取得価格、7 万 5,000 ドルも下回り、日足 RSI は 30 を割った",
+        "10 日にウォラー FRB 理事がインフレ次第で 12 月の 50bp 利上げもあり得ると発言、12 日に NVIDIA のフアン CEO の辞任が発表されたことが下げの材料とされた",
+        "来週の焦点として NVIDIA 決算と Anthropic の IPO を挙げ、大型 IPO に向けた資金確保でリスク資産から資金が流出している可能性にも触れている"
+      ],
+      "code": null,
+      "signal": null,
+      "pick": true
+    },
+    {
+      "id": "2026-11-16-coinpost-weekly-1113",
+      "url": "https://coinpost.jp/?p=747789",
+      "title": "週刊仮想通貨ニュース（11/13）｜上場企業のBTC売却・米BTC準備金・DAT企業の指数除外のまとめ",
+      "source": "coinpost.jp",
+      "source_group": "news",
+      "published_at": "2026-11-15T09:25:54+09:00",
+      "category": "crypto",
+      "keywords": [
+        "bitcoin-treasury",
+        "strategy",
+        "index-rebalance"
+      ],
+      "score": 82,
+      "why": "matched: ビットコイン",
+      "read_min": 4,
+      "tldr": "CoinPost の週間まとめ（11/7〜13）。上場企業の BTC 売却、米国の戦略的ビットコイン準備金、MSCI によるストラテジーの指数除外が主な話題で、BTC は週間で約 7％ 下落した。",
+      "points": [
+        "Lookonchain の集計として、上場企業 14 社が 2026 年に計 10 万 8,247 BTC（約 1.2 兆円相当）を売却",
+        "ホワイトハウスの元暗号資産顧問は、トランプ大統領が財政支出を増やさずに BTC を買うことに引き続き意欲を持っていると述べた",
+        "MSCI は 11 月の定期見直しでストラテジーを MSCI USA 指数から除外（11 月 30 日）。同社 CEO は指数連動分は約 3％ で影響は限定的との見方。記事時点で BTC 70,542 ドル（週間 −7.0％）、ETH 2,000 ドル（−10.3％）"
+      ],
+      "code": null,
+      "signal": null,
+      "pick": true
+    },
+    {
+      "id": "2026-11-16-investing-schmid-inflation",
+      "url": "https://jp.investing.com/news/economy-news/article-1757776",
+      "title": "カンザスシティ連銀のシュミッド総裁、インフレ対応に向けた取り組みを強調",
+      "source": "jp.investing.com",
+      "source_group": "news",
+      "published_at": "2026-11-16T03:58:14+09:00",
+      "category": "macro",
+      "keywords": [
+        "fed",
+        "interest-rates",
+        "us-inflation"
+      ],
+      "score": 80,
+      "why": "matched: 金利",
+      "read_min": 3,
+      "tldr": "カンザスシティ連銀のシュミッド総裁がハワイでの講演で、インフレは 2％ 目標を「不快なほど」上回っており、FRB は需要に働きかけて対処する手段と責任があると述べた。追加利上げを具体的に求める発言はなかった。",
+      "points": [
+        "インフレは需給の不均衡から生じ、供給ショックが物価を押し上げるのは需要が強いときだと主張。AI インフラ投資などの需要は金融政策の影響を受けないという見方に反論した",
+        "FRB は 9 月に 0.25 ポイント利上げして政策金利を 3.75〜4.00％ とし、10 月は据え置いた。シュミッド総裁は今年の FOMC で投票権を持たない",
+        "記事によれば、金利先物は 12 月会合での 0.25 ポイント利上げを完全に織り込み、0.50 ポイントの可能性もわずかに示している"
+      ],
+      "code": null,
+      "signal": null,
+      "pick": true
+    },
+    {
+      "id": "2026-11-16-toyokeizai-kodomo-nisa",
+      "url": "https://toyokeizai.net/articles/-/963779?utm_source=rss&utm_medium=http&utm_campaign=link_back",
+      "title": "手取り50万円でも｢親のNISA｣優先？元トレーダーが断言､《こどもNISA貧乏》に陥らず家族が豊かになる｢資産形成の正解｣ | キャリア・教育 | 東洋経済オンライン",
+      "source": "toyokeizai.net",
+      "source_group": "news",
+      "published_at": "2026-11-15T08:30:00+09:00",
+      "category": "funds",
+      "keywords": [
+        "new-nisa"
+      ],
+      "score": 78,
+      "why": "matched: nisa",
+      "read_min": null,
+      "tldr": "2027 年に始まる「こども NISA」について、親自身の NISA との優先順位や、制度の利用有無で資産格差が広がるという懸念を元トレーダーが論じる東洋経済の連載（同日 2 本）。本文は読めておらず、制度の詳細は未確認。",
+      "points": [],
+      "code": null,
+      "signal": null,
+      "pick": false
+    },
+    {
+      "id": "2026-11-16-diamond-ai-stocks-funding",
+      "url": "https://diamond.jp/articles/-/403304",
+      "title": "AI株急落は“バブル崩壊”の始まりか？株価だけでは見えない「資金調達」のリスク - トランプ中間選挙 経済・市場・政策はどうなる？",
+      "source": "diamond.jp",
+      "source_group": "news",
+      "published_at": "2026-11-16T04:30:00+09:00",
+      "category": "stocks",
+      "keywords": [
+        "us-stocks",
+        "ai-economy",
+        "data-center"
+      ],
+      "score": 70,
+      "why": "matched: 米国株",
+      "read_min": null,
+      "tldr": "AI 関連株の乱高下とデータセンター投資への見直し圧力を受け、株価だけでは見えない社債市場など資金調達環境の変化を検討するダイヤモンドの記事（要約のみ確認）。",
+      "points": [],
+      "code": null,
+      "signal": null,
+      "pick": false
+    },
+    {
+      "id": "2026-11-16-diamond-wsj-huang-ai-stocks",
+      "url": "https://diamond.jp/articles/-/403351",
+      "title": "フアン氏の失脚、AI株と「カリスマ理論」に試練 - WSJ PickUp",
+      "source": "diamond.jp",
+      "source_group": "news",
+      "published_at": "2026-11-16T04:05:00+09:00",
+      "category": "stocks",
+      "keywords": [
+        "nvidia",
+        "us-stocks",
+        "corporate-governance"
+      ],
+      "score": 65,
+      "why": "matched: 米国株",
+      "read_min": null,
+      "tldr": "WSJ の記事の転載。NVIDIA の危機で AI 業界が、フアン氏に依存する企業とそうでない企業に二分されたとする（要約のみ確認）。ITmedia によると、フアン氏の復帰を求める署名は 11 万人を超えた。",
+      "points": [],
+      "code": null,
+      "signal": null,
+      "pick": false
+    },
+    {
+      "id": "2026-11-16-diamond-wsj-ai-bot-cards",
+      "url": "https://diamond.jp/articles/-/403352",
+      "title": "AIボットのクレカ利用、対応に追われる銀行 - WSJ PickUp",
+      "source": "diamond.jp",
+      "source_group": "news",
+      "published_at": "2026-11-16T04:00:00+09:00",
+      "category": "macro",
+      "keywords": [
+        "payments",
+        "ai-agent"
+      ],
+      "score": 55,
+      "why": "AI エージェント決済と銀行の対応",
+      "read_min": null,
+      "tldr": "WSJ の記事の転載。AI エージェントによるクレジットカード利用に銀行が対応を迫られており、Stripe は AI エージェント主導の商取引で地位を築こうとする一方、JPモルガン・チェースは懐疑的だとする（要約のみ確認）。",
+      "points": [],
+      "code": null,
+      "signal": null,
+      "pick": false
+    },
+    {
+      "id": "2026-11-16-afpbb-us-china-russia-summit",
+      "url": "https://www.afpbb.com/articles/-/3662415",
+      "title": "米中ロ首脳、19日に初の3者会談 ロシアも開催確認",
+      "source": "afpbb.com",
+      "source_group": "tech_blog",
+      "published_at": "2026-11-15T13:38:18+09:00",
+      "category": "macro",
+      "keywords": [
+        "geopolitics"
+      ],
+      "score": 55,
+      "why": "米中ロ首脳会談の日程確定",
+      "read_min": null,
+      "tldr": "ロシアが、プーチン大統領が来週、中国・深センでの国際会議に合わせて習近平国家主席・トランプ大統領と史上初の 3 か国首脳会談に参加すると確認した（AFP）。開催は 19 日とされる。",
+      "points": [],
+      "code": null,
+      "signal": "B! 4",
+      "pick": false
+    },
+    {
+      "id": "2026-11-16-diamond-zenecon-ranking",
+      "url": "https://diamond.jp/articles/-/403335",
+      "title": "ゼネコン「経営耐久度」ワーストランキング【建築一式1108社】ワースト3位は中国建設工業、1位は？民間工事が中心の建築会社は価格転嫁に難 - ゼネコン・不動産 建設費高騰の呪縛",
+      "source": "diamond.jp",
+      "source_group": "news",
+      "published_at": "2026-11-16T04:15:00+09:00",
+      "category": "realestate",
+      "keywords": [
+        "construction-costs",
+        "real-estate-companies"
+      ],
+      "score": 45,
+      "why": "不動産・建設の関連記事",
+      "read_min": null,
+      "tldr": "建築一式のゼネコン 1,108 社の「経営耐久度」をランキングしたダイヤモンドの特集記事。民間工事が中心の建築会社は価格転嫁が難しいとしている（要約のみ確認）。",
+      "points": [],
+      "code": null,
+      "signal": null,
+      "pick": false
+    }
+  ],
+  "social": [
+    {
+      "network": "hn",
+      "author": null,
+      "url": "https://news.ycombinator.com/item?id=50507303",
+      "text": "『All AI-generated code should be Open Source』のスレッド。465 件のコメント",
+      "metrics": "▲ 879  ✉ 465",
+      "heat": 100,
+      "category": "ai",
+      "keywords": [
+        "ai-coding",
+        "licensing"
+      ],
+      "posted_at": "2026-11-15T23:46:58+09:00"
+    },
+    {
+      "network": "hn",
+      "author": null,
+      "url": "https://news.ycombinator.com/item?id=50496602",
+      "text": "『Tech companies are trying to shift the concept of privacy again』のスレッド。208 件のコメント",
+      "metrics": "▲ 590  ✉ 208",
+      "heat": 100,
+      "category": "sec",
+      "keywords": [
+        "privacy"
+      ],
+      "posted_at": "2026-11-14T21:45:45+09:00"
+    },
+    {
+      "network": "hn",
+      "author": null,
+      "url": "https://news.ycombinator.com/item?id=50502988",
+      "text": "『Court denies motion to dismiss DRAM price fixing case』のスレッド。203 件のコメント",
+      "metrics": "▲ 445  ✉ 203",
+      "heat": 100,
+      "category": "ai",
+      "keywords": [
+        "semiconductor",
+        "antitrust"
+      ],
+      "posted_at": "2026-11-15T10:18:36+09:00"
+    },
+    {
+      "network": "hn",
+      "author": null,
+      "url": "https://news.ycombinator.com/item?id=50501631",
+      "text": "『Nvidia deliberately kept GPU prices high through circular financing deals』のスレッド。230 件のコメント",
+      "metrics": "▲ 438  ✉ 230",
+      "heat": 100,
+      "category": "ai",
+      "keywords": [
+        "nvidia"
+      ],
+      "posted_at": "2026-11-15T07:26:30+09:00"
+    },
+    {
+      "network": "hn",
+      "author": null,
+      "url": "https://news.ycombinator.com/item?id=50496051",
+      "text": "『Project Zero will disclose vulnerabilities 90 days after reporting』のスレッド。179 件のコメント",
+      "metrics": "▲ 300  ✉ 179",
+      "heat": 75,
+      "category": "sec",
+      "keywords": [
+        "vulnerability-management"
+      ],
+      "posted_at": "2026-11-14T20:13:17+09:00"
+    }
+  ],
+  "releases": [
+    {
+      "date": "2026-11-17",
+      "title": "NVIDIA 第 3 四半期決算発表",
+      "repo": null,
+      "url": "https://nvidianews.nvidia.com/news/nvidia-announces-ceo-transition",
+      "kind": "event",
+      "note": "前日の日次ファイルから引き継ぎ。CoinPost の寄稿でも来週の焦点とされている",
+      "category": "stocks"
+    },
+    {
+      "date": "2026-11-17",
+      "title": "米 10 月 小売売上高",
+      "repo": null,
+      "url": "https://coinpost.jp/?p=747946",
+      "kind": "event",
+      "note": "前日の日次ファイルから引き継ぎ",
+      "category": "macro"
+    },
+    {
+      "date": "2026-11-19",
+      "title": "PostgreSQL 19 正式リリース（予定）",
+      "repo": "postgres/postgres",
+      "url": "https://www.publickey1.jp/blog/26/postgresql_194ai.html",
+      "kind": "event",
+      "note": "Publickey によると 11/12 に RC2 公開、正式版は 11/19 の見通し",
+      "category": "be"
+    },
+    {
+      "date": "2026-11-19",
+      "title": "米中ロ首脳による初の 3 者会談（深セン）",
+      "repo": null,
+      "url": "https://www.afpbb.com/articles/-/3662415",
+      "kind": "event",
+      "note": "AFP の記事で日程を確認",
+      "category": "macro"
+    }
+  ]
+}
