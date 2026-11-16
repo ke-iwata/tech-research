@@ -1,0 +1,817 @@
+{
+  "date": "2026-11-17",
+  "generated_at": "2026-11-17T05:13:25+09:00",
+  "stats": {
+    "collected": 206,
+    "sources_ok": 25,
+    "sources_total": 26,
+    "by_group": {
+      "hackernews": 44,
+      "tech_blog": 78,
+      "news": 75,
+      "official": 9
+    },
+    "failed_sources": [
+      "coindesk_jp"
+    ]
+  },
+  "digest": [
+    {
+      "category": "ai",
+      "text": "Alibaba が新フラッグシップ「Qwen4-Max」を公開し、HN で 837 pt・447 コメント。公式は新アーキテクチャ・ネイティブのビジョン対応・100 万トークンのコンテキストをうたう（公式ブログ本文は取得できず、X の投稿で確認）。",
+      "keywords": [
+        "llm",
+        "benchmark"
+      ]
+    },
+    {
+      "category": "cloud",
+      "text": "11 月 12〜13 日の Microsoft 365 世界障害について暫定報告。ゲートウェイ向け修正に潜んでいたロック競合に、通信の切り替えによる負荷増と約 14% の容量減が重なり、最悪時は 80% 以上のサーバーが応答しなかった。最終報告は 20 日の予定。",
+      "keywords": [
+        "system-outage",
+        "microsoft"
+      ]
+    },
+    {
+      "category": "sec",
+      "text": "パスキー対応 103 サイトを攻撃検証した独大学などの研究で、WebAuthn の基準をすべて満たすサイトはゼロ（はてブ 393）。uBlock Origin の Firefox 版ではサイトからワンクリックで任意のスクリプトを実行できる UXSS が修正された（HN 585 pt）。",
+      "keywords": [
+        "passkey",
+        "xss"
+      ]
+    },
+    {
+      "category": "stocks",
+      "text": "16 日の米国株は S&P 500 −1.89%、NASDAQ −2.38%（markets.py）。エヌビディアの CEO 辞任をめぐる混乱や Anthropic 上場観測でハイテク株が売られた。決算は米国時間 17 日。日経平均の 16 日終値は markets.py・検索とも取得できず（最新は 13 日の 61,142）、7〜9 月期 GDP は年率 −0.1% と 4 期ぶりのマイナス。",
+      "keywords": [
+        "us-stocks",
+        "nvidia",
+        "gdp"
+      ]
+    },
+    {
+      "category": "macro",
+      "text": "日銀の高田審議委員は講演で、2026 年を「機動的な利上げが必要な新たな局面」と位置づけ、中立金利に前もって近づける必要があるとの私見を示した。ビットコインは清算の連鎖で一時 1,000 万円を割り、markets.py の 16 日値は 1,036 万円。投信の 11 月資金流入と住宅ローン金利の 12 月予想は、検索で当日のニュースを確認できなかった。",
+      "keywords": [
+        "boj-rate-hike",
+        "bitcoin"
+      ]
+    }
+  ],
+  "items": [
+    {
+      "id": "2026-11-17-roettgers-protomaps",
+      "url": "https://bruceroettgers.eu/blog/protomaps/",
+      "title": "Protomaps: Self-hosting map tiles has gotten cheap and easy",
+      "source": "bruceroettgers.eu",
+      "source_group": "tech_blog",
+      "published_at": "2026-11-16T16:17:37+09:00",
+      "category": "cloud",
+      "keywords": [
+        "object-storage",
+        "oss",
+        "web-maps"
+      ],
+      "score": 94,
+      "why": "HN 450 pt・はてブ 11",
+      "read_min": 8,
+      "tldr": "地図タイルを 1 ファイルにまとめる PMTiles 形式を使い、商用地図 API を使わずに Bunny.net のストレージと CDN で地図を自前配信する手順を紹介した記事。HTTP Range リクエストで必要な範囲だけを読むため、タイルサーバーが要らない。",
+      "points": [
+        "PMTiles はタイル群を単一ファイルに格納し、クライアントが HTTP Range リクエストで必要なバイトだけを取得する。Range をキャッシュできる CDN ならそのまま配信できる（Cloudflare は x/y/z 形式への変換にエッジ関数が必要）",
+        "手順は S3 互換のストレージゾーン作成 → rclone でアップロード → プルゾーン作成 → リファラ制限・大容量オブジェクト最適化・10 MB 超のリクエストの帯域制限などを設定",
+        "世界全体の地図は約 139 GB で、5 リージョン複製でもストレージ費は月 5 ドル程度。ヨーロッパ表示から都市へのズームで約 5 MB の転送と試算し、ロード課金の Mapbox より大幅に安くなりうるとする（筆者の試算。Bunny へのリンクはアフィリエイト）"
+      ],
+      "code": {
+        "file": "upload.sh",
+        "lang": "bash",
+        "text": "rclone config create bunnycdn s3 \\\n  provider=Other \\\n  access_key_id=\"<zone-name>\" \\\n  secret_access_key=\"<storage-key>\" \\\n  endpoint=\"https://<primary-region>-s3.storage.bunnycdn.com\"\n\nrclone copyurl \"<build-url>\" \"bunnycdn:<zone-name>/<filename>.pmtiles\" \\\n  --s3-chunk-size 256M \\\n  --progress"
+      },
+      "signal": "B! 11 · ▲ 450",
+      "pick": true
+    },
+    {
+      "id": "2026-11-17-qwen-qwen4-max",
+      "url": "https://qwen.ai/blog?id=qwen4-max",
+      "title": "Qwen4-Max",
+      "source": "qwen.ai",
+      "source_group": "hackernews",
+      "published_at": "2026-11-16T11:14:44+09:00",
+      "category": "ai",
+      "keywords": [
+        "llm",
+        "benchmark"
+      ],
+      "score": 92,
+      "why": "HN 837 pt",
+      "read_min": null,
+      "tldr": "Alibaba の Qwen チームが新フラッグシップ「Qwen4-Max」を公開した（公式ブログ本文は取得できず）。HN のスレッド（447 コメント）では、Artificial Analysis の指標でのスコアや価格の比較、「ペリカンが自転車に乗る SVG」ベンチマークの妥当性が議論された。",
+      "points": [],
+      "code": null,
+      "signal": "▲ 837",
+      "pick": false
+    },
+    {
+      "id": "2026-11-17-levtech-voice-input",
+      "url": "https://levtech.jp/media/detail_972/",
+      "title": "OpenAIもAnthropicも勧めるのになぜ流行らない？「AIへの指示は99%音声入力」のPdMに聞く活用術",
+      "source": "levtech.jp",
+      "source_group": "tech_blog",
+      "published_at": "2026-11-16T10:34:47+09:00",
+      "category": "ai",
+      "keywords": [
+        "speech-to-text",
+        "ai-adoption"
+      ],
+      "score": 89,
+      "why": "はてブ 452",
+      "read_min": 10,
+      "tldr": "AI への指示をほぼすべて音声入力で行うプロダクトマネージャーへのインタビュー。長い指示を一度に出せる・画面を見たまま話せるといった利点と、オフィス環境や習慣など音声入力が広まらない理由を整理している。",
+      "points": [
+        "約 2 年前に音声入力へ切り替え、体感でタイピングの 3 倍以上速く、肩こりなど体の負担も半減したと話す（計測はしていない）",
+        "ChatGPT や Claude の標準機能ではなく専用アプリ（SuperWhisper、現在は Aqua Voice）を使い、トラックボールのボタンに音声入力を割り当てている",
+        "広まらない理由は「周囲に人がいる環境」「習慣がない」「話す内容を組み立てる必要があると感じる」の 3 点。思ったことをそのまま話せば AI が意図をくみ取ると気づき、約 1 か月で違和感が消えたという"
+      ],
+      "code": null,
+      "signal": "B! 452",
+      "pick": true
+    },
+    {
+      "id": "2026-11-17-impress-m365-outage-pir",
+      "url": "https://forest.watch.impress.co.jp/docs/news/2156753.html",
+      "title": "ほぼ丸1日続いた「Microsoft 365」「Outlook」障害の原因は？ Microsoftが暫定報告",
+      "source": "窓の杜",
+      "source_group": "tech_blog",
+      "published_at": "2026-11-16T17:21:28+09:00",
+      "category": "cloud",
+      "keywords": [
+        "system-outage",
+        "microsoft",
+        "incident-response"
+      ],
+      "score": 88,
+      "why": "HN 614 pt（障害が塩素ガス事故につながったとする続報）・はてブ 23 の同一話題を統合",
+      "read_min": 6,
+      "tldr": "11 月 12〜13 日にほぼ 1 日続いた Microsoft 365 の世界的障害について、Microsoft が暫定の事後報告を出した。7 月から潜んでいた Windows 内部の不具合に、通信の切り替えによる負荷増とサーバー容量の減少が重なり、ゲートウェイが連鎖的にダウンした。",
+      "points": [
+        "前段のネットワークゲートウェイで、ゲートウェイ向けの修正に起因するロック競合が特定の負荷条件で CPU とメモリを使い切った。障害の約 15 時間前に Teams の通信が Exchange Online と共用のゲートウェイへ移り、前日の別問題で容量の約 14% が稼働していなかった",
+        "最悪時は 80% 以上のサーバーが応答せず、区画分けも機能しなかった。復旧させたサーバーに待機中のトラフィックが集中して再びダウンするため、通常のロールバックや機能フラグでは戻せなかった",
+        "Exchange Online を中心に Copilot・SharePoint・OneDrive などにも影響。修正の適用や容量追加などを実施済みで、最終版の事後レポートは 11 月 20 日に公開予定"
+      ],
+      "code": null,
+      "signal": "B! 23 · ▲ 614",
+      "pick": true
+    },
+    {
+      "id": "2026-11-17-itmedia-passkey-study",
+      "url": "https://www.itmedia.co.jp/news/article/2611/16/2000003199/",
+      "title": "パスワードより安全なはずが……パスキー対応103サイトを検証→全てに脆弱性 独大学の調査結果",
+      "source": "ITmedia NEWS",
+      "source_group": "tech_blog",
+      "published_at": "2026-11-16T12:03:29+09:00",
+      "category": "sec",
+      "keywords": [
+        "passkey",
+        "authentication"
+      ],
+      "score": 87,
+      "why": "はてブ 393",
+      "read_min": 6,
+      "tldr": "ルール大学ボーフムなどの研究者が USENIX Security 2026 で、Web のパスキー導入状況と実装の安全性を調べた論文を発表した。WebAuthn のメッセージを改ざんする 15 種類の攻撃を試した 103 サイトのうち、仕様が求めるセキュリティ基準をすべて満たしたサイトはなかった。",
+      "points": [
+        "独自の検出システムでパスキー対応サイト 872 件を特定し、登録できた 208 サイトの設定と、103 サイトへの攻撃耐性を調べた",
+        "208 サイトの 66% は追加の本人確認なしでパスキーを登録でき、38% は有効範囲を親ドメイン全体に広げていた（サブドメイン乗っ取りのリスク）",
+        "103 サイト中、緊急レベルの脆弱性が 18 サイト、重要レベルが 53 サイト。署名を検証せず他人のアカウントに入れるサイトが 5 件あった"
+      ],
+      "code": null,
+      "signal": "B! 393",
+      "pick": true
+    },
+    {
+      "id": "2026-11-17-iter-ublock-uxss",
+      "url": "https://iter.ca/post/ubo-uxss/",
+      "title": "Universal XSS in uBlock Origin from website-driven element picker",
+      "source": "iter.ca",
+      "source_group": "hackernews",
+      "published_at": "2026-11-16T11:04:48+09:00",
+      "category": "sec",
+      "keywords": [
+        "xss",
+        "browser-extension",
+        "vulnerability-management"
+      ],
+      "score": 87,
+      "why": "HN 585 pt",
+      "read_min": 7,
+      "tldr": "Firefox 版 uBlock Origin（MV2）で、悪意あるサイトがワンクリックで任意の「信頼済みフィルタ」を追加させ、他のサイト上で JavaScript を実行できる問題が見つかり、修正された。要素ピッカーが任意のページからのメッセージを受け付けていたことが原因。",
+      "points": [
+        "攻撃者は既定のフィルタが発生させる XHR を利用して拡張機能の内部 UUID を取得し、要素ピッカーを iframe に埋め込んでメッセージを送れた",
+        "スクリプトレット系のフィルタは本来ピッカーで作れないが、オプション欄に改行を入れることで信頼済みフィルタを注入できた。クリック操作は透明な iframe で誘導できるとする（筆者はそこまでは実装していない）",
+        "修正後はピッカーが正規のコンテンツスクリプトから渡される秘密値を要求する。MV3 版の uBO Lite にも影響の小さい類似問題があった。詳細は GitHub のアドバイザリ GHSA-cmqw-9r2w-6wv2"
+      ],
+      "code": null,
+      "signal": "▲ 585",
+      "pick": true
+    },
+    {
+      "id": "2026-11-17-steveblank-nvidia",
+      "url": "https://steveblank.com/2026/11/15/whats-next-for-nvidia/",
+      "title": "What's Next for Nvidia?",
+      "source": "steveblank.com",
+      "source_group": "hackernews",
+      "published_at": "2026-11-16T08:55:55+09:00",
+      "category": "ai",
+      "keywords": [
+        "nvidia",
+        "corporate-governance",
+        "semiconductor"
+      ],
+      "score": 83,
+      "why": "HN 441 pt・559 コメント（Reuters・FT・WIRED の関連記事を統合）",
+      "read_min": null,
+      "tldr": "11 月 12 日に CEO を辞任したジェンスン・フアン氏について、FT は側近らと CEO 復帰を協議していると報じた。Steve Blank のブログ「What's Next for Nvidia?」が HN で 559 件のコメントを集めた。",
+      "points": [],
+      "code": null,
+      "signal": "▲ 441",
+      "pick": false
+    },
+    {
+      "id": "2026-11-17-ransomnews-bitly-hijack",
+      "url": "https://ransomnews.com/burger-king-tweet-bitly-link-hijack-2026/",
+      "title": "Old Bitly links are being hijacked",
+      "source": "ransomnews.com",
+      "source_group": "hackernews",
+      "published_at": "2026-11-16T07:11:43+09:00",
+      "category": "sec",
+      "keywords": [
+        "url-shortener",
+        "security-incident"
+      ],
+      "score": 81,
+      "why": "HN 369 pt",
+      "read_min": null,
+      "tldr": "過去の企業ツイートなどに残る古い Bitly の短縮リンクが乗っ取られているとする記事（タイトルとURLより、Burger King のツイートの事例）。HN で 195 件のコメント。",
+      "points": [],
+      "code": null,
+      "signal": "▲ 369",
+      "pick": false
+    },
+    {
+      "id": "2026-11-17-torproject-dos-fix",
+      "url": "https://forum.torproject.org/t/security-release-0-4-9-17/22454",
+      "title": "Tor Project Issues Rapid-Response DoS-Defense Fix Amid Sustained DDoS Attack",
+      "source": "forum.torproject.org",
+      "source_group": "hackernews",
+      "published_at": "2026-11-16T09:21:54+09:00",
+      "category": "sec",
+      "keywords": [
+        "ddos",
+        "tor"
+      ],
+      "score": 75,
+      "why": "HN 237 pt",
+      "read_min": null,
+      "tldr": "Tor Project が持続的な DDoS 攻撃を受けるなか、DoS 防御を強化するセキュリティリリース 0.4.9.17 を緊急で公開した（タイトルより）。",
+      "points": [],
+      "code": null,
+      "signal": "▲ 237",
+      "pick": false
+    },
+    {
+      "id": "2026-11-17-raschka-positional-embeddings",
+      "url": "https://magazine.sebastianraschka.com/p/understanding-positional-embeddings",
+      "title": "Understanding Positional Embeddings in Modern LLMs",
+      "source": "magazine.sebastianraschka.com",
+      "source_group": "hackernews",
+      "published_at": "2026-11-15T21:14:06+09:00",
+      "category": "ai",
+      "keywords": [
+        "llm",
+        "ai-research"
+      ],
+      "score": 75,
+      "why": "HN 241 pt",
+      "read_min": null,
+      "tldr": "Sebastian Raschka による、現在の LLM で使われる位置埋め込み（positional embeddings）の解説記事。",
+      "points": [],
+      "code": null,
+      "signal": "▲ 241",
+      "pick": false
+    },
+    {
+      "id": "2026-11-17-burntsushi-jiff-1",
+      "url": "https://burntsushi.net/jiff/",
+      "title": "Jiff 1.0: A datetime library for Rust",
+      "source": "burntsushi.net",
+      "source_group": "hackernews",
+      "published_at": "2026-11-17T01:53:39+09:00",
+      "category": "be",
+      "keywords": [
+        "rust",
+        "oss"
+      ],
+      "score": 72,
+      "why": "HN 190 pt",
+      "read_min": null,
+      "tldr": "ripgrep の作者として知られる BurntSushi の Rust 向け日時ライブラリ Jiff が 1.0 に到達した。",
+      "points": [],
+      "code": null,
+      "signal": "▲ 190",
+      "pick": false
+    },
+    {
+      "id": "2026-11-17-kwatch-docomo-outage",
+      "url": "https://k-tai.watch.impress.co.jp/docs/news/2156616.html",
+      "title": "ドコモでまたも通信障害、11月3度目",
+      "source": "ケータイ Watch",
+      "source_group": "tech_blog",
+      "published_at": "2026-11-16T11:12:18+09:00",
+      "category": "cloud",
+      "keywords": [
+        "system-outage",
+        "networking"
+      ],
+      "score": 72,
+      "why": "はてブ 146",
+      "read_min": null,
+      "tldr": "NTT ドコモで再び通信障害が発生し、11 月に入って 3 度目となった（タイトルより）。",
+      "points": [],
+      "code": null,
+      "signal": "B! 146",
+      "pick": false
+    },
+    {
+      "id": "2026-11-17-debian-kernel-6-1-0-55",
+      "url": "https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=1154101",
+      "title": "Debian Becomes Unresponsive after 6.1.0-55 Kernel Update",
+      "source": "bugs.debian.org",
+      "source_group": "hackernews",
+      "published_at": "2026-11-16T13:53:06+09:00",
+      "category": "cloud",
+      "keywords": [
+        "linux",
+        "debian"
+      ],
+      "score": 70,
+      "why": "HN 164 pt",
+      "read_min": null,
+      "tldr": "Debian でカーネル 6.1.0-55 への更新後にシステムが応答しなくなるとのバグ報告（#1154101）。HN で 77 件のコメント。",
+      "points": [],
+      "code": null,
+      "signal": "▲ 164",
+      "pick": false
+    },
+    {
+      "id": "2026-11-17-nulab-cacoo-breach",
+      "url": "https://nulab.com/ja/info/20261116_cacoo_01/",
+      "title": "当社サービス「Cacoo」における不正アクセスの発生について（第一報）",
+      "source": "nulab.com",
+      "source_group": "tech_blog",
+      "published_at": "2026-11-16T14:45:42+09:00",
+      "category": "sec",
+      "keywords": [
+        "data-breach",
+        "security-incident"
+      ],
+      "score": 55,
+      "why": "ヌーラボの公式発表（第一報）・はてブ 6",
+      "read_min": null,
+      "tldr": "ヌーラボは、オンラインホワイトボード「Cacoo」の運用環境と同社が管理するお問い合わせ記録の一部に、11 月 14 日に第三者の不正アクセスがあったことを確認したと発表した。",
+      "points": [],
+      "code": null,
+      "signal": "B! 6",
+      "pick": false
+    },
+    {
+      "id": "2026-11-17-investing-spy-tech-selloff",
+      "url": "https://jp.investing.com/news/stock-market-news/article-93CH-1759407",
+      "title": "SPDR S&P 500 ETF Trust、テクノロジー株の急落で2.1%下落",
+      "source": "Investing.com",
+      "source_group": "news",
+      "published_at": "2026-11-17T04:52:30+09:00",
+      "category": "stocks",
+      "keywords": [
+        "us-stocks",
+        "nvidia",
+        "semiconductor"
+      ],
+      "score": 88,
+      "why": "matched: 米国株",
+      "read_min": 3,
+      "tldr": "16 日の米国市場はテクノロジー株・半導体株に売りが広がり、SPY は日中 2.1% 下落した。エヌビディアの CEO 辞任をめぐる混乱、Anthropic の上場観測、ニューヨーク連銀の製造業景況指数の悪化、12 月利上げの織り込みが重なった。",
+      "points": [
+        "SPY は午後に 738.87 ドルまで下落。記事内の指標では S&P 500 −1.89%、ナスダック総合 −2.38%、ダウ −1.39%",
+        "エヌビディア株はスキャンダル発覚以来 30% 超下落。ベッセント財務長官が同社に抜本的な刷新を求めた",
+        "11 月のエンパイア・ステート製造業景況指数は 7.80（10 月 25.5、予想 17.0）。今後はエヌビディア決算（暫定 CEO が説明予定）と Anthropic 上場の行方が注目点"
+      ],
+      "code": null,
+      "signal": null,
+      "pick": true
+    },
+    {
+      "id": "2026-11-17-coinpost-btc-below-10m",
+      "url": "https://coinpost.jp/?p=748038",
+      "title": "ビットコイン一時1000万円割れ、清算連鎖とアンソロピックIPOへの資金シフト懸念も｜仮想NISHI",
+      "source": "CoinPost",
+      "source_group": "news",
+      "published_at": "2026-11-16T10:23:23+09:00",
+      "category": "crypto",
+      "keywords": [
+        "bitcoin",
+        "anthropic",
+        "ipo"
+      ],
+      "score": 90,
+      "why": "matched: ビットコイン",
+      "read_min": 5,
+      "tldr": "ビットコインは 15〜16 日に週末の薄商いのなかでロングの強制清算が連鎖し、円建てで一時 1,000 万円を割り込んだ。Anthropic の上場に伴う AI 銘柄への資金移動の懸念やバイナンスの問題も重しとする寄稿。",
+      "points": [
+        "清算建玉マップでは 6 万 5,000〜6 万 3,000 ドルに清算が集中していたとされる（総額の記載はない）",
+        "バイナンスの資産流出事故以降、現物市場の板の薄さが続き、14〜16 日はオプションのプットコールレシオも上昇した",
+        "注目日程として 17 日の米小売売上高、23 日の米 PMI、27〜28 日の BITCOIN JAPAN 2026 を挙げる"
+      ],
+      "code": null,
+      "signal": null,
+      "pick": true
+    },
+    {
+      "id": "2026-11-17-boj-takata-speech",
+      "url": "http://www.boj.or.jp/about/press/koen_2026/ko261116a.htm",
+      "title": "【講演】高田審議委員「わが国の経済・物価情勢と金融政策：日本のマネー・資本市場転換、山は動くか」（徳島経済同友会）",
+      "source": "日本銀行",
+      "source_group": "official",
+      "published_at": "2026-11-16T13:00:00+09:00",
+      "category": "macro",
+      "keywords": [
+        "boj-policy",
+        "boj-rate-hike",
+        "interest-rates"
+      ],
+      "score": 90,
+      "why": "日銀の公式発表・matched: 金利",
+      "read_min": 20,
+      "tldr": "日銀の高田創審議委員が徳島で講演し、2026 年を「機動的な利上げが必要な新たな局面」への転換の年と位置づけた。自身は 10 月会合で政策金利 1.5% への引き上げを提案したことにも触れた（講演 PDF より）。",
+      "points": [
+        "日銀は 6 月に政策金利を 1.0% 程度、9 月に 1.25% へ引き上げた。2024〜25 年の「年 2 回・各 0.25%」から、一定のペースや幅に囚われない data dependent な対応への転換と説明",
+        "日本の実質政策金利は依然として世界最低水準で、実質金利差に着目する為替動向を通じた物価への影響に留意が必要とした",
+        "海外が利上げ局面に入ったことで、中立金利は市場の想定より上振れる可能性があるとし、前もって中立金利の水準に十分近づけておく必要があるとの私見を示した"
+      ],
+      "code": null,
+      "signal": null,
+      "pick": true
+    },
+    {
+      "id": "2026-11-17-newsjp-nisa-poverty",
+      "url": "https://news.jp/i/1493487483235992357",
+      "title": "「投資しないと損」若者に広がる投資熱 「ＮＩＳＡ貧乏」とも言われる時代、その実態とは",
+      "source": "NEWSjp",
+      "source_group": "news",
+      "published_at": "2026-11-16T12:14:24+09:00",
+      "category": "funds",
+      "keywords": [
+        "new-nisa",
+        "index-fund"
+      ],
+      "score": 80,
+      "why": "matched: nisa",
+      "read_min": 5,
+      "tldr": "20 代の 4 人に 1 人が NISA 口座を持つなか、「やらないと損」という空気が若者に広がり、投資を優先しすぎて生活が苦しくなる「NISA 貧乏」という言葉も出ていると伝える記事。",
+      "points": [
+        "25 歳以下では、投資信託の購入額の半分以上を米国株・全世界株式が占め、個別株では AI・半導体関連が人気",
+        "第一ライフ資産運用経済研究所の研究員は、老後不安・好調な株式市場・IT の進展を背景に挙げ、若年層ほど周囲に合わせやすいと指摘",
+        "FP の井戸美枝氏は「無理してやる必要はない」とし、自分の収支となぜお金が必要かを考えることが大切だとした"
+      ],
+      "code": null,
+      "signal": "B! 39",
+      "pick": true
+    },
+    {
+      "id": "2026-11-17-nhk-gdp-q3",
+      "url": "https://news.web.nhk/newsweb/na/nd-20261116de76344",
+      "title": "7～9月GDP 年率-0.1％ 4期ぶりマイナス 節約する家計の実態は",
+      "source": "NHKニュース",
+      "source_group": "tech_blog",
+      "published_at": "2026-11-16T10:24:00+09:00",
+      "category": "macro",
+      "keywords": [
+        "gdp",
+        "household-spending"
+      ],
+      "score": 75,
+      "why": "内閣府の GDP 速報（16 日）",
+      "read_min": null,
+      "tldr": "内閣府が 16 日に発表した 7〜9 月期の実質 GDP は、個人消費の減少などで年率換算 −0.1% となり、4 期ぶりのマイナスとなった。",
+      "points": [],
+      "code": null,
+      "signal": "B! 7",
+      "pick": false
+    },
+    {
+      "id": "2026-11-17-nikkei-income-outflow",
+      "url": "https://www.nikkei.com/article/DGXZQOUA160F00W6A111C2000000/",
+      "title": "海外への所得流出2.2兆円拡大 7〜9月、円安・原油高の出口見えず",
+      "source": "日本経済新聞",
+      "source_group": "tech_blog",
+      "published_at": "2026-11-16T14:02:41+09:00",
+      "category": "macro",
+      "keywords": [
+        "gdp",
+        "fx",
+        "crude-oil"
+      ],
+      "score": 70,
+      "why": "matched: 為替",
+      "read_min": null,
+      "tldr": "16 日の GDP 統計で、7〜9 月期に日本から海外へ流出した所得が前期より約 2.2 兆円増えた。円安と中東情勢による原油高が家計や企業の購買力を圧迫しているとする記事（RSS 要約より）。",
+      "points": [],
+      "code": null,
+      "signal": "B! 4",
+      "pick": false
+    },
+    {
+      "id": "2026-11-17-fsa-tsumitate-list",
+      "url": "https://www.fsa.go.jp/policy/nisa2/products/index.html",
+      "title": "つみたて投資枠対象商品届出一覧及びつみたて投資枠対象商品の概要を更新しました",
+      "source": "金融庁",
+      "source_group": "official",
+      "published_at": "2026-11-17T02:00:00+09:00",
+      "category": "funds",
+      "keywords": [
+        "new-nisa",
+        "fsa"
+      ],
+      "score": 72,
+      "why": "金融庁の公式発表・matched: nisa",
+      "read_min": null,
+      "tldr": "金融庁が NISA つみたて投資枠の対象商品の届出一覧と概要を更新した。",
+      "points": [],
+      "code": null,
+      "signal": "B! 14",
+      "pick": false
+    },
+    {
+      "id": "2026-11-17-toyokeizai-kodomo-nisa",
+      "url": "https://toyokeizai.net/articles/-/964254?utm_source=rss&utm_medium=http&utm_campaign=link_back",
+      "title": "18歳になれば親は勝手に売却できない…ジュニアNISAのリベンジ｢こどもNISA｣を教育費に使いたい親の\"重大盲点\"",
+      "source": "東洋経済オンライン",
+      "source_group": "news",
+      "published_at": "2026-11-16T07:15:00+09:00",
+      "category": "funds",
+      "keywords": [
+        "new-nisa"
+      ],
+      "score": 70,
+      "why": "matched: nisa",
+      "read_min": null,
+      "tldr": "2027 年に始まる「こどもNISA」について、資産は子ども名義となり親が自由に引き出せない点を、教育費準備に使う際の注意点として取り上げる記事（RSS 要約より）。",
+      "points": [],
+      "code": null,
+      "signal": null,
+      "pick": false
+    },
+    {
+      "id": "2026-11-17-coinpost-strategy-485btc",
+      "url": "https://coinpost.jp/?p=748183",
+      "title": "米ストラテジー、53億円相当ビットコインを買い増し 3週連続",
+      "source": "CoinPost",
+      "source_group": "news",
+      "published_at": "2026-11-16T22:20:44+09:00",
+      "category": "crypto",
+      "keywords": [
+        "bitcoin-treasury",
+        "strategy"
+      ],
+      "score": 68,
+      "why": "matched: ビットコイン",
+      "read_min": null,
+      "tldr": "米ストラテジーは 9〜15 日に 485 BTC を買い増し、3 週連続の購入で保有量は 850,849 BTC になったと発表した。調達資金の最大の用途は優先株 STRC の買い戻しだった。",
+      "points": [],
+      "code": null,
+      "signal": null,
+      "pick": false
+    },
+    {
+      "id": "2026-11-17-coinpost-mining-hijack",
+      "url": "https://coinpost.jp/?p=748076",
+      "title": "ビットコイン採掘マシン約6万4000台分の乗っ取り発生 報酬アドレス書き換え",
+      "source": "CoinPost",
+      "source_group": "news",
+      "published_at": "2026-11-16T11:50:14+09:00",
+      "category": "crypto",
+      "keywords": [
+        "bitcoin-mining",
+        "security-incident"
+      ],
+      "score": 66,
+      "why": "matched: ビットコイン",
+      "read_min": null,
+      "tldr": "約 6 万 4,000 台のビットコイン採掘機器が報酬アドレスの設定を書き換えられたうえでマイニングプールに接続された。攻撃者への支払いは現時点で確認されていないという。",
+      "points": [],
+      "code": null,
+      "signal": "B! 1",
+      "pick": false
+    },
+    {
+      "id": "2026-11-17-coinpost-ef-eth-sale",
+      "url": "https://coinpost.jp/?p=748022",
+      "title": "イーサリアム財団関連アドレス、23億円相当のETH売却 現物ETFも7週連続流出",
+      "source": "CoinPost",
+      "source_group": "news",
+      "published_at": "2026-11-16T11:15:45+09:00",
+      "category": "crypto",
+      "keywords": [
+        "ethereum",
+        "crypto-etf"
+      ],
+      "score": 60,
+      "why": "関連: 暗号資産",
+      "read_min": null,
+      "tldr": "Lookonchain によると、イーサリアム財団関連のウォレットが 4 日間で 7,500 ETH を売却してステーブルコイン USDS に交換した。米国の ETH 現物 ETF は 7 週連続の純流出となっている。",
+      "points": [],
+      "code": null,
+      "signal": null,
+      "pick": false
+    },
+    {
+      "id": "2026-11-17-diamond-value-fund-ai",
+      "url": "https://diamond.jp/articles/-/403468",
+      "title": "バリュー株ファンド、中身はAI株だらけ - WSJ PickUp",
+      "source": "ダイヤモンド・オンライン",
+      "source_group": "news",
+      "published_at": "2026-11-17T04:00:00+09:00",
+      "category": "funds",
+      "keywords": [
+        "us-stocks",
+        "ai-economy"
+      ],
+      "score": 58,
+      "why": "関連: 米国株・投資信託",
+      "read_min": null,
+      "tldr": "「バリュー株」をうたうファンドの組み入れにも AI 関連株が多く含まれているとする WSJ の記事の転載（タイトルと要約より）。",
+      "points": [],
+      "code": null,
+      "signal": null,
+      "pick": false
+    },
+    {
+      "id": "2026-11-17-cnet-rental-wifi-watch",
+      "url": "https://japan.cnet.com/article/35254951/",
+      "title": "「年齢で断らない」賃貸アパート 全戸に見守りWi-Fi 電波の変化で安否を検知",
+      "source": "CNET Japan",
+      "source_group": "tech_blog",
+      "published_at": "2026-11-16T16:53:04+09:00",
+      "category": "realestate",
+      "keywords": [
+        "housing"
+      ],
+      "score": 50,
+      "why": "関連: 不動産・はてブ 159",
+      "read_min": null,
+      "tldr": "年齢や一人暮らしを理由に入居を断られる人向けに、全戸に Wi-Fi 電波の変化で安否を検知する見守り設備を備えた賃貸アパートが登場した。家族は専用アプリで活動状況を確認できる。",
+      "points": [],
+      "code": null,
+      "signal": "B! 159",
+      "pick": false
+    }
+  ],
+  "social": [
+    {
+      "network": "x",
+      "author": "@QwenDevs",
+      "url": "https://x.com/QwenDevs/status/2122156218928242799",
+      "text": "Qwen4-Max を正式に公開したと告知。新しいアーキテクチャ、ネイティブのビジョン対応、100 万トークンのコンテキストをうたう。",
+      "metrics": null,
+      "heat": null,
+      "category": "ai",
+      "keywords": [
+        "llm"
+      ],
+      "posted_at": "2026-11-16T11:34:05+09:00"
+    },
+    {
+      "network": "x",
+      "author": "@arena",
+      "url": "https://x.com/arena/status/2122153116959482051",
+      "text": "Arena のリーダーボードで Qwen4-Max が中国勢モデルの首位となり、Agent Arena では総合 14 位でデビューしたと投稿。",
+      "metrics": null,
+      "heat": null,
+      "category": "ai",
+      "keywords": [
+        "llm",
+        "benchmark"
+      ],
+      "posted_at": "2026-11-16T11:21:45+09:00"
+    },
+    {
+      "network": "x",
+      "author": "@MSFT365Status",
+      "url": "https://x.com/MSFT365Status/status/2121485746334777593",
+      "text": "Microsoft 365 障害の根本原因への対処を完了し、残っていた影響ユーザー・地域のサービスを復旧したと告知（管理センターの MO1550821）。",
+      "metrics": null,
+      "heat": null,
+      "category": "cloud",
+      "keywords": [
+        "system-outage",
+        "microsoft"
+      ],
+      "posted_at": "2026-11-14T15:09:51+09:00"
+    },
+    {
+      "network": "x",
+      "author": "@GergelyOrosz",
+      "url": "https://x.com/GergelyOrosz/status/2121249357169090842",
+      "text": "約 20 時間でようやく緩和されたと投稿。Microsoft の開発者から聞いた話として、原因は DNS ではなくネットワーク関連で、前進方向の修正が必要だったため時間がかかったという。",
+      "metrics": null,
+      "heat": null,
+      "category": "cloud",
+      "keywords": [
+        "system-outage",
+        "microsoft"
+      ],
+      "posted_at": "2026-11-13T23:30:32+09:00"
+    },
+    {
+      "network": "hn",
+      "author": null,
+      "url": "https://news.ycombinator.com/item?id=50509837",
+      "text": "『Protomaps: Self-hosting map tiles has gotten cheap and easy』のスレッド。81 件のコメント",
+      "metrics": "▲ 450  ✉ 81",
+      "heat": 100,
+      "category": "cloud",
+      "keywords": [
+        "web-maps",
+        "object-storage"
+      ],
+      "posted_at": "2026-11-16T16:17:37+09:00"
+    },
+    {
+      "network": "hn",
+      "author": null,
+      "url": "https://news.ycombinator.com/item?id=50513160",
+      "text": "『Universal XSS in uBlock Origin from website-driven element picker』のスレッド。164 件のコメント",
+      "metrics": "▲ 585  ✉ 164",
+      "heat": 100,
+      "category": "sec",
+      "keywords": [
+        "xss",
+        "browser-extension"
+      ],
+      "posted_at": "2026-11-16T11:04:48+09:00"
+    }
+  ],
+  "releases": [
+    {
+      "date": "2026-11-17",
+      "title": "NVIDIA 第 3 四半期決算発表（米国時間 17 日 14 時 PT）",
+      "repo": null,
+      "url": "https://investor.nvidia.com/news/press-release-details/2026/NVIDIA-Sets-Conference-Call-for-Third-Quarter-Financial-Results/",
+      "kind": "event",
+      "note": "NVIDIA の 10 月 28 日付の告知で日程を確認。日本時間では 18 日朝",
+      "category": "stocks"
+    },
+    {
+      "date": "2026-11-17",
+      "title": "米 10 月 小売売上高",
+      "repo": null,
+      "url": "https://coinpost.jp/?p=748038",
+      "kind": "event",
+      "note": "CoinPost の寄稿で日程を確認",
+      "category": "macro"
+    },
+    {
+      "date": "2026-11-19",
+      "title": "PostgreSQL 19 正式リリース（予定）",
+      "repo": "postgres/postgres",
+      "url": "https://www.publickey1.jp/blog/26/postgresql_194ai.html",
+      "kind": "event",
+      "note": "前日の日次ファイルから引き継ぎ（Publickey によると正式版は 11/19 の見通し）",
+      "category": "be"
+    },
+    {
+      "date": "2026-11-19",
+      "title": "米中ロ首脳による初の 3 者会談（深セン）",
+      "repo": null,
+      "url": "https://www.afpbb.com/articles/-/3662415",
+      "kind": "event",
+      "note": "前日の日次ファイルから引き継ぎ（AFP の記事で日程を確認済み）",
+      "category": "macro"
+    },
+    {
+      "date": "2026-11-20",
+      "title": "Microsoft 365 障害の最終版事後レポート（PIR）公開予定",
+      "repo": null,
+      "url": "https://forest.watch.impress.co.jp/docs/news/2156753.html",
+      "kind": "event",
+      "note": "窓の杜の記事で予定日を確認",
+      "category": "cloud"
+    },
+    {
+      "date": "2026-11-23",
+      "title": "米 11 月 PMI（速報）",
+      "repo": null,
+      "url": "https://coinpost.jp/?p=748038",
+      "kind": "event",
+      "note": "CoinPost の寄稿で日程を確認",
+      "category": "macro"
+    }
+  ]
+}
