@@ -1,0 +1,832 @@
+{
+  "date": "2026-11-19",
+  "generated_at": "2026-11-19T05:12:53+09:00",
+  "stats": {
+    "collected": 267,
+    "sources_ok": 25,
+    "sources_total": 26,
+    "by_group": {
+      "tech_blog": 85,
+      "hackernews": 48,
+      "news": 125,
+      "official": 9
+    },
+    "failed_sources": [
+      "coindesk_jp"
+    ]
+  },
+  "digest": [
+    {
+      "category": "sec",
+      "text": "NGINX の HTTP/2 実装に認証不要の RCE につながる脆弱性 2 件（CVE-2026-123633 / 123007、CVSS 4.0 で 9.2）。修正版は OSS 1.30.7 / 1.31.9 で、すぐ更新できなければ HTTP/2 の無効化が暫定策（HN 679 pt）。",
+      "keywords": [
+        "rce",
+        "http",
+        "vulnerability-management"
+      ]
+    },
+    {
+      "category": "sec",
+      "text": "OpenJDK の Base64 デコーダに AVX-512 VBMI 対応 CPU で発生するメモリ破壊「Java4Shell」（CVE-2026-114938）。11 月 17 日に Oracle・OpenJDK・Corretto が修正を出し、Jira・Jenkins などの既定構成で RCE が実証された（HN 1137 pt）。",
+      "keywords": [
+        "rce",
+        "java"
+      ]
+    },
+    {
+      "category": "cloud",
+      "text": "海賊版対策の DNS ブロックを命じたフランスの判決を受け、Quad9 がフランスから撤退する（11 月 24 日停止）。Cloudflare は DNS レベルのブロック義務付けは効果が薄く巻き添えが大きいと批判（HN 866 pt）。",
+      "keywords": [
+        "dns",
+        "cloudflare"
+      ]
+    },
+    {
+      "category": "crypto",
+      "text": "ビットコインは前週 12% 安。Bitwise は 10 月の米 CPI 上振れによる金利ショック（12 月利上げ確率 100%）が主因とみる。大手トレジャリー企業 25 社中 24 社で時価総額が保有資産を下回った。",
+      "keywords": [
+        "bitcoin",
+        "bitcoin-treasury",
+        "fed"
+      ]
+    },
+    {
+      "category": "macro",
+      "text": "防衛省が主要企業に来年度以降の防衛費の大幅圧縮を伝え、受注減額の見通しを示していた。政府は 2027〜31 年度の総額を 50 兆〜60 兆円台に抑える方針で、業界は「はしご外し」と反発している。",
+      "keywords": [
+        "jp-fiscal"
+      ]
+    }
+  ],
+  "items": [
+    {
+      "id": "2026-11-19-cloudflare-quad9-france",
+      "url": "https://blog.cloudflare.com/quad9-withdrawal-from-france/",
+      "title": "Quad9’s withdrawal from France: A canary in the coal mine",
+      "source": "blog.cloudflare.com",
+      "source_group": "tech_blog",
+      "published_at": "2026-11-18T05:24:27+09:00",
+      "category": "cloud",
+      "keywords": [
+        "dns",
+        "cloudflare",
+        "networking"
+      ],
+      "score": 100,
+      "why": "HN 866 pt・416 コメント（関連記事 HN 452 pt を統合）",
+      "read_min": 7,
+      "tldr": "スイスの非営利 DNS リゾルバ Quad9 が、海賊版対策のドメインブロックを命じたフランスの裁判所判決（不履行に日額の制裁金）を受けてフランスから撤退する件について、Cloudflare が DNS レベルのブロック義務付けの問題点を論じた。リゾルバの切り替えで簡単に回避できるうえ、同じドメイン上の合法コンテンツも巻き込むと主張している。",
+      "points": [
+        "フランスでは政府機関・教育機関・病院・公益事業も Quad9 を使っているが、Quad9 は利用者を特定できないため直接知らせることができない",
+        "公開リゾルバでのブロックは国境を越えて効き、1 国の命令が他国の利用にも影響しうる。Cisco も以前 OpenDNS をフランスなどから引き揚げている",
+        "ベルギーの裁判所は Cloudflare・Google・Cisco に 2027 年 1 月初めまでのブロック開始を命じており、3 社は控訴中。Cloudflare は侵害ファイルをホストする事業者を対象にすべきだとしている"
+      ],
+      "code": null,
+      "signal": "B! 1 · ▲ 866",
+      "pick": true
+    },
+    {
+      "id": "2026-11-19-wiz-nginx-http2-rce",
+      "url": "https://www.wiz.io/blog/nginx-http2-rce-vulnerabilities",
+      "title": "Unauthenticated Remote Code Execution in NGINX: CVE-2026-123633 and CVE-2026-123007 | Wiz",
+      "source": "wiz.io",
+      "source_group": "tech_blog",
+      "published_at": "2026-11-19T00:27:17+09:00",
+      "category": "sec",
+      "keywords": [
+        "rce",
+        "http",
+        "vulnerability-management"
+      ],
+      "score": 99,
+      "why": "HN 679 pt・はてブ 15",
+      "read_min": 6,
+      "tldr": "NGINX の HTTP/2 実装に、認証なしでリモートコード実行につながるメモリ破壊の脆弱性が 2 件見つかった（いずれも CVSS 4.0 で 9.2）。HTTP/2 を有効にしている場合が対象で、OSS 1.30.7（stable）/ 1.31.9（mainline）で修正された。",
+      "points": [
+        "CVE-2026-123633 は HTTP/2 接続の use-after-free で、接続スロットが逼迫したときのリバースプロキシ処理に影響。OSS 1.19.7 以降が対象",
+        "CVE-2026-123007 は send_window の整数アンダーフローによる不正なメモリコピー。バックエンドもサードパーティモジュールもない静的ファイル配信の構成で RCE を実証したとしている。OSS 1.9.5 以降が対象",
+        "すぐに更新できない場合の暫定策は HTTP/2 の無効化（1.25.1 以降は http2 off; と listen からの http2 削除）。リロード後に古いワーカーの終了を確認する"
+      ],
+      "code": {
+        "file": "nginx.conf",
+        "lang": "nginx",
+        "text": "# 修正版（1.30.7 / 1.31.9）へ更新できるまでの暫定策\nserver {\n    listen 443 ssl;      # listen から http2 パラメータを外す\n    http2 off;           # NGINX 1.25.1 以降\n    ...\n}"
+      },
+      "signal": "B! 15 · ▲ 679",
+      "pick": true
+    },
+    {
+      "id": "2026-11-19-calif-java4shell",
+      "url": "https://calif.io/java4shell/",
+      "title": "Java4Shell: RCE in OpenJDK when processing Base64",
+      "source": "calif.io",
+      "source_group": "hackernews",
+      "published_at": "2026-11-18T06:11:28+09:00",
+      "category": "sec",
+      "keywords": [
+        "rce",
+        "java",
+        "memory-safety"
+      ],
+      "score": 96,
+      "why": "HN 1137 pt（Aikido の解説 HN 149 pt・Amazon Corretto の重大パッチ告知を統合）",
+      "read_min": 8,
+      "tldr": "OpenJDK の x86-64 向け Base64 デコーダ（AVX-512 VBMI の手書きアセンブリ）に、出力長の計算誤りで配列外へ 64 バイト書き込むメモリ破壊の脆弱性 CVE-2026-114938（CVSS 4.0 で 9.2）がある。11 月 17 日に Oracle と OpenJDK が修正を出し、Amazon Corretto も同日に重大パッチを公開した。",
+      "points": [
+        "Ice Lake 以降の Xeon・Zen 4 以降の AMD など AVX-512 VBMI 対応 CPU で、JIT が高速パスにコンパイルした後に発生する。ARM64 は影響なし",
+        "Calif は Keycloak・Jira・Confluence・Jenkins・Kafka の既定構成で RCE を実証したとし、製品別のエクスプロイトは公開を控えている",
+        "パッチ適用までの回避策として、Base64 の組み込み高速化を無効にする JVM オプションを挙げている。-XX:UseAVX=2 は ARM では起動しなくなるので x86-64 限定"
+      ],
+      "code": {
+        "file": "jvm-options",
+        "lang": "bash",
+        "text": "# パッチ適用までの回避策（Calif の記事より）\njava -XX:-UseBASE64Intrinsics -jar app.jar\n# または AVX-512 自体を無効化（x86-64 のみ）\njava -XX:UseAVX=2 -jar app.jar"
+      },
+      "signal": "B! 14 · ▲ 1137",
+      "pick": true
+    },
+    {
+      "id": "2026-11-19-all-about-berlin-ai",
+      "url": "https://nicolasbouliane.com/blog/death-by-ai",
+      "title": "AI is killing All About Berlin",
+      "source": "nicolasbouliane.com",
+      "source_group": "hackernews",
+      "published_at": "2026-11-18T15:47:26+09:00",
+      "category": "ai",
+      "keywords": [
+        "search-engine",
+        "google",
+        "ai-economy"
+      ],
+      "score": 90,
+      "why": "HN 723 pt・654 コメント",
+      "read_min": 6,
+      "tldr": "ベルリン移住者向けの情報サイト All About Berlin の運営者が、Google の AI による概要表示で検索からの訪問が大きく減り、運営を続けるのが難しくなったと書いた。検索結果では広告と自分の記事を学習した AI の回答が先に出て、リンクはその後になると指摘している。",
+      "points": [
+        "2017 年から運営し、役所が案内に使い、ベルリンの移民局もデータを利用しているサイト",
+        "7 年間伸びてきた訪問が AI 概要の影響で大きく減り、「読者の 4 分の 1 しか残っていない」状態で活動資金をまかなうのは難しいとしている",
+        "新しい記事を書く代わりに別の収入源の準備をしており、「この先 All About Berlin がどこに収まるのか分からない」と述べている"
+      ],
+      "code": null,
+      "signal": "▲ 723",
+      "pick": true
+    },
+    {
+      "id": "2026-11-19-revscope-ai-search-traffic",
+      "url": "https://revscope.co/blog/search-seo-geo-2026/",
+      "title": "Google's AI answers reducing search traffic by 40%",
+      "source": "revscope.co",
+      "source_group": "hackernews",
+      "published_at": "2026-11-18T09:17:58+09:00",
+      "category": "ai",
+      "keywords": [
+        "search-engine",
+        "google"
+      ],
+      "score": 89,
+      "why": "HN 672 pt・520 コメント",
+      "read_min": null,
+      "tldr": "Google の AI による回答が検索経由の流入を 40% 減らしているとする分析記事。All About Berlin の件と並んで、AI 回答とサイト運営者の関係が HN で議論になった。",
+      "points": [],
+      "code": null,
+      "signal": "B! 1 · ▲ 672",
+      "pick": false
+    },
+    {
+      "id": "2026-11-19-piyolog-rakuten-sec",
+      "url": "https://piyolog.hatenadiary.jp/entry/2026/11/18/100525",
+      "title": "楽天証券への不正アクセスについてまとめてみた - piyolog",
+      "source": "piyolog.hatenadiary.jp",
+      "source_group": "tech_blog",
+      "published_at": "2026-11-18T10:53:39+09:00",
+      "category": "sec",
+      "keywords": [
+        "data-breach",
+        "security-incident"
+      ],
+      "score": 84,
+      "why": "はてブ 341（ITmedia・弁護士ドットコムの続報を統合）",
+      "read_min": null,
+      "tldr": "前日に公表された楽天証券の不正アクセス・情報漏えいの可能性について、公表内容を整理したまとめ。ITmedia の取材に同社はテスト環境に本番の顧客データを置いていた理由を「システムのアップグレードに伴う検証に本番データが必要だった」と説明し、集団訴訟の参加者を募るサイトも開設された。",
+      "points": [],
+      "code": null,
+      "signal": "B! 341",
+      "pick": false
+    },
+    {
+      "id": "2026-11-19-phrack-73",
+      "url": "https://phrack.org/issues/73/introduction_md",
+      "title": "Phrack 73",
+      "source": "phrack.org",
+      "source_group": "hackernews",
+      "published_at": "2026-11-18T03:31:25+09:00",
+      "category": "sec",
+      "keywords": [
+        "security-research"
+      ],
+      "score": 84,
+      "why": "HN 459 pt",
+      "read_min": null,
+      "tldr": "セキュリティ誌 Phrack の第 73 号が公開され、HN で話題になった。",
+      "points": [],
+      "code": null,
+      "signal": "B! 1 · ▲ 459",
+      "pick": false
+    },
+    {
+      "id": "2026-11-19-onnxruntime-github",
+      "url": "https://github.com/microsoft/onnxruntime",
+      "title": "Microsoft's ONNX Runtime has disappeared from GitHub",
+      "source": "github.com",
+      "source_group": "hackernews",
+      "published_at": "2026-11-18T08:18:49+09:00",
+      "category": "ai",
+      "keywords": [
+        "microsoft",
+        "github",
+        "oss"
+      ],
+      "score": 83,
+      "why": "HN 440 pt",
+      "read_min": null,
+      "tldr": "Microsoft の推論エンジン ONNX Runtime のリポジトリが GitHub から見えなくなったと HN で話題になった。理由は投稿時点で示されていない。",
+      "points": [],
+      "code": null,
+      "signal": "B! 8 · ▲ 440",
+      "pick": false
+    },
+    {
+      "id": "2026-11-19-microsoft-mai-code-2",
+      "url": "https://microsoft.ai/news/introducing-mai-code-2-and-mai-code-2-flash/",
+      "title": "MAI Code 2 and Code 2 Flash",
+      "source": "microsoft.ai",
+      "source_group": "hackernews",
+      "published_at": "2026-11-18T03:25:13+09:00",
+      "category": "ai",
+      "keywords": [
+        "microsoft",
+        "coding-agent",
+        "llm"
+      ],
+      "score": 82,
+      "why": "HN 415 pt・Publickey はてブ 66（Ignite の新モデル 7 種 HN 299 pt を統合）",
+      "read_min": null,
+      "tldr": "Microsoft が Ignite でコーディング用 AI モデル「MAI Code 2」「MAI Code 2 Flash」を発表した。Publickey は「高性能かつ低価格」と紹介しており、同時に価格性能比を重視した新モデル 7 種も公表された。",
+      "points": [],
+      "code": null,
+      "signal": "B! 66 · ▲ 415",
+      "pick": false
+    },
+    {
+      "id": "2026-11-19-runta-frontier-harness",
+      "url": "https://runta.com/blog/introducing-frontierharness-eval-v1-1/",
+      "title": "What is the best harness for each model?",
+      "source": "runta.com",
+      "source_group": "hackernews",
+      "published_at": "2026-11-17T23:53:43+09:00",
+      "category": "ai",
+      "keywords": [
+        "coding-agent",
+        "benchmark"
+      ],
+      "score": 82,
+      "why": "HN 415 pt",
+      "read_min": null,
+      "tldr": "コーディングエージェントのハーネス（実行環境・ツール群）とモデルの組み合わせごとの成績を比べる評価「FrontierHarness Eval v1.1」の紹介。",
+      "points": [],
+      "code": null,
+      "signal": "▲ 415",
+      "pick": false
+    },
+    {
+      "id": "2026-11-19-jquery-4-1-0",
+      "url": "https://github.com/jquery/jquery/releases/tag/4.1.0",
+      "title": "jQuery 4.1.0",
+      "source": "github.com",
+      "source_group": "hackernews",
+      "published_at": "2026-11-18T04:50:40+09:00",
+      "category": "be",
+      "keywords": [
+        "javascript",
+        "oss"
+      ],
+      "score": 81,
+      "why": "HN 367 pt",
+      "read_min": null,
+      "tldr": "jQuery 4.1.0 がリリースされた。",
+      "points": [],
+      "code": null,
+      "signal": "B! 1 · ▲ 367",
+      "pick": false
+    },
+    {
+      "id": "2026-11-19-solidjs-2-0",
+      "url": "https://www.solidjs.com/blog/solid-2-0-the-long-hold/",
+      "title": "Solid 2.0",
+      "source": "solidjs.com",
+      "source_group": "hackernews",
+      "published_at": "2026-11-18T03:56:17+09:00",
+      "category": "be",
+      "keywords": [
+        "javascript",
+        "oss"
+      ],
+      "score": 81,
+      "why": "HN 368 pt",
+      "read_min": null,
+      "tldr": "UI ライブラリ SolidJS のメジャーバージョン 2.0 が公開された。",
+      "points": [],
+      "code": null,
+      "signal": "B! 8 · ▲ 368",
+      "pick": false
+    },
+    {
+      "id": "2026-11-19-harvard-agents-code-review",
+      "url": "https://complexdiscovery.com/harvard-researchers-find-ai-coding-agents-shifted-the-bottleneck-to-code-review/",
+      "title": "Harvard researchers find AI coding agents shifted the bottleneck to code review",
+      "source": "complexdiscovery.com",
+      "source_group": "hackernews",
+      "published_at": "2026-11-18T06:16:12+09:00",
+      "category": "ai",
+      "keywords": [
+        "coding-agent",
+        "code-review"
+      ],
+      "score": 78,
+      "why": "HN 308 pt・415 コメント",
+      "read_min": null,
+      "tldr": "ハーバードの研究者が、AI コーディングエージェントの導入で開発のボトルネックがコードレビューに移ったとする研究結果をまとめた記事。",
+      "points": [],
+      "code": null,
+      "signal": "B! 2 · ▲ 308",
+      "pick": false
+    },
+    {
+      "id": "2026-11-19-codeberg-outage",
+      "url": "https://social.anoxinon.de/@codebergstatus/117636437840688845",
+      "title": "Codeberg.org Not Reachable",
+      "source": "social.anoxinon.de",
+      "source_group": "hackernews",
+      "published_at": "2026-11-18T19:02:17+09:00",
+      "category": "cloud",
+      "keywords": [
+        "system-outage",
+        "git"
+      ],
+      "score": 77,
+      "why": "HN 288 pt",
+      "read_min": null,
+      "tldr": "Git ホスティングの Codeberg.org に接続できない状態になったと、公式ステータスアカウントが告知した。",
+      "points": [],
+      "code": null,
+      "signal": "▲ 288",
+      "pick": false
+    },
+    {
+      "id": "2026-11-19-coinpost-bitwise-btc",
+      "url": "https://coinpost.jp/?p=748474",
+      "title": "ビットコイン週間12％安、ビットワイズCIOは金利ショックを主因に",
+      "source": "coinpost.jp",
+      "source_group": "news",
+      "published_at": "2026-11-18T09:29:12+09:00",
+      "category": "crypto",
+      "keywords": [
+        "bitcoin",
+        "fed",
+        "interest-rates"
+      ],
+      "score": 88,
+      "why": "matched: ビットコイン, 金利",
+      "read_min": 4,
+      "tldr": "Bitwise のホーガン CIO は、前週のビットコイン 12% 安（イーサリアム 14% 安）の主因を、10 月の米 CPI 上振れで利上げ観測が急に強まった「金利ショック」と分析した。12 月の 0.25 ポイント利上げの確率は 66% から 100% に上がり、週末には約 20 億ドルの強制決済が連鎖した。",
+      "points": [
+        "ウォラー理事が上振れ時の 0.5 ポイント利上げに言及し、2 年物米国債利回りは約 0.35 ポイント上昇。恐怖・強欲指数は 12 まで低下した",
+        "市場はすでに積極的な利上げを織り込み、過剰なレバレッジもかなり解消されたとして、ショックは一巡したとの見方を示した",
+        "一方でエヌビディアを巡る懸念や輸出規制強化の可能性は残り、回復は保証されないとも述べている"
+      ],
+      "code": null,
+      "signal": null,
+      "pick": true
+    },
+    {
+      "id": "2026-11-19-coinpost-treasury-mnav",
+      "url": "https://coinpost.jp/?p=748583",
+      "title": "仮想通貨トレジャリー企業、大手25社中24社が保有資産割れ＝ブルームバーグ",
+      "source": "coinpost.jp",
+      "source_group": "news",
+      "published_at": "2026-11-18T15:58:12+09:00",
+      "category": "crypto",
+      "keywords": [
+        "bitcoin-treasury",
+        "bitcoin",
+        "index-rebalance"
+      ],
+      "score": 85,
+      "why": "matched: ビットコイン",
+      "read_min": 4,
+      "tldr": "ブルームバーグによると、大手の仮想通貨トレジャリー企業 25 社のうち 24 社で、時価総額が保有する仮想通貨の価値を下回った（mNAV が 1 未満）。ビットコインが 1 週間で約 14% 下がり、ストラテジーとストライブの株価も同期間に 15% 以上下落した。",
+      "points": [
+        "株価が保有資産を上回るうちに新株を出して買い増すモデルは、mNAV が 1 を割ると既存株主の持ち分を実質的に手放すことになる",
+        "保有資産を下回る企業は、相場の回復を待つか、資産を売って株主に返すかの判断を迫られている",
+        "MSCI はストラテジーを米国指数から、メタプラネットを日本小型株指数から 11 月 30 日の取引終了時点で除外する。新基準の初適用で、上場は維持され、保有 BTC の売却を迫られるわけではない"
+      ],
+      "code": null,
+      "signal": null,
+      "pick": true
+    },
+    {
+      "id": "2026-11-19-coinpost-coinbase-chatgpt",
+      "url": "https://coinpost.jp/?p=748535",
+      "title": "ChatGPT会話画面で仮想通貨や株式取引可能に、米コインベースに新機能",
+      "source": "coinpost.jp",
+      "source_group": "news",
+      "published_at": "2026-11-18T14:00:17+09:00",
+      "category": "stocks",
+      "keywords": [
+        "ai-agent",
+        "us-stocks",
+        "crypto-exchange"
+      ],
+      "score": 80,
+      "why": "matched: 米国株",
+      "read_min": 3,
+      "tldr": "コインベースが 11 月 17 日、ChatGPT の会話画面から仮想通貨・対象の米国株・満期のある先物を注文できる公式プラグインを公開した。対象は米国の利用者のみで、日本では使えない。",
+      "points": [
+        "新規注文・変更・取り消し・ドルと USDC の交換は、確認カードでユーザーが承認してから実行される。残高照会は承認不要",
+        "11 月 11 日に追加された「Agent Controls」で、1 回の取引額・24 時間の取引量・損失率による自動停止を設定できる",
+        "これらの上限は Coinbase のサーバー側で強制される"
+      ],
+      "code": null,
+      "signal": null,
+      "pick": true
+    },
+    {
+      "id": "2026-11-19-newsjp-defense-budget",
+      "url": "https://news.jp/i/1495697429729739005",
+      "title": "防衛費圧縮を企業に伝達、防衛省 業界反発「はしご外し」 | NEWSjp",
+      "source": "news.jp",
+      "source_group": "news",
+      "published_at": "2026-11-18T17:55:55+09:00",
+      "category": "macro",
+      "keywords": [
+        "jp-fiscal"
+      ],
+      "score": 72,
+      "why": "はてブ 336・国の財政",
+      "read_min": 3,
+      "tldr": "防衛省が 11 月上旬、防衛産業の主要企業に来年度以降の防衛費が想定より大幅に圧縮される見通しを伝え、企業ごとに受注の減額幅を示して事業計画の見直しを求めていた。政府は年内の安保 3 文書改定で 2027〜31 年度の総額を 50 兆〜60 兆円台に抑える方針で、防衛省の試算（70 兆〜80 兆円）を下回る。",
+      "points": [
+        "装備品や施設工事の受注見込みは、半減から 5〜8 割減まで企業ごとに示された。すでに生産設備を増やした企業もある",
+        "現行の 2023〜27 年度の総額は約 43 兆円。消費税減税の議論もあり、50 兆円台前半を見込む向きもある",
+        "大幅増を前提にしていた業界は「はしごを外された」と強く反発している"
+      ],
+      "code": null,
+      "signal": "B! 336",
+      "pick": true
+    },
+    {
+      "id": "2026-11-19-coinpost-glassnode-btc",
+      "url": "https://coinpost.jp/?p=748470",
+      "title": "ビットコインの実現損失が降伏水準、鍵となる価格帯を分析＝グラスノード",
+      "source": "coinpost.jp",
+      "source_group": "news",
+      "published_at": "2026-11-18T10:30:11+09:00",
+      "category": "crypto",
+      "keywords": [
+        "bitcoin"
+      ],
+      "score": 75,
+      "why": "matched: ビットコイン（クリプトクアントの弱気局面分析を統合）",
+      "read_min": null,
+      "tldr": "グラスノードの週間レポートで、ビットコインの実現損失が過去の底値圏と同程度の水準に達し、レバレッジも解消されたと報告された。一方で需要は弱いとしており、クリプトクアントも弱気局面への回帰と「底打ちは未確認」と分析している。",
+      "points": [],
+      "code": null,
+      "signal": null,
+      "pick": false
+    },
+    {
+      "id": "2026-11-19-diamond-boj-current-account",
+      "url": "https://diamond.jp/articles/-/403649",
+      "title": "経常黒字でも円安続く「仮面の黒字国」日本は変わるか？植田総裁講演から読み解く海外投資と国内回帰の行方 - 日銀 早耳深掘",
+      "source": "diamond.jp",
+      "source_group": "news",
+      "published_at": "2026-11-19T04:13:00+09:00",
+      "category": "macro",
+      "keywords": [
+        "fx",
+        "current-account",
+        "boj-policy"
+      ],
+      "score": 72,
+      "why": "matched: 為替（有料記事のため冒頭のみ確認）",
+      "read_min": null,
+      "tldr": "11 月 6 日の植田日銀総裁の IMF 講演を手がかりに、経常黒字が円買いにつながらない背景として企業の対外投資と海外にとどまる収益を検証する記事。人手不足による国内投資の拡大がこの構造を変える可能性も論じている。",
+      "points": [],
+      "code": null,
+      "signal": null,
+      "pick": false
+    },
+    {
+      "id": "2026-11-19-ft-nvidia-singapore",
+      "url": "https://www.ft.com/content/dbde7a30-548c-4f9d-a4be-7898a0c24dcf",
+      "title": "Nvidia stopped disclosing Singapore sales as revenues hit $104B",
+      "source": "ft.com",
+      "source_group": "hackernews",
+      "published_at": "2026-11-18T02:12:06+09:00",
+      "category": "stocks",
+      "keywords": [
+        "nvidia",
+        "earnings",
+        "us-stocks"
+      ],
+      "score": 70,
+      "why": "matched: 米国株・HN 650 pt",
+      "read_min": null,
+      "tldr": "エヌビディアが売上高 1,040 億ドルに達するなかで、シンガポール向け売上の開示をやめたと FT が報じた（有料記事のため見出しのみ確認）。",
+      "points": [],
+      "code": null,
+      "signal": "▲ 650",
+      "pick": false
+    },
+    {
+      "id": "2026-11-19-diamond-wangan-tower",
+      "url": "https://diamond.jp/articles/-/403669",
+      "title": "新築湾岸タワマン価格が2000万円以上の下落！中古マンションも在庫激増中…いったい何が起こっているのか？【マンションインフルエンサー座談会1】",
+      "source": "diamond.jp",
+      "source_group": "news",
+      "published_at": "2026-11-19T04:30:00+09:00",
+      "category": "realestate",
+      "keywords": [
+        "real-estate-prices",
+        "housing"
+      ],
+      "score": 68,
+      "why": "不動産（マンション市況）",
+      "read_min": null,
+      "tldr": "転売目的の購入者や外国人の撤退で、新築マンションの値下げや中古マンションの在庫急増が起きているとする座談会記事。",
+      "points": [],
+      "code": null,
+      "signal": null,
+      "pick": false
+    },
+    {
+      "id": "2026-11-19-toyokeizai-softbank-earnings",
+      "url": "https://toyokeizai.net/articles/-/965266",
+      "title": "【孫正義「AI全賭け」に逆風？】ソフトバンクグループ最新決算で見えたAIリスク／データセンター関連で約6000億円の損失",
+      "source": "toyokeizai.net",
+      "source_group": "news",
+      "published_at": "2026-11-18T19:00:00+09:00",
+      "category": "stocks",
+      "keywords": [
+        "earnings",
+        "data-center"
+      ],
+      "score": 66,
+      "why": "株式（決算）",
+      "read_min": null,
+      "tldr": "ソフトバンクグループの上半期決算は純損益が 7,680 億円の赤字で、米国の AI データセンター向け発電設備に関する損失が 5,972 億円だったことを解説する動画記事。",
+      "points": [],
+      "code": null,
+      "signal": null,
+      "pick": false
+    },
+    {
+      "id": "2026-11-19-coinpost-mara-btc-sale",
+      "url": "https://coinpost.jp/?p=748597",
+      "title": "MARA、決算後も約1714BTC売却か＝オンチェーン分析",
+      "source": "coinpost.jp",
+      "source_group": "news",
+      "published_at": "2026-11-18T17:11:26+09:00",
+      "category": "crypto",
+      "keywords": [
+        "bitcoin-mining",
+        "bitcoin"
+      ],
+      "score": 65,
+      "why": "matched: ビットコイン",
+      "read_min": null,
+      "tldr": "マイニング大手 MARA が第 3 四半期決算の発表後も約 1,714 BTC を売却したとみられるとオンチェーン分析で示された。四半期終了後に 13,597 BTC の売却を開示しており、2026 年の売却は累計 4 万 BTC を超えた。",
+      "points": [],
+      "code": null,
+      "signal": null,
+      "pick": false
+    },
+    {
+      "id": "2026-11-19-diamond-crude-oil",
+      "url": "https://diamond.jp/articles/-/403648",
+      "title": "原油価格は110ドル超から「85ドル前後」へ下落、今後どうなる？米中間選挙後のイラン再攻撃懸念後退と供給不安の行方 - マーケットフォーカス",
+      "source": "diamond.jp",
+      "source_group": "news",
+      "published_at": "2026-11-19T04:25:00+09:00",
+      "category": "macro",
+      "keywords": [
+        "crude-oil",
+        "geopolitics"
+      ],
+      "score": 60,
+      "why": "マクロ（原油）",
+      "read_min": null,
+      "tldr": "WTI は 10 月に一時 1 バレル 110 ドルを超えたが、中東の緊張緩和への期待から足元は 85 ドル前後に下がった。9 月以降の相場を振り返り、上振れ・下振れ要因を整理する記事。",
+      "points": [],
+      "code": null,
+      "signal": null,
+      "pick": false
+    },
+    {
+      "id": "2026-11-19-yahoo-ohsho-earnings",
+      "url": "https://news.yahoo.co.jp/articles/3b25c3918195d0e87e1eba17f611a54c84a7d50a",
+      "title": "餃子の王将、営業利益42.3％減。5度の値上げで炒飯495円⇨693円に「仕方ない」「もう庶民の王将では…」の声も（ハフポスト日本版） - Yahoo!ニュース",
+      "source": "news.yahoo.co.jp",
+      "source_group": "news",
+      "published_at": "2026-11-18T11:11:44+09:00",
+      "category": "stocks",
+      "keywords": [
+        "earnings",
+        "inflation"
+      ],
+      "score": 58,
+      "why": "はてブ 170・株式（決算）",
+      "read_min": null,
+      "tldr": "王将フードサービスの 2026 年 4〜9 月期は、売上高が前年同期比 2.2% 減の 572 億円、営業利益が 42.3% 減の 30.7 億円だった。値上げを重ねてきたことへの利用者の声も紹介している。",
+      "points": [],
+      "code": null,
+      "signal": "B! 170",
+      "pick": false
+    },
+    {
+      "id": "2026-11-19-fsa-fsb-cross-border",
+      "url": "https://www.fsa.go.jp/inter/fsf/20261117/261117.html",
+      "title": "国際関係,金融安定理事会による「クロスボーダー送金の改善に向けたG20ロードマップ：2026年統合進捗報告書」について公表しました。",
+      "source": "fsa.go.jp",
+      "source_group": "official",
+      "published_at": "2026-11-18T02:00:00+09:00",
+      "category": "macro",
+      "keywords": [
+        "payments",
+        "fsa"
+      ],
+      "score": 55,
+      "why": "金融庁の公式発表",
+      "read_min": null,
+      "tldr": "金融庁が、金融安定理事会（FSB）による「クロスボーダー送金の改善に向けた G20 ロードマップ」の 2026 年統合進捗報告書を公表した。",
+      "points": [],
+      "code": null,
+      "signal": null,
+      "pick": false
+    },
+    {
+      "id": "2026-11-19-coinpost-anthropic-ipo-token",
+      "url": "https://coinpost.jp/?p=748539",
+      "title": "バイナンスウォレット、アンソロピックIPOの株トークン申し込みを受付 日本非対応",
+      "source": "coinpost.jp",
+      "source_group": "news",
+      "published_at": "2026-11-18T16:00:23+09:00",
+      "category": "stocks",
+      "keywords": [
+        "ipo",
+        "tokenization",
+        "anthropic"
+      ],
+      "score": 55,
+      "why": "株式（IPO）",
+      "read_min": null,
+      "tldr": "バイナンスウォレットが 18 日、アンソロピックの IPO に連動するトークン化株式の申し込み受付を発表した。日本のユーザーは参加できない。",
+      "points": [],
+      "code": null,
+      "signal": null,
+      "pick": false
+    }
+  ],
+  "social": [
+    {
+      "network": "x",
+      "author": "@Cloudflare",
+      "url": "https://x.com/Cloudflare/status/2122957323849314810",
+      "text": "Quad9 がフランスからの撤退を強いられた件は、DNS レベルのブロック義務付けの危うさを示しているとしてブログ記事を紹介。",
+      "metrics": null,
+      "heat": null,
+      "category": "cloud",
+      "keywords": [
+        "dns",
+        "cloudflare"
+      ],
+      "posted_at": "2026-11-18T16:37:23+09:00"
+    },
+    {
+      "network": "x",
+      "author": "@eastdakota",
+      "url": "https://x.com/eastdakota/status/2123012592209723604",
+      "text": "Cloudflare の CEO が、どの重要システムが Quad9 などのリゾルバに依存しているか分からず、止まるものが出ると警告。フランスの著作権当局と裁判所を強く批判した。",
+      "metrics": null,
+      "heat": null,
+      "category": "cloud",
+      "keywords": [
+        "dns"
+      ],
+      "posted_at": "2026-11-18T20:17:00+09:00"
+    },
+    {
+      "network": "x",
+      "author": "@nirohfeld",
+      "url": "https://x.com/nirohfeld/status/2123070394227663006",
+      "text": "Wiz の研究者が NGINX の CVE-2026-123633 / CVE-2026-123007（CVSS 4.0: 9.2）を開示。バックエンドもサードパーティモジュールもない静的ファイル配信の NGINX で、ASLR を回避した RCE を実現したと説明。どちらも HTTP/2 が条件。",
+      "metrics": null,
+      "heat": null,
+      "category": "sec",
+      "keywords": [
+        "rce",
+        "http"
+      ],
+      "posted_at": "2026-11-19T00:06:41+09:00"
+    },
+    {
+      "network": "x",
+      "author": "@wiz_io",
+      "url": "https://x.com/wiz_io/status/2123072693042082117",
+      "text": "Wiz Research と Xint・Metnir AI・Rapid7・Ikotas Labs がそれぞれ独立に NGINX の重大なメモリ安全性の欠陥 2 件を発見したと告知。HTTP/2 有効時に認証なしの RCE が可能。",
+      "metrics": null,
+      "heat": null,
+      "category": "sec",
+      "keywords": [
+        "rce",
+        "vulnerability-management"
+      ],
+      "posted_at": "2026-11-19T00:15:49+09:00"
+    },
+    {
+      "network": "x",
+      "author": "@wiz_io",
+      "url": "https://x.com/wiz_io/status/2122821240477954326",
+      "text": "Java4Shell（CVE-2026-114938、CVSS 9.2）の概要を解説。OpenJDK の Base64 デコード処理のメモリ破壊で、認証なしのリモートコード実行が可能になる。",
+      "metrics": null,
+      "heat": null,
+      "category": "sec",
+      "keywords": [
+        "rce",
+        "java"
+      ],
+      "posted_at": "2026-11-18T07:36:38+09:00"
+    },
+    {
+      "network": "x",
+      "author": "@yousukezan",
+      "url": "https://x.com/yousukezan/status/2122828616988058092",
+      "text": "Java の Base64 デコーダの脆弱性 Java4Shell を日本語で要約。AVX-512 VBMI 向け高速化コードが不正な入力で配列外へ 64 バイト書き込み、11 月 17 日に Oracle が修正、ARM は影響なしと紹介。",
+      "metrics": null,
+      "heat": null,
+      "category": "sec",
+      "keywords": [
+        "rce",
+        "java"
+      ],
+      "posted_at": "2026-11-18T08:05:57+09:00"
+    }
+  ],
+  "releases": [
+    {
+      "date": "2026-11-19",
+      "title": "PostgreSQL 19 正式リリース（予定）",
+      "repo": "postgres/postgres",
+      "url": "https://www.publickey1.jp/blog/26/postgresql_194ai.html",
+      "kind": "event",
+      "note": "前日の日次ファイルから引き継ぎ（Publickey によると正式版は 11/19 の見通し）",
+      "category": "be"
+    },
+    {
+      "date": "2026-11-19",
+      "title": "米中ロ首脳による初の 3 者会談（深セン）",
+      "repo": null,
+      "url": "https://www.afpbb.com/articles/-/3662415",
+      "kind": "event",
+      "note": "前日の日次ファイルから引き継ぎ（AFP の記事で日程を確認済み）",
+      "category": "macro"
+    },
+    {
+      "date": "2026-11-20",
+      "title": "Microsoft 365 障害の最終版事後レポート（PIR）公開予定",
+      "repo": null,
+      "url": "https://forest.watch.impress.co.jp/docs/news/2156753.html",
+      "kind": "event",
+      "note": "前日の日次ファイルから引き継ぎ（窓の杜の記事で予定日を確認）",
+      "category": "cloud"
+    },
+    {
+      "date": "2026-11-23",
+      "title": "米 11 月 PMI（速報）",
+      "repo": null,
+      "url": "https://coinpost.jp/?p=748038",
+      "kind": "event",
+      "note": "前日の日次ファイルから引き継ぎ（CoinPost の寄稿で日程を確認）",
+      "category": "macro"
+    },
+    {
+      "date": "2026-11-24",
+      "title": "Quad9 がフランスでのサービスを停止",
+      "repo": null,
+      "url": "https://x.com/Itsfoss/status/2113520157830295561",
+      "kind": "event",
+      "note": "複数の X 投稿（It's FOSS・Clubic など）で 11 月 24 日の停止日を確認。Cloudflare のブログには日付の記載なし",
+      "category": "cloud"
+    }
+  ]
+}
