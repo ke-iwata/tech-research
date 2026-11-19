@@ -1,0 +1,801 @@
+{
+ "date": "2026-11-20",
+ "generated_at": "2026-11-20T05:12:00+09:00",
+ "stats": {
+  "collected": 248,
+  "sources_ok": 25,
+  "sources_total": 26,
+  "by_group": {
+   "hackernews": 50,
+   "tech_blog": 80,
+   "news": 116,
+   "official": 2
+  },
+  "failed_sources": [
+   "coindesk_jp"
+  ]
+ },
+ "digest": [
+  {
+   "category": "ai",
+   "text": "Google が Gemini 4 の中位モデル「Neon」を公開。入力 100 万トークンあたり 3 ドル・出力 15 ドル、コンテキスト 100 万トークンで、Coding Agent Index 1 位などを自ら掲げる（HN 993 pt）。",
+   "keywords": [
+    "google",
+    "llm"
+   ]
+  },
+  {
+   "category": "sec",
+   "text": "Ruby の文字列の大文字・小文字変換に 1 バイトのヒープオーバーフロー「Ruby2ßhell」。既定構成の Rails / Sinatra で認証なしに到達するとされ、Ruby 3.3.14 / 3.4.13 / 4.0.10 で修正（3.2 以前は EOL）。",
+   "keywords": [
+    "rce",
+    "ruby"
+   ]
+  },
+  {
+   "category": "sec",
+   "text": "六花亭オンラインショップの決済画面が改ざんされ、カード番号全桁・セキュリティコードを含む約 8,000 件が流出した可能性（はてブ 361）。SBC メディカルグループの 162 万人分の流出など、国内の大型漏えいの公表が続いた。",
+   "keywords": [
+    "data-breach",
+    "payments"
+   ]
+  },
+  {
+   "category": "stocks",
+   "text": "Anthropic が 1 株 83 ドルで IPO の価格を決め、9 億 8,000 万株を売り出して 11 月 19 日に Nasdaq（ANT）で取引を始めた。",
+   "keywords": [
+    "ipo",
+    "anthropic"
+   ]
+  },
+  {
+   "category": "macro",
+   "text": "植田総裁は参院財政金融委員会で、政策金利 1.25% 程度を据え置いた 10 月会合の判断を説明し、情勢に応じて引き続き利上げしていく考えを示した。消費者物価は 2% をはっきり上回る水準まで伸びが高まると予想。",
+   "keywords": [
+    "boj-policy",
+    "boj-rate-hike"
+   ]
+  }
+ ],
+ "items": [
+  {
+   "id": "2026-11-20-google-gemini-4-neon",
+   "url": "https://blog.google/innovation-and-ai/models-and-research/gemini-models/introducing-gemini-4-neon/",
+   "title": "Gemini 4 Neon",
+   "source": "blog.google",
+   "source_group": "hackernews",
+   "published_at": "2026-11-19T06:34:07+09:00",
+   "category": "ai",
+   "keywords": [
+    "google",
+    "llm",
+    "benchmark",
+    "coding-agent"
+   ],
+   "score": 94,
+   "why": "HN 993 pt・751 コメント（関連記事 HN 248 pt を統合）",
+   "read_min": 6,
+   "tldr": "Google が Gemini 4 ファミリーの中位モデル「Neon」を発表した。最上位の Carbon と高速な Hydrogen の間で、深さと効率のバランスを取る位置づけ。価格は入力 100 万トークンあたり 3 ドル・出力 15 ドルで、コンテキストは 100 万トークン。",
+   "points": [
+    "Artificial Analysis Intelligence Index で 61（xhigh 時、全体 3 位）、Coding Agent Index で 1 位（58.6）など、Google 自身が多数のベンチマーク結果を掲げている",
+    "キャッシュ済み入力は 100 万トークンあたり 0.15 ドル（95% 引き）。既定の思考レベルでは Carbon よりタスクあたりのコストが 32% 低いとしている",
+    "Gemini API（AI Studio の有料枠）・Gemini for business・Antigravity・Gemini アプリの Pro / Ultra で提供。Antigravity では Hydrogen のサブエージェントを並列に指揮するオーケストレーターとしても使える"
+   ],
+   "code": null,
+   "signal": "B! 22 · ▲ 993",
+   "pick": true
+  },
+  {
+   "id": "2026-11-20-element-ec-matrix",
+   "url": "https://element.io/blog/how-the-european-commission-rolled-out-matrix-to-more-than-40-000-staff/",
+   "title": "How the European Commission rolled out Matrix to more than 40k staff",
+   "source": "element.io",
+   "source_group": "hackernews",
+   "published_at": "2026-11-19T19:58:29+09:00",
+   "category": "cloud",
+   "keywords": [
+    "oss",
+    "privacy"
+   ],
+   "score": 87,
+   "why": "HN 593 pt・280 コメント",
+   "read_min": null,
+   "tldr": "欧州委員会が 4 万人超の職員にオープンなチャット基盤 Matrix を展開した経緯を Element が紹介した（タイトルより）。",
+   "points": [],
+   "code": null,
+   "signal": "▲ 593",
+   "pick": false
+  },
+  {
+   "id": "2026-11-20-itmedia-rokkatei-card",
+   "url": "https://www.itmedia.co.jp/news/article/2611/19/2000003316/",
+   "title": "六花亭、カード番号全桁＋セキュリティコード約8000件流出か 決済画面のプログラム改ざん",
+   "source": "itmedia.co.jp",
+   "source_group": "tech_blog",
+   "published_at": "2026-11-19T09:18:40+09:00",
+   "category": "sec",
+   "keywords": [
+    "data-breach",
+    "payments",
+    "security-incident"
+   ],
+   "score": 85,
+   "why": "はてブ 361",
+   "read_min": 4,
+   "tldr": "六花亭オンラインショップが不正アクセスを受けて決済画面のプログラムが改ざんされ、入力されたカード情報が外部に送られていた可能性がある。対象は約 8,000 件で、カード番号の全桁・名義人・有効期限・セキュリティコードを含む。",
+   "points": [
+    "対象は 2026 年 10 月 21 日 21 時ごろから 11 月 18 日 11 時ごろまでに決済画面でカード情報を入力した利用者",
+    "同社はカード情報をサーバーに保存していないが、改ざんされたプログラムが入力時に情報を外部へ送信していた可能性がある",
+    "11 月 18 日に改ざんが判明し、サイトを停止。件数は調査で変わる可能性があり、該当者には個別に連絡し利用明細の確認を呼びかけている"
+   ],
+   "code": null,
+   "signal": "B! 361",
+   "pick": true
+  },
+  {
+   "id": "2026-11-20-ebm-kpmg-ai-audit",
+   "url": "https://europeanbusinessmagazine.com/ai-agents-better-questions-kpmg/",
+   "title": "AI agents ask better questions than KPMG accountants in audit trial",
+   "source": "europeanbusinessmagazine.com",
+   "source_group": "hackernews",
+   "published_at": "2026-11-19T00:49:34+09:00",
+   "category": "ai",
+   "keywords": [
+    "ai-agent",
+    "multi-agent",
+    "ai-adoption"
+   ],
+   "score": 84,
+   "why": "HN 478 pt・245 コメント",
+   "read_min": 4,
+   "tldr": "KPMG UK が FTSE 250 企業の決算書を題材に、100 を超える AI エージェントを従来の監査チームと並行して動かす実験「Project Exponential」を行った。エージェントが人間の監査人が問わなかった論点まで掘り下げた場面があったという。",
+   "points": [
+    "エージェントは情報収集・データ分析と記録・結論の草案・次の手順の提案を担い、役割分担と相互の調整も行った。開発には約 4 か月かかった",
+    "正式な法定監査ではなく、結果は会計の承認には使われていない。誤差や時間短縮などの定量的な結果は示されていない",
+    "規制要件と文書の照合をエージェントが誤り、監査人が介入した場面もあった。KPMG は対象を最大 20 件の大型監査に広げる計画だが、数千件規模には未成熟としている"
+   ],
+   "code": null,
+   "signal": "▲ 478",
+   "pick": true
+  },
+  {
+   "id": "2026-11-20-verialabs-ruby2shell",
+   "url": "https://verialabs.com/ruby2shell/",
+   "title": "Ruby2ßhell: Pre-authentication RCE on stock Rails",
+   "source": "verialabs.com",
+   "source_group": "hackernews",
+   "published_at": "2026-11-19T14:09:11+09:00",
+   "category": "sec",
+   "keywords": [
+    "rce",
+    "ruby",
+    "memory-safety",
+    "vulnerability-management"
+   ],
+   "score": 80,
+   "why": "HN 339 pt（Ruby 公式の脆弱性告知 HN 326 pt を統合）",
+   "read_min": 8,
+   "tldr": "Ruby の文字列の大文字・小文字変換に 1 バイトのヒープオーバーフローがあり、既定構成の Rails と Sinatra（classic）で認証なしに到達できると報告された（GHSA-34m4-m9fh-gqp5）。修正版は Ruby 3.3.14 / 3.4.13 / 4.0.10。",
+   "points": [
+    "ISO-8859 や Windows-125x などの 1 バイト文字コードで「ß」を大文字化すると 2 バイトの「SS」になるのに、ループは 1 バイト分の空きしか確かめていなかった。Ruby 2.4.0 からの不具合",
+    "upcase・swapcase・downcase(:fold)・casecmp? から到達する。UTF-8 の文字列は別のコードパスで影響を受けない",
+    "Ruby 3.2 以前は EOL で修正なし。GitLab 19.6.0 や GitHub Enterprise Server 3.22.5 などの最新版も同梱 Ruby が影響を受けるとされ、PoC は約 1 週間後に公開予定"
+   ],
+   "code": {
+    "file": "enc/iso_8859_*.c（case_map）",
+    "lang": "c",
+    "text": "while (*pp < end && to < to_end) {    /* room for one byte */\n    code = *(*pp)++;\n    if (code == SHARP_s) {\n        if (flags & ONIGENC_CASE_UPCASE) {\n            *to++ = 'S';              /* first byte */\n            code = 'S';\n        }\n        /* ... */\n    }\n    /* ... */\n    *to++ = code;                     /* second byte, unchecked */\n}"
+   },
+   "signal": "B! 1 · ▲ 339",
+   "pick": true
+  },
+  {
+   "id": "2026-11-20-kapteko-15m-webservers",
+   "url": "https://kapteko.com/15-million-webservers/",
+   "title": "15M web servers on one VM – smoltcp, DPDK, AF_XDP",
+   "source": "kapteko.com",
+   "source_group": "hackernews",
+   "published_at": "2026-11-19T14:56:36+09:00",
+   "category": "be",
+   "keywords": [
+    "networking",
+    "rust"
+   ],
+   "score": 80,
+   "why": "HN 338 pt",
+   "read_min": null,
+   "tldr": "smoltcp・DPDK・AF_XDP を使い、1 台の VM 上で 1,500 万の Web サーバーを動かす試みの記録（タイトルより）。",
+   "points": [],
+   "code": null,
+   "signal": "B! 1 · ▲ 338",
+   "pick": false
+  },
+  {
+   "id": "2026-11-20-nagoya-u-ai-for-teachers",
+   "url": "https://yamazato.nuee.nagoya-u.ac.jp/PDF/AI-for-Teachers-an-Open-Textbook-v1.0.0.pdf",
+   "title": "教師のためのAI入門",
+   "source": "nagoya-u.ac.jp",
+   "source_group": "tech_blog",
+   "published_at": "2026-11-19T10:32:33+09:00",
+   "category": "ai",
+   "keywords": [
+    "ai-adoption",
+    "cs-education"
+   ],
+   "score": 79,
+   "why": "はてブ 240",
+   "read_min": null,
+   "tldr": "教員向けに AI を解説するオープン教科書「AI for Teachers」の日本語版 PDF が公開され、はてなブックマークで話題になった。",
+   "points": [],
+   "code": null,
+   "signal": "B! 240",
+   "pick": false
+  },
+  {
+   "id": "2026-11-20-ebr-energy-based-reasoners",
+   "url": "https://energy-based-reasoners.github.io/",
+   "title": "Energy-Based Reasoners: 385x more efficient inference",
+   "source": "energy-based-reasoners.github.io",
+   "source_group": "hackernews",
+   "published_at": "2026-11-18T18:29:32+09:00",
+   "category": "ai",
+   "keywords": [
+    "ai-research",
+    "llm"
+   ],
+   "score": 79,
+   "why": "HN 315 pt",
+   "read_min": null,
+   "tldr": "エネルギーベースモデルによる推論手法「Energy-Based Reasoners」の研究ページ。タイトルでは推論効率 385 倍をうたう（本文未確認）。",
+   "points": [],
+   "code": null,
+   "signal": "B! 1 · ▲ 315",
+   "pick": false
+  },
+  {
+   "id": "2026-11-20-slowchronicle-llm-reversing",
+   "url": "https://www.slowchronicle.com/posts/llm-assisted-reverse-engineering",
+   "title": "LLM assisted reverse engineering",
+   "source": "slowchronicle.com",
+   "source_group": "hackernews",
+   "published_at": "2026-11-19T07:29:13+09:00",
+   "category": "sec",
+   "keywords": [
+    "llm",
+    "security-research"
+   ],
+   "score": 78,
+   "why": "HN 293 pt",
+   "read_min": null,
+   "tldr": "LLM を補助に使ったリバースエンジニアリングの実践記（タイトルより）。",
+   "points": [],
+   "code": null,
+   "signal": "▲ 293",
+   "pick": false
+  },
+  {
+   "id": "2026-11-20-macanorak-uk-apple-order",
+   "url": "https://macanorak.com/uk-government-forced-to-admit-it-issued-apple-a-secret-encryption-order/",
+   "title": "UK government forced to admit it issued Apple a secret encryption order",
+   "source": "macanorak.com",
+   "source_group": "hackernews",
+   "published_at": "2026-11-20T01:21:03+09:00",
+   "category": "sec",
+   "keywords": [
+    "apple",
+    "privacy",
+    "cryptography"
+   ],
+   "score": 77,
+   "why": "HN 276 pt・133 コメント",
+   "read_min": null,
+   "tldr": "英国政府が Apple に暗号化に関する秘密命令を出していたことを認めざるを得なくなったと報じられた（タイトルより）。",
+   "points": [],
+   "code": null,
+   "signal": "▲ 276",
+   "pick": false
+  },
+  {
+   "id": "2026-11-20-google-genie-4",
+   "url": "https://blog.google/innovation-and-ai/models-and-research/google-deepmind/genie-4-now-available-project-genie/",
+   "title": "Genie 4 is now available",
+   "source": "blog.google",
+   "source_group": "hackernews",
+   "published_at": "2026-11-19T03:49:51+09:00",
+   "category": "ai",
+   "keywords": [
+    "google",
+    "ai-research"
+   ],
+   "score": 77,
+   "why": "HN 286 pt",
+   "read_min": null,
+   "tldr": "Google DeepMind の世界モデル Genie 4 が Project Genie で利用可能になった（タイトルより）。",
+   "points": [],
+   "code": null,
+   "signal": "B! 4 · ▲ 286",
+   "pick": false
+  },
+  {
+   "id": "2026-11-20-php-86",
+   "url": "https://www.php.net/releases/8.6/en.php",
+   "title": "What's New in PHP 8.6",
+   "source": "php.net",
+   "source_group": "hackernews",
+   "published_at": "2026-11-19T18:27:15+09:00",
+   "category": "be",
+   "keywords": [
+    "programming-language",
+    "php"
+   ],
+   "score": 75,
+   "why": "HN 242 pt",
+   "read_min": null,
+   "tldr": "PHP 公式サイトの PHP 8.6 紹介ページ。新機能の概要をまとめている（タイトルより）。",
+   "points": [],
+   "code": null,
+   "signal": "B! 2 · ▲ 242",
+   "pick": false
+  },
+  {
+   "id": "2026-11-20-anthropic-claude-black-holes",
+   "url": "https://www.anthropic.com/research/claude-black-hole-physics",
+   "title": "Claude solves two open problems in the physics of black holes",
+   "source": "anthropic.com",
+   "source_group": "hackernews",
+   "published_at": "2026-11-20T02:30:44+09:00",
+   "category": "ai",
+   "keywords": [
+    "claude",
+    "anthropic",
+    "ai-research"
+   ],
+   "score": 73,
+   "why": "HN 201 pt",
+   "read_min": null,
+   "tldr": "Anthropic が、Claude がブラックホール物理の未解決問題 2 件を解いたとする研究記事を公開した（タイトルより）。",
+   "points": [],
+   "code": null,
+   "signal": "B! 1 · ▲ 201",
+   "pick": false
+  },
+  {
+   "id": "2026-11-20-itmedia-nikke-malware-hokkaido",
+   "url": "https://www.itmedia.co.jp/news/article/2611/19/2000003351/",
+   "title": "美少女ゲーム「NIKKE」経由でマルウェア感染 北海道2自治体、委託先が認める",
+   "source": "itmedia.co.jp",
+   "source_group": "tech_blog",
+   "published_at": "2026-11-19T20:25:45+09:00",
+   "category": "sec",
+   "keywords": [
+    "security-incident",
+    "data-breach",
+    "supply-chain"
+   ],
+   "score": 71,
+   "why": "はてブ 135",
+   "read_min": null,
+   "tldr": "北海道岩見沢市と新得町の業務の再委託先の機器がマルウェアに感染し、個人情報が漏えいした可能性がある件で、委託先がゲーム「勝利の女神：NIKKE」の PC 版ランチャーが関係していたと取材に答えた（RSS 要約より）。",
+   "points": [],
+   "code": null,
+   "signal": "B! 135",
+   "pick": false
+  },
+  {
+   "id": "2026-11-20-cnet-sbc-breach",
+   "url": "https://japan.cnet.com/article/35255171/",
+   "title": "「湘南美容クリニック」などの個人情報流出 氏名など162万人分 不正アクセスで",
+   "source": "japan.cnet.com",
+   "source_group": "tech_blog",
+   "published_at": "2026-11-19T22:48:03+09:00",
+   "category": "sec",
+   "keywords": [
+    "data-breach",
+    "security-incident"
+   ],
+   "score": 48,
+   "why": "はてブ 26（TechnoEdge の同件記事 はてブ 13 を統合）",
+   "read_min": null,
+   "tldr": "SBC メディカルグループが、湘南美容クリニックなどの利用者 162 万 4,000 人分の個人情報が不正アクセスで流出したと発表した。当時暗号化せずに保存していたパスワードも含まれる（RSS 要約より）。",
+   "points": [],
+   "code": null,
+   "signal": "B! 26",
+   "pick": false
+  },
+  {
+   "id": "2026-11-20-anthropic-ipo",
+   "url": "https://www.anthropic.com/news/anthropic-prices-initial-public-offering",
+   "title": "Anthropic prices initial public offering",
+   "source": "anthropic.com",
+   "source_group": "hackernews",
+   "published_at": "2026-11-19T08:30:09+09:00",
+   "category": "stocks",
+   "keywords": [
+    "ipo",
+    "anthropic",
+    "us-stocks"
+   ],
+   "score": 92,
+   "why": "matched: 米国株（HN 407 pt、上場初日の記事 HN 469 pt・CoinPost・東洋経済の関連記事を統合）",
+   "read_min": 3,
+   "tldr": "Anthropic が 1 株 83 ドルで新規株式公開の価格を決め、11 月 19 日に Nasdaq Global Select Market でティッカー「ANT」として取引を始めた。売り出しは Class A 普通株 9 億 8,000 万株で、受け渡しは 11 月 20 日の予定。",
+   "points": [
+    "9 億 8,000 万株のうち 9 億 5,635 万株余りを会社が、約 2,365 万株を既存株主が売り出す。引受会社には 30 日間で最大 1 億 4,700 万株の追加購入枠がある",
+    "SEC の登録届出は 11 月 18 日に発効。目論見書の窓口はゴールドマン・サックスとモルガン・スタンレー",
+    "上場前には分散型取引所 Hyperliquid の上場前先物が公開価格を約 16% 上回る水準で推移していた（CoinPost）。ロイターは初日に時価総額 2 兆ドルに達したと見出しで報じている（本文未確認）"
+   ],
+   "code": null,
+   "signal": "▲ 407",
+   "pick": true
+  },
+  {
+   "id": "2026-11-20-boj-ueda-diet-report",
+   "url": "http://www.boj.or.jp/mopo/diet/d_state/dst261119a.htm",
+   "title": "【概要説明】植田総裁「通貨及び金融の調節に関する報告書」（参議院財政金融委員会）",
+   "source": "boj.or.jp",
+   "source_group": "official",
+   "published_at": "2026-11-19T10:13:00+09:00",
+   "category": "macro",
+   "keywords": [
+    "boj-policy",
+    "boj-rate-hike",
+    "inflation"
+   ],
+   "score": 90,
+   "why": "日銀の公式発表（matched: 金利）",
+   "read_min": 5,
+   "tldr": "植田総裁が参議院財政金融委員会で半期報告の概要を説明した。政策金利（無担保コール翌日物 1.25% 程度）を据え置いた 10 月会合の決定を説明し、経済・物価・金融情勢に応じて引き続き利上げで緩和度合いを調整していく考えを示した。",
+   "points": [
+    "景気は中東情勢の影響で一部に弱めの動きもあるが緩やかに回復。輸出はグローバルな AI 関連需要を背景に緩やかに増加しているとの認識",
+    "生鮮食品を除く消費者物価の前年比は足もと 2% 程度。原油高や半導体価格の上昇、これまでの円安を受けて、2% をはっきり上回る水準まで伸びが高まると予想",
+    "利上げのタイミングとペースは、中東情勢・AI 関連需要・為替の影響を含めて見通しの確度とリスクを点検しながら検討する。基調的な物価上昇率が 2% を超えて上振れるリスクに注意を払う姿勢"
+   ],
+   "code": null,
+   "signal": null,
+   "pick": true
+  },
+  {
+   "id": "2026-11-20-coinpost-citi-btc-target",
+   "url": "https://coinpost.jp/?p=748660",
+   "title": "米シティ、ビットコインとイーサリアムの目標を約12％・約6％引き下げ",
+   "source": "coinpost.jp",
+   "source_group": "news",
+   "published_at": "2026-11-19T19:00:50+09:00",
+   "category": "crypto",
+   "keywords": [
+    "bitcoin",
+    "ethereum",
+    "bitcoin-etf"
+   ],
+   "score": 85,
+   "why": "matched: ビットコイン",
+   "read_min": 3,
+   "tldr": "米シティグループが 12 か月先の基本シナリオの目標を、ビットコインは 11 万 3,000 ドルから 9 万 9,532 ドルに、イーサリアムは 3,028 ドルから 2,838 ドルに引き下げた。ETF からの資金流出と 200 日移動平均線割れを理由に、短期の資金フロー判断も「中立」に下げた。",
+   "points": [
+    "BTC の ETF フローは年初来で再び純流出に転じ、ETH の ETF は 7 週連続で流出している",
+    "過去 1 週間で BTC は 14% 超、ETH は 13% 超下落し、S&P500 の下げに連動。ドル高・実質金利の上昇・株式のボラティリティ上昇が引き締め要因とされた",
+    "シティは 7 月に BTC の目標を 8 万 2,000 ドルまで下げ、10 月に引き上げていたため、約 1 か月半で再び下方修正したことになる"
+   ],
+   "code": null,
+   "signal": null,
+   "pick": true
+  },
+  {
+   "id": "2026-11-20-coinpost-grayscale-btc-vol",
+   "url": "https://coinpost.jp/?p=748693",
+   "title": "グレースケール、ビットコインのリスク再評価を提言 変動率は約43％に低下",
+   "source": "coinpost.jp",
+   "source_group": "news",
+   "published_at": "2026-11-19T19:00:18+09:00",
+   "category": "crypto",
+   "keywords": [
+    "bitcoin"
+   ],
+   "score": 70,
+   "why": "matched: ビットコイン",
+   "read_min": null,
+   "tldr": "米グレースケールが 18 日のレポートで、ビットコインのボラティリティが約 43% まで下がったとしてリスク評価の見直しを提言した（RSS 要約より）。",
+   "points": [],
+   "code": null,
+   "signal": null,
+   "pick": false
+  },
+  {
+   "id": "2026-11-20-nikkei-fsa-rakuten-sec",
+   "url": "https://www.nikkei.com/article/DGXZQOUB19ADX0Z11C26A1000000/",
+   "title": "金融庁、楽天証券に報告徴求命令 顧客情報漏洩で - 日本経済新聞",
+   "source": "nikkei.com",
+   "source_group": "tech_blog",
+   "published_at": "2026-11-19T20:01:11+09:00",
+   "category": "stocks",
+   "keywords": [
+    "fsa",
+    "data-breach",
+    "security-incident"
+   ],
+   "score": 75,
+   "why": "金融庁の行政対応（はてブ 12）",
+   "read_min": null,
+   "tldr": "金融庁が、不正アクセスで顧客情報が漏えいした楽天証券に、金融商品取引法に基づく報告徴求命令を出したと日経が報じた。漏えいは最大約 1,572 万口座分で、原因分析と再発防止策の報告を求める（RSS 要約より）。",
+   "points": [],
+   "code": null,
+   "signal": "B! 12",
+   "pick": false
+  },
+  {
+   "id": "2026-11-20-nikkei-jt-russia-loss",
+   "url": "https://www.nikkei.com/article/DGXZQOUB196SK0Z11C26A1000000/",
+   "title": "決算:JT、ロシア事業損失で1兆3860億円下方修正 子会社の支配喪失で - 日本経済新聞",
+   "source": "nikkei.com",
+   "source_group": "tech_blog",
+   "published_at": "2026-11-19T15:46:02+09:00",
+   "category": "stocks",
+   "keywords": [
+    "earnings",
+    "geopolitics"
+   ],
+   "score": 65,
+   "why": "はてブ 201",
+   "read_min": null,
+   "tldr": "JT が 2026 年 12 月期の連結最終損益を 7,240 億円の赤字に下方修正した（従来予想から 1 兆 3,860 億円の修正）。ロシア事業の経営権を事実上失い、連結から外したことに伴う損失を計上する（RSS 要約より）。",
+   "points": [],
+   "code": null,
+   "signal": "B! 201",
+   "pick": false
+  },
+  {
+   "id": "2026-11-20-diamond-mexico-rate-cut",
+   "url": "https://diamond.jp/articles/-/403766",
+   "title": "メキシコ中銀「サプライズ利下げ」で政策金利6.25％、米FRBと逆方向に動いた背景とペソ相場の上値が重い理由",
+   "source": "diamond.jp",
+   "source_group": "news",
+   "published_at": "2026-11-20T04:15:00+09:00",
+   "category": "macro",
+   "keywords": [
+    "emerging-markets",
+    "interest-rates"
+   ],
+   "score": 62,
+   "why": "matched: 金利",
+   "read_min": null,
+   "tldr": "メキシコ中央銀行が市場の据え置き予想に反して政策金利を 6.25% に引き下げた背景と、米国との金利差縮小でペソの上値が重くなりそうな理由を解説する（RSS 要約より）。",
+   "points": [],
+   "code": null,
+   "signal": null,
+   "pick": false
+  },
+  {
+   "id": "2026-11-20-diamond-fb-intervention",
+   "url": "https://diamond.jp/articles/-/403746",
+   "title": "「国の借金」が3カ月で23兆円減少！【政府短期証券】とは何か、15兆円超の円買い介入で減る仕組みを解説",
+   "source": "diamond.jp",
+   "source_group": "news",
+   "published_at": "2026-11-20T04:10:00+09:00",
+   "category": "macro",
+   "keywords": [
+    "fx",
+    "jp-fiscal"
+   ],
+   "score": 62,
+   "why": "matched: 為替",
+   "read_min": null,
+   "tldr": "9 月末の「国の借金」が 3 か月で 23 兆円以上減った主因は政府短期証券の残高減で、背景に 15 兆円超の円買い介入があると解説する。国の借金が減っても財政改善とはいえない理由にも触れている（RSS 要約より）。",
+   "points": [],
+   "code": null,
+   "signal": null,
+   "pick": false
+  },
+  {
+   "id": "2026-11-20-investing-barr-supervision",
+   "url": "https://jp.investing.com/news/economy-news/article-1765002",
+   "title": "バーFRB副議長、規制変更が金融監督を弱体化させる恐れと警告",
+   "source": "investing.com",
+   "source_group": "news",
+   "published_at": "2026-11-20T04:57:07+09:00",
+   "category": "macro",
+   "keywords": [
+    "fed",
+    "bank-supervision"
+   ],
+   "score": 50,
+   "why": "matched: 金利（FRB 関連）",
+   "read_min": null,
+   "tldr": "FRB のバー副議長が、規制の変更が金融監督を弱めるおそれがあると警告した（タイトルより）。",
+   "points": [],
+   "code": null,
+   "signal": null,
+   "pick": false
+  },
+  {
+   "id": "2026-11-20-diamond-yucho-deposit-cap",
+   "url": "https://diamond.jp/articles/-/403786",
+   "title": "ゆうちょ銀行の「貯金限度額撤廃」要望にメガバンク・地銀・信金信組がこぞって猛反発！",
+   "source": "diamond.jp",
+   "source_group": "news",
+   "published_at": "2026-11-20T04:50:00+09:00",
+   "category": "macro",
+   "keywords": [
+    "regional-banks",
+    "bank-supervision"
+   ],
+   "score": 45,
+   "why": "金融業界の制度論点",
+   "read_min": null,
+   "tldr": "ゆうちょ銀行が 10 月に郵政民営化委員会へ通常貯金の限度額撤廃を求め、民間金融機関が反発している背景と、上乗せ規制をめぐる攻防の歴史を解説する（RSS 要約より）。",
+   "points": [],
+   "code": null,
+   "signal": null,
+   "pick": false
+  },
+  {
+   "id": "2026-11-20-tbs-energy-subsidy",
+   "url": "https://newsdig.tbs.co.jp/articles/-/3096139",
+   "title": "ガソリン・電気・ガス補助に約17兆円「1日100億円超の税金」“激変緩和”も高市総理は“出口”を描けるか",
+   "source": "newsdig.tbs.co.jp",
+   "source_group": "tech_blog",
+   "published_at": "2026-11-19T09:55:42+09:00",
+   "category": "macro",
+   "keywords": [
+    "jp-fiscal",
+    "crude-oil"
+   ],
+   "score": 45,
+   "why": "はてブ 132",
+   "read_min": null,
+   "tldr": "2022 年に始まったガソリン・電気・ガスへの補助の累計が約 17 兆円に達し、出口を描けるかが焦点になっていると TBS が報じた（RSS 要約より）。",
+   "points": [],
+   "code": null,
+   "signal": "B! 132",
+   "pick": false
+  }
+ ],
+ "social": [
+  {
+   "network": "x",
+   "author": "@GoogleAI",
+   "url": "https://x.com/GoogleAI/status/2123168242797809944",
+   "text": "Google AI が Gemini 4 Neon を発表。ソフトウェア開発・知的作業・科学のワークフローで、最先端級の知能と速いタスク完了を両立するとした。",
+   "metrics": null,
+   "heat": null,
+   "category": "ai",
+   "keywords": [
+    "google",
+    "llm"
+   ],
+   "posted_at": "2026-11-19T06:35:30+09:00"
+  },
+  {
+   "network": "x",
+   "author": "@MicrosoftAI",
+   "url": "https://x.com/MicrosoftAI/status/2122778865068130701",
+   "text": "MAI Code 2 は GPT-6.1 Sol の 98% の性能を 40% のコストで、Claude Opus 5.5 の 96% を 5% のコストで出せると主張。",
+   "metrics": null,
+   "heat": null,
+   "category": "ai",
+   "keywords": [
+    "microsoft",
+    "llm-cost",
+    "ai-coding"
+   ],
+   "posted_at": "2026-11-18T04:48:15+09:00"
+  },
+  {
+   "network": "x",
+   "author": "@midudev",
+   "url": "https://x.com/midudev/status/2123417080145887570",
+   "text": "Ignite で Microsoft が発表した一連のモデル（Code 2・Code 2 Flash・Cyber 2 Flash・Image 2.7 など）を「AI のダークホース」として性能と価格の主張を並べて紹介。",
+   "metrics": null,
+   "heat": null,
+   "category": "ai",
+   "keywords": [
+    "microsoft",
+    "llm"
+   ],
+   "posted_at": "2026-11-19T23:04:17+09:00"
+  },
+  {
+   "network": "x",
+   "author": "@rokkatei",
+   "url": "https://x.com/rokkatei/status/2123023428135567758",
+   "text": "六花亭がオンラインショップへの不正アクセスで決済画面のプログラムが改ざんされ、入力された情報が外部に送信された可能性があるとお詫びと経緯を公表。",
+   "metrics": null,
+   "heat": null,
+   "category": "sec",
+   "keywords": [
+    "data-breach",
+    "payments"
+   ],
+   "posted_at": "2026-11-18T21:00:03+09:00"
+  },
+  {
+   "network": "x",
+   "author": "@shin__hod",
+   "url": "https://x.com/shin__hod/status/2123223085595976065",
+   "text": "全桁流出は入力画面で盗み見られる型なので、直感に反してカードを保存する設定のほうが毎回入力するよりリスクが下がると指摘。",
+   "metrics": null,
+   "heat": null,
+   "category": "sec",
+   "keywords": [
+    "payments",
+    "security-incident"
+   ],
+   "posted_at": "2026-11-19T10:13:25+09:00"
+  },
+  {
+   "network": "x",
+   "author": "@KobeissiLetter",
+   "url": "https://x.com/KobeissiLetter/status/2123396042431385907",
+   "text": "Anthropic（ANT）が Nasdaq で取引開始予定と速報。1 株 83 ドルで調達額は 813 億ドルと見込まれ、史上最大の IPO になるとした。",
+   "metrics": null,
+   "heat": null,
+   "category": "stocks",
+   "keywords": [
+    "ipo",
+    "anthropic"
+   ],
+   "posted_at": "2026-11-19T21:40:41+09:00"
+  },
+  {
+   "network": "x",
+   "author": "@YahooFinance",
+   "url": "https://x.com/YahooFinance/status/2123458533844726179",
+   "text": "Anthropic が上場企業になり、ANT が Nasdaq で取引を始めたと伝えた。",
+   "metrics": null,
+   "heat": null,
+   "category": "stocks",
+   "keywords": [
+    "ipo",
+    "anthropic",
+    "us-stocks"
+   ],
+   "posted_at": "2026-11-20T01:49:01+09:00"
+  }
+ ],
+ "releases": [
+  {
+   "date": "2026-11-18",
+   "title": "Ruby 4.0.10 / 3.4.13 / 3.3.14（セキュリティ修正）",
+   "repo": "ruby/ruby",
+   "url": "https://www.ruby-lang.org/en/news/2026/11/18/multiple-vulnerabilities-in-regexp-and-string/",
+   "kind": "release",
+   "note": "Regexp と String の大文字・小文字変換の脆弱性（Ruby2ßhell）を修正。修正版のバージョンは verialabs の記事で確認",
+   "category": "sec"
+  },
+  {
+   "date": "2026-11-20",
+   "title": "Anthropic IPO の受け渡し（クロージング）予定",
+   "repo": null,
+   "url": "https://www.anthropic.com/news/anthropic-prices-initial-public-offering",
+   "kind": "event",
+   "note": "Anthropic の発表で 11 月 20 日予定と確認（慣例的な条件を満たすことが前提）",
+   "category": "stocks"
+  },
+  {
+   "date": "2026-11-20",
+   "title": "Microsoft 365 障害の最終版事後レポート（PIR）公開予定",
+   "repo": null,
+   "url": "https://forest.watch.impress.co.jp/docs/news/2156753.html",
+   "kind": "event",
+   "note": "前日の日次ファイルから引き継ぎ（窓の杜の記事で予定日を確認）",
+   "category": "cloud"
+  },
+  {
+   "date": "2026-11-23",
+   "title": "米 11 月 PMI（速報）",
+   "repo": null,
+   "url": "https://coinpost.jp/?p=748038",
+   "kind": "event",
+   "note": "前日の日次ファイルから引き継ぎ（CoinPost の寄稿で日程を確認）",
+   "category": "macro"
+  },
+  {
+   "date": "2026-11-24",
+   "title": "Quad9 がフランスでのサービスを停止",
+   "repo": null,
+   "url": "https://x.com/Itsfoss/status/2113520157830295561",
+   "kind": "event",
+   "note": "前日の日次ファイルから引き継ぎ（X 投稿で 11 月 24 日の停止日を確認）",
+   "category": "cloud"
+  }
+ ]
+}
