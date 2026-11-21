@@ -1,0 +1,809 @@
+{
+  "date": "2026-11-22",
+  "generated_at": "2026-11-22T05:45:00+09:00",
+  "stats": {
+    "collected": 247,
+    "sources_ok": 25,
+    "sources_total": 26,
+    "by_group": {
+      "tech_blog": 74,
+      "hackernews": 47,
+      "official": 1,
+      "news": 125
+    },
+    "failed_sources": [
+      "coindesk_jp"
+    ]
+  },
+  "digest": [
+    {
+      "category": "stocks",
+      "text": "20 日の米国株はナスダック総合が 5.3% 安で 2026 年の上昇分を失い、7 日続落の S&P500（3.7% 安）とダウも調整局面入り。エヌビディアは会計を巡る SEC 調査の報道で約 14% 安となった。",
+      "keywords": [
+        "us-stocks",
+        "nvidia",
+        "ai-economy"
+      ]
+    },
+    {
+      "category": "ai",
+      "text": "Anthropic の数学者 Alpöge 氏が Claude と共同でリーマン予想（一般化リーマン予想を含む）の証明を Lean で公表（HN 2841 pt）。Lean コミュニティは形式証明のチェックを通ったと発表し、数学的な理解はこれからとしている。",
+      "keywords": [
+        "ai-research",
+        "formal-verification",
+        "claude"
+      ]
+    },
+    {
+      "category": "ai",
+      "text": "Thinking Machines Lab がノート PC で動くループ型 Transformer「Inkling 2 Mini」（26.4B の MoE）をオープンウェイトで公開した（HN 1297 pt）。",
+      "keywords": [
+        "open-weight",
+        "local-llm"
+      ]
+    },
+    {
+      "category": "crypto",
+      "text": "ビットコインは 21 日に一時 5.8 万ドルを割り、2024 年 9 月以来の安値圏に。24 時間の強制清算は約 20 億ドル、米現物 ETF は 3 日連続の純流出だった。",
+      "keywords": [
+        "bitcoin",
+        "bitcoin-etf"
+      ]
+    },
+    {
+      "category": "sec",
+      "text": "GPGME に細工した鍵で起きる二重解放（CVE-2026-129975）が見つかり、2.3.1 で修正。告知はリモートコード実行の可能性も否定していない。",
+      "keywords": [
+        "cryptography",
+        "memory-safety"
+      ]
+    }
+  ],
+  "items": [
+    {
+      "id": "2026-11-22-alpoge-rh-proof",
+      "url": "https://alpo.ge/remark.pdf",
+      "title": "Levent Alpöge claims proof of the Generalized Riemann Hypothesis [pdf]",
+      "source": "alpo.ge",
+      "source_group": "hackernews",
+      "published_at": "2026-11-20T23:16:21+09:00",
+      "category": "ai",
+      "keywords": [
+        "ai-research",
+        "formal-verification",
+        "claude",
+        "anthropic"
+      ],
+      "score": 100,
+      "why": "HN 2841 pt（Lean 検証 574 pt・Aaronson 336 pt など関連スレ多数）",
+      "read_min": 5,
+      "tldr": "Anthropic の数学者 Levent Alpöge 氏が、Claude と共同でリーマン予想の証明を見つけたとする声明を公表した。手法は一般化リーマン予想（GRH）にも及ぶとし、論文ではなく Lean による形式証明のみを公開している。",
+      "points": [
+        "声明は 2 ページ程度で、証明本体は Lean の形式化として公開。人間向けに書き下すと 25 万ページ超になるため「読めない slop」を出すより Lean のみにしたと説明している",
+        "Lean コミュニティ（Lean FRO・Mathlib Initiative が支持）は、約 1,700 万行のライブラリが Mathlib の RiemannHypothesis を証明していることを複数の独立チェッカーで確認したと発表。一方、証明に含まれる新しいアイデアの理解・解説はこれからとしている",
+        "同じ日に人間の手による別の GRH 証明案（A. M. Masullo 氏）も公表されたが、数時間後に複数の問題点が指摘されている。Terence Tao 氏は Euler・Navier–Stokes の爆発解とあわせて論じ、GRH の証明は消化に時間がかかるとしている"
+      ],
+      "code": null,
+      "signal": "B! 23 · ▲ 2841",
+      "pick": true
+    },
+    {
+      "id": "2026-11-22-thinkingmachines-inkling2-mini",
+      "url": "https://thinkingmachines.ai/news/inkling-2-mini/",
+      "title": "Introducing Inkling 2 Mini",
+      "source": "thinkingmachines.ai",
+      "source_group": "tech_blog",
+      "published_at": "2026-11-21T08:08:37+09:00",
+      "category": "ai",
+      "keywords": [
+        "open-weight",
+        "local-llm",
+        "llm"
+      ],
+      "score": 100,
+      "why": "HN 1297 pt",
+      "read_min": 8,
+      "tldr": "Thinking Machines Lab が、ノート PC で動く小型のオープンウェイトモデル Inkling 2 Mini を公開した。中間層を 1 トークンあたり 3 回繰り返すループ型 Transformer の MoE で、出力トークンを増やさずに内部で多く考える設計。",
+      "points": [
+        "総パラメータ 26.4B・アクティブ 3.4B（ループ分を含めた重みの適用は 5.4B）。24 層を 6 層ずつ 4 ブロックに分け、中央 2 ブロックを 3 回回して 24 層から 48 層分の計算をする",
+        "DeepSWE v1.1 48.2%、SWEBench Verified（bash のみ）79.2%、MCP Atlas 82.7% などを公表。一部のベンチマークでは Qwen3.8-27B に及ばないことも明記している",
+        "NVFP4 / MXFP8 でネイティブに学習・配布し、メモリは約 20GB。Ollama（32GB 以上の Mac）、llama.cpp、vLLM、SGLang などで動く"
+      ],
+      "code": null,
+      "signal": "B! 9 · ▲ 1297",
+      "pick": true
+    },
+    {
+      "id": "2026-11-22-manidoraisamy-dev-architect",
+      "url": "https://manidoraisamy.com/developer-to-architect.html",
+      "title": "We promoted developers into architects without informing them",
+      "source": "manidoraisamy.com",
+      "source_group": "hackernews",
+      "published_at": "2026-11-21T03:17:51+09:00",
+      "category": "be",
+      "keywords": [
+        "software-design",
+        "ai-coding",
+        "coding-agent"
+      ],
+      "score": 86,
+      "why": "HN 554 pt",
+      "read_min": 6,
+      "tldr": "AI コーディングツールは要求をそのまま実装し、設計の妥当性は問わない。だから開発者は知らないうちに「アーキテクト」の役割を担わされている、という主張。",
+      "points": [
+        "Google Forms アドオンのインストール時にメールを記録する要求に対し、AI は取得制限を回避するフォールバックを何段も書き、ウェルカム画面の表示に 15 秒かかるようになった例を挙げる",
+        "経験のある開発者なら、記録をタイムスタンプだけにする・画面表示後に非同期で記録するなど、要求に押し返してトレードオフを示したはずだとする",
+        "今後の開発者の仕事はデータモデルと設計を先に決めて AI をそれに従わせ、後方互換が必要な箇所を明示し、出力をシニアのレビューのように確かめることだと述べる"
+      ],
+      "code": null,
+      "signal": "B! 2 · ▲ 554",
+      "pick": true
+    },
+    {
+      "id": "2026-11-22-arxiv-self-rewriting-weights",
+      "url": "https://arxiv.org/abs/2611.21885",
+      "title": "Language Models Can Rewrite Their Own Weights",
+      "source": "arxiv.org",
+      "source_group": "hackernews",
+      "published_at": "2026-11-21T01:29:06+09:00",
+      "category": "ai",
+      "keywords": [
+        "ai-research",
+        "llm",
+        "open-weight"
+      ],
+      "score": 84,
+      "why": "HN 471 pt",
+      "read_min": 15,
+      "tldr": "言語モデルが勾配や学習を使わず、自分の推論で自分の重みを書き換える「self-rewriting」を提案する論文。27B のオープンモデルに自身の重みと採点結果を与え、失敗を診断して編集させた。",
+      "points": [
+        "候補の編集を練習問題で試し、成績が上がるものだけを残す。未見の問題で正答率が 6.6 ポイント上がったと報告している",
+        "8 回連続のセッションで、前回の編集の上に積み重ねる形で精度が上がり続けたという",
+        "壊したモデルを元の重みなしで元の 80% 超の精度まで修復できた一方、同じ系列の小さいモデルでは有効な編集ができず、能力は規模に依存するとしている"
+      ],
+      "code": null,
+      "signal": "▲ 471",
+      "pick": true
+    },
+    {
+      "id": "2026-11-22-tao-navier-stokes-grh",
+      "url": "https://terrytao.wordpress.com/2026/11/20/unforced-euler-singularity-unforced-navier-stokes-singularity-and-the-generalized-riemann-hypothesis/",
+      "title": "Unforced Navier-Stokes Singularity and the Generalized Riemann Hypothesis",
+      "source": "terrytao.wordpress.com",
+      "source_group": "hackernews",
+      "published_at": "2026-11-21T02:21:36+09:00",
+      "category": "ai",
+      "keywords": [
+        "ai-research",
+        "formal-verification"
+      ],
+      "score": 85,
+      "why": "HN 518 pt（Buckmaster 氏の Navier–Stokes リポジトリ 311 pt も同じ話題）",
+      "read_min": 10,
+      "tldr": "Terence Tao 氏が、外力なしの 3 次元 Euler 方程式・Navier–Stokes 方程式の有限時間爆発の証明（Lean 形式化あり）と、AI で生成された Lean のみの GRH 証明をまとめて論じた。いずれも検証済みとは宣言していない。",
+      "points": [],
+      "code": null,
+      "signal": "B! 9 · ▲ 518",
+      "pick": false
+    },
+    {
+      "id": "2026-11-22-cekrem-review-skill",
+      "url": "https://cekrem.github.io/posts/if-you-stop-writing-code-you-also-get-worse-at-reviewing-it/",
+      "title": "If you stop writing code, you also get worse at reviewing it",
+      "source": "cekrem.github.io",
+      "source_group": "hackernews",
+      "published_at": "2026-11-20T21:41:38+09:00",
+      "category": "ai",
+      "keywords": [
+        "ai-coding",
+        "code-review"
+      ],
+      "score": 81,
+      "why": "HN 372 pt",
+      "read_min": null,
+      "tldr": "AI にコードを書かせて自分は書かなくなると、レビューする力も落ちていく、という問題提起の記事。",
+      "points": [],
+      "code": null,
+      "signal": "▲ 372",
+      "pick": false
+    },
+    {
+      "id": "2026-11-22-mozilla-ios-browser-engines",
+      "url": "https://blog.mozilla.org/en/mozilla/internet-policy/apple-ios-browser-engine-rules/",
+      "title": "Why there are still no non-WebKit browsers on iOS",
+      "source": "blog.mozilla.org",
+      "source_group": "hackernews",
+      "published_at": "2026-11-21T00:03:31+09:00",
+      "category": "be",
+      "keywords": [
+        "apple",
+        "antitrust"
+      ],
+      "score": 81,
+      "why": "HN 372 pt",
+      "read_min": null,
+      "tldr": "Mozilla が、iOS でいまも WebKit 以外のブラウザエンジンが提供されていない理由を Apple のルールの観点から説明した。",
+      "points": [],
+      "code": null,
+      "signal": "▲ 372",
+      "pick": false
+    },
+    {
+      "id": "2026-11-22-motherjones-google-schools-ai",
+      "url": "https://www.motherjones.com/politics/2026/11/google-alphabet-union-school-ai-protest-gemini-workers-petition/",
+      "title": "Google workers tell their employer not to punish schools that don't want AI",
+      "source": "motherjones.com",
+      "source_group": "hackernews",
+      "published_at": "2026-11-21T01:59:27+09:00",
+      "category": "ai",
+      "keywords": [
+        "google",
+        "ai-adoption"
+      ],
+      "score": 77,
+      "why": "HN 279 pt",
+      "read_min": null,
+      "tldr": "Google の従業員らが、AI（Gemini）の導入を望まない学校を不利に扱わないよう会社に求める請願を出したと報じられた。",
+      "points": [],
+      "code": null,
+      "signal": "▲ 279",
+      "pick": false
+    },
+    {
+      "id": "2026-11-22-masteringemacs-dreamcoder",
+      "url": "https://www.masteringemacs.org/article/announcing-dreamcoder",
+      "title": "DreamCoder: Coding harness and IDE from the author of Mastering Emacs",
+      "source": "masteringemacs.org",
+      "source_group": "hackernews",
+      "published_at": "2026-11-21T05:03:59+09:00",
+      "category": "ai",
+      "keywords": [
+        "coding-agent"
+      ],
+      "score": 76,
+      "why": "HN 268 pt",
+      "read_min": null,
+      "tldr": "『Mastering Emacs』の著者が、AI コーディング向けのハーネス兼 IDE「DreamCoder」を発表した。",
+      "points": [],
+      "code": null,
+      "signal": "B! 1 · ▲ 268",
+      "pick": false
+    },
+    {
+      "id": "2026-11-22-gnupg-gpgme-double-free",
+      "url": "https://lists.gnupg.org/pipermail/gnupg-announce/2026q4/000517.html",
+      "title": "RCE in Gnupg",
+      "source": "lists.gnupg.org",
+      "source_group": "hackernews",
+      "published_at": "2026-11-21T17:32:58+09:00",
+      "category": "sec",
+      "keywords": [
+        "cryptography",
+        "memory-safety",
+        "vulnerability-management"
+      ],
+      "score": 72,
+      "why": "HN 192 pt・GnuPG 公式のセキュリティ告知",
+      "read_min": null,
+      "tldr": "GPGME の 2.3.0 より前の全バージョンに、細工した長いユーザー ID を持つ OpenPGP 鍵で起きる二重解放（CVE-2026-129975）があり、GPGME 2.3.1 と Gpg4win 5.1.2 で修正された。告知はデータ流出に悪用でき、リモートコード実行も否定できないとしている。",
+      "points": [],
+      "code": null,
+      "signal": "▲ 192",
+      "pick": false
+    },
+    {
+      "id": "2026-11-22-smhn-gemini-harness",
+      "url": "https://smhn.info/202611-gemini-subscription-third-party-harness-december-2",
+      "title": "どれだけGeminiが賢くなってもAIオタクが避ける理由。ついに解消の可能性 - すまほん!!",
+      "source": "smhn.info",
+      "source_group": "tech_blog",
+      "published_at": "2026-11-20T23:35:51+09:00",
+      "category": "ai",
+      "keywords": [
+        "google",
+        "coding-agent"
+      ],
+      "score": 80,
+      "why": "はてブ 251",
+      "read_min": null,
+      "tldr": "Gemini のモデル性能は上がってきたが乗り換えが進まない理由として、サブスクリプションをサードパーティのハーネスで使えない点を挙げ、それが解消されるかもしれないと伝える記事。",
+      "points": [],
+      "code": null,
+      "signal": "B! 251",
+      "pick": false
+    },
+    {
+      "id": "2026-11-22-bbc-fbi-database-hack",
+      "url": "https://www.bbc.com/news/articles/cvze7de86pk3o",
+      "title": "FBI reportedly investigating apparent hack of its criminal database",
+      "source": "bbc.com",
+      "source_group": "hackernews",
+      "published_at": "2026-11-21T19:33:57+09:00",
+      "category": "sec",
+      "keywords": [
+        "security-incident",
+        "data-breach"
+      ],
+      "score": 69,
+      "why": "HN 150 pt",
+      "read_min": null,
+      "tldr": "FBI が自らの犯罪データベースへのハッキングとみられる事案を調べていると BBC が報じた。",
+      "points": [],
+      "code": null,
+      "signal": "▲ 150",
+      "pick": false
+    },
+    {
+      "id": "2026-11-22-impress-windows-server-2028",
+      "url": "https://forest.watch.impress.co.jp/docs/news/2158261.html",
+      "title": "「Windows Server 2028」で「WSUS」や「SMB 1.0」、「VBScript」などが削除へ／「Windows PowerShell 5.1」「WDS」は非推奨に",
+      "source": "forest.watch.impress.co.jp",
+      "source_group": "tech_blog",
+      "published_at": "2026-11-20T20:11:54+09:00",
+      "category": "cloud",
+      "keywords": [
+        "microsoft"
+      ],
+      "score": 64,
+      "why": "はてブ 80",
+      "read_min": null,
+      "tldr": "次期 Windows Server 2028 で WSUS・SMB 1.0・VBScript などが削除され、Windows PowerShell 5.1 と WDS は非推奨、レガシー BIOS での起動もできなくなる。",
+      "points": [],
+      "code": null,
+      "signal": "B! 80",
+      "pick": false
+    },
+    {
+      "id": "2026-11-22-nikkei-patch-hell",
+      "url": "https://www.nikkei.com/article/DGXZQOGN18CYM0Y6A111C2000000/",
+      "title": "「パッチ地獄」が米IT障害誘発、AIがせかす脆弱性修正 銀行や空港停止 - 日本経済新聞",
+      "source": "nikkei.com",
+      "source_group": "tech_blog",
+      "published_at": "2026-11-21T09:21:00+09:00",
+      "category": "sec",
+      "keywords": [
+        "system-outage",
+        "vulnerability-management"
+      ],
+      "score": 56,
+      "why": "はてブ 47",
+      "read_min": null,
+      "tldr": "米国の銀行や空港でシステム障害が相次ぐ背景に、AI が大量の脆弱性を見つけ、パッチ適用や更新を急がざるを得ない事情があると日経が報じた。",
+      "points": [],
+      "code": null,
+      "signal": "B! 47",
+      "pick": false
+    },
+    {
+      "id": "2026-11-22-aws-sts-getscopedcredentials",
+      "url": "https://aws.amazon.com/about-aws/whats-new/2026/11/sts-getscopedcredentials/",
+      "title": "AWS STS announces GetScopedCredentials to scope down permissions at runtime",
+      "source": "aws.amazon.com",
+      "source_group": "tech_blog",
+      "published_at": "2026-11-20T18:32:05+09:00",
+      "category": "cloud",
+      "keywords": [
+        "aws",
+        "authentication"
+      ],
+      "score": 50,
+      "why": "AWS 公式発表（実行時に権限を絞った認証情報を発行する新 API）",
+      "read_min": null,
+      "tldr": "AWS STS に、実行時に権限を絞り込んだ一時認証情報を発行する GetScopedCredentials が追加された。",
+      "points": [],
+      "code": null,
+      "signal": "B! 9",
+      "pick": false
+    },
+    {
+      "id": "2026-11-22-nbc-nasdaq-correction",
+      "url": "https://www.nbcnews.com/business/markets/anthropic-shares-markets-selloff-nasdaq-rcna610394",
+      "title": "Markets plunge: Nasdaq erases 2026 gains, S&P, Dow in corrections",
+      "source": "nbcnews.com",
+      "source_group": "hackernews",
+      "published_at": "2026-11-21T02:44:01+09:00",
+      "category": "stocks",
+      "keywords": [
+        "us-stocks",
+        "ai-economy",
+        "anthropic"
+      ],
+      "score": 90,
+      "why": "matched: 米国株（Guardian 474 pt・日経「S&P500が調整局面入り」と同じ話題。Guardian は本文を取得できず NBC を残した）",
+      "read_min": 4,
+      "tldr": "20 日の米国株は全面安となり、ナスダック総合は 5.3% 下げて 2026 年の上昇分を失った。S&P500 は 3.7% 安で 7 日続落、ダウも 1.9% 安で、ともに直近高値から 10% 超下げた調整局面に入った。",
+      "points": [
+        "上場 2 日目の Anthropic 株は 9% 下落し、公開価格をわずかに上回る水準まで戻した",
+        "エヌビディア株は、当局が会計上の問題を調べているとのロイター報道を受けて約 14% 下落した",
+        "アナリストはデータセンター建設の減速、AI 案件の資金縮小、中間選挙の結果に加え、原油高・金利上昇・根強いインフレなどを背景に挙げ、10 月初めから続く下落の流れにあるとしている"
+      ],
+      "code": null,
+      "signal": "▲ 196",
+      "pick": true
+    },
+    {
+      "id": "2026-11-22-marketscreener-nvidia-sec",
+      "url": "https://www.marketscreener.com/news/us-sec-s-nvidia-probe-is-examining-potential-accounting-issues-sources-say-ce785ed3dd8ff627",
+      "title": "US SEC's Nvidia probe is examining potential accounting issues – sources",
+      "source": "marketscreener.com",
+      "source_group": "hackernews",
+      "published_at": "2026-11-21T05:22:41+09:00",
+      "category": "stocks",
+      "keywords": [
+        "nvidia",
+        "us-stocks",
+        "semiconductor"
+      ],
+      "score": 80,
+      "why": "matched: 米国株",
+      "read_min": 3,
+      "tldr": "ロイターは関係者 2 人の話として、米 SEC の執行部門がエヌビディアの会計に問題がないか調べていると報じた。調査の開始時期や具体的な論点は分かっていない。",
+      "points": [
+        "WSJ が先に SEC の調査を報じていたが、焦点は不明だった。SEC はコメントを控え、エヌビディアもすぐには回答していない",
+        "記事は、調査は不正の証拠ではなく、多くは処分なしに終わると注記している",
+        "エヌビディア株は 20 日の終値で 14.01% 安の 125.53 ドル。一連の問題で株価は 3 分の 1 超下げたとしている"
+      ],
+      "code": null,
+      "signal": "▲ 298",
+      "pick": true
+    },
+    {
+      "id": "2026-11-22-coinpost-btc-58k",
+      "url": "https://coinpost.jp/?p=749001",
+      "title": "ビットコイン続落、AI株安の中で一時5.8万ドル割れ、2024年9月以来の安値圏に",
+      "source": "coinpost.jp",
+      "source_group": "news",
+      "published_at": "2026-11-21T06:05:01+09:00",
+      "category": "crypto",
+      "keywords": [
+        "bitcoin",
+        "bitcoin-etf",
+        "bitcoin-mining"
+      ],
+      "score": 92,
+      "why": "matched: ビットコイン, 米国株",
+      "read_min": 4,
+      "tldr": "ビットコインは 21 日に一時 5 万 8,000 ドルを割り込み、夏に付けた年初来安値 5 万 7,700 ドルに迫った。AI 関連株の売りが波及し、24 時間で約 6% 下げた。",
+      "points": [
+        "CoinGecko ベースで 1 週間で約 15%、1 か月で約 30% の下落。CoinShares は AI 株の売りの影響が暗号資産固有の要因より大きいとみている",
+        "Coinglass によると 24 時間の強制清算は約 20 億ドル。米ビットコイン現物 ETF は 19 日に約 5.82 億ドルの純流出で、3 日間の合計は約 11.3 億ドル",
+        "JPモルガンは BTC が推計採掘コスト 8 万 6,000 ドルを 2 万 6,000 ドル超下回り、高コストのマイナーに売り圧力がかかりうると指摘。12 月の FRB・日銀の利上げ観測も重しとして挙げている"
+      ],
+      "code": null,
+      "signal": null,
+      "pick": true
+    },
+    {
+      "id": "2026-11-22-coinpost-aml-policy",
+      "url": "https://coinpost.jp/?p=749018",
+      "title": "政府、マネロン対策の基本方針を改訂、暗号資産の悪用リスクへの対応も明記",
+      "source": "coinpost.jp",
+      "source_group": "news",
+      "published_at": "2026-11-21T06:55:41+09:00",
+      "category": "crypto",
+      "keywords": [
+        "crypto-regulation",
+        "aml"
+      ],
+      "score": 70,
+      "why": "政府の基本方針の改訂（財務省が公表）",
+      "read_min": 4,
+      "tldr": "政府のマネロン・テロ資金供与・拡散金融対策政策会議が 19 日、2022 年 5 月に決めた基本方針を改訂した。暗号資産取引を脆弱性の一つに挙げ、マネロンのリスクを「相当程度」と評価している。",
+      "points": [
+        "暗号資産交換業者を、預金取扱金融機関や資金移動業者と並んで他業態より相対的に危険度が高いと位置づけた",
+        "拡散金融では暗号資産取引・非対面取引・海外送金を特に高リスクとし、北朝鮮による暗号資産窃取の情報収集に努めるとした",
+        "生成 AI の悪用や FATF 勧告の改訂を背景に、リスクベース・アプローチの徹底など 4 つの柱と 10 の対策を示した"
+      ],
+      "code": null,
+      "signal": null,
+      "pick": true
+    },
+    {
+      "id": "2026-11-22-diamond-boj-2pct",
+      "url": "https://diamond.jp/articles/-/403775",
+      "title": "日銀の物価目標“到達”でも喜んでいられない「物価も金利も2％」時代、金融政策に「4つの課題」 - 日銀 早耳深掘",
+      "source": "diamond.jp",
+      "source_group": "news",
+      "published_at": "2026-11-22T04:55:00+09:00",
+      "category": "macro",
+      "keywords": [
+        "boj-policy",
+        "interest-rates",
+        "inflation"
+      ],
+      "score": 80,
+      "why": "matched: 金利",
+      "read_min": null,
+      "tldr": "日銀が基調的な物価上昇率を 2% 目標とおおむね整合的と判断したことを受け、低成長とインフレの併存や巨額の政府債務などの課題を論じる記事。冒頭では政策金利 1.25% からの 12 月追加利上げを見込んでいる（本文の大半は有料で未確認）。",
+      "points": [],
+      "code": null,
+      "signal": null,
+      "pick": false
+    },
+    {
+      "id": "2026-11-22-afp-trump-datacenter-tax",
+      "url": "https://www.afpbb.com/articles/-/3663558",
+      "title": "トランプ氏、データセンターの国外建設認めず 建設すれば「莫大な税金」",
+      "source": "afpbb.com",
+      "source_group": "tech_blog",
+      "published_at": "2026-11-21T11:49:57+09:00",
+      "category": "macro",
+      "keywords": [
+        "data-center",
+        "ai-economy"
+      ],
+      "score": 50,
+      "why": "matched: 米国株（AI インフラ関連の政策発言）",
+      "read_min": null,
+      "tldr": "トランプ米大統領が 20 日、国外にデータセンターを建設する米企業に「莫大な税金」を課すと警告した。",
+      "points": [],
+      "code": null,
+      "signal": "B! 15",
+      "pick": false
+    },
+    {
+      "id": "2026-11-22-coinpost-anthropic-stock-tokens",
+      "url": "https://coinpost.jp/?p=749037",
+      "title": "アンソロピックの史上最大級IPOで株トークンが複数のブロックチェーンに登場、取引高15億円超",
+      "source": "coinpost.jp",
+      "source_group": "news",
+      "published_at": "2026-11-21T12:10:45+09:00",
+      "category": "crypto",
+      "keywords": [
+        "tokenization",
+        "anthropic",
+        "ipo"
+      ],
+      "score": 50,
+      "why": "matched: 米国株",
+      "read_min": null,
+      "tldr": "Santiment によると、Anthropic の IPO に合わせて同社株に連動するトークンが複数のチェーンに登場した。株式トークンに伴う権利や流動性の課題も指摘されている。",
+      "points": [],
+      "code": null,
+      "signal": null,
+      "pick": false
+    },
+    {
+      "id": "2026-11-22-investing-ubs-gold",
+      "url": "https://jp.investing.com/news/commodities-news/article-1766908",
+      "title": "UBSが利下げ期待回復前の金相場のさらなる下落を警告",
+      "source": "jp.investing.com",
+      "source_group": "news",
+      "published_at": "2026-11-22T02:50:39+09:00",
+      "category": "macro",
+      "keywords": [
+        "gold",
+        "interest-rates"
+      ],
+      "score": 40,
+      "why": "matched: 金利",
+      "read_min": null,
+      "tldr": "UBS が、利下げ期待が戻る前に金相場がさらに下落する可能性があると警告した。",
+      "points": [],
+      "code": null,
+      "signal": null,
+      "pick": false
+    },
+    {
+      "id": "2026-11-22-coinpost-bitbank-mexc",
+      "url": "https://coinpost.jp/?p=749017",
+      "title": "ビットバンク、MEXCへの暗号資産出金を24日から制限、入金も12月10日から",
+      "source": "coinpost.jp",
+      "source_group": "news",
+      "published_at": "2026-11-21T07:10:39+09:00",
+      "category": "crypto",
+      "keywords": [
+        "crypto-exchange"
+      ],
+      "score": 50,
+      "why": "matched: ビットコイン（国内交換業者の公式発表）",
+      "read_min": null,
+      "tldr": "ビットバンクが MEXC との暗号資産の入出金を制限すると発表した。出金は 11 月 24 日、入金は 12 月 10 日から対象になる。",
+      "points": [],
+      "code": null,
+      "signal": null,
+      "pick": false
+    },
+    {
+      "id": "2026-11-22-coinpost-clarity-act",
+      "url": "https://coinpost.jp/?p=749014",
+      "title": "「クラリティー法案の年内成立可能性はゼロ」共同提案議員",
+      "source": "coinpost.jp",
+      "source_group": "news",
+      "published_at": "2026-11-21T08:05:32+09:00",
+      "category": "crypto",
+      "keywords": [
+        "crypto-regulation"
+      ],
+      "score": 45,
+      "why": "matched: ビットコイン（米国の市場構造法案）",
+      "read_min": null,
+      "tldr": "米共和党のモレノ上院議員が、暗号資産の市場構造を定めるクラリティー法案が上院で可決されるシナリオはないと述べた。",
+      "points": [],
+      "code": null,
+      "signal": null,
+      "pick": false
+    },
+    {
+      "id": "2026-11-22-coinpost-sec-fake-exchange",
+      "url": "https://coinpost.jp/?p=749016",
+      "title": "偽の仮想通貨取引所で58億円超詐取、米SECが8事業体を提訴",
+      "source": "coinpost.jp",
+      "source_group": "news",
+      "published_at": "2026-11-21T07:50:37+09:00",
+      "category": "crypto",
+      "keywords": [
+        "fraud-prevention",
+        "crypto-regulation"
+      ],
+      "score": 40,
+      "why": "matched: ビットコイン",
+      "read_min": null,
+      "tldr": "米 SEC が、偽の投資顧問会社と暗号資産取引所で米国の投資家から 3,700 万ドル超をだまし取ったとしてコロラド州の 8 事業体を提訴した。SNS 広告からチャットに誘導する手口だった。",
+      "points": [],
+      "code": null,
+      "signal": null,
+      "pick": false
+    },
+    {
+      "id": "2026-11-22-coinpost-prediction-market-bill",
+      "url": "https://coinpost.jp/?p=748980",
+      "title": "米上院、戦争やテロに関する予測市場契約の上場禁止法案を可決 下院へ",
+      "source": "coinpost.jp",
+      "source_group": "news",
+      "published_at": "2026-11-20T21:20:59+09:00",
+      "category": "crypto",
+      "keywords": [
+        "prediction-market"
+      ],
+      "score": 40,
+      "why": "予測市場の規制（米上院で可決）",
+      "read_min": null,
+      "tldr": "米上院が、戦争・テロ・暗殺・米軍の作戦に関する予測市場契約や、個人の死亡で結果が決まる契約の上場を禁じる法案を可決し、下院に送った。",
+      "points": [],
+      "code": null,
+      "signal": null,
+      "pick": false
+    }
+  ],
+  "social": [
+    {
+      "network": "x",
+      "author": "@kimmonismus",
+      "url": "https://x.com/kimmonismus/status/2123791432800698792",
+      "text": "Anthropic の数学者 Alpöge 氏が Claude と共同でリーマン予想を証明したと述べ、手法は一般化リーマン予想にも及ぶとしていることを紹介する投稿。",
+      "metrics": null,
+      "heat": null,
+      "category": "ai",
+      "keywords": [
+        "ai-research",
+        "claude"
+      ],
+      "posted_at": "2026-11-20T23:51:50+09:00"
+    },
+    {
+      "network": "x",
+      "author": "@miramurati",
+      "url": "https://x.com/miramurati/status/2123872534970208421",
+      "text": "Inkling 2 Mini はノート PC で動くループ型 Transformer で、ループにより「多く考え、少なく書く」。この規模では思考過程を監視できるが、今後もそうとは限らないと投稿。",
+      "metrics": null,
+      "heat": null,
+      "category": "ai",
+      "keywords": [
+        "open-weight",
+        "local-llm"
+      ],
+      "posted_at": "2026-11-21T05:14:06+09:00"
+    },
+    {
+      "network": "x",
+      "author": "@UnslothAI",
+      "url": "https://x.com/UnslothAI/status/2123873656069877899",
+      "text": "Inkling 2 Mini を 16GB RAM で動かせる GGUF を llama.cpp 向けに公開し、Apache 2.0 の MoE で DeepSWE v1.1 48.2% と紹介。",
+      "metrics": null,
+      "heat": null,
+      "category": "ai",
+      "keywords": [
+        "open-weight",
+        "local-llm"
+      ],
+      "posted_at": "2026-11-21T05:18:33+09:00"
+    },
+    {
+      "network": "x",
+      "author": "@wallstengine",
+      "url": "https://x.com/wallstengine/status/2123885144520196425",
+      "text": "NASDAQ 100 が年初来の上昇分をすべて失ってマイナスに転じ、弱気相場入りまで 0.2% 以内で引けたと速報。",
+      "metrics": null,
+      "heat": null,
+      "category": "stocks",
+      "keywords": [
+        "us-stocks"
+      ],
+      "posted_at": "2026-11-21T06:04:12+09:00"
+    },
+    {
+      "network": "x",
+      "author": "@KobeissiLetter",
+      "url": "https://x.com/KobeissiLetter/status/2123993886771331080",
+      "text": "ビットコインが 5 万 6,000 ドルを割り、60 分で 6.5 億ドル相当のレバレッジポジションが清算されたと投稿。45 日間で 3 万 1,000 ドルの下落としている。",
+      "metrics": null,
+      "heat": null,
+      "category": "crypto",
+      "keywords": [
+        "bitcoin"
+      ],
+      "posted_at": "2026-11-21T13:16:19+09:00"
+    },
+    {
+      "network": "hn",
+      "author": null,
+      "url": "https://news.ycombinator.com/item?id=50579331",
+      "text": "『We promoted developers into architects without informing them』のスレッド。301 件のコメント",
+      "metrics": "▲ 554  ✉ 301",
+      "heat": 100,
+      "category": "be",
+      "keywords": [
+        "software-design",
+        "ai-coding"
+      ],
+      "posted_at": "2026-11-21T03:17:51+09:00"
+    }
+  ],
+  "releases": [
+    {
+      "date": "2026-11-19",
+      "title": "GPGME 2.3.1（CVE-2026-129975 修正）",
+      "repo": null,
+      "url": "https://lists.gnupg.org/pipermail/gnupg-announce/2026q4/000517.html",
+      "kind": "release",
+      "note": "GnuPG 公式告知（11 月 20 日付）で確認。Gpg4win 5.1.2 にも修正版を同梱",
+      "category": "sec"
+    },
+    {
+      "date": "2026-11-19",
+      "title": "マネロン・テロ資金供与・拡散金融対策の基本方針を改訂",
+      "repo": null,
+      "url": "https://coinpost.jp/?p=749018",
+      "kind": "policy",
+      "note": "政府の政策会議が決定、財務省が公表（CoinPost の記事で確認）",
+      "category": "crypto"
+    },
+    {
+      "date": "2026-11-23",
+      "title": "Anthropic（ANT）株のオプション取引開始予定",
+      "repo": null,
+      "url": "https://x.com/RandyWKirk1/status/2123429836912037989",
+      "kind": "event",
+      "note": "前日の日次ファイルから引き継ぎ（X 投稿で 11 月 23 日予定と確認）",
+      "category": "stocks"
+    },
+    {
+      "date": "2026-11-23",
+      "title": "米 11 月 PMI（速報）",
+      "repo": null,
+      "url": "https://coinpost.jp/?p=748038",
+      "kind": "event",
+      "note": "前日の日次ファイルから引き継ぎ（CoinPost の寄稿で日程を確認）",
+      "category": "macro"
+    },
+    {
+      "date": "2026-11-24",
+      "title": "ビットバンク、MEXC への暗号資産出金を制限開始",
+      "repo": null,
+      "url": "https://coinpost.jp/?p=749017",
+      "kind": "event",
+      "note": "入金の制限は 12 月 10 日から（CoinPost の記事で確認）",
+      "category": "crypto"
+    },
+    {
+      "date": "2026-11-24",
+      "title": "Quad9 がフランスでのサービスを停止",
+      "repo": null,
+      "url": "https://x.com/Itsfoss/status/2113520157830295561",
+      "kind": "event",
+      "note": "前日の日次ファイルから引き継ぎ（X 投稿で 11 月 24 日の停止日を確認）",
+      "category": "cloud"
+    }
+  ]
+}
