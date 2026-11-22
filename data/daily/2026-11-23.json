@@ -1,0 +1,756 @@
+{
+  "date": "2026-11-23",
+  "generated_at": "2026-11-23T05:40:00+09:00",
+  "stats": {
+    "collected": 139,
+    "sources_ok": 25,
+    "sources_total": 26,
+    "by_group": {
+      "hackernews": 25,
+      "tech_blog": 54,
+      "news": 60
+    },
+    "failed_sources": [
+      "coindesk_jp"
+    ]
+  },
+  "digest": [
+    {
+      "category": "ai",
+      "text": "Lean FRO と Mathlib Initiative が、リーマン予想の Lean 証明（約 1,700 万行）を複数の独立チェッカーで検証したとする共同声明を公開。HN で 1,192 pt。数学的な中身の解説はこれから。",
+      "keywords": [
+        "formal-verification",
+        "ai-research"
+      ]
+    },
+    {
+      "category": "ai",
+      "text": "Anthropic の 2028 年の電源はガス約 87%・石炭約 11% とする第三者推計が HN で 688 pt。排出量は中間値で年 3,200 万 t-CO2e とするが、前提に依存する推計。",
+      "keywords": [
+        "data-center",
+        "anthropic"
+      ]
+    },
+    {
+      "category": "stocks",
+      "text": "日経平均は 20 日に 3,007 円安の 5 万 6,436 円で週間 7.7% 安。AI 株急落を受け、台湾・韓国・中国が空売り規制や証拠金比率の変更などの市場支援策を出した。",
+      "keywords": [
+        "nikkei225",
+        "emerging-markets"
+      ]
+    },
+    {
+      "category": "crypto",
+      "text": "ビットコインは対円で 1,000 万円を割り、ドル建てでも 200 週移動平均線を下回った。次の焦点は 25 日の米 PCE デフレーター。",
+      "keywords": [
+        "bitcoin",
+        "us-inflation"
+      ]
+    },
+    {
+      "category": "macro",
+      "text": "財務省の研究会で、トークン化国債の実機検証を 11 月〜来年 3 月にカントン・ネットワークで行う計画が示された。投資信託・NISA と住宅ローン金利は、この日に確認できた新しいニュースがなかった。",
+      "keywords": [
+        "tokenization",
+        "jgb"
+      ]
+    }
+  ],
+  "items": [
+    {
+      "id": "2026-11-23-lean-rh-verify",
+      "url": "https://leanprover-community.github.io/blog/posts/riemann-hypothesis/",
+      "title": "Lean verification of the Riemann Hypothesis",
+      "source": "leanprover-community.github.io",
+      "source_group": "hackernews",
+      "published_at": "2026-11-21T23:36:45+09:00",
+      "category": "ai",
+      "keywords": [
+        "formal-verification",
+        "ai-research",
+        "claude"
+      ],
+      "score": 97,
+      "why": "HN 1192 pt（990 コメント）",
+      "read_min": 6,
+      "tldr": "Lean FRO と Mathlib Initiative が、11 月 20 日に公開されたリーマン予想の Lean 証明（約 1,700 万行）を検証したとする共同声明を出した。命題の正しさ・コンパイル・Mathlib の命題との一致・証明の妥当性の 4 基準で確認したとしている。",
+      "points": [
+        "数十人が同じ証明ファイルのコンパイルを再現し、comparator と con-leche --compare の 2 ツールで、証明された定理が Mathlib の RiemannHypothesis と一致することを確認したという",
+        "証明の検査は Lean 公式カーネルに加え、con-leche・con-ron と、第三者が別言語で実装したチェッカーで実施。悪意あるコードの影響を避けるため、書き出した不活性なエクスポートに対して検査したと説明している",
+        "ライブラリが直接依存するのは Mathlib だけ。一方、証明に含まれる新しい数学的アイデアの解説は今後の数学コミュニティに委ねるとしている"
+      ],
+      "code": null,
+      "signal": "B! 51 · ▲ 1192",
+      "pick": true
+    },
+    {
+      "id": "2026-11-23-anthropic-power-mix",
+      "url": "https://betterdatacenterproject.com/2026/11/16/how-ai-is-powered-a-breakdown-of-byop-and-grid-power/",
+      "title": "87% of the Anthropic power will come from gas and 11% from coal in 2028",
+      "source": "betterdatacenterproject.com",
+      "source_group": "hackernews",
+      "published_at": "2026-11-22T17:57:34+09:00",
+      "category": "ai",
+      "keywords": [
+        "data-center",
+        "anthropic",
+        "ai-economy"
+      ],
+      "score": 89,
+      "why": "HN 688 pt（737 コメント）",
+      "read_min": 10,
+      "tldr": "Better Data Center Project が、Anthropic の米国データセンター計画の電源構成を推計し、2028 年時点で天然ガス約 87%・石炭約 11% になるとするケーススタディを公開した。数値は PUE や稼働率などの前提に基づく推計。",
+      "points": [
+        "Epoch AI のトラッカーや企業の発表・提出書類を集め、系統電力は米 EPA の AVERT で限界電源をモデル化。中間ケースは PUE 1.15・稼働率 70%・2028 年に 9.6 GW 稼働と仮定している",
+        "2028 年の排出量は年 1,700 万〜3,800 万 t-CO2e（中間 3,200 万）と推計。自家発電（BYOP）は契約電力の約 25%（2.5 GW）で、その 8 割が効率の低い単純サイクル型としている",
+        "大気汚染による健康被害を年 20〜30 億ドルと見積もる一方、他社との比較は Anthropic が最大の排出者だという意味ではないと注記している"
+      ],
+      "code": null,
+      "signal": "▲ 688",
+      "pick": true
+    },
+    {
+      "id": "2026-11-23-studio-display-ethernet",
+      "url": "https://blog.tymscar.com/posts/studiodisplayethernet/",
+      "title": "My monitor was cutting my download speed by 75%",
+      "source": "blog.tymscar.com",
+      "source_group": "hackernews",
+      "published_at": "2026-11-21T19:36:32+09:00",
+      "category": "cloud",
+      "keywords": [
+        "networking",
+        "apple",
+        "homelab"
+      ],
+      "score": 89,
+      "why": "HN 676 pt",
+      "read_min": 12,
+      "tldr": "2.5 Gbps 回線で、Studio Display に挿した USB-C 有線 LAN アダプタ経由だと下りが約 600 Mbps しか出なかった原因を追った記事。原因は、アダプタのチップの USB バースト数が少なく、ディスプレイ内蔵ハブ経由では受信バッファがあふれてパケットが落ちることだった。",
+      "points": [
+        "上りは正常で下りだけ遅く、ping は約 10% が欠落。アダプタを Mac に直結すると約 2.2 Gbps 出たため、ディスプレイ側の経路を疑った",
+        "固定レートの UDP 試験で、約 168,000 フレーム/秒（約 2 Gbps）を超えた分がすべてアダプタで破棄されることを確認。RTL8156B は USB 3 のバーストが 4 パケットだった",
+        "バースト 8 パケットの RTL8157 を積んだ 5 Gbps アダプタに替えるとドロップはゼロに。フロー制御でも改善したがレイテンシが増えるため採らなかった"
+      ],
+      "code": {
+        "file": "terminal",
+        "lang": "bash",
+        "text": "$ python3 -c \"import usb.core; e = usb.core.find(idVendor=0x0bda)[0][(0,0)][0]; print('packet size', e.wMaxPacketSize, 'bMaxBurst', e.extra_descriptors[2])\""
+      },
+      "signal": "▲ 676",
+      "pick": true
+    },
+    {
+      "id": "2026-11-23-inkling-mini-quant",
+      "url": "https://github.com/ShinMegamiBoson/lookatmyquant",
+      "title": "Inkling-2-Mini in 5.4 GB Memory",
+      "source": "github.com",
+      "source_group": "hackernews",
+      "published_at": "2026-11-22T03:02:19+09:00",
+      "category": "ai",
+      "keywords": [
+        "local-llm",
+        "open-weight",
+        "on-device-ai"
+      ],
+      "score": 86,
+      "why": "HN 552 pt",
+      "read_min": 8,
+      "tldr": "Inkling-2-Mini（BF16 で 18.89 GB）を約 5.38 GB（1.65 bpp）まで量子化した OSS「LookAtMyQuant」。層ごとの損失を測り、サイズ上限内で損失が最小になるよう符号化方式を選ぶ。",
+      "points": [
+        "トレリス符号による重み符号化、Fisher 情報に基づく行グループ単位のビット配分、MoE 層の微調整を組み合わせ、敏感な層は NVFP4 のまま残す",
+        "作者の自己報告では GSM8K 87.0%（元 96.5%）、HumanEval 71.3%（元 92.7%）で、3 タスク平均は元モデル比 89%",
+        "Apple M5 Max で逐次デコード約 75 tok/s、ドラフト併用で約 124 tok/s、実行時メモリ約 5.3 GB。CUDA でも動く"
+      ],
+      "code": {
+        "file": "README.md",
+        "lang": "bash",
+        "text": "lamq generate shinmegamiboson/Inkling-2-Mini-LookAtMyQuant-5.4GB \\\n    --drafter shinmegamiboson/Inkling-2-Mini-LookAtMyQuant-drafter \\\n    -p \"What is 17 times 23? Show the steps.\" --stats"
+      },
+      "signal": "▲ 552",
+      "pick": true
+    },
+    {
+      "id": "2026-11-23-itmedia-meta-muse",
+      "url": "https://www.itmedia.co.jp/mobile/articles/2611/22/news005.html",
+      "title": "MetaのAIエージェント「Muse」は何ができる？ ChatGPTやGeminiとの違い、注意点を解説",
+      "source": "itmedia.co.jp",
+      "source_group": "tech_blog",
+      "published_at": "2026-11-22T11:46:03+09:00",
+      "category": "ai",
+      "keywords": [
+        "meta",
+        "ai-agent"
+      ],
+      "score": 84,
+      "why": "はてブ 337",
+      "read_min": 5,
+      "tldr": "Meta が 10 月 23 日に日本で提供を始めたパーソナル AI エージェント「Muse」の機能と、ChatGPT・Gemini との違い、使う際の注意点を解説した記事。",
+      "points": [],
+      "code": null,
+      "signal": "B! 337",
+      "pick": false
+    },
+    {
+      "id": "2026-11-23-pwnai-upload2shell",
+      "url": "https://pwn.ai/upload2shell",
+      "title": "Upload2Shell",
+      "source": "pwn.ai",
+      "source_group": "tech_blog",
+      "published_at": "2026-11-22T08:53:55+09:00",
+      "category": "sec",
+      "keywords": [
+        "rce",
+        "security-research"
+      ],
+      "score": 78,
+      "why": "HN 148 pt・はてブ 33",
+      "read_min": 5,
+      "tldr": "Ghostscript の Type 1 フォント読み込みにある use-after-free で、細工した文書が -dSAFER サンドボックスを越えて任意コマンドを実行できるとする研究報告。印刷・メール・アップロードのプレビュー処理などが影響を受けうる。",
+      "points": [],
+      "code": null,
+      "signal": "B! 33 · ▲ 148",
+      "pick": false
+    },
+    {
+      "id": "2026-11-23-openai-perplexity-intel",
+      "url": "https://openai.com/index/perplexity-and-intelligence/",
+      "title": "Perplexity and Intelligence",
+      "source": "openai.com",
+      "source_group": "hackernews",
+      "published_at": "2026-11-23T02:06:27+09:00",
+      "category": "ai",
+      "keywords": [
+        "openai",
+        "llm"
+      ],
+      "score": 77,
+      "why": "HN 279 pt",
+      "read_min": 5,
+      "tldr": "OpenAI が公開した「Perplexity and Intelligence」と題する記事。HN で 279 pt・184 コメントの議論になっている（本文は未確認）。",
+      "points": [],
+      "code": null,
+      "signal": "▲ 279",
+      "pick": false
+    },
+    {
+      "id": "2026-11-23-impress-gemini-notebook",
+      "url": "https://k-tai.watch.impress.co.jp/docs/news/2157164.html",
+      "title": "グーグルのGemini Notebook、資料を操作可能なWebサイトへ変換可能に",
+      "source": "k-tai.watch.impress.co.jp",
+      "source_group": "tech_blog",
+      "published_at": "2026-11-21T20:39:45+09:00",
+      "category": "ai",
+      "keywords": [
+        "google",
+        "llm"
+      ],
+      "score": 77,
+      "why": "はてブ 201",
+      "read_min": 5,
+      "tldr": "Google の Gemini Notebook で、取り込んだ資料を操作できる Web サイトに変換できるようになったと報じられた。",
+      "points": [],
+      "code": null,
+      "signal": "B! 201",
+      "pick": false
+    },
+    {
+      "id": "2026-11-23-openrouter-incidents",
+      "url": "https://openrouter.ai/blog/announcements/data-processing-incidents-on-inference-providers/",
+      "title": "Data Processing Incidents on Inference Providers",
+      "source": "openrouter.ai",
+      "source_group": "hackernews",
+      "published_at": "2026-11-22T11:14:14+09:00",
+      "category": "ai",
+      "keywords": [
+        "llm",
+        "privacy",
+        "security-incident"
+      ],
+      "score": 76,
+      "why": "HN 264 pt",
+      "read_min": 5,
+      "tldr": "OpenRouter が「推論プロバイダでのデータ処理インシデント」についての告知を公開した（本文は未確認）。",
+      "points": [],
+      "code": null,
+      "signal": "B! 1 · ▲ 264",
+      "pick": false
+    },
+    {
+      "id": "2026-11-23-aws-reverse-spec",
+      "url": "https://aws.amazon.com/jp/blogs/news/aidm-introducing-reverse-spec-flow/",
+      "title": "[AI-Driven Modernization] 既存コードからAIエージェント向けの仕様書を起こす「Reverse Spec Flow」を公開しました | Amazon Web Services",
+      "source": "aws.amazon.com",
+      "source_group": "tech_blog",
+      "published_at": "2026-11-21T21:08:39+09:00",
+      "category": "ai",
+      "keywords": [
+        "aws",
+        "coding-agent"
+      ],
+      "score": 72,
+      "why": "はてブ 145",
+      "read_min": 5,
+      "tldr": "AWS が、既存コードから AI エージェント向けの仕様書を起こす手順「Reverse Spec Flow」を公開した（AI-Driven Modernization のシリーズ）。",
+      "points": [],
+      "code": null,
+      "signal": "B! 145",
+      "pick": false
+    },
+    {
+      "id": "2026-11-23-zenn-tlaplus",
+      "url": "https://zenn.dev/karamage/articles/73027ee36796dc",
+      "title": "【TLA+】AIにテストケースを書かせるな。ルールを書け",
+      "source": "zenn.dev",
+      "source_group": "tech_blog",
+      "published_at": "2026-11-22T12:08:20+09:00",
+      "category": "be",
+      "keywords": [
+        "formal-verification",
+        "testing",
+        "ai-coding"
+      ],
+      "score": 71,
+      "why": "はてブ 134",
+      "read_min": 5,
+      "tldr": "実装・テスト・レビューをすべて AI が担うとテストの妥当性を誰も保証できない、という問題意識から、TLA+ で守るべきルールを書く方法を提案する記事。",
+      "points": [],
+      "code": null,
+      "signal": "B! 134",
+      "pick": false
+    },
+    {
+      "id": "2026-11-23-gopgext",
+      "url": "https://jespino.github.io/gopgext/",
+      "title": "PostgreSQL Extensions in Go",
+      "source": "jespino.github.io",
+      "source_group": "hackernews",
+      "published_at": "2026-11-22T02:08:04+09:00",
+      "category": "be",
+      "keywords": [
+        "postgres",
+        "go"
+      ],
+      "score": 70,
+      "why": "HN 165 pt",
+      "read_min": 5,
+      "tldr": "PostgreSQL の拡張機能を Go で書くためのプロジェクト「gopgext」。",
+      "points": [],
+      "code": null,
+      "signal": "B! 2 · ▲ 165",
+      "pick": false
+    },
+    {
+      "id": "2026-11-23-nhk-towerrecords",
+      "url": "https://news.web.nhk/newsweb/na/nd-20261122de79936",
+      "title": "タワーレコード 不正アクセスで約1100万件の個人情報流出 | NHKニュース",
+      "source": "nhk.or.jp",
+      "source_group": "tech_blog",
+      "published_at": "2026-11-22T19:00:18+09:00",
+      "category": "sec",
+      "keywords": [
+        "data-breach",
+        "security-incident"
+      ],
+      "score": 63,
+      "why": "はてブ 76",
+      "read_min": 5,
+      "tldr": "タワーレコードは、通販サイトが不正アクセスを受け、氏名やメールアドレスなど約 1,100 万件の個人情報が流出したと発表した。",
+      "points": [],
+      "code": null,
+      "signal": "B! 76",
+      "pick": false
+    },
+    {
+      "id": "2026-11-23-togetter-rokkatei",
+      "url": "https://togetter.com/li/2773676",
+      "title": "おやつ屋「六花亭」が不正アクセス、クレカのセキュリティコードまで流出→最上位のやらかしなのに誠実さを感じてかあまり荒れていない……なぜ他社にこれができないのか？",
+      "source": "togetter.com",
+      "source_group": "tech_blog",
+      "published_at": "2026-11-22T17:52:11+09:00",
+      "category": "sec",
+      "keywords": [
+        "data-breach",
+        "payments"
+      ],
+      "score": 68,
+      "why": "はてブ 111",
+      "read_min": 5,
+      "tldr": "六花亭オンラインショップのプログラムが改ざんされ、入力されたカード情報（セキュリティコードを含む）が流出した可能性があると同社が公表した件の反応まとめ。",
+      "points": [],
+      "code": null,
+      "signal": "B! 111",
+      "pick": false
+    },
+    {
+      "id": "2026-11-23-coinpost-btc-1000man",
+      "url": "https://coinpost.jp/?p=748953",
+      "title": "ビットコイン、1000万円割れ 25日PCEデフレーター発表が次の焦点｜bitbankアナリスト寄稿",
+      "source": "CoinPost",
+      "source_group": "news",
+      "published_at": "2026-11-22T11:30:08+09:00",
+      "category": "crypto",
+      "keywords": [
+        "bitcoin",
+        "fed",
+        "us-inflation"
+      ],
+      "score": 88,
+      "why": "matched: ビットコイン, 金利",
+      "read_min": 4,
+      "tldr": "bitbank のアナリスト寄稿。ビットコインの対円相場は週後半に 1,000 万円を割り、11 月 20 日未明に 980 万円台まで下げた。次の焦点は 25 日の米 PCE デフレーター。",
+      "points": [
+        "週初の 1,040 万円近辺、前週の 1,100 万円近辺から下落が続き、ドル建てでは 200 週移動平均線も下回った。日足 RSI は 30 を割っている",
+        "下げの材料として、ウォラー FRB 理事の 50bp 利上げ示唆、米ハイテク株の利益確定売り、Anthropic の IPO 通過後も反発できなかったことを挙げている",
+        "11 月 25 日に 10 月の PCE デフレーターとベージュブックが公表予定。12 月 FOMC での利上げはある程度織り込まれているとしている"
+      ],
+      "code": null,
+      "signal": null,
+      "pick": true
+    },
+    {
+      "id": "2026-11-23-coinpost-jgb-token",
+      "url": "https://coinpost.jp/?p=749074",
+      "title": "財務省研究会資料、国債トークン化の実機検証をカントンのブロックチェーンで実施へ",
+      "source": "CoinPost",
+      "source_group": "news",
+      "published_at": "2026-11-22T15:45:29+09:00",
+      "category": "macro",
+      "keywords": [
+        "tokenization",
+        "jgb",
+        "blockchain-infra"
+      ],
+      "score": 72,
+      "why": "matched: 金利（国債市場）・財務省研究会",
+      "read_min": 5,
+      "tldr": "財務省「国債のオンチェーン対応に関する研究会」の第 3 回会合（20 日）で、トークン化国債の実機検証を 2026 年 11 月〜2027 年 3 月にカントン・ネットワークのテストネットで行う計画が示された。",
+      "points": [
+        "プログマが、トークン化国債・トークン化預金・ステーブルコインを発行・管理できるサンドボックスを用意し、国内外のレポ取引・担保管理基盤と接続する",
+        "トークン化国債は振替国債の法的性質を保ったまま、ブロックチェーンと同期する「オンチェーン管理口座」で管理する方式。商用化の時期は示されていない",
+        "250 兆円超の国債レポ市場で、決済が日本時間の限られた時間帯に集中する制約を、24 時間 365 日の決済などで解消できるかを試す"
+      ],
+      "code": null,
+      "signal": null,
+      "pick": true
+    },
+    {
+      "id": "2026-11-23-investing-asia-support",
+      "url": "https://jp.investing.com/news/stock-market-news/article-1767026",
+      "title": "アジア諸国、AI株急落を受けて株式市場支援策を発表",
+      "source": "investing.com",
+      "source_group": "news",
+      "published_at": "2026-11-23T00:12:43+09:00",
+      "category": "stocks",
+      "keywords": [
+        "emerging-markets",
+        "semiconductor",
+        "us-stocks"
+      ],
+      "score": 80,
+      "why": "matched: 米国株（AI 株急落の波及）",
+      "read_min": 4,
+      "tldr": "AI 関連株の急落を受け、台湾・韓国・中国が相次いで株式市場の支援策を発表した。S&P 500 も 2025 年 4 月以来の悪い週間成績になった。",
+      "points": [
+        "台湾は前日終値を下回る価格での空売りを禁止し、最低証拠金率を 130% から 150% に引き上げ。主要指数は 1990 年 8 月以来の週間下落率",
+        "韓国は市場支援ファンドの設立準備と自社株買い規制の一時緩和を発表。KOSPI は金曜に 5% 超下げ、6 月の高値から約 47% 下落",
+        "中国は信用取引の証拠金比率を 100% から 80% に引き下げ。上海総合・深圳成分指数はそれぞれ 2025 年 7 月・6 月以来の安値"
+      ],
+      "code": null,
+      "signal": null,
+      "pick": true
+    },
+    {
+      "id": "2026-11-23-diamond-osaka-towerman",
+      "url": "https://diamond.jp/articles/-/403684",
+      "title": "大阪駅の買いたくても買えなかったタワマンが「投げ売り」状態!?マンション相場の逆回転はどこで止まるのか【マンションインフルエンサー座談会2】 - マンション羅針盤 管理＆売買",
+      "source": "ダイヤモンド",
+      "source_group": "news",
+      "published_at": "2026-11-23T04:45:00+09:00",
+      "category": "realestate",
+      "keywords": [
+        "real-estate-prices",
+        "housing"
+      ],
+      "score": 66,
+      "why": "matched: 不動産（マンション価格）",
+      "read_min": 6,
+      "tldr": "大阪のタワーマンション市場で 2025 年秋ごろから在庫が積み上がり、値下げが増えているとする座談会記事。無料公開部分のみ確認（後半は有料）。",
+      "points": [
+        "ザ・パークハウス 大阪梅田タワーは完成後に約 4 割が売りに出され、今も 3 割近くが残る。グラングリーン大阪ザ・ノースレジデンスは約 90 戸が売り出し中",
+        "売り出し価格と成約価格の乖離率は 2021〜2023 年の約 10% から、最近は 20% を超える例も。大阪の中古タワマンの価格変更は 1 カ月で 341 回",
+        "1 年程度の短期融資で買った事業者が返済期限を前に値下げして売る動きがあり、正常化までは「我慢の市場」との見方を示している"
+      ],
+      "code": null,
+      "signal": null,
+      "pick": true
+    },
+    {
+      "id": "2026-11-23-sanin-nikkei-3007",
+      "url": "https://www.sanin-chuo.co.jp/articles/-/1120146",
+      "title": "東証急落 3007 円安 AI 材料出尽くし",
+      "source": "sanin-chuo.co.jp",
+      "source_group": "news",
+      "published_at": null,
+      "category": "stocks",
+      "keywords": [
+        "nikkei225",
+        "semiconductor"
+      ],
+      "score": 78,
+      "why": "matched: 米国株・日本株（前営業日の終値）",
+      "read_min": 5,
+      "tldr": "11 月 20 日（金）の日経平均株価は前日比 3,007 円 56 銭安の 5 万 6,436 円 65 銭で、約 7 カ月ぶりの安値水準。米ハイテク株安を受け AI 関連が売られた（検索結果の要約で確認）。",
+      "points": [],
+      "code": null,
+      "signal": null,
+      "pick": false
+    },
+    {
+      "id": "2026-11-23-coinpost-coinbase-58k",
+      "url": "https://coinpost.jp/?p=749050",
+      "title": "ビットコイン、「5.8万ドル割り込めば2022年型の下落リスクも」＝コインベース",
+      "source": "CoinPost",
+      "source_group": "news",
+      "published_at": "2026-11-21T21:00:24+09:00",
+      "category": "crypto",
+      "keywords": [
+        "bitcoin",
+        "crypto-exchange"
+      ],
+      "score": 70,
+      "why": "matched: ビットコイン",
+      "read_min": 5,
+      "tldr": "コインベースの週間レポートによると、ビットコインは週間で約 12% 下げて 200 週移動平均線を割り込んだ。5.8 万ドルを割ると 2022 年型の下落リスクがあるとしている。",
+      "points": [],
+      "code": null,
+      "signal": null,
+      "pick": false
+    },
+    {
+      "id": "2026-11-23-toyokeizai-anthropic-ipo",
+      "url": "https://toyokeizai.net/articles/-/965573?utm_source=rss&utm_medium=http&utm_campaign=link_back",
+      "title": "〈売りの号砲が鳴った〉アンソロピックは初値から真っ逆さまに落ちてゆく…｢夢見る自転車操業｣のAI循環投資にブレーキ | 政治・経済・投資 | 東洋経済オンライン",
+      "source": "toyokeizai.net",
+      "source_group": "news",
+      "published_at": "2026-11-22T06:00:00+09:00",
+      "category": "stocks",
+      "keywords": [
+        "anthropic",
+        "ipo",
+        "ai-economy"
+      ],
+      "score": 62,
+      "why": "matched: 米国株",
+      "read_min": 5,
+      "tldr": "Anthropic の上場を境に個人投資家のセンチメントが崩れ、AI 関連の「循環投資」に歯止めがかかったとする論考。",
+      "points": [],
+      "code": null,
+      "signal": null,
+      "pick": false
+    },
+    {
+      "id": "2026-11-23-investing-nvidia-china",
+      "url": "https://jp.investing.com/news/company-news/article-1767035",
+      "title": "トランプ政権、NvidiaにAIチップの中国流出疑惑への回答を要求",
+      "source": "investing.com",
+      "source_group": "news",
+      "published_at": "2026-11-23T03:48:04+09:00",
+      "category": "stocks",
+      "keywords": [
+        "nvidia",
+        "semiconductor",
+        "geopolitics"
+      ],
+      "score": 60,
+      "why": "matched: 米国株",
+      "read_min": 5,
+      "tldr": "トランプ政権が Nvidia に対し、AI チップの中国流出疑惑について回答を求めたと報じられた。",
+      "points": [],
+      "code": null,
+      "signal": null,
+      "pick": false
+    },
+    {
+      "id": "2026-11-23-diamond-india-stocks",
+      "url": "https://diamond.jp/articles/-/403776",
+      "title": "AIブームに乗れずアジアで際立つ「インド株」低迷、年7％の高成長国は本当にAI時代の“負け組”か - Diamond マーケットラボ",
+      "source": "ダイヤモンド",
+      "source_group": "news",
+      "published_at": "2026-11-23T04:50:00+09:00",
+      "category": "stocks",
+      "keywords": [
+        "emerging-markets"
+      ],
+      "score": 48,
+      "why": "matched: 株式（アジア市場）",
+      "read_min": 5,
+      "tldr": "AI・半導体関連企業が少ないインド株は韓国・台湾の活況から取り残された一方、ソフトウエアなどの業務サービス輸出は 4 年前の 2 倍以上に増えているとする記事。",
+      "points": [],
+      "code": null,
+      "signal": null,
+      "pick": false
+    },
+    {
+      "id": "2026-11-23-investing-midterms",
+      "url": "https://jp.investing.com/news/stock-market-news/article-1767028",
+      "title": "米中間選挙は投資家にとって何を意味するのか",
+      "source": "investing.com",
+      "source_group": "news",
+      "published_at": "2026-11-23T00:56:18+09:00",
+      "category": "macro",
+      "keywords": [
+        "us-stocks",
+        "geopolitics"
+      ],
+      "score": 45,
+      "why": "matched: 米国株",
+      "read_min": 5,
+      "tldr": "米中間選挙の結果が投資家にとって何を意味するかを論じた記事（本文は未確認）。",
+      "points": [],
+      "code": null,
+      "signal": null,
+      "pick": false
+    },
+    {
+      "id": "2026-11-23-toyokeizai-gift-rental",
+      "url": "https://toyokeizai.net/articles/-/965379?utm_source=rss&utm_medium=http&utm_campaign=link_back",
+      "title": "｢賃貸で10年住めばタダであげます｣――借り手つかない\"坂の上\"物件､格安家賃で子育て世代の生活支援や創業の拠点に | ライフ | 東洋経済オンライン",
+      "source": "toyokeizai.net",
+      "source_group": "news",
+      "published_at": "2026-11-22T08:00:00+09:00",
+      "category": "realestate",
+      "keywords": [
+        "housing"
+      ],
+      "score": 40,
+      "why": "matched: 不動産",
+      "read_min": 5,
+      "tldr": "長崎で、10 年住めば家を無償で譲る「贈与型賃貸」で、借り手のつかない坂の上の空き家を子育て世帯や創業者向けに再生する取り組みを紹介している。",
+      "points": [],
+      "code": null,
+      "signal": null,
+      "pick": false
+    }
+  ],
+  "social": [
+    {
+      "network": "x",
+      "author": "@leanprover",
+      "url": "https://x.com/leanprover/status/2124159121645801562",
+      "text": "Lean FRO と Mathlib Initiative が、11 月 20 日に 1,700 万行の Lean ライブラリとして公開されたリーマン予想の証明について、共同で検証したとする声明を出したと告知。",
+      "metrics": null,
+      "heat": null,
+      "category": "ai",
+      "keywords": [
+        "formal-verification",
+        "ai-research"
+      ],
+      "posted_at": null
+    },
+    {
+      "network": "x",
+      "author": "@aka_ssy",
+      "url": "https://x.com/aka_ssy/status/2124451368991949239",
+      "text": "Anthropic の 2028 年の電源が「ガス 87%・石炭 11%」という推計について、個々の Claude の利用が石炭を燃やすという意味ではなく、契約済みのデータセンター需要を満たす限界電源の推計だと補足している。",
+      "metrics": null,
+      "heat": null,
+      "category": "ai",
+      "keywords": [
+        "data-center",
+        "anthropic"
+      ],
+      "posted_at": null
+    },
+    {
+      "network": "hn",
+      "author": null,
+      "url": "https://news.ycombinator.com/item?id=50589618",
+      "text": "『Lean verification of the Riemann Hypothesis』のスレッド。990 件のコメント",
+      "metrics": "▲ 1,192  ✉ 990",
+      "heat": 100,
+      "category": "ai",
+      "keywords": [
+        "formal-verification"
+      ],
+      "posted_at": "2026-11-21T23:36:45+09:00"
+    },
+    {
+      "network": "hn",
+      "author": null,
+      "url": "https://news.ycombinator.com/item?id=50597612",
+      "text": "『87% of the Anthropic power will come from gas and 11% from coal in 2028』のスレッド。737 件のコメント",
+      "metrics": "▲ 688  ✉ 737",
+      "heat": 100,
+      "category": "ai",
+      "keywords": [
+        "data-center",
+        "anthropic"
+      ],
+      "posted_at": "2026-11-22T17:57:34+09:00"
+    },
+    {
+      "network": "hn",
+      "author": null,
+      "url": "https://news.ycombinator.com/item?id=50587875",
+      "text": "『My monitor was cutting my download speed by 75%』のスレッド。312 件のコメント",
+      "metrics": "▲ 676  ✉ 312",
+      "heat": 100,
+      "category": "cloud",
+      "keywords": [
+        "networking"
+      ],
+      "posted_at": "2026-11-21T19:36:32+09:00"
+    },
+    {
+      "network": "hn",
+      "author": null,
+      "url": "https://news.ycombinator.com/item?id=50591853",
+      "text": "『Inkling-2-Mini in 5.4 GB Memory』のスレッド。132 件のコメント",
+      "metrics": "▲ 552  ✉ 132",
+      "heat": 100,
+      "category": "ai",
+      "keywords": [
+        "local-llm"
+      ],
+      "posted_at": "2026-11-22T03:02:19+09:00"
+    }
+  ],
+  "releases": [
+    {
+      "date": "2026-11-20",
+      "title": "財務省、国債トークン化の実機検証計画を研究会で公表",
+      "repo": null,
+      "url": "https://coinpost.jp/?p=749074",
+      "kind": "policy",
+      "note": "国債のオンチェーン対応に関する研究会 第 3 回。検証は 2026 年 11 月〜2027 年 3 月（CoinPost の記事で確認）",
+      "category": "macro"
+    },
+    {
+      "date": "2026-11-24",
+      "title": "ビットバンク、MEXC への暗号資産出金を制限開始",
+      "repo": null,
+      "url": "https://coinpost.jp/?p=749017",
+      "kind": "event",
+      "note": "前日の日次ファイルから引き継ぎ。入金の制限は 12 月 10 日から",
+      "category": "crypto"
+    },
+    {
+      "date": "2026-11-24",
+      "title": "Quad9 がフランスでのサービスを停止",
+      "repo": null,
+      "url": "https://x.com/Itsfoss/status/2113520157830295561",
+      "kind": "event",
+      "note": "前日の日次ファイルから引き継ぎ",
+      "category": "cloud"
+    },
+    {
+      "date": "2026-11-25",
+      "title": "米 10 月 PCE デフレーター・ベージュブック公表",
+      "repo": null,
+      "url": "https://coinpost.jp/?p=748953",
+      "kind": "event",
+      "note": "bitbank アナリスト寄稿（CoinPost）で日程を確認",
+      "category": "macro"
+    }
+  ]
+}
