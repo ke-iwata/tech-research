@@ -1,0 +1,792 @@
+{
+  "date": "2026-11-25",
+  "generated_at": "2026-11-25T06:20:00+09:00",
+  "stats": {
+    "collected": 240,
+    "sources_ok": 25,
+    "sources_total": 26,
+    "by_group": {
+      "hackernews": 48,
+      "tech_blog": 85,
+      "news": 95,
+      "official": 12
+    },
+    "failed_sources": [
+      "coindesk_jp"
+    ]
+  },
+  "digest": [
+    {
+      "category": "ai",
+      "text": "ヤン・ルカン氏が、アモデイ氏は危険性を誇張してオープンなモデルを違法にし主導権を握ろうとしていると X で批判し、HN で 1,969 pt・コメント 1,150 件。AI エージェントは利用者より開発元に従うと論じる記事も 759 pt。",
+      "keywords": [
+        "anthropic",
+        "open-weight",
+        "ai-agent"
+      ]
+    },
+    {
+      "category": "be",
+      "text": "OSS メールサーバー Stalwart 1.2.0 が MAPI over HTTP・EWS・ActiveSync に対応し、Outlook を変えずに使える Exchange の代替を打ち出した（HN 674 pt）。",
+      "keywords": [
+        "email-server",
+        "jmap"
+      ]
+    },
+    {
+      "category": "be",
+      "text": "AArch64 の命令・レジスタを検索できる個人のリファレンスサイトが、Arm の弁護士の通知を受けて 12 月 4 日に終了する（HN 1,151 pt）。",
+      "keywords": [
+        "licensing",
+        "oss"
+      ]
+    },
+    {
+      "category": "stocks",
+      "text": "フアン氏の CEO 復帰でエヌビディア株は 24 日に 31.6% 上昇し、時価総額の 1 日の増加額は米国株で過去最大の 9,550 億ドル。日経平均も 24 日は大幅反発した。",
+      "keywords": [
+        "nvidia",
+        "us-stocks",
+        "nikkei225"
+      ]
+    },
+    {
+      "category": "crypto",
+      "text": "SBI の北尾会長が、暗号資産の分離課税（適用は早くて 2028 年）と現物ビットコイン ETF の前倒しを国に求めた。投資信託の 11 月分の資金流入と住宅ローン金利は、この日に確認できた新しいニュースがなかった。",
+      "keywords": [
+        "crypto-tax",
+        "bitcoin-etf"
+      ]
+    }
+  ],
+  "items": [
+    {
+      "id": "2026-11-25-arm-aarch64-ref",
+      "url": "https://arm.jonpalmisc.com/",
+      "title": "Per Arm's request, this site will be discontinued on 4 December 2026 :(",
+      "source": "arm.jonpalmisc.com",
+      "source_group": "hackernews",
+      "published_at": "2026-11-24T04:17:55+09:00",
+      "category": "be",
+      "keywords": [
+        "licensing",
+        "oss"
+      ],
+      "score": 96,
+      "why": "HN 1,151 pt",
+      "read_min": 2,
+      "tldr": "AArch64 の命令セットとシステムレジスタを検索できる個人運営のリファレンスサイトが、Arm の弁護士から削除しなければ法的措置を取ると通知を受け、12 月 4 日で終了すると告知した。",
+      "points": [
+        "Armv8-A / Armv9-A の基本命令・SIMD・SVE・SME の命令一覧と、AArch64 / AArch32 のレジスタを閲覧・検索できるサイト",
+        "終了は「Arm の要請により」2026 年 12 月 4 日と告知",
+        "代替サイトは示されておらず、作者はブックマークやリンクが使えるようにする方法を検討中としている"
+      ],
+      "code": null,
+      "signal": "B! 1 · ▲ 1151",
+      "pick": true
+    },
+    {
+      "id": "2026-11-25-2035-came-early",
+      "url": "https://fzakaria.com/2026/11/23/2035-came-early",
+      "title": "2035 came early",
+      "source": "fzakaria.com",
+      "source_group": "hackernews",
+      "published_at": "2026-11-24T15:30:33+09:00",
+      "category": "be",
+      "keywords": [
+        "webassembly",
+        "linux"
+      ],
+      "score": 93,
+      "why": "HN 867 pt",
+      "read_min": 6,
+      "tldr": "Linux を WebAssembly にコンパイルしたエンジン unkernel を使い、trynix.dev がブラウザ上で GUI プログラムまで動かせるようになったと紹介する記事。筆者は、かつての講演で予言された「2035 年」の光景が LLM の影響で早く来たと主張する。",
+      "points": [
+        "カーネルが wasm の速度で動くため、ワークロードによって qemu-wasm より 2〜32 倍速いとされる",
+        "X11 / Wayland のウィンドウ、WebGL2 による GL 描画、ALSA の音声、WebSocket 経由のネットワークが使える",
+        "trynix 上の Firefox の中でさらに Firefox を動かすデモに成功（描画に 1 時間以上かかった）"
+      ],
+      "code": null,
+      "signal": "▲ 867",
+      "pick": true
+    },
+    {
+      "id": "2026-11-25-llm-agents-parent-companies",
+      "url": "https://michaelharley.net/posts/2026/11/01/llm-agents-work-for-their-parent-companies-not-for-you/",
+      "title": "LLM agents work for their parent companies, not for you",
+      "source": "michaelharley.net",
+      "source_group": "hackernews",
+      "published_at": "2026-11-24T21:40:15+09:00",
+      "category": "ai",
+      "keywords": [
+        "ai-agent",
+        "local-llm",
+        "claude"
+      ],
+      "score": 91,
+      "why": "HN 759 pt",
+      "read_min": 7,
+      "tldr": "Claude Code のスキルで Bandcamp から曲を買えるようにしていた筆者が、Bandcamp の検索 API にチャレンジが追加された際に Claude が回避を手伝わなかった経験から、AI エージェントは利用者より開発元の方針に従うと論じる。自宅で動くローカルモデルへの関心を述べている。",
+      "points": [
+        "Bandcamp の回避は断る一方で YouTube からのダウンロードは手伝うなど、企業の方針が利用者の目的に優先されうる点を問題視",
+        "広告や製品配置、政府の要請で推薦や回答が歪む可能性を指摘",
+        "利用者の利益を優先するためにローカルの「オープンモデル」を検討。「オープン」の意味は学習過程まで含めて考える必要があるとする"
+      ],
+      "code": null,
+      "signal": "B! 1 · ▲ 759",
+      "pick": true
+    },
+    {
+      "id": "2026-11-25-stalwart-exchange",
+      "url": "https://stalw.art/blog/microsoft-exchange-replacement/",
+      "title": "Stalwart is now a drop-in replacement for Microsoft Exchange",
+      "source": "stalw.art",
+      "source_group": "hackernews",
+      "published_at": "2026-11-24T07:32:29+09:00",
+      "category": "be",
+      "keywords": [
+        "email-server",
+        "jmap",
+        "oss"
+      ],
+      "score": 89,
+      "why": "HN 674 pt",
+      "read_min": 8,
+      "tldr": "OSS のメールサーバー Stalwart 1.2.0 が、Outlook などのクライアントを変えずに接続できる Microsoft Exchange の代替を目指したリリースとなった。Exchange 対応は AGPL の Community 版に含まれる。",
+      "points": [
+        "MAPI over HTTP・EWS・Exchange ActiveSync・Autodiscover に対応。パブリックフォルダ、NTLM / Kerberos 認証、RPC over HTTP は対象外",
+        "Outlook で作ったルールはサーバー側の Sieve として保存され、どのクライアントからも同じメールボックス・予定表・連絡先を使える",
+        "移行ツール Vandelay でオンプレ Exchange（EWS）や Microsoft 365（Graph）から JMAP で取り込み、MX を切り替える。新しい Outlook for Windows はセルフホストでは非推奨"
+      ],
+      "code": null,
+      "signal": "▲ 674",
+      "pick": true
+    },
+    {
+      "id": "2026-11-25-fsnotes-eu-removed",
+      "url": "https://github.com/glushchenko/fsnotes/discussions/2056",
+      "title": "Apple removed my open-source app from EU App Stores after 9 years",
+      "source": "github.com",
+      "source_group": "hackernews",
+      "published_at": "2026-11-24T03:48:10+09:00",
+      "category": "be",
+      "keywords": [
+        "apple",
+        "oss",
+        "desktop-app"
+      ],
+      "score": 88,
+      "why": "HN 611 pt",
+      "read_min": 3,
+      "tldr": "OSS のメモアプリ FSNotes の開発者が、約 9 年配信してきたアプリを Apple に EU の全 App Store から削除されたと訴えた。10 月分の売上が入金されないことから問い合わせたが、数週間返信がないという。",
+      "points": [
+        "開発者によると Apple から削除の明確な説明はない",
+        "EU のデジタルサービス法（DSA）向けの情報は提出済みとしているが、それが原因とは書かれていない",
+        "Apple への公開書簡への支持を呼びかけ、GitHub では無料提供を続けるとしている"
+      ],
+      "code": null,
+      "signal": "▲ 611",
+      "pick": true
+    },
+    {
+      "id": "2026-11-25-lecun-dario-open-models",
+      "url": "https://twitter.com/ylecun/status/2124550037912920090",
+      "title": "\"Dario is hyping the dangers so OSS models are illegal and he stays in control\"",
+      "source": "twitter.com",
+      "source_group": "hackernews",
+      "published_at": "2026-11-24T02:07:26+09:00",
+      "category": "ai",
+      "keywords": [
+        "anthropic",
+        "open-weight"
+      ],
+      "score": 100,
+      "why": "HN 1,969 pt",
+      "read_min": 2,
+      "tldr": "ヤン・ルカン氏が X で、ダリオ・アモデイ氏は GPT-2 の頃から危険性を強調してオープンなモデルを違法にし、自らが主導権を握ろうとしてきたと批判した投稿。HN のスレッドはコメント 1,150 件。",
+      "points": [],
+      "code": null,
+      "signal": "▲ 1969",
+      "pick": false
+    },
+    {
+      "id": "2026-11-25-polymarket-huang",
+      "url": "https://deucalionn.vercel.app/polymarket-delit-initie-jensen-huang-nvidia/",
+      "title": "Investigation of Polymarket Insider Trading on the Reinstatement of Jensen Huang",
+      "source": "deucalionn.vercel.app",
+      "source_group": "hackernews",
+      "published_at": "2026-11-24T20:13:55+09:00",
+      "category": "ai",
+      "keywords": [
+        "nvidia",
+        "prediction-market"
+      ],
+      "score": 84,
+      "why": "HN 458 pt",
+      "read_min": 6,
+      "tldr": "NVIDIA のフアン氏の CEO 復帰をめぐり、予測市場 Polymarket でインサイダー取引があったかを調べたとする個人の調査記事。",
+      "points": [],
+      "code": null,
+      "signal": "▲ 458",
+      "pick": false
+    },
+    {
+      "id": "2026-11-25-kagi-mail",
+      "url": "https://blog.kagi.com/kagi-mail-public-beta",
+      "title": "Kagi Mail (public beta)",
+      "source": "blog.kagi.com",
+      "source_group": "hackernews",
+      "published_at": "2026-11-24T02:17:01+09:00",
+      "category": "be",
+      "keywords": [
+        "email-server",
+        "privacy"
+      ],
+      "score": 84,
+      "why": "HN 453 pt",
+      "read_min": 4,
+      "tldr": "検索エンジンの Kagi が、メールサービス Kagi Mail のパブリックベータを公開した。",
+      "points": [],
+      "code": null,
+      "signal": "▲ 453",
+      "pick": false
+    },
+    {
+      "id": "2026-11-25-gpui-repo",
+      "url": "https://github.com/zed-industries/gpui",
+      "title": "GPUI is getting its own repository",
+      "source": "github.com",
+      "source_group": "hackernews",
+      "published_at": "2026-11-24T05:52:54+09:00",
+      "category": "be",
+      "keywords": [
+        "rust",
+        "desktop-app"
+      ],
+      "score": 81,
+      "why": "HN 371 pt",
+      "read_min": 3,
+      "tldr": "エディタ Zed の GPU UI フレームワーク GPUI が独立したリポジトリに切り出された。",
+      "points": [],
+      "code": null,
+      "signal": "B! 1 · ▲ 371",
+      "pick": false
+    },
+    {
+      "id": "2026-11-25-vp-vnp",
+      "url": "https://github.com/anthropics/formal-math/tree/main/vp-vnp",
+      "title": "VP ≠ VNP over Every Field",
+      "source": "github.com",
+      "source_group": "hackernews",
+      "published_at": "2026-11-24T07:09:10+09:00",
+      "category": "ai",
+      "keywords": [
+        "formal-verification",
+        "ai-research"
+      ],
+      "score": 80,
+      "why": "HN 353 pt",
+      "read_min": 5,
+      "tldr": "Anthropic の formal-math リポジトリに、「任意の体上で VP ≠ VNP」を扱う形式証明のディレクトリが公開され、HN で話題になった。",
+      "points": [],
+      "code": null,
+      "signal": "B! 2 · ▲ 353",
+      "pick": false
+    },
+    {
+      "id": "2026-11-25-quad9-france",
+      "url": "https://quad9.net/news/blog/quad9-service-deactivation-in-france/",
+      "title": "Quad9 pulled their DNS service from France",
+      "source": "quad9.net",
+      "source_group": "hackernews",
+      "published_at": "2026-11-24T17:33:14+09:00",
+      "category": "cloud",
+      "keywords": [
+        "dns"
+      ],
+      "score": 76,
+      "why": "HN 259 pt",
+      "read_min": 4,
+      "tldr": "公開 DNS リゾルバの Quad9 が、フランスでのサービス提供を停止すると発表した。",
+      "points": [],
+      "code": null,
+      "signal": "▲ 259",
+      "pick": false
+    },
+    {
+      "id": "2026-11-25-gentoo-security-hell",
+      "url": "https://blogs.gentoo.org/mgorny/2026/10/27/the-next-circle-of-security-hell/",
+      "title": "The next circle of security hell",
+      "source": "blogs.gentoo.org",
+      "source_group": "hackernews",
+      "published_at": "2026-11-23T20:34:16+09:00",
+      "category": "sec",
+      "keywords": [
+        "supply-chain",
+        "vulnerability-management"
+      ],
+      "score": 76,
+      "why": "HN 259 pt",
+      "read_min": 8,
+      "tldr": "Gentoo の開発者が、OSS を取り巻くセキュリティ対応の負担の行方について書いたブログ記事。",
+      "points": [],
+      "code": null,
+      "signal": "B! 1 · ▲ 259",
+      "pick": false
+    },
+    {
+      "id": "2026-11-25-checkpoint-intrusion",
+      "url": "https://www.greynoise.io/blog/check-point-security-management-servers-intrusion-campaign",
+      "title": "Active Intrusion Campaign Against Check Point Security Management Servers",
+      "source": "greynoise.io",
+      "source_group": "hackernews",
+      "published_at": "2026-11-25T01:32:17+09:00",
+      "category": "sec",
+      "keywords": [
+        "security-incident",
+        "vulnerability-management"
+      ],
+      "score": 73,
+      "why": "HN 205 pt",
+      "read_min": 6,
+      "tldr": "GreyNoise が、Check Point の Security Management サーバーを狙った侵入キャンペーンが進行中だと報告した。",
+      "points": [],
+      "code": null,
+      "signal": "▲ 205",
+      "pick": false
+    },
+    {
+      "id": "2026-11-25-rakuten-sec-leak-2",
+      "url": "https://www.rakuten-sec.co.jp/web/info/info20261124-04.html",
+      "title": "当社お客様の情報漏えいに関するお詫びとお知らせ（第2報）:楽天証券",
+      "source": "rakuten-sec.co.jp",
+      "source_group": "tech_blog",
+      "published_at": "2026-11-24T22:06:22+09:00",
+      "category": "sec",
+      "keywords": [
+        "data-breach",
+        "security-incident"
+      ],
+      "score": 73,
+      "why": "はてブ 152",
+      "read_min": 4,
+      "tldr": "楽天証券が、顧客情報の漏えいについてのお詫びとお知らせの第 2 報を出した。",
+      "points": [],
+      "code": null,
+      "signal": "B! 152",
+      "pick": false
+    },
+    {
+      "id": "2026-11-25-aws-waf-ai-endpoints",
+      "url": "https://aws.amazon.com/about-aws/whats-new/2026/11/waf-ai-endpoint-discovery-protection/",
+      "title": "AWS WAF announces automated discovery and protection for LLM, MCP, and A2A endpoints using Amazon Bedrock Guardrails",
+      "source": "aws what's new",
+      "source_group": "news",
+      "published_at": "2026-11-24T03:47:00+09:00",
+      "category": "cloud",
+      "keywords": [
+        "aws",
+        "ai-security",
+        "mcp-server"
+      ],
+      "score": 50,
+      "why": "AWS 公式発表。LLM・MCP・A2A のエンドポイントを WAF が自動検出",
+      "read_min": 3,
+      "tldr": "AWS WAF が、LLM・MCP・A2A のエンドポイントを自動で検出して保護する機能を発表した。",
+      "points": [],
+      "code": null,
+      "signal": "B! 1",
+      "pick": false
+    },
+    {
+      "id": "2026-11-25-nvidia-mcap-record",
+      "url": "https://coinpost.jp/?p=749132",
+      "title": "フアン氏復帰にトランプ大統領が関与、エヌビディアの時価総額増加額は米国株で過去最大",
+      "source": "CoinPost",
+      "source_group": "news",
+      "published_at": "2026-11-24T07:55:45+09:00",
+      "category": "stocks",
+      "keywords": [
+        "nvidia",
+        "us-stocks"
+      ],
+      "score": 80,
+      "why": "matched: 米国株",
+      "read_min": 4,
+      "tldr": "フアン氏の CEO 復帰を受け、エヌビディア株は 24 日に前週末比 31.6% 上昇し、時価総額は 1 日で 9,550 億ドル（約 151 兆円）増えた。米国株の 1 日の時価総額増加額として過去最大。",
+      "points": [
+        "株価は 1 カ月前と比べるとまだ約 21% 低い水準",
+        "ナスダック総合指数は 6.5%、S&P 500 は 4.7% 上昇し、米国株全体の時価総額は 3 兆ドル以上増えた",
+        "ビットコインは 23 日夜に一時 6 万 4,603 ドルを付けたが、24 日朝には 6 万 1,000 ドル台に反落"
+      ],
+      "code": null,
+      "signal": null,
+      "pick": true
+    },
+    {
+      "id": "2026-11-25-sbi-crypto-tax-etf",
+      "url": "https://coinpost.jp/?p=749332",
+      "title": "SBI北尾会長、仮想通貨の分離課税・ETF前倒しを提言",
+      "source": "CoinPost",
+      "source_group": "news",
+      "published_at": "2026-11-24T19:26:02+09:00",
+      "category": "crypto",
+      "keywords": [
+        "crypto-tax",
+        "bitcoin-etf",
+        "crypto-regulation"
+      ],
+      "score": 78,
+      "why": "matched: ビットコイン",
+      "read_min": 3,
+      "tldr": "SBI ホールディングスの北尾会長が、7 月成立の改正法で決まった暗号資産の 20% 申告分離課税（適用は早くて 2028 年）と、国内で未解禁の現物ビットコイン ETF について、前倒しを国に求めた。",
+      "points": [
+        "制度の整った市場へ資金と人材が移り、世界のリスクマネーが日本を素通りすることへの懸念を示した",
+        "銘柄や取引量を限った商用市場の先行開設や、海外で実績のある事業者の迅速な受け入れも求めた",
+        "企業には国内制度を待たずアジアで先に事業を始めるよう提言"
+      ],
+      "code": null,
+      "signal": null,
+      "pick": true
+    },
+    {
+      "id": "2026-11-25-jp-gdp-boj-outlook",
+      "url": "https://diamond.jp/articles/-/404063",
+      "title": "日銀は3月に「利上げ終了」か、27年の日本経済は景気回復基調もAI・半導体投資と消費低迷の“綱引き”続く - 経済分析の哲人が斬る！市場トピックの深層",
+      "source": "ダイヤモンド",
+      "source_group": "news",
+      "published_at": "2026-11-25T04:20:00+09:00",
+      "category": "macro",
+      "keywords": [
+        "gdp",
+        "boj-policy"
+      ],
+      "score": 72,
+      "why": "matched: 金利",
+      "read_min": 6,
+      "tldr": "7〜9 月期の実質 GDP は前期比 0.02% 減（年率 0.1% 減）で 1 年ぶりのマイナス。筆者は 2027 年も景気回復が続くとみる一方、AI・半導体投資と物価高による消費低迷の「綱引き」が続くとする。日銀の利上げ見通しの部分は有料で未確認。",
+      "points": [
+        "AI・半導体関連の設備投資は堅調だったが、物価高と夏の天候不順で個人消費が振るわなかった",
+        "人手不足のなか、省力化・自動化（ソフトウエアを含む）の設備投資が景気の軸になるとの見方",
+        "AI 関連機器の輸入増で GDP の伸びにつながりにくいこと、エネルギー主導の物価高で家計が生活防衛に動いていることを下振れ要因に挙げる"
+      ],
+      "code": null,
+      "signal": null,
+      "pick": true
+    },
+    {
+      "id": "2026-11-25-nikkei-1124-rebound",
+      "url": "https://minkabu.jp/news/4671079",
+      "title": "日経平均寄与度ランキング（大引け）～日経平均は大幅反発、アドバンテストや東エレクが2銘柄で約973円分押し上げ",
+      "source": "minkabu.jp",
+      "source_group": "news",
+      "published_at": "2026-11-24T16:49:00+09:00",
+      "category": "stocks",
+      "keywords": [
+        "nikkei225",
+        "semiconductor"
+      ],
+      "score": 70,
+      "why": "matched: 米国株（エヌビディア急伸の波及）",
+      "read_min": 3,
+      "tldr": "24 日の日経平均は大幅反発。アドバンテストと東京エレクトロンの 2 銘柄で約 973 円分を押し上げた（見出しから）。",
+      "points": [],
+      "code": null,
+      "signal": null,
+      "pick": false
+    },
+    {
+      "id": "2026-11-25-anthropic-below-ipo",
+      "url": "https://www.bloomberg.com/news/articles/2026-11-24/anthropic-breaks-below-83-ipo-price-in-premarket-trading",
+      "title": "Anthropic breaks below $83 IPO price",
+      "source": "bloomberg.com",
+      "source_group": "hackernews",
+      "published_at": "2026-11-24T22:23:47+09:00",
+      "category": "stocks",
+      "keywords": [
+        "anthropic",
+        "ipo"
+      ],
+      "score": 68,
+      "why": "matched: 米国株 / HN 196 pt",
+      "read_min": 3,
+      "tldr": "Anthropic の株価が 83 ドルの IPO 価格を割り込んだと Bloomberg が伝えた。",
+      "points": [],
+      "code": null,
+      "signal": "▲ 196",
+      "pick": false
+    },
+    {
+      "id": "2026-11-25-usdjpy-160",
+      "url": "https://diamond.jp/articles/-/404020",
+      "title": "米国のAI規制強化懸念でも、1ドル「160円超」のドル円再上昇シナリオを維持する理由 - 為替ウォッチ",
+      "source": "ダイヤモンド",
+      "source_group": "news",
+      "published_at": "2026-11-25T04:15:00+09:00",
+      "category": "macro",
+      "keywords": [
+        "fx"
+      ],
+      "score": 66,
+      "why": "matched: 為替, 金利",
+      "read_min": 6,
+      "tldr": "米国の AI 規制強化への懸念がある中でも、ドル円が 1 ドル 160 円を超えて再上昇するシナリオを維持する理由を解説するコラム。",
+      "points": [],
+      "code": null,
+      "signal": null,
+      "pick": false
+    },
+    {
+      "id": "2026-11-25-rates-land-prices",
+      "url": "https://toyokeizai.net/articles/-/965356?utm_source=rss&utm_medium=http&utm_campaign=link_back",
+      "title": "｢金利が上がれば地価は下がる｣は本当か？ 武蔵野･三鷹は加速､調布･府中は鈍化… 最新基準地価に見た｢静かな地殻変動｣ | 政治・経済・投資 | 東洋経済オンライン",
+      "source": "東洋経済",
+      "source_group": "news",
+      "published_at": "2026-11-24T05:15:00+09:00",
+      "category": "realestate",
+      "keywords": [
+        "real-estate-prices",
+        "interest-rates"
+      ],
+      "score": 64,
+      "why": "matched: 金利",
+      "read_min": 6,
+      "tldr": "長期金利が一時約 30 年ぶりに 3% 台となる中、「金利が上がれば地価は下がる」は本当かを最新の基準地価で検証する記事。見出しでは武蔵野・三鷹は上昇が加速、調布・府中は鈍化。",
+      "points": [],
+      "code": null,
+      "signal": null,
+      "pick": false
+    },
+    {
+      "id": "2026-11-25-sbg-retail-bond",
+      "url": "https://toyokeizai.net/articles/-/965756?utm_source=rss&utm_medium=http&utm_campaign=link_back",
+      "title": "【個人向け社債は買い？】ソフトバンクG利回り4.75%／AIバブル懸念?ネオクラウドに市場が警戒！社債市場にも異変／格付けとスプレッドの逆転現象とは？／途中で売ると損?／楽天やみずほFGも発行 | ビジネス | 東洋経済オンライン",
+      "source": "東洋経済",
+      "source_group": "news",
+      "published_at": "2026-11-24T19:00:00+09:00",
+      "category": "macro",
+      "keywords": [
+        "interest-rates",
+        "ai-economy"
+      ],
+      "score": 58,
+      "why": "matched: 金利",
+      "read_min": 10,
+      "tldr": "ソフトバンクグループの個人向け社債（利回り 4.75%）を題材に、AI バブル懸念やネオクラウドへの警戒、格付けとスプレッドの逆転など社債市場の変化を扱う動画記事。",
+      "points": [],
+      "code": null,
+      "signal": null,
+      "pick": false
+    },
+    {
+      "id": "2026-11-25-coreweave-bonds",
+      "url": "https://jp.investing.com/news/stock-market-news/article-1769782",
+      "title": "CoreWeaveの社債が最安値を更新、AIトレードへの懸念が再燃",
+      "source": "investing.com",
+      "source_group": "news",
+      "published_at": "2026-11-25T04:23:21+09:00",
+      "category": "stocks",
+      "keywords": [
+        "ai-economy",
+        "data-center"
+      ],
+      "score": 55,
+      "why": "matched: 米国株",
+      "read_min": 3,
+      "tldr": "CoreWeave の社債が最安値を更新し、AI 関連の取引への懸念が再燃していると伝える記事。",
+      "points": [],
+      "code": null,
+      "signal": null,
+      "pick": false
+    },
+    {
+      "id": "2026-11-25-grayscale-btc",
+      "url": "https://coinpost.jp/?p=749133",
+      "title": "「ビットコインは売られ過ぎ、短期はAI関連リスク次第」＝グレースケール",
+      "source": "CoinPost",
+      "source_group": "news",
+      "published_at": "2026-11-24T07:20:47+09:00",
+      "category": "crypto",
+      "keywords": [
+        "bitcoin"
+      ],
+      "score": 62,
+      "why": "matched: ビットコイン",
+      "read_min": 3,
+      "tldr": "グレースケールが、ビットコインは売られ過ぎで、短期的には AI 関連のリスク次第だとの見方を示した。",
+      "points": [],
+      "code": null,
+      "signal": null,
+      "pick": false
+    },
+    {
+      "id": "2026-11-25-cftc-crypto-opex",
+      "url": "https://coinpost.jp/?p=749215",
+      "title": "BTC・ETH・ステーブルコインを一部企業の運営費に算入可、米CFTCスタッフが見解",
+      "source": "CoinPost",
+      "source_group": "news",
+      "published_at": "2026-11-24T13:00:14+09:00",
+      "category": "crypto",
+      "keywords": [
+        "crypto-regulation",
+        "stablecoin"
+      ],
+      "score": 56,
+      "why": "matched: ビットコイン",
+      "read_min": 3,
+      "tldr": "米 CFTC のスタッフが、BTC・ETH・ステーブルコインを一部企業の運営費に算入できるとの見解を示した。",
+      "points": [],
+      "code": null,
+      "signal": null,
+      "pick": false
+    },
+    {
+      "id": "2026-11-25-binance-security-review",
+      "url": "https://coinpost.jp/?p=749162",
+      "title": "ハッキング被害のバイナンス、外部3社にセキュリティ手順の独立レビューを依頼",
+      "source": "CoinPost",
+      "source_group": "news",
+      "published_at": "2026-11-24T09:20:07+09:00",
+      "category": "crypto",
+      "keywords": [
+        "exchange-hack",
+        "crypto-exchange"
+      ],
+      "score": 50,
+      "why": "暗号資産取引所のハッキング後の対応",
+      "read_min": 3,
+      "tldr": "ハッキング被害を受けたバイナンスが、外部 3 社にセキュリティ手順の独立レビューを依頼した。",
+      "points": [],
+      "code": null,
+      "signal": null,
+      "pick": false
+    },
+    {
+      "id": "2026-11-25-fsa-ai-study-group",
+      "url": "https://www.fsa.go.jp/singi/ai_2026/shiryou/20261124.html",
+      "title": "「AI等の健全な利活用の推進に関する研究会」（第１回）議事次第について公表しました。",
+      "source": "金融庁",
+      "source_group": "official",
+      "published_at": "2026-11-25T02:00:00+09:00",
+      "category": "macro",
+      "keywords": [
+        "fsa",
+        "ai-adoption"
+      ],
+      "score": 52,
+      "why": "金融庁の公式発表",
+      "read_min": 2,
+      "tldr": "金融庁が「AI 等の健全な利活用の推進に関する研究会」の第 1 回議事次第を公表した。",
+      "points": [],
+      "code": null,
+      "signal": null,
+      "pick": false
+    }
+  ],
+  "social": [
+    {
+      "network": "x",
+      "author": "@ylecun",
+      "url": "https://x.com/ylecun/status/2124550037912920090",
+      "text": "ルカン氏が、アモデイ氏は GPT-2 の頃から危険性を誇張してオープンなモデルを違法にし主導権を握ろうとしてきたと批判し、アラビア語の印刷機を禁じたオスマン帝国になぞらえた。",
+      "metrics": null,
+      "heat": null,
+      "category": "ai",
+      "keywords": [
+        "anthropic",
+        "open-weight"
+      ],
+      "posted_at": null
+    },
+    {
+      "network": "x",
+      "author": "@Benzinga",
+      "url": "https://x.com/Benzinga/status/2125283807855341745",
+      "text": "Benzinga が、CEO 復帰でエヌビディア株が 31% 超上昇し、フアン氏の資産が約 337 億ドル増えたと投稿。時価総額は 1 日で過去最大の 9,543 億ドル増。",
+      "metrics": null,
+      "heat": null,
+      "category": "stocks",
+      "keywords": [
+        "nvidia",
+        "us-stocks"
+      ],
+      "posted_at": null
+    },
+    {
+      "network": "hn",
+      "author": null,
+      "url": "https://news.ycombinator.com/item?id=50615308",
+      "text": "『\"Dario is hyping the dangers so OSS models are illegal and he stays in control\"』のスレッド。1,150 件のコメント",
+      "metrics": "▲ 1969  ✉ 1150",
+      "heat": 100,
+      "category": "ai",
+      "keywords": [
+        "anthropic",
+        "open-weight"
+      ],
+      "posted_at": null
+    },
+    {
+      "network": "hn",
+      "author": null,
+      "url": "https://news.ycombinator.com/item?id=50617499",
+      "text": "『Per Arm's request, this site will be discontinued on 4 December 2026』のスレッド。281 件のコメント",
+      "metrics": "▲ 1151  ✉ 281",
+      "heat": 100,
+      "category": "be",
+      "keywords": [
+        "licensing",
+        "oss"
+      ],
+      "posted_at": null
+    },
+    {
+      "network": "hn",
+      "author": null,
+      "url": "https://news.ycombinator.com/item?id=50620349",
+      "text": "『Stalwart is now a drop-in replacement for Microsoft Exchange』のスレッド。333 件のコメント",
+      "metrics": "▲ 674  ✉ 333",
+      "heat": 100,
+      "category": "be",
+      "keywords": [
+        "email-server",
+        "oss"
+      ],
+      "posted_at": null
+    },
+    {
+      "network": "hn",
+      "author": null,
+      "url": "https://news.ycombinator.com/item?id=50627340",
+      "text": "『LLM agents work for their parent companies, not for you』のスレッド。319 件のコメント",
+      "metrics": "▲ 759  ✉ 319",
+      "heat": 100,
+      "category": "ai",
+      "keywords": [
+        "ai-agent",
+        "local-llm"
+      ],
+      "posted_at": null
+    }
+  ],
+  "releases": [
+    {
+      "date": "2026-11-24",
+      "title": "Stalwart 1.2.0",
+      "repo": "stalwartlabs/stalwart",
+      "url": "https://stalw.art/blog/microsoft-exchange-replacement/",
+      "kind": "release",
+      "note": "Exchange 互換（MAPI over HTTP・EWS・ActiveSync・Autodiscover）を Community 版に追加（公式ブログで確認）",
+      "category": "be"
+    },
+    {
+      "date": "2026-11-25",
+      "title": "米 10 月 PCE デフレーター・ベージュブック公表",
+      "repo": null,
+      "url": "https://coinpost.jp/?p=748953",
+      "kind": "event",
+      "note": "前日の日次ファイルから引き継ぎ",
+      "category": "macro"
+    }
+  ]
+}
