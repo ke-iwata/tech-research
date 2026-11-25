@@ -1,0 +1,787 @@
+{
+  "date": "2026-11-26",
+  "generated_at": "2026-11-26T05:11:43+09:00",
+  "stats": {
+    "collected": 233,
+    "sources_ok": 25,
+    "sources_total": 26,
+    "by_group": {
+      "hackernews": 50,
+      "tech_blog": 80,
+      "news": 90,
+      "official": 13
+    },
+    "failed_sources": [
+      "coindesk_jp"
+    ]
+  },
+  "digest": [
+    {
+      "category": "ai",
+      "text": "OpenAI が、行列積の指数 ω は任意の体で 9/4 ちょうどだとする論文を公開し、HN で 950 pt。既知の上界に一致する下界を示したとするが、算術回路モデルに限った査読前の結果。",
+      "keywords": [
+        "openai",
+        "ai-research"
+      ]
+    },
+    {
+      "category": "sec",
+      "text": "1Password が従業員の GitHub アカウント乗っ取りを起点に、ソースコードの持ち出し・CI/CD への侵入・一部顧客の氏名やメールの流出があったと公表（HN 578 pt）。保管庫の中身は無事としている。",
+      "keywords": [
+        "security-incident",
+        "github",
+        "supply-chain"
+      ]
+    },
+    {
+      "category": "ai",
+      "text": "3 値重みの Ternary Bonsai 2.5 27B が 5.9 GB のまま SWE-bench Verified 75.6 に。はてブでは AI エージェントに渡す CLAUDE.md の工夫（582）や、自作アプリで宅建に合格した話（378）が上位。",
+      "keywords": [
+        "local-llm",
+        "coding-agent"
+      ]
+    },
+    {
+      "category": "stocks",
+      "text": "25 日の日経平均は 1,633 円安の 57,011 円で、前日の急伸から反落。エヌビディアが 6% 近く下げた流れで半導体・AI 株が売られた。米国のビットコイン現物 ETF は 7 日間の純流出が過去 1 年で最大になった。",
+      "keywords": [
+        "nikkei225",
+        "nvidia",
+        "bitcoin-etf"
+      ]
+    },
+    {
+      "category": "realestate",
+      "text": "住宅金融支援機構の調査で、金利上昇が住宅ローンの借り方に影響した人は 53.9%。変動型は 66.9% で減少傾向。投資信託の 11 月分の資金流入は、まだ月次統計が出ておらず確認できなかった。",
+      "keywords": [
+        "mortgage-rates",
+        "housing"
+      ]
+    }
+  ],
+  "items": [
+    {
+      "id": "2026-11-26-openai-matmul-exponent",
+      "url": "https://github.com/openai/math/blob/main/preprints/The-matrix-multiplication-exponent-is-nine-fourths-November-24-2026/paper.pdf",
+      "title": "The matrix multiplication exponent is nine fourths [pdf]",
+      "source": "github.com",
+      "source_group": "hackernews",
+      "published_at": "2026-11-25T10:19:26+09:00",
+      "category": "ai",
+      "keywords": [
+        "openai",
+        "ai-research"
+      ],
+      "score": 94,
+      "why": "HN 950 pt",
+      "read_min": 30,
+      "tldr": "OpenAI が、正方行列の積の指数 ω は任意の体で 9/4 ちょうどだとする論文を公開した。上界 9/4 は既知で、今回はそれに一致する下界を示したとしている。",
+      "points": [
+        "n×n 行列の積を計算する形式的な算術回路は、n≥2 のとき少なくとも ⌈n^(9/4)/2⌉ 個の乗算・除算ゲートを必要とする（線形演算は無料としても）と主張",
+        "証明の筋は「指数がもっと小さいとテンソルネットワークを圧縮でき、複数リストの要素がすべて異なるかを判定する問題の下界に反する」というもの",
+        "上界 9/4 は C 上では OpenAI、任意の体では Amanov・van den Berg・Zuiddam が示していた。下界は算術回路というモデルに限った結果で、査読前のプレプリント"
+      ],
+      "code": null,
+      "signal": "▲ 950",
+      "pick": true
+    },
+    {
+      "id": "2026-11-26-zenn-solo-dev-with-ai",
+      "url": "https://zenn.dev/holygrail/scraps/dec6ae85d06b4f",
+      "title": "個人開発 with AI",
+      "source": "zenn.dev",
+      "source_group": "tech_blog",
+      "published_at": "2026-11-25T07:02:28+09:00",
+      "category": "ai",
+      "keywords": [
+        "coding-agent",
+        "claude",
+        "ai-coding"
+      ],
+      "score": 92,
+      "why": "はてブ 582",
+      "read_min": 15,
+      "tldr": "個人開発者が AI エージェントと進める開発の工夫をまとめたスクラップ。報告が読み手の負担にならないよう CLAUDE.md を整え、設計は対話で詰めて実装は子セッションに任せる運用を紹介している。",
+      "points": [
+        "複数セッションを並行し時間を空けて戻る前提で、報告の冒頭に「現在地」を置き、判断の依頼は 1 回 1 問にするルールを CLAUDE.md に書いている",
+        "メインのセッションで設計を詰め、実装は子セッションに委任。仕様検討の段階から PoC を作らせ、子セッションが違うものを作るリスクを減らす",
+        "DB・ログ・アクセス解析・Search Console を AI が参照できるようにし、課題を投げて改善案を出させ、人が取捨選択する"
+      ],
+      "code": {
+        "file": "CLAUDE.md",
+        "lang": "markdown",
+        "text": "## ユーザーへの報告\nユーザーが読む報告（進捗、完了、判断の依頼、手作業の案内）に適用する。\n- 冒頭に現在地を置く。\n- 判断の依頼は 1 回に 1 問にする。\n- 「必要なら言ってください」のような任意の申し出は書かない。"
+      },
+      "signal": "B! 582",
+      "pick": true
+    },
+    {
+      "id": "2026-11-26-1password-incident",
+      "url": "https://1password.com/blog/update-on-nov-2026-security-incident",
+      "title": "1Password Security Incident",
+      "source": "1password.com",
+      "source_group": "hackernews",
+      "published_at": "2026-11-26T02:18:26+09:00",
+      "category": "sec",
+      "keywords": [
+        "security-incident",
+        "github",
+        "supply-chain",
+        "secrets-management"
+      ],
+      "score": 87,
+      "why": "HN 578 pt",
+      "read_min": 6,
+      "tldr": "1Password が、従業員の社用 GitHub アカウントを乗っ取られ、ソースコードの持ち出しや CI/CD への侵入、一部顧客の管理用データのダウンロードがあったと公表した。保管庫（Vault）の中身や鍵は影響を受けていないとしている。",
+      "points": [
+        "11 月 19 日に調査を開始。攻撃者は非公開リポジトリのコードを複製し、バックエンドに悪意あるコードを push し、CI/CD のインフラ用シークレットにも触れた（ローテーション済み）",
+        "漏れたのは一部ユーザーの氏名・メールアドレス・各種 ID・公開鍵・SRP パラメータなど。招待・復旧リンクのトークンも含まれ、招待・復旧コードを 6 桁から英数字 10 文字に延長した。影響人数は公表されていない",
+        "利用者側の対応は不要とし、1Password を名乗る心当たりのないメール・電話に注意するよう呼びかけている"
+      ],
+      "code": null,
+      "signal": "B! 1 · ▲ 578",
+      "pick": true
+    },
+    {
+      "id": "2026-11-26-prismml-bonsai-25",
+      "url": "https://prismml.com/news/bonsai-2-5-27b",
+      "title": "Ternary Bonsai 2.5 27B",
+      "source": "prismml.com",
+      "source_group": "hackernews",
+      "published_at": "2026-11-25T05:08:03+09:00",
+      "category": "ai",
+      "keywords": [
+        "local-llm",
+        "open-weight",
+        "coding-agent"
+      ],
+      "score": 86,
+      "why": "HN 521 pt",
+      "read_min": 5,
+      "tldr": "PrismML が、Qwen3.8 27B を基にした 3 値（ternary）重みのモデル Ternary Bonsai 2.5 27B を公開した。モデルサイズは 5.9 GB のまま、エージェント的なコーディングとツール利用の性能を前版から大きく上げたとしている。",
+      "points": [
+        "SWE-bench Verified は 75.6（前版 60.8、元の Qwen3.8 27B は 80.6）、AppWorld は 90.5（前版 51.2）",
+        "H100 で生成 約 291 tok/s（MTP 使用）、RTX 4090 で約 204 tok/s。llama.cpp（NVIDIA・Intel GPU）と MLX（Mac・iPhone・iPad）に対応",
+        "ライセンスは Apache 2.0"
+      ],
+      "code": null,
+      "signal": "▲ 521",
+      "pick": true
+    },
+    {
+      "id": "2026-11-26-note-takken-ai-app",
+      "url": "https://note.com/shikimi_crypto/n/n35d0bb54e6fb",
+      "title": "AIで学習アプリを作って2週間で宅建に合格した話【テキスト不要】｜Shikimi",
+      "source": "note.com",
+      "source_group": "tech_blog",
+      "published_at": "2026-11-25T18:23:07+09:00",
+      "category": "ai",
+      "keywords": [
+        "ai-coding",
+        "claude"
+      ],
+      "score": 86,
+      "why": "はてブ 378",
+      "read_min": 10,
+      "tldr": "市販テキストを使わず、Claude Code で作った自分専用の学習アプリと YouTube 教材で約 2 週間・60 時間勉強し、宅建試験に自己採点 38 点で合格した体験記。",
+      "points": [
+        "FastAPI + Jinja2 + SQLite の Web アプリを自宅サーバーで動かし、Tailscale でスマホから利用。大部分は Claude Code が書いたという",
+        "2020〜2025 年度の過去問から現行法で解ける 373 問を選び、動画 211 本に 56 の論点ラベルを付けて相互に飛べるようにした",
+        "演習記録を Claude API に渡して傾向分析させた。初日の模試 29 点から本番 38 点（合格点 37 点）へ。AI は戦略を実行する道具で、演習や暗記は従来どおり必要としている"
+      ],
+      "code": null,
+      "signal": "B! 378",
+      "pick": true
+    },
+    {
+      "id": "2026-11-26-button-sounds",
+      "url": "https://buttons.joshwcomeau.com/",
+      "title": "Button Sounds – collection of professionally-recorded button clicks and presses",
+      "source": "buttons.joshwcomeau.com",
+      "source_group": "hackernews",
+      "published_at": "2026-11-25T12:23:07+09:00",
+      "category": "be",
+      "keywords": [
+        "ui-design"
+      ],
+      "score": 91,
+      "why": "HN 771 pt",
+      "read_min": null,
+      "tldr": "ボタンのクリック音・押下音をプロが録音した、UI 向けの効果音集のサイト（HN 771 pt・コメント 124 件）。",
+      "points": [],
+      "code": null,
+      "signal": "B! 1 · ▲ 771",
+      "pick": false
+    },
+    {
+      "id": "2026-11-26-levtech-hidemaru-ai",
+      "url": "https://levtech.jp/media/detail_973/",
+      "title": "34年目の秀丸エディタと、AIの距離感 「正直皆どんな目的で使ってるかよく分かりません」 - レバテックLAB",
+      "source": "levtech.jp",
+      "source_group": "tech_blog",
+      "published_at": "2026-11-25T09:58:54+09:00",
+      "category": "ai",
+      "keywords": [
+        "ai-coding",
+        "desktop-app"
+      ],
+      "score": 83,
+      "why": "はてブ 315",
+      "read_min": null,
+      "tldr": "1993 年に公開された秀丸エディタの開発元サイトー企画へのインタビュー。開発者が生成 AI との距離感を語り、「正直皆どんな目的で使ってるかよく分かりません」と述べている。",
+      "points": [],
+      "code": null,
+      "signal": "B! 315",
+      "pick": false
+    },
+    {
+      "id": "2026-11-26-hn-anthropic-distilling",
+      "url": "https://news.ycombinator.com/item?id=50630809",
+      "title": "Ask HN: Anthropic is accusing my company of distilling. How can I prove I'm not?",
+      "source": "news.ycombinator.com",
+      "source_group": "hackernews",
+      "published_at": "2026-11-25T01:45:44+09:00",
+      "category": "ai",
+      "keywords": [
+        "anthropic",
+        "llm"
+      ],
+      "score": 83,
+      "why": "HN 430 pt",
+      "read_min": null,
+      "tldr": "Anthropic から自社がモデルの蒸留をしていると指摘されたという投稿者が、していないことをどう証明すればよいかを尋ねた Ask HN（コメント 325 件）。",
+      "points": [],
+      "code": null,
+      "signal": "▲ 430",
+      "pick": false
+    },
+    {
+      "id": "2026-11-26-lesswrong-inference-covert",
+      "url": "https://www.lesswrong.com/posts/7wzWuLP3HhyBLmKfo/models-can-communicate-via-inference-servers-despite-being",
+      "title": "Models Can Communicate via Inference Servers Despite Being Sandboxed",
+      "source": "lesswrong.com",
+      "source_group": "hackernews",
+      "published_at": "2026-11-25T11:34:21+09:00",
+      "category": "sec",
+      "keywords": [
+        "ai-security",
+        "sandbox"
+      ],
+      "score": 82,
+      "why": "HN 413 pt",
+      "read_min": null,
+      "tldr": "サンドボックスで隔離されたモデル同士でも、共有する推論サーバーを介して情報をやり取りできるとする LessWrong の投稿（HN 413 pt）。",
+      "points": [],
+      "code": null,
+      "signal": "B! 1 · ▲ 413",
+      "pick": false
+    },
+    {
+      "id": "2026-11-26-ios-safari-60fps",
+      "url": "https://rida.dev/blog/bypassing-ios-safari-60-fps-limit",
+      "title": "Bypassing iOS Safari's 60 FPS Limit to Build Web Applications That Feel Native",
+      "source": "rida.dev",
+      "source_group": "hackernews",
+      "published_at": "2026-11-25T12:04:37+09:00",
+      "category": "be",
+      "keywords": [
+        "web-browser",
+        "apple",
+        "javascript"
+      ],
+      "score": 82,
+      "why": "HN 409 pt",
+      "read_min": null,
+      "tldr": "iOS Safari の 60 FPS 制限を回避し、ネイティブアプリのように感じる Web アプリを作る方法を解説した記事（HN 409 pt）。",
+      "points": [],
+      "code": null,
+      "signal": "B! 2 · ▲ 409",
+      "pick": false
+    },
+    {
+      "id": "2026-11-26-google-cogentic-papers",
+      "url": "https://github.com/google-research/google-research/tree/master/cogentic_research_papers",
+      "title": "Google releases Cogentic papers on integer factorization, discrete logs and more",
+      "source": "github.com",
+      "source_group": "hackernews",
+      "published_at": "2026-11-25T22:33:07+09:00",
+      "category": "ai",
+      "keywords": [
+        "google",
+        "ai-research",
+        "cryptography"
+      ],
+      "score": 81,
+      "why": "HN 371 pt・関連スレッド 355 pt",
+      "read_min": null,
+      "tldr": "Google Research が整数の素因数分解や離散対数などを扱う「Cogentic」の論文群を GitHub で公開した（HN 371 pt）。同じ日、AI 研究所が素因数分解を多項式時間で解いたという噂の Reddit 投稿も HN で 355 pt を集めたが、噂は未確認。",
+      "points": [],
+      "code": null,
+      "signal": "▲ 371",
+      "pick": false
+    },
+    {
+      "id": "2026-11-26-openai-gpt6-protein",
+      "url": "https://openai.com/index/gpt-6-models-demonstrate-intrinsic-protein-design-capabilities/",
+      "title": "GPT-6 models demonstrate intrinsic protein-design capabilities",
+      "source": "openai.com",
+      "source_group": "hackernews",
+      "published_at": "2026-11-25T06:02:22+09:00",
+      "category": "ai",
+      "keywords": [
+        "openai",
+        "ai-research"
+      ],
+      "score": 80,
+      "why": "HN 344 pt",
+      "read_min": null,
+      "tldr": "OpenAI が、GPT-6 系のモデルが専用の学習なしにタンパク質を設計する能力を示したと発表した（HN 344 pt）。",
+      "points": [],
+      "code": null,
+      "signal": "B! 1 · ▲ 344",
+      "pick": false
+    },
+    {
+      "id": "2026-11-26-microsoft-code-red",
+      "url": "https://www.reuters.com/business/microsoft-declares-code-red-after-historic-outage-internal-memos-show-2026-11-24/",
+      "title": "Microsoft declares 'Code Red' after historic outage, internal memos show",
+      "source": "reuters.com",
+      "source_group": "hackernews",
+      "published_at": "2026-11-25T02:07:41+09:00",
+      "category": "cloud",
+      "keywords": [
+        "microsoft",
+        "system-outage",
+        "azure"
+      ],
+      "score": 76,
+      "why": "HN 252 pt",
+      "read_min": null,
+      "tldr": "Reuters によると、Microsoft が大規模障害を受けて社内で「コードレッド」を宣言したことが内部メモで分かった（HN 252 pt）。",
+      "points": [],
+      "code": null,
+      "signal": "B! 1 · ▲ 252",
+      "pick": false
+    },
+    {
+      "id": "2026-11-26-us-treasury-subdomain",
+      "url": "https://www.intruder.io/research/taking-over-us-treasury-subdomains-for-3-each",
+      "title": "Taking over US Treasury subdomains for $3 each",
+      "source": "intruder.io",
+      "source_group": "hackernews",
+      "published_at": "2026-11-25T13:27:55+09:00",
+      "category": "sec",
+      "keywords": [
+        "dns",
+        "security-research",
+        "us-treasury"
+      ],
+      "score": 73,
+      "why": "HN 215 pt",
+      "read_min": null,
+      "tldr": "米財務省のサブドメインを 1 件 3 ドルで乗っ取れたとするセキュリティ企業 Intruder の調査記事（HN 215 pt）。",
+      "points": [],
+      "code": null,
+      "signal": "▲ 215",
+      "pick": false
+    },
+    {
+      "id": "2026-11-26-publickey-skills-over-mcp",
+      "url": "https://www.publickey1.jp/blog/26/mcpskills_over_mcpmcp.html",
+      "title": "MCPに新機能「Skills over MCP」登場。ツールとの接続だけでなく使い方のスキルもMCP経由で提供",
+      "source": "publickey1.jp",
+      "source_group": "news",
+      "published_at": "2026-11-26T00:29:05+09:00",
+      "category": "ai",
+      "keywords": [
+        "mcp-server",
+        "ai-agent"
+      ],
+      "score": 55,
+      "why": "MCP の仕様追加（Publickey）",
+      "read_min": null,
+      "tldr": "MCP に、ツールとの接続だけでなく「使い方のスキル」も MCP 経由で提供できる新機能「Skills over MCP」がベータ版として追加された。",
+      "points": [],
+      "code": null,
+      "signal": "B! 3",
+      "pick": false
+    },
+    {
+      "id": "2026-11-26-kabutan-nikkei-1125",
+      "url": "https://kabutan.jp/news/marketnews/?b=n202611251075",
+      "title": "日経平均 大引け｜大幅反落、AI・半導体関連中心に売り優勢（11月25日）",
+      "source": "kabutan.jp",
+      "source_group": "news",
+      "published_at": null,
+      "category": "stocks",
+      "keywords": [
+        "nikkei225",
+        "nvidia",
+        "semiconductor"
+      ],
+      "score": 80,
+      "why": "matched: 米国株（エヌビディア急落の波及）",
+      "read_min": null,
+      "tldr": "25 日の日経平均は前日比 1,633.01 円安（-2.78%）の 57,011.62 円で大引け。前日の米国市場でエヌビディアが 6% 近く下落した流れで、AI・半導体関連に売りが出た（検索結果で確認）。",
+      "points": [],
+      "code": null,
+      "signal": null,
+      "pick": false
+    },
+    {
+      "id": "2026-11-26-coinpost-btc-etf-outflow",
+      "url": "https://coinpost.jp/?p=749505",
+      "title": "ビットコインETF流出、前週の2.4倍に 過去1年で最大＝アナリスト",
+      "source": "coinpost.jp",
+      "source_group": "news",
+      "published_at": "2026-11-25T17:30:58+09:00",
+      "category": "crypto",
+      "keywords": [
+        "bitcoin-etf",
+        "bitcoin"
+      ],
+      "score": 80,
+      "why": "matched: ビットコイン",
+      "read_min": 4,
+      "tldr": "米国のビットコイン現物 ETF の直近 7 日間の純流出が 3 万 4,785 BTC となり、前週（1 万 4,313 BTC）の約 2.4 倍で過去 1 年で最大規模になった。24 日も 6 営業日連続の流出。",
+      "points": [
+        "24 日の純流出は 2 億 3,156 万ドルで、IBIT が 1 億 7,530 万ドル、FBTC が 4,403 万ドル。前営業日より流出額は約 6 割縮小",
+        "総純資産は 720 億 1,000 万ドルで BTC 時価総額の 5.99%。取引所からの出金超過は 9 日連続、恐怖・強欲指数は 11（極度の恐怖）",
+        "CryptoQuant のアナリストは、ETF 流出が需給の圧力になる一方、取引所からの出金は買い需要の強まりを示すと整理している"
+      ],
+      "code": null,
+      "signal": null,
+      "pick": true
+    },
+    {
+      "id": "2026-11-26-suumo-mortgage-survey",
+      "url": "https://suumo.jp/journal/2026/11/25/222645/",
+      "title": "住宅ローン、金利上昇で選び方は変わった？ 利用者調査で「変化あり」は53.9％、変動型は減少傾向に",
+      "source": "suumo.jp",
+      "source_group": "news",
+      "published_at": "2026-11-25T07:00:20+09:00",
+      "category": "realestate",
+      "keywords": [
+        "mortgage-rates",
+        "housing"
+      ],
+      "score": 80,
+      "why": "matched: 金利, 住宅ローン",
+      "read_min": 6,
+      "tldr": "住宅金融支援機構の住宅ローン利用者調査（2025 年 10 月〜2026 年 3 月の借入者、N=599）で、金利上昇が借り方に「影響した」人が 53.9% と過半数になった。変動型の割合は減る傾向。",
+      "points": [
+        "金利タイプは変動型 66.9%・固定期間選択型 19.7%・全期間固定型 13.4%。借入金利は 0.5〜1.0% が 43.6% で最多",
+        "変化の中身は「借入額を減らした」10.2%、「変動から固定へ」7.8%、「固定から変動へ」7.2%、「取得を前倒し」7.3%",
+        "返済期間は 30〜35 年が 30.2% で最多。35 年超は 18.2% で、超長期化には歯止めがかかりつつあるとみられる。調査委託先の変更で過去との単純比較はできない"
+      ],
+      "code": null,
+      "signal": null,
+      "pick": true
+    },
+    {
+      "id": "2026-11-26-coinpost-coldcard-report",
+      "url": "https://coinpost.jp/?p=749430",
+      "title": "なぜ167億円相当のビットコインが不正流出したのか？ ハードウォレット「コールドカード」が原因報告",
+      "source": "coinpost.jp",
+      "source_group": "news",
+      "published_at": "2026-11-25T15:15:23+09:00",
+      "category": "crypto",
+      "keywords": [
+        "crypto-custody",
+        "bitcoin",
+        "security-incident"
+      ],
+      "score": 72,
+      "why": "matched: ビットコイン",
+      "read_min": 5,
+      "tldr": "ハードウェアウォレット「コールドカード」の Coinkite が、約 167 億円相当（約 1 億ドル）のビットコイン流出はシード生成の不具合が原因だったとする報告書を公開した。端末の乗っ取りはなく、弱い乱数から秘密鍵を再生成されたと説明している。",
+      "points": [
+        "盗難は 7 月 29 日に始まり、30 日に脆弱性を特定、31 日にサポート中の全 5 系統へ修正ファームウェアを公開",
+        "サイコロを 50 回以上振って作ったシードは影響なし。強い BIP-39 パスフレーズやマルチシグも追加の防御になったという",
+        "新しいシードは利用者の入力と 3 つのハードウェア乱数源を組み合わせて生成する。記事はファームウェアの更新を強く勧めている"
+      ],
+      "code": null,
+      "signal": null,
+      "pick": true
+    },
+    {
+      "id": "2026-11-26-diamond-fed-nasdaq",
+      "url": "https://diamond.jp/articles/-/404146",
+      "title": "FRBは利上げ路線をいつ止めるのか、米中間選挙の民主党圧勝と10年実質金利の上昇がナスダックを直撃 - マーケットフォーカス",
+      "source": "diamond.jp",
+      "source_group": "news",
+      "published_at": "2026-11-26T04:25:00+09:00",
+      "category": "macro",
+      "keywords": [
+        "fed",
+        "us-stocks",
+        "interest-rates",
+        "us-midterms"
+      ],
+      "score": 70,
+      "why": "matched: 米国株, 金利",
+      "read_min": null,
+      "tldr": "米中間選挙で民主党が圧勝した後、米国株は軟調が続いている。FRB の利上げ観測で米 10 年実質金利が上がり、AI 関連株の多いナスダックを押し下げているという解説（本文の多くは有料）。",
+      "points": [],
+      "code": null,
+      "signal": null,
+      "pick": false
+    },
+    {
+      "id": "2026-11-26-diamond-boj-yen-real-rate",
+      "url": "https://diamond.jp/articles/-/403329",
+      "title": "日銀利上げでも円安地獄が終わらない…住宅ローンは苦しいのになぜ円は買われない？ - ニュースな本",
+      "source": "diamond.jp",
+      "source_group": "news",
+      "published_at": "2026-11-25T11:00:00+09:00",
+      "category": "macro",
+      "keywords": [
+        "fx",
+        "boj-rate-hike",
+        "interest-rates"
+      ],
+      "score": 68,
+      "why": "matched: 金利, 住宅ローン",
+      "read_min": null,
+      "tldr": "日銀が利上げしても円安が収まらない理由を、物価上昇を差し引いた「実質金利」から説明する書籍の抜粋。",
+      "points": [],
+      "code": null,
+      "signal": "B! 1",
+      "pick": false
+    },
+    {
+      "id": "2026-11-26-toyokeizai-ideco-reform",
+      "url": "https://toyokeizai.net/articles/-/965913?utm_source=rss&utm_medium=http&utm_campaign=link_back",
+      "title": "【NISAにないメリットも！iDeCo徹底攻略】改正で“恩恵”を受けるのはどんな人？／掛金を増額した場合の税控除シミュレーション／受け取り方で“差”出口戦略の最適解／【ウエンツ瑛士のマネーファーム】 | ビジネス | 東洋経済オンライン",
+      "source": "toyokeizai.net",
+      "source_group": "news",
+      "published_at": "2026-11-25T19:00:00+09:00",
+      "category": "funds",
+      "keywords": [
+        "retirement-plan",
+        "new-nisa"
+      ],
+      "score": 66,
+      "why": "matched: nisa",
+      "read_min": null,
+      "tldr": "12 月 1 日の法改正で iDeCo の拠出上限が引き上げられ、加入可能年齢も 70 歳未満に広がる。番組形式の記事で、NISA との税優遇の違いや「60 歳まで引き出せない」点などの論点を扱う。",
+      "points": [],
+      "code": null,
+      "signal": null,
+      "pick": false
+    },
+    {
+      "id": "2026-11-26-toyokeizai-boj-etf-gains",
+      "url": "https://toyokeizai.net/articles/-/965681?utm_source=rss&utm_medium=http&utm_campaign=link_back",
+      "title": "日銀ETFの巨額売却益で将来の日本財政をサポート､高市首相は重要分野での新たな特別会計の財源に位置付ける考え示す | 政治・経済・投資 | 東洋経済オンライン",
+      "source": "toyokeizai.net",
+      "source_group": "news",
+      "published_at": "2026-11-25T05:50:00+09:00",
+      "category": "macro",
+      "keywords": [
+        "boj-policy",
+        "etf",
+        "jp-fiscal"
+      ],
+      "score": 64,
+      "why": "matched: 金利（日銀の資産売却）",
+      "read_min": null,
+      "tldr": "日銀は保有 ETF の売却を 2027 年以降年 8,600 億円（簿価）に増やし、完了までの期間を約 112 年から約 43 年に縮める。3 月末の含み益は約 57.1 兆円で、高市首相は売却益を新たな特別会計の財源に位置付ける考えを示した（詳細は有料部分）。",
+      "points": [],
+      "code": null,
+      "signal": null,
+      "pick": false
+    },
+    {
+      "id": "2026-11-26-coinpost-btc-realized-loss",
+      "url": "https://coinpost.jp/?p=749397",
+      "title": "ビットコイン、実現損失がFTX破綻以来の水準に",
+      "source": "coinpost.jp",
+      "source_group": "news",
+      "published_at": "2026-11-25T09:40:56+09:00",
+      "category": "crypto",
+      "keywords": [
+        "bitcoin"
+      ],
+      "score": 60,
+      "why": "matched: ビットコイン",
+      "read_min": null,
+      "tldr": "グラスノードは、エヌビディア関連の市場変動でビットコインが株式に先行して下落したと指摘。実現損失は FTX 破綻以来の水準とし、底打ちの兆しがある一方で実現価格までの下値リスクもあると分析した。",
+      "points": [],
+      "code": null,
+      "signal": null,
+      "pick": false
+    },
+    {
+      "id": "2026-11-26-toyokeizai-ai-chip-export",
+      "url": "https://toyokeizai.net/articles/-/965571?utm_source=rss&utm_medium=http&utm_campaign=link_back",
+      "title": "エヌビディア･フアン氏の疑惑でアメリカ政府が東南アジアやブラジル向けAI半導体輸出を規制 中国への締め付け強化 | ビジネス | 東洋経済オンライン",
+      "source": "toyokeizai.net",
+      "source_group": "news",
+      "published_at": "2026-11-25T06:00:00+09:00",
+      "category": "stocks",
+      "keywords": [
+        "nvidia",
+        "semiconductor",
+        "geopolitics"
+      ],
+      "score": 60,
+      "why": "matched: 米国株（エヌビディア）",
+      "read_min": null,
+      "tldr": "米政府が東南アジアやブラジル向けの AI 半導体輸出規制を強化した。背景にはエヌビディアのフアン氏をめぐる疑惑や対中締め付けがあるとする解説。",
+      "points": [],
+      "code": null,
+      "signal": null,
+      "pick": false
+    },
+    {
+      "id": "2026-11-26-boj-lending-rate-sep",
+      "url": "http://www.boj.or.jp/statistics/dl/loan/yaku/yaku2609.pdf",
+      "title": "貸出約定平均金利（9月）",
+      "source": "boj.or.jp",
+      "source_group": "official",
+      "published_at": "2026-11-25T08:50:00+09:00",
+      "category": "macro",
+      "keywords": [
+        "boj-statistics",
+        "interest-rates"
+      ],
+      "score": 56,
+      "why": "matched: 金利",
+      "read_min": null,
+      "tldr": "日本銀行が 9 月分の「貸出約定平均金利」を公表した。",
+      "points": [],
+      "code": null,
+      "signal": null,
+      "pick": false
+    },
+    {
+      "id": "2026-11-26-coinpost-sbi-solana",
+      "url": "https://coinpost.jp/?p=749518",
+      "title": "SBI Solana Global始動 三井住友FG・ソラナ財団と合弁",
+      "source": "coinpost.jp",
+      "source_group": "news",
+      "published_at": "2026-11-25T17:54:29+09:00",
+      "category": "crypto",
+      "keywords": [
+        "stablecoin",
+        "tokenization"
+      ],
+      "score": 52,
+      "why": "暗号資産の国内大手の新会社",
+      "read_min": null,
+      "tldr": "SBI ホールディングス・三井住友 FG・ソラナ財団の合弁会社「SBI Solana Global」が本格始動した。旧 SBI R3 Japan を商号変更し、ステーブルコイン決済や RWA のトークン化など 4 領域でオンチェーン金融事業を展開する。",
+      "points": [],
+      "code": null,
+      "signal": null,
+      "pick": false
+    }
+  ],
+  "social": [
+    {
+      "network": "x",
+      "author": "@1Password",
+      "url": "https://x.com/1Password/status/2125642686443258030",
+      "text": "1Password が一部バックエンドに関わるセキュリティインシデントの続報を投稿し、保管庫の中身（シークレット・パスワード）や鍵は影響を受けていないと強調した。",
+      "metrics": null,
+      "heat": null,
+      "category": "sec",
+      "keywords": [
+        "security-incident"
+      ],
+      "posted_at": null
+    },
+    {
+      "network": "x",
+      "author": "@gregosuri",
+      "url": "https://x.com/gregosuri/status/2125641941903921380",
+      "text": "1Password がハッキングされたと伝え、保管庫は無事との説明でも、最高水準のセキュリティを担うべき企業への信頼は大きく下がったと投稿。",
+      "metrics": null,
+      "heat": null,
+      "category": "sec",
+      "keywords": [
+        "security-incident"
+      ],
+      "posted_at": null
+    },
+    {
+      "network": "x",
+      "author": "@SebastienBubeck",
+      "url": "https://x.com/SebastienBubeck/status/2125402576145572334",
+      "text": "10 月 6 日の公開で行列積の指数の上界 9/4 を示した後、モデルが下界に取り組んでいたと説明。下界はこれまでほとんど何も知られていなかったと投稿。",
+      "metrics": null,
+      "heat": null,
+      "category": "ai",
+      "keywords": [
+        "openai",
+        "ai-research"
+      ],
+      "posted_at": null
+    },
+    {
+      "network": "x",
+      "author": "@stevenstrogatz",
+      "url": "https://x.com/stevenstrogatz/status/2125406764329779427",
+      "text": "数学者のストロガッツ氏が、正しければ多くの専門家の見立て（指数は 2）を AI が覆す例になるとして、驚くべき結果だと投稿。",
+      "metrics": null,
+      "heat": null,
+      "category": "ai",
+      "keywords": [
+        "ai-research"
+      ],
+      "posted_at": null
+    },
+    {
+      "network": "hn",
+      "author": null,
+      "url": "https://news.ycombinator.com/item?id=50633922",
+      "text": "『Ternary Bonsai 2.5 27B』のスレッド。173 件のコメント",
+      "metrics": "▲ 521  ✉ 173",
+      "heat": 100,
+      "category": "ai",
+      "keywords": [
+        "local-llm",
+        "open-weight"
+      ],
+      "posted_at": null
+    }
+  ],
+  "releases": [
+    {
+      "date": "2026-11-26",
+      "title": "kubernetes v1.37.3",
+      "repo": "kubernetes/kubernetes",
+      "url": "https://github.com/kubernetes/kubernetes/releases/tag/v1.37.3",
+      "kind": "release",
+      "note": "パッチリリース（git タグで検出）",
+      "category": "cloud"
+    },
+    {
+      "date": "2026-11-26",
+      "title": "uv 0.13.10",
+      "repo": "astral-sh/uv",
+      "url": "https://github.com/astral-sh/uv/releases/tag/0.13.10",
+      "kind": "release",
+      "note": "git タグで検出",
+      "category": "be"
+    },
+    {
+      "date": "2026-12-01",
+      "title": "iDeCo 改正法の施行（拠出上限の引き上げ・加入年齢 70 歳未満へ）",
+      "repo": null,
+      "url": "https://toyokeizai.net/articles/-/965913",
+      "kind": "policy",
+      "note": "東洋経済の記事で施行日を確認。拠出上限の具体額は公式情報で要確認",
+      "category": "funds"
+    },
+    {
+      "date": "2026-12-04",
+      "title": "AArch64 リファレンスサイトの公開終了",
+      "repo": null,
+      "url": "https://arm.jonpalmisc.com/",
+      "kind": "event",
+      "note": "前日の日次ファイルから引き継ぎ（サイトの告知で 12 月 4 日を確認）",
+      "category": "be"
+    }
+  ]
+}
