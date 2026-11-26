@@ -1,0 +1,778 @@
+{
+  "date": "2026-11-27",
+  "generated_at": "2026-11-27T05:40:00+09:00",
+  "stats": {
+    "collected": 219,
+    "sources_ok": 25,
+    "sources_total": 26,
+    "by_group": {
+      "hackernews": 37,
+      "tech_blog": 84,
+      "news": 89,
+      "official": 9
+    },
+    "failed_sources": [
+      "coindesk_jp"
+    ]
+  },
+  "digest": [
+    {
+      "category": "ai",
+      "text": "AI による数学の成果が相次ぎ、Scott Aaronson のブログ記事が HN で 1,920 pt。Anthropic はリーマン予想・GRH の Lean 証明の短縮版（約 7.6 万行）を公開した。いずれも機械検証のみで、人による査読はこれから。",
+      "keywords": [
+        "ai-research",
+        "formal-verification"
+      ]
+    },
+    {
+      "category": "sec",
+      "text": "Ubuntu のカーネル脆弱性対応が遅いという指摘が oss-security に投稿され（HN 400 pt）、TCP のリモートメモリ破壊に 9 日間修正がないとされた。NFS サーバーの認証前 root 奪取（Nfs2root）も話題に。",
+      "keywords": [
+        "linux",
+        "vulnerability-management"
+      ]
+    },
+    {
+      "category": "ai",
+      "text": "はてブでは Meta の AI エージェント Muse の 1 か月レビュー（444）が首位。無料枠の大きさや自然な日本語が評価される一方、コーディングは不得意との指摘。",
+      "keywords": [
+        "ai-agent",
+        "meta"
+      ]
+    },
+    {
+      "category": "macro",
+      "text": "日銀の田村審議委員が私見として基調物価は 2% 程度に達したとし、政策金利を中立金利に早く近づける必要を述べた。26 日の日経平均は 487 円高の 57,499 円で反発。",
+      "keywords": [
+        "boj-rate-hike",
+        "nikkei225"
+      ]
+    },
+    {
+      "category": "crypto",
+      "text": "Google の AI 数学論文は RSA やビットコインの暗号を破るものではないと専門家が説明。21Shares は実現価格の約 5 万 3,250 ドルを注目水準に挙げた。東京 23 区の中古マンション価格は 10 月に前月比 1.6% 下落。",
+      "keywords": [
+        "bitcoin",
+        "cryptography",
+        "real-estate-prices"
+      ]
+    }
+  ],
+  "items": [
+    {
+      "id": "2026-11-27-aaronson-ai-math",
+      "url": "https://scottaaronson.blog/?p=10379",
+      "title": "Holy shit holy shit holy shit holy shit: The magnitude of what’s now happening",
+      "source": "scottaaronson.blog",
+      "source_group": "hackernews",
+      "published_at": "2026-11-26T04:11:27+09:00",
+      "category": "ai",
+      "keywords": [
+        "ai-research",
+        "formal-verification",
+        "cryptography"
+      ],
+      "score": 100,
+      "why": "HN 1920 pt・1757 コメント",
+      "read_min": 25,
+      "tldr": "量子計算の研究者 Scott Aaronson が、OpenAI・Anthropic などによる AI 発の数学成果の連続（行列積の指数 ω=9/4、有限フーリエ変換の下界、QIP(2)=PSPACE など）に「本当に驚いている」とブログに書いた。Lean で検証された証明は反証されるまで正しいと扱うべきだと主張している。",
+      "points": [
+        "行列積の指数がちょうど 9/4 という主張と、有限フーリエ変換の線形ゲート数が N(log N)^(1/2+o(1)) で上下界が一致したという OpenAI の結果を、1960 年代以来の問題の決着として紹介",
+        "暗号に関わる成果がラボにあると信頼できる筋から聞いたが詳細は知らない、と書いた。同時期に HN では「素因数分解が P に入ったのでは」という噂のスレッド（503 pt）も立ったが、裏付けはない",
+        "26 日の追記で、口調への批判に答えつつ、Lean の証明を退けるには検証器の具体的なバグが必要だと反論。理解には何年もかかりうるとも述べている"
+      ],
+      "code": null,
+      "signal": "▲ 1920",
+      "pick": true
+    },
+    {
+      "id": "2026-11-27-sin5d-meta-muse",
+      "url": "https://dev.sin5d.com/meta-muse-usage",
+      "title": "MetaのAIエージェント Museを1ヶ月使い倒してわかったこと | kinoko dev",
+      "source": "dev.sin5d.com",
+      "source_group": "tech_blog",
+      "published_at": "2026-11-26T07:53:15+09:00",
+      "category": "ai",
+      "keywords": [
+        "ai-agent",
+        "meta",
+        "memory"
+      ],
+      "score": 88,
+      "why": "はてブ 444",
+      "read_min": 15,
+      "tldr": "Meta のクラウド型 AI エージェント「Muse」を 1 か月使ったレビュー（はてブ 444）。無料版でも大量に使えることや自然な日本語を評価する一方、コーディングは不得意で、メモリー検索でコンテキストを使い切ることがあると指摘している。",
+      "points": [
+        "アプリは秘書型の「Muse」とコーディング用の「Muse Code」。無料版は Muse Spark 1.3、有料版は Muse Wonder に固定でモデルは選べない",
+        "メインチャットとサイドチャットを持ち、メモリーは日別要約・人物・組織などに階層化。常時読み込むのは最上位の MEMORY.md だけで、IDENTITY.md で口調や役割を指定できる",
+        "筆者は毎日約 10 万字の文章を生成しても週の上限に届かないという。短い指示を重ねるとメモリー検索で精度が落ちるため、テーマ別のサイドチャットに分けるのが対策"
+      ],
+      "code": null,
+      "signal": "B! 444",
+      "pick": true
+    },
+    {
+      "id": "2026-11-27-verge-nyt-photoshop",
+      "url": "https://www.theverge.com/ai-artificial-intelligence/1041227/the-new-york-times-warns-photographers-not-to-update-photoshop-over-ai-features",
+      "title": "The New York Times warns photographers not to update Photoshop over AI features",
+      "source": "theverge.com",
+      "source_group": "hackernews",
+      "published_at": "2026-11-26T06:18:02+09:00",
+      "category": "ai",
+      "keywords": [
+        "ai-adoption",
+        "privacy"
+      ],
+      "score": 88,
+      "why": "HN 620 pt",
+      "read_min": 4,
+      "tldr": "The New York Times が写真家に Photoshop をアップデートしないよう警告したと The Verge が報じた。AI 機能が理由とされる（本文は未確認）。",
+      "points": [],
+      "code": null,
+      "signal": "▲ 620",
+      "pick": false
+    },
+    {
+      "id": "2026-11-27-anthropic-grh-lean",
+      "url": "https://github.com/lsernau/grh-lean",
+      "title": "Much shorter version of GRH Lean verification from Anthropic",
+      "source": "github.com",
+      "source_group": "hackernews",
+      "published_at": "2026-11-26T06:48:10+09:00",
+      "category": "ai",
+      "keywords": [
+        "formal-verification",
+        "anthropic",
+        "ai-research"
+      ],
+      "score": 86,
+      "why": "HN 529 pt",
+      "read_min": 10,
+      "tldr": "Anthropic の研究者らが、リーマン予想と Dirichlet L 関数の一般化リーマン予想の Lean 4 による証明の短縮版を GitHub で公開した。Claude と共同で作った証明をもとに、約 30 万行の読みやすい版と約 7.6 万行の圧縮版を用意している。",
+      "points": [
+        "依存する公理は propext・Classical.choice・Quot.sound の標準 3 つだけで、Mathlib 上に構築。ライセンスは Apache 2.0",
+        "機械検証を通っただけで、数学者による全文の査読や論文はまだない。保守もコントリビュートの受け付けもしない研究成果物としている",
+        "ビルドには Lean v4.35.0 と指定コミットの Mathlib が必要で、12 コア・24GB で 1〜2 時間かかる"
+      ],
+      "code": {
+        "file": "README.md",
+        "lang": "bash",
+        "text": "lake exe cache get\nlake build\nlake env lean scripts/PrintAxioms.lean"
+      },
+      "signal": "B! 11 · ▲ 529",
+      "pick": true
+    },
+    {
+      "id": "2026-11-27-sankei-factcheck-ai",
+      "url": "https://www.sankei.com/article/20261126-IAIWQ5GJCZBRLNFFDXLEY3YDU4/",
+      "title": "ファクトチェックセンターが衆院選期間に誤情報 AI鵜呑み、れいわ大石氏の架空発言掲載",
+      "source": "sankei.com",
+      "source_group": "tech_blog",
+      "published_at": "2026-11-26T11:30:50+09:00",
+      "category": "ai",
+      "keywords": [
+        "ai-adoption"
+      ],
+      "score": 84,
+      "why": "はてブ 330",
+      "read_min": 4,
+      "tldr": "ファクトチェックを掲げる団体が、衆院選の期間中に AI の出力をそのまま使い、政治家の実在しない発言を掲載していたと産経新聞が報じた（はてブ 330、本文は未確認）。",
+      "points": [],
+      "code": null,
+      "signal": "B! 330",
+      "pick": false
+    },
+    {
+      "id": "2026-11-27-openai-gpt62-limits",
+      "url": "https://twitter.com/thsottiaux/status/2125784147889393806",
+      "title": "OpenAI cuts GPT-6.2 usage: Astra hits limits 40% faster, Sol 25% faster",
+      "source": "x.com",
+      "source_group": "hackernews",
+      "published_at": "2026-11-26T12:36:58+09:00",
+      "category": "ai",
+      "keywords": [
+        "openai",
+        "llm-cost"
+      ],
+      "score": 83,
+      "why": "HN 439 pt",
+      "read_min": 2,
+      "tldr": "OpenAI 関係者の投稿として、GPT-6.2 の利用枠が縮小され、Astra は 40%、Sol は 25% 早く上限に達するようになったという話題が HN で 439 pt を集めた。",
+      "points": [],
+      "code": null,
+      "signal": "▲ 439",
+      "pick": false
+    },
+    {
+      "id": "2026-11-27-oss-sec-ubuntu-slow",
+      "url": "https://www.openwall.com/lists/oss-security/2026/11/25/9",
+      "title": "Slow Ubuntu security response times",
+      "source": "openwall.com",
+      "source_group": "hackernews",
+      "published_at": "2026-11-26T05:38:00+09:00",
+      "category": "sec",
+      "keywords": [
+        "linux",
+        "vulnerability-management",
+        "debian"
+      ],
+      "score": 82,
+      "why": "HN 400 pt",
+      "read_min": 5,
+      "tldr": "oss-security メーリングリストに、Ubuntu のカーネル脆弱性への対応が遅いという指摘が投稿された（HN 400 pt）。11 月 16 日に詳細が出た TCP スタックのリモートメモリ破壊（CVE-2026-99288）に、9 日たっても Ubuntu の修正がないとしている。",
+      "points": [
+        "CVE-2026-99288（TCP、11/16 公開）と AMD 仮想化の KVM ホスト脱出（CVE-2026-99312、11/18 公開）は、投稿時点で Ubuntu 未修正。他のディストリビューションは公開時点で修正を出していたという",
+        "以前の TCP の脆弱性（CVE-2026-98432）でも修正まで数週間かかったと指摘",
+        "投稿者は、古いベースへのバックポートを続ける Ubuntu カーネル（7.0.0 系）に対し、kernel.org の longterm 版に追従する Debian stable（6.12 系）を対比し、longterm を土台にすべきだと主張。Canonical の回答は含まれていない"
+      ],
+      "code": null,
+      "signal": "▲ 400",
+      "pick": true
+    },
+    {
+      "id": "2026-11-27-opensec-nfs2root",
+      "url": "https://opensec.in/blog/nfs2root-cve-2026-99362",
+      "title": "Nfs2root: A 12-year-old pre-auth remote root in the Linux kernel's NFS server",
+      "source": "opensec.in",
+      "source_group": "hackernews",
+      "published_at": "2026-11-26T05:35:50+09:00",
+      "category": "sec",
+      "keywords": [
+        "linux",
+        "rce",
+        "vulnerability-management"
+      ],
+      "score": 73,
+      "why": "HN 207 pt",
+      "read_min": 10,
+      "tldr": "Linux カーネルの NFS サーバーに 12 年前から存在した、認証前にリモートで root を取れる脆弱性「Nfs2root」（CVE-2026-99362）の解説が公開された（本文は未確認）。",
+      "points": [],
+      "code": null,
+      "signal": "▲ 207",
+      "pick": false
+    },
+    {
+      "id": "2026-11-27-modaic-jev-qwen",
+      "url": "https://modaic.dev/blog/latency-doesnt-lie",
+      "title": "Jev is probably Qwen3.5-35B-A3B",
+      "source": "modaic.dev",
+      "source_group": "hackernews",
+      "published_at": "2026-11-26T07:57:04+09:00",
+      "category": "ai",
+      "keywords": [
+        "llm",
+        "open-weight",
+        "benchmark"
+      ],
+      "score": 79,
+      "why": "HN 332 pt",
+      "read_min": 8,
+      "tldr": "応答レイテンシーの特徴から、商用モデル「Jev」の中身は Qwen3.5-35B-A3B だろうと推定するブログ記事。",
+      "points": [],
+      "code": null,
+      "signal": "▲ 332",
+      "pick": false
+    },
+    {
+      "id": "2026-11-27-minipg-single-binary",
+      "url": "https://progrium.github.io/minipg/",
+      "title": "Minipg: PostgreSQL as a Single Executable",
+      "source": "progrium.github.io",
+      "source_group": "hackernews",
+      "published_at": "2026-11-26T12:00:48+09:00",
+      "category": "be",
+      "keywords": [
+        "postgres",
+        "sqlite"
+      ],
+      "score": 77,
+      "why": "HN 269 pt",
+      "read_min": 5,
+      "tldr": "PostgreSQL を単一の実行ファイルとして配布・起動できるようにする「Minipg」が公開された。",
+      "points": [],
+      "code": null,
+      "signal": "▲ 269",
+      "pick": false
+    },
+    {
+      "id": "2026-11-27-anond-claude-md",
+      "url": "https://anond.hatelabo.jp/20261126144022",
+      "title": "CLAUDE.md / AGENTS.md を Claude Codeに継続的に書かせる",
+      "source": "anond.hatelabo.jp",
+      "source_group": "tech_blog",
+      "published_at": "2026-11-26T14:40:51+09:00",
+      "category": "ai",
+      "keywords": [
+        "coding-agent",
+        "claude"
+      ],
+      "score": 75,
+      "why": "はてブ 174",
+      "read_min": 5,
+      "tldr": "CLAUDE.md や AGENTS.md を人が書くのではなく、Claude Code に作業のたびに継続して書き足させる運用を紹介する匿名ダイアリー（はてブ 174）。",
+      "points": [],
+      "code": null,
+      "signal": "B! 174",
+      "pick": false
+    },
+    {
+      "id": "2026-11-27-conao3-clojure-lean",
+      "url": "https://s.conao3.com/blog/2026/e4f733",
+      "title": "I checked Clojure's core with Lean and found unreported bugs",
+      "source": "s.conao3.com",
+      "source_group": "hackernews",
+      "published_at": "2026-11-25T23:56:52+09:00",
+      "category": "be",
+      "keywords": [
+        "formal-verification",
+        "programming-language"
+      ],
+      "score": 75,
+      "why": "HN 235 pt",
+      "read_min": 10,
+      "tldr": "Clojure のコア関数を Lean で検証し、報告されていなかったバグを見つけたという記事。",
+      "points": [],
+      "code": null,
+      "signal": "▲ 235",
+      "pick": false
+    },
+    {
+      "id": "2026-11-27-piyolog-1password",
+      "url": "https://piyolog.hatenadiary.jp/entry/2026/11/26/153937",
+      "title": "1Passwordへの不正アクセスについてまとめてみた - piyolog",
+      "source": "piyolog.hatenadiary.jp",
+      "source_group": "tech_blog",
+      "published_at": "2026-11-26T15:51:59+09:00",
+      "category": "sec",
+      "keywords": [
+        "security-incident",
+        "secrets-management",
+        "supply-chain"
+      ],
+      "score": 72,
+      "why": "はてブ 145",
+      "read_min": 10,
+      "tldr": "1Password への不正アクセスについて、公表内容と経緯を時系列で整理した piyolog のまとめ（はてブ 145）。1Password の公表は前日の HN でも 1,600 pt 超まで伸びた。",
+      "points": [],
+      "code": null,
+      "signal": "B! 145",
+      "pick": false
+    },
+    {
+      "id": "2026-11-27-githubstatus-degraded",
+      "url": "https://www.githubstatus.com/incidents/qn8mfv6q5hlx",
+      "title": "Investigating degraded experiences across GitHub products",
+      "source": "githubstatus.com",
+      "source_group": "hackernews",
+      "published_at": "2026-11-26T00:59:23+09:00",
+      "category": "cloud",
+      "keywords": [
+        "github",
+        "system-outage"
+      ],
+      "score": 72,
+      "why": "HN 186 pt",
+      "read_min": 2,
+      "tldr": "GitHub が複数のプロダクトで性能低下が起きていると status ページで報告し、HN で 186 pt。",
+      "points": [],
+      "code": null,
+      "signal": "▲ 186",
+      "pick": false
+    },
+    {
+      "id": "2026-11-27-publickey-gws-mcp",
+      "url": "https://www.publickey1.jp/blog/26/google_workspace_mcpgoogle_workspace_cli.html",
+      "title": "「Google Workspace MCPサーバ」と「Google Workspace CLI」が正式版としてリリース",
+      "source": "publickey1.jp",
+      "source_group": "news",
+      "published_at": "2026-11-26T00:27:15+09:00",
+      "category": "ai",
+      "keywords": [
+        "mcp-server",
+        "google",
+        "cli"
+      ],
+      "score": 60,
+      "why": "はてブ 60",
+      "read_min": 4,
+      "tldr": "Google が「Google Workspace MCP サーバ」と「Google Workspace CLI」を正式版にした（はてブ 60）。AI エージェントや CLI から Workspace を操作できる。",
+      "points": [],
+      "code": null,
+      "signal": "B! 60",
+      "pick": false
+    },
+    {
+      "id": "2026-11-27-aws-lambda-microvm",
+      "url": "https://aws.amazon.com/about-aws/whats-new/2026/11/lambda-durable-microvm/",
+      "title": "AWS Lambda now supports orchestrating MicroVMs with Lambda durable functions",
+      "source": "aws.amazon.com",
+      "source_group": "news",
+      "published_at": "2026-11-26T05:00:00+09:00",
+      "category": "cloud",
+      "keywords": [
+        "aws",
+        "sandbox"
+      ],
+      "score": 45,
+      "why": "AWS 公式の新機能発表",
+      "read_min": 3,
+      "tldr": "AWS Lambda の durable functions から MicroVM をオーケストレーションできるようになった。",
+      "points": [],
+      "code": null,
+      "signal": null,
+      "pick": false
+    },
+    {
+      "id": "2026-11-27-boj-tamura-yamanashi",
+      "url": "http://www.boj.or.jp/about/press/koen_2026/ko261126a.htm",
+      "title": "【挨拶】田村審議委員「わが国の経済・物価情勢と金融政策」（山梨）",
+      "source": "boj.or.jp",
+      "source_group": "official",
+      "published_at": "2026-11-26T10:00:00+09:00",
+      "category": "macro",
+      "keywords": [
+        "boj-policy",
+        "boj-rate-hike",
+        "interest-rates"
+      ],
+      "score": 90,
+      "why": "日銀の公式発表（審議委員講演）",
+      "read_min": 20,
+      "tldr": "日銀の田村審議委員が山梨県で講演し、私見として基調的な物価上昇率はすでに 2% 程度に達したと述べた。政策の焦点は物価を押し上げる局面から上振れを止める局面に移ったとして、政策金利を中立金利に早く近づける必要があるとの考えを示した。",
+      "points": [
+        "AI 関連需要がデータセンター・電源・空調・建設などに広がり、9 月短観では中小企業製造業にも恩恵が及んでいると指摘",
+        "政策金利は 9 月会合で 1.25% 程度になったと振り返り、緩和的な状態が続くと物価の上振れを招くおそれがあると説明",
+        "中立金利は事後的にしか分からず変動しうるため、金融環境の変化に対する企業の声を丁寧に聞くとした（講演 PDF より）"
+      ],
+      "code": null,
+      "signal": null,
+      "pick": true
+    },
+    {
+      "id": "2026-11-27-kabutan-nikkei-1126",
+      "url": "https://kabutan.jp/news/marketnews/?b=n202611260984",
+      "title": "日経平均 大引け｜反発、半導体関連株に買い戻しが優勢（11月26日）",
+      "source": "kabutan.jp",
+      "source_group": "news",
+      "published_at": "2026-11-26T15:45:00+09:00",
+      "category": "stocks",
+      "keywords": [
+        "nikkei225",
+        "semiconductor"
+      ],
+      "score": 70,
+      "why": "matched: 米国株・株式の前営業日",
+      "read_min": 3,
+      "tldr": "26 日の日経平均は 487 円高の 57,499 円で反発。半導体関連株の買い戻しで一時 1,200 円あまり上げたが、終盤は伸び悩んだ。TOPIX は小幅高（検索結果の要約から確認）。",
+      "points": [],
+      "code": null,
+      "signal": null,
+      "pick": false
+    },
+    {
+      "id": "2026-11-27-coinpost-google-crypto",
+      "url": "https://coinpost.jp/?p=749545",
+      "title": "グーグルのAI論文、RSAやビットコインの暗号に影響なし＝専門家",
+      "source": "coinpost.jp",
+      "source_group": "news",
+      "published_at": "2026-11-26T09:46:18+09:00",
+      "category": "crypto",
+      "keywords": [
+        "cryptography",
+        "bitcoin",
+        "google"
+      ],
+      "score": 82,
+      "why": "matched: ビットコイン",
+      "read_min": 5,
+      "tldr": "Google Research が AI エージェントで作った素因数分解・離散対数などの数学論文 6 本について、専門家が RSA やビットコインの暗号には影響しないと説明した。素因数分解の論文は既存手法と同じ計算量を初めて無条件で証明したもので、高速化ではないという。",
+      "points": [
+        "素因数分解の論文は数体ふるい法と同じ計算量を未証明の仮定なしに示したとする主張で、RSA の推奨鍵長は変わらない",
+        "離散対数の論文は標数の小さい有限体という特殊な場合に限られ、実用からは外れている",
+        "ビットコインは署名に RSA ではなく楕円曲線暗号を使っており、今回の論文の影響は受けないとされる。いずれも査読前"
+      ],
+      "code": null,
+      "signal": null,
+      "pick": true
+    },
+    {
+      "id": "2026-11-27-toyokeizai-tokyo-condo",
+      "url": "https://toyokeizai.net/articles/-/966081",
+      "title": "【都心マンションに異変】東京都内の中古マンション価格が下落／マンション市場に何が起きている？／中古マンションは今買うべきか？／東京以外の価格動向／新築マンション、一戸建て、賃貸の価格はどうなる？ | ビジネス | 東洋経済オンライン",
+      "source": "toyokeizai.net",
+      "source_group": "news",
+      "published_at": "2026-11-26T19:00:00+09:00",
+      "category": "realestate",
+      "keywords": [
+        "real-estate-prices",
+        "housing"
+      ],
+      "score": 78,
+      "why": "matched: 不動産・住宅",
+      "read_min": 3,
+      "tldr": "東京カンテイの集計で、10 月の東京 23 区の中古マンション価格は前月比 1.6% 安の 1 億 2,421 万円。都心 6 区は 1 億 7,520 万円で 6 か月連続の下落となり、2013 年 3 月以来の前年同月割れになった。",
+      "points": [
+        "23 区の中古マンション（10 月）は前月比 -1.6% の 1 億 2,421 万円",
+        "千代田・中央区などの都心 6 区は前月比 -1.5% の 1 億 7,520 万円で 6 か月連続の下落",
+        "都心 6 区の前年同月割れは 2013 年 3 月以来。記事は動画が中心で、新築や他都市の数値はページからは確認できなかった"
+      ],
+      "code": null,
+      "signal": null,
+      "pick": true
+    },
+    {
+      "id": "2026-11-27-coinpost-btc-21shares",
+      "url": "https://coinpost.jp/?p=749617",
+      "title": "ビットコイン、5万3250ドルへの下落を警戒＝21シェアーズ",
+      "source": "coinpost.jp",
+      "source_group": "news",
+      "published_at": "2026-11-26T22:30:39+09:00",
+      "category": "crypto",
+      "keywords": [
+        "bitcoin",
+        "bitcoin-etf",
+        "stablecoin"
+      ],
+      "score": 80,
+      "why": "matched: ビットコイン",
+      "read_min": 5,
+      "tldr": "21Shares のレポートは、ビットコインの下落の大半は需要の減少とレバレッジの強制清算によるもので、実現価格の約 5 万 3,250 ドルが注目水準だとした。ステーブルコイン供給の再拡大と ETF への資金流入再開までは反発が続きにくいとみている。",
+      "points": [
+        "11 月 4 日の 8 万 488 ドルから 21 日に 6 万 123 ドルまで下落（事件前比で約 26% 安）",
+        "10 月末の取引所ハッキング後、ステーブルコイン供給は 107 億ドル減。米現物 BTC・ETH ETF からは 10/30〜11/13 に計 39 億ドルが流出",
+        "12 月 4 日の米雇用統計、9 日の FOMC、10 日の米 CPI を注目イベントに挙げている"
+      ],
+      "code": null,
+      "signal": null,
+      "pick": true
+    },
+    {
+      "id": "2026-11-27-diamond-mortgage-condo",
+      "url": "https://diamond.jp/articles/-/403908",
+      "title": "銀行の融資姿勢も急変！利上げで「マンション冬の時代」に住宅ローンはどう借りるべきか【マンションインフルエンサー座談会3】 - マンション羅針盤 管理＆売買",
+      "source": "diamond.jp",
+      "source_group": "news",
+      "published_at": "2026-11-27T04:25:00+09:00",
+      "category": "realestate",
+      "keywords": [
+        "mortgage-rates",
+        "housing"
+      ],
+      "score": 72,
+      "why": "matched: 金利, 住宅ローン",
+      "read_min": 8,
+      "tldr": "利上げで銀行の融資姿勢が変わる中、住宅ローンをどう借りるかをマンション情報の発信者が話し合う座談会記事（本文は未確認）。",
+      "points": [],
+      "code": null,
+      "signal": null,
+      "pick": false
+    },
+    {
+      "id": "2026-11-27-coinpost-swiss-btc-etf",
+      "url": "https://coinpost.jp/?p=749648",
+      "title": "スイス初のビットコイン現物ETFが上場、運用資産350BTC（33億円相当）",
+      "source": "coinpost.jp",
+      "source_group": "news",
+      "published_at": "2026-11-26T23:00:32+09:00",
+      "category": "crypto",
+      "keywords": [
+        "bitcoin-etf",
+        "crypto-etf"
+      ],
+      "score": 62,
+      "why": "matched: ビットコイン",
+      "read_min": 3,
+      "tldr": "スイス初のビットコイン現物 ETF が上場した。運用資産は 350 BTC（約 33 億円）という。",
+      "points": [],
+      "code": null,
+      "signal": null,
+      "pick": false
+    },
+    {
+      "id": "2026-11-27-coinpost-fsa-defi",
+      "url": "https://coinpost.jp/?p=749639",
+      "title": "金融庁、DeFi規制の対象を誰にするか 研究会で論点提示",
+      "source": "coinpost.jp",
+      "source_group": "news",
+      "published_at": "2026-11-26T21:02:18+09:00",
+      "category": "crypto",
+      "keywords": [
+        "crypto-regulation",
+        "fsa"
+      ],
+      "score": 58,
+      "why": "金融庁の制度議論",
+      "read_min": 3,
+      "tldr": "金融庁の研究会で、DeFi 規制の対象を誰にするかの論点が示された。",
+      "points": [],
+      "code": null,
+      "signal": null,
+      "pick": false
+    },
+    {
+      "id": "2026-11-27-coinpost-bitflyer-mexc",
+      "url": "https://coinpost.jp/?p=749559",
+      "title": "bitFlyer、MEXCとの送受取を停止へ 米FinCEN命令受け",
+      "source": "coinpost.jp",
+      "source_group": "news",
+      "published_at": "2026-11-26T10:54:18+09:00",
+      "category": "crypto",
+      "keywords": [
+        "crypto-exchange",
+        "aml"
+      ],
+      "score": 52,
+      "why": "国内取引所の対応",
+      "read_min": 3,
+      "tldr": "bitFlyer が、米 FinCEN の命令を受けて海外取引所 MEXC との暗号資産の送受取を停止する。",
+      "points": [],
+      "code": null,
+      "signal": null,
+      "pick": false
+    },
+    {
+      "id": "2026-11-27-boj-regional-special-rate",
+      "url": "http://www.boj.or.jp/finsys/rfs/rfs261126.pdf",
+      "title": "地域金融強化のための特別当座預金制度に基づく特別付利の実施について",
+      "source": "boj.or.jp",
+      "source_group": "official",
+      "published_at": "2026-11-26T16:00:00+09:00",
+      "category": "macro",
+      "keywords": [
+        "boj-policy",
+        "regional-banks"
+      ],
+      "score": 55,
+      "why": "日銀の公式発表",
+      "read_min": 3,
+      "tldr": "日銀が、地域金融強化のための特別当座預金制度に基づく特別付利の実施を公表した。",
+      "points": [],
+      "code": null,
+      "signal": null,
+      "pick": false
+    },
+    {
+      "id": "2026-11-27-boj-gsib-2026",
+      "url": "http://www.boj.or.jp/finsys/intlact_fs/kisei/kis261126a.htm",
+      "title": "金融安定理事会による「グローバルなシステム上重要な銀行（G-SIB）の2026年リスト」の公表について",
+      "source": "boj.or.jp",
+      "source_group": "official",
+      "published_at": "2026-11-26T17:00:00+09:00",
+      "category": "macro",
+      "keywords": [
+        "bank-supervision"
+      ],
+      "score": 45,
+      "why": "日銀・金融庁の公式発表",
+      "read_min": 3,
+      "tldr": "金融安定理事会（FSB）が「グローバルなシステム上重要な銀行（G-SIB）」の 2026 年リストを公表し、日銀・金融庁が案内した。",
+      "points": [],
+      "code": null,
+      "signal": null,
+      "pick": false
+    },
+    {
+      "id": "2026-11-27-diamond-us-midterms-fed",
+      "url": "https://diamond.jp/articles/-/404279",
+      "title": "中間選挙“大敗”トランプ政権残り2年の「決められない政治」の行方、景気対策の出遅れリスクとFRBの難しいかじ取り - トランプ中間選挙 経済・市場・政策はどうなる？",
+      "source": "diamond.jp",
+      "source_group": "news",
+      "published_at": "2026-11-27T04:13:00+09:00",
+      "category": "macro",
+      "keywords": [
+        "us-midterms",
+        "fed"
+      ],
+      "score": 50,
+      "why": "matched: 米国株・金利",
+      "read_min": 8,
+      "tldr": "中間選挙で大敗したトランプ政権の残り 2 年について、景気対策の遅れや FRB のかじ取りの難しさを論じる記事（本文は未確認）。",
+      "points": [],
+      "code": null,
+      "signal": null,
+      "pick": false
+    }
+  ],
+  "social": [
+    {
+      "network": "hn",
+      "author": null,
+      "url": "https://news.ycombinator.com/item?id=50646108",
+      "text": "『Holy shit holy shit holy shit holy shit: The magnitude of what’s now happening』のスレッド。1,757 件のコメント",
+      "metrics": "▲ 1,920  ✉ 1,757",
+      "heat": 100,
+      "category": "ai",
+      "keywords": [
+        "ai-research",
+        "formal-verification"
+      ],
+      "posted_at": "2026-11-26T04:11:27+09:00"
+    },
+    {
+      "network": "x",
+      "author": "@xingyudang",
+      "url": "https://x.com/xingyudang/status/2125393189683036248",
+      "text": "行列積の指数が 9/4 に等しいと、OpenAI の結果を紹介する投稿。",
+      "metrics": null,
+      "heat": null,
+      "category": "ai",
+      "keywords": [
+        "ai-research",
+        "openai"
+      ],
+      "posted_at": null
+    },
+    {
+      "network": "hn",
+      "author": null,
+      "url": "https://news.ycombinator.com/item?id=50647673",
+      "text": "『The New York Times warns photographers not to update Photoshop over AI features』のスレッド。492 件のコメント",
+      "metrics": "▲ 620  ✉ 492",
+      "heat": 100,
+      "category": "ai",
+      "keywords": [
+        "ai-adoption"
+      ],
+      "posted_at": "2026-11-26T06:18:02+09:00"
+    },
+    {
+      "network": "hn",
+      "author": null,
+      "url": "https://news.ycombinator.com/item?id=50648050",
+      "text": "『Much shorter version of GRH Lean verification from Anthropic』のスレッド。336 件のコメント",
+      "metrics": "▲ 529  ✉ 336",
+      "heat": 100,
+      "category": "ai",
+      "keywords": [
+        "formal-verification",
+        "anthropic"
+      ],
+      "posted_at": "2026-11-26T06:48:10+09:00"
+    },
+    {
+      "network": "hn",
+      "author": null,
+      "url": "https://news.ycombinator.com/item?id=50647181",
+      "text": "『Slow Ubuntu security response times』のスレッド。249 件のコメント",
+      "metrics": "▲ 400  ✉ 249",
+      "heat": 100,
+      "category": "sec",
+      "keywords": [
+        "linux",
+        "vulnerability-management"
+      ],
+      "posted_at": "2026-11-26T05:38:00+09:00"
+    }
+  ],
+  "releases": [
+    {
+      "date": "2026-12-04",
+      "title": "米雇用統計（11 月分）",
+      "repo": null,
+      "url": "https://coinpost.jp/?p=749617",
+      "kind": "event",
+      "note": "CoinPost 掲載の 21Shares レポートで日付を確認。9 日 FOMC・10 日米 CPI も挙げられている",
+      "category": "macro"
+    }
+  ]
+}
